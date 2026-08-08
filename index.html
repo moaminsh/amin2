@@ -25,6 +25,24 @@
     --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
     --mono: 'JetBrains Mono','Consolas',monospace;
     --sheet-margin: 22px;
+    --sheet-fill: rgba(16,35,63,0.86);
+    --blob-opacity: .5;
+    --blob-blend: screen;
+    --blob-blur: 95px;
+  }
+  body.theme-light{
+    --blue-field:   #eef1f6;
+    --blue-field-2: #f7f8fb;
+    --blue-field-3: #e2e7ee;
+    --line:         #182437;
+    --line-dim:     #57657c;
+    --line-faint:   #c9d2dd;
+    --grid:         rgba(24,36,55,0.055);
+    --brass-dim:    #a9793f;
+    --sheet-fill: rgba(238,241,246,0.86);
+    --blob-opacity: .32;
+    --blob-blend: multiply;
+    --blob-blur: 85px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -38,22 +56,55 @@
     color:var(--line);
     font-family:var(--sans);
     -webkit-font-smoothing:antialiased;
+    transition:background .4s ease, color .4s ease;
   }
   a{color:inherit;}
   button{font:inherit;}
-  ::selection{background:var(--brass); color:var(--blue-field-2);}
+  ::selection{background:var(--brass); color:#1a1207;}
   :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  /* ---------- ambient fluid background ---------- */
+  .fluid-bg{
+    position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+  }
+  .fluid-bg span{
+    position:absolute; border-radius:50%;
+    filter:blur(var(--blob-blur));
+    opacity:var(--blob-opacity);
+    mix-blend-mode:var(--blob-blend);
+    will-change:transform;
+  }
+  .blob-a{
+    width:640px; height:640px; top:-200px; left:-140px;
+    background:radial-gradient(circle, var(--brass) 0%, transparent 68%);
+    animation:driftA 46s ease-in-out infinite alternate;
+  }
+  .blob-b{
+    width:720px; height:720px; bottom:-240px; right:-180px;
+    background:radial-gradient(circle, #3f7fb8 0%, transparent 68%);
+    animation:driftB 58s ease-in-out infinite alternate;
+  }
+  .blob-c{
+    width:520px; height:520px; top:32%; left:52%;
+    background:radial-gradient(circle, #7aa0d6 0%, transparent 68%);
+    animation:driftC 51s ease-in-out infinite alternate;
+  }
+  @keyframes driftA{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(90px,70px) scale(1.18);} }
+  @keyframes driftB{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(-80px,-60px) scale(1.12);} }
+  @keyframes driftC{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(-60px,80px) scale(0.88);} }
 
   /* ---------- sheet frame (drawing-sheet border with crop ticks) ---------- */
   .sheet{
-    position:relative;
+    position:relative; z-index:1;
     margin:10px;
     border:1px solid var(--line-faint);
     background:
       linear-gradient(var(--grid) 1px, transparent 1px) 0 0/38px 38px,
       linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/38px 38px,
       radial-gradient(1100px 620px at 88% -8%, rgba(159,180,204,.10), transparent 60%),
-      var(--blue-field);
+      var(--sheet-fill);
+    backdrop-filter:saturate(1.05);
+    transition:background .4s ease;
   }
   .tick{position:absolute; width:14px; height:14px; border:1px solid var(--brass-dim); opacity:.85;}
   .tick.tl{top:-1px; left:-1px; border-width:1px 0 0 1px;}
@@ -272,6 +323,12 @@
 </head>
 <body>
 
+<div class="fluid-bg" aria-hidden="true">
+  <span class="blob-a"></span>
+  <span class="blob-b"></span>
+  <span class="blob-c"></span>
+</div>
+
 <div class="sheet">
   <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
 
@@ -284,6 +341,7 @@
       <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
     </div>
     <div class="nav-right">
+      <button id="themeBtn" class="lang-btn" type="button" aria-label="Toggle day/night theme">☀</button>
       <button id="langBtn" class="lang-btn" type="button" aria-label="Switch language">EN</button>
       <a class="btn btn-primary btn-sm" href="#contact" data-fa="تماس بگیرید" data-en="Get in touch">تماس بگیرید</a>
       <span class="nav-avatar"><img src="profile.jpg" alt=""></span>
@@ -483,13 +541,32 @@
     try { return localStorage.getItem(KEY) || 'fa'; } catch(e){ return 'fa'; }
   }
 
+  var THEME_KEY = 'site-theme';
+  function applyTheme(theme){
+    document.body.classList.toggle('theme-light', theme === 'light');
+    var themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) themeBtn.textContent = theme === 'light' ? '☾' : '☀';
+    try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
+  }
+  function storedTheme(){
+    try { return localStorage.getItem(THEME_KEY) || 'dark'; } catch(e){ return 'dark'; }
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
     apply(stored());
+    applyTheme(storedTheme());
 
     var langBtn = document.getElementById('langBtn');
     if (langBtn){
       langBtn.addEventListener('click', function(){
         apply(document.documentElement.lang === 'fa' ? 'en' : 'fa');
+      });
+    }
+
+    var themeBtn = document.getElementById('themeBtn');
+    if (themeBtn){
+      themeBtn.addEventListener('click', function(){
+        applyTheme(document.body.classList.contains('theme-light') ? 'dark' : 'light');
       });
     }
 
