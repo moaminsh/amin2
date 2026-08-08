@@ -23,6 +23,28 @@
     --mono: 'JetBrains Mono','Consolas',monospace;
     --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
   }
+  body.light{
+    --bg: #f3f5f7;
+    --panel: #ffffff;
+    --panel-2: #f4f6f8;
+    --line: #d7dee3;
+    --line-soft: #e4e9ec;
+    --text: #202a30;
+    --text-dim: #57666e;
+    --text-faint: #8b98a0;
+    --accent: #b9781f;
+    --accent-dim: #e7c791;
+    --cyan: #0f8e9d;
+    --green: #2f8f5b;
+    --yellow: #a9791c;
+    --red: #c9484c;
+  }
+  body.light .item-desc.status-green{ color:#256a45; }
+  body.light .item-desc.status-yellow{ color:#7a5c15; }
+  body.light .item-desc.status-red{ color:#a5393c; }
+  body.light header, body.light section.stage-content{
+    box-shadow:0 8px 22px -14px rgba(30,40,48,.18), inset 0 1px 0 rgba(255,255,255,.6);
+  }
   *{box-sizing:border-box;}
   body{
     margin:0;
@@ -36,28 +58,11 @@
     position:relative;
     overflow-x:hidden;
   }
-  .bg-art{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+  .header-icon{
+    flex:none;
+    width:40px; height:40px;
   }
-  .bg-art svg{
-    width:min(1100px, 130vw);
-    height:auto;
-    opacity:.035;
-  }
-  .bg-art .glow{
-    position:absolute;
-    width:900px; height:900px;
-    top:-260px; right:-320px;
-    background:radial-gradient(circle, rgba(85,199,214,.06), transparent 70%);
-    border-radius:50%;
-  }
+  .header-icon svg{ width:100%; height:100%; opacity:.85; }
   .wrap{max-width:980px;margin:0 auto; position:relative; z-index:1;}
 
   header{
@@ -75,6 +80,14 @@
     position:absolute; top:0; right:0; left:0; height:2px;
     background:linear-gradient(90deg, var(--accent), var(--cyan), transparent);
     opacity:.7;
+  }
+  .header-top{
+    display:flex; align-items:center; gap:12px; margin-bottom:2px;
+  }
+  .header-titles{ flex:1; min-width:0; }
+  .theme-toggle-btn{
+    flex:none;
+    margin-inline-start:auto;
   }
   .tag{
     font-family:var(--mono);
@@ -138,12 +151,6 @@
     cursor:pointer;
   }
 
-  .sync-box{
-    border:1px dashed var(--line-soft);
-    border-radius:10px;
-    padding:12px 14px;
-    margin-bottom:16px;
-  }
   .sync-row{
     display:flex; align-items:center; gap:8px; flex-wrap:wrap;
   }
@@ -161,18 +168,6 @@
     text-align:left;
   }
   .sync-row input::placeholder{color:var(--text-faint); direction:rtl; text-align:right;}
-  .room-display{
-    font-family:var(--mono);
-    font-size:11.5px;
-    color:var(--cyan);
-    direction:ltr;
-  }
-  .sync-status{
-    margin-top:8px;
-    font-family:var(--mono);
-    font-size:11px;
-    color:var(--text-faint);
-  }
 
   .page-tabs{
     display:flex; gap:8px; margin-bottom:18px;
@@ -750,54 +745,6 @@
 </head>
 <body>
 
-<div class="bg-art">
-  <div class="glow"></div>
-  <svg viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="pumpGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#ffb545"/>
-        <stop offset="100%" stop-color="#55c7d6"/>
-      </linearGradient>
-    </defs>
-    <g fill="none" stroke="url(#pumpGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <!-- volute casing -->
-      <path d="M450 180
-               C 340 180, 250 260, 235 370
-               C 220 480, 280 580, 380 610
-               C 440 628, 480 610, 500 570"/>
-      <path d="M450 210
-               C 365 210, 292 278, 280 370
-               C 268 462, 318 548, 400 572"/>
-      <!-- discharge nozzle -->
-      <path d="M500 570 L 610 570 L 610 640 L 560 640 L 560 610 L 500 610 Z"/>
-      <!-- suction inlet pipe -->
-      <path d="M450 180 L 450 90 M 410 90 L 490 90"/>
-      <!-- impeller hub circle -->
-      <circle cx="410" cy="400" r="70"/>
-      <circle cx="410" cy="400" r="14" fill="url(#pumpGrad)" stroke="none" opacity=".5"/>
-      <!-- impeller blades -->
-      <g class="accent-line">
-        <path d="M410 400 L 410 330"/>
-        <path d="M410 400 L 465 350"/>
-        <path d="M410 400 L 478 400"/>
-        <path d="M410 400 L 465 450"/>
-        <path d="M410 400 L 410 470"/>
-        <path d="M410 400 L 355 450"/>
-        <path d="M410 400 L 342 400"/>
-        <path d="M410 400 L 355 350"/>
-      </g>
-      <!-- shaft -->
-      <path d="M480 400 L 700 400" stroke-dasharray="3 7"/>
-      <rect x="700" y="382" width="90" height="36" rx="6"/>
-      <!-- baseplate -->
-      <path d="M300 660 L 640 660" stroke-dasharray="2 8" opacity=".6"/>
-      <!-- flow arrows -->
-      <path d="M450 60 L 450 88 M 440 78 L 450 88 L 460 78" opacity=".7"/>
-      <path d="M615 605 L 640 605 M 630 596 L 640 605 L 630 614" opacity=".7"/>
-    </g>
-  </svg>
-</div>
-
 <div class="wrap">
 
   <div class="page-tabs">
@@ -850,13 +797,47 @@
   <div class="page-view" id="pageMain">
 
   <header>
-    <div class="tag">CFTurbo · Pump Design QA</div>
-    <h1>چک‌لیست طراحی پمپ در CFTurbo</h1>
+    <div class="header-top">
+      <div class="header-icon" aria-hidden="true">
+        <svg viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pumpGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffb545"/>
+              <stop offset="100%" stop-color="#55c7d6"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="url(#pumpGrad)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M450 180
+                     C 340 180, 250 260, 235 370
+                     C 220 480, 280 580, 380 610
+                     C 440 628, 480 610, 500 570"/>
+            <path d="M500 570 L 610 570 L 610 640 L 560 640 L 560 610 L 500 610 Z"/>
+            <path d="M450 180 L 450 90 M 410 90 L 490 90"/>
+            <circle cx="410" cy="400" r="70"/>
+            <circle cx="410" cy="400" r="14" fill="url(#pumpGrad)" stroke="none" opacity=".5"/>
+            <g>
+              <path d="M410 400 L 410 330"/>
+              <path d="M410 400 L 465 350"/>
+              <path d="M410 400 L 478 400"/>
+              <path d="M410 400 L 465 450"/>
+              <path d="M410 400 L 410 470"/>
+              <path d="M410 400 L 355 450"/>
+              <path d="M410 400 L 342 400"/>
+              <path d="M410 400 L 355 350"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="header-titles">
+        <div class="tag">CFTurbo · Pump Design QA</div>
+        <h1>چک‌لیست طراحی پمپ در CFTurbo</h1>
+      </div>
+      <button id="themeToggleBtn" class="btn-ghost theme-toggle-btn" type="button">🌙 حالت شب</button>
+    </div>
     <div class="sub">
       فهرست کنترلی مبتنی بر مراحل رسمی طراحی پمپ در نرم‌افزار CFTurbo (پروانه، ولوت، استاتور) به‌همراه نکات
       کیفی و منبع هر مورد. با تیک‌زدن هر بند، پیشرفت کار ذخیره می‌شود و در پایان می‌توانید گزارش نهایی را
-      به‌صورت فایل Word یا Excel خروجی بگیرید. با راه‌اندازی سرور داخلی همراه این پروژه، می‌توانید همین فایل
-      را برای هم‌تیمی‌هایتان بفرستید و با اتصال به همان اتاق، تغییرات همه روی شبکه داخلی همگام شود.
+      به‌صورت فایل Word یا Excel خروجی بگیرید.
     </div>
     <div class="stats">
       <div class="stat"><b id="statDone">0</b><span>موارد تکمیل‌شده</span></div>
@@ -872,18 +853,6 @@
     <button id="newProjectBtn" class="btn-primary">+ پروژه جدید</button>
     <button id="renameProjectBtn" class="btn-ghost">✎ تغییر نام</button>
     <button id="deleteProjectBtn" class="btn-ghost">🗑 حذف این پروژه</button>
-  </div>
-
-  <div class="sync-box" id="syncBox">
-    <div class="sync-row">
-      <input type="text" id="serverBaseInput" placeholder="آدرس سرور داخلی — مثلاً http://192.168.1.10:4000" style="min-width:230px;">
-      <input type="text" id="roomCodeInput" placeholder="کد اتاق را اینجا بچسبانید…">
-      <button id="joinRoomBtn">اتصال با کد</button>
-      <button id="createRoomBtn" class="btn-primary">ساخت اتاق مشترک جدید</button>
-      <button id="leaveRoomBtn" class="btn-ghost">قطع اتصال</button>
-      <span class="room-display" id="roomCodeDisplay"></span>
-    </div>
-    <div class="sync-status" id="syncStatus"></div>
   </div>
 
   <div class="toolbar">
@@ -1232,169 +1201,6 @@ async function storeDelete(key){
   try{ localStorage.removeItem(key); }catch(e){}
 }
 
-/* ---------- همگام‌سازی آنلاین بین چند نفر از طریق سروری که خودتان روی شبکه/آی‌پی داخلی بالا می‌آورید ----------
-   این بخش دیگر به هیچ سرویس خارجی وابسته نیست. کافیست فایل server.js (که همراه این پروژه داده شده)
-   را روی یک کامپیوتر داخل شبکه اجرا کنید و آی‌پی:پورت آن را در کادر «آدرس سرور» وارد کنید.
-   منطق: آخرین تغییری که ارسال شود همیشه برنده است (Last-write-wins)؛ اگر دو نفر همزمان ویرایش کنند
-   ممکن است یکی از تغییرات بازنویسی شود. */
-let serverBase = '';
-let roomCode = null;
-let syncTimer = null;
-let pushTimer = null;
-let lastRemoteStr = null;
-
-function normalizeBase(url){
-  url = (url || '').trim();
-  if (!url) return '';
-  if (!/^https?:\/\//i.test(url)) url = 'http://' + url;
-  return url.replace(/\/+$/, '');
-}
-
-async function buildFullPayload(){
-  const projects = {};
-  for (const name of projectList){
-    const raw = await storeGet(projectKey(name));
-    projects[name] = raw ? JSON.parse(raw) : { checks:{}, notes:{}, status:{} };
-  }
-  return { projectList: projectList.slice(), currentProject, projects, updatedAt: Date.now() };
-}
-
-async function applyFullPayload(payload){
-  projectList = Array.isArray(payload.projectList) ? payload.projectList : [];
-  const projects = payload.projects || {};
-  for (const name of projectList){
-    await storeSet(projectKey(name), JSON.stringify(projects[name] || { checks:{}, notes:{}, status:{} }));
-  }
-  if (!currentProject || !projectList.includes(currentProject)){
-    currentProject = (payload.currentProject && projectList.includes(payload.currentProject))
-      ? payload.currentProject
-      : (projectList[0] || null);
-  }
-  await storeSet('cfturbo-project-list', JSON.stringify(projectList));
-  await storeSet('cfturbo-active-project', currentProject || '');
-  await loadCurrentProjectData();
-  renderProjectSelect();
-  render();
-}
-
-function setSyncStatus(text){
-  const el = document.getElementById('syncStatus');
-  if (el) el.textContent = text;
-}
-
-async function pullRemote(){
-  if (!roomCode || !serverBase) return;
-  try{
-    const res = await fetch(`${serverBase}/api/rooms/${roomCode}`);
-    if (!res.ok) throw new Error('bad status');
-    const data = await res.json();
-    const str = JSON.stringify(data);
-    if (str !== lastRemoteStr){
-      lastRemoteStr = str;
-      await applyFullPayload(data);
-    }
-    setSyncStatus('🟢 متصل — آخرین همگام‌سازی: ' + new Date().toLocaleTimeString('fa-IR'));
-  }catch(e){
-    setSyncStatus('🟡 خطا در اتصال به سرور — دوباره تلاش می‌شود…');
-  }
-}
-
-async function pushRemote(){
-  if (!roomCode || !serverBase) return;
-  try{
-    const payload = await buildFullPayload();
-    const str = JSON.stringify(payload);
-    lastRemoteStr = str;
-    await fetch(`${serverBase}/api/rooms/${roomCode}`, {
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: str
-    });
-    setSyncStatus('🟢 متصل — تغییرات ارسال شد: ' + new Date().toLocaleTimeString('fa-IR'));
-  }catch(e){
-    setSyncStatus('🟡 خطا در ارسال تغییرات — دوباره تلاش می‌شود…');
-  }
-}
-
-function schedulePush(){
-  if (!roomCode || !serverBase) return;
-  clearTimeout(pushTimer);
-  pushTimer = setTimeout(pushRemote, 1200);
-}
-
-function startSyncLoop(){
-  clearInterval(syncTimer);
-  pullRemote();
-  syncTimer = setInterval(pullRemote, 8000);
-}
-function stopSyncLoop(){
-  clearInterval(syncTimer);
-  syncTimer = null;
-}
-
-function updateSyncUI(){
-  const connected = !!roomCode;
-  document.getElementById('serverBaseInput').style.display = connected ? 'none' : '';
-  document.getElementById('createRoomBtn').style.display = connected ? 'none' : '';
-  document.getElementById('joinRoomBtn').style.display = connected ? 'none' : '';
-  document.getElementById('roomCodeInput').style.display = connected ? 'none' : '';
-  document.getElementById('leaveRoomBtn').style.display = connected ? '' : 'none';
-  document.getElementById('roomCodeDisplay').style.display = connected ? '' : 'none';
-  if (connected) document.getElementById('roomCodeDisplay').textContent = 'سرور: ' + serverBase + '  |  کد اتاق: ' + roomCode;
-  setSyncStatus(connected ? 'در حال اتصال…' : '⚪ آفلاین — فقط ذخیره محلی روی همین مرورگر');
-}
-
-async function createRoom(){
-  serverBase = normalizeBase(document.getElementById('serverBaseInput').value);
-  if (!serverBase){ alert('اول آدرس سرور داخلی را وارد کنید (مثلاً http://192.168.1.10:4000).'); return; }
-  const sure = confirm('یک اتاق مشترک جدید روی سرور ساخته می‌شود و وضعیت فعلی همه پروژه‌های شما در آن قرار می‌گیرد. ادامه می‌دهید؟');
-  if (!sure) return;
-  try{
-    const payload = await buildFullPayload();
-    const res = await fetch(`${serverBase}/api/rooms`, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) throw new Error('bad status');
-    const data = await res.json();
-    if (!data.id) throw new Error('پاسخ نامعتبر از سرور');
-    roomCode = data.id;
-    lastRemoteStr = JSON.stringify(payload);
-    await storeSet('cfturbo-room-code', roomCode);
-    await storeSet('cfturbo-server-base', serverBase);
-    updateSyncUI();
-    startSyncLoop();
-    prompt('اتاق مشترک ساخته شد. این کد را همراه آدرس سرور برای بقیه ارسال کنید:', roomCode);
-  }catch(e){
-    alert('ساخت اتاق مشترک با خطا مواجه شد. مطمئن شوید سرور server.js روشن است و آدرس درست وارد شده.');
-  }
-}
-
-async function joinRoom(){
-  serverBase = normalizeBase(document.getElementById('serverBaseInput').value);
-  const input = document.getElementById('roomCodeInput').value.trim();
-  if (!serverBase || !input){ alert('آدرس سرور و کد اتاق را وارد کنید.'); return; }
-  const sure = confirm('با اتصال به این اتاق، وضعیت فعلی پروژه‌های محلی شما با نسخه آنلاین این اتاق جایگزین می‌شود. ادامه می‌دهید؟');
-  if (!sure) return;
-  roomCode = input;
-  await storeSet('cfturbo-room-code', roomCode);
-  await storeSet('cfturbo-server-base', serverBase);
-  updateSyncUI();
-  await pullRemote();
-  startSyncLoop();
-}
-
-async function leaveRoom(){
-  if (!roomCode) return;
-  const sure = confirm('اتصال به اتاق مشترک قطع شود؟ نسخه محلی شما همین‌طور که الان هست حفظ می‌شود ولی دیگر با بقیه همگام نمی‌شود.');
-  if (!sure) return;
-  stopSyncLoop();
-  roomCode = null;
-  await storeDelete('cfturbo-room-code');
-  updateSyncUI();
-}
-
 /* ---------- مدیریت پروژه‌ها ---------- */
 async function loadProjectList(){
   const raw = await storeGet('cfturbo-project-list');
@@ -1405,7 +1211,6 @@ async function loadProjectList(){
 async function saveProjectList(){
   await storeSet('cfturbo-project-list', JSON.stringify(projectList));
   await storeSet('cfturbo-active-project', currentProject || '');
-  schedulePush();
 }
 async function loadCurrentProjectData(){
   if (!currentProject){
@@ -2494,9 +2299,21 @@ document.getElementById('renameProjectBtn').addEventListener('click', renameCurr
 document.getElementById('projectSelect').addEventListener('change', (e) => {
   switchToProject(e.target.value);
 });
-document.getElementById('createRoomBtn').addEventListener('click', createRoom);
-document.getElementById('joinRoomBtn').addEventListener('click', joinRoom);
-document.getElementById('leaveRoomBtn').addEventListener('click', leaveRoom);
+/* ---------- تغییر پس‌زمینه (حالت شب / روز) ---------- */
+function applyTheme(theme){
+  document.body.classList.toggle('light', theme === 'light');
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.textContent = theme === 'light' ? '🌙 حالت شب' : '☀️ حالت روز';
+}
+async function initTheme(){
+  const saved = await storeGet('cfturbo-theme');
+  applyTheme(saved === 'light' ? 'light' : 'dark');
+}
+document.getElementById('themeToggleBtn').addEventListener('click', async () => {
+  const next = document.body.classList.contains('light') ? 'dark' : 'light';
+  applyTheme(next);
+  await storeSet('cfturbo-theme', next);
+});
 
 /* ---------- تعویض صفحه (چک‌لیست / محاسبه‌گر) ---------- */
 document.querySelectorAll('.page-tab').forEach(btn => {
@@ -2509,24 +2326,13 @@ document.querySelectorAll('.page-tab').forEach(btn => {
 });
 
 async function init(){
+  await initTheme();
   await loadProjectList();
   if (currentProject){
     await loadCurrentProjectData();
   }
   renderProjectSelect();
   render();
-
-  const savedBase = await storeGet('cfturbo-server-base');
-  const savedRoom = await storeGet('cfturbo-room-code');
-  if (savedBase) document.getElementById('serverBaseInput').value = savedBase;
-  if (savedBase && savedRoom){
-    serverBase = savedBase;
-    roomCode = savedRoom;
-    updateSyncUI();
-    startSyncLoop();
-  } else {
-    updateSyncUI();
-  }
 }
 
 init();
