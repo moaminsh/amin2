@@ -40,6 +40,7 @@
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;}
+  button{font:inherit;}
   ::selection{background:var(--brass); color:var(--blue-field-2);}
   :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
 
@@ -64,65 +65,71 @@
 
   /* ---------- nav ---------- */
   nav{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; justify-content:space-between; gap:18px;
     padding:22px var(--sheet-margin) 0;
     max-width:1060px; margin:0 auto;
   }
   .logo{
     font-family:var(--mono); font-size:13px; letter-spacing:.06em;
-    color:var(--line); display:flex; align-items:center; gap:8px;
+    color:var(--line); display:flex; align-items:center; gap:8px; white-space:nowrap;
   }
   .logo b{color:var(--brass); font-weight:700;}
   nav .links{display:flex; gap:22px; font-size:13.5px;}
   nav .links a{text-decoration:none; color:var(--line-dim); transition:color .15s;}
   nav .links a:hover{color:var(--line);}
+  .nav-right{display:flex; align-items:center; gap:12px; flex:0 0 auto;}
+  .lang-btn{
+    font-family:var(--mono); font-size:11.5px; font-weight:600; letter-spacing:.05em;
+    padding:7px 13px; border:1px solid var(--line-faint); border-radius:20px; background:transparent;
+    color:var(--line); cursor:pointer; transition:border-color .15s, color .15s;
+  }
+  .lang-btn:hover{border-color:var(--brass); color:var(--brass);}
+  .nav-avatar{width:32px; height:32px; border-radius:50%; overflow:hidden; border:1px solid var(--line-faint); flex:0 0 auto; display:block;}
+  .nav-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
 
-  /* ---------- hero ---------- */
-  .hero{
-    display:grid;
-    grid-template-columns:1.25fr .85fr;
-    gap:48px;
-    align-items:center;
-    padding:56px var(--sheet-margin) 30px;
-  }
-  .eyebrow{
-    font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--brass); display:flex; align-items:center; gap:10px; margin-bottom:18px;
-  }
-  .eyebrow::after{content:""; flex:0 0 46px; height:1px; background:var(--brass-dim);}
-  h1{
-    margin:0 0 14px; font-weight:800; font-size:clamp(34px,5.4vw,58px); line-height:1.12;
-    letter-spacing:-.01em;
-  }
-  h1 span{color:var(--brass);}
-  .lede{
-    font-size:16.5px; line-height:2; color:var(--line-dim); max-width:52ch; margin:0 0 30px;
-  }
-  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
   .btn{
     font-family:var(--sans); font-size:14px; font-weight:600;
-    padding:13px 22px; border-radius:3px; text-decoration:none;
-    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, background .15s, color .15s;
+    padding:13px 22px; border-radius:3px; text-decoration:none; border:none; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, background .15s, color .15s, border-color .15s;
   }
+  .btn-sm{padding:9px 15px; font-size:12.5px;}
   .btn-primary{background:var(--brass); color:#1a1207;}
   .btn-primary:hover{background:#dcab73; transform:translateY(-1px);}
-  .btn-ghost{border:1px solid var(--line-faint); color:var(--line);}
+  .btn-ghost{border:1px solid var(--line-faint); color:var(--line); background:transparent;}
   .btn-ghost:hover{border-color:var(--brass); color:var(--brass);}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
 
-  /* ---------- hero photo w/ dimension frame ---------- */
-  .photo-block{position:relative; justify-self:center; width:100%; max-width:300px;}
-  .photo-frame{
-    position:relative; border:1px solid var(--line-faint); border-radius:4px; overflow:hidden;
-    background:var(--blue-field-3);
+  /* ---------- banner ---------- */
+  .banner{
+    margin:26px var(--sheet-margin) 0; height:108px; border-radius:4px;
+    border:1px solid var(--line-faint); position:relative; overflow:hidden;
+    background:
+      repeating-linear-gradient(45deg, rgba(205,154,95,.16) 0 2px, transparent 2px 16px),
+      linear-gradient(120deg, var(--blue-field-3), var(--blue-field) 65%);
   }
-  .photo-frame img{display:block; width:100%; height:360px; object-fit:cover; filter:saturate(.92) contrast(1.02);}
+  .banner::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(560px 200px at 82% 0%, rgba(237,243,248,.10), transparent 70%);
+  }
+
+  /* ---------- profile row ---------- */
+  .profile-row{
+    display:flex; gap:32px; align-items:flex-end; flex-wrap:wrap;
+    padding:0 var(--sheet-margin); margin-top:-58px;
+  }
+  .avatar-block{position:relative; flex:0 0 auto; width:168px;}
+  .avatar-frame{
+    position:relative; width:168px; height:196px; border:1px solid var(--line-faint); border-radius:4px;
+    overflow:hidden; background:var(--blue-field-3); box-shadow:0 18px 34px -18px rgba(0,0,0,.6);
+  }
+  .avatar-frame img{display:block; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.02);}
   .dim{
     position:absolute; font-family:var(--mono); font-size:10px; color:var(--line-dim); letter-spacing:.03em;
     display:flex; align-items:center; gap:6px;
   }
-  .dim-top{ top:-26px; left:0; right:0; justify-content:center;}
+  .dim-top{ top:-24px; left:0; right:0; justify-content:center;}
   .dim-top::before, .dim-top::after{content:""; flex:1; height:1px; background:var(--line-faint); position:relative; top:1px;}
-  .dim-side{ top:0; bottom:0; left:-30px; writing-mode:vertical-rl; justify-content:center;}
+  .dim-side{ top:0; bottom:0; left:-28px; writing-mode:vertical-rl; justify-content:center;}
   .dim-side::before, .dim-side::after{content:""; flex:1; width:1px; background:var(--line-faint);}
   .photo-tag{
     position:absolute; bottom:-13px; right:14px; background:var(--brass); color:#1a1207;
@@ -130,9 +137,38 @@
     letter-spacing:.04em;
   }
 
+  .profile-info{flex:1 1 320px; min-width:260px; padding-top:14px;}
+  .profile-top{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;}
+  .name{font-size:clamp(25px,3.2vw,32px); font-weight:800; margin:0; letter-spacing:-.01em;}
+  .badge{
+    font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.06em;
+    background:var(--brass); color:#1a1207; padding:4px 10px; border-radius:3px; white-space:nowrap;
+  }
+  .role{font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); margin:0 0 14px;}
+  .tagline{font-size:19px; font-weight:600; line-height:1.55; margin:0 0 10px; max-width:44ch;}
+  .tagline span{color:var(--brass);}
+  .bio{font-size:14.5px; color:var(--line-dim); line-height:1.9; max-width:52ch; margin:0 0 22px;}
+
+  .stats-row{display:flex; gap:34px; margin-top:26px; padding-top:20px; border-top:1px solid var(--blue-field-3); flex-wrap:wrap;}
+  .stat{display:flex; flex-direction:column; gap:4px;}
+  .stat .n{font-family:var(--mono); font-size:21px; font-weight:700; color:var(--line);}
+  .stat .l{font-size:11.5px; color:var(--line-dim);}
+
+  /* ---------- tabs ---------- */
+  .tabbar{
+    display:flex; gap:26px; padding:34px var(--sheet-margin) 0; margin-top:20px;
+    border-bottom:1px solid var(--blue-field-3); overflow-x:auto;
+  }
+  .tab{
+    font-size:14px; padding:0 0 14px; color:var(--line-dim); text-decoration:none; white-space:nowrap;
+    border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
+  }
+  .tab:hover{color:var(--line);}
+  .tab.active{color:var(--line); border-bottom-color:var(--brass);}
+
   /* ---------- title block (paper card) — signature element ---------- */
   .titleblock{
-    margin:6px var(--sheet-margin) 40px;
+    margin:34px var(--sheet-margin) 40px;
     background:var(--paper); color:var(--paper-ink);
     border:1px solid #d9d0bc; border-radius:2px;
     box-shadow:0 18px 40px -20px rgba(0,0,0,.55);
@@ -161,7 +197,7 @@
     padding-bottom:14px; border-bottom:1px solid var(--blue-field-3);
   }
   .focus-list li:last-child{border-bottom:none; padding-bottom:0;}
-  .focus-list b{font-family:var(--mono); color:var(--brass); font-size:12px; margin-top:2px;}
+  .focus-list b{font-family:var(--mono); color:var(--brass); font-size:12px; margin-top:2px; flex:0 0 auto;}
 
   /* ---------- skills datasheet table ---------- */
   .datasheet{width:100%; border-collapse:collapse; font-size:14px;}
@@ -217,15 +253,20 @@
     border-top:1px solid var(--blue-field-3);
   }
 
+  html[dir="ltr"] .tb-value.mono{text-align:left;}
+
   @media (max-width:820px){
-    .hero{grid-template-columns:1fr; padding-top:36px;}
-    .photo-block{order:-1; max-width:220px;}
     .about-grid{grid-template-columns:1fr;}
     .project-card{grid-template-columns:1fr;}
     .project-visual{border-left:none; border-bottom:1px solid var(--line-faint);}
     .titleblock{grid-template-columns:1fr 1fr;}
     .tb-cell:nth-child(2){border-right:none;}
     nav .links{display:none;}
+    .profile-row{margin-top:-38px; gap:20px;}
+    .avatar-block{width:132px;}
+    .avatar-frame{width:132px; height:158px;}
+    .stats-row{gap:22px;}
+    .tabbar{gap:18px;}
   }
 </style>
 </head>
@@ -235,106 +276,130 @@
   <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
 
   <nav>
-    <div class="logo"><b>MA</b>&nbsp;/ مهندسی مکانیک</div>
+    <div class="logo"><b>MA</b>&nbsp;/ <span data-fa="مهندسی مکانیک" data-en="Mechanical Engineering">مهندسی مکانیک</span></div>
     <div class="links">
-      <a href="#about">درباره</a>
-      <a href="#skills">مهارت‌ها</a>
-      <a href="#projects">پروژه‌ها</a>
-      <a href="#contact">تماس</a>
+      <a href="#about" data-fa="درباره" data-en="About">درباره</a>
+      <a href="#skills" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</a>
+      <a href="#projects" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a>
+      <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
+    </div>
+    <div class="nav-right">
+      <button id="langBtn" class="lang-btn" type="button" aria-label="Switch language">EN</button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-fa="تماس بگیرید" data-en="Get in touch">تماس بگیرید</a>
+      <span class="nav-avatar"><img src="profile.jpg" alt=""></span>
     </div>
   </nav>
 
-  <header class="hero">
-    <div>
-      <div class="eyebrow">دانشجوی مهندسی مکانیک</div>
-      <h1>طراحی می‌کنم،<br>می‌سازم و <span>محاسبه</span> می‌کنم.</h1>
-      <p class="lede">
-        محمدامین هستم؛ روی طراحی مکانیکی، سیالات و توربوماشین‌ها کار می‌کنم و ابزارهایی می‌سازم
-        که فرایند طراحی و بررسی مهندسی را ساده‌تر و دقیق‌تر می‌کنند.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#projects">مشاهدهٔ پروژه‌ها</a>
-        <a class="btn btn-ghost" href="mailto:mohammadaminsh1384@gmail.com">ارسال ایمیل</a>
-      </div>
-    </div>
+  <div class="banner"></div>
 
-    <div class="photo-block">
-      <div class="dim dim-top">۳۰۰</div>
-      <div class="dim dim-side">۳۶۰</div>
-      <div class="photo-frame">
+  <div class="profile-row">
+    <div class="avatar-block">
+      <div class="dim dim-top" data-fa="۲۲۰" data-en="220">۲۲۰</div>
+      <div class="dim dim-side" data-fa="۲۶۰" data-en="260">۲۶۰</div>
+      <div class="avatar-frame">
         <img src="profile.jpg" alt="عکس محمدامین">
       </div>
       <span class="photo-tag">FIG. 01</span>
     </div>
-  </header>
+
+    <div class="profile-info">
+      <div class="profile-top">
+        <h1 class="name" data-fa="محمدامین" data-en="Mohammadamin">محمدامین</h1>
+        <span class="badge">REV.A</span>
+      </div>
+      <div class="role" data-fa="دانشجوی مهندسی مکانیک" data-en="Mechanical Engineering Student">دانشجوی مهندسی مکانیک</div>
+      <p class="tagline" data-html data-fa="طراحی می‌کنم، می‌سازم و <span>محاسبه</span> می‌کنم." data-en="I design, build, and <span>calculate</span>.">طراحی می‌کنم، می‌سازم و <span>محاسبه</span> می‌کنم.</p>
+      <p class="bio" data-fa="روی طراحی مکانیکی، سیالات و توربوماشین‌ها کار می‌کنم و ابزارهایی می‌سازم که فرایند طراحی و بررسی مهندسی را ساده‌تر و دقیق‌تر می‌کنند." data-en="I work on mechanical design, fluids, and turbomachinery, and I build tools that make the engineering design and review process simpler and more precise.">روی طراحی مکانیکی، سیالات و توربوماشین‌ها کار می‌کنم و ابزارهایی می‌سازم که فرایند طراحی و بررسی مهندسی را ساده‌تر و دقیق‌تر می‌کنند.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects" data-fa="مشاهدهٔ پروژه‌ها" data-en="View projects">مشاهدهٔ پروژه‌ها</a>
+        <a class="btn btn-ghost" href="mailto:mohammadaminsh1384@gmail.com" data-fa="ارسال ایمیل" data-en="Email me">ارسال ایمیل</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><span class="n" data-fa="۰۴" data-en="04">۰۴</span><span class="l" data-fa="دسته‌های مهارت" data-en="Skill categories">دسته‌های مهارت</span></div>
+        <div class="stat"><span class="n" data-fa="۰۳" data-en="03">۰۳</span><span class="l" data-fa="ابزار اصلی" data-en="Core tools">ابزار اصلی</span></div>
+        <div class="stat"><span class="n" data-fa="۰۱" data-en="01">۰۱</span><span class="l" data-fa="پروژهٔ منتشرشده" data-en="Shipped project">پروژهٔ منتشرشده</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <a class="tab" href="#about" data-fa="درباره" data-en="About">درباره</a>
+    <a class="tab" href="#skills" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</a>
+    <a class="tab" href="#projects" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a>
+    <a class="tab" href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
+  </div>
 
   <div class="titleblock">
     <div class="tb-cell">
-      <div class="tb-label">نام</div>
-      <div class="tb-value">محمدامین</div>
+      <div class="tb-label" data-fa="نام" data-en="Name">نام</div>
+      <div class="tb-value" data-fa="محمدامین" data-en="Mohammadamin">محمدامین</div>
     </div>
     <div class="tb-cell">
-      <div class="tb-label">رشته</div>
-      <div class="tb-value">مهندسی مکانیک</div>
+      <div class="tb-label" data-fa="رشته" data-en="Field">رشته</div>
+      <div class="tb-value" data-fa="مهندسی مکانیک" data-en="Mechanical Engineering">مهندسی مکانیک</div>
     </div>
     <div class="tb-cell">
-      <div class="tb-label">ایمیل</div>
+      <div class="tb-label" data-fa="ایمیل" data-en="Email">ایمیل</div>
       <div class="tb-value mono"><a href="mailto:mohammadaminsh1384@gmail.com">mohammadaminsh1384@gmail.com</a></div>
     </div>
     <div class="tb-cell">
-      <div class="tb-label">شمارهٔ نقشه</div>
+      <div class="tb-label" data-fa="شمارهٔ نقشه" data-en="Drawing No.">شمارهٔ نقشه</div>
       <div class="tb-value mono">PORTFOLIO&nbsp;— REV.A</div>
     </div>
   </div>
 
   <section id="about">
-    <div class="sec-head"><span class="sec-num">01</span><h2>درباره من</h2><span class="divider"></span></div>
+    <div class="sec-head"><span class="sec-num">01</span><h2 data-fa="درباره من" data-en="About me">درباره من</h2><span class="divider"></span></div>
     <div class="about-grid">
       <div class="about">
-        <p>
+        <p data-html data-fa="علاقهٔ اصلی‌ام <strong>طراحی مکانیکی و توربوماشین‌هاست</strong>؛ از محاسبات اولیهٔ نقطهٔ طراحی تا انتخاب نوع پمپ و بررسی گام‌به‌گام فرایند طراحی. بیشتر وقتم بین نرم‌افزارهای CAD/CFD و ساخت ابزارهای کوچکی می‌گذرد که کار مهندسی روزمره را دقیق‌تر و منظم‌تر می‌کنند." data-en="My main interest is <strong>mechanical design and turbomachinery</strong> — from initial design-point calculations to pump-type selection and step-by-step review of the design process. Most of my time is split between CAD/CFD software and building small tools that make everyday engineering work more precise and organized.">
           علاقهٔ اصلی‌ام <strong>طراحی مکانیکی و توربوماشین‌هاست</strong>؛ از محاسبات اولیهٔ نقطهٔ طراحی
           تا انتخاب نوع پمپ و بررسی گام‌به‌گام فرایند طراحی. بیشتر وقتم بین نرم‌افزارهای CAD/CFD
           و ساخت ابزارهای کوچکی می‌گذرد که کار مهندسی روزمره را دقیق‌تر و منظم‌تر می‌کنند.
         </p>
-        <p>
+        <p data-html data-fa="به ترکیب <strong>دقت مهندسی</strong> با <strong>طراحی کاربردی نرم‌افزار</strong> علاقه دارم؛ پروژهٔ زیر نمونه‌ای از همین نگاه است." data-en="I like combining <strong>engineering precision</strong> with <strong>practical software design</strong> — the project below is one example of that approach.">
           به ترکیب <strong>دقت مهندسی</strong> با <strong>طراحی کاربردی نرم‌افزار</strong> علاقه دارم؛
           پروژهٔ زیر نمونه‌ای از همین نگاه است.
         </p>
       </div>
       <ul class="focus-list">
-        <li><b>SCOPE</b> طراحی مکانیکی و تحلیل سیالات</li>
-        <li><b>FOCUS</b> توربوماشین‌ها و پمپ‌های سانتریفیوژ</li>
-        <li><b>TOOLS</b> CFTurbo · SolidWorks · MATLAB</li>
-        <li><b>NOW</b> ساخت ابزارهای دیجیتال برای فرایند طراحی</li>
+        <li><b>SCOPE</b><span data-fa="طراحی مکانیکی و تحلیل سیالات" data-en="Mechanical design & fluid analysis">طراحی مکانیکی و تحلیل سیالات</span></li>
+        <li><b>FOCUS</b><span data-fa="توربوماشین‌ها و پمپ‌های سانتریفیوژ" data-en="Turbomachinery & centrifugal pumps">توربوماشین‌ها و پمپ‌های سانتریفیوژ</span></li>
+        <li><b>TOOLS</b><span data-fa="CFTurbo · SolidWorks · MATLAB" data-en="CFTurbo · SolidWorks · MATLAB">CFTurbo · SolidWorks · MATLAB</span></li>
+        <li><b>NOW</b><span data-fa="ساخت ابزارهای دیجیتال برای فرایند طراحی" data-en="Building digital tools for the design process">ساخت ابزارهای دیجیتال برای فرایند طراحی</span></li>
       </ul>
     </div>
   </section>
 
   <section id="skills">
-    <div class="sec-head"><span class="sec-num">02</span><h2>مهارت‌ها</h2><span class="divider"></span></div>
+    <div class="sec-head"><span class="sec-num">02</span><h2 data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</h2><span class="divider"></span></div>
     <table class="datasheet">
       <thead>
-        <tr><th style="width:26%">دسته</th><th>موارد</th><th style="width:14%">سطح</th></tr>
+        <tr>
+          <th style="width:26%" data-fa="دسته" data-en="Category">دسته</th>
+          <th data-fa="موارد" data-en="Items">موارد</th>
+          <th style="width:14%" data-fa="سطح" data-en="Level">سطح</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="ds-cat">طراحی و مدل‌سازی</td>
-          <td class="ds-items">مدل‌سازی سه‌بعدی، نقشه‌کشی فنی، طراحی قطعات و مجموعه‌ها</td>
+          <td class="ds-cat" data-fa="طراحی و مدل‌سازی" data-en="Design & modeling">طراحی و مدل‌سازی</td>
+          <td class="ds-items" data-fa="مدل‌سازی سه‌بعدی، نقشه‌کشی فنی، طراحی قطعات و مجموعه‌ها" data-en="3D modeling, technical drafting, part & assembly design">مدل‌سازی سه‌بعدی، نقشه‌کشی فنی، طراحی قطعات و مجموعه‌ها</td>
           <td class="ds-level">••••○</td>
         </tr>
         <tr>
-          <td class="ds-cat">سیالات و توربوماشین</td>
-          <td class="ds-items">طراحی پمپ سانتریفیوژ، محاسبهٔ nq، انتخاب نوع پروانه</td>
+          <td class="ds-cat" data-fa="سیالات و توربوماشین" data-en="Fluids & turbomachinery">سیالات و توربوماشین</td>
+          <td class="ds-items" data-fa="طراحی پمپ سانتریفیوژ، محاسبهٔ nq، انتخاب نوع پروانه" data-en="Centrifugal pump design, nq calculation, impeller type selection">طراحی پمپ سانتریفیوژ، محاسبهٔ nq، انتخاب نوع پروانه</td>
           <td class="ds-level">••••○</td>
         </tr>
         <tr>
-          <td class="ds-cat">محاسبات و ابزار</td>
-          <td class="ds-items">محاسبات مهندسی، اسکریپت‌نویسی برای ابزارهای طراحی</td>
+          <td class="ds-cat" data-fa="محاسبات و ابزار" data-en="Calculations & tools">محاسبات و ابزار</td>
+          <td class="ds-items" data-fa="محاسبات مهندسی، اسکریپت‌نویسی برای ابزارهای طراحی" data-en="Engineering calculations, scripting for design tools">محاسبات مهندسی، اسکریپت‌نویسی برای ابزارهای طراحی</td>
           <td class="ds-level">•••○○</td>
         </tr>
         <tr>
-          <td class="ds-cat">توسعهٔ نرم‌افزار</td>
-          <td class="ds-items">ساخت ابزارهای وب برای فرایندهای مهندسی (HTML/JS)</td>
+          <td class="ds-cat" data-fa="توسعهٔ نرم‌افزار" data-en="Software development">توسعهٔ نرم‌افزار</td>
+          <td class="ds-items" data-fa="ساخت ابزارهای وب برای فرایندهای مهندسی (HTML/JS)" data-en="Building web tools for engineering workflows (HTML/JS)">ساخت ابزارهای وب برای فرایندهای مهندسی (HTML/JS)</td>
           <td class="ds-level">•••○○</td>
         </tr>
       </tbody>
@@ -342,18 +407,18 @@
   </section>
 
   <section id="projects">
-    <div class="sec-head"><span class="sec-num">03</span><h2>پروژه‌ها</h2><span class="divider"></span></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2 data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</h2><span class="divider"></span></div>
 
     <div class="project-card">
       <div class="project-visual">
         <div class="ptag">PROJECT — 01</div>
-        <div class="pname">چک‌لیست طراحی پمپ<br>CFTurbo</div>
-        <div class="spec-line"><span>نوع</span><b>ابزار وب تعاملی</b></div>
-        <div class="spec-line"><span>زبان</span><b>فارسی (RTL)</b></div>
-        <div class="spec-line"><span>خروجی</span><b>Word · Excel</b></div>
+        <div class="pname" data-html data-fa="چک‌لیست طراحی پمپ<br>CFTurbo" data-en="CFTurbo Pump Design<br>Checklist">چک‌لیست طراحی پمپ<br>CFTurbo</div>
+        <div class="spec-line"><span data-fa="نوع" data-en="Type">نوع</span><b data-fa="ابزار وب تعاملی" data-en="Interactive web tool">ابزار وب تعاملی</b></div>
+        <div class="spec-line"><span data-fa="زبان" data-en="Language">زبان</span><b data-fa="فارسی (RTL)" data-en="Persian (RTL)">فارسی (RTL)</b></div>
+        <div class="spec-line"><span data-fa="خروجی" data-en="Output">خروجی</span><b>Word · Excel</b></div>
       </div>
       <div class="project-body">
-        <p>
+        <p data-fa="ابزاری برای پیگیری گام‌به‌گام فرایند طراحی پمپ در CFTurbo: محاسبهٔ نقطهٔ طراحی و سرعت مخصوص (nq)، پیشنهاد نوع پمپ متناسب، ثبت وضعیت هر مرحله، مقایسهٔ دو پروژه، همگام‌سازی آنلاین بین دستگاه‌ها و خروجی گرفتن به‌صورت Word و Excel." data-en="A tool for tracking the CFTurbo pump design process step by step: design-point and specific-speed (nq) calculation, matching pump-type suggestions, per-step status tracking, comparing two projects, online sync across devices, and Word/Excel export.">
           ابزاری برای پیگیری گام‌به‌گام فرایند طراحی پمپ در CFTurbo: محاسبهٔ نقطهٔ طراحی و سرعت
           مخصوص (nq)، پیشنهاد نوع پمپ متناسب، ثبت وضعیت هر مرحله، مقایسهٔ دو پروژه، همگام‌سازی
           آنلاین بین دستگاه‌ها و خروجی گرفتن به‌صورت Word و Excel.
@@ -365,18 +430,18 @@
           <span class="tag-chip">HTML / JS</span>
         </div>
         <div class="project-links">
-          <a class="btn btn-primary" href="projects/cfturbo-pump-checklist.html">باز کردن ابزار</a>
+          <a class="btn btn-primary" href="projects/cfturbo-pump-checklist.html" data-fa="باز کردن ابزار" data-en="Open tool">باز کردن ابزار</a>
         </div>
       </div>
     </div>
   </section>
 
   <section id="contact">
-    <div class="sec-head"><span class="sec-num">04</span><h2>تماس</h2><span class="divider"></span></div>
+    <div class="sec-head"><span class="sec-num">04</span><h2 data-fa="تماس" data-en="Contact">تماس</h2><span class="divider"></span></div>
     <div class="contact-card">
       <div>
-        <h3>در حال ساخت پروژهٔ جدیدی هستید؟</h3>
-        <p>برای همکاری، مشاوره یا صرفاً گفت‌وگو دربارهٔ طراحی مکانیکی، از طریق ایمیل در ارتباط باشید.</p>
+        <h3 data-fa="در حال ساخت پروژهٔ جدیدی هستید؟" data-en="Building something new?">در حال ساخت پروژهٔ جدیدی هستید؟</h3>
+        <p data-fa="برای همکاری، مشاوره یا صرفاً گفت‌وگو دربارهٔ طراحی مکانیکی، از طریق ایمیل در ارتباط باشید." data-en="For collaboration, consulting, or just talking about mechanical design, reach out by email.">برای همکاری، مشاوره یا صرفاً گفت‌وگو دربارهٔ طراحی مکانیکی، از طریق ایمیل در ارتباط باشید.</p>
       </div>
       <div class="contact-links">
         <a class="btn btn-primary" href="mailto:mohammadaminsh1384@gmail.com">mohammadaminsh1384@gmail.com</a>
@@ -386,9 +451,64 @@
 
   <footer>
     <span>DWG NO. PORTFOLIO-2026 · SCALE N/A</span>
-    <span>© 2026 محمدامین — مهندسی مکانیک</span>
+    <span data-fa="© 2026 محمدامین — مهندسی مکانیک" data-en="© 2026 Mohammadamin — Mechanical Engineering">© 2026 محمدامین — مهندسی مکانیک</span>
   </footer>
 </div>
+
+<script>
+(function(){
+  var KEY = 'site-lang';
+  var titleFa = 'محمدامین — مهندسی مکانیک';
+  var titleEn = 'Mohammadamin — Mechanical Engineering';
+  var descFa = 'نمونه‌کار محمدامین، دانشجوی مهندسی مکانیک — طراحی، توربوماشین و ابزارهای مهندسی.';
+  var descEn = 'Portfolio of Mohammadamin, a mechanical engineering student — design, turbomachinery, and engineering tools.';
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-fa]').forEach(function(el){
+      var val = lang === 'fa' ? el.getAttribute('data-fa') : el.getAttribute('data-en');
+      if (val === null) return;
+      if (el.hasAttribute('data-html')) { el.innerHTML = val; } else { el.textContent = val; }
+    });
+    var langBtn = document.getElementById('langBtn');
+    if (langBtn) langBtn.textContent = lang === 'fa' ? 'EN' : 'فا';
+    document.title = lang === 'fa' ? titleFa : titleEn;
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', lang === 'fa' ? descFa : descEn);
+    try { localStorage.setItem(KEY, lang); } catch(e){}
+  }
+
+  function stored(){
+    try { return localStorage.getItem(KEY) || 'fa'; } catch(e){ return 'fa'; }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    apply(stored());
+
+    var langBtn = document.getElementById('langBtn');
+    if (langBtn){
+      langBtn.addEventListener('click', function(){
+        apply(document.documentElement.lang === 'fa' ? 'en' : 'fa');
+      });
+    }
+
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var sections = tabs.map(function(t){ return document.querySelector(t.getAttribute('href')); });
+    if ('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting){
+            var id = '#' + entry.target.id;
+            tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('href') === id); });
+          }
+        });
+      }, { rootMargin: '-35% 0px -55% 0px' });
+      sections.forEach(function(s){ if (s) obs.observe(s); });
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
