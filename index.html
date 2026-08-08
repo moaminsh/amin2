@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محمدامین — مهندسی مکانیک</title>
+<meta name="description" content="نمونه‌کار محمدامین، دانشجوی مهندسی مکانیک — طراحی، توربوماشین و ابزارهای مهندسی.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-field:   #10233f;
+    --blue-field-2: #0b1930;
+    --blue-field-3: #16304f;
+    --line:         #edf3f8;
+    --line-dim:     #9fb4cc;
+    --line-faint:   #3c567c;
+    --grid:         rgba(159,180,204,0.09);
+    --brass:        #cd9a5f;
+    --brass-dim:    #8a6238;
+    --paper:        #f1ece0;
+    --paper-ink:    #201a12;
+    --paper-ink-dim:#6c6152;
+    --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+    --mono: 'JetBrains Mono','Consolas',monospace;
+    --sheet-margin: 22px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--blue-field-2);
+    color:var(--line);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--brass); color:var(--blue-field-2);}
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  /* ---------- sheet frame (drawing-sheet border with crop ticks) ---------- */
+  .sheet{
+    position:relative;
+    margin:10px;
+    border:1px solid var(--line-faint);
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/38px 38px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/38px 38px,
+      radial-gradient(1100px 620px at 88% -8%, rgba(159,180,204,.10), transparent 60%),
+      var(--blue-field);
+  }
+  .tick{position:absolute; width:14px; height:14px; border:1px solid var(--brass-dim); opacity:.85;}
+  .tick.tl{top:-1px; left:-1px; border-width:1px 0 0 1px;}
+  .tick.tr{top:-1px; right:-1px; border-width:1px 1px 0 0;}
+  .tick.bl{bottom:-1px; left:-1px; border-width:0 0 1px 1px;}
+  .tick.br{bottom:-1px; right:-1px; border-width:0 1px 1px 0;}
+
+  .wrap{max-width:1060px; margin:0 auto; padding:0 var(--sheet-margin);}
+
+  /* ---------- nav ---------- */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px var(--sheet-margin) 0;
+    max-width:1060px; margin:0 auto;
+  }
+  .logo{
+    font-family:var(--mono); font-size:13px; letter-spacing:.06em;
+    color:var(--line); display:flex; align-items:center; gap:8px;
+  }
+  .logo b{color:var(--brass); font-weight:700;}
+  nav .links{display:flex; gap:22px; font-size:13.5px;}
+  nav .links a{text-decoration:none; color:var(--line-dim); transition:color .15s;}
+  nav .links a:hover{color:var(--line);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns:1.25fr .85fr;
+    gap:48px;
+    align-items:center;
+    padding:56px var(--sheet-margin) 30px;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--brass); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::after{content:""; flex:0 0 46px; height:1px; background:var(--brass-dim);}
+  h1{
+    margin:0 0 14px; font-weight:800; font-size:clamp(34px,5.4vw,58px); line-height:1.12;
+    letter-spacing:-.01em;
+  }
+  h1 span{color:var(--brass);}
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--line-dim); max-width:52ch; margin:0 0 30px;
+  }
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--sans); font-size:14px; font-weight:600;
+    padding:13px 22px; border-radius:3px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, background .15s, color .15s;
+  }
+  .btn-primary{background:var(--brass); color:#1a1207;}
+  .btn-primary:hover{background:#dcab73; transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line-faint); color:var(--line);}
+  .btn-ghost:hover{border-color:var(--brass); color:var(--brass);}
+
+  /* ---------- hero photo w/ dimension frame ---------- */
+  .photo-block{position:relative; justify-self:center; width:100%; max-width:300px;}
+  .photo-frame{
+    position:relative; border:1px solid var(--line-faint); border-radius:4px; overflow:hidden;
+    background:var(--blue-field-3);
+  }
+  .photo-frame img{display:block; width:100%; height:360px; object-fit:cover; filter:saturate(.92) contrast(1.02);}
+  .dim{
+    position:absolute; font-family:var(--mono); font-size:10px; color:var(--line-dim); letter-spacing:.03em;
+    display:flex; align-items:center; gap:6px;
+  }
+  .dim-top{ top:-26px; left:0; right:0; justify-content:center;}
+  .dim-top::before, .dim-top::after{content:""; flex:1; height:1px; background:var(--line-faint); position:relative; top:1px;}
+  .dim-side{ top:0; bottom:0; left:-30px; writing-mode:vertical-rl; justify-content:center;}
+  .dim-side::before, .dim-side::after{content:""; flex:1; width:1px; background:var(--line-faint);}
+  .photo-tag{
+    position:absolute; bottom:-13px; right:14px; background:var(--brass); color:#1a1207;
+    font-family:var(--mono); font-size:10px; padding:4px 9px; border-radius:2px; font-weight:700;
+    letter-spacing:.04em;
+  }
+
+  /* ---------- title block (paper card) — signature element ---------- */
+  .titleblock{
+    margin:6px var(--sheet-margin) 40px;
+    background:var(--paper); color:var(--paper-ink);
+    border:1px solid #d9d0bc; border-radius:2px;
+    box-shadow:0 18px 40px -20px rgba(0,0,0,.55);
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .tb-cell{padding:14px 16px; border-right:1px solid #d9d0bc;}
+  .tb-cell:last-child{border-right:none;}
+  .tb-label{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--paper-ink-dim); margin-bottom:5px;}
+  .tb-value{font-size:14px; font-weight:600;}
+  .tb-value.mono{font-family:var(--mono); direction:ltr; text-align:right; font-weight:500;}
+  .tb-value a{text-decoration:none; border-bottom:1px dashed var(--brass-dim);}
+
+  /* ---------- sections ---------- */
+  section{padding:64px var(--sheet-margin);}
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:30px;}
+  .sec-num{font-family:var(--mono); font-size:12px; color:var(--brass);}
+  h2{font-size:24px; margin:0; font-weight:700;}
+  .divider{height:1px; background:linear-gradient(90deg, var(--line-faint), transparent); flex:1;}
+
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+  .about p{color:var(--line-dim); line-height:2.05; font-size:15px; margin:0 0 16px;}
+  .about strong{color:var(--line); font-weight:600;}
+  .focus-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
+  .focus-list li{
+    display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--line-dim);
+    padding-bottom:14px; border-bottom:1px solid var(--blue-field-3);
+  }
+  .focus-list li:last-child{border-bottom:none; padding-bottom:0;}
+  .focus-list b{font-family:var(--mono); color:var(--brass); font-size:12px; margin-top:2px;}
+
+  /* ---------- skills datasheet table ---------- */
+  .datasheet{width:100%; border-collapse:collapse; font-size:14px;}
+  .datasheet th{
+    text-align:right; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--line-dim); font-weight:500; padding:10px 4px; border-bottom:1px solid var(--line-faint);
+  }
+  .datasheet td{padding:14px 4px; border-bottom:1px solid var(--blue-field-3); vertical-align:top;}
+  .datasheet tr:last-child td{border-bottom:none;}
+  .ds-cat{font-weight:700; color:var(--line);}
+  .ds-items{color:var(--line-dim); line-height:1.9;}
+  .ds-level{font-family:var(--mono); color:var(--brass); white-space:nowrap;}
+
+  /* ---------- projects ---------- */
+  .project-card{
+    display:grid; grid-template-columns:1fr 1.15fr; gap:0;
+    border:1px solid var(--line-faint); border-radius:4px; overflow:hidden;
+    background:var(--blue-field-3);
+  }
+  .project-visual{
+    padding:34px 30px; background:
+      linear-gradient(155deg, rgba(205,154,95,.10), transparent 60%),
+      var(--blue-field-2);
+    display:flex; flex-direction:column; justify-content:center; gap:16px;
+    border-left:1px solid var(--line-faint);
+  }
+  .project-visual .ptag{font-family:var(--mono); font-size:11px; color:var(--brass); letter-spacing:.1em;}
+  .project-visual .pname{font-size:22px; font-weight:700; line-height:1.4;}
+  .spec-line{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11.5px; color:var(--line-dim); padding:6px 0; border-top:1px dashed var(--line-faint);}
+  .spec-line b{color:var(--line);}
+  .project-body{padding:32px 30px; display:flex; flex-direction:column; gap:16px;}
+  .project-body p{margin:0; color:var(--line-dim); line-height:1.95; font-size:14.5px;}
+  .tag-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .tag-chip{
+    font-family:var(--mono); font-size:10.5px; padding:5px 10px; border:1px solid var(--line-faint);
+    border-radius:3px; color:var(--line-dim);
+  }
+  .project-links{display:flex; gap:12px; margin-top:auto; padding-top:6px;}
+
+  /* ---------- contact ---------- */
+  .contact-card{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;
+    border:1px solid var(--line-faint); border-radius:4px; padding:38px 34px;
+    background:linear-gradient(155deg, var(--blue-field-3), var(--blue-field-2));
+  }
+  .contact-card h3{margin:0 0 8px; font-size:21px;}
+  .contact-card p{margin:0; color:var(--line-dim); font-size:14.5px; max-width:44ch; line-height:1.85;}
+  .contact-links{display:flex; gap:12px; flex-wrap:wrap;}
+
+  footer{
+    padding:26px var(--sheet-margin) 30px; display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:11px; color:var(--line-faint); flex-wrap:wrap; gap:10px;
+    border-top:1px solid var(--blue-field-3);
+  }
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr; padding-top:36px;}
+    .photo-block{order:-1; max-width:220px;}
+    .about-grid{grid-template-columns:1fr;}
+    .project-card{grid-template-columns:1fr;}
+    .project-visual{border-left:none; border-bottom:1px solid var(--line-faint);}
+    .titleblock{grid-template-columns:1fr 1fr;}
+    .tb-cell:nth-child(2){border-right:none;}
+    nav .links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+
+  <nav>
+    <div class="logo"><b>MA</b>&nbsp;/ مهندسی مکانیک</div>
+    <div class="links">
+      <a href="#about">درباره</a>
+      <a href="#skills">مهارت‌ها</a>
+      <a href="#projects">پروژه‌ها</a>
+      <a href="#contact">تماس</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow">دانشجوی مهندسی مکانیک</div>
+      <h1>طراحی می‌کنم،<br>می‌سازم و <span>محاسبه</span> می‌کنم.</h1>
+      <p class="lede">
+        محمدامین هستم؛ روی طراحی مکانیکی، سیالات و توربوماشین‌ها کار می‌کنم و ابزارهایی می‌سازم
+        که فرایند طراحی و بررسی مهندسی را ساده‌تر و دقیق‌تر می‌کنند.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">مشاهدهٔ پروژه‌ها</a>
+        <a class="btn btn-ghost" href="mailto:mohammadaminsh1384@gmail.com">ارسال ایمیل</a>
+      </div>
+    </div>
+
+    <div class="photo-block">
+      <div class="dim dim-top">۳۰۰</div>
+      <div class="dim dim-side">۳۶۰</div>
+      <div class="photo-frame">
+        <img src="profile.jpg" alt="عکس محمدامین">
+      </div>
+      <span class="photo-tag">FIG. 01</span>
+    </div>
+  </header>
+
+  <div class="titleblock">
+    <div class="tb-cell">
+      <div class="tb-label">نام</div>
+      <div class="tb-value">محمدامین</div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">رشته</div>
+      <div class="tb-value">مهندسی مکانیک</div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">ایمیل</div>
+      <div class="tb-value mono"><a href="mailto:mohammadaminsh1384@gmail.com">mohammadaminsh1384@gmail.com</a></div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">شمارهٔ نقشه</div>
+      <div class="tb-value mono">PORTFOLIO&nbsp;— REV.A</div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="sec-head"><span class="sec-num">01</span><h2>درباره من</h2><span class="divider"></span></div>
+    <div class="about-grid">
+      <div class="about">
+        <p>
+          علاقهٔ اصلی‌ام <strong>طراحی مکانیکی و توربوماشین‌هاست</strong>؛ از محاسبات اولیهٔ نقطهٔ طراحی
+          تا انتخاب نوع پمپ و بررسی گام‌به‌گام فرایند طراحی. بیشتر وقتم بین نرم‌افزارهای CAD/CFD
+          و ساخت ابزارهای کوچکی می‌گذرد که کار مهندسی روزمره را دقیق‌تر و منظم‌تر می‌کنند.
+        </p>
+        <p>
+          به ترکیب <strong>دقت مهندسی</strong> با <strong>طراحی کاربردی نرم‌افزار</strong> علاقه دارم؛
+          پروژهٔ زیر نمونه‌ای از همین نگاه است.
+        </p>
+      </div>
+      <ul class="focus-list">
+        <li><b>SCOPE</b> طراحی مکانیکی و تحلیل سیالات</li>
+        <li><b>FOCUS</b> توربوماشین‌ها و پمپ‌های سانتریفیوژ</li>
+        <li><b>TOOLS</b> CFTurbo · SolidWorks · MATLAB</li>
+        <li><b>NOW</b> ساخت ابزارهای دیجیتال برای فرایند طراحی</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><span class="sec-num">02</span><h2>مهارت‌ها</h2><span class="divider"></span></div>
+    <table class="datasheet">
+      <thead>
+        <tr><th style="width:26%">دسته</th><th>موارد</th><th style="width:14%">سطح</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ds-cat">طراحی و مدل‌سازی</td>
+          <td class="ds-items">مدل‌سازی سه‌بعدی، نقشه‌کشی فنی، طراحی قطعات و مجموعه‌ها</td>
+          <td class="ds-level">••••○</td>
+        </tr>
+        <tr>
+          <td class="ds-cat">سیالات و توربوماشین</td>
+          <td class="ds-items">طراحی پمپ سانتریفیوژ، محاسبهٔ nq، انتخاب نوع پروانه</td>
+          <td class="ds-level">••••○</td>
+        </tr>
+        <tr>
+          <td class="ds-cat">محاسبات و ابزار</td>
+          <td class="ds-items">محاسبات مهندسی، اسکریپت‌نویسی برای ابزارهای طراحی</td>
+          <td class="ds-level">•••○○</td>
+        </tr>
+        <tr>
+          <td class="ds-cat">توسعهٔ نرم‌افزار</td>
+          <td class="ds-items">ساخت ابزارهای وب برای فرایندهای مهندسی (HTML/JS)</td>
+          <td class="ds-level">•••○○</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head"><span class="sec-num">03</span><h2>پروژه‌ها</h2><span class="divider"></span></div>
+
+    <div class="project-card">
+      <div class="project-visual">
+        <div class="ptag">PROJECT — 01</div>
+        <div class="pname">چک‌لیست طراحی پمپ<br>CFTurbo</div>
+        <div class="spec-line"><span>نوع</span><b>ابزار وب تعاملی</b></div>
+        <div class="spec-line"><span>زبان</span><b>فارسی (RTL)</b></div>
+        <div class="spec-line"><span>خروجی</span><b>Word · Excel</b></div>
+      </div>
+      <div class="project-body">
+        <p>
+          ابزاری برای پیگیری گام‌به‌گام فرایند طراحی پمپ در CFTurbo: محاسبهٔ نقطهٔ طراحی و سرعت
+          مخصوص (nq)، پیشنهاد نوع پمپ متناسب، ثبت وضعیت هر مرحله، مقایسهٔ دو پروژه، همگام‌سازی
+          آنلاین بین دستگاه‌ها و خروجی گرفتن به‌صورت Word و Excel.
+        </p>
+        <div class="tag-row">
+          <span class="tag-chip">Pump Design</span>
+          <span class="tag-chip">CFTurbo</span>
+          <span class="tag-chip">Checklist Tool</span>
+          <span class="tag-chip">HTML / JS</span>
+        </div>
+        <div class="project-links">
+          <a class="btn btn-primary" href="projects/cfturbo-pump-checklist.html">باز کردن ابزار</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head"><span class="sec-num">04</span><h2>تماس</h2><span class="divider"></span></div>
+    <div class="contact-card">
+      <div>
+        <h3>در حال ساخت پروژهٔ جدیدی هستید؟</h3>
+        <p>برای همکاری، مشاوره یا صرفاً گفت‌وگو دربارهٔ طراحی مکانیکی، از طریق ایمیل در ارتباط باشید.</p>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:mohammadaminsh1384@gmail.com">mohammadaminsh1384@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>DWG NO. PORTFOLIO-2026 · SCALE N/A</span>
+    <span>© 2026 محمدامین — مهندسی مکانیک</span>
+  </footer>
+</div>
+
+</body>
+</html>

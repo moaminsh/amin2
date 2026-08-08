@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>چک‌لیست طراحی پمپ | CFTurbo</title>
+<style>
+  :root{
+    --bg: #0b1015;
+    --panel: #11171d;
+    --panel-2: #151d24;
+    --line: #223039;
+    --line-soft: #1a252c;
+    --text: #e7edf1;
+    --text-dim: #93a3ad;
+    --text-faint: #5c6e78;
+    --accent: #ffb545;
+    --accent-dim: #7a5a26;
+    --cyan: #55c7d6;
+    --green: #5fd192;
+    --yellow: #e8c15a;
+    --red: #e2686b;
+    --mono: 'JetBrains Mono','Consolas',monospace;
+    --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0/100% 28px,
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    padding:28px 16px 80px;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+  }
+  .bg-art{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .bg-art svg{
+    width:min(1100px, 130vw);
+    height:auto;
+    opacity:.035;
+  }
+  .bg-art .glow{
+    position:absolute;
+    width:900px; height:900px;
+    top:-260px; right:-320px;
+    background:radial-gradient(circle, rgba(85,199,214,.06), transparent 70%);
+    border-radius:50%;
+  }
+  .wrap{max-width:980px;margin:0 auto; position:relative; z-index:1;}
+
+  header{
+    border:1px solid var(--line);
+    background:linear-gradient(155deg, var(--panel) 0%, var(--panel-2) 100%);
+    border-radius:12px;
+    padding:22px 24px;
+    margin-bottom:18px;
+    box-shadow:0 10px 30px -14px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.02);
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; top:0; right:0; left:0; height:2px;
+    background:linear-gradient(90deg, var(--accent), var(--cyan), transparent);
+    opacity:.7;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:8px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .tag::before{content:"◆"; font-size:9px;}
+  h1{margin:0 0 6px; font-size:21px; font-weight:600;}
+  .sub{color:var(--text-dim); font-size:13px; line-height:1.9;}
+
+  .stats{
+    display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+  }
+  .stat{
+    padding:8px 4px;
+    flex:1;
+    min-width:110px;
+    border-right:1px solid var(--line-soft);
+  }
+  .stat:first-child{border-right:none;}
+  .stat b{display:block; font-family:var(--mono); font-size:18px; color:var(--cyan); font-weight:600;}
+  .stat span{font-size:11px; color:var(--text-faint);}
+
+  .progress-track{
+    margin-top:14px;
+    height:8px;
+    border-radius:6px;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--accent-dim), var(--accent));
+    transition:width .35s ease;
+  }
+
+  .toolbar{
+    display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .project-bar{
+    display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .project-label{
+    font-size:12.5px; color:var(--text-faint);
+  }
+  .project-bar select{
+    font-family:var(--sans);
+    font-size:12.5px;
+    background:var(--panel);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    min-width:150px;
+    cursor:pointer;
+  }
+
+  .sync-box{
+    border:1px dashed var(--line-soft);
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:16px;
+  }
+  .sync-row{
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+  .sync-row input{
+    font-family:var(--mono);
+    font-size:12px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    flex:1;
+    min-width:160px;
+    direction:ltr;
+    text-align:left;
+  }
+  .sync-row input::placeholder{color:var(--text-faint); direction:rtl; text-align:right;}
+  .room-display{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--cyan);
+    direction:ltr;
+  }
+  .sync-status{
+    margin-top:8px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-faint);
+  }
+
+  .page-tabs{
+    display:flex; gap:8px; margin-bottom:18px;
+  }
+  .page-tab{
+    font-family:var(--sans);
+    font-size:13px;
+    font-weight:600;
+    background:var(--panel);
+    color:var(--text-dim);
+    border:1px solid var(--line);
+    border-radius:9px 9px 0 0;
+    padding:10px 18px;
+    cursor:pointer;
+    border-bottom:none;
+    position:relative;
+    top:1px;
+  }
+  .page-tab.active{
+    color:var(--accent);
+    background:var(--panel-2);
+    border-color:var(--accent-dim);
+  }
+  .page-tab:not(.active):hover{ color:var(--text); }
+
+  .design-point-box{
+    margin-top:12px;
+    border:1px dashed var(--line-soft);
+    border-radius:9px;
+    padding:12px 14px;
+  }
+  .dp-title{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--cyan);
+    margin-bottom:10px;
+  }
+  .dp-row{
+    display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap;
+  }
+  .dp-row label{
+    display:flex; flex-direction:column; gap:5px;
+    font-size:11.5px; color:var(--text-dim);
+  }
+  .dp-row input{
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    width:110px;
+    direction:ltr;
+  }
+  .dp-row input:focus{outline:none; border-color:var(--cyan);}
+  .dp-row select{
+    font-family:var(--sans);
+    font-size:12px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 6px;
+    cursor:pointer;
+  }
+  .dp-status{
+    margin-top:10px; font-size:11.5px; color:var(--text-faint); line-height:1.9;
+  }
+
+  .pump-type-box{
+    margin-top:12px;
+    border:1px dashed var(--line-soft);
+    border-radius:9px;
+    padding:12px 14px;
+  }
+  .fluid-box{
+    margin-top:12px;
+    border:1px dashed var(--line-soft);
+    border-radius:9px;
+    padding:12px 14px;
+  }
+  .fluid-row{
+    display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap;
+  }
+  .fluid-row label{
+    display:flex; flex-direction:column; gap:5px;
+    font-size:11.5px; color:var(--text-dim);
+  }
+  .fluid-row select{
+    font-family:var(--sans);
+    font-size:12px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    min-width:130px;
+    cursor:pointer;
+  }
+  .fluid-row input{
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    width:100px;
+    direction:ltr;
+  }
+  .fluid-row input:focus, .fluid-row select:focus{outline:none; border-color:var(--cyan);}
+  .fluid-row input:disabled{opacity:.55;}
+  .fluid-status{
+    margin-top:10px; font-size:11.5px; color:var(--text-faint); line-height:1.9;
+  }
+  .pump-type-box.nested{
+    border:none;
+    border-top:1px dashed var(--line-soft);
+    border-radius:0;
+    padding:14px 0 0;
+    margin-top:14px;
+  }
+  .pt-current-nq{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--cyan);
+    margin-bottom:10px;
+  }
+  .pt-options{
+    display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;
+  }
+  .pt-btn{
+    font-family:var(--sans);
+    font-size:12.5px;
+    background:var(--bg);
+    color:var(--text-dim);
+    border:1px solid var(--line-soft);
+    border-radius:20px;
+    padding:8px 16px;
+    cursor:pointer;
+  }
+  .pt-btn.active{
+    color:var(--accent);
+    border-color:var(--accent-dim);
+    background:var(--panel-2);
+    font-weight:700;
+  }
+  .pt-btn:not(.active):hover{ color:var(--text); }
+  .pt-suggest-tag{
+    font-size:9.5px;
+    color:var(--accent);
+    border:1px solid var(--accent-dim);
+    border-radius:10px;
+    padding:1px 6px;
+    margin-right:4px;
+  }
+  .pt-result{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .pt-msg{
+    font-size:11.5px; color:var(--text-dim); line-height:1.9; flex:1; min-width:200px;
+  }
+
+  .calc-section{
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:10px;
+    padding:18px 20px 6px;
+    margin-bottom:18px;
+  }
+  .calc-section-title{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .calc-section-title::before{content:"◆"; font-size:9px;}
+  .calc-box{
+    border:1px solid var(--line-soft);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-bottom:16px;
+  }
+  .calc-title{
+    font-weight:700; font-size:14px; color:var(--accent); margin-bottom:4px;
+  }
+  .calc-formula{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-faint);
+    margin-bottom:12px;
+    direction:ltr; text-align:left;
+  }
+  .calc-row{
+    display:flex; align-items:flex-end; gap:14px; flex-wrap:wrap;
+  }
+  .calc-row-tight{ margin-top:2px; }
+  .calc-divider{
+    height:1px;
+    background:var(--line-soft);
+    margin:14px 0;
+  }
+  .calc-row label{
+    display:flex; flex-direction:column; gap:5px;
+    font-size:11.5px; color:var(--text-dim);
+  }
+  .calc-row input{
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    width:120px;
+    direction:ltr;
+  }
+  .calc-row input:focus{outline:none; border-color:var(--cyan);}
+  .calc-qwrap{ display:flex; gap:6px; }
+  .calc-qwrap input{ width:80px; }
+  .calc-qwrap select{
+    font-family:var(--sans);
+    font-size:12px;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 6px;
+    cursor:pointer;
+  }
+  .calc-result{
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--mono);
+    padding-bottom:2px;
+  }
+  .calc-nq-label{ color:var(--text-faint); font-size:13px; }
+  .calc-nq-value{ font-size:20px; font-weight:700; color:var(--text); min-width:64px; }
+  .calc-badge{
+    font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;
+    color:#1a1206;
+  }
+  .calc-badge.green{ background:var(--green); }
+  .calc-badge.yellow{ background:var(--yellow); }
+  .calc-badge.red{ background:var(--red); color:#fff; }
+  .calc-note{
+    margin-top:10px; font-size:11.5px; color:var(--text-faint); line-height:1.9;
+  }
+
+  .compare-box{
+    border:1px solid var(--line-soft);
+    border-radius:10px;
+    padding:14px;
+    margin-bottom:16px;
+  }
+  .compare-box select{
+    font-family:var(--sans);
+    font-size:12.5px;
+    background:var(--panel);
+    color:var(--text);
+    border:1px solid var(--line-soft);
+    border-radius:7px;
+    padding:8px 10px;
+    min-width:130px;
+    cursor:pointer;
+  }
+  #compareResult{ margin-top:14px; overflow-x:auto; }
+  .cmp-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:12.5px;
+  }
+  .cmp-table th, .cmp-table td{
+    border:1px solid var(--line-soft);
+    padding:8px 10px;
+    text-align:right;
+    vertical-align:top;
+  }
+  .cmp-table th{
+    background:var(--panel-2);
+    color:var(--text-dim);
+    font-weight:600;
+    font-size:11.5px;
+    position:sticky; top:0;
+  }
+  .cmp-table td.center{ text-align:center; }
+  .cmp-diff{ background:rgba(226,104,107,.08); }
+  .cmp-stage-row td{
+    background:var(--panel-2);
+    font-weight:700;
+    color:var(--accent);
+    font-size:12px;
+  }
+  .cmp-dot{
+    display:inline-block; width:10px; height:10px; border-radius:50%; margin-left:4px;
+  }
+  .cmp-dot.g{background:var(--green);}
+  .cmp-dot.y{background:var(--yellow);}
+  .cmp-dot.r{background:var(--red);}
+  .cmp-summary{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-bottom:10px;
+  }
+  button{
+    font-family:var(--sans);
+    font-size:12.5px;
+    border-radius:8px;
+    padding:9px 14px;
+    cursor:pointer;
+    border:1px solid var(--line-soft);
+    background:var(--panel);
+    color:var(--text-dim);
+    transition:.15s;
+    display:flex; align-items:center; gap:7px;
+  }
+  button:hover{color:var(--cyan); border-color:var(--cyan); transform:translateY(-1px);}
+  button:active{transform:translateY(0);}
+  button:disabled{opacity:.35; cursor:not-allowed; transform:none;}
+  button:disabled:hover{color:var(--text-dim); border-color:var(--line-soft);}
+  .btn-primary{
+    background:linear-gradient(155deg, #ffc568, var(--accent));
+    color:#1a1206;
+    font-weight:700;
+    border-color:var(--accent);
+    box-shadow:0 4px 14px -6px rgba(255,181,69,.45);
+  }
+  .btn-primary:hover{background:linear-gradient(155deg, #ffd48a, #ffc568); color:#1a1206; border-color:#ffc568;}
+  .btn-ghost{color:var(--text-faint); background:transparent;}
+
+  .stage-layout{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+  }
+  .stage-sidebar{
+    width:230px;
+    flex:none;
+    position:sticky;
+    top:14px;
+  }
+  .sidebar-export-row{
+    display:flex; flex-direction:column; gap:8px;
+    margin-bottom:12px;
+  }
+  .sidebar-export-row button{ width:100%; justify-content:center; }
+  .stage-nav-list{
+    display:flex; flex-direction:column; gap:5px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:8px;
+  }
+  .stage-nav-item{
+    display:flex; align-items:center; gap:8px;
+    padding:8px 9px;
+    border-radius:8px;
+    border:1px solid transparent;
+    background:var(--bg);
+    cursor:pointer;
+    transition:.15s;
+    text-align:right;
+  }
+  .stage-nav-item:hover{ border-color:var(--cyan); }
+  .stage-nav-item.active{
+    background:var(--panel-2);
+    border-color:var(--accent);
+  }
+  .stage-nav-num{
+    font-family:var(--mono); font-size:10.5px; color:var(--text-faint);
+    flex:none; width:18px; text-align:center;
+  }
+  .stage-nav-item.active .stage-nav-num{ color:var(--accent); }
+  .stage-nav-title{
+    flex:1; font-size:11.8px; color:var(--text-dim); line-height:1.55;
+  }
+  .stage-nav-item.active .stage-nav-title{ color:var(--text); font-weight:600; }
+  .stage-nav-check{
+    flex:none; width:16px; height:16px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:9.5px; font-weight:900; color:#08130d;
+  }
+  .stage-nav-item.done .stage-nav-check{ background:var(--green); }
+  .stage-main{ flex:1; min-width:0; }
+
+  @media (max-width:760px){
+    .stage-layout{ flex-direction:column; }
+    .stage-sidebar{ width:100%; position:static; }
+    .sidebar-export-row{ flex-direction:row; }
+    .stage-nav-list{ flex-direction:row; overflow-x:auto; }
+    .stage-nav-item{ flex:none; min-width:180px; }
+  }
+
+  section.stage-content{
+    border:1px solid var(--line-soft);
+    background:var(--panel-2);
+    border-radius:12px;
+    margin-bottom:10px;
+    overflow:hidden;
+    box-shadow:0 14px 34px -18px rgba(0,0,0,.6);
+  }
+  .stage-head{
+    display:flex; align-items:center; gap:10px;
+    padding:14px 16px;
+    border-bottom:1px solid var(--line-soft);
+    background:var(--panel);
+  }
+  .stage-head-check{
+    width:20px; height:20px;
+    flex:none;
+    accent-color:var(--green);
+    cursor:pointer;
+  }
+  .stage-head-title{
+    flex:1;
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .stage-head-count{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--text-faint);
+    white-space:nowrap;
+  }
+  .stage-body{padding:10px 8px 8px;}
+
+  .item{
+    display:flex;
+    gap:12px;
+    padding:12px 10px;
+    border-radius:8px;
+    align-items:flex-start;
+    border-top:1px solid var(--line-soft);
+    transition:background .15s;
+  }
+  .item:first-child{border-top:none;}
+  .item:hover{background:rgba(85,199,214,.04);}
+  .item.done{background:rgba(95,209,146,.03);}
+  .chk{
+    margin-top:3px;
+    width:19px; height:19px;
+    flex:none;
+    accent-color: var(--green);
+    cursor:pointer;
+  }
+  .item-body{flex:1; min-width:0;}
+  .item-title{
+    font-size:14px; font-weight:600; line-height:1.6;
+    color:var(--text);
+  }
+  .item.done .item-title{color:var(--text-faint); text-decoration:line-through; text-decoration-color:var(--line);}
+  .item-desc{
+    font-size:12.8px; color:var(--text-dim); line-height:1.9; margin-top:4px;
+    padding-right:9px;
+    border-right:2px solid transparent;
+    transition:.2s;
+  }
+  .item-desc.status-green{ border-color:var(--green); color:#bfe9d2; }
+  .item-desc.status-yellow{ border-color:var(--yellow); color:#f0e0b0; }
+  .item-desc.status-red{ border-color:var(--red); color:#f0bcbc; }
+  .item-src{
+    margin-top:7px;
+    font-family:var(--mono);
+    font-size:10.8px;
+    color:var(--text-faint);
+    display:flex; align-items:center; gap:6px;
+    direction:ltr; justify-content:flex-end;
+  }
+  .item-src::before{content:"src:"; color:var(--cyan); direction:ltr;}
+
+  .status-row{
+    margin-top:9px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .status-label{
+    font-size:10.8px;
+    color:var(--text-faint);
+  }
+  .status-btns{display:flex; gap:5px;}
+  .status-btn{
+    width:22px; height:22px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+    display:flex; align-items:center; justify-content:center;
+    transition:.15s;
+    opacity:.55;
+  }
+  .status-btn:hover{opacity:1; transform:scale(1.08);}
+  .status-btn.g{background:var(--green); border-color:var(--green);}
+  .status-btn.y{background:var(--yellow); border-color:var(--yellow);}
+  .status-btn.r{background:var(--red); border-color:var(--red);}
+  .status-btn.active{opacity:1; box-shadow:0 0 0 3px rgba(255,255,255,.06);}
+
+  .item-note{
+    margin-top:8px;
+  }
+  .item-note textarea{
+    width:100%;
+    background:transparent;
+    border:1px dashed var(--line-soft);
+    border-radius:6px;
+    color:var(--text-dim);
+    font-family:var(--sans);
+    font-size:12.5px;
+    padding:7px 10px;
+    resize:vertical;
+    min-height:34px;
+  }
+  .item-note textarea:focus{outline:none; border-color:var(--cyan); color:var(--text);}
+  .item-note textarea::placeholder{color:var(--text-faint);}
+
+  footer{
+    text-align:center;
+    color:var(--text-faint);
+    font-size:11.5px;
+    margin-top:26px;
+    font-family:var(--mono);
+    line-height:1.9;
+  }
+  .dev-credit{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line-soft);
+    text-align:center;
+  }
+  .dev-credit .dev-name{
+    color:var(--accent);
+    font-size:19px;
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+  .dev-credit .dev-email{
+    margin-top:6px;
+    color:var(--cyan);
+    font-size:13px;
+    direction:ltr;
+    unicode-bidi:plaintext;
+  }
+  .save-indicator{
+    position:fixed;
+    bottom:18px; left:18px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--green);
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:7px 12px;
+    border-radius:7px;
+    opacity:0;
+    transition:opacity .3s;
+    z-index:50;
+  }
+  .save-indicator.show{opacity:1;}
+  .empty-state{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:13px;
+    line-height:2;
+    padding:50px 20px;
+    border:1px dashed var(--line-soft);
+    border-radius:10px;
+  }
+
+  @media (max-width:520px){
+    .stats{flex-direction:column;}
+    h1{font-size:19px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-art">
+  <div class="glow"></div>
+  <svg viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="pumpGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffb545"/>
+        <stop offset="100%" stop-color="#55c7d6"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#pumpGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- volute casing -->
+      <path d="M450 180
+               C 340 180, 250 260, 235 370
+               C 220 480, 280 580, 380 610
+               C 440 628, 480 610, 500 570"/>
+      <path d="M450 210
+               C 365 210, 292 278, 280 370
+               C 268 462, 318 548, 400 572"/>
+      <!-- discharge nozzle -->
+      <path d="M500 570 L 610 570 L 610 640 L 560 640 L 560 610 L 500 610 Z"/>
+      <!-- suction inlet pipe -->
+      <path d="M450 180 L 450 90 M 410 90 L 490 90"/>
+      <!-- impeller hub circle -->
+      <circle cx="410" cy="400" r="70"/>
+      <circle cx="410" cy="400" r="14" fill="url(#pumpGrad)" stroke="none" opacity=".5"/>
+      <!-- impeller blades -->
+      <g class="accent-line">
+        <path d="M410 400 L 410 330"/>
+        <path d="M410 400 L 465 350"/>
+        <path d="M410 400 L 478 400"/>
+        <path d="M410 400 L 465 450"/>
+        <path d="M410 400 L 410 470"/>
+        <path d="M410 400 L 355 450"/>
+        <path d="M410 400 L 342 400"/>
+        <path d="M410 400 L 355 350"/>
+      </g>
+      <!-- shaft -->
+      <path d="M480 400 L 700 400" stroke-dasharray="3 7"/>
+      <rect x="700" y="382" width="90" height="36" rx="6"/>
+      <!-- baseplate -->
+      <path d="M300 660 L 640 660" stroke-dasharray="2 8" opacity=".6"/>
+      <!-- flow arrows -->
+      <path d="M450 60 L 450 88 M 440 78 L 450 88 L 460 78" opacity=".7"/>
+      <path d="M615 605 L 640 605 M 630 596 L 640 605 L 630 614" opacity=".7"/>
+    </g>
+  </svg>
+</div>
+
+<div class="wrap">
+
+  <div class="page-tabs">
+    <button class="page-tab active" id="tabMain" data-page="pageMain">📋 چک‌لیست</button>
+    <button class="page-tab" id="tabCalc" data-page="pageCalc">📁 محاسبه‌گر</button>
+  </div>
+
+  <div class="page-view" id="pageCalc" style="display:none;">
+    <div class="calc-section" id="calcSection">
+      <div class="calc-section-title">محاسبه‌گر</div>
+
+      <div class="calc-box" id="calcBox">
+        <div class="calc-title">محاسبه‌گر سرعت مخصوص (n<sub>q</sub>) و نوع پمپ</div>
+        <div class="calc-formula">n<sub>q</sub> = N · √Q  /  H<sup>¾</sup> — واحد Q خودکار به m³/s تبدیل می‌شود؛ واحد دلخواه را از کنار آن انتخاب کنید.</div>
+        <div class="calc-row">
+          <label>N (دور بر دقیقه)<input type="number" id="calcN" step="any" placeholder="مثلاً 1450"></label>
+          <label>Q<span class="calc-qwrap">
+            <input type="number" id="calcQ" step="any" placeholder="مثلاً 66">
+            <select id="calcQUnit">
+              <option value="m3h">m³/h</option>
+              <option value="m3s">m³/s</option>
+              <option value="ls">l/s</option>
+            </select>
+          </span></label>
+          <label>H (m)<input type="number" id="calcH" step="any" placeholder="مثلاً 17.5"></label>
+          <div class="calc-result" id="calcResult">
+            <span class="calc-nq-label">n<sub>q</sub> =</span>
+            <span class="calc-nq-value" id="calcNqValue">—</span>
+            <span class="calc-badge" id="calcBadge"></span>
+          </div>
+        </div>
+        <div class="calc-note" id="calcNote"></div>
+
+        <div class="calc-divider"></div>
+        <div class="calc-row calc-row-tight">
+          <label>یا مستقیم n<sub>q</sub> را وارد کنید (اختیاری — اگر پر باشد جای محاسبه بالا استفاده می‌شود)<input type="number" id="manualNqInput" step="any" placeholder="مثلاً 45"></label>
+        </div>
+
+        <div class="pump-type-box nested" id="pumpTypeBoxCalc">
+          <div class="dp-title">نوع پمپ پیشنهادی</div>
+          <div class="pt-current-nq"></div>
+          <div class="pt-options"></div>
+          <div class="pt-result"></div>
+        </div>
+      </div>
+      <!-- محاسبه‌گرهای بعدی همینجا به‌عنوان calc-box جدید اضافه می‌شوند -->
+    </div>
+  </div>
+
+  <div class="page-view" id="pageMain">
+
+  <header>
+    <div class="tag">CFTurbo · Pump Design QA</div>
+    <h1>چک‌لیست طراحی پمپ در CFTurbo</h1>
+    <div class="sub">
+      فهرست کنترلی مبتنی بر مراحل رسمی طراحی پمپ در نرم‌افزار CFTurbo (پروانه، ولوت، استاتور) به‌همراه نکات
+      کیفی و منبع هر مورد. با تیک‌زدن هر بند، پیشرفت کار ذخیره می‌شود و در پایان می‌توانید گزارش نهایی را
+      به‌صورت فایل Word یا Excel خروجی بگیرید. با راه‌اندازی سرور داخلی همراه این پروژه، می‌توانید همین فایل
+      را برای هم‌تیمی‌هایتان بفرستید و با اتصال به همان اتاق، تغییرات همه روی شبکه داخلی همگام شود.
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="statDone">0</b><span>موارد تکمیل‌شده</span></div>
+      <div class="stat"><b id="statTotal">0</b><span>مجموع موارد چک‌لیست</span></div>
+      <div class="stat"><b id="statPercent">0%</b><span>درصد پیشرفت</span></div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </header>
+
+  <div class="project-bar">
+    <span class="project-label">پروژه (اسم فایل):</span>
+    <select id="projectSelect"></select>
+    <button id="newProjectBtn" class="btn-primary">+ پروژه جدید</button>
+    <button id="renameProjectBtn" class="btn-ghost">✎ تغییر نام</button>
+    <button id="deleteProjectBtn" class="btn-ghost">🗑 حذف این پروژه</button>
+  </div>
+
+  <div class="sync-box" id="syncBox">
+    <div class="sync-row">
+      <input type="text" id="serverBaseInput" placeholder="آدرس سرور داخلی — مثلاً http://192.168.1.10:4000" style="min-width:230px;">
+      <input type="text" id="roomCodeInput" placeholder="کد اتاق را اینجا بچسبانید…">
+      <button id="joinRoomBtn">اتصال با کد</button>
+      <button id="createRoomBtn" class="btn-primary">ساخت اتاق مشترک جدید</button>
+      <button id="leaveRoomBtn" class="btn-ghost">قطع اتصال</button>
+      <span class="room-display" id="roomCodeDisplay"></span>
+    </div>
+    <div class="sync-status" id="syncStatus"></div>
+  </div>
+
+  <div class="toolbar">
+    <button id="toggleCompareBtn">⇄ مقایسه دو پروژه</button>
+    <button class="btn-ghost" id="resetBtn">↺ پاک‌کردن تیک‌های این پروژه</button>
+  </div>
+
+  <div class="compare-box" id="compareBox" style="display:none;">
+    <div class="sync-row">
+      <span class="project-label">پروژه A:</span>
+      <select id="compareSelectA"></select>
+      <span class="project-label">پروژه B:</span>
+      <select id="compareSelectB"></select>
+      <button class="btn-primary" id="runCompareBtn">نمایش مقایسه</button>
+      <button id="exportCompareBtn">⇩ خروجی Excel مقایسه</button>
+    </div>
+    <div id="compareResult"></div>
+  </div>
+
+  <div class="stage-layout">
+    <aside class="stage-sidebar">
+      <div class="sidebar-export-row">
+        <button class="btn-primary" id="exportBtn">⇩ خروجی گزارش Word</button>
+        <button class="btn-primary" id="exportExcelBtn">⇩ خروجی گزارش Excel</button>
+      </div>
+      <div class="stage-nav-list" id="stageNavList"></div>
+    </aside>
+    <div class="stage-main" id="stages"></div>
+  </div>
+
+  <footer>
+    منابع: cfturbo.com/software/pumps · /impellers · /volutes · /stators · /main-functions ·
+    empoweringpumps.com (CFturbo Live Demo)<br>
+    وضعیت این صفحه به‌صورت خودکار روی حساب شما ذخیره می‌شود.
+    <div class="dev-credit">
+      <div class="dev-name">طراح و توسعه‌دهنده: محمدامین شریف</div>
+      <div class="dev-email">mohammadaminsh2005@gmail.com</div>
+    </div>
+  </footer>
+
+  </div>
+
+</div>
+
+<div class="save-indicator" id="saveIndicator">✓ ذخیره شد</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+<script>
+const DATA = [
+  {
+    title: "۱ · نقطه طراحی (Design Point)",
+    items: [
+      {
+        t: "تعیین دقیق نقطه طراحی: دبی حجمی (Q)، هد (H) و سرعت دورانی (n)",
+        d: "این سه پارامتر مبنای تمام محاسبات بعدی پروانه هستند و باید پیش از شروع طراحی با دقت وارد شوند.",
+        s: "cfturbo.com/software/pumps · empoweringpumps.com (Live Demo)"
+      },
+      {
+        t: "تعریف صحیح سیال کاری (چگالی، ویسکوزیته، دما)",
+        d: "خصوصیات سیال روی محاسبات ترمودینامیکی و تلفات اثر مستقیم دارد.",
+        s: "empoweringpumps.com (CFturbo Live Demo)"
+      },
+      {
+        t: "بررسی قرارگیری سرعت مخصوص (nq) در بازه معتبر نرم‌افزار",
+        d: "بازه پوشش‌داده‌شده توسط CFTurbo: ۸ تا ۵۰۰ در واحد اروپایی (nq) یا ۴۰۰ تا ۲۲۰۰۰ در واحد آمریکایی (Ns). خارج از این بازه دقت مدل‌های تجربی کاهش می‌یابد.",
+        s: "cfturbo.com/software/pumps"
+      },
+      {
+        t: "انتخاب نوع پمپ متناسب با nq: رادیال، میکس‌فلو یا محوری",
+        d: "CFTurbo برای هر بازه سرعت مخصوص، ماشین پیشنهادی خاصی را نمایش می‌دهد که باید با نوع پمپ انتخابی هم‌خوانی داشته باشد.",
+        s: "cfturbo.com/software/pumps"
+      }
+    ]
+  },
+  {
+    title: "۲ · ابعاد اصلی پروانه (Main Dimensions)",
+    items: [
+      {
+        t: "محاسبه قطر هاب، قطر مکش، عرض خروجی و قطر خارجی پروانه",
+        d: "این چهار بُعد اصلی، اسکلت هندسی پروانه را می‌سازند و پایه مراحل بعدی‌اند.",
+        s: "cfturbo.com/software/impellers (مرحله ۱: Main dimensions)"
+      },
+      {
+        t: "بررسی توابع تخمین داخلی یا تعریف تابع تخمین اختصاصی",
+        d: "در صورت داشتن داده تجربی یا استاندارد داخلی، جایگزینی توابع تخمین پیش‌فرض دقت را بالا می‌برد.",
+        s: "cfturbo.com/software/impellers"
+      },
+      {
+        t: "کنترل مقادیر محاسبه‌شده ترمودینامیکی یک‌بعدی (1D)",
+        d: "پیش از رفتن به مرحله هندسه دقیق، مقادیر 1D باید منطقی و در بازه‌های مهندسی قابل قبول باشند.",
+        s: "cfturbo.com/software/impellers"
+      }
+    ]
+  },
+  {
+    title: "۳ · کانتور مریدیونال (Meridional Contour)",
+    items: [
+      {
+        t: "طراحی کانتور هاب و شرود با بزیر/خط/کمان و بررسی هم‌واری منحنی",
+        d: "ناهمواری یا شکست در کانتور مریدیونال باعث ایجاد گرادیان سرعت ناخواسته می‌شود.",
+        s: "cfturbo.com/software/impellers (مرحله ۲: Meridional contour)"
+      },
+      {
+        t: "جای‌گذاری صحیح لبه ورودی و خروجی (مستقیم یا منحنی)",
+        d: "موقعیت لبه‌ها روی زاویه جریان ورودی و در نتیجه زاویه پره در ورودی اثر مستقیم دارد.",
+        s: "cfturbo.com/software/impellers"
+      },
+      {
+        t: "بررسی جریان مریدیونال با روش پتانسیل فلو (Potential Flow)",
+        d: "این محاسبه یکنواختی توزیع سرعت در طول کانتور را نشان می‌دهد؛ افت‌های موضعی باید اصلاح شوند.",
+        s: "cfturbo.com/software/impellers"
+      },
+      {
+        t: "کنترل گپ نزدیک چشمه پروانه (Impeller Eye) برای کاهش تلفات حجمی",
+        d: "در دمو رسمی CFturbo، طراحی گپ کوچک بین شرود و بدنه نزدیک چشمه پروانه به‌عنوان روش استاندارد کاهش تلفات حجمی معرفی شده است.",
+        s: "empoweringpumps.com (CFturbo Live Demo)"
+      }
+    ]
+  },
+  {
+    title: "۴ · خصوصیات پره (Blade Properties)",
+    items: [
+      {
+        t: "انتخاب شکل پره متناسب با nq و روش ساخت",
+        d: "گزینه‌ها شامل فری‌فرم سه‌بعدی/دوبعدی، دایره‌ای، مستقیم، اِلمان رادیال و رولد سرفیس است؛ انتخاب باید هم با محدودیت ساخت و هم با عملکرد هیدرولیکی سازگار باشد.",
+        s: "cfturbo.com/software/impellers (مرحله ۳: Blade properties)"
+      },
+      {
+        t: "محاسبه زاویه پره با در نظر گرفتن ضخامت پره و ضریب لغزش (Slip Factor)",
+        d: "چند رابطه تجربی برای ضریب لغزش موجود است؛ انتخاب رابطه مناسب برای نوع پروانه اهمیت دارد.",
+        s: "cfturbo.com/software/impellers"
+      },
+      {
+        t: "بررسی مثلث‌های سرعت (Velocity Triangles) در چند اسپن (۱ تا ۱۵ span)",
+        d: "بررسی چند سطح جریان (span) به‌جای فقط میان‌قطر، رفتار سه‌بعدی جریان را بهتر نشان می‌دهد.",
+        s: "cfturbo.com/software/impellers"
+      },
+      {
+        t: "اعمال زاویه ورود (Incidence Angle) مناسب در لبه ورودی",
+        d: "زاویه ورود نامناسب می‌تواند ریسک جدایش جریان و کاویتاسیون نزدیک لبه ورودی را افزایش دهد.",
+        s: "cfturbo.com/software/impellers"
+      }
+    ]
+  },
+  {
+    title: "۵ · میان‌خط پره و پروفیل ضخامت (Blade Mean Lines & Profiles)",
+    items: [
+      {
+        t: "تعریف میان‌خط پره روی سطوح جریان مریدیونال (Conformal mapping به m-θ / m-β)",
+        d: "میان‌خط پره، مسیر اصلی هدایت جریان داخل کانال پره را تعیین می‌کند.",
+        s: "cfturbo.com/software/impellers (مرحله ۴: Blade mean lines)"
+      },
+      {
+        t: "بررسی زاویه رَپ (Wrap Angle) پره و تنظیم میان‌خط‌های کوپل/غیرکوپل",
+        d: "زاویه رپ زیاد یا کم می‌تواند به‌ترتیب باعث افزایش تلفات اصطکاکی یا کاهش کنترل جریان شود.",
+        s: "cfturbo.com/software/impellers"
+      },
+      {
+        t: "بررسی توزیع ضخامت پره (خطی یا فری‌فرم) و پروفیل مقاطع",
+        d: "ضخامت پره باید هم از نظر مقاومت مکانیکی و هم از نظر افت هیدرولیکی بهینه باشد.",
+        s: "cfturbo.com/software/impellers (مرحله ۵: Blade profiles)"
+      },
+      {
+        t: "کنترل توزیع سرعت و فشار محاسبه‌شده در کانال پره",
+        d: "وجود افت فشار ناگهانی یا برگشت جریان در کانال، نشانه نیاز به بازطراحی میان‌خط یا پروفیل است.",
+        s: "cfturbo.com/software/impellers"
+      }
+    ]
+  },
+  {
+    title: "۶ · لبه‌های پره (Blade Edges)",
+    items: [
+      {
+        t: "گردکردن لبه ورودی و خروجی پره (بزیر، بیضی، خطی یا Cutoff)",
+        d: "می‌توان شکل متقارن یا نامتقارن انتخاب کرد؛ انتخاب باید با جریان ورودی/خروجی هم‌خوان باشد.",
+        s: "cfturbo.com/software/impellers (مرحله ۶: Blade edges)"
+      },
+      {
+        t: "بررسی اثر شکل لبه ورودی بر ریسک کاویتاسیون",
+        d: "شکل و شعاع گردی لبه ورودی مستقیماً روی توزیع فشار موضعی و شروع کاویتاسیون اثر دارد.",
+        s: "cfturbo.com/software/impellers"
+      }
+    ]
+  },
+  {
+    title: "۷ · طراحی ولوت (Volute Design) — برای پمپ‌های رادیال",
+    items: [
+      {
+        t: "تعیین عرض و قطر ورودی ولوت هم‌راستا با خروجی پروانه یا دیفیوزر",
+        d: "عدم تطابق ابعاد ورودی ولوت با خروجی جزء قبلی می‌تواند تلفات اضافی و بی‌نظمی جریان ایجاد کند.",
+        s: "cfturbo.com/software/volutes (مرحله ۱: Volute inlet)"
+      },
+      {
+        t: "انتخاب نوع مقطع ولوت (مستطیل، ذوزنقه، دایره یا فری‌فرم بزیر) و تقارن آن",
+        d: "مقطع می‌تواند در طول محیط ولوت تغییر کند؛ ولوت داخلی/خارجی نیز باید مشخص شود.",
+        s: "cfturbo.com/software/volutes (مرحله ۲: Cross-sections)"
+      },
+      {
+        t: "انتخاب قانون طراحی اسپیرال (Pfleiderer یا Stepanoff) یا رابطه سطح/شعاع دلخواه",
+        d: "زاویه رپ اسپیرال و زاویه شروع نیز در همین مرحله تعریف و در صورت نیاز، اصلاح کاتواتر و مقیاس انجام می‌شود.",
+        s: "cfturbo.com/software/volutes (مرحله ۳: Spiral geometry)"
+      },
+      {
+        t: "طراحی دیفیوزر خروجی (طول، زاویه مخروط، جهت تانژانت یا رادیال)",
+        d: "توزیع سطح مقطع دیفیوزر باید متناسب با افت فشار قابل‌قبول طراحی شود.",
+        s: "cfturbo.com/software/volutes (مرحله ۴: Discharge diffuser)"
+      },
+      {
+        t: "انتخاب نوع کاتواتر/تانگ (ساده، فیلت یا شارپ)",
+        d: "شکل تانگ ولوت روی نوسانات فشار و نویز هیدرولیکی نزدیک منطقه Cutwater اثر مهمی دارد.",
+        s: "cfturbo.com/software/volutes (مرحله ۵: Cutwater, tongue)"
+      }
+    ]
+  },
+  {
+    title: "۸ · استاتور / دیفیوزر (Stator Design) — در صورت وجود",
+    items: [
+      {
+        t: "تعیین مقطع ورودی و خروجی استاتور هم‌راستا با اجزای مجاور",
+        d: "هماهنگی مقاطع ورودی/خروجی استاتور با پروانه یا ولوت مجاور، جریان یکنواخت‌تری ایجاد می‌کند.",
+        s: "cfturbo.com/software/stators"
+      },
+      {
+        t: "انتخاب نوع استاتور مناسب: پره‌دار، بدون‌پره، دیفیوزر محوری، رادیال یا بوول",
+        d: "نوع استاتور باید متناسب با ساختار کلی پمپ (مثلاً پمپ‌های چند مرحله‌ای عمودی) انتخاب شود.",
+        s: "cfturbo.com/software/stators"
+      }
+    ]
+  },
+  {
+    title: "۹ · اعتبارسنجی و بررسی نهایی طراحی (Verification & Warnings)",
+    items: [
+      {
+        t: "بررسی کامل هشدارهای نرم‌افزار (Warnings) بر اساس آستانه پارامترهای تعریف‌شده",
+        d: "CFTurbo هشدارهایی بر اساس محدودیت پارامترهای مهندسی نمایش می‌دهد که نباید نادیده گرفته شوند.",
+        s: "cfturbo.com/software/main-functions (Project management)"
+      },
+      {
+        t: "مقایسه طراحی جدید با نسخه مرجع یا طراحی قبلی (Compare Designs)",
+        d: "امکان نمایش هم‌زمان مدل سه‌بعدی و مقادیر عددی چند طراحی، برای انتخاب بهترین گزینه مفید است.",
+        s: "cfturbo.com/software/main-functions (Compare different designs)"
+      },
+      {
+        t: "بررسی منحنی پیش‌بینی عملکرد (Performance Map) در دورها و قطرهای مختلف",
+        d: "منحنی عملکرد پیش‌بینی‌شده باید با منحنی مشخصه سیستم و نقطه کار واقعی تطبیق داده شود.",
+        s: "cfturbo.com/software/main-functions (Performance map prediction)"
+      },
+      {
+        t: "ذخیره فایل لاگ طراحی برای بازیابی و ردیابی تاریخچه پروژه",
+        d: "فایل لاگ امکان بازگشت به مراحل قبلی طراحی و بررسی روند تغییرات را فراهم می‌کند.",
+        s: "cfturbo.com/software/main-functions (Project management)"
+      }
+    ]
+  },
+  {
+    title: "۱۰ · خروجی و آماده‌سازی برای CAD/CFD (Export & Simulation)",
+    items: [
+      {
+        t: "خروجی مدل سه‌بعدی به فرمت‌های خنثی (STEP, IGES, Parasolid, STL, DXF) یا اتصال مستقیم به CAD/CFD",
+        d: "CFTurbo دارای رابط‌های مستقیم به کدهای اصلی CFD و سیستم‌های CAD است.",
+        s: "cfturbo.com/software/main-functions (Data export) · cfturbo.com/software/pumps"
+      },
+      {
+        t: "تعیین تعداد نقاط داده صادرشده برای هر قطعه (رزولوشن هندسه خروجی)",
+        d: "تراکم نقاط باید متناسب با دقت مورد نیاز شبیه‌سازی بعدی انتخاب شود.",
+        s: "cfturbo.com/software/main-functions (Options)"
+      },
+      {
+        t: "برنامه‌ریزی برای اجرای شبیه‌سازی گذرا (Transient CFD) پیش از تأیید نهایی طراحی",
+        d: "در دموی رسمی CFturbo، اجرای شبیه‌سازی گذرا به‌عنوان توصیه استاندارد پیش از نهایی‌کردن طراحی پمپ ذکر شده است.",
+        s: "empoweringpumps.com (CFturbo Live Demo)"
+      }
+    ]
+  }
+];
+
+const FLUID_PRESETS = {
+  water:      { density: 998,  viscosity: 1.0,  temp: 20 },
+  seawater:   { density: 1025, viscosity: 1.05, temp: 15 },
+  light_oil:  { density: 850,  viscosity: 20,   temp: 40 },
+  heavy_oil:  { density: 900,  viscosity: 150,  temp: 40 },
+  diesel:     { density: 835,  viscosity: 3.5,  temp: 20 },
+  custom:     null
+};
+const FLUID_LABELS = {
+  water: 'آب', seawater: 'آب دریا', light_oil: 'روغن سبک',
+  heavy_oil: 'روغن سنگین', diesel: 'نفت گاز / دیزل', custom: 'سفارشی'
+};
+
+const PUMP_TYPES = [
+  { key:'radial', label:'رادیال (شعاعی)', min:0,   max:100, optMin:20,  optMax:50,  hint:'مناسب هدهای بالا و دبی‌های پایین' },
+  { key:'mixed',  label:'نیمه‌محوری (میکس‌فلو)', min:100, max:200, optMin:80,  optMax:120, hint:'حد واسط هد و دبی' },
+  { key:'axial',  label:'محوری', min:200, max:400, optMin:200, optMax:300, hint:'مناسب هدهای پایین و دبی‌های بالا' }
+];
+function suggestPumpType(nq){
+  if (nq === null || isNaN(nq)) return null;
+  if (nq < 100) return 'radial';
+  if (nq < 200) return 'mixed';
+  if (nq <= 400) return 'axial';
+  return null;
+}
+function pumpTypeStatus(nq, type){
+  if (nq === null || isNaN(nq)) return null;
+  if (nq >= type.optMin && nq <= type.optMax){
+    return { cls:'green', label:'در بازه بهینه', msg:`سرعت مخصوص (nq = ${nq.toFixed(1)}) دقیقاً در بازه بهینه «${type.label}» (${type.optMin} تا ${type.optMax}) قرار دارد.` };
+  }
+  if (nq >= type.min && nq <= type.max){
+    return { cls:'yellow', label:'خارج از بازه بهینه', msg:`سرعت مخصوص (nq = ${nq.toFixed(1)}) در بازه طراحی «${type.label}» (${type.min} تا ${type.max}) قرار دارد، ولی از بازه بهینه (${type.optMin} تا ${type.optMax}) خارج است — طراحی ممکن است ولی راندمان بهینه نخواهد بود.` };
+  }
+  return { cls:'red', label:'خارج از بازه طراحی', msg:`سرعت مخصوص (nq = ${nq.toFixed(1)}) خارج از بازه طراحی «${type.label}» (${type.min} تا ${type.max}) است — این نوع پمپ برای این نقطه طراحی مناسب نیست.` };
+}
+
+const state = { checks:{}, notes:{}, status:{}, calc:{ N:'', Q:'', H:'', Qunit:'m3h' }, designPoint:{ n:'', Q:'', H:'', Qunit:'m3h' }, pumpType:null, manualNq:'' };
+let activeStage = 0;
+let saveTimer = null;
+let currentProject = null;   // نام پروژه فعال
+let projectList = [];        // فهرست نام پروژه‌های ذخیره‌شده
+
+function keyFor(si, ii){ return si + "_" + ii; }
+function projectKey(name){ return 'cfturbo-project:' + name; }
+
+/* ---------- لایه ذخیره‌سازی: ابتدا حافظه دائمی Claude، در صورت نبود آن (مثلاً فایل باز شده مستقیم در مرورگر) از localStorage همان مرورگر به‌عنوان نسخه پشتیبان استفاده می‌شود. با این کار تیک‌ها و اطلاعات با بستن نرم‌افزار/مرورگر پاک نمی‌شوند و فقط با درخواست خودتان (دکمه حذف پروژه) از بین می‌روند. ---------- */
+async function storeSet(key, value){
+  let ok = false;
+  try{
+    if (window.storage){ await window.storage.set(key, value, false); ok = true; }
+  }catch(e){}
+  try{ localStorage.setItem(key, value); ok = true; }catch(e){}
+  return ok;
+}
+async function storeGet(key){
+  try{
+    if (window.storage){
+      const r = await window.storage.get(key, false);
+      if (r && typeof r.value === 'string') return r.value;
+    }
+  }catch(e){}
+  try{
+    const v = localStorage.getItem(key);
+    if (v !== null) return v;
+  }catch(e){}
+  return null;
+}
+async function storeDelete(key){
+  try{ if (window.storage) await window.storage.delete(key, false); }catch(e){}
+  try{ localStorage.removeItem(key); }catch(e){}
+}
+
+/* ---------- همگام‌سازی آنلاین بین چند نفر از طریق سروری که خودتان روی شبکه/آی‌پی داخلی بالا می‌آورید ----------
+   این بخش دیگر به هیچ سرویس خارجی وابسته نیست. کافیست فایل server.js (که همراه این پروژه داده شده)
+   را روی یک کامپیوتر داخل شبکه اجرا کنید و آی‌پی:پورت آن را در کادر «آدرس سرور» وارد کنید.
+   منطق: آخرین تغییری که ارسال شود همیشه برنده است (Last-write-wins)؛ اگر دو نفر همزمان ویرایش کنند
+   ممکن است یکی از تغییرات بازنویسی شود. */
+let serverBase = '';
+let roomCode = null;
+let syncTimer = null;
+let pushTimer = null;
+let lastRemoteStr = null;
+
+function normalizeBase(url){
+  url = (url || '').trim();
+  if (!url) return '';
+  if (!/^https?:\/\//i.test(url)) url = 'http://' + url;
+  return url.replace(/\/+$/, '');
+}
+
+async function buildFullPayload(){
+  const projects = {};
+  for (const name of projectList){
+    const raw = await storeGet(projectKey(name));
+    projects[name] = raw ? JSON.parse(raw) : { checks:{}, notes:{}, status:{} };
+  }
+  return { projectList: projectList.slice(), currentProject, projects, updatedAt: Date.now() };
+}
+
+async function applyFullPayload(payload){
+  projectList = Array.isArray(payload.projectList) ? payload.projectList : [];
+  const projects = payload.projects || {};
+  for (const name of projectList){
+    await storeSet(projectKey(name), JSON.stringify(projects[name] || { checks:{}, notes:{}, status:{} }));
+  }
+  if (!currentProject || !projectList.includes(currentProject)){
+    currentProject = (payload.currentProject && projectList.includes(payload.currentProject))
+      ? payload.currentProject
+      : (projectList[0] || null);
+  }
+  await storeSet('cfturbo-project-list', JSON.stringify(projectList));
+  await storeSet('cfturbo-active-project', currentProject || '');
+  await loadCurrentProjectData();
+  renderProjectSelect();
+  render();
+}
+
+function setSyncStatus(text){
+  const el = document.getElementById('syncStatus');
+  if (el) el.textContent = text;
+}
+
+async function pullRemote(){
+  if (!roomCode || !serverBase) return;
+  try{
+    const res = await fetch(`${serverBase}/api/rooms/${roomCode}`);
+    if (!res.ok) throw new Error('bad status');
+    const data = await res.json();
+    const str = JSON.stringify(data);
+    if (str !== lastRemoteStr){
+      lastRemoteStr = str;
+      await applyFullPayload(data);
+    }
+    setSyncStatus('🟢 متصل — آخرین همگام‌سازی: ' + new Date().toLocaleTimeString('fa-IR'));
+  }catch(e){
+    setSyncStatus('🟡 خطا در اتصال به سرور — دوباره تلاش می‌شود…');
+  }
+}
+
+async function pushRemote(){
+  if (!roomCode || !serverBase) return;
+  try{
+    const payload = await buildFullPayload();
+    const str = JSON.stringify(payload);
+    lastRemoteStr = str;
+    await fetch(`${serverBase}/api/rooms/${roomCode}`, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: str
+    });
+    setSyncStatus('🟢 متصل — تغییرات ارسال شد: ' + new Date().toLocaleTimeString('fa-IR'));
+  }catch(e){
+    setSyncStatus('🟡 خطا در ارسال تغییرات — دوباره تلاش می‌شود…');
+  }
+}
+
+function schedulePush(){
+  if (!roomCode || !serverBase) return;
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(pushRemote, 1200);
+}
+
+function startSyncLoop(){
+  clearInterval(syncTimer);
+  pullRemote();
+  syncTimer = setInterval(pullRemote, 8000);
+}
+function stopSyncLoop(){
+  clearInterval(syncTimer);
+  syncTimer = null;
+}
+
+function updateSyncUI(){
+  const connected = !!roomCode;
+  document.getElementById('serverBaseInput').style.display = connected ? 'none' : '';
+  document.getElementById('createRoomBtn').style.display = connected ? 'none' : '';
+  document.getElementById('joinRoomBtn').style.display = connected ? 'none' : '';
+  document.getElementById('roomCodeInput').style.display = connected ? 'none' : '';
+  document.getElementById('leaveRoomBtn').style.display = connected ? '' : 'none';
+  document.getElementById('roomCodeDisplay').style.display = connected ? '' : 'none';
+  if (connected) document.getElementById('roomCodeDisplay').textContent = 'سرور: ' + serverBase + '  |  کد اتاق: ' + roomCode;
+  setSyncStatus(connected ? 'در حال اتصال…' : '⚪ آفلاین — فقط ذخیره محلی روی همین مرورگر');
+}
+
+async function createRoom(){
+  serverBase = normalizeBase(document.getElementById('serverBaseInput').value);
+  if (!serverBase){ alert('اول آدرس سرور داخلی را وارد کنید (مثلاً http://192.168.1.10:4000).'); return; }
+  const sure = confirm('یک اتاق مشترک جدید روی سرور ساخته می‌شود و وضعیت فعلی همه پروژه‌های شما در آن قرار می‌گیرد. ادامه می‌دهید؟');
+  if (!sure) return;
+  try{
+    const payload = await buildFullPayload();
+    const res = await fetch(`${serverBase}/api/rooms`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('bad status');
+    const data = await res.json();
+    if (!data.id) throw new Error('پاسخ نامعتبر از سرور');
+    roomCode = data.id;
+    lastRemoteStr = JSON.stringify(payload);
+    await storeSet('cfturbo-room-code', roomCode);
+    await storeSet('cfturbo-server-base', serverBase);
+    updateSyncUI();
+    startSyncLoop();
+    prompt('اتاق مشترک ساخته شد. این کد را همراه آدرس سرور برای بقیه ارسال کنید:', roomCode);
+  }catch(e){
+    alert('ساخت اتاق مشترک با خطا مواجه شد. مطمئن شوید سرور server.js روشن است و آدرس درست وارد شده.');
+  }
+}
+
+async function joinRoom(){
+  serverBase = normalizeBase(document.getElementById('serverBaseInput').value);
+  const input = document.getElementById('roomCodeInput').value.trim();
+  if (!serverBase || !input){ alert('آدرس سرور و کد اتاق را وارد کنید.'); return; }
+  const sure = confirm('با اتصال به این اتاق، وضعیت فعلی پروژه‌های محلی شما با نسخه آنلاین این اتاق جایگزین می‌شود. ادامه می‌دهید؟');
+  if (!sure) return;
+  roomCode = input;
+  await storeSet('cfturbo-room-code', roomCode);
+  await storeSet('cfturbo-server-base', serverBase);
+  updateSyncUI();
+  await pullRemote();
+  startSyncLoop();
+}
+
+async function leaveRoom(){
+  if (!roomCode) return;
+  const sure = confirm('اتصال به اتاق مشترک قطع شود؟ نسخه محلی شما همین‌طور که الان هست حفظ می‌شود ولی دیگر با بقیه همگام نمی‌شود.');
+  if (!sure) return;
+  stopSyncLoop();
+  roomCode = null;
+  await storeDelete('cfturbo-room-code');
+  updateSyncUI();
+}
+
+/* ---------- مدیریت پروژه‌ها ---------- */
+async function loadProjectList(){
+  const raw = await storeGet('cfturbo-project-list');
+  projectList = raw ? JSON.parse(raw) : [];
+  const active = await storeGet('cfturbo-active-project');
+  currentProject = active || (projectList[0] || null);
+}
+async function saveProjectList(){
+  await storeSet('cfturbo-project-list', JSON.stringify(projectList));
+  await storeSet('cfturbo-active-project', currentProject || '');
+  schedulePush();
+}
+async function loadCurrentProjectData(){
+  if (!currentProject){
+    state.checks = {}; state.notes = {}; state.status = {}; state.calc = { N:'', Q:'', H:'', Qunit:'m3h' };
+    state.designPoint = { n:'', Q:'', H:'', Qunit:'m3h' };
+    state.pumpType = null;
+    state.manualNq = '';
+    return;
+  }
+  const raw = await storeGet(projectKey(currentProject));
+  const parsed = raw ? JSON.parse(raw) : {};
+  state.checks = parsed.checks || {};
+  state.notes = parsed.notes || {};
+  state.status = parsed.status || {};
+  state.calc = parsed.calc || { N:'', Q:'', H:'', Qunit:'m3h' };
+  state.designPoint = parsed.designPoint || { n:'', Q:'', H:'', Qunit:'m3h' };
+  state.pumpType = parsed.pumpType || null;
+  state.manualNq = parsed.manualNq || '';
+}
+async function persist(){
+  if (!currentProject) return;
+  try {
+    await storeSet(projectKey(currentProject), JSON.stringify(state));
+    const ind = document.getElementById('saveIndicator');
+    ind.classList.add('show');
+    clearTimeout(saveIndicatorTimer);
+    saveIndicatorTimer = setTimeout(() => ind.classList.remove('show'), 1200);
+    schedulePush();
+  } catch(e){
+    console.error('ذخیره ناموفق بود', e);
+  }
+}
+
+function renderProjectSelect(){
+  const sel = document.getElementById('projectSelect');
+  sel.innerHTML = '';
+  if (projectList.length === 0){
+    const opt = document.createElement('option');
+    opt.textContent = 'هنوز پروژه‌ای نساخته‌اید';
+    opt.disabled = true;
+    opt.selected = true;
+    sel.appendChild(opt);
+    updateCompareSelects();
+    return;
+  }
+  projectList.forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name;
+    opt.textContent = name;
+    if (name === currentProject) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  updateCompareSelects();
+}
+
+function updateCompareSelects(){
+  const selA = document.getElementById('compareSelectA');
+  const selB = document.getElementById('compareSelectB');
+  if (!selA || !selB) return;
+  const prevA = selA.value, prevB = selB.value;
+  [selA, selB].forEach(sel => sel.innerHTML = '');
+  if (projectList.length === 0){
+    [selA, selB].forEach(sel => {
+      const opt = document.createElement('option');
+      opt.textContent = 'پروژه‌ای موجود نیست';
+      opt.disabled = true; opt.selected = true;
+      sel.appendChild(opt);
+    });
+    return;
+  }
+  projectList.forEach((name, idx) => {
+    const optA = document.createElement('option');
+    optA.value = name; optA.textContent = name;
+    const optB = optA.cloneNode(true);
+    selA.appendChild(optA);
+    selB.appendChild(optB);
+  });
+  selA.value = projectList.includes(prevA) ? prevA : projectList[0];
+  selB.value = projectList.includes(prevB) ? prevB : (projectList[1] || projectList[0]);
+}
+
+async function switchToProject(name){
+  currentProject = name;
+  await saveProjectList();
+  await loadCurrentProjectData();
+  render();
+}
+
+async function createProject(){
+  let name = prompt('نام پروژه جدید را وارد کنید:', '');
+  if (name === null) return;
+  name = name.trim();
+  if (!name){ alert('نام پروژه نمی‌تواند خالی باشد.'); return; }
+  if (projectList.includes(name)){ alert('پروژه‌ای با این نام از قبل وجود دارد.'); return; }
+  projectList.push(name);
+  currentProject = name;
+  state.checks = {}; state.notes = {}; state.status = {}; state.calc = { N:'', Q:'', H:'', Qunit:'m3h' };
+  state.designPoint = { n:'', Q:'', H:'', Qunit:'m3h' };
+  state.pumpType = null;
+  state.manualNq = '';
+  await saveProjectList();
+  await persist();
+  renderProjectSelect();
+  render();
+}
+
+async function deleteCurrentProject(){
+  if (!currentProject) return;
+  const sure = confirm(`پروژه «${currentProject}» و تمام تیک‌ها/یادداشت‌های آن برای همیشه حذف شود؟ این کار قابل بازگشت نیست.`);
+  if (!sure) return;
+  await storeDelete(projectKey(currentProject));
+  projectList = projectList.filter(n => n !== currentProject);
+  currentProject = projectList[0] || null;
+  await saveProjectList();
+  await loadCurrentProjectData();
+  renderProjectSelect();
+  render();
+}
+
+async function renameCurrentProject(){
+  if (!currentProject){ alert('اول یک پروژه بسازید.'); return; }
+  let newName = prompt('نام جدید پروژه (اسم فایل خروجی هم بر همین اساس تنظیم می‌شود):', currentProject);
+  if (newName === null) return;
+  newName = newName.trim();
+  if (!newName){ alert('نام نمی‌تواند خالی باشد.'); return; }
+  if (newName === currentProject) return;
+  if (projectList.includes(newName)){ alert('پروژه‌ای با این نام از قبل وجود دارد.'); return; }
+
+  await storeSet(projectKey(newName), JSON.stringify(state));
+  await storeDelete(projectKey(currentProject));
+  projectList = projectList.map(n => n === currentProject ? newName : n);
+  currentProject = newName;
+  await saveProjectList();
+  renderProjectSelect();
+  render();
+}
+
+/* ---------- محاسبه‌گر سرعت مخصوص (nq) ---------- */
+function computeNq(){
+  const N = parseFloat(document.getElementById('calcN').value);
+  const QRaw = parseFloat(document.getElementById('calcQ').value);
+  const H = parseFloat(document.getElementById('calcH').value);
+  const unit = document.getElementById('calcQUnit').value; // m3h | m3s | ls
+  const valueEl = document.getElementById('calcNqValue');
+  const badgeEl = document.getElementById('calcBadge');
+  const noteEl = document.getElementById('calcNote');
+
+  if (isNaN(N) || isNaN(QRaw) || isNaN(H)){
+    valueEl.textContent = '—';
+    badgeEl.textContent = '';
+    badgeEl.className = 'calc-badge';
+    noteEl.textContent = 'مقادیر N (دور بر دقیقه)، Q و H (متر) را وارد کنید تا nq محاسبه شود. فرمول همیشه با Q بر حسب m³/s حساب می‌شود؛ واحد دبی خودتان را از کنار آن انتخاب کنید تا خودکار تبدیل شود.';
+    return null;
+  }
+
+  // تبدیل دبی به m3/s (واحد استاندارد فرمول اروپایی nq)، مستقل از واحدی که کاربر وارد کرده
+  let Q;
+  if (unit === 'm3h') Q = QRaw / 3600;
+  else if (unit === 'ls') Q = QRaw / 1000;
+  else Q = QRaw; // m3s
+
+  let raw;
+  if (Q < 0 || H <= 0){
+    raw = NaN;
+  } else {
+    raw = N * Math.sqrt(Q) / Math.pow(H, 0.75);
+  }
+
+  if (isNaN(raw)){
+    valueEl.textContent = '—';
+    badgeEl.textContent = 'نامعتبر';
+    badgeEl.className = 'calc-badge red';
+    noteEl.textContent = 'مقادیر وارد شده معتبر نیست (H باید بزرگ‌تر از صفر و Q نباید منفی باشد).';
+    return null;
+  }
+
+  valueEl.textContent = raw.toFixed(1);
+
+  let cls, label, note;
+  if (raw < 0){
+    cls = 'red';
+    label = 'نامعتبر';
+    note = 'سرعت مخصوص منفی به‌دست آمد — احتمالاً N منفی وارد شده؛ پارامترهای ورودی را بررسی کنید.';
+  } else if (raw >= 12 && raw <= 300){
+    cls = 'green';
+    label = 'در بازه مناسب';
+    note = 'سرعت مخصوص در بازه معمول طراحی این پمپ قرار دارد (۱۲ تا ۳۰۰، بر اساس تعریف اروپایی nq با Q بر حسب m³/s).';
+  } else {
+    cls = 'yellow';
+    label = 'داده تجربی کم';
+    note = raw < 12
+      ? 'سرعت مخصوص کمتر از ۱۲ است — این داده در محدوده‌ای قرار دارد که داده‌های تجربی کمی برای آن وجود دارد (پمپ به سمت رادیال با نسبت قطر بالا می‌رود).'
+      : 'سرعت مخصوص بیشتر از ۳۰۰ است — این داده در محدوده‌ای قرار دارد که داده‌های تجربی کمی برای آن وجود دارد (پمپ به سمت محوری خالص می‌رود).';
+  }
+  badgeEl.textContent = label;
+  badgeEl.className = 'calc-badge ' + cls;
+  noteEl.textContent = note;
+  return raw;
+}
+
+function renderCalcBox(){
+  const c = state.calc || { N:'', Q:'', H:'', Qunit:'m3h' };
+  document.getElementById('calcN').value = c.N || '';
+  document.getElementById('calcQ').value = c.Q || '';
+  document.getElementById('calcH').value = c.H || '';
+  document.getElementById('calcQUnit').value = c.Qunit || 'm3h';
+  computeNq();
+  document.getElementById('manualNqInput').value = state.manualNq || '';
+}
+
+function getNqStatus(){
+  const raw = computeNq();
+  if (raw === null) return null;
+  if (raw < 0) return { value: raw, label: 'نامعتبر', cls: 'red' };
+  if (raw >= 12 && raw <= 300) return { value: raw, label: 'در بازه مناسب', cls: 'green' };
+  return { value: raw, label: 'داده تجربی کم', cls: 'yellow' };
+}
+
+/* nq «مؤثر»: اگر کاربر مستقیم nq وارد کرده باشد همان اولویت دارد،
+   وگرنه از محاسبه‌گر N/Q/H بالای همان باکس استفاده می‌شود. */
+function getEffectiveNqInfo(){
+  const manualEl = document.getElementById('manualNqInput');
+  const manualRaw = manualEl ? parseFloat(manualEl.value) : NaN;
+  if (!isNaN(manualRaw)){
+    return { value: manualRaw, source: 'manual' };
+  }
+  const raw = computeNq();
+  if (raw === null || isNaN(raw)) return null;
+  return { value: raw, source: 'auto' };
+}
+
+/* ---------- محاسبه‌گر انتخاب نوع پمپ (رادیال / نیمه‌محوری / محوری) بر اساس nq ----------
+   یک نمونه از این باکس داخل صفحه «محاسبه‌گر» (متصل به N/Q/H یا nq دستی) و یک نمونه
+   داخل چک‌لیست نمایش داده می‌شود؛ هر دو با state.pumpType هماهنگ می‌مانند و نتیجه
+   به‌طور خودکار در بند «انتخاب نوع پمپ» چک‌لیست (هم نوع پمپ، هم اعتبار داده) ثبت می‌شود. */
+function renderPumpTypeBox(box){
+  if (!box) return;
+
+  const nqInfo = getEffectiveNqInfo();
+  const nq = nqInfo ? nqInfo.value : null;
+  const suggested = suggestPumpType(nq);
+  const selectedKey = state.pumpType || suggested;
+
+  const nqEl = box.querySelector('.pt-current-nq');
+  nqEl.textContent = (nq !== null && !isNaN(nq))
+    ? `nq فعلی: ${nq.toFixed(1)}${nqInfo.source === 'manual' ? ' (ورودی مستقیم)' : ' (از N، Q، H بالا)'}`
+    : 'مقادیر N، Q و H را وارد کنید یا مستقیم nq را در فیلد بالا بدهید.';
+
+  const optionsEl = box.querySelector('.pt-options');
+  optionsEl.innerHTML = '';
+  PUMP_TYPES.forEach(type => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pt-btn' + (type.key === selectedKey ? ' active' : '');
+    btn.innerHTML = type.label + ((type.key === suggested && !state.pumpType) ? ' <span class="pt-suggest-tag">پیشنهاد</span>' : '');
+    btn.title = `بازه طراحی: ${type.min} تا ${type.max}  —  بازه بهینه: ${type.optMin} تا ${type.optMax}  —  ${type.hint}`;
+    btn.addEventListener('click', () => {
+      state.pumpType = type.key;
+      syncPumpTypeToChecklist();
+    });
+    optionsEl.appendChild(btn);
+  });
+
+  const resultEl = box.querySelector('.pt-result');
+  const selType = PUMP_TYPES.find(t => t.key === selectedKey);
+  if (!selType){
+    resultEl.innerHTML = '';
+    return;
+  }
+  const status = pumpTypeStatus(nq, selType);
+  if (!status){
+    resultEl.innerHTML = `<span class="calc-badge">—</span><span class="pt-msg">پس از وارد کردن nq، وضعیت اعتبار نوع پمپ انتخابی اینجا نمایش داده می‌شود.</span>`;
+  } else {
+    resultEl.innerHTML = `<span class="calc-badge ${status.cls}">${status.label}</span><span class="pt-msg">${status.msg}</span>`;
+  }
+}
+
+/* هر نمونه از پمپ‌تایپ‌باکس (چه در چک‌لیست، چه در صفحه محاسبه‌گر) را دوباره رسم می‌کند */
+function renderAllPumpTypeBoxes(){
+  document.querySelectorAll('.pump-type-box').forEach(renderPumpTypeBox);
+}
+
+/* فقط state.notes/state.status بند «انتخاب نوع پمپ» را بر اساس nq مؤثر فعلی به‌روزرسانی می‌کند؛
+   بدون persist/render — برای استفاده در جریان‌های دیگری که خودشان persist/render می‌زنند. */
+function computePumpTypeSync(nqInfo){
+  if (!nqInfo) return null;
+  const nq = nqInfo.value;
+  const suggested = suggestPumpType(nq);
+  const selectedKey = state.pumpType || suggested;
+  const selType = PUMP_TYPES.find(t => t.key === selectedKey);
+  if (!selType) return null;
+  const status = pumpTypeStatus(nq, selType);
+  if (!status) return null;
+  const key = keyFor(0, 3); // «انتخاب نوع پمپ متناسب با nq: رادیال، میکس‌فلو یا محوری»
+  const sourceLabel = nqInfo.source === 'manual' ? 'ورودی مستقیم nq' : 'محاسبه از N، Q، H';
+  state.notes[key] = `تعیین‌شده خودکار از محاسبه‌گر (${sourceLabel}): nq = ${nq.toFixed(1)} → نوع پمپ «${selType.label}» — ${status.label}.`;
+  state.status[key] = status.cls;
+  return { selType, status };
+}
+
+/* نسخه کامل: nq مؤثر را می‌خواند، در چک‌لیست ثبت می‌کند، ذخیره و رندر می‌کند */
+function syncPumpTypeToChecklist(){
+  if (!currentProject) return;
+  computePumpTypeSync(getEffectiveNqInfo());
+  persist();
+  render();
+}
+
+/* ---------- اتصال پارامترهای نقطه طراحی به محاسبه‌گر سرعت مخصوص ---------- */
+function connectDesignPointToCalc(dpStatusEl){
+  const dp = state.designPoint || {};
+  const n = parseFloat(dp.n), Q = parseFloat(dp.Q), H = parseFloat(dp.H);
+
+  if (isNaN(n) || isNaN(Q) || isNaN(H)){
+    if (dpStatusEl) dpStatusEl.textContent = 'برای اتصال به محاسبه‌گر، هر سه مقدار n (سرعت دورانی)، Q (دبی) و H (هد) را وارد کنید.';
+    return;
+  }
+
+  // مقادیر نقطه طراحی را به محاسبه‌گر اصلی nq منتقل و آن را محاسبه کن
+  state.calc = { N: dp.n, Q: dp.Q, H: dp.H, Qunit: dp.Qunit || 'm3h' };
+  state.manualNq = ''; // اتصال از نقطه طراحی همیشه با N/Q/H محاسبه‌شده انجام می‌شود
+  renderCalcBox();
+  const nqInfo = getNqStatus();
+
+  const kNqCheck = keyFor(0, 2); // "بررسی قرارگیری سرعت مخصوص (nq) در بازه معتبر نرم‌افزار"
+  if (nqInfo){
+    const statusText = nqInfo.cls === 'yellow'
+      ? 'این داده در محدوده‌ای قرار دارد که داده‌های تجربی کمی برای آن وجود دارد.'
+      : nqInfo.label;
+    state.notes[kNqCheck] = `سرعت مخصوص محاسبه‌شده (خودکار از نقطه طراحی): nq = ${nqInfo.value.toFixed(1)} — ${statusText}`;
+    state.status[kNqCheck] = nqInfo.cls;
+    if (dpStatusEl) dpStatusEl.textContent = `✓ محاسبه شد و در بندهای «بررسی قرارگیری سرعت مخصوص» و «انتخاب نوع پمپ» ثبت شد: nq = ${nqInfo.value.toFixed(1)} — ${statusText}`;
+  } else {
+    delete state.notes[kNqCheck];
+    delete state.status[kNqCheck];
+    if (dpStatusEl) dpStatusEl.textContent = 'مقادیر واردشده معتبر نیست (H باید بزرگ‌تر از صفر و Q نباید منفی باشد).';
+  }
+
+  // بند «انتخاب نوع پمپ» را هم بر همین اساس هماهنگ کن
+  computePumpTypeSync(getEffectiveNqInfo());
+
+  persist();
+  render();
+}
+
+function render(){
+  const root = document.getElementById('stages');
+  const navList = document.getElementById('stageNavList');
+  root.innerHTML = '';
+
+  document.getElementById('exportBtn').disabled = !currentProject;
+  document.getElementById('exportExcelBtn').disabled = !currentProject;
+  document.getElementById('resetBtn').disabled = !currentProject;
+  document.getElementById('deleteProjectBtn').disabled = !currentProject;
+  document.getElementById('renameProjectBtn').disabled = !currentProject;
+  ['calcN','calcQ','calcH','calcQUnit','manualNqInput'].forEach(id => document.getElementById(id).disabled = !currentProject);
+  renderCalcBox();
+
+  if (!currentProject){
+    navList.innerHTML = '';
+    root.innerHTML = `<div class="empty-state">
+      برای شروع، یک پروژه بسازید — کارها و یادداشت‌های هر پروژه جدا ذخیره می‌شوند و
+      تا وقتی خودتان حذفش نکنید، پاک نمی‌شوند.
+    </div>`;
+    updateStats();
+    renderAllPumpTypeBoxes();
+    return;
+  }
+
+  navList.innerHTML = '';
+  DATA.forEach((stage, si) => {
+    const stageDoneCount = stage.items.filter((_, ii) => !!state.checks[keyFor(si, ii)]).length;
+    const stageAllDone = stageDoneCount === stage.items.length;
+    const navItem = document.createElement('button');
+    navItem.type = 'button';
+    navItem.dataset.si = si;
+    navItem.className = 'stage-nav-item' + (si === activeStage ? ' active' : '') + (stageAllDone ? ' done' : '');
+    navItem.innerHTML = `
+      <span class="stage-nav-num">${String(si+1).padStart(2,'0')}</span>
+      <span class="stage-nav-title">${stage.title}</span>
+      <span class="stage-nav-check">✓</span>`;
+    navItem.addEventListener('click', () => {
+      activeStage = si;
+      render();
+    });
+    navList.appendChild(navItem);
+  });
+
+  const si = activeStage;
+  const stage = DATA[si];
+
+  const sec = document.createElement('section');
+  sec.className = 'stage-content';
+
+  const head = document.createElement('div');
+  head.className = 'stage-head';
+  const stageDoneCountActive = stage.items.filter((_, ii) => !!state.checks[keyFor(si, ii)]).length;
+  head.innerHTML = `
+    <input type="checkbox" class="stage-head-check" id="stageHeadCheck" ${stageDoneCountActive === stage.items.length ? 'checked' : ''}>
+    <span class="stage-head-title">${stage.title}</span>
+    <span class="stage-head-count" id="stageHeadCount">${stageDoneCountActive}/${stage.items.length}</span>`;
+  sec.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'stage-body';
+
+  const stageHeadCheck = head.querySelector('#stageHeadCheck');
+  stageHeadCheck.addEventListener('change', () => {
+    const setTo = stageHeadCheck.checked;
+    stage.items.forEach((_, ii) => { state.checks[keyFor(si, ii)] = setTo; });
+    persist();
+    render();
+  });
+
+  stage.items.forEach((item, ii) => {
+      const k = keyFor(si, ii);
+      const row = document.createElement('div');
+      row.className = 'item';
+      row.dataset.key = k;
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'chk';
+      cb.checked = !!state.checks[k];
+      cb.addEventListener('change', () => {
+        state.checks[k] = cb.checked;
+        row.classList.toggle('done', cb.checked);
+        updateStats();
+        persist();
+      });
+      cb.addEventListener('change', () => {
+        const doneCount = stage.items.filter((_, jj) => !!state.checks[keyFor(si, jj)]).length;
+        const allDone = doneCount === stage.items.length;
+        const headCheck = document.getElementById('stageHeadCheck');
+        if (headCheck) headCheck.checked = allDone;
+        const headCount = document.getElementById('stageHeadCount');
+        if (headCount) headCount.textContent = `${doneCount}/${stage.items.length}`;
+        const navEl = document.querySelector(`.stage-nav-item[data-si="${si}"]`);
+        if (navEl){
+          navEl.classList.toggle('done', allDone);
+        }
+      });
+
+      const body2 = document.createElement('div');
+      body2.className = 'item-body';
+      body2.innerHTML = `
+        <div class="item-title">${item.t}</div>
+        <div class="item-desc" data-desc="${k}">${item.d}</div>
+        <div class="item-src">${item.s}</div>
+        ${ (si === 0 && ii === 0) ? `
+        <div class="design-point-box" id="designPointBox">
+          <div class="dp-title">وارد کردن جدای پارامترهای نقطه طراحی</div>
+          <div class="dp-row">
+            <label>n — سرعت دورانی (rpm)<input type="number" step="any" id="dpN" placeholder="مثلاً 1450"></label>
+            <label>Q — دبی حجمی<span class="calc-qwrap">
+              <input type="number" step="any" id="dpQ" placeholder="مثلاً 66">
+              <select id="dpQUnit">
+                <option value="m3h">m³/h</option>
+                <option value="m3s">m³/s</option>
+                <option value="ls">l/s</option>
+              </select>
+            </span></label>
+            <label>H — هد (m)<input type="number" step="any" id="dpH" placeholder="مثلاً 17.5"></label>
+            <button type="button" class="btn-primary" id="dpConnectBtn">🔗 محاسبه و اتصال به محاسبه‌گر</button>
+          </div>
+          <div class="dp-status" id="dpStatus"></div>
+        </div>
+        ` : '' }
+        ${ (si === 0 && ii === 1) ? `
+        <div class="fluid-box" id="fluidBox">
+          <div class="dp-title">مشخصات سیال کاری</div>
+          <div class="fluid-row">
+            <label>نوع سیال<select id="fluidType">
+              <option value="water">آب (پیش‌فرض)</option>
+              <option value="light_oil">روغن سبک</option>
+              <option value="heavy_oil">روغن سنگین</option>
+              <option value="diesel">نفت گاز / دیزل</option>
+              <option value="seawater">آب دریا</option>
+              <option value="custom">سفارشی…</option>
+            </select></label>
+            <label>چگالی ρ (kg/m³)<input type="number" step="any" id="fluidDensity"></label>
+            <label>ویسکوزیته سینماتیک ν (cSt)<input type="number" step="any" id="fluidViscosity"></label>
+            <label>دما (°C)<input type="number" step="any" id="fluidTemp"></label>
+          </div>
+          <div class="fluid-status" id="fluidStatus"></div>
+        </div>
+        ` : '' }
+        ${ (si === 0 && ii === 3) ? `
+        <div class="pump-type-box" id="pumpTypeBox">
+          <div class="dp-title">محاسبه‌گر انتخاب نوع پمپ بر اساس سرعت مخصوص (n<sub>q</sub>)</div>
+          <div class="pt-current-nq" id="ptCurrentNq"></div>
+          <div class="pt-options" id="ptOptions"></div>
+          <div class="pt-result" id="ptResult"></div>
+        </div>
+        ` : '' }
+        <div class="status-row">
+          <span class="status-label">اعتبار داده:</span>
+          <span class="status-btns">
+            <button type="button" class="status-btn g" data-status="green" title="تأیید شده — داده قابل توجیه است"></button>
+            <button type="button" class="status-btn y" data-status="yellow" title="نیاز به بررسی — مطمئن نیستم"></button>
+            <button type="button" class="status-btn r" data-status="red" title="نادرست — باید کامل بررسی شود"></button>
+          </span>
+        </div>
+        <div class="item-note"><textarea placeholder="یادداشت شخصی شما برای این مورد (اختیاری)…"></textarea></div>
+      `;
+      const ta = body2.querySelector('textarea');
+      ta.value = state.notes[k] || '';
+      ta.addEventListener('input', () => {
+        state.notes[k] = ta.value;
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(persist, 500);
+      });
+
+      if (si === 0 && ii === 0){
+        const dpN = body2.querySelector('#dpN');
+        const dpQ = body2.querySelector('#dpQ');
+        const dpQUnit = body2.querySelector('#dpQUnit');
+        const dpH = body2.querySelector('#dpH');
+        const dpBtn = body2.querySelector('#dpConnectBtn');
+        const dpStatus = body2.querySelector('#dpStatus');
+        const dp = state.designPoint || { n:'', Q:'', H:'', Qunit:'m3h' };
+        dpN.value = dp.n || '';
+        dpQ.value = dp.Q || '';
+        dpQUnit.value = dp.Qunit || 'm3h';
+        dpH.value = dp.H || '';
+        const saveDp = () => {
+          state.designPoint = { n: dpN.value, Q: dpQ.value, H: dpH.value, Qunit: dpQUnit.value };
+          clearTimeout(saveTimer);
+          saveTimer = setTimeout(persist, 500);
+        };
+        [dpN, dpQ, dpH].forEach(el => el.addEventListener('input', saveDp));
+        dpQUnit.addEventListener('change', saveDp);
+        dpBtn.addEventListener('click', () => {
+          saveDp();
+          connectDesignPointToCalc(dpStatus);
+        });
+      }
+
+      if (si === 0 && ii === 1){
+        const fType = body2.querySelector('#fluidType');
+        const fDensity = body2.querySelector('#fluidDensity');
+        const fVisc = body2.querySelector('#fluidViscosity');
+        const fTemp = body2.querySelector('#fluidTemp');
+        const fStatus = body2.querySelector('#fluidStatus');
+
+        const applyPreset = (type) => {
+          const preset = FLUID_PRESETS[type];
+          if (preset){
+            fDensity.value = preset.density;
+            fVisc.value = preset.viscosity;
+            fTemp.value = preset.temp;
+          }
+          const isCustom = (type === 'custom');
+          fDensity.disabled = !isCustom;
+          fVisc.disabled = !isCustom;
+          fTemp.disabled = !isCustom;
+        };
+
+        const saveFluid = () => {
+          const type = fType.value;
+          state.fluid = { type, density: fDensity.value, viscosity: fVisc.value, temp: fTemp.value };
+          const label = FLUID_LABELS[type] || type;
+          state.notes[k] = `سیال کاری: ${label} — ρ = ${fDensity.value || '—'} kg/m³، ν = ${fVisc.value || '—'} cSt، دما = ${fTemp.value || '—'}°C`;
+          fStatus.textContent = `فعلی: ${label}  (ρ = ${fDensity.value || '—'} kg/m³, ν = ${fVisc.value || '—'} cSt, دما = ${fTemp.value || '—'}°C)`;
+          clearTimeout(saveTimer);
+          saveTimer = setTimeout(persist, 500);
+        };
+
+        const savedFluid = state.fluid;
+        if (savedFluid){
+          fType.value = savedFluid.type || 'water';
+          if (savedFluid.type === 'custom'){
+            fDensity.value = savedFluid.density ?? '';
+            fVisc.value = savedFluid.viscosity ?? '';
+            fTemp.value = savedFluid.temp ?? '';
+            fDensity.disabled = false; fVisc.disabled = false; fTemp.disabled = false;
+          } else {
+            applyPreset(savedFluid.type || 'water');
+          }
+          const label = FLUID_LABELS[savedFluid.type] || savedFluid.type;
+          fStatus.textContent = `فعلی: ${label}  (ρ = ${fDensity.value || '—'} kg/m³, ν = ${fVisc.value || '—'} cSt, دما = ${fTemp.value || '—'}°C)`;
+        } else {
+          // پیش‌فرض: آب — مقادیر خودکار پر و بر همان اساس محاسبه می‌شود
+          fType.value = 'water';
+          applyPreset('water');
+          saveFluid();
+        }
+
+        fType.addEventListener('change', () => {
+          applyPreset(fType.value);
+          saveFluid();
+        });
+        [fDensity, fVisc, fTemp].forEach(el => el.addEventListener('input', saveFluid));
+      }
+
+      if (si === 0 && ii === 3){
+        renderPumpTypeBox(body2.querySelector('.pump-type-box'));
+      }
+
+      const descEl = body2.querySelector('.item-desc');
+      const curStatus = state.status[k];
+      if (curStatus) descEl.classList.add('status-' + curStatus);
+      body2.querySelectorAll('.status-btn').forEach(btn => {
+        if (btn.dataset.status === curStatus) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          const val = btn.dataset.status;
+          const isActive = btn.classList.contains('active');
+          body2.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+          descEl.classList.remove('status-green','status-yellow','status-red');
+          if (isActive) {
+            delete state.status[k];
+          } else {
+            btn.classList.add('active');
+            descEl.classList.add('status-' + val);
+            state.status[k] = val;
+          }
+          persist();
+        });
+      });
+
+      if (cb.checked) row.classList.add('done');
+      row.appendChild(cb);
+      row.appendChild(body2);
+      body.appendChild(row);
+    });
+
+    sec.appendChild(body);
+    root.appendChild(sec);
+  updateStats();
+  renderAllPumpTypeBoxes();
+}
+
+function updateStats(){
+  let total = 0, done = 0;
+  DATA.forEach((stage, si) => {
+    stage.items.forEach((_, ii) => {
+      total++;
+      if (state.checks[keyFor(si,ii)]) done++;
+    });
+  });
+  document.getElementById('statDone').textContent = done;
+  document.getElementById('statTotal').textContent = total;
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('statPercent').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+let saveIndicatorTimer = null;
+
+function escapeHtml(str){
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildWordHtml(){
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('fa-IR');
+  let total = 0, done = 0;
+  DATA.forEach(stage => stage.items.forEach(() => total++));
+  Object.values(state.checks).forEach(v => { if (v) done++; });
+  const pct = total ? Math.round(done/total*100) : 0;
+  const nqInfo = getNqStatus();
+  const nqColorMap = { green:'#2f8f5b', yellow:'#9a7a12', red:'#b23b3e' };
+
+  let body = `
+    <div style="font-family:'B Nazanin','Tahoma',Arial,sans-serif; direction:rtl; text-align:right;">
+    <h1 style="color:#1a2733; border-bottom:2px solid #d99a2b; padding-bottom:8px;">
+      گزارش چک‌لیست طراحی پمپ در CFTurbo
+    </h1>
+    <p style="color:#555; font-size:12px;">تاریخ تهیه گزارش: ${dateStr} &nbsp; | &nbsp; پیشرفت کلی: ${done} از ${total} مورد (${pct}%)</p>
+    ${nqInfo ? `<p style="font-size:12.5px;">سرعت مخصوص محاسبه‌شده: <b>n<sub>q</sub> = ${nqInfo.value.toFixed(1)}</b> — <span style="color:${nqColorMap[nqInfo.cls]}; font-weight:bold;">${nqInfo.label}</span></p>` : ''}
+    <hr style="border:none; border-top:1px solid #ccc;">
+  `;
+
+  DATA.forEach((stage, si) => {
+    body += `<h2 style="color:#1a2733; margin-top:26px; font-size:16px;">${stage.title}</h2>`;
+    body += `<table style="width:100%; border-collapse:collapse; margin-top:8px;">`;
+    stage.items.forEach((item, ii) => {
+      const k = keyFor(si, ii);
+      const checked = !!state.checks[k];
+      const note = escapeHtml(state.notes[k] || '');
+      const st = state.status[k];
+      const statusMap = {
+        green:  { label: 'تأیید شده — داده قابل توجیه است', color:'#2f8f5b', bg:'#eaf7ef' },
+        yellow: { label: 'نیاز به بررسی — از داده مطمئن نیستیم', color:'#9a7a12', bg:'#fbf3df' },
+        red:    { label: 'نادرست — باید کامل بازبینی شود', color:'#b23b3e', bg:'#fbe9ea' }
+      };
+      const sInfo = statusMap[st];
+      body += `
+        <tr>
+          <td style="width:26px; vertical-align:top; padding:8px 4px; border:1px solid #ddd; text-align:center; font-size:15px;">
+            ${checked ? '☑' : '☐'}
+          </td>
+          <td style="padding:8px 10px; border:1px solid #ddd;">
+            <div style="font-weight:bold; font-size:13px; color:#1a2733;">${escapeHtml(item.t)}</div>
+            <div style="font-size:12px; color:#444; margin-top:4px;">${escapeHtml(item.d)}</div>
+            <div style="font-size:10.5px; color:#999; margin-top:6px; direction:ltr; text-align:left;">source: ${escapeHtml(item.s)}</div>
+            ${sInfo ? `<div style="font-size:11.5px; color:${sInfo.color}; background:${sInfo.bg}; margin-top:6px; padding:5px 8px; border-radius:4px; display:inline-block;">اعتبار داده: ${sInfo.label}</div>` : ''}
+            ${note ? `<div style="font-size:12px; color:#8a5a12; margin-top:6px; background:#fff7e8; padding:6px 8px; border-radius:4px;">یادداشت: ${note}</div>` : ''}
+          </td>
+        </tr>`;
+    });
+    body += `</table>`;
+  });
+
+  body += `
+    <p style="margin-top:30px; font-size:10.5px; color:#999; border-top:1px solid #ccc; padding-top:8px;">
+      این گزارش بر اساس صفحات رسمی cfturbo.com (Pumps · Impellers · Volutes · Stators · Main Functions)
+      و دموی رسمی CFturbo منتشرشده در empoweringpumps.com تهیه شده است.<br>
+      طراح و توسعه‌دهنده: محمدامین شریف — mohammadaminsh2005@gmail.com
+    </p>
+    </div>`;
+
+  return `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="UTF-8"><title>گزارش چک‌لیست CFTurbo</title></head>
+    <body>${body}</body>
+    </html>`;
+}
+
+function exportWord(){
+  const html = buildWordHtml();
+  const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const safeName = (currentProject || 'پروژه').replace(/[\\/:*?"<>|]/g, '-');
+  a.download = `گزارش-${safeName}-CFTurbo.doc`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+const STATUS_LABEL_FA = {
+  green:  'تأیید شده',
+  yellow: 'نیاز به بررسی',
+  red:    'نادرست / نیاز به بازبینی کامل'
+};
+const STATUS_COLOR_HEX = {
+  green:  'FF5FD192',
+  yellow: 'FFE8C15A',
+  red:    'FFE2686B'
+};
+
+async function exportExcel(){
+  if (typeof ExcelJS === 'undefined'){
+    alert('کتابخانه Excel هنوز بارگذاری نشده. اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.');
+    return;
+  }
+  if (!currentProject){ alert('اول یک پروژه بسازید.'); return; }
+
+  const wb = new ExcelJS.Workbook();
+  wb.creator = 'CFTurbo Pump Checklist';
+  const ws = wb.addWorksheet('چک‌لیست', { views: [{ rightToLeft: true }] });
+
+  ws.mergeCells('A1:D1');
+  const title = ws.getCell('A1');
+  title.value = `گزارش پروژه: ${currentProject}`;
+  title.font = { size: 15, bold: true, color: { argb: 'FF1A2733' } };
+  title.alignment = { horizontal: 'right' };
+  ws.getRow(1).height = 26;
+
+  ws.mergeCells('A2:D2');
+  const sub = ws.getCell('A2');
+  sub.value = `تاریخ: ${new Date().toLocaleDateString('fa-IR')}`;
+  sub.font = { size: 10.5, color: { argb: 'FF8A8A8A' } };
+  sub.alignment = { horizontal: 'right' };
+
+  const nqInfo = getNqStatus();
+  if (nqInfo){
+    ws.mergeCells('A3:D3');
+    const nqCell = ws.getCell('A3');
+    nqCell.value = `سرعت مخصوص (nq): ${nqInfo.value.toFixed(1)}  —  ${nqInfo.label}`;
+    nqCell.font = { size: 11, bold: true, color: { argb: 'FF1A2733' } };
+    nqCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_COLOR_HEX[nqInfo.cls] || 'FFEFEFEF' } };
+    nqCell.alignment = { horizontal: 'right' };
+  }
+
+  ws.addRow([]);
+
+  const headerRow = ws.addRow(['کار انجام‌شده', 'انجام شد؟', 'اعتبار داده', 'یادداشت من']);
+  headerRow.eachCell(cell => {
+    cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1A2733' } };
+    cell.alignment = { horizontal: 'right', vertical: 'middle' };
+    cell.border = { bottom: { style: 'thin', color: { argb: 'FFCCCCCC' } } };
+  });
+  headerRow.height = 20;
+  ws.views = [{ state: 'frozen', ySplit: headerRow.number, rightToLeft: true }];
+
+  ws.columns = [
+    { width: 46 }, { width: 12 }, { width: 20 }, { width: 34 }
+  ];
+
+  let addedAny = false;
+
+  DATA.forEach((stage, si) => {
+    let stageHeaderAdded = false;
+    stage.items.forEach((item, ii) => {
+      const k = keyFor(si, ii);
+      const checked = !!state.checks[k];
+      const st = state.status[k];
+      const note = (state.notes[k] || '').trim();
+      const touched = checked || !!st || note;
+      if (!touched) return; // فقط کارهایی که واقعاً روی آن‌ها کار شده
+
+      if (!stageHeaderAdded){
+        const stageRow = ws.addRow([stage.title, '', '', '']);
+        ws.mergeCells(`A${stageRow.number}:D${stageRow.number}`);
+        stageRow.getCell(1).font = { bold: true, color: { argb: 'FFB8792E' } };
+        stageRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3EFE7' } };
+        stageRow.getCell(1).alignment = { horizontal: 'right' };
+        stageHeaderAdded = true;
+      }
+
+      const row = ws.addRow([item.t, checked ? 'انجام شد' : 'باقی مانده', st ? STATUS_LABEL_FA[st] : '—', note || '']);
+      row.getCell(1).alignment = { horizontal: 'right', wrapText: true };
+      row.getCell(2).alignment = { horizontal: 'center' };
+      row.getCell(2).font = { color: { argb: checked ? 'FF2F8F5B' : 'FF999999' }, bold: checked };
+      row.getCell(3).alignment = { horizontal: 'center' };
+      if (st){
+        row.getCell(3).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_COLOR_HEX[st] } };
+        row.getCell(3).font = { color: { argb: 'FF1A2733' }, bold: true };
+      }
+      row.getCell(4).alignment = { horizontal: 'right', wrapText: true };
+      row.eachCell(cell => {
+        cell.border = { bottom: { style: 'hair', color: { argb: 'FFE5E5E5' } } };
+      });
+      addedAny = true;
+    });
+  });
+
+  if (!addedAny){
+    const emptyRow = ws.addRow(['هنوز روی هیچ موردی کار نکرده‌اید — تیکی نزده یا یادداشتی ننوشته‌اید.', '', '', '']);
+    ws.mergeCells(`A${emptyRow.number}:D${emptyRow.number}`);
+    emptyRow.getCell(1).font = { italic: true, color: { argb: 'FF999999' } };
+    emptyRow.getCell(1).alignment = { horizontal: 'right' };
+  }
+
+  const safeName = currentProject.replace(/[\\/:*?"<>|]/g, '-');
+  const buf = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `گزارش-${safeName}-CFTurbo.xlsx`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ---------- مقایسه دو پروژه ---------- */
+async function loadProjectDataByName(name){
+  if (!name) return { checks:{}, notes:{}, status:{} };
+  const raw = await storeGet(projectKey(name));
+  const parsed = raw ? JSON.parse(raw) : {};
+  return {
+    checks: parsed.checks || {},
+    notes: parsed.notes || {},
+    status: parsed.status || {}
+  };
+}
+
+let lastComparison = null; // برای استفاده در خروجی Excel مقایسه
+
+async function renderComparison(){
+  const nameA = document.getElementById('compareSelectA').value;
+  const nameB = document.getElementById('compareSelectB').value;
+  const resultEl = document.getElementById('compareResult');
+  if (!nameA || !nameB){
+    resultEl.innerHTML = '<div class="empty-state">دو پروژه برای مقایسه انتخاب کنید.</div>';
+    return;
+  }
+  if (nameA === nameB){
+    resultEl.innerHTML = '<div class="empty-state">پروژه A و B باید متفاوت باشند.</div>';
+    return;
+  }
+  const dataA = await loadProjectDataByName(nameA);
+  const dataB = await loadProjectDataByName(nameB);
+
+  let totalItems = 0, diffCount = 0;
+  const rows = [];
+
+  DATA.forEach((stage, si) => {
+    rows.push({ stageRow: true, title: stage.title });
+    stage.items.forEach((item, ii) => {
+      const k = keyFor(si, ii);
+      const cA = !!dataA.checks[k], cB = !!dataB.checks[k];
+      const sA = dataA.status[k] || '', sB = dataB.status[k] || '';
+      const isDiff = (cA !== cB) || (sA !== sB);
+      totalItems++;
+      if (isDiff) diffCount++;
+      rows.push({
+        stageRow:false, title:item.t,
+        cA, cB, sA, sB, isDiff,
+        noteA: dataA.notes[k] || '', noteB: dataB.notes[k] || ''
+      });
+    });
+  });
+
+  lastComparison = { nameA, nameB, rows, totalItems, diffCount };
+
+  const dotHtml = (s) => s ? `<span class="cmp-dot ${s[0]}" title="${STATUS_LABEL_FA[s]}"></span>` : '—';
+
+  let html = `<div class="cmp-summary">مجموع موارد: ${totalItems} &nbsp;|&nbsp; موارد متفاوت بین «${escapeHtml(nameA)}» و «${escapeHtml(nameB)}»: ${diffCount}</div>`;
+  html += `<table class="cmp-table"><thead><tr>
+      <th style="width:34%;">عنوان مورد</th>
+      <th class="center">انجام‌شده در ${escapeHtml(nameA)}</th>
+      <th class="center">اعتبار در ${escapeHtml(nameA)}</th>
+      <th class="center">انجام‌شده در ${escapeHtml(nameB)}</th>
+      <th class="center">اعتبار در ${escapeHtml(nameB)}</th>
+    </tr></thead><tbody>`;
+
+  rows.forEach(r => {
+    if (r.stageRow){
+      html += `<tr class="cmp-stage-row"><td colspan="5">${escapeHtml(r.title)}</td></tr>`;
+    } else {
+      html += `<tr class="${r.isDiff ? 'cmp-diff' : ''}">
+        <td>${escapeHtml(r.title)}</td>
+        <td class="center">${r.cA ? '☑' : '☐'}</td>
+        <td class="center">${dotHtml(r.sA)}</td>
+        <td class="center">${r.cB ? '☑' : '☐'}</td>
+        <td class="center">${dotHtml(r.sB)}</td>
+      </tr>`;
+    }
+  });
+  html += '</tbody></table>';
+  resultEl.innerHTML = html;
+}
+
+async function exportCompareExcel(){
+  if (typeof ExcelJS === 'undefined'){
+    alert('کتابخانه Excel هنوز بارگذاری نشده. اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.');
+    return;
+  }
+  if (!lastComparison){
+    alert('اول روی «نمایش مقایسه» بزنید.');
+    return;
+  }
+  const { nameA, nameB, rows } = lastComparison;
+
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet('مقایسه', { views: [{ rightToLeft: true }] });
+
+  ws.mergeCells('A1:E1');
+  const title = ws.getCell('A1');
+  title.value = `مقایسه «${nameA}» با «${nameB}»`;
+  title.font = { size: 15, bold: true, color: { argb: 'FF1A2733' } };
+  title.alignment = { horizontal: 'right' };
+  ws.getRow(1).height = 26;
+  ws.addRow([]);
+
+  const headerRow = ws.addRow(['کار', nameA, `اعتبار ${nameA}`, nameB, `اعتبار ${nameB}`]);
+  headerRow.eachCell(cell => {
+    cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1A2733' } };
+    cell.alignment = { horizontal: 'right', vertical: 'middle' };
+  });
+  headerRow.height = 20;
+  ws.views = [{ state: 'frozen', ySplit: headerRow.number, rightToLeft: true }];
+  ws.columns = [{ width: 40 }, { width: 14 }, { width: 20 }, { width: 14 }, { width: 20 }];
+
+  let stageHeaderAdded = false;
+  let addedAny = false;
+  let pendingStageTitle = '';
+
+  rows.forEach(r => {
+    if (r.stageRow){
+      stageHeaderAdded = false; // منتظر اولین سطر دارای داده در این مرحله
+      pendingStageTitle = r.title;
+      return;
+    }
+    const touched = r.cA || r.cB || r.sA || r.sB || r.noteA || r.noteB;
+    if (!touched) return;
+
+    if (!stageHeaderAdded){
+      const stageRow = ws.addRow([pendingStageTitle, '', '', '', '']);
+      ws.mergeCells(`A${stageRow.number}:E${stageRow.number}`);
+      stageRow.getCell(1).font = { bold: true, color: { argb: 'FFB8792E' } };
+      stageRow.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF3EFE7' } };
+      stageRow.getCell(1).alignment = { horizontal: 'right' };
+      stageHeaderAdded = true;
+    }
+
+    const row = ws.addRow([
+      r.title,
+      r.cA ? 'انجام شد' : 'باقی مانده',
+      r.sA ? STATUS_LABEL_FA[r.sA] : '—',
+      r.cB ? 'انجام شد' : 'باقی مانده',
+      r.sB ? STATUS_LABEL_FA[r.sB] : '—'
+    ]);
+    row.getCell(1).alignment = { horizontal: 'right', wrapText: true };
+    [2,4].forEach((col, idx) => {
+      const isCheckedCol = idx === 0 ? r.cA : r.cB;
+      row.getCell(col).alignment = { horizontal: 'center' };
+      row.getCell(col).font = { color: { argb: isCheckedCol ? 'FF2F8F5B' : 'FF999999' }, bold: isCheckedCol };
+    });
+    [3,5].forEach((col, idx) => {
+      const st = idx === 0 ? r.sA : r.sB;
+      row.getCell(col).alignment = { horizontal: 'center' };
+      if (st){
+        row.getCell(col).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_COLOR_HEX[st] } };
+        row.getCell(col).font = { color: { argb: 'FF1A2733' }, bold: true };
+      }
+    });
+    if (r.isDiff){
+      row.eachCell(cell => {
+        cell.border = { right: { style: 'medium', color: { argb: 'FFE2686B' } } };
+      });
+    }
+    addedAny = true;
+  });
+
+  if (!addedAny){
+    const emptyRow = ws.addRow(['در هیچ‌کدام از دو پروژه روی موردی کار نشده است.', '', '', '', '']);
+    ws.mergeCells(`A${emptyRow.number}:E${emptyRow.number}`);
+    emptyRow.getCell(1).font = { italic: true, color: { argb: 'FF999999' } };
+    emptyRow.getCell(1).alignment = { horizontal: 'right' };
+  }
+
+  const safeA = nameA.replace(/[\\/:*?"<>|]/g, '-');
+  const safeB = nameB.replace(/[\\/:*?"<>|]/g, '-');
+  const buf = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `مقایسه-${safeA}-با-${safeB}-CFTurbo.xlsx`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('exportBtn').addEventListener('click', exportWord);
+document.getElementById('exportExcelBtn').addEventListener('click', exportExcel);
+document.getElementById('toggleCompareBtn').addEventListener('click', () => {
+  const box = document.getElementById('compareBox');
+  box.style.display = (box.style.display === 'none') ? '' : 'none';
+});
+document.getElementById('runCompareBtn').addEventListener('click', renderComparison);
+document.getElementById('exportCompareBtn').addEventListener('click', exportCompareExcel);
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!currentProject){ alert('اول یک پروژه بسازید.'); return; }
+  if (!confirm(`تیک‌ها، یادداشت‌ها و پارامترهای واردشده (هد، دبی، سرعت دورانی، سیال کاری، nq و نوع پمپ) پروژه «${currentProject}» پاک شود؟ (خود پروژه حذف نمی‌شود)`)) return;
+  state.checks = {};
+  state.notes = {};
+  state.status = {};
+  state.designPoint = {};
+  state.calc = {};
+  state.manualNq = '';
+  state.pumpType = null;
+  state.fluid = null;
+  persist();
+  render();
+});
+document.getElementById('newProjectBtn').addEventListener('click', createProject);
+let pumpTypeSyncTimer = null;
+function syncCalcState(){
+  state.calc = {
+    N: document.getElementById('calcN').value,
+    Q: document.getElementById('calcQ').value,
+    H: document.getElementById('calcH').value,
+    Qunit: document.getElementById('calcQUnit').value
+  };
+  computeNq();
+  renderAllPumpTypeBoxes();
+  persist();
+  clearTimeout(pumpTypeSyncTimer);
+  pumpTypeSyncTimer = setTimeout(syncPumpTypeToChecklist, 500);
+}
+['calcN','calcQ','calcH'].forEach(id => {
+  document.getElementById(id).addEventListener('input', syncCalcState);
+});
+document.getElementById('calcQUnit').addEventListener('change', syncCalcState);
+document.getElementById('manualNqInput').addEventListener('input', () => {
+  state.manualNq = document.getElementById('manualNqInput').value;
+  renderAllPumpTypeBoxes();
+  persist();
+  clearTimeout(pumpTypeSyncTimer);
+  pumpTypeSyncTimer = setTimeout(syncPumpTypeToChecklist, 500);
+});
+document.getElementById('deleteProjectBtn').addEventListener('click', deleteCurrentProject);
+document.getElementById('renameProjectBtn').addEventListener('click', renameCurrentProject);
+document.getElementById('projectSelect').addEventListener('change', (e) => {
+  switchToProject(e.target.value);
+});
+document.getElementById('createRoomBtn').addEventListener('click', createRoom);
+document.getElementById('joinRoomBtn').addEventListener('click', joinRoom);
+document.getElementById('leaveRoomBtn').addEventListener('click', leaveRoom);
+
+/* ---------- تعویض صفحه (چک‌لیست / محاسبه‌گر) ---------- */
+document.querySelectorAll('.page-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.page-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.page-view').forEach(p => p.style.display = 'none');
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.page).style.display = '';
+  });
+});
+
+async function init(){
+  await loadProjectList();
+  if (currentProject){
+    await loadCurrentProjectData();
+  }
+  renderProjectSelect();
+  render();
+
+  const savedBase = await storeGet('cfturbo-server-base');
+  const savedRoom = await storeGet('cfturbo-room-code');
+  if (savedBase) document.getElementById('serverBaseInput').value = savedBase;
+  if (savedBase && savedRoom){
+    serverBase = savedBase;
+    roomCode = savedRoom;
+    updateSyncUI();
+    startSyncLoop();
+  } else {
+    updateSyncUI();
+  }
+}
+
+init();
+</script>
+</body>
+</html>
