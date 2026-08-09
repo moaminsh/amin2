@@ -1,292 +1,979 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>محمدامین شریف | مهندس مکانیک و سیالات</title>
+  <title>MOHAMMADAMIN SHARIF // MECHANICAL & FLUIDS ENGINEERING</title>
+  
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
-      --bg-dark: #090b0e;
-      --bg-card: #0f1319;
-      --bg-card-hover: #151b24;
-      --border: #1e2633;
-      --border-focus: #2e3c52;
-      --text-main: #e2e8f0;
-      --text-muted: #64748b;
-      --text-dim: #475569;
+      --bg-dark: #07090e;
+      --bg-card: #0d1117;
+      --bg-card-hover: #131922;
+      --border: #1a2230;
+      --border-bright: #2d3b52;
+      --text-main: #f0f4f8;
+      --text-muted: #62748e;
+      --text-dim: #3d4b5e;
       --accent-cyan: #00f2fe;
-      --accent-glow: rgba(0, 242, 254, 0.15);
-      --font-sans: 'Vazirmatn', sans-serif;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 242, 254, 0.12);
+      
       --font-mono: 'Fira Code', monospace;
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --font-sans: 'Plus Jakarta Sans', 'Vazirmatn', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
+    
+    html {
+      scroll-behavior: smooth;
       background-color: var(--bg-dark);
       color: var(--text-main);
       font-family: var(--font-sans);
-      line-height: 1.6;
+      selection-background-color: var(--accent-cyan);
+      selection-color: var(--bg-dark);
+    }
+
+    body {
+      overflow-x: hidden;
       min-height: 100vh;
+      line-height: 1.5;
     }
 
+    /* Custom Cursor Indicator */
+    .custom-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+      mix-blend-mode: difference;
+    }
+    .custom-cursor.hover {
+      width: 36px; height: 36px;
+      background: rgba(0, 242, 254, 0.3);
+      border: 1px solid var(--accent-cyan);
+    }
+
+    /* Grid Overlay Background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
     .container {
-      max-width: 1000px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Header Profile Section */
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      margin-bottom: 48px;
-      padding-bottom: 32px;
+    /* Header / Nav Bar */
+    header.nav-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-
-    .avatar-wrapper {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      padding: 3px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--border));
-    }
-
-    .avatar-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      background: var(--bg-card);
-      display: block;
-    }
-
-    .profile-info { flex: 1; }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent-cyan);
-      background: var(--accent-glow);
-      padding: 4px 10px;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      margin-bottom: 8px;
-    }
-
-    .profile-name {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .profile-title {
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .social-links {
+    .nav-inner {
       display: flex;
-      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
     }
-
-    .social-btn {
-      color: var(--text-muted);
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-main);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 13px;
+      gap: 10px;
+    }
+    .nav-brand-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+    .nav-menu {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-link {
       font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       transition: var(--transition);
     }
-
-    .social-btn:hover {
+    .nav-link:hover {
       color: var(--accent-cyan);
     }
 
-    /* Section Styles */
-    .section-title {
+    /* HERO SECTION */
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 40px;
+      padding-top: 100px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-meta {
       font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--text-dim);
-      letter-spacing: 1px;
-      margin-bottom: 20px;
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+    .hero-title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
       text-transform: uppercase;
     }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .hero-title span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 48px;
+      font-weight: 700;
+    }
+    .hero-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+      font-family: var(--font-mono);
+    }
+    .spec-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 4px;
+    }
+    .spec-key {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .spec-value {
+      font-size: 13px;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-top: 4px;
     }
 
-    /* Projects Grid */
+    /* HERO VISUAL CANVAS */
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .canvas-overlay {
+      position: absolute;
+      top: 12px; left: 16px; right: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+    #heroCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 80px 0 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .section-title-text {
+      font-size: 28px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    /* VISUAL PROJECTS GALLERY */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-bottom: 48px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
     }
-
     .project-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 24px;
+      overflow: hidden;
       text-decoration: none;
       color: inherit;
       transition: var(--transition);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      position: relative;
     }
-
     .project-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-focus);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border-color: var(--border-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
-
-    .card-top {
+    .project-preview {
+      height: 220px;
+      background: #05070a;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .project-preview-icon {
+      color: var(--accent-cyan);
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+    .project-card:hover .project-preview-icon {
+      transform: scale(1.1) rotate(5deg);
+      opacity: 1;
+    }
+    .project-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+    .project-header-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
-
-    .card-icon {
-      color: var(--accent-cyan);
-      background: var(--accent-glow);
-      padding: 10px;
-      border-radius: 6px;
-    }
-
-    .card-title {
-      font-size: 18px;
+    .project-title {
+      font-size: 20px;
       font-weight: 700;
-      margin-bottom: 8px;
+      color: var(--text-main);
     }
-
-    .card-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .card-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tag-item {
+    .project-year {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-dim);
+    }
+    .project-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 16px 0;
+      font-family: var(--font-mono);
       background: var(--bg-dark);
-      padding: 2px 8px;
+      padding: 10px;
       border-radius: 4px;
       border: 1px solid var(--border);
     }
+    .p-metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .p-metric-lbl { font-size: 9px; color: var(--text-dim); text-transform: uppercase; }
+    .p-metric-val { font-size: 12px; color: var(--accent-cyan); font-weight: 600; }
 
-    @media(max-width: 640px) {
-      .profile-header {
-        flex-direction: column;
-        text-align: center;
-      }
-      .social-links {
-        justify-content: center;
-      }
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .p-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* INTERACTIVE MICROFLUIDICS / PUMP DEMO MODULE */
+    .interactive-module {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .module-info-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .module-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .chip-canvas-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: #040608;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    #chipCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* TECHNICAL CAPABILITIES GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .skill-cat-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+    }
+    .skill-pill {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-main);
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    /* INFO & CONTACT SECTION */
+    .info-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 8px;
+    }
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-cyan);
+      background: var(--bg-dark);
+    }
+    .contact-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-label { color: var(--text-dim); text-transform: uppercase; }
+    .contact-link { color: var(--text-main); text-decoration: none; font-weight: 600; transition: var(--transition); }
+    .contact-link:hover { color: var(--accent-cyan); }
+
+    /* FOOTER */
+    footer {
+      margin-top: 80px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .interactive-module { grid-template-columns: 1fr; }
+      .info-section { grid-template-columns: 1fr; }
+      .hero-title { font-size: 40px; }
+      .hero-title span { font-size: 32px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Profile Header -->
-    <header class="profile-header">
-      <div class="avatar-wrapper">
-        <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="avatar-img" onerror="this.src='https://via.placeholder.com/110/0f1319/00f2fe?text=Sharif'">
-      </div>
-      <div class="profile-info">
-        <div class="badge"><i data-lucide="terminal" style="width: 14px;"></i> MECHANICAL & FLUIDS ENGINEER</div>
-        <h1 class="profile-name">محمدامین شریف</h1>
-        <p class="profile-title">طراحی هیدرولیکی توربوماشین‌ها، شبیه‌سازی عددی سیالات (CFD) و بهینه‌سازی سیستم‌های پمپ</p>
-        <div class="social-links">
-          <a href="https://github.com" target="_blank" class="social-btn"><i data-lucide="github" style="width: 15px;"></i> GitHub</a>
-          <a href="https://linkedin.com" target="_blank" class="social-btn"><i data-lucide="linkedin" style="width: 15px;"></i> LinkedIn</a>
-          <a href="mailto:email@domain.com" class="social-btn"><i data-lucide="mail" style="width: 15px;"></i> Email</a>
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="bg-grid"></div>
+
+  <!-- NAVIGATION -->
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <a href="#" class="nav-brand">
+        <span class="nav-brand-dot"></span>
+        MOHAMMADAMIN SHARIF
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#projects" class="nav-link">PROJECTS</a></li>
+        <li><a href="#microfluidics" class="nav-link">MICROFLUIDICS</a></li>
+        <li><a href="#capabilities" class="nav-link">CAPABILITIES</a></li>
+        <li><a href="#info" class="nav-link">INFO</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div>
+        <div class="hero-meta">
+          <i data-lucide="cpu" style="width: 14px;"></i>
+          MECHANICAL ENGINEERING // IUST
+        </div>
+        <h1 class="hero-title">
+          MOHAMMADAMIN
+          <span>SHARIF</span>
+        </h1>
+
+        <div class="hero-specs">
+          <div class="spec-node">
+            <div class="spec-key">INSTITUTION</div>
+            <div class="spec-value">Iran Univ. of Science & Tech (IUST)</div>
+          </div>
+          <div class="spec-node">
+            <div class="spec-key">CORE DOMAINS</div>
+            <div class="spec-value">Pumps • Microfluidics • CFD</div>
+          </div>
+          <div class="spec-node">
+            <div class="spec-key">FOCUS</div>
+            <div class="spec-value">Computational Fluid Dynamics</div>
+          </div>
+          <div class="spec-node">
+            <div class="spec-key">LOCATION</div>
+            <div class="spec-value">Tehran, Iran</div>
+          </div>
         </div>
       </div>
-    </header>
 
-    <!-- Selected Projects Section -->
-    <main>
-      <div class="section-title">PROJECTS // پروژه‌های منتخب</div>
-      
+      <!-- KINEMATICS & FLUID VECTOR CANVAS -->
+      <div class="hero-visual">
+        <div class="canvas-overlay">
+          <span>VECTOR FIELD // DYNAMIC SIMULATION</span>
+          <span id="fpsCounter">60 FPS</span>
+        </div>
+        <canvas id="heroCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- PROJECTS GALLERY -->
+    <section id="projects">
+      <div class="section-header">
+        <div>
+          <div class="section-label">// SELECTED WORKS</div>
+          <div class="section-title-text">ENGINEERING PROJECTS</div>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">
+          [01 / 03]
+        </div>
+      </div>
+
       <div class="projects-grid">
-        <!-- CFturbo Centrifugal Pump Project -->
+
+        <!-- PROJECT 01: CFTURBO PUMP -->
         <a href="projects/cfturbo-pump/index.html" class="project-card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon">
-                <i data-lucide="disc" style="width: 24px; height: 24px;"></i>
-              </div>
-              <i data-lucide="arrow-up-left" style="color: var(--text-dim); width: 18px;"></i>
-            </div>
-            <h2 class="card-title">طراحی پمپ سانتریفیوژ در CFturbo</h2>
-            <p class="card-desc">طراحی هندسی پروانه و حلزونی پمپ سانتریفیوژ، ارزیابی نقطه‌ی کاری و شبیه‌سازی تعاملی دینامیک سیال.</p>
+          <div class="project-preview">
+            <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="card-tags">
-            <span class="tag-item">CFturbo 2026</span>
-            <span class="tag-item">Turbomachinery</span>
-            <span class="tag-item">Pump Simulation</span>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title">CFturbo Centrifugal Pump</h3>
+                <span class="project-year">2026</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);">
+                Parametric hydraulic design of 6-blade radial impeller and spiral volute with integrated interactive kinematic simulation.
+              </p>
+            </div>
+
+            <div class="project-metrics">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">DESIGN FLOW (Q)</span>
+                <span class="p-metric-val">66.0 m³/h</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">HEAD (H) / RPM</span>
+                <span class="p-metric-val">17.5 m @ 1450</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">CFturbo</span>
+              <span class="p-tag">Turbomachinery</span>
+              <span class="p-tag">Hydraulic Design</span>
+              <span class="p-tag">Interactive Model</span>
+            </div>
           </div>
         </a>
 
-        <!-- Placeholder for Future Projects -->
-        <div class="project-card" style="opacity: 0.6; cursor: default;">
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="color: var(--text-dim); background: var(--bg-dark);">
-                <i data-lucide="wind" style="width: 24px; height: 24px;"></i>
+        <!-- PROJECT 02: MICROFLUIDIC CHIP FABRICATION -->
+        <div class="project-card" style="cursor: default;">
+          <div class="project-preview">
+            <i data-lucide="git-fork" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title">Microfluidic Channel Architecture</h3>
+                <span class="project-year">2025</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);">
+                Design and velocity field optimization of micro-scale hydrodynamic focusing channels for Lab-on-a-Chip applications.
+              </p>
+            </div>
+
+            <div class="project-metrics">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">CHANNEL WIDTH</span>
+                <span class="p-metric-val">150 µm</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">FLOW REGIME</span>
+                <span class="p-metric-val">Laminar (Re &lt; 1)</span>
               </div>
             </div>
-            <h2 class="card-title" style="color: var(--text-muted);">تحلیل CFD جریان توربولانس</h2>
-            <p class="card-desc">شبیه‌سازی عددی و بهینه‌سازی افت فشار در کانال‌ها و مبدل‌های حرارتی (در حال تکمیل).</p>
+
+            <div class="project-tags">
+              <span class="p-tag">Microfluidics</span>
+              <span class="p-tag">COMSOL / CFD</span>
+              <span class="p-tag">Lab-on-a-Chip</span>
+            </div>
           </div>
-          <div class="card-tags">
-            <span class="tag-item">OpenFOAM</span>
-            <span class="tag-item">CFD</span>
+        </div>
+
+        <!-- PROJECT 03: TURBULENCE SIMULATION -->
+        <div class="project-card" style="cursor: default;">
+          <div class="project-preview">
+            <i data-lucide="wind" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title">CFD Flow & Pressure Loss</h3>
+                <span class="project-year">2025</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);">
+                Numerical analysis of turbulent fluid flow and pressure drops in complex mechanical piping geometries.
+              </p>
+            </div>
+
+            <div class="project-metrics">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">SOLVER</span>
+                <span class="p-metric-val">OpenFOAM / Fluent</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">TURBULENCE</span>
+                <span class="p-metric-val">k-ε / SST k-ω</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">CFD</span>
+              <span class="p-tag">Fluid Mechanics</span>
+              <span class="p-tag">Mesh Generation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE MICROFLUIDICS MODULE -->
+    <section id="microfluidics">
+      <div class="interactive-module">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 8px;">
+            // INTERACTIVE DEMO
+          </div>
+          <h2 class="module-info-title">Microfluidic Chip Hydrodynamics</h2>
+          <p class="module-desc">
+            Interactive visual simulation of particle trajectory and streamwise laminar flow through micro-channel bifurcations. Move your cursor over the chip matrix to alter regional velocity gradients.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">
+            STATUS: ACTIVE // LAMINAR FLOW STABLE
+          </div>
+        </div>
+
+        <div class="chip-canvas-wrapper">
+          <canvas id="chipCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL CAPABILITIES -->
+    <section id="capabilities">
+      <div class="section-header">
+        <div>
+          <div class="section-label">// TECHNICAL STACK</div>
+          <div class="section-title-text">CAPABILITIES & TOOLS</div>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="skill-cat-title">
+            <i data-lucide="layers" style="width: 14px;"></i> TURBOMACHINERY & CAD
+          </div>
+          <ul class="skill-list">
+            <li class="skill-pill">CFturbo</li>
+            <li class="skill-pill">SolidWorks</li>
+            <li class="skill-pill">Impeller Geometry</li>
+            <li class="skill-pill">Volute Design</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-title">
+            <i data-lucide="activity" style="width: 14px;"></i> CFD & SIMULATION
+          </div>
+          <ul class="skill-list">
+            <li class="skill-pill">ANSYS Fluent</li>
+            <li class="skill-pill">OpenFOAM</li>
+            <li class="skill-pill">COMSOL Multiphysics</li>
+            <li class="skill-pill">Mesh Generation</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-title">
+            <i data-lucide="git-commit" style="width: 14px;"></i> MICROFLUIDICS
+          </div>
+          <ul class="skill-list">
+            <li class="skill-pill">Lab-on-a-Chip</li>
+            <li class="skill-pill">Micro-channel Architecture</li>
+            <li class="skill-pill">Hydrodynamic Focusing</li>
+            <li class="skill-pill">Particle Kinematics</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-title">
+            <i data-lucide="code" style="width: 14px;"></i> COMPUTATION
+          </div>
+          <ul class="skill-list">
+            <li class="skill-pill">MATLAB</li>
+            <li class="skill-pill">Python (NumPy / SciPy)</li>
+            <li class="skill-pill">Data Visualization</li>
+            <li class="skill-pill">C++</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO & CONTACT -->
+    <section id="info" class="info-section">
+      <div class="profile-card">
+        <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-avatar" onerror="this.src='https://via.placeholder.com/90/0d1117/00f2fe?text=Sharif'">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700;">Mohammadamin Sharif</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+            B.Sc. Student in Mechanical Engineering
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-top: 8px;">
+            Iran University of Science & Technology (IUST)
           </div>
         </div>
       </div>
-    </main>
-  </div>
+
+      <div class="contact-block">
+        <div class="contact-row">
+          <span class="contact-label">EMAIL</span>
+          <a href="mailto:email@domain.com" class="contact-link">email@domain.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">GITHUB</span>
+          <a href="https://github.com" target="_blank" class="contact-link">github.com/m-sharif</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">LINKEDIN</span>
+          <a href="https://linkedin.com" target="_blank" class="contact-link">linkedin.com/in/m-sharif</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">ACADEMIC PROFILE</span>
+          <span style="color: var(--text-main);">IUST Mechanical Dept.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 MOHAMMADAMIN SHARIF</span>
+      <span>MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
+    </footer>
+
+  </main>
 
   <script>
+    // Initialize Lucide Icons
     lucide.createIcons();
+
+    // Custom Cursor Movement
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // --- HERO CANVAS: ROTATING IMPELLER & FLUID PARTICLES ---
+    const hCanvas = document.getElementById('heroCanvas');
+    const hCtx = hCanvas.getContext('2d');
+    
+    function resizeHeroCanvas() {
+      hCanvas.width = hCanvas.parentElement.clientWidth;
+      hCanvas.height = hCanvas.parentElement.clientHeight;
+    }
+    resizeHeroCanvas();
+    window.addEventListener('resize', resizeHeroCanvas);
+
+    let hAngle = 0;
+    const heroParticles = Array.from({ length: 50 }, () => ({
+      x: Math.random() * 400 - 200,
+      y: Math.random() * 400 - 200,
+      r: Math.random() * 80 + 20,
+      speed: Math.random() * 0.02 + 0.01
+    }));
+
+    function renderHeroCanvas() {
+      hCtx.fillStyle = '#0d1117';
+      hCtx.fillRect(0, 0, hCanvas.width, hCanvas.height);
+
+      const cx = hCanvas.width / 2;
+      const cy = hCanvas.height / 2;
+
+      // Draw Coordinates / Engineering Grid
+      hCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      hCtx.lineWidth = 1;
+      hCtx.beginPath();
+      hCtx.moveTo(cx, 0); hCtx.lineTo(cx, hCanvas.height);
+      hCtx.moveTo(0, cy); hCtx.lineTo(hCanvas.width, cy);
+      hCtx.stroke();
+
+      // Outer Casing Ring
+      hCtx.strokeStyle = '#1a2230';
+      hCtx.lineWidth = 2;
+      hCtx.beginPath();
+      hCtx.arc(cx, cy, 140, 0, Math.PI * 2);
+      hCtx.stroke();
+
+      // Rotating Impeller Geometry
+      hCtx.save();
+      hCtx.translate(cx, cy);
+      hCtx.rotate(hAngle);
+
+      hCtx.strokeStyle = '#00f2fe';
+      hCtx.lineWidth = 2;
+      for (let i = 0; i < 6; i++) {
+        hCtx.rotate((Math.PI * 2) / 6);
+        hCtx.beginPath();
+        hCtx.moveTo(15, 0);
+        hCtx.quadraticCurveTo(50, 40, 130, 10);
+        hCtx.stroke();
+      }
+      hCtx.restore();
+
+      // Particle Kinematics
+      hCtx.fillStyle = 'rgba(0, 242, 254, 0.6)';
+      heroParticles.forEach(p => {
+        p.r += p.speed * 20;
+        if (p.r > 140) p.r = 15;
+        const pAngle = hAngle * 2 + p.x;
+        const px = cx + Math.cos(pAngle) * p.r;
+        const py = cy + Math.sin(pAngle) * p.r;
+
+        hCtx.beginPath();
+        hCtx.arc(px, py, 2, 0, Math.PI * 2);
+        hCtx.fill();
+      });
+
+      hAngle += 0.01;
+      requestAnimationFrame(renderHeroCanvas);
+    }
+    renderHeroCanvas();
+
+    // --- CHIP CANVAS: MICROFLUIDIC CHANNEL SIMULATION ---
+    const cCanvas = document.getElementById('chipCanvas');
+    const cCtx = cCanvas.getContext('2d');
+
+    function resizeChipCanvas() {
+      cCanvas.width = cCanvas.parentElement.clientWidth;
+      cCanvas.height = cCanvas.parentElement.clientHeight;
+    }
+    resizeChipCanvas();
+    window.addEventListener('resize', resizeChipCanvas);
+
+    let chipMouseY = cCanvas.height / 2;
+    cCanvas.addEventListener('mousemove', (e) => {
+      const rect = cCanvas.getBoundingClientRect();
+      chipMouseY = e.clientY - rect.top;
+    });
+
+    const chipParticles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * 600,
+      y: Math.random() * 200 + 50,
+      vx: Math.random() * 2 + 1.5
+    }));
+
+    function renderChipCanvas() {
+      cCtx.fillStyle = '#040608';
+      cCtx.fillRect(0, 0, cCanvas.width, cCanvas.height);
+
+      const h = cCanvas.height;
+      const w = cCanvas.width;
+
+      // Microfluidic Channel Walls
+      cCtx.strokeStyle = '#1a2230';
+      cCtx.lineWidth = 4;
+      
+      // Main Channel
+      cCtx.beginPath();
+      cCtx.moveTo(0, h * 0.3); cCtx.lineTo(w * 0.4, h * 0.3);
+      cCtx.lineTo(w * 0.6, h * 0.15); cCtx.lineTo(w, h * 0.15);
+      
+      cCtx.moveTo(0, h * 0.7); cCtx.lineTo(w * 0.4, h * 0.7);
+      cCtx.lineTo(w * 0.6, h * 0.85); cCtx.lineTo(w, h * 0.85);
+      cCtx.stroke();
+
+      // Bifurcated Middle Divider
+      cCtx.beginPath();
+      cCtx.moveTo(w * 0.45, h * 0.5);
+      cCtx.lineTo(w, h * 0.5);
+      cCtx.stroke();
+
+      // Fluid Particle Animation
+      cCtx.fillStyle = '#00f2fe';
+      chipParticles.forEach(p => {
+        p.x += p.vx;
+        if (p.x > w) p.x = 0;
+
+        // Channel influence
+        let cy = p.y;
+        if (p.x > w * 0.4) {
+          if (p.y < h * 0.5) {
+            cy = h * 0.3 + (p.y - h * 0.3) * 0.6;
+          } else {
+            cy = h * 0.7 + (p.y - h * 0.7) * 0.6;
+          }
+        }
+
+        cCtx.beginPath();
+        cCtx.arc(p.x, cy, 2, 0, Math.PI * 2);
+        cCtx.fill();
+      });
+
+      requestAnimationFrame(renderChipCanvas);
+    }
+    renderChipCanvas();
   </script>
 </body>
 </html>
