@@ -370,20 +370,77 @@
   .bp-stack{ fill:var(--blue-field-3); stroke:var(--line-faint); stroke-width:2.4; }
   .bp-label{ font-family:var(--mono); font-size:9px; fill:var(--line-dim); letter-spacing:.05em; }
   .bp-droplet{ fill:var(--brass); opacity:.9; filter:drop-shadow(0 0 3px rgba(205,154,95,.75)); }
-  .steam-puff{ fill:var(--line-dim); opacity:.4; transform-box:fill-box; transform-origin:center; animation:steamRise 3.4s ease-out infinite; }
+  .steam-puff{ fill:#e8e2d6; opacity:.5; transform-box:fill-box; transform-origin:center; animation:steamRise 3.4s ease-out infinite; }
   .steam-puff.s2{ animation-delay:1.1s; }
   .steam-puff.s3{ animation-delay:2.2s; }
   @keyframes steamRise{
-    0%{ transform:translateY(0) scale(.7); opacity:.42; }
-    70%{ opacity:.22; }
-    100%{ transform:translateY(-30px) scale(1.7); opacity:0; }
+    0%{ transform:translateY(0) scale(.7); opacity:.5; }
+    70%{ opacity:.25; }
+    100%{ transform:translateY(-32px) scale(1.8); opacity:0; }
   }
   @media (prefers-reduced-motion: reduce){
-    .bp-flow, .pn-flow, .steam-puff{ animation:none; }
+    .bp-flow, .pn-flow, .steam-puff, .bp-pump-blades, .flame-shape{ animation:none; }
   }
   @media (max-width:820px){
     .banner{ height:128px; }
     .bp-label{ display:none; }
+  }
+
+  /* ---------- interactive plant controls ---------- */
+  .bp-hit{ fill:transparent; pointer-events:all; cursor:pointer; }
+  .bp-interactive{ pointer-events:none; outline:none; }
+  .bp-interactive .bp-hit{ pointer-events:all; }
+  .bp-interactive:hover .bp-hover-target{ filter:brightness(1.22); }
+  .bp-interactive:focus{ outline:none; }
+  .bp-interactive:focus-visible{ outline:none; }
+  .bp-interactive:focus-visible .bp-hit{ outline:2px solid var(--brass); outline-offset:2px; }
+  .bp-led{ transition:fill .2s; }
+  .bp-led.on{ fill:#5fd38b; filter:drop-shadow(0 0 3px rgba(95,211,139,.85)); }
+  .bp-led.off{ fill:#8a5a52; }
+
+  .bp-pump-blades{
+    stroke:var(--blue-field-2); stroke-width:2.6; stroke-linecap:round;
+    transform-box:fill-box; transform-origin:center; animation:pumpSpin 1.1s linear infinite;
+  }
+  @keyframes pumpSpin{ to{ transform:rotate(360deg); } }
+  .bp-pump.is-off .bp-pump-blades{ animation-play-state:paused; }
+  .bp-pump.is-off .bp-pump-body{ opacity:.5; }
+  .bp-pump.is-off .bp-pump-motor{ opacity:.4; }
+  .bp-pump.is-off .bp-pump-hub{ opacity:.4; }
+
+  .bp-valve-gate{ fill:#c65b4a; opacity:0; transition:opacity .2s; }
+  .bp-valve.is-closed .bp-valve-gate{ opacity:1; }
+  .bp-valve.is-closed .bp-valve-x{ stroke:#c65b4a; }
+  .bp-valve.is-closed .bp-valve-body{ stroke:#c65b4a; }
+  .bp-valve-wheel{ transform-box:fill-box; transform-origin:center; transition:transform .35s ease; }
+  .bp-valve.is-closed .bp-valve-wheel{ transform:rotate(90deg); }
+
+  .banner-svg.is-stopped .bp-flow{ animation-play-state:paused; opacity:.2; }
+  .banner-svg.is-stopped .bp-droplet{ opacity:0; }
+
+  .bp-flame{ opacity:0; transition:opacity .3s ease; }
+  .bp-boiler.is-lit .bp-flame{ opacity:1; }
+  .flame-shape{
+    transform-box:fill-box; transform-origin:center bottom;
+    animation:flameFlicker .55s ease-in-out infinite alternate;
+  }
+  .flame-shape.f2{ animation-delay:.12s; }
+  .flame-shape.f3{ animation-delay:.28s; }
+  @keyframes flameFlicker{
+    0%{ transform:scaleY(1) scaleX(1) translateY(0); }
+    100%{ transform:scaleY(1.18) scaleX(.9) translateY(-2px); }
+  }
+  .bp-boiler.is-lit .bp-boiler-tube{ stroke:#e0925a; opacity:.9; }
+  .bp-boiler.is-lit .bp-boiler-shell{ stroke:var(--brass); }
+  .bp-boiler.is-lit .bp-boiler-drum{ stroke:var(--brass); }
+  .bp-steam{ opacity:0; transition:opacity .4s ease; }
+  .bp-boiler.is-lit .bp-steam{ opacity:1; }
+  .bp-boiler-glow{ opacity:0; transition:opacity .4s ease; }
+  .bp-boiler.is-lit .bp-boiler-glow{ opacity:.55; }
+
+  .banner-hint{
+    font-family:var(--mono); font-size:10.5px; color:var(--line-faint);
+    text-align:center; margin:8px var(--sheet-margin) 0; letter-spacing:.02em;
   }
 
   /* ---------- project folders ---------- */
@@ -520,7 +577,7 @@
   </nav>
 
   <div class="banner">
-    <svg class="banner-svg" viewBox="0 -70 1400 290" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="banner-svg" viewBox="0 -70 1400 290" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <!-- main pipe route: pump -> valve -> gauge -> riser -> boiler header -->
       <path class="bp-pipe" d="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50" />
       <path class="bp-pipe-inner" d="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50" />
@@ -537,14 +594,36 @@
         <line x1="850" y1="32" x2="850" y2="68"/><line x1="862" y1="32" x2="862" y2="68"/>
       </g>
 
-      <!-- gate valve -->
-      <g transform="translate(345,160)">
-        <line x1="-30" y1="0" x2="30" y2="0" class="bp-pipe" opacity="0"/>
-        <rect x="-17" y="-17" width="34" height="34" class="bp-valve-body"/>
-        <line x1="-10" y1="-10" x2="10" y2="10" class="bp-valve-x"/>
-        <line x1="-10" y1="10" x2="10" y2="-10" class="bp-valve-x"/>
-        <rect x="-4" y="-34" width="8" height="17" class="bp-valve-stem"/>
-        <rect x="-11" y="-42" width="22" height="9" rx="2" class="bp-valve-stem"/>
+      <!-- gate valve (interactive) -->
+      <g class="bp-valve bp-interactive" data-role="valve" data-name-fa="شیر اصلی" data-name-en="Main valve" transform="translate(345,160)" tabindex="0" role="button" aria-pressed="false">
+        <title data-fa="کلیک کن تا شیر اصلی رو ببندی یا باز کنی" data-en="Click to open or close the main valve">کلیک کن تا شیر اصلی رو ببندی یا باز کنی</title>
+        <g class="bp-hover-target">
+          <rect x="-17" y="-17" width="34" height="34" class="bp-valve-body"/>
+          <rect x="-6" y="-16" width="12" height="32" class="bp-valve-gate"/>
+          <g class="bp-valve-wheel">
+            <line x1="-10" y1="-10" x2="10" y2="10" class="bp-valve-x"/>
+            <line x1="-10" y1="10" x2="10" y2="-10" class="bp-valve-x"/>
+          </g>
+          <rect x="-4" y="-34" width="8" height="17" class="bp-valve-stem"/>
+          <rect x="-11" y="-42" width="22" height="9" rx="2" class="bp-valve-stem"/>
+          <circle class="bp-led on" cx="0" cy="26" r="3.4"/>
+        </g>
+        <circle class="bp-hit" cx="0" cy="-8" r="34"/>
+      </g>
+
+      <!-- second valve, on the return line (interactive) -->
+      <g class="bp-valve bp-interactive" data-role="valve" data-name-fa="شیر بازگشت" data-name-en="Return valve" transform="translate(520,180)" tabindex="0" role="button" aria-pressed="false">
+        <title data-fa="کلیک کن تا شیر بازگشت رو ببندی یا باز کنی" data-en="Click to open or close the return valve">کلیک کن تا شیر بازگشت رو ببندی یا باز کنی</title>
+        <g class="bp-hover-target">
+          <rect x="-14" y="-14" width="28" height="28" class="bp-valve-body"/>
+          <rect x="-5" y="-13" width="10" height="26" class="bp-valve-gate"/>
+          <g class="bp-valve-wheel">
+            <line x1="-8" y1="-8" x2="8" y2="8" class="bp-valve-x"/>
+            <line x1="-8" y1="8" x2="8" y2="-8" class="bp-valve-x"/>
+          </g>
+          <circle class="bp-led on" cx="0" cy="22" r="3"/>
+        </g>
+        <circle class="bp-hit" cx="0" cy="0" r="26"/>
       </g>
 
       <!-- pressure gauge -->
@@ -554,26 +633,49 @@
         <line x1="0" y1="-46" x2="7" y2="-56" class="bp-gauge-needle"/>
       </g>
 
-      <!-- pump -->
-      <g transform="translate(95,160)">
-        <circle r="46" class="bp-pump-body"/>
-        <circle r="9" class="bp-pump-hub"/>
-        <rect x="-17" y="-84" width="34" height="32" rx="3" class="bp-pump-motor"/>
-        <path d="M-46,10 Q-72,10 -72,-16" class="bp-pipe-inner" opacity="0"/>
-        <path d="M-46,6 Q-70,6 -70,-20 L-70,-30" fill="none" stroke="var(--line-faint)" stroke-width="10" stroke-linecap="round"/>
-        <text class="bp-label" x="-10" y="70">PUMP</text>
+      <!-- pump (interactive) -->
+      <g class="bp-pump bp-interactive" data-role="pump" data-name-fa="پمپ" data-name-en="Pump" transform="translate(95,160)" tabindex="0" role="button" aria-pressed="true">
+        <title data-fa="کلیک کن تا پمپ رو روشن یا خاموش کنی" data-en="Click to turn the pump on or off">کلیک کن تا پمپ رو روشن یا خاموش کنی</title>
+        <g class="bp-hover-target">
+          <circle r="46" class="bp-pump-body"/>
+          <g class="bp-pump-blades">
+            <line x1="0" y1="0" x2="0" y2="-32"/>
+            <line x1="0" y1="0" x2="27" y2="16"/>
+            <line x1="0" y1="0" x2="-27" y2="16"/>
+          </g>
+          <circle r="9" class="bp-pump-hub"/>
+          <rect x="-17" y="-84" width="34" height="32" rx="3" class="bp-pump-motor"/>
+          <path d="M-46,6 Q-70,6 -70,-20 L-70,-30" fill="none" stroke="var(--line-faint)" stroke-width="10" stroke-linecap="round"/>
+          <circle class="bp-led on" cx="17" cy="-72" r="3.6"/>
+          <text class="bp-label" x="-10" y="70">PUMP</text>
+        </g>
+        <circle class="bp-hit" cx="0" cy="-10" r="58"/>
       </g>
 
-      <!-- boiler with tube bank + drum + stack -->
-      <g transform="translate(980,-10)">
-        <rect x="0" y="0" width="330" height="200" rx="8" class="bp-boiler-shell"/>
-        <path class="bp-boiler-tube" d="M26,36 h278 M26,66 h278 M26,96 h278 M26,126 h278 M26,156 h278 M26,182 h278"/>
-        <ellipse cx="165" cy="18" rx="120" ry="14" class="bp-boiler-drum"/>
-        <rect x="130" y="-46" width="34" height="50" class="bp-stack"/>
-        <circle class="steam-puff s1" cx="147" cy="-50" r="7"/>
-        <circle class="steam-puff s2" cx="147" cy="-50" r="7"/>
-        <circle class="steam-puff s3" cx="147" cy="-50" r="7"/>
-        <text class="bp-label" x="120" y="222">BOILER</text>
+      <!-- boiler with tube bank + drum + stack (interactive: click to ignite) -->
+      <g class="bp-boiler bp-interactive" data-role="boiler" data-name-fa="بویلر" data-name-en="Boiler" transform="translate(980,-10)" tabindex="0" role="button" aria-pressed="false">
+        <title data-fa="کلیک کن تا آتش زیر بویلر رو روشن یا خاموش کنی" data-en="Click to light or extinguish the boiler fire">کلیک کن تا آتش زیر بویلر رو روشن یا خاموش کنی</title>
+        <g class="bp-hover-target">
+          <ellipse class="bp-boiler-glow" cx="165" cy="205" rx="150" ry="35" fill="#e0703f"/>
+          <rect x="0" y="0" width="330" height="200" rx="8" class="bp-boiler-shell"/>
+          <path class="bp-boiler-tube" d="M26,36 h278 M26,66 h278 M26,96 h278 M26,126 h278 M26,156 h278 M26,182 h278"/>
+          <ellipse cx="165" cy="18" rx="120" ry="14" class="bp-boiler-drum"/>
+          <rect x="130" y="-46" width="34" height="50" class="bp-stack"/>
+          <g class="bp-steam">
+            <circle class="steam-puff s1" cx="147" cy="-50" r="7"/>
+            <circle class="steam-puff s2" cx="147" cy="-50" r="7"/>
+            <circle class="steam-puff s3" cx="147" cy="-50" r="7"/>
+          </g>
+          <g class="bp-flame">
+            <path class="flame-shape f1" d="M40,200 Q30,182 44,168 Q48,184 58,174 Q56,192 66,184 Q64,202 46,202 Z" fill="#e2622f"/>
+            <path class="flame-shape f2" d="M110,200 Q98,178 116,160 Q120,180 132,168 Q130,190 142,180 Q140,202 118,202 Z" fill="#f0864a"/>
+            <path class="flame-shape f3" d="M190,200 Q180,182 194,168 Q198,184 208,174 Q206,192 216,184 Q214,202 196,202 Z" fill="#e2622f"/>
+            <path class="flame-shape f2" d="M260,200 Q248,178 266,160 Q270,180 282,168 Q280,190 292,180 Q290,202 268,202 Z" fill="#f0864a"/>
+          </g>
+          <circle class="bp-led off" cx="310" cy="166" r="4"/>
+          <text class="bp-label" x="120" y="222">BOILER</text>
+        </g>
+        <rect class="bp-hit" x="-10" y="-56" width="350" height="270"/>
       </g>
 
       <!-- traveling droplets along the main flow -->
@@ -591,6 +693,7 @@
       </circle>
     </svg>
   </div>
+  <p class="banner-hint" data-fa="شیرها، پمپ و بویلر رو لمس کن — نیروگاه دست خودته" data-en="Tap the valves, pump, and boiler — the plant is yours to run">شیرها، پمپ و بویلر رو لمس کن — نیروگاه دست خودته</p>
 
   <div class="profile-row">
     <div class="avatar-block">
@@ -887,6 +990,78 @@
     document.querySelectorAll('[data-close-folder]').forEach(function(btn){
       btn.addEventListener('click', closeAllFolders);
     });
+
+    // ---------- interactive power-plant banner ----------
+    (function(){
+      var svg = document.querySelector('.banner-svg');
+      if (!svg) return;
+      var pump = svg.querySelector('.bp-pump');
+      var valves = Array.prototype.slice.call(svg.querySelectorAll('.bp-valve'));
+      var boiler = svg.querySelector('.bp-boiler');
+
+      var pumpOn = true;
+      var valveOpen = { };
+      valves.forEach(function(v, i){ valveOpen[i] = true; });
+
+      function setLed(group, on){
+        var led = group.querySelector('.bp-led');
+        if (!led) return;
+        led.classList.toggle('on', on);
+        led.classList.toggle('off', !on);
+      }
+
+      function refreshFlow(){
+        var allOpen = valves.every(function(v, i){ return valveOpen[i]; });
+        var flowing = pumpOn && allOpen;
+        svg.classList.toggle('is-stopped', !flowing);
+        try {
+          if (flowing) { svg.unpauseAnimations && svg.unpauseAnimations(); }
+          else { svg.pauseAnimations && svg.pauseAnimations(); }
+        } catch(e){}
+      }
+
+      function togglePump(){
+        pumpOn = !pumpOn;
+        pump.classList.toggle('is-off', !pumpOn);
+        pump.setAttribute('aria-pressed', pumpOn ? 'true' : 'false');
+        setLed(pump, pumpOn);
+        refreshFlow();
+      }
+
+      function toggleValve(idx){
+        var group = valves[idx];
+        valveOpen[idx] = !valveOpen[idx];
+        group.classList.toggle('is-closed', !valveOpen[idx]);
+        group.setAttribute('aria-pressed', valveOpen[idx] ? 'false' : 'true');
+        setLed(group, valveOpen[idx]);
+        refreshFlow();
+      }
+
+      function toggleBoiler(){
+        var lit = boiler.classList.toggle('is-lit');
+        boiler.setAttribute('aria-pressed', lit ? 'true' : 'false');
+        setLed(boiler, lit);
+      }
+
+      pump.addEventListener('click', togglePump);
+      pump.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); togglePump(); }
+      });
+
+      valves.forEach(function(group, idx){
+        group.addEventListener('click', function(){ toggleValve(idx); });
+        group.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleValve(idx); }
+        });
+      });
+
+      boiler.addEventListener('click', toggleBoiler);
+      boiler.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleBoiler(); }
+      });
+
+      refreshFlow();
+    })();
 
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
     var sections = tabs.map(function(t){ return document.querySelector(t.getAttribute('href')); });
