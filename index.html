@@ -322,6 +322,33 @@
       letter-spacing: -0.5px;
     }
 
+    /* SUBSECTION HEADER (chapter-like heading within a section) */
+    .subsection-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .subsection-header:first-of-type {
+      margin-top: 0;
+    }
+
+    /* PLACEHOLDER CARDS (content coming soon) */
+    .project-card-placeholder {
+      opacity: 0.6;
+    }
+    .project-card-placeholder .project-preview-icon {
+      opacity: 0.4;
+    }
+
     /* VISUAL PROJECTS GALLERY */
     .projects-grid {
       display: grid;
@@ -634,6 +661,7 @@
       </a>
       <ul class="nav-menu">
         <li><a href="#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+        <li><a href="#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
         <li><a href="#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
         <li><a href="#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
         <li><a href="#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
@@ -704,11 +732,11 @@
     <section id="projects">
       <div class="section-header">
         <div>
-          <div class="section-label" data-en="// SELECTED WORKS" data-fa="// منتخب آثار">// SELECTED WORKS</div>
-          <div class="section-title-text" data-en="ENGINEERING PROJECTS" data-fa="پروژه‌های مهندسی">ENGINEERING PROJECTS</div>
+          <div class="section-label" data-en="// SELECTED WORK" data-fa="// منتخب آثار">// SELECTED WORK</div>
+          <div class="section-title-text" data-en="PUMP DESIGN" data-fa="طراحی پمپ">PUMP DESIGN</div>
         </div>
         <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">
-          [01 / 03]
+          [01 / 01]
         </div>
       </div>
 
@@ -751,76 +779,62 @@
           </div>
         </a>
 
-        <!-- PROJECT 02: MICROFLUIDIC CHIP FABRICATION -->
-        <div class="project-card" style="cursor: default;">
+      </div>
+    </section>
+
+    <!-- SOLIDWORKS GALLERY -->
+    <section id="solidworks">
+      <div class="section-header">
+        <div>
+          <div class="section-label" data-en="// CAD MODELING" data-fa="// مدل‌سازی CAD">// CAD MODELING</div>
+          <div class="section-title-text" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</div>
+        </div>
+      </div>
+
+      <!-- SUBSECTION: 3D SAMPLE -->
+      <div class="subsection-header">
+        <i data-lucide="box" style="width: 16px;"></i>
+        <span data-en="3D SAMPLE" data-fa="نمونه سه‌بعدی">3D SAMPLE</span>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card project-card-placeholder" style="cursor: default;">
           <div class="project-preview">
-            <i data-lucide="git-fork" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+            <i data-lucide="box" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
           <div class="project-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title" data-en="Microfluidic Channel Architecture" data-fa="معماری کانال‌های میکروفلوئیدیک">Microfluidic Channel Architecture</h3>
-                <span class="project-year">2025</span>
+                <h3 class="project-title" data-en="3D models coming soon" data-fa="نمونه‌های سه‌بعدی به‌زودی">3D models coming soon</h3>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Design and velocity field optimization of micro-scale hydrodynamic focusing channels for Lab-on-a-Chip applications." data-fa="طراحی و بهینه‌سازی میدان سرعت کانال‌های تمرکز هیدرودینامیکی در مقیاس میکرو برای کاربردهای Lab-on-a-Chip.">
-                Design and velocity field optimization of micro-scale hydrodynamic focusing channels for Lab-on-a-Chip applications.
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="This section will showcase 3D SolidWorks models." data-fa="این بخش نمونه‌های سه‌بعدی طراحی‌شده در سالیدورکس را نمایش خواهد داد.">
+                This section will showcase 3D SolidWorks models.
               </p>
-            </div>
-
-            <div class="project-metrics">
-              <div class="p-metric-item">
-                <span class="p-metric-lbl" data-en="CHANNEL WIDTH" data-fa="عرض کانال">CHANNEL WIDTH</span>
-                <span class="p-metric-val">150 µm</span>
-              </div>
-              <div class="p-metric-item">
-                <span class="p-metric-lbl" data-en="FLOW REGIME" data-fa="رژیم جریان">FLOW REGIME</span>
-                <span class="p-metric-val" data-en="Laminar (Re < 1)" data-fa="آرام (Re &lt; ۱)">Laminar (Re &lt; 1)</span>
-              </div>
-            </div>
-
-            <div class="project-tags">
-              <span class="p-tag" data-en="Microfluidics" data-fa="میکروفلوئیدیک">Microfluidics</span>
-              <span class="p-tag">COMSOL / CFD</span>
-              <span class="p-tag">Lab-on-a-Chip</span>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- PROJECT 03: TURBULENCE SIMULATION -->
-        <div class="project-card" style="cursor: default;">
+      <!-- SUBSECTION: 2D DESIGN -->
+      <div class="subsection-header">
+        <i data-lucide="ruler" style="width: 16px;"></i>
+        <span data-en="2D DESIGN" data-fa="طرح دوبعدی">2D DESIGN</span>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card project-card-placeholder" style="cursor: default;">
           <div class="project-preview">
-            <i data-lucide="wind" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+            <i data-lucide="ruler" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
           <div class="project-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title" data-en="CFD Flow & Pressure Loss" data-fa="جریان CFD و افت فشار">CFD Flow & Pressure Loss</h3>
-                <span class="project-year">2025</span>
+                <h3 class="project-title" data-en="2D drawings coming soon" data-fa="طرح‌های دوبعدی به‌زودی">2D drawings coming soon</h3>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Numerical analysis of turbulent fluid flow and pressure drops in complex mechanical piping geometries." data-fa="تحلیل عددی جریان آشفته سیال و افت فشار در هندسه‌های پیچیده لوله‌کشی مکانیکی.">
-                Numerical analysis of turbulent fluid flow and pressure drops in complex mechanical piping geometries.
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="This section will showcase 2D SolidWorks drawings." data-fa="این بخش طرح‌های دوبعدی طراحی‌شده در سالیدورکس را نمایش خواهد داد.">
+                This section will showcase 2D SolidWorks drawings.
               </p>
-            </div>
-
-            <div class="project-metrics">
-              <div class="p-metric-item">
-                <span class="p-metric-lbl" data-en="SOLVER" data-fa="حل‌گر">SOLVER</span>
-                <span class="p-metric-val">OpenFOAM / Fluent</span>
-              </div>
-              <div class="p-metric-item">
-                <span class="p-metric-lbl" data-en="TURBULENCE" data-fa="آشفتگی">TURBULENCE</span>
-                <span class="p-metric-val">k-ε / SST k-ω</span>
-              </div>
-            </div>
-
-            <div class="project-tags">
-              <span class="p-tag">CFD</span>
-              <span class="p-tag" data-en="Fluid Mechanics" data-fa="مکانیک سیالات">Fluid Mechanics</span>
-              <span class="p-tag" data-en="Mesh Generation" data-fa="تولید مش">Mesh Generation</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
