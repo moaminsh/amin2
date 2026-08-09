@@ -1,1205 +1,1083 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>محمدامین — مهندسی مکانیک</title>
-<meta name="description" content="نمونه‌کار محمدامین، دانشجوی مهندسی مکانیک — طراحی، توربوماشین و ابزارهای مهندسی.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --blue-field:   #13241a;
-    --blue-field-2: #0d1913;
-    --blue-field-3: #1a3024;
-    --line:         #eef4ea;
-    --line-dim:     #a7c4a0;
-    --line-faint:   #3d5c44;
-    --grid:         rgba(167,196,160,0.09);
-    --brass:        #9dc183;
-    --brass-dim:    #61804f;
-    --paper:        #f0efdf;
-    --paper-ink:    #1c2116;
-    --paper-ink-dim:#666f57;
-    --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
-    --mono: 'JetBrains Mono','Consolas',monospace;
-    --sheet-margin: 22px;
-    --sheet-fill: rgba(19,36,26,0.86);
-    --blob-opacity: .5;
-    --blob-blend: screen;
-    --blob-blur: 95px;
-  }
-  body.theme-light{
-    --blue-field:   #eef3ea;
-    --blue-field-2: #f7f9f4;
-    --blue-field-3: #e1ebe0;
-    --line:         #1c2b1f;
-    --line-dim:     #5a7458;
-    --line-faint:   #cddac8;
-    --grid:         rgba(28,43,31,0.055);
-    --brass-dim:    #5e7f4c;
-    --sheet-fill: rgba(238,243,234,0.86);
-    --blob-opacity: .32;
-    --blob-blend: multiply;
-    --blob-blur: 85px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth; overflow-x:hidden;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
-  }
-  body{
-    margin:0;
-    background:var(--blue-field-2);
-    color:var(--line);
-    font-family:var(--sans);
-    -webkit-font-smoothing:antialiased;
-    transition:background .4s ease, color .4s ease;
-    overflow-x:hidden;
-    width:100%;
-  }
-  a{color:inherit;}
-  button{font:inherit;}
-  ::selection{background:var(--brass); color:#1a1207;}
-  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammadamin Sharif — Mechanical Engineering & Fluid Dynamics</title>
+  <meta name="description" content="Portfolio of Mohammadamin Sharif — Mechanical Engineering Student at IUST specializing in Pump Design, Fluid Mechanics, CFD Simulations, and Microfluidics.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-  /* ---------- ambient fluid background ---------- */
-  .fluid-bg{
-    position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
-  }
-  .fluid-bg span{
-    position:absolute; border-radius:50%;
-    filter:blur(var(--blob-blur));
-    opacity:var(--blob-opacity);
-    mix-blend-mode:var(--blob-blend);
-    will-change:transform;
-  }
-  .blob-a{
-    width:640px; height:640px; top:-200px; left:-140px;
-    background:radial-gradient(circle, var(--brass) 0%, transparent 68%);
-    animation:driftA 46s ease-in-out infinite alternate;
-  }
-  .blob-b{
-    width:720px; height:720px; bottom:-240px; right:-180px;
-    background:radial-gradient(circle, #6fae63 0%, transparent 68%);
-    animation:driftB 58s ease-in-out infinite alternate;
-  }
-  .blob-c{
-    width:520px; height:520px; top:32%; left:52%;
-    background:radial-gradient(circle, #b6cf7e 0%, transparent 68%);
-    animation:driftC 51s ease-in-out infinite alternate;
-  }
-  @keyframes driftA{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(90px,70px) scale(1.18);} }
-  @keyframes driftB{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(-80px,-60px) scale(1.12);} }
-  @keyframes driftC{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(-60px,80px) scale(0.88);} }
-
-  /* ---------- sheet frame (drawing-sheet border with crop ticks) ---------- */
-  .sheet{
-    position:relative; z-index:1;
-    margin:10px;
-    border:1px solid var(--line-faint);
-    background:
-      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/38px 38px,
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/38px 38px,
-      radial-gradient(1100px 620px at 88% -8%, rgba(159,180,204,.10), transparent 60%),
-      var(--sheet-fill);
-    backdrop-filter:saturate(1.05);
-    transition:background .4s ease;
-  }
-  .tick{position:absolute; width:14px; height:14px; border:1px solid var(--brass-dim); opacity:.85;}
-  .tick.tl{top:-1px; left:-1px; border-width:1px 0 0 1px;}
-  .tick.tr{top:-1px; right:-1px; border-width:1px 1px 0 0;}
-  .tick.bl{bottom:-1px; left:-1px; border-width:0 0 1px 1px;}
-  .tick.br{bottom:-1px; right:-1px; border-width:0 1px 1px 0;}
-
-  .wrap{max-width:1060px; margin:0 auto; padding:0 var(--sheet-margin);}
-
-  /* ---------- nav ---------- */
-  nav{
-    display:flex; align-items:center; justify-content:space-between; gap:18px;
-    padding:22px var(--sheet-margin) 0;
-    max-width:1060px; margin:0 auto;
-  }
-  .logo{
-    font-family:var(--mono); font-size:13px; letter-spacing:.06em;
-    color:var(--line); display:flex; align-items:center; gap:8px; white-space:nowrap;
-  }
-  .logo b{color:var(--brass); font-weight:700;}
-  nav .links{display:flex; gap:22px; font-size:13.5px;}
-  nav .links a{text-decoration:none; color:var(--line-dim); transition:color .15s;}
-  nav .links a:hover{color:var(--line);}
-  .nav-right{display:flex; align-items:center; gap:12px; flex:0 0 auto;}
-  .lang-btn{
-    font-family:var(--mono); font-size:11.5px; font-weight:600; letter-spacing:.05em;
-    padding:7px 13px; border:1px solid var(--line-faint); border-radius:20px; background:transparent;
-    color:var(--line); cursor:pointer; transition:border-color .15s, color .15s;
-  }
-  .lang-btn:hover{border-color:var(--brass); color:var(--brass);}
-  .nav-avatar{width:32px; height:32px; border-radius:50%; overflow:hidden; border:1px solid var(--line-faint); flex:0 0 auto; display:block;}
-  .nav-avatar img{width:100%; height:100%; object-fit:cover; display:block;}
-
-  .btn{
-    font-family:var(--sans); font-size:14px; font-weight:600;
-    padding:13px 22px; border-radius:3px; text-decoration:none; border:none; cursor:pointer;
-    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, background .15s, color .15s, border-color .15s;
-  }
-  .btn-sm{padding:9px 15px; font-size:12.5px;}
-  .btn-primary{background:var(--brass); color:#1a1207;}
-  .btn-primary:hover{background:#b6d99a; transform:translateY(-1px);}
-  .btn-ghost{border:1px solid var(--line-faint); color:var(--line); background:transparent;}
-  .btn-ghost:hover{border-color:var(--brass); color:var(--brass);}
-  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
-
-  /* ---------- banner ---------- */
-  .banner{
-    margin:26px var(--sheet-margin) 0; height:108px; border-radius:4px;
-    border:1px solid var(--line-faint); position:relative; overflow:hidden;
-    background:
-      repeating-linear-gradient(45deg, rgba(205,154,95,.16) 0 2px, transparent 2px 16px),
-      linear-gradient(120deg, var(--blue-field-3), var(--blue-field) 65%);
-  }
-  .banner::after{
-    content:""; position:absolute; inset:0;
-    background:radial-gradient(560px 200px at 82% 0%, rgba(237,243,248,.10), transparent 70%);
-  }
-
-  /* ---------- profile row ---------- */
-  .profile-row{
-    display:flex; gap:32px; align-items:flex-end; flex-wrap:wrap;
-    padding:0 var(--sheet-margin); margin-top:-58px;
-  }
-  .avatar-block{position:relative; flex:0 0 auto; width:168px;}
-  .avatar-frame{
-    position:relative; width:168px; height:196px; border:1px solid var(--line-faint); border-radius:4px;
-    overflow:hidden; background:var(--blue-field-3); box-shadow:0 18px 34px -18px rgba(0,0,0,.6);
-  }
-  .avatar-frame img{display:block; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.02);}
-  .dim{
-    position:absolute; font-family:var(--mono); font-size:10px; color:var(--line-dim); letter-spacing:.03em;
-    display:flex; align-items:center; gap:6px;
-  }
-  .dim-top{ top:-24px; left:0; right:0; justify-content:center;}
-  .dim-top::before, .dim-top::after{content:""; flex:1; height:1px; background:var(--line-faint); position:relative; top:1px;}
-  .dim-side{ top:0; bottom:0; left:-28px; writing-mode:vertical-rl; justify-content:center;}
-  .dim-side::before, .dim-side::after{content:""; flex:1; width:1px; background:var(--line-faint);}
-  .photo-tag{
-    position:absolute; bottom:-13px; right:14px; background:var(--brass); color:#1a1207;
-    font-family:var(--mono); font-size:10px; padding:4px 9px; border-radius:2px; font-weight:700;
-    letter-spacing:.04em;
-  }
-
-  .profile-info{flex:1 1 320px; min-width:260px; padding-top:14px;}
-  .profile-top{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;}
-  .name{font-size:clamp(25px,3.2vw,32px); font-weight:800; margin:0; letter-spacing:-.01em;}
-  .badge{
-    font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.06em;
-    background:var(--brass); color:#1a1207; padding:4px 10px; border-radius:3px; white-space:nowrap;
-  }
-  .role{font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--brass); margin:0 0 14px;}
-  .tagline{font-size:19px; font-weight:600; line-height:1.55; margin:0 0 10px; max-width:44ch;}
-  .tagline span{color:var(--brass);}
-  .bio{font-size:14.5px; color:var(--line-dim); line-height:1.9; max-width:52ch; margin:0 0 22px;}
-
-  .stats-row{display:flex; gap:34px; margin-top:26px; padding-top:20px; border-top:1px solid var(--blue-field-3); flex-wrap:wrap;}
-  .stat{display:flex; flex-direction:column; gap:4px;}
-  .stat .n{font-family:var(--mono); font-size:21px; font-weight:700; color:var(--line);}
-  .stat .l{font-size:11.5px; color:var(--line-dim);}
-
-  /* ---------- tabs ---------- */
-  .tabbar{
-    display:flex; gap:26px; padding:34px var(--sheet-margin) 0; margin-top:20px;
-    border-bottom:1px solid var(--blue-field-3); overflow-x:auto;
-  }
-  .tab{
-    font-size:14px; padding:0 0 14px; color:var(--line-dim); text-decoration:none; white-space:nowrap;
-    border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
-  }
-  .tab:hover{color:var(--line);}
-  .tab.active{color:var(--line); border-bottom-color:var(--brass);}
-
-  /* ---------- title block (paper card) — signature element ---------- */
-  .titleblock{
-    margin:34px var(--sheet-margin) 40px;
-    background:var(--paper); color:var(--paper-ink);
-    border:1px solid #d9d0bc; border-radius:2px;
-    box-shadow:0 18px 40px -20px rgba(0,0,0,.55);
-    display:grid; grid-template-columns:repeat(4,1fr);
-  }
-  .tb-cell{padding:14px 16px; border-right:1px solid #d9d0bc;}
-  .tb-cell:last-child{border-right:none;}
-  .tb-label{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--paper-ink-dim); margin-bottom:5px;}
-  .tb-value{font-size:14px; font-weight:600;}
-  .tb-value.mono{font-family:var(--mono); direction:ltr; text-align:right; font-weight:500;}
-  .tb-value a{text-decoration:none; border-bottom:1px dashed var(--brass-dim);}
-
-  /* ---------- sections ---------- */
-  section{padding:64px var(--sheet-margin);}
-  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:30px;}
-  .sec-num{font-family:var(--mono); font-size:12px; color:var(--brass);}
-  h2{font-size:24px; margin:0; font-weight:700;}
-  .divider{height:1px; background:linear-gradient(90deg, var(--line-faint), transparent); flex:1;}
-
-  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
-  .about p{color:var(--line-dim); line-height:2.05; font-size:15px; margin:0 0 16px;}
-  .about strong{color:var(--line); font-weight:600;}
-  .focus-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
-  .focus-list li{
-    display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--line-dim);
-    padding-bottom:14px; border-bottom:1px solid var(--blue-field-3);
-  }
-  .focus-list li:last-child{border-bottom:none; padding-bottom:0;}
-  .focus-list b{font-family:var(--mono); color:var(--brass); font-size:12px; margin-top:2px; flex:0 0 auto;}
-
-  /* ---------- skills datasheet table ---------- */
-  .datasheet{width:100%; border-collapse:collapse; font-size:14px;}
-  .datasheet th{
-    text-align:right; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--line-dim); font-weight:500; padding:10px 4px; border-bottom:1px solid var(--line-faint);
-  }
-  .datasheet td{padding:14px 4px; border-bottom:1px solid var(--blue-field-3); vertical-align:top;}
-  .datasheet tr:last-child td{border-bottom:none;}
-  .ds-cat{font-weight:700; color:var(--line);}
-  .ds-items{color:var(--line-dim); line-height:1.9;}
-  .ds-level{font-family:var(--mono); color:var(--brass); white-space:nowrap;}
-
-  /* ---------- projects ---------- */
-  .project-card{
-    display:grid; grid-template-columns:1fr 1.15fr; gap:0;
-    border:1px solid var(--line-faint); border-radius:4px; overflow:hidden;
-    background:var(--blue-field-3);
-  }
-  .project-visual{
-    padding:34px 30px; background:
-      linear-gradient(155deg, rgba(205,154,95,.10), transparent 60%),
-      var(--blue-field-2);
-    display:flex; flex-direction:column; justify-content:center; gap:16px;
-    border-left:1px solid var(--line-faint);
-  }
-  .project-visual .ptag{font-family:var(--mono); font-size:11px; color:var(--brass); letter-spacing:.1em;}
-  .project-visual .pname{font-size:22px; font-weight:700; line-height:1.4;}
-  .spec-line{display:flex; justify-content:space-between; font-family:var(--mono); font-size:11.5px; color:var(--line-dim); padding:6px 0; border-top:1px dashed var(--line-faint);}
-  .spec-line b{color:var(--line);}
-  .project-body{padding:32px 30px; display:flex; flex-direction:column; gap:16px;}
-  .project-body p{margin:0; color:var(--line-dim); line-height:1.95; font-size:14.5px;}
-  .tag-row{display:flex; gap:8px; flex-wrap:wrap;}
-  .tag-chip{
-    font-family:var(--mono); font-size:10.5px; padding:5px 10px; border:1px solid var(--line-faint);
-    border-radius:3px; color:var(--line-dim);
-  }
-  .project-links{display:flex; gap:12px; margin-top:auto; padding-top:6px;}
-
-  /* ---------- contact ---------- */
-  .contact-card{
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;
-    border:1px solid var(--line-faint); border-radius:4px; padding:38px 34px;
-    background:linear-gradient(155deg, var(--blue-field-3), var(--blue-field-2));
-  }
-  .contact-card h3{margin:0 0 8px; font-size:21px;}
-  .contact-card p{margin:0; color:var(--line-dim); font-size:14.5px; max-width:44ch; line-height:1.85;}
-  .contact-links{display:flex; gap:12px; flex-wrap:wrap;}
-
-  footer{
-    padding:26px var(--sheet-margin) 30px; display:flex; justify-content:space-between; align-items:center;
-    font-family:var(--mono); font-size:11px; color:var(--line-faint); flex-wrap:wrap; gap:10px;
-    border-top:1px solid var(--blue-field-3);
-  }
-
-  /* ---------- ambient corner plant (full-page background art, all four corners) ---------- */
-  .plant-corners{ position:fixed; inset:0; z-index:5; pointer-events:none; }
-  .bg-pipes{
-    position:fixed; inset:0; width:100%; height:100%; opacity:.5;
-  }
-  body.theme-light .bg-pipes{ opacity:.32; }
-  .bg-pipes .bgp-pipe{
-    fill:none; stroke:var(--line-faint); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; opacity:.6;
-    vector-effect:non-scaling-stroke;
-  }
-  .bg-pipes .bgp-flow{
-    fill:none; stroke:var(--brass); stroke-width:1.6; stroke-linecap:round;
-    stroke-dasharray:4 55; opacity:0; vector-effect:non-scaling-stroke;
-    transition:opacity .5s ease; animation:bgpFlow 5.5s linear infinite; animation-play-state:paused;
-  }
-  .bg-pipes.is-flowing .bgp-flow{ opacity:.8; animation-play-state:running; }
-  @keyframes bgpFlow{ to{ stroke-dashoffset:-590; } }
-  @media (prefers-reduced-motion: reduce){ .bg-pipes .bgp-flow{ animation:none; } }
-
-  .corner-node{
-    position:absolute; width:96px; height:96px; pointer-events:auto; cursor:pointer; opacity:.82;
-    background:none; border:none; padding:0; outline:none; -webkit-tap-highlight-color:transparent;
-    transition:opacity .2s ease;
-  }
-  .corner-node:hover, .corner-node.is-on{ opacity:1; }
-  .corner-node svg{ width:100%; height:100%; overflow:visible; display:block; }
-  .cn-tl{ top:10px; left:10px; }
-  .cn-tr{ top:10px; right:10px; }
-  .cn-bl{ bottom:10px; left:10px; }
-  .cn-br{ bottom:10px; right:10px; }
-  html[dir="rtl"] .cn-tl{ left:auto; right:10px; }
-  html[dir="rtl"] .cn-tr{ right:auto; left:10px; }
-  html[dir="rtl"] .cn-bl{ left:auto; right:10px; }
-  html[dir="rtl"] .cn-br{ right:auto; left:10px; }
-
-  .cn-body{ fill:var(--blue-field-3); stroke:var(--brass-dim); stroke-width:3; opacity:.65; transition:opacity .2s; }
-  .cn-detail{ fill:none; stroke:var(--brass-dim); stroke-width:2.4; opacity:.6; transition:opacity .2s, stroke .2s; }
-  .cn-stub{ fill:none; stroke:var(--line-faint); stroke-width:6; stroke-linecap:round; opacity:.5; }
-  .cn-glow{ opacity:0; transition:opacity .35s ease; }
-  .corner-node:hover .cn-body{ opacity:.9; }
-  .corner-node:focus-visible{ outline:2px solid var(--brass); outline-offset:4px; border-radius:50%; }
-  .cn-led{ transition:fill .2s; }
-  .cn-led.on{ fill:#7ed99a; filter:drop-shadow(0 0 3px rgba(126,217,154,.85)); }
-  .cn-led.off{ fill:#5a6b56; }
-
-  .corner-node.is-on .cn-body{ stroke:var(--brass); opacity:.95; }
-  .corner-node.is-on .cn-detail{ stroke:var(--brass); opacity:.95; }
-  .corner-node.is-on .cn-glow{ opacity:.5; }
-
-  .cn-blades{ transform-box:fill-box; transform-origin:center; }
-  .corner-node.is-on .cn-blades{ animation:cnSpin 1.3s linear infinite; }
-  .cn-needle{ transform-box:fill-box; transform-origin:center; transition:transform .6s ease; }
-  .corner-node.is-on .cn-needle{ animation:cnSweep 2.6s ease-in-out infinite alternate; }
-  @keyframes cnSpin{ to{ transform:rotate(360deg); } }
-  @keyframes cnSweep{ 0%{ transform:rotate(-18deg); } 100%{ transform:rotate(22deg); } }
-  .cn-wheel{ transform-box:fill-box; transform-origin:center; transition:transform .35s ease; }
-  .corner-node.is-on .cn-wheel{ transform:rotate(90deg); }
-  @media (prefers-reduced-motion: reduce){
-    .cn-blades, .cn-needle{ animation:none !important; }
-  }
-
-  @media (max-width:600px){
-    .corner-node{ width:58px; height:58px; }
-    .cn-tl{ top:6px; left:6px; }
-    .cn-tr{ top:6px; right:6px; }
-    .cn-bl{ bottom:6px; left:6px; }
-    .cn-br{ bottom:6px; right:6px; }
-    html[dir="rtl"] .cn-tl{ left:auto; right:6px; }
-    html[dir="rtl"] .cn-tr{ right:auto; left:6px; }
-    html[dir="rtl"] .cn-bl{ left:auto; right:6px; }
-    html[dir="rtl"] .cn-br{ right:auto; left:6px; }
-  }
-
-  /* ---------- banner: pump-to-boiler pipeline illustration ---------- */
-  .banner{
-    margin:26px var(--sheet-margin) 0; height:172px; border-radius:4px;
-    border:1px solid var(--line-faint); position:relative; overflow:hidden;
-    background:
-      repeating-linear-gradient(45deg, rgba(205,154,95,.10) 0 2px, transparent 2px 16px),
-      linear-gradient(120deg, var(--blue-field-3), var(--blue-field) 65%);
-  }
-  body.theme-light .banner{
-    background:
-      repeating-linear-gradient(45deg, rgba(169,121,63,.10) 0 2px, transparent 2px 16px),
-      linear-gradient(120deg, var(--blue-field-3), var(--blue-field) 65%);
-  }
-  .banner::after{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(560px 200px at 82% 0%, rgba(237,243,248,.10), transparent 70%);
-  }
-  .banner-svg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-  .bp-pipe{ fill:none; stroke:var(--line-faint); stroke-width:11; stroke-linecap:round; stroke-linejoin:round; }
-  .bp-pipe-inner{ fill:none; stroke:var(--blue-field-2); stroke-width:5; stroke-linecap:round; stroke-linejoin:round; opacity:.6; }
-  .bp-flow{
-    fill:none; stroke:var(--brass); stroke-width:3.6; stroke-linecap:round;
-    stroke-dasharray:2 16; animation:bpFlow 3.1s linear infinite;
-  }
-  @keyframes bpFlow{ to{ stroke-dashoffset:-180; } }
-  .bp-flange line{ stroke:var(--brass-dim); stroke-width:3.4; }
-  .bp-valve-body{ fill:var(--blue-field-2); stroke:var(--brass); stroke-width:2.4; }
-  .bp-valve-x{ stroke:var(--brass); stroke-width:2.4; stroke-linecap:round; }
-  .bp-valve-stem{ fill:var(--brass-dim); }
-  .bp-pump-body{ fill:var(--blue-field-2); stroke:var(--brass); stroke-width:3; }
-  .bp-pump-motor{ fill:var(--brass-dim); rx:2; }
-  .bp-pump-hub{ fill:var(--brass); opacity:.85; }
-  .bp-gauge-face{ fill:var(--blue-field-2); stroke:var(--line-dim); stroke-width:1.6; }
-  .bp-gauge-needle{ stroke:var(--brass); stroke-width:1.6; stroke-linecap:round; }
-  .bp-boiler-shell{ fill:var(--blue-field-2); stroke:var(--line-faint); stroke-width:3; }
-  .bp-boiler-tube{ fill:none; stroke:var(--line-dim); stroke-width:3; opacity:.55; }
-  .bp-boiler-drum{ fill:var(--blue-field-3); stroke:var(--brass-dim); stroke-width:2.4; }
-  .bp-stack{ fill:var(--blue-field-3); stroke:var(--line-faint); stroke-width:2.4; }
-  .bp-label{ font-family:var(--mono); font-size:9px; fill:var(--line-dim); letter-spacing:.05em; }
-  .bp-droplet{ fill:var(--brass); opacity:.9; filter:drop-shadow(0 0 3px rgba(205,154,95,.75)); }
-  .steam-puff{ fill:#e8e2d6; opacity:.5; transform-box:fill-box; transform-origin:center; animation:steamRise 3.4s ease-out infinite; }
-  .steam-puff.s2{ animation-delay:1.1s; }
-  .steam-puff.s3{ animation-delay:2.2s; }
-  @keyframes steamRise{
-    0%{ transform:translateY(0) scale(.7); opacity:.5; }
-    70%{ opacity:.25; }
-    100%{ transform:translateY(-32px) scale(1.8); opacity:0; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .bp-flow, .bgp-flow, .steam-puff, .bp-pump-blades, .flame-shape{ animation:none; }
-  }
-  @media (max-width:820px){
-    .banner{ height:128px; }
-    .bp-label{ display:none; }
-  }
-  @media (max-width:600px){
-    .banner{
-      height:150px; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
-      scroll-snap-type:x proximity;
+  <style>
+    :root {
+      --bg-dark: #090b0e;
+      --bg-card: #0f1319;
+      --bg-card-hover: #151b24;
+      --border: #1e2633;
+      --border-focus: #2e3c52;
+      
+      --text-main: #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim: #475569;
+      
+      --accent-cyan: #00f2fe;
+      --accent-blue: #0077ff;
+      --accent-glow: rgba(0, 242, 254, 0.15);
+      
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .banner-svg{ position:static; width:640px; min-width:640px; height:100%; }
-  }
 
-  /* ---------- interactive plant controls ---------- */
-  .bp-hit{ fill:transparent; pointer-events:all; cursor:pointer; }
-  .bp-interactive{ pointer-events:none; outline:none; }
-  .bp-interactive .bp-hit{ pointer-events:all; }
-  .bp-interactive:hover .bp-hover-target{ filter:brightness(1.22); }
-  .bp-interactive:focus{ outline:none; }
-  .bp-interactive:focus-visible{ outline:none; }
-  .bp-interactive:focus-visible .bp-hit{ outline:2px solid var(--brass); outline-offset:2px; }
-  .bp-led{ transition:fill .2s; }
-  .bp-led.on{ fill:#5fd38b; filter:drop-shadow(0 0 3px rgba(95,211,139,.85)); }
-  .bp-led.off{ fill:#8a5a52; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .bp-pump-blades{
-    stroke:var(--blue-field-2); stroke-width:2.6; stroke-linecap:round;
-    transform-box:fill-box; transform-origin:center; animation:pumpSpin 1.1s linear infinite;
-  }
-  @keyframes pumpSpin{ to{ transform:rotate(360deg); } }
-  .bp-pump.is-off .bp-pump-blades{ animation-play-state:paused; }
-  .bp-pump.is-off .bp-pump-body{ opacity:.5; }
-  .bp-pump.is-off .bp-pump-motor{ opacity:.4; }
-  .bp-pump.is-off .bp-pump-hub{ opacity:.4; }
+    ::selection {
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+    }
 
-  .bp-valve-gate{ fill:#c65b4a; opacity:0; transition:opacity .2s; }
-  .bp-valve.is-closed .bp-valve-gate{ opacity:1; }
-  .bp-valve.is-closed .bp-valve-x{ stroke:#c65b4a; }
-  .bp-valve.is-closed .bp-valve-body{ stroke:#c65b4a; }
-  .bp-valve-wheel{ transform-box:fill-box; transform-origin:center; transition:transform .35s ease; }
-  .bp-valve.is-closed .bp-valve-wheel{ transform:rotate(90deg); }
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .banner-svg.is-stopped .bp-flow{ animation-play-state:paused; opacity:.2; }
-  .banner-svg.is-stopped .bp-droplet{ opacity:0; }
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .bp-flame{ opacity:0; transition:opacity .3s ease; }
-  .bp-boiler.is-lit .bp-flame{ opacity:1; }
-  .flame-shape{
-    transform-box:fill-box; transform-origin:center bottom;
-    animation:flameFlicker .55s ease-in-out infinite alternate;
-  }
-  .flame-shape.f2{ animation-delay:.12s; }
-  .flame-shape.f3{ animation-delay:.28s; }
-  @keyframes flameFlicker{
-    0%{ transform:scaleY(1) scaleX(1) translateY(0); }
-    100%{ transform:scaleY(1.18) scaleX(.9) translateY(-2px); }
-  }
-  .bp-boiler.is-lit .bp-boiler-tube{ stroke:#e0925a; opacity:.9; }
-  .bp-boiler.is-lit .bp-boiler-shell{ stroke:var(--brass); }
-  .bp-boiler.is-lit .bp-boiler-drum{ stroke:var(--brass); }
-  .bp-steam{ opacity:0; transition:opacity .4s ease; }
-  .bp-boiler.is-lit .bp-steam{ opacity:1; }
-  .bp-boiler-glow{ opacity:0; transition:opacity .4s ease; }
-  .bp-boiler.is-lit .bp-boiler-glow{ opacity:.55; }
+    /* Technical Grid Overlay */
+    .tech-grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  .banner-hint{
-    font-family:var(--mono); font-size:10.5px; color:var(--line-faint);
-    text-align:center; margin:8px var(--sheet-margin) 0; letter-spacing:.02em;
-  }
+    .tech-grid-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, transparent 20%, var(--bg-dark) 80%);
+    }
 
-  /* ---------- project folders ---------- */
-  .folder-grid{
-    display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:16px;
-    margin-bottom:8px;
-  }
-  .folder-card{
-    display:flex; align-items:center; gap:14px;
-    padding:16px 16px; border:1px solid var(--line-faint); border-radius:5px;
-    background:var(--blue-field-3); cursor:pointer; text-align:right;
-    transition:border-color .15s, transform .15s, background .15s;
-  }
-  html[dir="ltr"] .folder-card{ text-align:left; }
-  .folder-card:hover{ border-color:var(--brass); transform:translateY(-2px); }
-  .folder-card.is-open{ border-color:var(--brass); background:linear-gradient(155deg, rgba(205,154,95,.12), var(--blue-field-3)); }
-  .folder-icon{ position:relative; width:38px; height:30px; flex:0 0 auto; }
-  .folder-icon svg{ position:absolute; inset:0; width:100%; height:100%; }
-  .folder-icon .folder-open{ display:none; }
-  .folder-card.is-open .folder-open{ display:block; }
-  .folder-card.is-open .folder-closed{ display:none; }
-  .folder-info{ flex:1 1 auto; min-width:0; }
-  .folder-name{ font-size:14.5px; font-weight:700; color:var(--line); }
-  .folder-count{ font-family:var(--mono); font-size:11px; color:var(--line-dim); margin-top:3px; }
-  .folder-chevron{ font-family:var(--mono); font-size:13px; color:var(--brass); transition:transform .2s; flex:0 0 auto; }
-  .folder-card.is-open .folder-chevron{ transform:rotate(90deg); }
-  html[dir="ltr"] .folder-card.is-open .folder-chevron{ transform:rotate(90deg); }
+    /* Custom Cursor Indicator */
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--accent-cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--bg-dark);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
-  .folder-contents{
-    margin-top:20px; padding-top:20px; border-top:1px dashed var(--line-faint);
-  }
-  .folder-contents[hidden]{ display:none; }
-  .folder-contents-head{
-    display:flex; align-items:center; gap:10px; margin-bottom:18px;
-    font-family:var(--mono); font-size:11.5px; color:var(--line-dim); letter-spacing:.04em;
-  }
-  .folder-contents-head b{ color:var(--brass); }
-  .folder-back{
-    font-family:var(--mono); font-size:11px; color:var(--line-dim); background:transparent;
-    border:1px solid var(--line-faint); border-radius:20px; padding:5px 12px; cursor:pointer;
-    transition:border-color .15s, color .15s;
-  }
-  .folder-back:hover{ border-color:var(--brass); color:var(--brass); }
-  .folder-empty{
-    border:1px dashed var(--line-faint); border-radius:4px; padding:40px 20px;
-    text-align:center; color:var(--line-dim); font-size:14px; line-height:1.9;
-  }
+    .custom-cursor.active {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
 
-  html[dir="ltr"] .tb-value.mono{text-align:left;}
+    /* Layout Containers */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
 
-  @media (max-width:820px){
-    .about-grid{grid-template-columns:1fr;}
-    .project-card{grid-template-columns:1fr;}
-    .project-visual{border-left:none; border-bottom:1px solid var(--line-faint);}
-    .titleblock{grid-template-columns:1fr 1fr;}
-    .tb-cell:nth-child(2){border-right:none;}
-    nav .links{display:none;}
-    .profile-row{margin-top:-38px; gap:20px;}
-    .avatar-block{width:132px;}
-    .avatar-frame{width:132px; height:158px;}
-    .stats-row{gap:22px;}
-    .tabbar{gap:18px;}
-  }
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(9, 11, 14, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
 
-  @media (max-width:600px){
-    :root{ --sheet-margin:14px; }
-    .sheet{ margin:6px; }
-    nav{ flex-wrap:wrap; row-gap:12px; padding-top:16px; }
-    .nav-right{ gap:8px; }
-    .btn-sm{ padding:8px 12px; font-size:12px; }
-    .datasheet-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
-    .datasheet{ min-width:520px; }
-    .titleblock{ grid-template-columns:1fr; }
-    .tb-cell{ border-right:none; border-bottom:1px solid #d9d0bc; }
-    .tb-cell:last-child{ border-bottom:none; }
-    .dim{ display:none; }
-    .profile-row{ margin-top:-30px; }
-    .avatar-block{ width:110px; }
-    .avatar-frame{ width:110px; height:130px; }
-    .name{ font-size:23px; }
-    .tagline{ font-size:17px; }
-    section{ padding:48px var(--sheet-margin); }
-    .contact-card{ padding:26px 20px; }
-    footer{ font-size:10px; }
-  }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
 
-  @media (max-width:380px){
-    .corner-node{ width:46px; height:46px; }
-    .btn.btn-primary.btn-sm{ display:none; }
-  }
-</style>
+    .brand-mark {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-mark span {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 140px 0 80px;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-meta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-meta::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 540px;
+      margin-bottom: 32px;
+      border-left: 2px solid var(--border-focus);
+      padding-left: 16px;
+    }
+
+    /* Hero Canvas Visual */
+    .hero-visual {
+      position: relative;
+      height: 380px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-overlay-info {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      pointer-events: none;
+      line-height: 1.4;
+    }
+
+    /* Section Component */
+    section {
+      padding: 90px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Interactive Simulation Modules */
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .sim-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 24px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .sim-card:hover {
+      border-color: var(--border-focus);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .sim-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .sim-title {
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .sim-canvas-container {
+      width: 100%;
+      height: 200px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .sim-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .control-btn {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      transition: var(--transition);
+    }
+
+    .control-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* Projects Showcase */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      border-color: var(--border-focus);
+    }
+
+    .project-preview {
+      background: #06080a;
+      border-right: 1px solid var(--border);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      min-height: 280px;
+    }
+
+    .project-meta-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      padding: 4px 8px;
+      border-radius: 3px;
+      width: fit-content;
+    }
+
+    .project-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .metric-item {
+      font-family: var(--font-mono);
+    }
+
+    .metric-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .metric-val {
+      font-size: 13px;
+      color: var(--text-main);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .project-info {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      width: fit-content;
+    }
+
+    .action-btn:hover {
+      box-shadow: 0 0 15px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* Technical Specifications Table */
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .tech-table th {
+      text-align: left;
+      padding: 12px 16px;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .tech-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .tech-table tr:hover td {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+    }
+
+    .tech-category {
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    /* Technical Profile / About Cards */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .data-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      font-family: var(--font-mono);
+    }
+
+    .data-card-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .data-card-val {
+      font-size: 14px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Contact minimal block */
+    .contact-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .contact-link-item {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 10px 16px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-link-item:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 868px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+      .project-preview {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links {
+        display: none;
+      }
+      .contact-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="fluid-bg" aria-hidden="true">
-  <span class="blob-a"></span>
-  <span class="blob-b"></span>
-  <span class="blob-c"></span>
-  <svg class="bg-pipes" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path class="bgp-pipe" d="M8,8 C 28,14 34,30 30,46 C 26,64 40,72 60,70 C 78,68 84,80 92,92" />
-    <path class="bgp-flow" d="M8,8 C 28,14 34,30 30,46 C 26,64 40,72 60,70 C 78,68 84,80 92,92" />
-    <path class="bgp-pipe" d="M92,8 C 74,16 66,10 52,18 C 38,26 40,44 24,50 C 12,54 10,64 8,92" />
-    <path class="bgp-flow" d="M92,8 C 74,16 66,10 52,18 C 38,26 40,44 24,50 C 12,54 10,64 8,92" />
-  </svg>
-</div>
+  <div class="tech-grid-bg"></div>
+  <div class="custom-cursor" id="cursor"></div>
 
-<div class="plant-corners" aria-label="نمای کوچک نیروگاه — چهار المان قابل‌لمس در گوشه‌های صفحه">
-  <button type="button" class="corner-node cn-tl is-on" data-cn aria-pressed="true" aria-label="شیر گوشهٔ نیروگاه — لمس کن تا باز یا بسته شود">
-    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-      <path class="cn-stub" d="M40,40 C 60,52 74,60 92,66"/>
-      <ellipse class="cn-glow" cx="30" cy="30" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
-      <circle cx="30" cy="30" r="19" class="cn-body"/>
-      <g class="cn-wheel">
-        <line x1="22" y1="22" x2="38" y2="38" class="cn-detail"/>
-        <line x1="22" y1="38" x2="38" y2="22" class="cn-detail"/>
-      </g>
-      <circle class="cn-led on" cx="30" cy="30" r="3.4"/>
-    </svg>
-  </button>
-
-  <button type="button" class="corner-node cn-tr is-on" data-cn aria-pressed="true" aria-label="فشارسنج گوشهٔ نیروگاه — لمس کن تا روشن یا خاموش شود">
-    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-      <path class="cn-stub" d="M56,40 C 36,52 22,60 4,66"/>
-      <ellipse class="cn-glow" cx="66" cy="30" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
-      <circle cx="66" cy="30" r="19" class="cn-body"/>
-      <line x1="66" y1="30" x2="66" y2="16" class="cn-needle cn-detail"/>
-      <circle cx="66" cy="30" r="3" class="cn-detail" fill="var(--brass-dim)"/>
-      <circle class="cn-led on" cx="66" cy="46" r="3.4"/>
-    </svg>
-  </button>
-
-  <button type="button" class="corner-node cn-bl is-on" data-cn aria-pressed="true" aria-label="پمپ گوشهٔ نیروگاه — لمس کن تا روشن یا خاموش شود">
-    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-      <path class="cn-stub" d="M40,56 C 60,44 74,36 92,30"/>
-      <ellipse class="cn-glow" cx="30" cy="66" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
-      <circle cx="30" cy="66" r="19" class="cn-body"/>
-      <g class="cn-blades">
-        <line x1="30" y1="66" x2="30" y2="53" class="cn-detail"/>
-        <line x1="30" y1="66" x2="41" y2="73" class="cn-detail"/>
-        <line x1="30" y1="66" x2="19" y2="73" class="cn-detail"/>
-      </g>
-      <circle cx="30" cy="66" r="3.5" fill="var(--brass-dim)"/>
-      <circle class="cn-led on" cx="30" cy="86" r="3.4"/>
-    </svg>
-  </button>
-
-  <button type="button" class="corner-node cn-br" data-cn aria-pressed="false" aria-label="بویلر گوشهٔ نیروگاه — لمس کن تا شعله روشن یا خاموش شود">
-    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-      <path class="cn-stub" d="M56,56 C 36,44 22,36 4,30"/>
-      <ellipse class="cn-glow" cx="66" cy="66" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
-      <rect x="50" y="50" width="32" height="32" rx="5" class="cn-body"/>
-      <path class="cn-detail" d="M58,58 h16 M58,66 h16 M58,74 h16"/>
-      <circle class="cn-led off" cx="66" cy="88" r="3.4"/>
-    </svg>
-  </button>
-</div>
-
-<div class="sheet">
-  <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
-
+  <!-- Navigation -->
   <nav>
-    <div class="logo"><b>MA</b>&nbsp;/ <span data-fa="مهندسی مکانیک" data-en="Mechanical Engineering">مهندسی مکانیک</span></div>
-    <div class="links">
-      <a href="#about" data-fa="درباره" data-en="About">درباره</a>
-      <a href="#skills" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</a>
-      <a href="#projects" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a>
-      <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
-    </div>
-    <div class="nav-right">
-      <button id="themeBtn" class="lang-btn" type="button" aria-label="Toggle day/night theme">☀</button>
-      <button id="langBtn" class="lang-btn" type="button" aria-label="Switch language">EN</button>
-      <a class="btn btn-primary btn-sm" href="#contact" data-fa="تماس بگیرید" data-en="Get in touch">تماس بگیرید</a>
-      <span class="nav-avatar"><img src="profile.jpg" alt=""></span>
+    <div class="container nav-inner">
+      <a href="#" class="brand-mark">
+        <span>//</span> MOHAMMADAMIN SHARIF
+      </a>
+      <ul class="nav-links">
+        <li><a href="#simulations" data-hover="SIMS">Simulations</a></li>
+        <li><a href="#projects" data-hover="WORK">Projects</a></li>
+        <li><a href="#specs" data-hover="SPECS">Technical Specs</a></li>
+        <li><a href="#contact" data-hover="INFO">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
-  <div class="banner">
-    <svg class="banner-svg" viewBox="0 -70 1400 290" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- main pipe route: pump -> valve -> gauge -> riser -> boiler header -->
-      <path class="bp-pipe" d="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50" />
-      <path class="bp-pipe-inner" d="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50" />
-      <path class="bp-flow" d="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50" />
-
-      <!-- return line beneath, feeding back toward the pump -->
-      <path class="bp-pipe" d="M760,50 L760,150 Q760,180 730,180 L260,180 Q220,180 220,200" opacity=".55"/>
-      <path class="bp-flow" d="M760,50 L760,150 Q760,180 730,180 L260,180 Q220,180 220,200" style="stroke:#6fae63; animation-duration:4.6s;" opacity=".7"/>
-
-      <!-- flanges along the main run -->
-      <g class="bp-flange">
-        <line x1="260" y1="142" x2="260" y2="178"/><line x1="272" y1="142" x2="272" y2="178"/>
-        <line x1="700" y1="142" x2="700" y2="178"/><line x1="712" y1="142" x2="712" y2="178"/>
-        <line x1="850" y1="32" x2="850" y2="68"/><line x1="862" y1="32" x2="862" y2="68"/>
-      </g>
-
-      <!-- gate valve (interactive) -->
-      <g class="bp-valve bp-interactive" data-role="valve" data-name-fa="شیر اصلی" data-name-en="Main valve" transform="translate(345,160)" tabindex="0" role="button" aria-pressed="false">
-        <title data-fa="کلیک کن تا شیر اصلی رو ببندی یا باز کنی" data-en="Click to open or close the main valve">کلیک کن تا شیر اصلی رو ببندی یا باز کنی</title>
-        <g class="bp-hover-target">
-          <rect x="-17" y="-17" width="34" height="34" class="bp-valve-body"/>
-          <rect x="-6" y="-16" width="12" height="32" class="bp-valve-gate"/>
-          <g class="bp-valve-wheel">
-            <line x1="-10" y1="-10" x2="10" y2="10" class="bp-valve-x"/>
-            <line x1="-10" y1="10" x2="10" y2="-10" class="bp-valve-x"/>
-          </g>
-          <rect x="-4" y="-34" width="8" height="17" class="bp-valve-stem"/>
-          <rect x="-11" y="-42" width="22" height="9" rx="2" class="bp-valve-stem"/>
-          <circle class="bp-led on" cx="0" cy="26" r="3.4"/>
-        </g>
-        <circle class="bp-hit" cx="0" cy="-8" r="34"/>
-      </g>
-
-      <!-- second valve, on the return line (interactive) -->
-      <g class="bp-valve bp-interactive" data-role="valve" data-name-fa="شیر بازگشت" data-name-en="Return valve" transform="translate(520,180)" tabindex="0" role="button" aria-pressed="false">
-        <title data-fa="کلیک کن تا شیر بازگشت رو ببندی یا باز کنی" data-en="Click to open or close the return valve">کلیک کن تا شیر بازگشت رو ببندی یا باز کنی</title>
-        <g class="bp-hover-target">
-          <rect x="-14" y="-14" width="28" height="28" class="bp-valve-body"/>
-          <rect x="-5" y="-13" width="10" height="26" class="bp-valve-gate"/>
-          <g class="bp-valve-wheel">
-            <line x1="-8" y1="-8" x2="8" y2="8" class="bp-valve-x"/>
-            <line x1="-8" y1="8" x2="8" y2="-8" class="bp-valve-x"/>
-          </g>
-          <circle class="bp-led on" cx="0" cy="22" r="3"/>
-        </g>
-        <circle class="bp-hit" cx="0" cy="0" r="26"/>
-      </g>
-
-      <!-- pressure gauge -->
-      <g transform="translate(495,160)">
-        <line x1="0" y1="-17" x2="0" y2="-30" class="bp-flange" stroke="var(--brass-dim)" stroke-width="2.4"/>
-        <circle r="17" cy="-46" class="bp-gauge-face"/>
-        <line x1="0" y1="-46" x2="7" y2="-56" class="bp-gauge-needle"/>
-      </g>
-
-      <!-- pump (interactive) -->
-      <g class="bp-pump bp-interactive" data-role="pump" data-name-fa="پمپ" data-name-en="Pump" transform="translate(95,160)" tabindex="0" role="button" aria-pressed="true">
-        <title data-fa="کلیک کن تا پمپ رو روشن یا خاموش کنی" data-en="Click to turn the pump on or off">کلیک کن تا پمپ رو روشن یا خاموش کنی</title>
-        <g class="bp-hover-target">
-          <circle r="46" class="bp-pump-body"/>
-          <g class="bp-pump-blades">
-            <line x1="0" y1="0" x2="0" y2="-32"/>
-            <line x1="0" y1="0" x2="27" y2="16"/>
-            <line x1="0" y1="0" x2="-27" y2="16"/>
-          </g>
-          <circle r="9" class="bp-pump-hub"/>
-          <rect x="-17" y="-84" width="34" height="32" rx="3" class="bp-pump-motor"/>
-          <path d="M-46,6 Q-70,6 -70,-20 L-70,-30" fill="none" stroke="var(--line-faint)" stroke-width="10" stroke-linecap="round"/>
-          <circle class="bp-led on" cx="17" cy="-72" r="3.6"/>
-          <text class="bp-label" x="-10" y="70">PUMP</text>
-        </g>
-        <circle class="bp-hit" cx="0" cy="-10" r="58"/>
-      </g>
-
-      <!-- boiler with tube bank + drum + stack (interactive: click to ignite) -->
-      <g class="bp-boiler bp-interactive" data-role="boiler" data-name-fa="بویلر" data-name-en="Boiler" transform="translate(980,-10)" tabindex="0" role="button" aria-pressed="false">
-        <title data-fa="کلیک کن تا آتش زیر بویلر رو روشن یا خاموش کنی" data-en="Click to light or extinguish the boiler fire">کلیک کن تا آتش زیر بویلر رو روشن یا خاموش کنی</title>
-        <g class="bp-hover-target">
-          <ellipse class="bp-boiler-glow" cx="165" cy="205" rx="150" ry="35" fill="#e0703f"/>
-          <rect x="0" y="0" width="330" height="200" rx="8" class="bp-boiler-shell"/>
-          <path class="bp-boiler-tube" d="M26,36 h278 M26,66 h278 M26,96 h278 M26,126 h278 M26,156 h278 M26,182 h278"/>
-          <ellipse cx="165" cy="18" rx="120" ry="14" class="bp-boiler-drum"/>
-          <rect x="130" y="-46" width="34" height="50" class="bp-stack"/>
-          <g class="bp-steam">
-            <circle class="steam-puff s1" cx="147" cy="-50" r="7"/>
-            <circle class="steam-puff s2" cx="147" cy="-50" r="7"/>
-            <circle class="steam-puff s3" cx="147" cy="-50" r="7"/>
-          </g>
-          <g class="bp-flame">
-            <path class="flame-shape f1" d="M40,200 Q30,182 44,168 Q48,184 58,174 Q56,192 66,184 Q64,202 46,202 Z" fill="#e2622f"/>
-            <path class="flame-shape f2" d="M110,200 Q98,178 116,160 Q120,180 132,168 Q130,190 142,180 Q140,202 118,202 Z" fill="#f0864a"/>
-            <path class="flame-shape f3" d="M190,200 Q180,182 194,168 Q198,184 208,174 Q206,192 216,184 Q214,202 196,202 Z" fill="#e2622f"/>
-            <path class="flame-shape f2" d="M260,200 Q248,178 266,160 Q270,180 282,168 Q280,190 292,180 Q290,202 268,202 Z" fill="#f0864a"/>
-          </g>
-          <circle class="bp-led off" cx="310" cy="166" r="4"/>
-          <text class="bp-label" x="120" y="222">BOILER</text>
-        </g>
-        <rect class="bp-hit" x="-10" y="-56" width="350" height="270"/>
-      </g>
-
-      <!-- traveling droplets along the main flow -->
-      <circle class="bp-droplet" r="3.4">
-        <animateMotion dur="5.2s" repeatCount="indefinite"
-          path="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50"/>
-      </circle>
-      <circle class="bp-droplet" r="3.4" opacity=".7">
-        <animateMotion dur="5.2s" begin="1.7s" repeatCount="indefinite"
-          path="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50"/>
-      </circle>
-      <circle class="bp-droplet" r="3.4" opacity=".5">
-        <animateMotion dur="5.2s" begin="3.4s" repeatCount="indefinite"
-          path="M150,160 L430,160 L560,160 Q590,160 590,130 L590,80 Q590,50 620,50 L980,50"/>
-      </circle>
-    </svg>
-  </div>
-  <p class="banner-hint" data-fa="شیرها، پمپ و بویلر رو لمس کن — نیروگاه دست خودته" data-en="Tap the valves, pump, and boiler — the plant is yours to run">شیرها، پمپ و بویلر رو لمس کن — نیروگاه دست خودته</p>
-
-  <div class="profile-row">
-    <div class="avatar-block">
-      <div class="dim dim-top" data-fa="۲۲۰" data-en="220">۲۲۰</div>
-      <div class="dim dim-side" data-fa="۲۶۰" data-en="260">۲۶۰</div>
-      <div class="avatar-frame">
-        <img src="profile.jpg" alt="عکس محمدامین">
-      </div>
-      <span class="photo-tag">FIG. 01</span>
-    </div>
-
-    <div class="profile-info">
-      <div class="profile-top">
-        <h1 class="name" data-fa="محمدامین" data-en="Mohammadamin">محمدامین</h1>
-        <span class="badge">REV.A</span>
-      </div>
-      <div class="role" data-fa="دانشجوی مهندسی مکانیک" data-en="Mechanical Engineering Student">دانشجوی مهندسی مکانیک</div>
-      <p class="tagline" data-html data-fa="طراحی می‌کنم، می‌سازم و <span>محاسبه</span> می‌کنم." data-en="I design, build, and <span>calculate</span>.">طراحی می‌کنم، می‌سازم و <span>محاسبه</span> می‌کنم.</p>
-      <p class="bio" data-fa="روی طراحی مکانیکی، سیالات و توربوماشین‌ها کار می‌کنم و ابزارهایی می‌سازم که فرایند طراحی و بررسی مهندسی را ساده‌تر و دقیق‌تر می‌کنند." data-en="I work on mechanical design, fluids, and turbomachinery, and I build tools that make the engineering design and review process simpler and more precise.">روی طراحی مکانیکی، سیالات و توربوماشین‌ها کار می‌کنم و ابزارهایی می‌سازم که فرایند طراحی و بررسی مهندسی را ساده‌تر و دقیق‌تر می‌کنند.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#projects" data-fa="مشاهدهٔ پروژه‌ها" data-en="View projects">مشاهدهٔ پروژه‌ها</a>
-        <a class="btn btn-ghost" href="mailto:mohammadaminsh1384@gmail.com" data-fa="ارسال ایمیل" data-en="Email me">ارسال ایمیل</a>
-      </div>
-      <div class="stats-row">
-        <div class="stat"><span class="n" data-fa="۰۴" data-en="04">۰۴</span><span class="l" data-fa="دسته‌های مهارت" data-en="Skill categories">دسته‌های مهارت</span></div>
-        <div class="stat"><span class="n" data-fa="۰۳" data-en="03">۰۳</span><span class="l" data-fa="ابزار اصلی" data-en="Core tools">ابزار اصلی</span></div>
-        <div class="stat"><span class="n" data-fa="۰۱" data-en="01">۰۱</span><span class="l" data-fa="پروژهٔ منتشرشده" data-en="Shipped project">پروژهٔ منتشرشده</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tabbar">
-    <a class="tab" href="#about" data-fa="درباره" data-en="About">درباره</a>
-    <a class="tab" href="#skills" data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</a>
-    <a class="tab" href="#projects" data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</a>
-    <a class="tab" href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
-  </div>
-
-  <div class="titleblock">
-    <div class="tb-cell">
-      <div class="tb-label" data-fa="نام" data-en="Name">نام</div>
-      <div class="tb-value" data-fa="محمدامین" data-en="Mohammadamin">محمدامین</div>
-    </div>
-    <div class="tb-cell">
-      <div class="tb-label" data-fa="رشته" data-en="Field">رشته</div>
-      <div class="tb-value" data-fa="مهندسی مکانیک" data-en="Mechanical Engineering">مهندسی مکانیک</div>
-    </div>
-    <div class="tb-cell">
-      <div class="tb-label" data-fa="ایمیل" data-en="Email">ایمیل</div>
-      <div class="tb-value mono"><a href="mailto:mohammadaminsh1384@gmail.com">mohammadaminsh1384@gmail.com</a></div>
-    </div>
-    <div class="tb-cell">
-      <div class="tb-label" data-fa="شمارهٔ نقشه" data-en="Drawing No.">شمارهٔ نقشه</div>
-      <div class="tb-value mono">PORTFOLIO&nbsp;— REV.A</div>
-    </div>
-  </div>
-
-  <section id="about">
-    <div class="sec-head"><span class="sec-num">01</span><h2 data-fa="درباره من" data-en="About me">درباره من</h2><span class="divider"></span></div>
-    <div class="about-grid">
-      <div class="about">
-        <p data-html data-fa="علاقهٔ اصلی‌ام <strong>طراحی مکانیکی و توربوماشین‌هاست</strong>؛ از محاسبات اولیهٔ نقطهٔ طراحی تا انتخاب نوع پمپ و بررسی گام‌به‌گام فرایند طراحی. بیشتر وقتم بین نرم‌افزارهای CAD/CFD و ساخت ابزارهای کوچکی می‌گذرد که کار مهندسی روزمره را دقیق‌تر و منظم‌تر می‌کنند." data-en="My main interest is <strong>mechanical design and turbomachinery</strong> — from initial design-point calculations to pump-type selection and step-by-step review of the design process. Most of my time is split between CAD/CFD software and building small tools that make everyday engineering work more precise and organized.">
-          علاقهٔ اصلی‌ام <strong>طراحی مکانیکی و توربوماشین‌هاست</strong>؛ از محاسبات اولیهٔ نقطهٔ طراحی
-          تا انتخاب نوع پمپ و بررسی گام‌به‌گام فرایند طراحی. بیشتر وقتم بین نرم‌افزارهای CAD/CFD
-          و ساخت ابزارهای کوچکی می‌گذرد که کار مهندسی روزمره را دقیق‌تر و منظم‌تر می‌کنند.
-        </p>
-        <p data-html data-fa="به ترکیب <strong>دقت مهندسی</strong> با <strong>طراحی کاربردی نرم‌افزار</strong> علاقه دارم؛ پروژهٔ زیر نمونه‌ای از همین نگاه است." data-en="I like combining <strong>engineering precision</strong> with <strong>practical software design</strong> — the project below is one example of that approach.">
-          به ترکیب <strong>دقت مهندسی</strong> با <strong>طراحی کاربردی نرم‌افزار</strong> علاقه دارم؛
-          پروژهٔ زیر نمونه‌ای از همین نگاه است.
-        </p>
-      </div>
-      <ul class="focus-list">
-        <li><b>SCOPE</b><span data-fa="طراحی مکانیکی و تحلیل سیالات" data-en="Mechanical design & fluid analysis">طراحی مکانیکی و تحلیل سیالات</span></li>
-        <li><b>FOCUS</b><span data-fa="توربوماشین‌ها و پمپ‌های سانتریفیوژ" data-en="Turbomachinery & centrifugal pumps">توربوماشین‌ها و پمپ‌های سانتریفیوژ</span></li>
-        <li><b>TOOLS</b><span data-fa="CFTurbo · SolidWorks · MATLAB" data-en="CFTurbo · SolidWorks · MATLAB">CFTurbo · SolidWorks · MATLAB</span></li>
-        <li><b>NOW</b><span data-fa="ساخت ابزارهای دیجیتال برای فرایند طراحی" data-en="Building digital tools for the design process">ساخت ابزارهای دیجیتال برای فرایند طراحی</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="sec-head"><span class="sec-num">02</span><h2 data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</h2><span class="divider"></span></div>
-    <div class="datasheet-wrap">
-    <table class="datasheet">
-      <thead>
-        <tr>
-          <th style="width:26%" data-fa="دسته" data-en="Category">دسته</th>
-          <th data-fa="موارد" data-en="Items">موارد</th>
-          <th style="width:14%" data-fa="سطح" data-en="Level">سطح</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="ds-cat" data-fa="طراحی و مدل‌سازی" data-en="Design & modeling">طراحی و مدل‌سازی</td>
-          <td class="ds-items" data-fa="مدل‌سازی سه‌بعدی، نقشه‌کشی فنی، طراحی قطعات و مجموعه‌ها" data-en="3D modeling, technical drafting, part & assembly design">مدل‌سازی سه‌بعدی، نقشه‌کشی فنی، طراحی قطعات و مجموعه‌ها</td>
-          <td class="ds-level">••••○</td>
-        </tr>
-        <tr>
-          <td class="ds-cat" data-fa="سیالات و توربوماشین" data-en="Fluids & turbomachinery">سیالات و توربوماشین</td>
-          <td class="ds-items" data-fa="طراحی پمپ سانتریفیوژ، محاسبهٔ nq، انتخاب نوع پروانه" data-en="Centrifugal pump design, nq calculation, impeller type selection">طراحی پمپ سانتریفیوژ، محاسبهٔ nq، انتخاب نوع پروانه</td>
-          <td class="ds-level">••••○</td>
-        </tr>
-        <tr>
-          <td class="ds-cat" data-fa="محاسبات و ابزار" data-en="Calculations & tools">محاسبات و ابزار</td>
-          <td class="ds-items" data-fa="محاسبات مهندسی، اسکریپت‌نویسی برای ابزارهای طراحی" data-en="Engineering calculations, scripting for design tools">محاسبات مهندسی، اسکریپت‌نویسی برای ابزارهای طراحی</td>
-          <td class="ds-level">•••○○</td>
-        </tr>
-        <tr>
-          <td class="ds-cat" data-fa="توسعهٔ نرم‌افزار" data-en="Software development">توسعهٔ نرم‌افزار</td>
-          <td class="ds-items" data-fa="ساخت ابزارهای وب برای فرایندهای مهندسی (HTML/JS)" data-en="Building web tools for engineering workflows (HTML/JS)">ساخت ابزارهای وب برای فرایندهای مهندسی (HTML/JS)</td>
-          <td class="ds-level">•••○○</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="sec-head"><span class="sec-num">03</span><h2 data-fa="پروژه‌ها" data-en="Projects">پروژه‌ها</h2><span class="divider"></span></div>
-
-    <div class="folder-grid" id="folderGrid">
-      <div class="folder-card" data-folder="pump-design" tabindex="0" role="button" aria-expanded="false">
-        <span class="folder-icon">
-          <svg class="folder-closed" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4,12 h20 l6,8 h30 a4,4 0 0 1 4,4 v22 a4,4 0 0 1 -4,4 h-56 a4,4 0 0 1 -4,-4 v-30 a4,4 0 0 1 4,-4 z" fill="var(--brass-dim)"/>
-            <path d="M2,20 h60 v22 a4,4 0 0 1 -4,4 h-52 a4,4 0 0 1 -4,-4 z" fill="var(--brass)"/>
-          </svg>
-          <svg class="folder-open" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4,12 h20 l6,8 h26 a4,4 0 0 1 4,4 v2 h-56 z" fill="var(--brass-dim)"/>
-            <path d="M2,20 h58 l-6,26 a4,4 0 0 1 -4,3 h-42 a4,4 0 0 1 -4,-3 z" fill="var(--brass)"/>
-          </svg>
-        </span>
-        <span class="folder-info">
-          <span class="folder-name" data-fa="طراحی پمپ" data-en="Pump Design">طراحی پمپ</span>
-          <span class="folder-count" data-fa="۱ پروژه" data-en="1 project">۱ پروژه</span>
-        </span>
-        <span class="folder-chevron">‹</span>
-      </div>
-
-      <div class="folder-card" data-folder="solidworks" tabindex="0" role="button" aria-expanded="false">
-        <span class="folder-icon">
-          <svg class="folder-closed" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4,12 h20 l6,8 h30 a4,4 0 0 1 4,4 v22 a4,4 0 0 1 -4,4 h-56 a4,4 0 0 1 -4,-4 v-30 a4,4 0 0 1 4,-4 z" fill="var(--brass-dim)"/>
-            <path d="M2,20 h60 v22 a4,4 0 0 1 -4,4 h-52 a4,4 0 0 1 -4,-4 z" fill="var(--brass)"/>
-          </svg>
-          <svg class="folder-open" viewBox="0 0 64 52" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4,12 h20 l6,8 h26 a4,4 0 0 1 4,4 v2 h-56 z" fill="var(--brass-dim)"/>
-            <path d="M2,20 h58 l-6,26 a4,4 0 0 1 -4,3 h-42 a4,4 0 0 1 -4,-3 z" fill="var(--brass)"/>
-          </svg>
-        </span>
-        <span class="folder-info">
-          <span class="folder-name" data-fa="سالیدورکس" data-en="SolidWorks">سالیدورکس</span>
-          <span class="folder-count" data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span>
-        </span>
-        <span class="folder-chevron">‹</span>
-      </div>
-    </div>
-
-    <div class="folder-contents" id="folder-pump-design" hidden>
-      <div class="folder-contents-head">
-        <button class="folder-back" type="button" data-close-folder data-fa="بازگشت به پوشه‌ها" data-en="Back to folders">بازگشت به پوشه‌ها</button>
-        <span data-fa="/ طراحی پمپ" data-en="/ Pump Design">/ طراحی پمپ</span>
-      </div>
-      <div class="project-card">
-        <div class="project-visual">
-          <div class="ptag">PROJECT — 01</div>
-          <div class="pname" data-html data-fa="چک‌لیست طراحی پمپ<br>CFTurbo" data-en="CFTurbo Pump Design<br>Checklist">چک‌لیست طراحی پمپ<br>CFTurbo</div>
-          <div class="spec-line"><span data-fa="نوع" data-en="Type">نوع</span><b data-fa="ابزار وب تعاملی" data-en="Interactive web tool">ابزار وب تعاملی</b></div>
-          <div class="spec-line"><span data-fa="زبان" data-en="Language">زبان</span><b data-fa="فارسی (RTL)" data-en="Persian (RTL)">فارسی (RTL)</b></div>
-          <div class="spec-line"><span data-fa="خروجی" data-en="Output">خروجی</span><b>Word · Excel</b></div>
-        </div>
-        <div class="project-body">
-          <p data-fa="ابزاری برای پیگیری گام‌به‌گام فرایند طراحی پمپ در CFTurbo: محاسبهٔ نقطهٔ طراحی و سرعت مخصوص (nq)، پیشنهاد نوع پمپ متناسب، ثبت وضعیت هر مرحله، مقایسهٔ دو پروژه، همگام‌سازی آنلاین بین دستگاه‌ها و خروجی گرفتن به‌صورت Word و Excel." data-en="A tool for tracking the CFTurbo pump design process step by step: design-point and specific-speed (nq) calculation, matching pump-type suggestions, per-step status tracking, comparing two projects, online sync across devices, and Word/Excel export.">
-            ابزاری برای پیگیری گام‌به‌گام فرایند طراحی پمپ در CFTurbo: محاسبهٔ نقطهٔ طراحی و سرعت
-            مخصوص (nq)، پیشنهاد نوع پمپ متناسب، ثبت وضعیت هر مرحله، مقایسهٔ دو پروژه، همگام‌سازی
-            آنلاین بین دستگاه‌ها و خروجی گرفتن به‌صورت Word و Excel.
+  <!-- Hero Section -->
+  <div class="container">
+    <section class="hero" style="border-top: none;">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-meta">
+            IRAN UNIVERSITY OF SCIENCE & TECHNOLOGY (IUST)
+          </div>
+          <h1 class="hero-title">
+            MOHAMMADAMIN<br>SHARIF
+          </h1>
+          <p class="hero-sub">
+            Mechanical Engineering Student. Focused on centrifugal pump architecture, computational fluid dynamics, and microfluidic chip design.
           </p>
-          <div class="tag-row">
-            <span class="tag-chip">Pump Design</span>
-            <span class="tag-chip">CFTurbo</span>
-            <span class="tag-chip">Checklist Tool</span>
-            <span class="tag-chip">HTML / JS</span>
+          <div style="display: flex; gap: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">
+            <span>[FLUID MECHANICS]</span>
+            <span>[PUMP DESIGN]</span>
+            <span>[MICROFLUIDICS]</span>
           </div>
-          <div class="project-links">
-            <a class="btn btn-primary" href="projects/cfturbo-pump-checklist.html" data-fa="باز کردن ابزار" data-en="Open tool">باز کردن ابزار</a>
+        </div>
+
+        <div class="hero-visual" id="heroVisualContainer">
+          <div class="visual-overlay-info">
+            SYSTEM: VELOCITY VECTOR FIELD<br>
+            GRID: 40x40 MESH<br>
+            STATUS: ACTIVE SIMULATION
+          </div>
+          <canvas id="heroCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Engineering Visualizations -->
+  <section id="simulations">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">ENGINEERING INTERACTION MODULES</h2>
+      </div>
+
+      <div class="sim-grid">
+        <!-- Module 1: Microfluidic Flow -->
+        <div class="sim-card">
+          <div class="sim-card-header">
+            <span class="sim-title">MICROFLUIDIC CHIP FLOW</span>
+            <i data-lucide="cpu" style="width: 16px; color: var(--accent-cyan);"></i>
+          </div>
+          <div class="sim-canvas-container" id="microContainer">
+            <canvas id="microCanvas"></canvas>
+          </div>
+          <div class="sim-controls">
+            <span>VELOCITY FIELD:</span>
+            <button class="control-btn" id="microSpeedBtn">TOGGLE FLOW RATE</button>
+          </div>
+        </div>
+
+        <!-- Module 2: Impeller Cross-Section -->
+        <div class="sim-card">
+          <div class="sim-card-header">
+            <span class="sim-title">CENTRIFUGAL IMPELLER KINEMATICS</span>
+            <i data-lucide="disc" style="width: 16px; color: var(--accent-cyan);"></i>
+          </div>
+          <div class="sim-canvas-container" id="pumpContainer">
+            <canvas id="pumpCanvas"></canvas>
+          </div>
+          <div class="sim-controls">
+            <span>ROTATION RPM:</span>
+            <button class="control-btn" id="pumpRPMBtn">ADJUST RPM</button>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="folder-contents" id="folder-solidworks" hidden>
-      <div class="folder-contents-head">
-        <button class="folder-back" type="button" data-close-folder data-fa="بازگشت به پوشه‌ها" data-en="Back to folders">بازگشت به پوشه‌ها</button>
-        <span data-fa="/ سالیدورکس" data-en="/ SolidWorks">/ سالیدورکس</span>
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">EXECUTED PROJECTS & TOOLS</h2>
       </div>
-      <div class="folder-empty" data-fa="پروژه‌های سالیدورکس به‌زودی اینجا اضافه می‌شوند." data-en="SolidWorks projects will be added here soon.">
-        پروژه‌های سالیدورکس به‌زودی اینجا اضافه می‌شوند.
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-preview">
+            <div>
+              <span class="project-meta-badge">TURBOMACHINERY TOOL</span>
+              <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 18px; font-weight: 600;">
+                CFTurbo Pump Design & Workflow Verification Checklist
+              </div>
+            </div>
+
+            <div class="project-metrics">
+              <div class="metric-item">
+                <div class="metric-label">Core Calculation</div>
+                <div class="metric-val">nq / Specific Speed</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">Export Modules</div>
+                <div class="metric-val">Docx / Xlsx</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <div class="project-desc">
+                Interactive engineering web platform designed to streamline and verify step-by-step centrifugal pump design routines in CFTurbo. Computes design points, determines optimal specific speed ($n_q$), suggests matching impeller geometry, and provides project state tracking and data synchronization.
+              </div>
+              <div class="project-tags">
+                <span class="tag">CFTurbo</span>
+                <span class="tag">Pump Design</span>
+                <span class="tag">Fluid Mechanics</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+
+            <a href="projects/cfturbo-pump-checklist.html" class="action-btn" data-hover="OPEN">
+              EXECUTE TOOL <i data-lucide="arrow-up-right" style="width: 14px;"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Technical Specs & Datasheet -->
+  <section id="specs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">TECHNICAL SPECIFICATIONS & METHODS</h2>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 40px;">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Technical Competencies & Methodologies</th>
+              <th>Software / Environments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tech-category">Fluid Dynamics & Turbomachinery</td>
+              <td>Centrifugal pump design, specific speed ($n_q$) computation, impeller profile definition, flow path analysis.</td>
+              <td>CFTurbo, MATLAB</td>
+            </tr>
+            <tr>
+              <td class="tech-category">3D Modeling & CAD</td>
+              <td>Technical drafting, part assemblies, geometry generation for simulation inputs.</td>
+              <td>SolidWorks</td>
+            </tr>
+            <tr>
+              <td class="tech-category">Microfluidics</td>
+              <td>Microfluidic chip geometry layout, microchannel flow analysis, droplet/particle movement concepts.</td>
+              <td>CAD / Analytical Methods</td>
+            </tr>
+            <tr>
+              <td class="tech-category">Engineering Computation</td>
+              <td>Algorithm design for mechanical calculations, workflow automation, technical web applications.</td>
+              <td>HTML5, JavaScript, Python</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Factual Profile Grid -->
+      <div class="profile-grid">
+        <div class="data-card">
+          <div class="data-card-label">INSTITUTION</div>
+          <div class="data-card-val">Iran University of Science and Technology (IUST)</div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">DEGREE PROGRAM</div>
+          <div class="data-card-val">B.Sc. Mechanical Engineering</div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">PRIMARY FOCUS</div>
+          <div class="data-card-val">Fluid Systems, Pumps & Microfluidics</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
   <section id="contact">
-    <div class="sec-head"><span class="sec-num">04</span><h2 data-fa="تماس" data-en="Contact">تماس</h2><span class="divider"></span></div>
-    <div class="contact-card">
-      <div>
-        <h3 data-fa="در حال ساخت پروژهٔ جدیدی هستید؟" data-en="Building something new?">در حال ساخت پروژهٔ جدیدی هستید؟</h3>
-        <p data-fa="برای همکاری، مشاوره یا صرفاً گفت‌وگو دربارهٔ طراحی مکانیکی، از طریق ایمیل در ارتباط باشید." data-en="For collaboration, consulting, or just talking about mechanical design, reach out by email.">برای همکاری، مشاوره یا صرفاً گفت‌وگو دربارهٔ طراحی مکانیکی، از طریق ایمیل در ارتباط باشید.</p>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">COMMUNICATION DIRECTORY</h2>
       </div>
-      <div class="contact-links">
-        <a class="btn btn-primary" href="mailto:mohammadaminsh1384@gmail.com">mohammadaminsh1384@gmail.com</a>
+
+      <div class="contact-block">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 600; margin-bottom: 6px;">
+            MOHAMMADAMIN SHARIF
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">
+            Mechanical Engineering Student — IUST
+          </div>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:mohammadaminsh1384@gmail.com" class="contact-link-item" data-hover="MAIL">
+            <i data-lucide="mail" style="width: 14px;"></i> mohammadaminsh1384@gmail.com
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <span>DWG NO. PORTFOLIO-2026 · SCALE N/A</span>
-    <span data-fa="© 2026 محمدامین — مهندسی مکانیک" data-en="© 2026 Mohammadamin — Mechanical Engineering">© 2026 محمدامین — مهندسی مکانیک</span>
-  </footer>
-</div>
+  <!-- Footer -->
+  <div class="container">
+    <footer>
+      <div>MOHAMMADAMIN SHARIF © 2026</div>
+      <div>REF: ENG-PORTFOLIO // LATENCY: OPTIMIZED</div>
+    </footer>
+  </div>
 
-<script>
-(function(){
-  var KEY = 'site-lang';
-  var titleFa = 'محمدامین — مهندسی مکانیک';
-  var titleEn = 'Mohammadamin — Mechanical Engineering';
-  var descFa = 'نمونه‌کار محمدامین، دانشجوی مهندسی مکانیک — طراحی، توربوماشین و ابزارهای مهندسی.';
-  var descEn = 'Portfolio of Mohammadamin, a mechanical engineering student — design, turbomachinery, and engineering tools.';
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
 
-  function apply(lang){
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-    document.querySelectorAll('[data-fa]').forEach(function(el){
-      var val = lang === 'fa' ? el.getAttribute('data-fa') : el.getAttribute('data-en');
-      if (val === null) return;
-      if (el.hasAttribute('data-html')) { el.innerHTML = val; } else { el.textContent = val; }
-    });
-    var langBtn = document.getElementById('langBtn');
-    if (langBtn) langBtn.textContent = lang === 'fa' ? 'EN' : 'فا';
-    document.title = lang === 'fa' ? titleFa : titleEn;
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', lang === 'fa' ? descFa : descEn);
-    try { localStorage.setItem(KEY, lang); } catch(e){}
-  }
-
-  function stored(){
-    try { return localStorage.getItem(KEY) || 'fa'; } catch(e){ return 'fa'; }
-  }
-
-  var THEME_KEY = 'site-theme';
-  function applyTheme(theme){
-    document.body.classList.toggle('theme-light', theme === 'light');
-    var themeBtn = document.getElementById('themeBtn');
-    if (themeBtn) themeBtn.textContent = theme === 'light' ? '☾' : '☀';
-    try { localStorage.setItem(THEME_KEY, theme); } catch(e){}
-  }
-  function storedTheme(){
-    try { return localStorage.getItem(THEME_KEY) || 'dark'; } catch(e){ return 'dark'; }
-  }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    apply(stored());
-    applyTheme(storedTheme());
-
-    var langBtn = document.getElementById('langBtn');
-    if (langBtn){
-      langBtn.addEventListener('click', function(){
-        apply(document.documentElement.lang === 'fa' ? 'en' : 'fa');
-      });
-    }
-
-    var themeBtn = document.getElementById('themeBtn');
-    if (themeBtn){
-      themeBtn.addEventListener('click', function(){
-        applyTheme(document.body.classList.contains('theme-light') ? 'dark' : 'light');
-      });
-    }
-
-    var folderCards = Array.prototype.slice.call(document.querySelectorAll('.folder-card'));
-    function closeAllFolders(){
-      folderCards.forEach(function(c){ c.classList.remove('is-open'); c.setAttribute('aria-expanded','false'); });
-      document.querySelectorAll('.folder-contents').forEach(function(fc){ fc.hidden = true; });
-    }
-    function openFolder(name){
-      closeAllFolders();
-      var card = document.querySelector('.folder-card[data-folder="' + name + '"]');
-      var panel = document.getElementById('folder-' + name);
-      if (card){ card.classList.add('is-open'); card.setAttribute('aria-expanded','true'); }
-      if (panel){ panel.hidden = false; panel.scrollIntoView({behavior:'smooth', block:'nearest'}); }
-    }
-    folderCards.forEach(function(card){
-      card.addEventListener('click', function(){ openFolder(card.getAttribute('data-folder')); });
-      card.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openFolder(card.getAttribute('data-folder')); }
-      });
-    });
-    document.querySelectorAll('[data-close-folder]').forEach(function(btn){
-      btn.addEventListener('click', closeAllFolders);
+    // Custom Interactive Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
     });
 
-    // ---------- interactive power-plant banner ----------
-    (function(){
-      var svg = document.querySelector('.banner-svg');
-      if (!svg) return;
-      var pump = svg.querySelector('.bp-pump');
-      var valves = Array.prototype.slice.call(svg.querySelectorAll('.bp-valve'));
-      var boiler = svg.querySelector('.bp-boiler');
-
-      var pumpOn = true;
-      var valveOpen = { };
-      valves.forEach(function(v, i){ valveOpen[i] = true; });
-
-      function setLed(group, on){
-        var led = group.querySelector('.bp-led');
-        if (!led) return;
-        led.classList.toggle('on', on);
-        led.classList.toggle('off', !on);
-      }
-
-      function refreshFlow(){
-        var allOpen = valves.every(function(v, i){ return valveOpen[i]; });
-        var flowing = pumpOn && allOpen;
-        svg.classList.toggle('is-stopped', !flowing);
-        try {
-          if (flowing) { svg.unpauseAnimations && svg.unpauseAnimations(); }
-          else { svg.pauseAnimations && svg.pauseAnimations(); }
-        } catch(e){}
-      }
-
-      function togglePump(){
-        pumpOn = !pumpOn;
-        pump.classList.toggle('is-off', !pumpOn);
-        pump.setAttribute('aria-pressed', pumpOn ? 'true' : 'false');
-        setLed(pump, pumpOn);
-        refreshFlow();
-      }
-
-      function toggleValve(idx){
-        var group = valves[idx];
-        valveOpen[idx] = !valveOpen[idx];
-        group.classList.toggle('is-closed', !valveOpen[idx]);
-        group.setAttribute('aria-pressed', valveOpen[idx] ? 'false' : 'true');
-        setLed(group, valveOpen[idx]);
-        refreshFlow();
-      }
-
-      function toggleBoiler(){
-        var lit = boiler.classList.toggle('is-lit');
-        boiler.setAttribute('aria-pressed', lit ? 'true' : 'false');
-        setLed(boiler, lit);
-      }
-
-      pump.addEventListener('click', togglePump);
-      pump.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); togglePump(); }
+    document.querySelectorAll('[data-hover]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('active');
+        cursor.innerText = el.getAttribute('data-hover');
       });
-
-      valves.forEach(function(group, idx){
-        group.addEventListener('click', function(){ toggleValve(idx); });
-        group.addEventListener('keydown', function(e){
-          if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleValve(idx); }
-        });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('active');
+        cursor.innerText = '';
       });
+    });
 
-      boiler.addEventListener('click', toggleBoiler);
-      boiler.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleBoiler(); }
-      });
+    // --- Interactive Visual 1: Hero Particle Vector Field ---
+    const heroCanvas = document.getElementById('heroCanvas');
+    const heroCtx = heroCanvas.getContext('2d');
 
-      refreshFlow();
-    })();
-
-    // ---------- ambient corner plant nodes ----------
-    (function(){
-      var nodes = Array.prototype.slice.call(document.querySelectorAll('.corner-node[data-cn]'));
-      var bgPipes = document.querySelector('.bg-pipes');
-      if (!nodes.length) return;
-
-      function refresh(){
-        var anyOn = nodes.some(function(n){ return n.classList.contains('is-on'); });
-        if (bgPipes) bgPipes.classList.toggle('is-flowing', anyOn);
-      }
-      nodes.forEach(function(node){
-        node.addEventListener('click', function(){
-          var on = node.classList.toggle('is-on');
-          node.setAttribute('aria-pressed', on ? 'true' : 'false');
-          var led = node.querySelector('.cn-led');
-          if (led){ led.classList.toggle('on', on); led.classList.toggle('off', !on); }
-          refresh();
-        });
-      });
-      refresh();
-    })();
-
-    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-    var sections = tabs.map(function(t){ return document.querySelector(t.getAttribute('href')); });
-    if ('IntersectionObserver' in window){
-      var obs = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if (entry.isIntersecting){
-            var id = '#' + entry.target.id;
-            tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('href') === id); });
-          }
-        });
-      }, { rootMargin: '-35% 0px -55% 0px' });
-      sections.forEach(function(s){ if (s) obs.observe(s); });
+    function resizeHeroCanvas() {
+      const rect = heroCanvas.parentElement.getBoundingClientRect();
+      heroCanvas.width = rect.width;
+      heroCanvas.height = rect.height;
     }
-  });
-})();
-</script>
+    resizeHeroCanvas();
+    window.addEventListener('resize', resizeHeroCanvas);
 
+    let particles = [];
+    const particleCount = 65;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * heroCanvas.width,
+        y: Math.random() * heroCanvas.height,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2,
+        history: []
+      });
+    }
+
+    let mouse = { x: -1000, y: -1000 };
+    heroCanvas.addEventListener('mousemove', (e) => {
+      const rect = heroCanvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    function renderHero() {
+      heroCtx.fillStyle = 'rgba(9, 11, 14, 0.2)';
+      heroCtx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
+
+      // Draw subtle background grid
+      heroCtx.strokeStyle = 'rgba(30, 38, 51, 0.3)';
+      heroCtx.lineWidth = 1;
+      const step = 30;
+      for (let x = 0; x < heroCanvas.width; x += step) {
+        heroCtx.beginPath();
+        heroCtx.moveTo(x, 0);
+        heroCtx.lineTo(x, heroCanvas.height);
+        heroCtx.stroke();
+      }
+      for (let y = 0; y < heroCanvas.height; y += step) {
+        heroCtx.beginPath();
+        heroCtx.moveTo(0, y);
+        heroCtx.lineTo(heroCanvas.width, y);
+        heroCtx.stroke();
+      }
+
+      // Update and draw fluid particles
+      particles.forEach(p => {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          const angle = Math.atan2(dy, dx);
+          p.vx -= Math.cos(angle) * 0.2;
+          p.vy -= Math.sin(angle) * 0.2;
+        }
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = heroCanvas.width;
+        if (p.x > heroCanvas.width) p.x = 0;
+        if (p.y < 0) p.y = heroCanvas.height;
+        if (p.y > heroCanvas.height) p.y = 0;
+
+        heroCtx.fillStyle = '#00f2fe';
+        heroCtx.beginPath();
+        heroCtx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        heroCtx.fill();
+      });
+
+      requestAnimationFrame(renderHero);
+    }
+    renderHero();
+
+    // --- Interactive Visual 2: Microfluidic Chip Visual ---
+    const microCanvas = document.getElementById('microCanvas');
+    const microCtx = microCanvas.getContext('2d');
+    let microFlowSpeed = 2;
+
+    function resizeMicro() {
+      const rect = microCanvas.parentElement.getBoundingClientRect();
+      microCanvas.width = rect.width;
+      microCanvas.height = rect.height;
+    }
+    resizeMicro();
+    window.addEventListener('resize', resizeMicro);
+
+    let microParticles = [];
+    for (let i = 0; i < 30; i++) {
+      microParticles.push({
+        x: Math.random() * microCanvas.width,
+        y: microCanvas.height / 2 + (Math.random() - 0.5) * 20
+      });
+    }
+
+    document.getElementById('microSpeedBtn').addEventListener('click', () => {
+      microFlowSpeed = microFlowSpeed === 2 ? 6 : 2;
+    });
+
+    function renderMicro() {
+      microCtx.fillStyle = '#090b0e';
+      microCtx.fillRect(0, 0, microCanvas.width, microCanvas.height);
+
+      const h = microCanvas.height;
+      const w = microCanvas.width;
+
+      // Draw Microchannel Geometry
+      microCtx.strokeStyle = '#2e3c52';
+      microCtx.lineWidth = 2;
+      microCtx.beginPath();
+      microCtx.moveTo(0, h / 2 - 25);
+      microCtx.lineTo(w, h / 2 - 25);
+      microCtx.moveTo(0, h / 2 + 25);
+      microCtx.lineTo(w, h / 2 + 25);
+      microCtx.stroke();
+
+      // Flow Particles
+      microCtx.fillStyle = '#00f2fe';
+      microParticles.forEach(p => {
+        p.x += microFlowSpeed;
+        if (p.x > w) p.x = 0;
+
+        microCtx.beginPath();
+        microCtx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        microCtx.fill();
+      });
+
+      requestAnimationFrame(renderMicro);
+    }
+    renderMicro();
+
+    // --- Interactive Visual 3: Impeller Geometry Rotation ---
+    const pumpCanvas = document.getElementById('pumpCanvas');
+    const pumpCtx = pumpCanvas.getContext('2d');
+    let angle = 0;
+    let rpmSpeed = 0.02;
+
+    function resizePump() {
+      const rect = pumpCanvas.parentElement.getBoundingClientRect();
+      pumpCanvas.width = rect.width;
+      pumpCanvas.height = rect.height;
+    }
+    resizePump();
+    window.addEventListener('resize', resizePump);
+
+    document.getElementById('pumpRPMBtn').addEventListener('click', () => {
+      rpmSpeed = rpmSpeed === 0.02 ? 0.07 : 0.02;
+    });
+
+    function renderPump() {
+      pumpCtx.fillStyle = '#090b0e';
+      pumpCtx.fillRect(0, 0, pumpCanvas.width, pumpCanvas.height);
+
+      const cx = pumpCanvas.width / 2;
+      const cy = pumpCanvas.height / 2;
+      const radius = 50;
+
+      pumpCtx.save();
+      pumpCtx.translate(cx, cy);
+      pumpCtx.rotate(angle);
+
+      // Outer Ring
+      pumpCtx.strokeStyle = '#2e3c52';
+      pumpCtx.lineWidth = 2;
+      pumpCtx.beginPath();
+      pumpCtx.arc(0, 0, radius, 0, Math.PI * 2);
+      pumpCtx.stroke();
+
+      // Blades
+      pumpCtx.strokeStyle = '#00f2fe';
+      for (let i = 0; i < 6; i++) {
+        pumpCtx.rotate((Math.PI * 2) / 6);
+        pumpCtx.beginPath();
+        pumpCtx.moveTo(10, 0);
+        pumpCtx.quadraticCurveTo(25, 20, radius, 0);
+        pumpCtx.stroke();
+      }
+
+      pumpCtx.restore();
+      angle += rpmSpeed;
+
+      requestAnimationFrame(renderPump);
+    }
+    renderPump();
+  </script>
 </body>
 </html>
