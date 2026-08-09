@@ -560,12 +560,63 @@
       justify-content: space-between;
     }
 
+    /* Hamburger button: hidden by default (desktop/laptop untouched) */
+    .hamburger-btn { display: none; }
+
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .interactive-module { grid-template-columns: 1fr; }
       .info-section { grid-template-columns: 1fr; }
       .hero-title { font-size: 40px; }
       .hero-title span { font-size: 32px; }
+
+      /* Collapse the nav links into a dropdown driven by the hamburger button */
+      .hamburger-btn { display: flex; order: -1; }
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        padding: 4px 24px 12px;
+        z-index: 100;
+      }
+      .nav-menu.mobile-open { display: flex; }
+      .nav-menu .nav-link {
+        display: block;
+        padding: 14px 0;
+        border-bottom: 1px dashed var(--border);
+        font-size: 12px;
+      }
+      .nav-menu li:last-child .nav-link { border-bottom: none; }
+
+      /* Grids that assumed wide cards need to stack on narrow viewports */
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .container { padding: 0 18px; }
+      .hero-specs { grid-template-columns: 1fr; }
+      .hero-visual { height: 320px; }
+      .hero-title { font-size: 30px; }
+      .hero-title span { font-size: 24px; }
+      .section-title-text { font-size: 20px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .nav-brand { font-size: 11px; gap: 6px; }
+      .nav-tools { gap: 6px; margin-left: 12px; }
+      .tool-btn { padding: 7px 8px; }
+      #langToggleLabel { display: none; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+      .profile-card { flex-direction: column; text-align: center; }
+      .contact-row { flex-wrap: wrap; gap: 4px; }
+    }
+
+    /* Touch devices have no hover-driven cursor to move, so hide the custom dot */
+    @media (pointer: coarse) {
+      .custom-cursor { display: none; }
     }
   </style>
 </head>
@@ -589,6 +640,10 @@
         <li><a href="#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
       </ul>
       <div class="nav-tools">
+        <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
+          <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
+          <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
+        </button>
         <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
           <i data-lucide="languages" style="width: 16px;"></i>
           <span id="langToggleLabel">FA</span>
@@ -1083,6 +1138,26 @@
       const next = current === 'fa' ? 'en' : 'fa';
       applyLanguage(next);
       localStorage.setItem('site-lang', next);
+    });
+
+    // --- MOBILE NAV MENU TOGGLE ---
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navMenuEl = document.querySelector('.nav-menu');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+
+    function setMobileMenu(open) {
+      navMenuEl.classList.toggle('mobile-open', open);
+      menuIconOpen.style.display = open ? 'none' : 'block';
+      menuIconClose.style.display = open ? 'block' : 'none';
+    }
+
+    mobileMenuToggle.addEventListener('click', () => {
+      setMobileMenu(!navMenuEl.classList.contains('mobile-open'));
+    });
+
+    navMenuEl.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => setMobileMenu(false));
     });
 
     // Custom Cursor Movement
