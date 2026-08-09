@@ -387,6 +387,16 @@
       opacity: 0.7;
       transition: var(--transition);
     }
+    .project-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition);
+    }
+    .project-card:hover .project-preview img {
+      transform: scale(1.04);
+    }
     .project-card:hover .project-preview-icon {
       transform: scale(1.1) rotate(5deg);
       opacity: 1;
@@ -797,21 +807,95 @@
         <span data-en="3D SAMPLE" data-fa="نمونه سه‌بعدی">3D SAMPLE</span>
       </div>
       <div class="projects-grid">
-        <div class="project-card project-card-placeholder" style="cursor: default;">
+
+        <!-- 3D 01: MODEL ROCKET ASSEMBLY -->
+        <a href="assets/downloads/solidworks/rocket-assembly.zip" download class="project-card">
           <div class="project-preview">
-            <i data-lucide="box" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+            <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="Model Rocket Assembly render">
           </div>
           <div class="project-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title" data-en="3D models coming soon" data-fa="نمونه‌های سه‌بعدی به‌زودی">3D models coming soon</h3>
+                <h3 class="project-title" data-en="Model Rocket Assembly" data-fa="مونتاژ راکت مدل">Model Rocket Assembly</h3>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="This section will showcase 3D SolidWorks models." data-fa="این بخش نمونه‌های سه‌بعدی طراحی‌شده در سالیدورکس را نمایش خواهد داد.">
-                This section will showcase 3D SolidWorks models.
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Full multi-stage model rocket assembly, including engine, fuel tank, nose cone, reducer, and stage-to-stage connections." data-fa="مونتاژ کامل چندمرحله‌ای راکت مدل شامل موتور، مخزن سوخت، نوک مخروطی، رابط کاهنده و اتصالات بین مراحل.">
+                Full multi-stage model rocket assembly, including engine, fuel tank, nose cone, reducer, and stage-to-stage connections.
               </p>
             </div>
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag" data-en="Assembly" data-fa="مونتاژ">Assembly</span>
+              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
+            </div>
           </div>
-        </div>
+        </a>
+
+        <!-- 3D 02: SHOCK ASSEMBLY -->
+        <a href="assets/downloads/solidworks/shock-assembly.zip" download class="project-card">
+          <div class="project-preview">
+            <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Shock Assembly" data-fa="مجموعه ضربه‌گیر">Shock Assembly</h3>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Pivoting shock/suspension linkage built from a bracket, pivot, U-support, bushing, washer, and fastener set (bolt, castle nut, self-locking nut)." data-fa="لینک ضربه‌گیر/تعلیق چرخشی متشکل از بریکت، پیوت، U-ساپورت، بوش، واشر و مجموعه پیچ‌ومهره (پیچ، مهره قفلی، مهره خودقفل‌شونده).">
+                Pivoting shock/suspension linkage built from a bracket, pivot, U-support, bushing, washer, and fastener set (bolt, castle nut, self-locking nut).
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag" data-en="Assembly" data-fa="مونتاژ">Assembly</span>
+              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3D 03: CLAMP MECHANISM -->
+        <a href="assets/downloads/solidworks/clamp-assembly.zip" download class="project-card">
+          <div class="project-preview">
+            <i data-lucide="wrench" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Bench Clamp Mechanism" data-fa="مکانیزم گیره رومیزی">Bench Clamp Mechanism</h3>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Toggle-clamp style mechanism with a base, jaw and jaw face, clamp screw with handle, handle stop, and safety handle." data-fa="مکانیزم گیره از نوع اهرمی شامل بیس، فک و صفحه فک، پیچ گیره همراه دسته، توقف‌گاه دسته و دسته ایمنی.">
+                Toggle-clamp style mechanism with a base, jaw and jaw face, clamp screw with handle, handle stop, and safety handle.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag" data-en="Assembly" data-fa="مونتاژ">Assembly</span>
+              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3D 04: MECHANICAL ASSEMBLY 04 -->
+        <a href="assets/downloads/solidworks/mechanical-assembly-04.zip" download class="project-card">
+          <div class="project-preview">
+            <i data-lucide="cog" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Mechanical Assembly 04" data-fa="مجموعه مکانیکی ۰۴">Mechanical Assembly 04</h3>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="A 10-part mechanical assembly modeled and detailed in SolidWorks." data-fa="یک مجموعه مکانیکی ۱۰ قطعه‌ای که در سالیدورکس مدل‌سازی و جزئیات آن ترسیم شده است.">
+                A 10-part mechanical assembly modeled and detailed in SolidWorks.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag" data-en="Assembly" data-fa="مونتاژ">Assembly</span>
+              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
+            </div>
+          </div>
+        </a>
+
       </div>
 
       <!-- SUBSECTION: 2D DESIGN -->
