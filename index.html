@@ -10,42 +10,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --blue-field:   #10233f;
-    --blue-field-2: #0b1930;
-    --blue-field-3: #16304f;
-    --line:         #edf3f8;
-    --line-dim:     #9fb4cc;
-    --line-faint:   #3c567c;
-    --grid:         rgba(159,180,204,0.09);
-    --brass:        #cd9a5f;
-    --brass-dim:    #8a6238;
-    --paper:        #f1ece0;
-    --paper-ink:    #201a12;
-    --paper-ink-dim:#6c6152;
+    --blue-field:   #13241a;
+    --blue-field-2: #0d1913;
+    --blue-field-3: #1a3024;
+    --line:         #eef4ea;
+    --line-dim:     #a7c4a0;
+    --line-faint:   #3d5c44;
+    --grid:         rgba(167,196,160,0.09);
+    --brass:        #9dc183;
+    --brass-dim:    #61804f;
+    --paper:        #f0efdf;
+    --paper-ink:    #1c2116;
+    --paper-ink-dim:#666f57;
     --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
     --mono: 'JetBrains Mono','Consolas',monospace;
     --sheet-margin: 22px;
-    --sheet-fill: rgba(16,35,63,0.86);
+    --sheet-fill: rgba(19,36,26,0.86);
     --blob-opacity: .5;
     --blob-blend: screen;
     --blob-blur: 95px;
   }
   body.theme-light{
-    --blue-field:   #eef1f6;
-    --blue-field-2: #f7f8fb;
-    --blue-field-3: #e2e7ee;
-    --line:         #182437;
-    --line-dim:     #57657c;
-    --line-faint:   #c9d2dd;
-    --grid:         rgba(24,36,55,0.055);
-    --brass-dim:    #a9793f;
-    --sheet-fill: rgba(238,241,246,0.86);
+    --blue-field:   #eef3ea;
+    --blue-field-2: #f7f9f4;
+    --blue-field-3: #e1ebe0;
+    --line:         #1c2b1f;
+    --line-dim:     #5a7458;
+    --line-faint:   #cddac8;
+    --grid:         rgba(28,43,31,0.055);
+    --brass-dim:    #5e7f4c;
+    --sheet-fill: rgba(238,243,234,0.86);
     --blob-opacity: .32;
     --blob-blend: multiply;
     --blob-blur: 85px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
@@ -57,6 +57,8 @@
     font-family:var(--sans);
     -webkit-font-smoothing:antialiased;
     transition:background .4s ease, color .4s ease;
+    overflow-x:hidden;
+    width:100%;
   }
   a{color:inherit;}
   button{font:inherit;}
@@ -81,12 +83,12 @@
   }
   .blob-b{
     width:720px; height:720px; bottom:-240px; right:-180px;
-    background:radial-gradient(circle, #3f7fb8 0%, transparent 68%);
+    background:radial-gradient(circle, #6fae63 0%, transparent 68%);
     animation:driftB 58s ease-in-out infinite alternate;
   }
   .blob-c{
     width:520px; height:520px; top:32%; left:52%;
-    background:radial-gradient(circle, #7aa0d6 0%, transparent 68%);
+    background:radial-gradient(circle, #b6cf7e 0%, transparent 68%);
     animation:driftC 51s ease-in-out infinite alternate;
   }
   @keyframes driftA{ 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(90px,70px) scale(1.18);} }
@@ -145,7 +147,7 @@
   }
   .btn-sm{padding:9px 15px; font-size:12.5px;}
   .btn-primary{background:var(--brass); color:#1a1207;}
-  .btn-primary:hover{background:#dcab73; transform:translateY(-1px);}
+  .btn-primary:hover{background:#b6d99a; transform:translateY(-1px);}
   .btn-ghost{border:1px solid var(--line-faint); color:var(--line); background:transparent;}
   .btn-ghost:hover{border-color:var(--brass); color:var(--brass);}
   .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
@@ -304,31 +306,78 @@
     border-top:1px solid var(--blue-field-3);
   }
 
-  /* ---------- ambient pipeline network (full-page background art) ---------- */
-  .pipe-network{
-    position:absolute; inset:0; width:100%; height:100%;
-    opacity:.55;
+  /* ---------- ambient corner plant (full-page background art, all four corners) ---------- */
+  .plant-corners{ position:fixed; inset:0; z-index:5; pointer-events:none; }
+  .bg-pipes{
+    position:fixed; inset:0; width:100%; height:100%; opacity:.5;
   }
-  body.theme-light .pipe-network{ opacity:.4; }
-  .pipe-network .pn-pipe{
-    fill:none; stroke:var(--line-faint); stroke-width:9; stroke-linecap:round; stroke-linejoin:round; opacity:.55;
+  body.theme-light .bg-pipes{ opacity:.32; }
+  .bg-pipes .bgp-pipe{
+    fill:none; stroke:var(--line-faint); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; opacity:.6;
+    vector-effect:non-scaling-stroke;
   }
-  .pipe-network .pn-pipe-thin{
-    fill:none; stroke:var(--line-faint); stroke-width:4; stroke-linecap:round; stroke-linejoin:round; opacity:.4;
+  .bg-pipes .bgp-flow{
+    fill:none; stroke:var(--brass); stroke-width:1.6; stroke-linecap:round;
+    stroke-dasharray:4 55; opacity:0; vector-effect:non-scaling-stroke;
+    transition:opacity .5s ease; animation:bgpFlow 5.5s linear infinite; animation-play-state:paused;
   }
-  .pipe-network .pn-flange line{ stroke:var(--brass-dim); stroke-width:3; opacity:.6; }
-  .pipe-network .pn-flow{
-    fill:none; stroke:var(--brass); stroke-width:2.6; stroke-linecap:round;
-    stroke-dasharray:1 20; opacity:.75;
-    animation:pnFlow 4.5s linear infinite;
+  .bg-pipes.is-flowing .bgp-flow{ opacity:.8; animation-play-state:running; }
+  @keyframes bgpFlow{ to{ stroke-dashoffset:-590; } }
+  @media (prefers-reduced-motion: reduce){ .bg-pipes .bgp-flow{ animation:none; } }
+
+  .corner-node{
+    position:absolute; width:96px; height:96px; pointer-events:auto; cursor:pointer; opacity:.82;
+    background:none; border:none; padding:0; outline:none; -webkit-tap-highlight-color:transparent;
+    transition:opacity .2s ease;
   }
-  .pipe-network .pn-flow-b{ stroke:#3f7fb8; animation-duration:6s; }
-  @keyframes pnFlow{ to{ stroke-dashoffset:-210; } }
-  .pipe-network .pn-pump-body{ fill:var(--blue-field-3); stroke:var(--brass-dim); stroke-width:3; opacity:.7; }
-  .pipe-network .pn-pump-hub{ fill:var(--brass-dim); opacity:.55; }
-  .pipe-network .pn-boiler-shell{ fill:var(--blue-field-3); stroke:var(--line-faint); stroke-width:3; opacity:.55; }
-  .pipe-network .pn-boiler-tube{ fill:none; stroke:var(--line-faint); stroke-width:2.4; opacity:.4; }
-  .pipe-network .pn-valve{ fill:none; stroke:var(--brass-dim); stroke-width:3; opacity:.65; }
+  .corner-node:hover, .corner-node.is-on{ opacity:1; }
+  .corner-node svg{ width:100%; height:100%; overflow:visible; display:block; }
+  .cn-tl{ top:10px; left:10px; }
+  .cn-tr{ top:10px; right:10px; }
+  .cn-bl{ bottom:10px; left:10px; }
+  .cn-br{ bottom:10px; right:10px; }
+  html[dir="rtl"] .cn-tl{ left:auto; right:10px; }
+  html[dir="rtl"] .cn-tr{ right:auto; left:10px; }
+  html[dir="rtl"] .cn-bl{ left:auto; right:10px; }
+  html[dir="rtl"] .cn-br{ right:auto; left:10px; }
+
+  .cn-body{ fill:var(--blue-field-3); stroke:var(--brass-dim); stroke-width:3; opacity:.65; transition:opacity .2s; }
+  .cn-detail{ fill:none; stroke:var(--brass-dim); stroke-width:2.4; opacity:.6; transition:opacity .2s, stroke .2s; }
+  .cn-stub{ fill:none; stroke:var(--line-faint); stroke-width:6; stroke-linecap:round; opacity:.5; }
+  .cn-glow{ opacity:0; transition:opacity .35s ease; }
+  .corner-node:hover .cn-body{ opacity:.9; }
+  .corner-node:focus-visible{ outline:2px solid var(--brass); outline-offset:4px; border-radius:50%; }
+  .cn-led{ transition:fill .2s; }
+  .cn-led.on{ fill:#7ed99a; filter:drop-shadow(0 0 3px rgba(126,217,154,.85)); }
+  .cn-led.off{ fill:#5a6b56; }
+
+  .corner-node.is-on .cn-body{ stroke:var(--brass); opacity:.95; }
+  .corner-node.is-on .cn-detail{ stroke:var(--brass); opacity:.95; }
+  .corner-node.is-on .cn-glow{ opacity:.5; }
+
+  .cn-blades{ transform-box:fill-box; transform-origin:center; }
+  .corner-node.is-on .cn-blades{ animation:cnSpin 1.3s linear infinite; }
+  .cn-needle{ transform-box:fill-box; transform-origin:center; transition:transform .6s ease; }
+  .corner-node.is-on .cn-needle{ animation:cnSweep 2.6s ease-in-out infinite alternate; }
+  @keyframes cnSpin{ to{ transform:rotate(360deg); } }
+  @keyframes cnSweep{ 0%{ transform:rotate(-18deg); } 100%{ transform:rotate(22deg); } }
+  .cn-wheel{ transform-box:fill-box; transform-origin:center; transition:transform .35s ease; }
+  .corner-node.is-on .cn-wheel{ transform:rotate(90deg); }
+  @media (prefers-reduced-motion: reduce){
+    .cn-blades, .cn-needle{ animation:none !important; }
+  }
+
+  @media (max-width:600px){
+    .corner-node{ width:58px; height:58px; }
+    .cn-tl{ top:6px; left:6px; }
+    .cn-tr{ top:6px; right:6px; }
+    .cn-bl{ bottom:6px; left:6px; }
+    .cn-br{ bottom:6px; right:6px; }
+    html[dir="rtl"] .cn-tl{ left:auto; right:6px; }
+    html[dir="rtl"] .cn-tr{ right:auto; left:6px; }
+    html[dir="rtl"] .cn-bl{ left:auto; right:6px; }
+    html[dir="rtl"] .cn-br{ right:auto; left:6px; }
+  }
 
   /* ---------- banner: pump-to-boiler pipeline illustration ---------- */
   .banner{
@@ -379,11 +428,18 @@
     100%{ transform:translateY(-32px) scale(1.8); opacity:0; }
   }
   @media (prefers-reduced-motion: reduce){
-    .bp-flow, .pn-flow, .steam-puff, .bp-pump-blades, .flame-shape{ animation:none; }
+    .bp-flow, .bgp-flow, .steam-puff, .bp-pump-blades, .flame-shape{ animation:none; }
   }
   @media (max-width:820px){
     .banner{ height:128px; }
     .bp-label{ display:none; }
+  }
+  @media (max-width:600px){
+    .banner{
+      height:150px; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+      scroll-snap-type:x proximity;
+    }
+    .banner-svg{ position:static; width:640px; min-width:640px; height:100%; }
   }
 
   /* ---------- interactive plant controls ---------- */
@@ -504,6 +560,33 @@
     .stats-row{gap:22px;}
     .tabbar{gap:18px;}
   }
+
+  @media (max-width:600px){
+    :root{ --sheet-margin:14px; }
+    .sheet{ margin:6px; }
+    nav{ flex-wrap:wrap; row-gap:12px; padding-top:16px; }
+    .nav-right{ gap:8px; }
+    .btn-sm{ padding:8px 12px; font-size:12px; }
+    .datasheet-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .datasheet{ min-width:520px; }
+    .titleblock{ grid-template-columns:1fr; }
+    .tb-cell{ border-right:none; border-bottom:1px solid #d9d0bc; }
+    .tb-cell:last-child{ border-bottom:none; }
+    .dim{ display:none; }
+    .profile-row{ margin-top:-30px; }
+    .avatar-block{ width:110px; }
+    .avatar-frame{ width:110px; height:130px; }
+    .name{ font-size:23px; }
+    .tagline{ font-size:17px; }
+    section{ padding:48px var(--sheet-margin); }
+    .contact-card{ padding:26px 20px; }
+    footer{ font-size:10px; }
+  }
+
+  @media (max-width:380px){
+    .corner-node{ width:46px; height:46px; }
+    .btn.btn-primary.btn-sm{ display:none; }
+  }
 </style>
 </head>
 <body>
@@ -512,49 +595,63 @@
   <span class="blob-a"></span>
   <span class="blob-b"></span>
   <span class="blob-c"></span>
-  <svg class="pipe-network" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <!-- main run: pump (bottom-left) up to boiler (top-right) -->
-    <path class="pn-pipe" d="M40,780 L560,780 Q600,780 600,740 L600,560 Q600,520 640,520 L980,520 Q1020,520 1020,480 L1020,260 Q1020,220 1060,220 L1300,220" />
-    <path class="pn-pipe-thin" d="M40,780 L560,780 Q600,780 600,740 L600,560 Q600,520 640,520 L980,520 Q1020,520 1020,480 L1020,260 Q1020,220 1060,220 L1300,220" />
-    <path class="pn-flow" d="M40,780 L560,780 Q600,780 600,740 L600,560 Q600,520 640,520 L980,520 Q1020,520 1020,480 L1020,260 Q1020,220 1060,220 L1300,220" />
-
-    <!-- secondary branch -->
-    <path class="pn-pipe-thin" d="M760,780 L760,650 Q760,610 800,610 L1140,610" />
-    <path class="pn-flow pn-flow-b" d="M760,780 L760,650 Q760,610 800,610 L1140,610" />
-
-    <g class="pn-flange">
-      <line x1="220" y1="762" x2="220" y2="798"/><line x1="232" y1="762" x2="232" y2="798"/>
-      <line x1="420" y1="762" x2="420" y2="798"/><line x1="432" y1="762" x2="432" y2="798"/>
-      <line x1="762" y1="502" x2="798" y2="502"/><line x1="762" y1="514" x2="798" y2="514"/>
-      <line x1="1002" y1="340" x2="1038" y2="340"/><line x1="1002" y1="352" x2="1038" y2="352"/>
-    </g>
-
-    <!-- valve on main run -->
-    <g transform="translate(320,780)">
-      <line x1="-16" y1="0" x2="16" y2="0" class="pn-pipe-thin"/>
-      <rect x="-13" y="-13" width="26" height="26" class="pn-valve"/>
-      <line x1="-8" y1="-8" x2="8" y2="8" class="pn-valve"/><line x1="-8" y1="8" x2="8" y2="-8" class="pn-valve"/>
-    </g>
-    <g transform="translate(880,520)">
-      <line x1="-16" y1="0" x2="16" y2="0" class="pn-pipe-thin"/>
-      <rect x="-13" y="-13" width="26" height="26" class="pn-valve"/>
-      <line x1="-8" y1="-8" x2="8" y2="8" class="pn-valve"/><line x1="-8" y1="8" x2="8" y2="-8" class="pn-valve"/>
-    </g>
-
-    <!-- pump icon -->
-    <g transform="translate(40,780)">
-      <circle r="46" class="pn-pump-body"/>
-      <circle r="9" class="pn-pump-hub"/>
-      <rect x="-16" y="-78" width="32" height="30" rx="3" class="pn-pump-body"/>
-    </g>
-
-    <!-- boiler icon -->
-    <g transform="translate(1300,220)">
-      <rect x="0" y="-140" width="220" height="290" rx="8" class="pn-boiler-shell"/>
-      <path class="pn-boiler-tube" d="M24,-100 h172 M24,-70 h172 M24,-40 h172 M24,-10 h172 M24,20 h172 M24,50 h172 M24,80 h172 M24,110 h172 M24,140 h172"/>
-      <rect x="80" y="-190" width="30" height="55" class="pn-pipe-thin" fill="none"/>
-    </g>
+  <svg class="bg-pipes" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="bgp-pipe" d="M8,8 C 28,14 34,30 30,46 C 26,64 40,72 60,70 C 78,68 84,80 92,92" />
+    <path class="bgp-flow" d="M8,8 C 28,14 34,30 30,46 C 26,64 40,72 60,70 C 78,68 84,80 92,92" />
+    <path class="bgp-pipe" d="M92,8 C 74,16 66,10 52,18 C 38,26 40,44 24,50 C 12,54 10,64 8,92" />
+    <path class="bgp-flow" d="M92,8 C 74,16 66,10 52,18 C 38,26 40,44 24,50 C 12,54 10,64 8,92" />
   </svg>
+</div>
+
+<div class="plant-corners" aria-label="نمای کوچک نیروگاه — چهار المان قابل‌لمس در گوشه‌های صفحه">
+  <button type="button" class="corner-node cn-tl is-on" data-cn aria-pressed="true" aria-label="شیر گوشهٔ نیروگاه — لمس کن تا باز یا بسته شود">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <path class="cn-stub" d="M40,40 C 60,52 74,60 92,66"/>
+      <ellipse class="cn-glow" cx="30" cy="30" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
+      <circle cx="30" cy="30" r="19" class="cn-body"/>
+      <g class="cn-wheel">
+        <line x1="22" y1="22" x2="38" y2="38" class="cn-detail"/>
+        <line x1="22" y1="38" x2="38" y2="22" class="cn-detail"/>
+      </g>
+      <circle class="cn-led on" cx="30" cy="30" r="3.4"/>
+    </svg>
+  </button>
+
+  <button type="button" class="corner-node cn-tr is-on" data-cn aria-pressed="true" aria-label="فشارسنج گوشهٔ نیروگاه — لمس کن تا روشن یا خاموش شود">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <path class="cn-stub" d="M56,40 C 36,52 22,60 4,66"/>
+      <ellipse class="cn-glow" cx="66" cy="30" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
+      <circle cx="66" cy="30" r="19" class="cn-body"/>
+      <line x1="66" y1="30" x2="66" y2="16" class="cn-needle cn-detail"/>
+      <circle cx="66" cy="30" r="3" class="cn-detail" fill="var(--brass-dim)"/>
+      <circle class="cn-led on" cx="66" cy="46" r="3.4"/>
+    </svg>
+  </button>
+
+  <button type="button" class="corner-node cn-bl is-on" data-cn aria-pressed="true" aria-label="پمپ گوشهٔ نیروگاه — لمس کن تا روشن یا خاموش شود">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <path class="cn-stub" d="M40,56 C 60,44 74,36 92,30"/>
+      <ellipse class="cn-glow" cx="30" cy="66" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
+      <circle cx="30" cy="66" r="19" class="cn-body"/>
+      <g class="cn-blades">
+        <line x1="30" y1="66" x2="30" y2="53" class="cn-detail"/>
+        <line x1="30" y1="66" x2="41" y2="73" class="cn-detail"/>
+        <line x1="30" y1="66" x2="19" y2="73" class="cn-detail"/>
+      </g>
+      <circle cx="30" cy="66" r="3.5" fill="var(--brass-dim)"/>
+      <circle class="cn-led on" cx="30" cy="86" r="3.4"/>
+    </svg>
+  </button>
+
+  <button type="button" class="corner-node cn-br" data-cn aria-pressed="false" aria-label="بویلر گوشهٔ نیروگاه — لمس کن تا شعله روشن یا خاموش شود">
+    <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <path class="cn-stub" d="M56,56 C 36,44 22,36 4,30"/>
+      <ellipse class="cn-glow" cx="66" cy="66" rx="30" ry="30" fill="var(--brass)" opacity=".2"/>
+      <rect x="50" y="50" width="32" height="32" rx="5" class="cn-body"/>
+      <path class="cn-detail" d="M58,58 h16 M58,66 h16 M58,74 h16"/>
+      <circle class="cn-led off" cx="66" cy="88" r="3.4"/>
+    </svg>
+  </button>
 </div>
 
 <div class="sheet">
@@ -585,7 +682,7 @@
 
       <!-- return line beneath, feeding back toward the pump -->
       <path class="bp-pipe" d="M760,50 L760,150 Q760,180 730,180 L260,180 Q220,180 220,200" opacity=".55"/>
-      <path class="bp-flow" d="M760,50 L760,150 Q760,180 730,180 L260,180 Q220,180 220,200" style="stroke:#3f7fb8; animation-duration:4.6s;" opacity=".7"/>
+      <path class="bp-flow" d="M760,50 L760,150 Q760,180 730,180 L260,180 Q220,180 220,200" style="stroke:#6fae63; animation-duration:4.6s;" opacity=".7"/>
 
       <!-- flanges along the main run -->
       <g class="bp-flange">
@@ -776,6 +873,7 @@
 
   <section id="skills">
     <div class="sec-head"><span class="sec-num">02</span><h2 data-fa="مهارت‌ها" data-en="Skills">مهارت‌ها</h2><span class="divider"></span></div>
+    <div class="datasheet-wrap">
     <table class="datasheet">
       <thead>
         <tr>
@@ -807,6 +905,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </section>
 
   <section id="projects">
@@ -1061,6 +1160,28 @@
       });
 
       refreshFlow();
+    })();
+
+    // ---------- ambient corner plant nodes ----------
+    (function(){
+      var nodes = Array.prototype.slice.call(document.querySelectorAll('.corner-node[data-cn]'));
+      var bgPipes = document.querySelector('.bg-pipes');
+      if (!nodes.length) return;
+
+      function refresh(){
+        var anyOn = nodes.some(function(n){ return n.classList.contains('is-on'); });
+        if (bgPipes) bgPipes.classList.toggle('is-flowing', anyOn);
+      }
+      nodes.forEach(function(node){
+        node.addEventListener('click', function(){
+          var on = node.classList.toggle('is-on');
+          node.setAttribute('aria-pressed', on ? 'true' : 'false');
+          var led = node.querySelector('.cn-led');
+          if (led){ led.classList.toggle('on', on); led.classList.toggle('off', !on); }
+          refresh();
+        });
+      });
+      refresh();
     })();
 
     var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
