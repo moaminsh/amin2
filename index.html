@@ -173,6 +173,65 @@
       color: var(--accent-cyan);
     }
 
+    /* Avatar */
+    .brand-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.06);
+      flex-shrink: 0;
+    }
+
+    .brand-avatar-fallback {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #101724, #0a0d12);
+      border: 1px solid var(--border-focus);
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Translate Toggle */
+    #google_translate_element { display: none; }
+    .goog-te-banner-frame { display: none !important; }
+    body { top: 0 !important; }
+
+    .translate-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+    }
+
+    .translate-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .translate-btn.is-fa {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.06);
+    }
+
     /* Hero Section */
     .hero {
       padding: 140px 0 80px;
@@ -486,6 +545,104 @@
       transform: translateY(-1px);
     }
 
+    /* Simulation File Library */
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .file-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: var(--transition);
+    }
+
+    .file-card:hover {
+      border-color: var(--border-focus);
+    }
+
+    .file-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .file-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 5px;
+      background: rgba(0, 242, 254, 0.06);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+    }
+
+    .file-ext {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .file-name {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .file-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .file-download {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .file-download:hover {
+      text-decoration: underline;
+    }
+
+    .file-card.is-empty {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-style: dashed;
+      color: var(--text-dim);
+      min-height: 160px;
+    }
+
+    .placeholder-note {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      background: rgba(0, 242, 254, 0.04);
+      border: 1px dashed var(--border-focus);
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
     /* Technical Specifications Table */
     .tech-table {
       width: 100%;
@@ -629,16 +786,29 @@
   <nav>
     <div class="container nav-inner">
       <a href="#" class="brand-mark">
+        <img src="assets/profile.jpg" alt="Mohammadamin Sharif" class="brand-avatar" id="brandAvatarImg"
+             onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-avatar-fallback',textContent:'MS'}))">
         <span>//</span> MOHAMMADAMIN SHARIF
       </a>
-      <ul class="nav-links">
-        <li><a href="#simulations" data-hover="SIMS">Simulations</a></li>
-        <li><a href="#projects" data-hover="WORK">Projects</a></li>
-        <li><a href="#specs" data-hover="SPECS">Technical Specs</a></li>
-        <li><a href="#contact" data-hover="INFO">Contact</a></li>
-      </ul>
+      <div style="display:flex; align-items:center; gap:28px;">
+        <ul class="nav-links">
+          <li><a href="#simulations" data-hover="SIMS">Simulations</a></li>
+          <li><a href="#projects" data-hover="WORK">Pump Projects</a></li>
+          <li><a href="#solidworks" data-hover="CAD">SolidWorks</a></li>
+          <li><a href="#simfiles" data-hover="FILES">Sim Files</a></li>
+          <li><a href="#specs" data-hover="SPECS">Technical Specs</a></li>
+          <li><a href="#contact" data-hover="INFO">Contact</a></li>
+        </ul>
+        <button class="translate-btn" id="translateBtn" data-hover="FA/EN" title="Translate site to Persian">
+          <i data-lucide="languages" style="width: 13px;"></i>
+          <span id="translateBtnLabel">FA</span>
+        </button>
+      </div>
     </div>
   </nav>
+
+  <!-- Hidden Google Translate widget (driven by the translate button above) -->
+  <div id="google_translate_element"></div>
 
   <!-- Hero Section -->
   <div class="container">
@@ -715,12 +885,12 @@
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Pump Design Projects Section -->
   <section id="projects">
     <div class="container">
       <div class="section-header">
         <span class="section-num">02</span>
-        <h2 class="section-title">EXECUTED PROJECTS & TOOLS</h2>
+        <h2 class="section-title">PUMP DESIGN PROJECTS</h2>
       </div>
 
       <div class="projects-grid">
@@ -764,6 +934,131 @@
             </a>
           </div>
         </div>
+
+        <!-- Project 2: placeholder — replace with a real pump design project -->
+        <div class="project-card">
+          <div class="project-preview">
+            <div>
+              <span class="project-meta-badge">PUMP DESIGN PROJECT</span>
+              <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 18px; font-weight: 600;">
+                [ Add your next pump design project ]
+              </div>
+            </div>
+
+            <div class="project-metrics">
+              <div class="metric-item">
+                <div class="metric-label">Core Calculation</div>
+                <div class="metric-val">—</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">Export Modules</div>
+                <div class="metric-val">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <div class="project-desc">
+                Placeholder card — swap this description for a real pump design project (e.g. a specific impeller design, volute sizing study, or performance curve analysis) whenever you're ready.
+              </div>
+              <div class="project-tags">
+                <span class="tag">Pump Design</span>
+              </div>
+            </div>
+
+            <a href="#" class="action-btn" data-hover="OPEN" style="opacity: 0.5; pointer-events: none;">
+              EXECUTE TOOL <i data-lucide="arrow-up-right" style="width: 14px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SolidWorks Projects Section -->
+  <section id="solidworks">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">SOLIDWORKS PROJECTS</h2>
+      </div>
+
+      <div class="placeholder-note">
+        // Placeholder section — send over your SolidWorks project names, part files, or renders (assembly screenshots, drawings, STEP/SLDPRT exports) and this will be filled in with real project cards.
+      </div>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-preview">
+            <div>
+              <span class="project-meta-badge">CAD / SOLIDWORKS</span>
+              <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 18px; font-weight: 600;">
+                [ Add your first SolidWorks project ]
+              </div>
+            </div>
+
+            <div class="project-metrics">
+              <div class="metric-item">
+                <div class="metric-label">Model Type</div>
+                <div class="metric-val">—</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">File Format</div>
+                <div class="metric-val">SLDPRT / STEP</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-info">
+            <div>
+              <div class="project-desc">
+                Placeholder card — describe the assembly or part (what it is, tolerances, mates, manufacturing intent) and attach a render or drawing view.
+              </div>
+              <div class="project-tags">
+                <span class="tag">SolidWorks</span>
+                <span class="tag">CAD</span>
+              </div>
+            </div>
+
+            <a href="#" class="action-btn" data-hover="OPEN" style="opacity: 0.5; pointer-events: none;">
+              VIEW MODEL <i data-lucide="arrow-up-right" style="width: 14px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulation File Library -->
+  <section id="simfiles">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">SIMULATION FILE LIBRARY</h2>
+      </div>
+
+      <div class="placeholder-note">
+        // Placeholder section — this is a static site, so files here need to actually exist on the server (e.g. in a /simulations folder next to this page). Send me the simulation files (CFD results, .avi/.mp4 recordings, report PDFs, etc.) and I'll wire up the links to each card below.
+      </div>
+
+      <div class="file-grid">
+        <div class="file-card">
+          <div class="file-card-top">
+            <div class="file-icon-box"><i data-lucide="file-box" style="width: 18px;"></i></div>
+            <span class="file-ext">CFD</span>
+          </div>
+          <div class="file-name">[ simulation-file-name ]</div>
+          <div class="file-desc">Placeholder — description of what was simulated, solver used, and key results.</div>
+          <a href="#" class="file-download" data-hover="GET">
+            <i data-lucide="download" style="width: 12px;"></i> Download
+          </a>
+        </div>
+
+        <div class="file-card is-empty">
+          <i data-lucide="plus-circle" style="width: 20px; margin-bottom: 8px;"></i>
+          <span>Add another simulation file</span>
+        </div>
       </div>
     </div>
   </section>
@@ -772,7 +1067,7 @@
   <section id="specs">
     <div class="container">
       <div class="section-header">
-        <span class="section-num">03</span>
+        <span class="section-num">05</span>
         <h2 class="section-title">TECHNICAL SPECIFICATIONS & METHODS</h2>
       </div>
 
@@ -832,7 +1127,7 @@
   <section id="contact">
     <div class="container">
       <div class="section-header">
-        <span class="section-num">04</span>
+        <span class="section-num">06</span>
         <h2 class="section-title">COMMUNICATION DIRECTORY</h2>
       </div>
 
@@ -1078,6 +1373,51 @@
       requestAnimationFrame(renderPump);
     }
     renderPump();
+
+    // --- Site Translator (Google Website Translator, driven by a custom button) ---
+    // The FA / EN button below toggles the whole page between English and Persian
+    // using Google's translate widget under the hood (kept hidden via CSS).
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en', includedLanguages: 'fa,en', autoDisplay: false },
+        'google_translate_element'
+      );
+    }
+
+    (function loadGoogleTranslate() {
+      const s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.body.appendChild(s);
+    })();
+
+    let isPersian = false;
+    const translateBtn = document.getElementById('translateBtn');
+    const translateBtnLabel = document.getElementById('translateBtnLabel');
+
+    function setGoogTranslateLang(langCode) {
+      const combo = document.querySelector('.goog-te-combo');
+      if (!combo) return false;
+      combo.value = langCode;
+      combo.dispatchEvent(new Event('change'));
+      return true;
+    }
+
+    translateBtn.addEventListener('click', () => {
+      const targetLang = isPersian ? 'en' : 'fa';
+      // The widget's <select> only appears once Google's script has finished loading;
+      // retry briefly if it isn't ready yet (e.g. user clicks right on page load).
+      let attempts = 0;
+      const tryTranslate = setInterval(() => {
+        attempts++;
+        if (setGoogTranslateLang(targetLang) || attempts > 40) {
+          clearInterval(tryTranslate);
+        }
+      }, 150);
+
+      isPersian = !isPersian;
+      translateBtnLabel.textContent = isPersian ? 'EN' : 'FA';
+      translateBtn.classList.toggle('is-fa', isPersian);
+    });
   </script>
 </body>
 </html>
