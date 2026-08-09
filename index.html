@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,6 +137,56 @@
     }
     .nav-link:hover {
       color: var(--accent-cyan);
+    }
+
+    /* NAV TOOLS: theme + language toggles */
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 28px;
+    }
+    .tool-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .tool-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+    }
+
+    /* LIGHT MODE THEME */
+    html.light-mode {
+      --bg-dark: #f5f7fa;
+      --bg-card: #ffffff;
+      --bg-card-hover: #eef1f6;
+      --border: #dde3ec;
+      --border-bright: #c3ccdb;
+      --text-main: #10151d;
+      --text-muted: #4b5a70;
+      --text-dim: #8592a6;
+      --accent-cyan: #0091b3;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 145, 179, 0.10);
+    }
+    html.light-mode header.nav-bar {
+      background: rgba(245, 247, 250, 0.85);
+    }
+    html.light-mode .custom-cursor {
+      mix-blend-mode: normal;
     }
 
     /* HERO SECTION */
@@ -510,11 +560,21 @@
         MOHAMMADAMIN SHARIF
       </a>
       <ul class="nav-menu">
-        <li><a href="#projects" class="nav-link">PROJECTS</a></li>
-        <li><a href="#microfluidics" class="nav-link">MICROFLUIDICS</a></li>
-        <li><a href="#capabilities" class="nav-link">CAPABILITIES</a></li>
-        <li><a href="#info" class="nav-link">INFO</a></li>
+        <li><a href="#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+        <li><a href="#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
+        <li><a href="#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
+        <li><a href="#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
       </ul>
+      <div class="nav-tools">
+        <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
+          <i data-lucide="languages" style="width: 16px;"></i>
+          <span id="langToggleLabel">FA</span>
+        </button>
+        <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
+          <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
+          <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -525,7 +585,7 @@
       <div>
         <div class="hero-meta">
           <i data-lucide="cpu" style="width: 14px;"></i>
-          MECHANICAL ENGINEERING // IUST
+          <span data-en="MECHANICAL ENGINEERING // IUST" data-fa="مهندسی مکانیک // دانشگاه علم و صنعت">MECHANICAL ENGINEERING // IUST</span>
         </div>
         <h1 class="hero-title">
           MOHAMMADAMIN
@@ -534,20 +594,20 @@
 
         <div class="hero-specs">
           <div class="spec-node">
-            <div class="spec-key">INSTITUTION</div>
-            <div class="spec-value">Iran Univ. of Science & Tech (IUST)</div>
+            <div class="spec-key" data-en="INSTITUTION" data-fa="دانشگاه">INSTITUTION</div>
+            <div class="spec-value" data-en="Iran Univ. of Science & Tech (IUST)" data-fa="دانشگاه علم و صنعت ایران">Iran Univ. of Science & Tech (IUST)</div>
           </div>
           <div class="spec-node">
-            <div class="spec-key">CORE DOMAINS</div>
-            <div class="spec-value">Pumps • Microfluidics • CFD</div>
+            <div class="spec-key" data-en="CORE DOMAINS" data-fa="حوزه‌های اصلی">CORE DOMAINS</div>
+            <div class="spec-value" data-en="Pumps • Microfluidics • CFD" data-fa="پمپ‌ها • میکروفلوئیدیک • دینامیک سیالات محاسباتی">Pumps • Microfluidics • CFD</div>
           </div>
           <div class="spec-node">
-            <div class="spec-key">FOCUS</div>
-            <div class="spec-value">Computational Fluid Dynamics</div>
+            <div class="spec-key" data-en="FOCUS" data-fa="تمرکز">FOCUS</div>
+            <div class="spec-value" data-en="Computational Fluid Dynamics" data-fa="دینامیک سیالات محاسباتی">Computational Fluid Dynamics</div>
           </div>
           <div class="spec-node">
-            <div class="spec-key">LOCATION</div>
-            <div class="spec-value">Tehran, Iran</div>
+            <div class="spec-key" data-en="LOCATION" data-fa="موقعیت">LOCATION</div>
+            <div class="spec-value" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</div>
           </div>
         </div>
       </div>
@@ -555,7 +615,7 @@
       <!-- KINEMATICS & FLUID VECTOR CANVAS -->
       <div class="hero-visual">
         <div class="canvas-overlay">
-          <span>VECTOR FIELD // DYNAMIC SIMULATION</span>
+          <span data-en="VECTOR FIELD // DYNAMIC SIMULATION" data-fa="میدان برداری // شبیه‌سازی دینامیک">VECTOR FIELD // DYNAMIC SIMULATION</span>
           <span id="fpsCounter">60 FPS</span>
         </div>
         <canvas id="heroCanvas"></canvas>
@@ -566,8 +626,8 @@
     <section id="projects">
       <div class="section-header">
         <div>
-          <div class="section-label">// SELECTED WORKS</div>
-          <div class="section-title-text">ENGINEERING PROJECTS</div>
+          <div class="section-label" data-en="// SELECTED WORKS" data-fa="// منتخب آثار">// SELECTED WORKS</div>
+          <div class="section-title-text" data-en="ENGINEERING PROJECTS" data-fa="پروژه‌های مهندسی">ENGINEERING PROJECTS</div>
         </div>
         <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">
           [01 / 03]
@@ -584,30 +644,30 @@
           <div class="project-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title">CFturbo Centrifugal Pump</h3>
+                <h3 class="project-title" data-en="CFturbo Centrifugal Pump" data-fa="پمپ گریز از مرکز CFturbo">CFturbo Centrifugal Pump</h3>
                 <span class="project-year">2026</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);">
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Parametric hydraulic design of 6-blade radial impeller and spiral volute with integrated interactive kinematic simulation." data-fa="طراحی هیدرولیکی پارامتریک پروانه شعاعی ۶ پره و ولوت مارپیچی، همراه با شبیه‌سازی تعاملی سینماتیک.">
                 Parametric hydraulic design of 6-blade radial impeller and spiral volute with integrated interactive kinematic simulation.
               </p>
             </div>
 
             <div class="project-metrics">
               <div class="p-metric-item">
-                <span class="p-metric-lbl">DESIGN FLOW (Q)</span>
+                <span class="p-metric-lbl" data-en="DESIGN FLOW (Q)" data-fa="دبی طراحی (Q)">DESIGN FLOW (Q)</span>
                 <span class="p-metric-val">66.0 m³/h</span>
               </div>
               <div class="p-metric-item">
-                <span class="p-metric-lbl">HEAD (H) / RPM</span>
+                <span class="p-metric-lbl" data-en="HEAD (H) / RPM" data-fa="هد (H) / دور بر دقیقه">HEAD (H) / RPM</span>
                 <span class="p-metric-val">17.5 m @ 1450</span>
               </div>
             </div>
 
             <div class="project-tags">
               <span class="p-tag">CFturbo</span>
-              <span class="p-tag">Turbomachinery</span>
-              <span class="p-tag">Hydraulic Design</span>
-              <span class="p-tag">Interactive Model</span>
+              <span class="p-tag" data-en="Turbomachinery" data-fa="توربوماشین">Turbomachinery</span>
+              <span class="p-tag" data-en="Hydraulic Design" data-fa="طراحی هیدرولیکی">Hydraulic Design</span>
+              <span class="p-tag" data-en="Interactive Model" data-fa="مدل تعاملی">Interactive Model</span>
             </div>
           </div>
         </a>
@@ -620,27 +680,27 @@
           <div class="project-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title">Microfluidic Channel Architecture</h3>
+                <h3 class="project-title" data-en="Microfluidic Channel Architecture" data-fa="معماری کانال‌های میکروفلوئیدیک">Microfluidic Channel Architecture</h3>
                 <span class="project-year">2025</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);">
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Design and velocity field optimization of micro-scale hydrodynamic focusing channels for Lab-on-a-Chip applications." data-fa="طراحی و بهینه‌سازی میدان سرعت کانال‌های تمرکز هیدرودینامیکی در مقیاس میکرو برای کاربردهای Lab-on-a-Chip.">
                 Design and velocity field optimization of micro-scale hydrodynamic focusing channels for Lab-on-a-Chip applications.
               </p>
             </div>
 
             <div class="project-metrics">
               <div class="p-metric-item">
-                <span class="p-metric-lbl">CHANNEL WIDTH</span>
+                <span class="p-metric-lbl" data-en="CHANNEL WIDTH" data-fa="عرض کانال">CHANNEL WIDTH</span>
                 <span class="p-metric-val">150 µm</span>
               </div>
               <div class="p-metric-item">
-                <span class="p-metric-lbl">FLOW REGIME</span>
-                <span class="p-metric-val">Laminar (Re &lt; 1)</span>
+                <span class="p-metric-lbl" data-en="FLOW REGIME" data-fa="رژیم جریان">FLOW REGIME</span>
+                <span class="p-metric-val" data-en="Laminar (Re < 1)" data-fa="آرام (Re &lt; ۱)">Laminar (Re &lt; 1)</span>
               </div>
             </div>
 
             <div class="project-tags">
-              <span class="p-tag">Microfluidics</span>
+              <span class="p-tag" data-en="Microfluidics" data-fa="میکروفلوئیدیک">Microfluidics</span>
               <span class="p-tag">COMSOL / CFD</span>
               <span class="p-tag">Lab-on-a-Chip</span>
             </div>
@@ -655,29 +715,29 @@
           <div class="project-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title">CFD Flow & Pressure Loss</h3>
+                <h3 class="project-title" data-en="CFD Flow & Pressure Loss" data-fa="جریان CFD و افت فشار">CFD Flow & Pressure Loss</h3>
                 <span class="project-year">2025</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);">
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Numerical analysis of turbulent fluid flow and pressure drops in complex mechanical piping geometries." data-fa="تحلیل عددی جریان آشفته سیال و افت فشار در هندسه‌های پیچیده لوله‌کشی مکانیکی.">
                 Numerical analysis of turbulent fluid flow and pressure drops in complex mechanical piping geometries.
               </p>
             </div>
 
             <div class="project-metrics">
               <div class="p-metric-item">
-                <span class="p-metric-lbl">SOLVER</span>
+                <span class="p-metric-lbl" data-en="SOLVER" data-fa="حل‌گر">SOLVER</span>
                 <span class="p-metric-val">OpenFOAM / Fluent</span>
               </div>
               <div class="p-metric-item">
-                <span class="p-metric-lbl">TURBULENCE</span>
+                <span class="p-metric-lbl" data-en="TURBULENCE" data-fa="آشفتگی">TURBULENCE</span>
                 <span class="p-metric-val">k-ε / SST k-ω</span>
               </div>
             </div>
 
             <div class="project-tags">
               <span class="p-tag">CFD</span>
-              <span class="p-tag">Fluid Mechanics</span>
-              <span class="p-tag">Mesh Generation</span>
+              <span class="p-tag" data-en="Fluid Mechanics" data-fa="مکانیک سیالات">Fluid Mechanics</span>
+              <span class="p-tag" data-en="Mesh Generation" data-fa="تولید مش">Mesh Generation</span>
             </div>
           </div>
         </div>
@@ -689,14 +749,14 @@
     <section id="microfluidics">
       <div class="interactive-module">
         <div>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 8px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 8px;" data-en="// INTERACTIVE DEMO" data-fa="// دموی تعاملی">
             // INTERACTIVE DEMO
           </div>
-          <h2 class="module-info-title">Microfluidic Chip Hydrodynamics</h2>
-          <p class="module-desc">
+          <h2 class="module-info-title" data-en="Microfluidic Chip Hydrodynamics" data-fa="هیدرودینامیک تراشه میکروفلوئیدیک">Microfluidic Chip Hydrodynamics</h2>
+          <p class="module-desc" data-en="Interactive visual simulation of particle trajectory and streamwise laminar flow through micro-channel bifurcations. Move your cursor over the chip matrix to alter regional velocity gradients." data-fa="شبیه‌سازی بصری تعاملی مسیر ذرات و جریان آرام هم‌راستا در انشعاب‌های میکروکانال. نشانگر خود را روی ماتریس تراشه حرکت دهید تا شیب سرعت منطقه‌ای تغییر کند.">
             Interactive visual simulation of particle trajectory and streamwise laminar flow through micro-channel bifurcations. Move your cursor over the chip matrix to alter regional velocity gradients.
           </p>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);" data-en="STATUS: ACTIVE // LAMINAR FLOW STABLE" data-fa="وضعیت: فعال // جریان آرام پایدار">
             STATUS: ACTIVE // LAMINAR FLOW STABLE
           </div>
         </div>
@@ -711,56 +771,56 @@
     <section id="capabilities">
       <div class="section-header">
         <div>
-          <div class="section-label">// TECHNICAL STACK</div>
-          <div class="section-title-text">CAPABILITIES & TOOLS</div>
+          <div class="section-label" data-en="// TECHNICAL STACK" data-fa="// مجموعه فنی">// TECHNICAL STACK</div>
+          <div class="section-title-text" data-en="CAPABILITIES & TOOLS" data-fa="توانمندی‌ها و ابزارها">CAPABILITIES & TOOLS</div>
         </div>
       </div>
 
       <div class="skills-grid">
         <div class="skill-category">
           <div class="skill-cat-title">
-            <i data-lucide="layers" style="width: 14px;"></i> TURBOMACHINERY & CAD
+            <i data-lucide="layers" style="width: 14px;"></i> <span data-en="TURBOMACHINERY & CAD" data-fa="توربوماشین و CAD">TURBOMACHINERY & CAD</span>
           </div>
           <ul class="skill-list">
             <li class="skill-pill">CFturbo</li>
             <li class="skill-pill">SolidWorks</li>
-            <li class="skill-pill">Impeller Geometry</li>
-            <li class="skill-pill">Volute Design</li>
+            <li class="skill-pill" data-en="Impeller Geometry" data-fa="هندسه پروانه">Impeller Geometry</li>
+            <li class="skill-pill" data-en="Volute Design" data-fa="طراحی ولوت">Volute Design</li>
           </ul>
         </div>
 
         <div class="skill-category">
           <div class="skill-cat-title">
-            <i data-lucide="activity" style="width: 14px;"></i> CFD & SIMULATION
+            <i data-lucide="activity" style="width: 14px;"></i> <span data-en="CFD & SIMULATION" data-fa="CFD و شبیه‌سازی">CFD & SIMULATION</span>
           </div>
           <ul class="skill-list">
             <li class="skill-pill">ANSYS Fluent</li>
             <li class="skill-pill">OpenFOAM</li>
             <li class="skill-pill">COMSOL Multiphysics</li>
-            <li class="skill-pill">Mesh Generation</li>
+            <li class="skill-pill" data-en="Mesh Generation" data-fa="تولید مش">Mesh Generation</li>
           </ul>
         </div>
 
         <div class="skill-category">
           <div class="skill-cat-title">
-            <i data-lucide="git-commit" style="width: 14px;"></i> MICROFLUIDICS
+            <i data-lucide="git-commit" style="width: 14px;"></i> <span data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</span>
           </div>
           <ul class="skill-list">
             <li class="skill-pill">Lab-on-a-Chip</li>
-            <li class="skill-pill">Micro-channel Architecture</li>
-            <li class="skill-pill">Hydrodynamic Focusing</li>
-            <li class="skill-pill">Particle Kinematics</li>
+            <li class="skill-pill" data-en="Micro-channel Architecture" data-fa="معماری میکروکانال">Micro-channel Architecture</li>
+            <li class="skill-pill" data-en="Hydrodynamic Focusing" data-fa="تمرکز هیدرودینامیکی">Hydrodynamic Focusing</li>
+            <li class="skill-pill" data-en="Particle Kinematics" data-fa="سینماتیک ذرات">Particle Kinematics</li>
           </ul>
         </div>
 
         <div class="skill-category">
           <div class="skill-cat-title">
-            <i data-lucide="code" style="width: 14px;"></i> COMPUTATION
+            <i data-lucide="code" style="width: 14px;"></i> <span data-en="COMPUTATION" data-fa="محاسبات">COMPUTATION</span>
           </div>
           <ul class="skill-list">
             <li class="skill-pill">MATLAB</li>
             <li class="skill-pill">Python (NumPy / SciPy)</li>
-            <li class="skill-pill">Data Visualization</li>
+            <li class="skill-pill" data-en="Data Visualization" data-fa="تجسم داده">Data Visualization</li>
             <li class="skill-pill">C++</li>
           </ul>
         </div>
@@ -773,10 +833,10 @@
         <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-avatar" onerror="this.src='https://via.placeholder.com/90/0d1117/00f2fe?text=Sharif'">
         <div>
           <h3 style="font-size: 20px; font-weight: 700;">Mohammadamin Sharif</h3>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" data-en="B.Sc. Student in Mechanical Engineering" data-fa="دانشجوی کارشناسی مهندسی مکانیک">
             B.Sc. Student in Mechanical Engineering
           </p>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-top: 8px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-top: 8px;" data-en="Iran University of Science & Technology (IUST)" data-fa="دانشگاه علم و صنعت ایران">
             Iran University of Science & Technology (IUST)
           </div>
         </div>
@@ -784,8 +844,12 @@
 
       <div class="contact-block">
         <div class="contact-row">
-          <span class="contact-label">EMAIL</span>
-          <a href="mailto:email@domain.com" class="contact-link">email@domain.com</a>
+          <span class="contact-label" data-en="EMAIL" data-fa="ایمیل">EMAIL</span>
+          <a href="mailto:mohammadaminsh1384@gmail.com" class="contact-link">mohammadaminsh1384@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label" data-en="PHONE" data-fa="تلفن">PHONE</span>
+          <a href="tel:+989032764840" class="contact-link" dir="ltr">0903 276 4840</a>
         </div>
         <div class="contact-row">
           <span class="contact-label">GITHUB</span>
@@ -796,8 +860,8 @@
           <a href="https://linkedin.com" target="_blank" class="contact-link">linkedin.com/in/m-sharif</a>
         </div>
         <div class="contact-row">
-          <span class="contact-label">ACADEMIC PROFILE</span>
-          <span style="color: var(--text-main);">IUST Mechanical Dept.</span>
+          <span class="contact-label" data-en="ACADEMIC PROFILE" data-fa="پروفایل دانشگاهی">ACADEMIC PROFILE</span>
+          <span style="color: var(--text-main);" data-en="IUST Mechanical Dept." data-fa="دانشکده مکانیک IUST">IUST Mechanical Dept.</span>
         </div>
       </div>
     </section>
@@ -805,7 +869,7 @@
     <!-- FOOTER -->
     <footer>
       <span>© 2026 MOHAMMADAMIN SHARIF</span>
-      <span>MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
+      <span data-en="MECHANICAL & FLUID DYNAMICS PORTFOLIO" data-fa="نمونه‌کار مهندسی مکانیک و دینامیک سیالات">MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
     </footer>
 
   </main>
@@ -813,6 +877,63 @@
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
+
+    // --- DAY / NIGHT MODE TOGGLE ---
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('themeIconSun');
+    const moonIcon = document.getElementById('themeIconMoon');
+    const rootEl = document.documentElement;
+
+    function applyTheme(mode) {
+      if (mode === 'light') {
+        rootEl.classList.add('light-mode');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      } else {
+        rootEl.classList.remove('light-mode');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('site-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isLight = rootEl.classList.contains('light-mode');
+      const next = isLight ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem('site-theme', next);
+    });
+
+    // --- LANGUAGE TOGGLE (EN / FA) ---
+    const langToggleBtn = document.getElementById('langToggle');
+    const langToggleLabel = document.getElementById('langToggleLabel');
+    const i18nEls = document.querySelectorAll('[data-en][data-fa]');
+
+    function applyLanguage(lang) {
+      i18nEls.forEach(el => {
+        el.textContent = lang === 'fa' ? el.dataset.fa : el.dataset.en;
+      });
+      if (lang === 'fa') {
+        document.body.style.fontFamily = "'Vazirmatn', 'Plus Jakarta Sans', sans-serif";
+        langToggleLabel.textContent = 'EN';
+      } else {
+        document.body.style.fontFamily = '';
+        langToggleLabel.textContent = 'FA';
+      }
+      rootEl.setAttribute('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('site-lang') || 'en';
+    applyLanguage(savedLang);
+
+    langToggleBtn.addEventListener('click', () => {
+      const current = rootEl.getAttribute('lang') === 'fa' ? 'fa' : 'en';
+      const next = current === 'fa' ? 'en' : 'fa';
+      applyLanguage(next);
+      localStorage.setItem('site-lang', next);
+    });
 
     // Custom Cursor Movement
     const cursor = document.getElementById('cursor');
