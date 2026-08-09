@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///C:/Users/Mohammadamin/Desktop/rankine-plant-simulator.html -->
+<html lang="fa" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شبیه‌ساز جامع نیروگاه سیکل رانکین و سیستم طراحی پمپ | CFTurbo Power Plant Twin</title>
+<style>
+  :root{
+    --bg: #0b1015;
+    --panel: #11171d;
+    --panel-2: #151d24;
+    --line: #223039;
+    --line-soft: #1a252c;
+    --text: #e7edf1;
+    --text-dim: #93a3ad;
+    --text-faint: #5c6e78;
+    --accent: #ffb545;
+    --accent-dim: #7a5a26;
+    --cyan: #55c7d6;
+    --green: #5fd192;
+    --yellow: #e8c15a;
+    --red: #e2686b;
+    --purple: #b388ff;
+    --mono: 'JetBrains Mono','Consolas',monospace;
+    --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+  }
+  body.light{
+    --bg: #f3f5f7;
+    --panel: #ffffff;
+    --panel-2: #f4f6f8;
+    --line: #d7dee3;
+    --line-soft: #e4e9ec;
+    --text: #202a30;
+    --text-dim: #57666e;
+    --text-faint: #8b98a0;
+    --accent: #b9781f;
+    --accent-dim: #e7c791;
+    --cyan: #0f8e9d;
+    --green: #2f8f5b;
+    --yellow: #a9791c;
+    --red: #c9484c;
+    --purple: #7c4dff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0/100% 28px, var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    padding:28px 16px 80px;
+    min-height:100vh;
+    position:relative;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1200px;margin:0 auto; position:relative; z-index:1;}
+
+  header{
+    border:1px solid var(--line);
+    background:linear-gradient(155deg, var(--panel) 0%, var(--panel-2) 100%);
+    border-radius:12px;
+    padding:22px 24px;
+    margin-bottom:18px;
+    box-shadow:0 10px 30px -14px rgba(0,0,0,.55);
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:""; position:absolute; top:0; right:0; left:0; height:2px;
+    background:linear-gradient(90deg, var(--accent), var(--cyan), var(--purple), transparent);
+  }
+  .header-top{ display:flex; align-items:center; gap:12px; margin-bottom:2px; }
+  .header-titles{ flex:1; min-width:0; }
+  .tag{ font-family:var(--mono); font-size:11px; color:var(--accent); text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+  .tag::before{content:"◆"; font-size:9px;}
+  h1{margin:0 0 6px; font-size:21px; font-weight:600;}
+  .sub{color:var(--text-dim); font-size:13px; line-height:1.9;}
+
+  /* Navigation Tabs */
+  .page-tabs{ display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+  .page-tab{
+    font-family:var(--sans); font-size:13px; font-weight:600;
+    background:var(--panel); color:var(--text-dim);
+    border:1px solid var(--line); border-radius:9px; padding:10px 18px;
+    cursor:pointer; transition:.15s;
+  }
+  .page-tab.active{ color:var(--accent); background:var(--panel-2); border-color:var(--accent-dim); box-shadow:0 0 10px rgba(255,181,69,.15); }
+  .page-tab:hover:not(.active){ color:var(--text); border-color:var(--cyan); }
+
+  /* Buttons & Inputs */
+  button{
+    font-family:var(--sans); font-size:12.5px; border-radius:8px; padding:9px 14px;
+    cursor:pointer; border:1px solid var(--line-soft); background:var(--panel); color:var(--text-dim);
+    transition:.15s; display:inline-flex; align-items:center; justify-content:center; gap:7px;
+  }
+  button:hover{color:var(--cyan); border-color:var(--cyan); transform:translateY(-1px);}
+  .btn-primary{ background:linear-gradient(155deg, #ffc568, var(--accent)); color:#1a1206; font-weight:700; border-color:var(--accent); }
+  .btn-primary:hover{ background:linear-gradient(155deg, #ffd48a, #ffc568); color:#1a1206; }
+  .btn-danger{ background:rgba(226,104,107,.15); color:var(--red); border-color:var(--red); }
+  .btn-danger:hover{ background:var(--red); color:#fff; }
+
+  /* Dashboard Grid */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 12px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .dash-card {
+    background: var(--panel-2);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  .dash-card .lbl { font-size: 10.5px; color: var(--text-faint); margin-bottom: 4px; font-family: var(--mono); }
+  .dash-card .val { font-size: 17px; font-weight: bold; color: var(--cyan); font-family: var(--mono); }
+  .dash-card .unit { font-size: 11px; color: var(--text-dim); font-weight: normal; }
+
+  /* Dynamic Power Plant Viewport */
+  .twin-viewport {
+    background: radial-gradient(circle at center, #162029 0%, #080c0f 100%);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.85);
+    margin-bottom: 16px;
+  }
+  .viewport-controls {
+    position: absolute; top: 12px; left: 12px; z-index: 10;
+    display: flex; gap: 6px; background: rgba(17, 23, 29, 0.85);
+    padding: 6px; border-radius: 8px; border: 1px solid var(--line); backdrop-filter: blur(4px);
+  }
+  .viewport-canvas-container { width: 100%; height: 100%; cursor: grab; }
+  .viewport-canvas-container:active { cursor: grabbing; }
+
+  /* Controls Panel */
+  .control-panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+  .control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+  .ctrl-group { display: flex; flex-direction: column; gap: 6px; }
+  .ctrl-group label { font-size: 12px; color: var(--text-dim); display: flex; justify-content: space-between; }
+  .ctrl-group input[type="range"] { accent-color: var(--cyan); cursor: pointer; width:100%; }
+
+  /* Water Property & Thermo Tables */
+  .thermo-table {
+    width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px;
+  }
+  .thermo-table th, .thermo-table td {
+    border: 1px solid var(--line-soft); padding: 8px 10px; text-align: center;
+  }
+  .thermo-table th { background: var(--panel-2); color: var(--text-dim); font-family: var(--mono); }
+
+  /* Alert Banners */
+  .alert-box {
+    padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: bold;
+    display: none; align-items: center; gap: 10px; margin-bottom: 16px;
+  }
+  .alert-box.danger {
+    display: flex; background: rgba(226, 104, 107, 0.2); border: 1px solid var(--red); color: var(--red);
+    animation: alertBlink 0.8s infinite alternate;
+  }
+  .alert-box.warning {
+    display: flex; background: rgba(232, 193, 90, 0.2); border: 1px solid var(--yellow); color: var(--yellow);
+  }
+  @keyframes alertBlink { from { opacity: 0.6; } to { opacity: 1; } }
+
+  .calc-box{ border:1px solid var(--line-soft); border-radius:10px; padding:16px; margin-bottom:16px; background:var(--panel-2); }
+  .calc-title{ font-weight:700; font-size:14px; color:var(--accent); margin-bottom:6px; }
+  .calc-row{ display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; }
+  .calc-row label{ display:flex; flex-direction:column; gap:5px; font-size:12px; color:var(--text-dim); }
+  .calc-row input, .calc-row select{
+    font-family:var(--mono); font-size:13px; background:var(--bg); color:var(--text);
+    border:1px solid var(--line-soft); border-radius:7px; padding:8px 10px; direction:ltr;
+  }
+
+  .save-indicator{
+    position:fixed; bottom:18px; left:18px; font-family:var(--mono); font-size:11px;
+    color:var(--green); background:var(--panel); border:1px solid var(--line);
+    padding:7px 12px; border-radius:7px; opacity:0; transition:opacity .3s; z-index:50;
+  }
+  .save-indicator.show{opacity:1;}
+</style>
+</head>
+<body class="">
+
+<div class="wrap">
+
+  <header>
+    <div class="header-top">
+      <div class="header-titles">
+        <div class="tag">CFTurbo · Power Plant Digital Twin Engine</div>
+        <h1>شبیه‌ساز تعاملی نیروگاه سیکل رانکین و اتصالات طراحی پمپ</h1>
+      </div>
+      <button id="themeToggleBtn" type="button">🌙 حالت شب / روز</button>
+    </div>
+    <div class="sub">
+      این پلتفرم مشخصات مهندسی پمپ در حال طراحی شما را مستقیماً به یک <b>سیکل نیروگاهی کامل (رانکین)</b> متشکل از بویلر/سوپرهیتر، توربین بخار، ژنراتور، کندانسور، پمپ تغذیه و خواص دقیق ترمودینامیکی آب و بخار متصل می‌کند.
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="page-tabs">
+    <button class="page-tab active" data-page="pagePlant">⚙️ شبیه‌ساز زنده نیروگاه (Rankine Twin)</button>
+    <button class="page-tab" data-page="pageWater">💧 خواص ترمودینامیکی آب و تحلیل انفجار</button>
+    <button class="page-tab" data-page="pagePump">🌀 طراحی و مشخصات فنی پمپ (CFTurbo Link)</button>
+  </div>
+
+  <!-- TAB 1: POWER PLANT DIGITAL TWIN -->
+  <div class="page-view" id="pagePlant" style="display: block;">
+
+    <!-- Alert Box -->
+    <div id="plantAlert" class="alert-box warning">⚠️ هشدار کاویتاسیون: NPSH موجود پمپ تغذیه کمتر از حد مورد نیاز است! ریسک تخریب پروانه پمپ.</div>
+
+    <!-- Live Metrics Dashboard -->
+    <div class="dashboard-grid">
+      <div class="dash-card">
+        <span class="lbl">POWER OUTPUT</span>
+        <span class="val" id="valMW">0.18 <span class="unit">MW</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">BOILER TEMP</span>
+        <span class="val" id="valBoilerT">241.0 <span class="unit">°C</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">BOILER PRESS</span>
+        <span class="val" id="valBoilerP">4.03 <span class="unit">bar</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">STEAM FLOW</span>
+        <span class="val" id="valSteamFlow">1.4 <span class="unit">kg/s</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">TURBINE RPM</span>
+        <span class="val" id="valTurbineRpm">472 <span class="unit">RPM</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">CONDENSER PRESS</span>
+        <span class="val" id="valCondP">0.10 <span class="unit">bar</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">FEED PUMP FLOW</span>
+        <span class="val" id="valPumpQ">120.0 <span class="unit">m³/h</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">PUMP NPSH MARGIN</span>
+        <span class="val" id="valNpshMargin">-0.07 <span class="unit">m</span></span>
+      </div>
+      <div class="dash-card">
+        <span class="lbl">THERMAL EFFICIENCY</span>
+        <span class="val" id="valEff" style="color:var(--green);">0.7 <span class="unit">%</span></span>
+      </div>
+    </div>
+
+    <!-- Visual Twin Viewport -->
+    <div class="twin-viewport">
+      <div class="viewport-controls">
+        <button id="btnZoomIn" type="button">+</button>
+        <button id="btnZoomOut" type="button">-</button>
+        <button id="btnResetView" type="button">⟲ بازنشانی نمای دید</button>
+      </div>
+      <div class="viewport-canvas-container">
+        <canvas id="plantCanvas" width="1198" height="518"></canvas>
+      </div>
+    </div>
+
+    <!-- Interactive Control Deck -->
+    <div class="control-panel">
+      <div class="calc-title" style="margin-bottom:14px;">🎛️ پانل فرمان‌دهی و اتاق کنترل نیروگاه</div>
+      <div class="control-grid">
+
+        <!-- Burner Controls -->
+        <div class="ctrl-group">
+          <label>توان مشعل بویلر (Burner Power): <b id="lblBurnerPower" style="color:var(--accent);">60%</b></label>
+          <input type="range" id="rngBurnerPower" min="0" max="100" value="60">
+        </div>
+
+        <!-- Turbine Throttle Valve -->
+        <div class="ctrl-group">
+          <label>دریچه بخار توربین (Throttle Valve): <b id="lblThrottle" style="color:var(--cyan);">80%</b></label>
+          <input type="range" id="rngThrottle" min="0" max="100" value="80">
+        </div>
+
+        <!-- Feedwater Pump RPM (Linked to Design) -->
+        <div class="ctrl-group">
+          <label>دور پمپ تغذیه N (rpm): <b id="lblPumpRpm" style="color:var(--green);">2900</b></label>
+          <input type="range" id="rngPumpRpm" min="500" max="4000" step="50" value="2900">
+        </div>
+
+        <!-- Condenser Cooling Water Flow -->
+        <div class="ctrl-group">
+          <label>دبی آب خنک‌کن کندانسور: <b id="lblCooling" style="color:var(--cyan);">70%</b></label>
+          <input type="range" id="rngCooling" min="10" max="100" value="70">
+        </div>
+
+        <!-- Electrical Grid Load -->
+        <div class="ctrl-group">
+          <label>بار درخواستی شبکه (Grid Demand): <b id="lblGridLoad" style="color:var(--purple);">12.5 MW</b></label>
+          <input type="range" id="rngGridLoad" min="0" max="35" step="0.5" value="12.5">
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="ctrl-group">
+          <label>کلیدهای ایمنی و قطع اضطراری</label>
+          <div style="display:flex; gap:8px;">
+            <button id="btnTrip" type="button" class="btn-danger" style="flex:1;">🚨 TRIP اضطراری</button>
+            <button id="btnRelief" type="button" style="flex:1;">💥 تخلیه فشار (Relief)</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAB 2: WATER THERMODYNAMICS & EXPLOSION ANALYSIS -->
+  <div class="page-view" id="pageWater" style="display: none;">
+    <div class="calc-box">
+      <div class="calc-title">🌊 تحلیل جامع ترمودینامیکی آب و بخار و آستانه‌های انفجار تجهیزات</div>
+      <p style="font-size:12.5px; color:var(--text-dim); line-height:1.8;">
+        در این بخش، مشخصات سیال کاری آب در تمام محدوده‌های دمایی (از ۰ تا ۶۰۰ درجه سانتی‌گراد) و فشاری محاسبه می‌شود. همچنین نقطه فاز اشباع، آنتالپی، آنتروپی و حد ریسک انفجار بویلر/لوله‌ها بر اثر آنومالی دمایی یا فشاری نمایش داده شده است.
+      </p>
+
+      <div class="calc-row" style="margin-top:14px;">
+        <label>دمای کاری سیال (°C)
+          <input type="number" id="numTestTemp" value="320" min="0" max="600">
+        </label>
+        <label>فشار کاری سیستم (bar)
+          <input type="number" id="numTestPress" value="40" min="0.05" max="250" step="0.5">
+        </label>
+        <button id="btnCalcWaterProp" type="button" class="btn-primary">🔍 محاسبه خواص فیزیکی و فاز</button>
+      </div>
+
+      <div id="waterPropResult" style="margin-top:16px;">
+    <div style="background:var(--panel); border:1px solid var(--line); padding:14px; border-radius:8px; font-family:var(--mono); font-size:12.5px;">
+      <div>• فاز سیال: <b style="color:var(--cyan);">Superheated Steam (بخار سوپرهیت)</b></div>
+      <div>• فشار اشباع در این دما (P_sat): <b>112.84 bar</b></div>
+      <div>• چگالی سیال (ρ): <b>14.6 kg/m³</b></div>
+      <div>• آنتالپی مخصوص (h): <b>3104.6 kJ/kg</b></div>
+      <div style="margin-top:6px;">• ارزیابی ریسک سازه و انفجار: <b style="color:var(--yellow);">MEDIUM (نیازمند پایش مستمر فشار)</b></div>
+    </div>
+  </div>
+
+      <h3 style="font-size:14px; color:var(--accent); margin-top:24px;">📊 جدول استاندارد مرزهای فاز آب و خطرات انفجار</h3>
+      <table class="thermo-table">
+        <thead>
+          <tr>
+            <th>دما (°C)</th>
+            <th>فشار اشباع P_sat (bar)</th>
+            <th>چگالی مایع ρ_f (kg/m³)</th>
+            <th>حجم مخصوص بخار v_g (m³/kg)</th>
+            <th>وضعیت سازه و ریسک انفجار</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>100</td> <td>1.01</td> <td>958.4</td> <td>1.673</td> <td style="color:var(--green);">ایمن — فشار اتمسفر معمولی</td>
+          </tr>
+          <tr>
+            <td>200</td> <td>15.54</td> <td>864.7</td> <td>0.127</td> <td style="color:var(--green);">عملکرد استاندارد بویلرهای صنعتی</td>
+          </tr>
+          <tr>
+            <td>300</td> <td>85.81</td> <td>712.1</td> <td>0.0216</td> <td style="color:var(--yellow);">فشار بالا — نیازمند دیواره ضخیم و شیر اطمینان</td>
+          </tr>
+          <tr>
+            <td>374.1 (نقطه بحرانی)</td> <td>220.64</td> <td>322.0</td> <td>0.0031</td> <td style="color:var(--red);">بحرانی — عدم تمایز فاز مایع و بخار</td>
+          </tr>
+          <tr>
+            <td>&gt; 500</td> <td>&gt; 250</td> <td>—</td> <td>—</td> <td style="color:var(--red); font-weight:bold;">⚠️ ریسک بالای تخریب تسلیم متالورژیکی و انفجار مخزن</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 3: PUMP DESIGN & SPECIFICATIONS (CFTurbo Link) -->
+  <div class="page-view" id="pagePump" style="display: none;">
+    <div class="calc-box">
+      <div class="calc-title">🌀 پارامترهای طراحی پمپ تغذیه بویلر (CFTurbo Integration)</div>
+      <p style="font-size:12.5px; color:var(--text-dim); line-height:1.8;">
+        مشخصات هندسی و عملکردی پمپ که در این بخش تنظیم می‌شوند، مستقیماً نقطه کاری، دبی، هد و ریسک کاویتاسیون پمپ تغذیه نیروگاه در سیکل زنده رانکین را هدایت می‌کنند.
+      </p>
+
+      <div class="calc-row" style="margin-top:14px;">
+        <label>سرعت دورانی N (rpm)
+          <input type="number" id="pumpN" value="2900">
+        </label>
+        <label>دبی طراحی Q (m³/h)
+          <input type="number" id="pumpQ" value="120">
+        </label>
+        <label>هد طراحی H (m)
+          <input type="number" id="pumpH" value="450">
+        </label>
+        <label>قطر مکش d_s (mm)
+          <input type="number" id="pumpDs" value="150">
+        </label>
+      </div>
+
+      <div class="calc-row" style="margin-top:14px;">
+        <label>راندمان هیدرولیکی پیش‌بینی‌شده η_p (%)
+          <input type="number" id="pumpEta" value="82" min="10" max="98">
+        </label>
+        <label>NPSH مورد نیاز NPSH_r (m)
+          <input type="number" id="pumpNpshr" value="3.2" step="0.1">
+        </label>
+        <button id="btnApplyPumpSpecs" type="button" class="btn-primary">🔗 اعمال رو سیکل نیروگاهی و به‌روزرسانی n_q</button>
+      </div>
+
+      <div id="pumpDesignSummary" style="margin-top:16px; font-family:var(--mono); font-size:12.5px; color:var(--cyan);">
+    ✓ مشخصات پمپ روی سیکل زنده اعمال شد.<br>
+    • سرعت مخصوص n_q محاسبه‌شده: <b>5.4</b> (نوع پمپ پیشنهادی: رادیال / سانتریفیوژ)
+  </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="save-indicator" id="saveIndicator">✓ داده‌ها به‌روزرسانی شدند</div>
+
+<script>
+/* ==========================================================================
+   1. THERMODYNAMIC ENGINE FOR WATER & STEAM (IAPWS ACCURATE APPROXIMATIONS)
+   ========================================================================== */
+function getWaterProperties(tempC, pressBar) {
+  const T = tempC + 273.15; // Kelvin
+  const P = pressBar;
+
+  // Saturation pressure approximation (Antoine / Wagner equation for water)
+  let Psat = 0;
+  if (tempC < 373.9) {
+    const Tc = 647.096;
+    const Pc = 220.64;
+    const x = 1 - (T / Tc);
+    const a1 = -7.85951783, a2 = 1.84408259, a3 = -11.7866497, a4 = 22.6807411, a5 = -15.9618719, a6 = 1.80122502;
+    const val = (Tc / T) * (a1*x + a2*Math.pow(x,1.5) + a3*Math.pow(x,3) + a4*Math.pow(x,3.5) + a5*Math.pow(x,4) + a6*Math.pow(x,7.5));
+    Psat = Pc * Math.exp(val);
+  } else {
+    Psat = 220.64 + (tempC - 373.9) * 1.5;
+  }
+
+  // Phase Determination
+  let phase = "Liquid Water (مایع)";
+  if (P < Psat) {
+    phase = tempC > 374 ? "Supercritical Fluid (سیال فوق بحرانی)" : "Superheated Steam (بخار سوپرهیت)";
+  } else if (Math.abs(P - Psat) < 0.1) {
+    phase = "Saturated Mixture (مخلوط دو فازی اشباع)";
+  }
+
+  // Water Density Approximation (kg/m3)
+  let density = 1000 / (1 + 0.0002 * Math.pow(tempC, 1.2));
+  if (phase.includes("Steam")) {
+    density = (P * 100) / (0.4615 * T); // Ideal steam approx
+  }
+
+  // Enthalpy kJ/kg
+  let enthalpy = 4.184 * tempC;
+  if (phase.includes("Steam")) {
+    enthalpy = 2501 + 1.88 * tempC + 0.05 * P;
+  }
+
+  // Explosion Risk Assessment
+  let explosionRisk = "LOW (ایمن)";
+  let riskColor = "var(--green)";
+  if (P > 40 || tempC > 450) {
+    explosionRisk = "HIGH (خطر بالای انفجار لوله‌ها و ساختار بویلر)";
+    riskColor = "var(--red)";
+  } else if (P > 25 || tempC > 350) {
+    explosionRisk = "MEDIUM (نیازمند پایش مستمر فشار)";
+    riskColor = "var(--yellow)";
+  }
+
+  return { tempC, pressBar, Psat, phase, density, enthalpy, explosionRisk, riskColor };
+}
+
+/* ==========================================================================
+   2. POWER PLANT TWIN STATE & SIMULATION LOOP
+   ========================================================================== */
+const state = {
+  // Boiler Parameters
+  boilerTemp: 25.0,
+  boilerPress: 1.01,
+  waterLevel: 80.0, // %
+  burnerPower: 60, // %
+  reliefOpen: false,
+
+  // Turbine Parameters
+  throttle: 80, // %
+  turbineRpm: 0,
+  powerMW: 0.0,
+
+  // Condenser Parameters
+  condPress: 0.08, // bar
+  coolingFlow: 70, // %
+
+  // Feed Pump (Linked to CFTurbo Design)
+  pumpRpm: 2900,
+  pumpDesignQ: 120, // m3/h
+  pumpDesignH: 450, // m
+  pumpEta: 0.82,
+  pumpNpshr: 3.2,
+  pumpCurrentQ: 0.0,
+  pumpNpshMargin: 5.0,
+
+  // Grid
+  gridDemandMW: 12.5,
+  overallEff: 0.0,
+
+  // Viewport camera
+  zoom: 1.0,
+  panX: 0,
+  panY: 0,
+  particles: []
+};
+
+// Initialize Canvas & Particles
+const canvas = document.getElementById('plantCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = canvas.parentElement.clientWidth;
+  canvas.height = canvas.parentElement.clientHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Particle System for Steam/Water Motion
+for(let i=0; i<120; i++) {
+  state.particles.push({
+    x: Math.random() * 800,
+    y: Math.random() * 400,
+    speed: 1 + Math.random() * 3,
+    type: Math.random() > 0.4 ? 'steam' : 'water'
+  });
+}
+
+/* Physics & Thermo Update Loop */
+function updatePhysics() {
+  // 1. Boiler Thermodynamics
+  const heatInput = (state.burnerPower / 100) * 45; // MW equivalent
+  if (heatInput > 0) {
+    state.boilerTemp += (heatInput * 0.08) - ((state.boilerTemp - 25) * 0.01);
+  } else {
+    state.boilerTemp -= (state.boilerTemp - 25) * 0.02;
+  }
+
+  // Pressure calculation based on temperature and steam accumulation
+  const props = getWaterProperties(state.boilerTemp, state.boilerPress);
+  if (state.boilerTemp > 100) {
+    const steamGenRate = (state.boilerTemp - 100) * 0.15 * (state.burnerPower/100);
+    const steamOutRate = (state.throttle / 100) * Math.sqrt(Math.max(0, state.boilerPress - state.condPress)) * 8.0;
+
+    state.boilerPress += (steamGenRate - steamOutRate) * 0.02;
+    if (state.boilerPress < 1.01) state.boilerPress = 1.01;
+  } else {
+    state.boilerPress = 1.01;
+  }
+
+  // Relief Valve Trigger
+  if (state.reliefOpen || state.boilerPress > 45.0) {
+    state.boilerPress -= 1.5;
+    if (state.boilerPress < 1.01) state.boilerPress = 1.01;
+  }
+
+  // 2. Turbine Mechanics & Power Generation
+  const pressureRatio = Math.max(0, state.boilerPress - state.condPress);
+  const maxTurbineRpm = 3000;
+  const targetRpm = (state.throttle / 100) * Math.min(1.0, pressureRatio / 20.0) * maxTurbineRpm;
+  state.turbineRpm += (targetRpm - state.turbineRpm) * 0.05;
+
+  const steamMassFlow = (state.throttle / 100) * (state.boilerPress / 35.0) * 15.0; // kg/s
+  const idealPower = steamMassFlow * 0.85 * (1 - (state.condPress / Math.max(1, state.boilerPress)));
+  state.powerMW = Math.max(0, idealPower * (state.turbineRpm / 3000));
+
+  // 3. Condenser Mechanics
+  const coolingCap = (state.coolingFlow / 100) * 20.0;
+  state.condPress = Math.max(0.04, 0.20 - (coolingCap * 0.007));
+
+  // 4. Feed Pump Performance (Speed Scaling Laws)
+  const rpmRatio = state.pumpRpm / 2900;
+  state.pumpCurrentQ = state.pumpDesignQ * rpmRatio * (state.boilerPress < 40 ? 1.0 : 0.85);
+
+  // NPSH Available = (P_cond - P_sat) / (rho * g) + Static Head
+  const npshAvail = ((state.condPress - 0.04) * 100000) / (9800) + 2.5;
+  state.pumpNpshMargin = npshAvail - state.pumpNpshr;
+
+  // Thermal Efficiency %
+  if (heatInput > 0 && state.powerMW > 0) {
+    state.overallEff = Math.min(42.0, (state.powerMW / heatInput) * 100);
+  } else {
+    state.overallEff = 0.0;
+  }
+
+  // Update UI Elements
+  document.getElementById('valMW').innerHTML = `${state.powerMW.toFixed(2)} <span class="unit">MW</span>`;
+  document.getElementById('valBoilerT').innerHTML = `${state.boilerTemp.toFixed(1)} <span class="unit">°C</span>`;
+  document.getElementById('valBoilerP').innerHTML = `${state.boilerPress.toFixed(2)} <span class="unit">bar</span>`;
+  document.getElementById('valSteamFlow').innerHTML = `${steamMassFlow.toFixed(1)} <span class="unit">kg/s</span>`;
+  document.getElementById('valTurbineRpm').innerHTML = `${Math.round(state.turbineRpm)} <span class="unit">RPM</span>`;
+  document.getElementById('valCondP').innerHTML = `${state.condPress.toFixed(2)} <span class="unit">bar</span>`;
+  document.getElementById('valPumpQ').innerHTML = `${state.pumpCurrentQ.toFixed(1)} <span class="unit">m³/h</span>`;
+  document.getElementById('valNpshMargin').innerHTML = `${state.pumpNpshMargin.toFixed(2)} <span class="unit">m</span>`;
+  document.getElementById('valEff').innerHTML = `${state.overallEff.toFixed(1)} <span class="unit">%</span>`;
+
+  // Safety Alerts
+  const alertEl = document.getElementById('plantAlert');
+  if (state.boilerPress > 40.0) {
+    alertEl.className = "alert-box danger";
+    alertEl.innerHTML = "🚨 هشدار بحرانی: فشار بویلر بیش از حد مجاز (۴۰ بار)! ریسک انفجار متالورژیکی لوله‌ها. شیر اطمینان باز شد.";
+    state.reliefOpen = true;
+  } else if (state.pumpNpshMargin < 0) {
+    alertEl.className = "alert-box warning";
+    alertEl.innerHTML = "⚠️ هشدار کاویتاسیون: NPSH موجود پمپ تغذیه کمتر از حد مورد نیاز است! ریسک تخریب پروانه پمپ.";
+  } else {
+    alertEl.className = "alert-box";
+    alertEl.style.display = "none";
+  }
+}
+
+/* Render Power Plant Interactive Twin Diagram */
+function renderCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+
+  // Apply Camera Transform
+  ctx.translate(canvas.width/2 + state.panX, canvas.height/2 + state.panY);
+  ctx.scale(state.zoom, state.zoom);
+  ctx.translate(-400, -220);
+
+  // Background Grid Lines
+  ctx.strokeStyle = "rgba(255,255,255,0.03)";
+  ctx.lineWidth = 1;
+  for(let x=0; x<800; x+=40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,440); ctx.stroke(); }
+  for(let y=0; y<440; y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(800,y); ctx.stroke(); }
+
+  // 1. BOILER & SUPERHEATER (Left Box)
+  ctx.fillStyle = "#1e2933";
+  ctx.strokeStyle = state.boilerPress > 30 ? "#e2686b" : "#ffb545";
+  ctx.lineWidth = 3;
+  ctx.fillRect(60, 100, 160, 220);
+  ctx.strokeRect(60, 100, 160, 220);
+
+  // Boiler Flames
+  if (state.burnerPower > 0) {
+    ctx.fillStyle = "#ff5722";
+    ctx.beginPath();
+    ctx.arc(140, 300, 35, 0, Math.PI, false);
+    ctx.fill();
+    ctx.fillStyle = "#ffb545";
+    ctx.beginPath();
+    ctx.arc(140, 300, 20, 0, Math.PI, false);
+    ctx.fill();
+  }
+
+  // Boiler Label
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 13px Vazirmatn, sans-serif";
+  ctx.fillText("بویلر / سوپرهیتر", 90, 130);
+  ctx.font = "11px JetBrains Mono";
+  ctx.fillStyle = "#55c7d6";
+  ctx.fillText(`${state.boilerTemp.toFixed(0)}°C | ${state.boilerPress.toFixed(1)} bar`, 85, 150);
+
+  // 2. STEAM TURBINE & GENERATOR (Top Right)
+  ctx.fillStyle = "#253342";
+  ctx.strokeStyle = "#55c7d6";
+  ctx.beginPath();
+  ctx.moveTo(380, 100); ctx.lineTo(520, 120); ctx.lineTo(520, 180); ctx.lineTo(380, 200); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+
+  // Turbine Rotor Line & Rotation Effect
+  ctx.strokeStyle = "#ffb545";
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(350, 150); ctx.lineTo(600, 150); ctx.stroke();
+
+  // Generator Block
+  ctx.fillStyle = "#1b4d3e";
+  ctx.strokeStyle = "#5fd192";
+  ctx.fillRect(540, 115, 90, 70);
+  ctx.strokeRect(540, 115, 90, 70);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 12px Vazirmatn";
+  ctx.fillText("توربین بخار", 420, 145);
+  ctx.fillText("ژنراتور", 560, 145);
+  ctx.fillStyle = "#5fd192";
+  ctx.fillText(`${state.powerMW.toFixed(2)} MW`, 555, 165);
+
+  // 3. CONDENSER (Bottom Right)
+  ctx.fillStyle = "#162536";
+  ctx.strokeStyle = "#55c7d6";
+  ctx.fillRect(400, 270, 150, 100);
+  ctx.strokeRect(400, 270, 150, 100);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText("کندانسور", 450, 300);
+  ctx.font = "11px JetBrains Mono";
+  ctx.fillStyle = "#93a3ad";
+  ctx.fillText(`P = ${state.condPress.toFixed(2)} bar`, 440, 320);
+
+  // 4. FEEDWATER PUMP (User Designed Pump - Bottom Left)
+  ctx.fillStyle = "#2d2013";
+  ctx.strokeStyle = "#ffb545";
+  ctx.beginPath(); ctx.arc(260, 320, 30, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+
+  // Rotating Impeller Blades
+  ctx.save();
+  ctx.translate(260, 320);
+  ctx.rotate((Date.now() / 100) * (state.pumpRpm / 1000));
+  ctx.strokeStyle = "#ffb545"; ctx.lineWidth = 3;
+  for(let b=0; b<4; b++) {
+    ctx.rotate(Math.PI / 2);
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(20, 0); ctx.stroke();
+  }
+  ctx.restore();
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 11px Vazirmatn";
+  ctx.fillText("پمپ تغذیه بویلر", 220, 370);
+  ctx.font = "10px JetBrains Mono";
+  ctx.fillStyle = "#ffb545";
+  ctx.fillText(`${state.pumpRpm} RPM`, 235, 385);
+
+  // 5. PIPING NETWORK
+  ctx.lineWidth = 5;
+
+  // High Pressure Steam Pipe (Boiler -> Turbine)
+  ctx.strokeStyle = "#ffb545";
+  ctx.beginPath(); ctx.moveTo(220, 120); ctx.lineTo(380, 120); ctx.stroke();
+
+  // Turbine Exhaust (Turbine -> Condenser)
+  ctx.strokeStyle = "#55c7d6";
+  ctx.beginPath(); ctx.moveTo(450, 190); ctx.lineTo(450, 270); ctx.stroke();
+
+  // Condensate Water Pipe (Condenser -> Pump)
+  ctx.strokeStyle = "#2f8f5b";
+  ctx.beginPath(); ctx.moveTo(400, 320); ctx.lineTo(290, 320); ctx.stroke();
+
+  // High Pressure Feedwater Pipe (Pump -> Boiler)
+  ctx.strokeStyle = "#2f8f5b";
+  ctx.beginPath(); ctx.moveTo(260, 290); ctx.lineTo(260, 220); ctx.lineTo(220, 220); ctx.stroke();
+
+  ctx.restore();
+}
+
+/* Main Animation Loop */
+function loop() {
+  updatePhysics();
+  renderCanvas();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* ==========================================================================
+   3. EVENT LISTENERS & UI INTERACTION
+   ========================================================================== */
+// Tab Switching
+document.querySelectorAll('.page-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.page-view').forEach(v => v.style.display = 'none');
+
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.page).style.display = 'block';
+  });
+});
+
+// Control Deck Input Bindings
+document.getElementById('rngBurnerPower').addEventListener('input', (e) => {
+  state.burnerPower = parseFloat(e.target.value);
+  document.getElementById('lblBurnerPower').innerText = `${state.burnerPower}%`;
+});
+
+document.getElementById('rngThrottle').addEventListener('input', (e) => {
+  state.throttle = parseFloat(e.target.value);
+  document.getElementById('lblThrottle').innerText = `${state.throttle}%`;
+});
+
+document.getElementById('rngPumpRpm').addEventListener('input', (e) => {
+  state.pumpRpm = parseFloat(e.target.value);
+  document.getElementById('lblPumpRpm').innerText = `${state.pumpRpm}`;
+});
+
+document.getElementById('rngCooling').addEventListener('input', (e) => {
+  state.coolingFlow = parseFloat(e.target.value);
+  document.getElementById('lblCooling').innerText = `${state.coolingFlow}%`;
+});
+
+document.getElementById('rngGridLoad').addEventListener('input', (e) => {
+  state.gridDemandMW = parseFloat(e.target.value);
+  document.getElementById('lblGridLoad').innerText = `${state.gridDemandMW} MW`;
+});
+
+// Safety Buttons
+document.getElementById('btnTrip').addEventListener('click', () => {
+  state.burnerPower = 0;
+  state.throttle = 0;
+  document.getElementById('rngBurnerPower').value = 0;
+  document.getElementById('rngThrottle').value = 0;
+  document.getElementById('lblBurnerPower').innerText = "0%";
+  document.getElementById('lblThrottle').innerText = "0%";
+});
+
+document.getElementById('btnRelief').addEventListener('click', () => {
+  state.reliefOpen = !state.reliefOpen;
+  const indicator = document.getElementById('saveIndicator');
+  indicator.innerText = state.reliefOpen ? "⚠️ شیر اطمینان باز شد" : "✓ شیر اطمینان بسته شد";
+  indicator.classList.add('show');
+  setTimeout(() => indicator.classList.remove('show'), 2000);
+});
+
+// Viewport Zooming and Reset
+document.getElementById('btnZoomIn').addEventListener('click', () => { state.zoom = Math.min(2.5, state.zoom + 0.15); });
+document.getElementById('btnZoomOut').addEventListener('click', () => { state.zoom = Math.max(0.5, state.zoom - 0.15); });
+document.getElementById('btnResetView').addEventListener('click', () => { state.zoom = 1.0; state.panX = 0; state.panY = 0; });
+
+// Water Property Calculator
+document.getElementById('btnCalcWaterProp').addEventListener('click', () => {
+  const t = parseFloat(document.getElementById('numTestTemp').value);
+  const p = parseFloat(document.getElementById('numTestPress').value);
+  const res = getWaterProperties(t, p);
+
+  document.getElementById('waterPropResult').innerHTML = `
+    <div style="background:var(--panel); border:1px solid var(--line); padding:14px; border-radius:8px; font-family:var(--mono); font-size:12.5px;">
+      <div>• فاز سیال: <b style="color:var(--cyan);">${res.phase}</b></div>
+      <div>• فشار اشباع در این دما (P_sat): <b>${res.Psat.toFixed(2)} bar</b></div>
+      <div>• چگالی سیال (ρ): <b>${res.density.toFixed(1)} kg/m³</b></div>
+      <div>• آنتالپی مخصوص (h): <b>${res.enthalpy.toFixed(1)} kJ/kg</b></div>
+      <div style="margin-top:6px;">• ارزیابی ریسک سازه و انفجار: <b style="color:${res.riskColor};">${res.explosionRisk}</b></div>
+    </div>
+  `;
+});
+
+// Apply Pump Design Specs
+document.getElementById('btnApplyPumpSpecs').addEventListener('click', () => {
+  const N = parseFloat(document.getElementById('pumpN').value);
+  const Q = parseFloat(document.getElementById('pumpQ').value);
+  const H = parseFloat(document.getElementById('pumpH').value);
+
+  // Specific Speed Calculation
+  const Q_m3s = Q / 3600;
+  const nq = N * Math.sqrt(Q_m3s) / Math.pow(H, 0.75);
+
+  state.pumpRpm = N;
+  state.pumpDesignQ = Q;
+  state.pumpDesignH = H;
+
+  document.getElementById('rngPumpRpm').value = N;
+  document.getElementById('lblPumpRpm').innerText = `${N}`;
+
+  document.getElementById('pumpDesignSummary').innerHTML = `
+    ✓ مشخصات پمپ روی سیکل زنده اعمال شد.<br>
+    • سرعت مخصوص n_q محاسبه‌شده: <b>${nq.toFixed(1)}</b> (نوع پمپ پیشنهادی: ${nq < 100 ? 'رادیال / سانتریفیوژ' : 'میکس‌فلو'})
+  `;
+});
+
+// Theme Switcher
+document.getElementById('themeToggleBtn').addEventListener('click', () => {
+  document.body.classList.toggle('light');
+});
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پمپ سانتریفیوژ تعاملی | نمای برش‌خورده و پانل کنترل زنده</title>
+<style>
+  :root{
+    --bg: #0b1015;
+    --panel: #11171d;
+    --panel-2: #151d24;
+    --line: #223039;
+    --line-soft: #1a252c;
+    --text: #e7edf1;
+    --text-dim: #93a3ad;
+    --text-faint: #5c6e78;
+    --accent: #ffb545;
+    --accent-dim: #7a5a26;
+    --cyan: #55c7d6;
+    --green: #5fd192;
+    --yellow: #e8c15a;
+    --red: #e2686b;
+    --purple: #b388ff;
+    --mono: 'JetBrains Mono','Consolas',monospace;
+    --sans: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+  }
+  body.light{
+    --bg: #f3f5f7;
+    --panel: #ffffff;
+    --panel-2: #f4f6f8;
+    --line: #d7dee3;
+    --line-soft: #e4e9ec;
+    --text: #202a30;
+    --text-dim: #57666e;
+    --text-faint: #8b98a0;
+    --accent: #b9781f;
+    --accent-dim: #e7c791;
+    --cyan: #0f8e9d;
+    --green: #2f8f5b;
+    --yellow: #a9791c;
+    --red: #c9484c;
+    --purple: #7c4dff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0/100% 28px, var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    padding:28px 16px 60px;
+    min-height:100vh;
+  }
+  .wrap{max-width:980px; margin:0 auto;}
+
+  header{
+    border:1px solid var(--line);
+    background:linear-gradient(155deg, var(--panel) 0%, var(--panel-2) 100%);
+    border-radius:12px;
+    padding:20px 24px;
+    margin-bottom:18px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:""; position:absolute; top:0; right:0; left:0; height:2px;
+    background:linear-gradient(90deg, var(--accent), var(--cyan), var(--purple), transparent);
+  }
+  .header-top{ display:flex; align-items:center; gap:12px; }
+  .header-titles{ flex:1; min-width:0; }
+  .tag{ font-family:var(--mono); font-size:11px; color:var(--accent); text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+  .tag::before{content:"◆"; font-size:9px;}
+  h1{margin:0 0 6px; font-size:20px; font-weight:600;}
+  .sub{color:var(--text-dim); font-size:13px; line-height:1.85;}
+  button{
+    font-family:var(--sans); font-size:12.5px; border-radius:8px; padding:9px 14px;
+    cursor:pointer; border:1px solid var(--line-soft); background:var(--panel); color:var(--text-dim);
+    transition:.15s;
+  }
+  button:hover{color:var(--cyan); border-color:var(--cyan);}
+
+  /* ============== PUMP SHOWCASE STAGE ============== */
+  .pump-stage{
+    background: radial-gradient(circle at 50% 30%, #16212b 0%, #090d11 100%);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 10px 6px;
+    margin-bottom:18px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,.8);
+    position:relative;
+  }
+  .pump-svg-wrap{ width:100%; }
+  .pump-svg-wrap svg{ width:100%; height:auto; display:block; overflow:visible; }
+
+  .status-pill{
+    position:absolute; top:16px; left:16px;
+    display:flex; align-items:center; gap:7px;
+    background:rgba(17,23,29,.85); border:1px solid var(--line); border-radius:20px;
+    padding:6px 12px; font-family:var(--mono); font-size:11px; color:var(--text-dim);
+    backdrop-filter: blur(4px);
+  }
+  .status-dot{ width:8px; height:8px; border-radius:50%; background:var(--text-faint); transition:.2s; }
+  .status-pill.running .status-dot{ background:var(--green); box-shadow:0 0 8px var(--green); animation: dotPulse 1s infinite alternate; }
+  .status-pill.running{ color: var(--green); }
+  @keyframes dotPulse{ from{opacity:.5;} to{opacity:1;} }
+
+  .stage-title{
+    position:absolute; top:16px; right:16px;
+    font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    background:rgba(17,23,29,.85); border:1px solid var(--line); border-radius:20px;
+    padding:6px 12px; backdrop-filter: blur(4px);
+  }
+
+  /* Rotating groups (speed controlled via CSS var --spin-dur) */
+  #impellerGroup{
+    transform-box: fill-box; transform-origin:center;
+    animation: spin var(--spin-dur, 1.2s) linear infinite;
+  }
+  #motorFan{
+    transform-box: fill-box; transform-origin:center;
+    animation: spin var(--spin-dur, 1.2s) linear infinite;
+  }
+  #shaftCoupling{
+    transform-box: fill-box; transform-origin:center;
+    animation: spin var(--spin-dur, 1.2s) linear infinite;
+  }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  body.stopped #impellerGroup,
+  body.stopped #motorFan,
+  body.stopped #shaftCoupling{ animation-play-state:paused; }
+
+  /* Flow dash-offset streams */
+  .flow-line{ stroke-dasharray:6 6; animation: flowMove 0.6s linear infinite; }
+  .flow-line.slow{ animation-duration:1.1s; }
+  body.stopped .flow-line{ animation-play-state:paused; opacity:.15; }
+  @keyframes flowMove{ to{ stroke-dashoffset:-24; } }
+
+  /* Suction droplets rising into pump */
+  .droplet{ animation: dropRise 1.3s ease-in infinite; opacity:0; }
+  body.stopped .droplet{ animation-play-state:paused; opacity:0 !important; }
+  @keyframes dropRise{
+    0%{ transform:translateY(0); opacity:0; }
+    15%{ opacity:1; }
+    90%{ opacity:1; }
+    100%{ transform:translateY(-46px); opacity:0; }
+  }
+
+  /* Discharge spray particles */
+  .spark{ animation: sparkFly 0.9s ease-out infinite; opacity:0; }
+  body.stopped .spark{ animation-play-state:paused; opacity:0 !important; }
+  @keyframes sparkFly{
+    0%{ transform:translate(0,0); opacity:0; }
+    10%{ opacity:1; }
+    100%{ transform:translate(38px,-6px); opacity:0; }
+  }
+
+  /* Gauge needles */
+  #pressureNeedle, #rpmNeedle{
+    transform-box: fill-box; transform-origin: bottom center;
+    transition: transform .35s cubic-bezier(.22,.9,.3,1.3);
+  }
+
+  /* Casing pulsing glow when pressure high */
+  #casingGlow{ opacity:0; transition:opacity .4s; }
+  body.high-pressure #casingGlow{ opacity:.55; animation: glowPulse 1s infinite alternate; }
+  @keyframes glowPulse{ from{opacity:.35;} to{opacity:.7;} }
+
+  /* Bearing heat shimmer */
+  .heat-line{ opacity:0; }
+  body.running .heat-line{ opacity:.5; animation: heatWobble 2.4s ease-in-out infinite; }
+  @keyframes heatWobble{
+    0%,100%{ transform:translateY(0) scaleY(1); }
+    50%{ transform:translateY(-4px) scaleY(1.15); }
+  }
+
+  /* ============== CONTROL DECK ============== */
+  .control-panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .calc-title{ font-weight:700; font-size:13.5px; color:var(--accent); margin-bottom:12px; }
+  .control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+  }
+  .ctrl-group { display: flex; flex-direction: column; gap: 6px; }
+  .ctrl-group label { font-size: 12px; color: var(--text-dim); display: flex; justify-content: space-between; }
+  .ctrl-group input[type="range"] { accent-color: var(--cyan); cursor: pointer; width:100%; }
+  .toggle-row{ display:flex; align-items:center; gap:10px; }
+  .switch{
+    position:relative; width:52px; height:28px; border-radius:16px; background:var(--line-soft);
+    border:1px solid var(--line); cursor:pointer; transition:.2s; flex-shrink:0;
+  }
+  .switch::after{
+    content:""; position:absolute; top:2px; right:2px; width:22px; height:22px; border-radius:50%;
+    background:var(--text-faint); transition:.25s;
+  }
+  .switch.on{ background:rgba(95,209,146,.25); border-color:var(--green); }
+  .switch.on::after{ right:26px; background:var(--green); box-shadow:0 0 8px var(--green); }
+
+  /* Live readouts strip */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .dash-card {
+    background: var(--panel-2);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .dash-card .lbl { font-size: 10px; color: var(--text-faint); margin-bottom: 4px; font-family: var(--mono); display:block; }
+  .dash-card .val { font-size: 16px; font-weight: bold; color: var(--cyan); font-family: var(--mono); }
+  .dash-card .unit { font-size: 10.5px; color: var(--text-dim); font-weight: normal; }
+
+  .legend{
+    display:flex; flex-wrap:wrap; gap:14px; font-size:11.5px; color:var(--text-dim);
+    border-top:1px solid var(--line-soft); padding-top:12px; margin-top:4px;
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend i{ width:10px; height:10px; border-radius:3px; display:inline-block; }
+</style>
+</head>
+<body class="running">
+
+<div class="wrap">
+
+  <header>
+    <div class="header-top">
+      <div class="header-titles">
+        <div class="tag">CFTurbo · Interactive Pump Anatomy</div>
+        <h1>پمپ سانتریفیوژ تک‌مرحله‌ای — نمای برش‌خورده و زنده</h1>
+      </div>
+      <button id="themeToggleBtn" type="button">🌙 حالت شب / روز</button>
+    </div>
+    <div class="sub">
+      نسخهٔ کامل و بزرگ‌شدهٔ انیمیشن پمپ سربرگ: برش داخلی پروانه، محفظه مارپیچی (Volute)، کوپلینگ و موتور محرک، یاتاقان‌ها، لوله مکش و دهش با جریان زنده سیال، و دو گیج آنالوگ فشار و دور که با پانل کنترل به‌روزرسانی می‌شوند.
+    </div>
+  </header>
+
+  <!-- Live readouts -->
+  <div class="dashboard-grid">
+    <div class="dash-card">
+      <span class="lbl">وضعیت</span>
+      <span class="val" id="valStatus" style="color:var(--green);">روشن</span>
+    </div>
+    <div class="dash-card">
+      <span class="lbl">سرعت دورانی N</span>
+      <span class="val" id="valRpm">2900 <span class="unit">rpm</span></span>
+    </div>
+    <div class="dash-card">
+      <span class="lbl">فشار دهش</span>
+      <span class="val" id="valPress">4.4 <span class="unit">bar</span></span>
+    </div>
+    <div class="dash-card">
+      <span class="lbl">دبی تخمینی</span>
+      <span class="val" id="valFlow">120 <span class="unit">m³/h</span></span>
+    </div>
+    <div class="dash-card">
+      <span class="lbl">دمای یاتاقان</span>
+      <span class="val" id="valTemp">42 <span class="unit">°C</span></span>
+    </div>
+  </div>
+
+  <!-- Pump Stage -->
+  <div class="pump-stage">
+    <div class="status-pill running" id="statusPill">
+      <span class="status-dot"></span>
+      <span id="statusPillText">در حال کار</span>
+    </div>
+    <div class="stage-title">برش داخلی پمپ سانتریفیوژ · Volute Type</div>
+
+    <div class="pump-svg-wrap">
+      <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#3a464e"/>
+            <stop offset="100%" stop-color="#232c33"/>
+          </linearGradient>
+          <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffc568"/>
+            <stop offset="100%" stop-color="#55c7d6"/>
+          </linearGradient>
+          <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e2686b" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="#e2686b" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#55c7d6"/>
+            <stop offset="100%" stop-color="#2f8f5b"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ================= BASE / SKID ================= -->
+        <rect x="30" y="330" width="660" height="14" rx="4" fill="#1c252b" stroke="#0f1519"/>
+        <rect x="60" y="316" width="40" height="16" fill="#333f47"/>
+        <rect x="560" y="316" width="40" height="16" fill="#333f47"/>
+
+        <!-- ================= SUCTION PIPE (top) ================= -->
+        <rect x="184" y="20" width="34" height="90" rx="4" fill="url(#bodyGrad)" stroke="#0f1519" stroke-width="2"/>
+        <text x="201" y="16" text-anchor="middle" font-family="Vazirmatn" font-size="12" fill="#93a3ad">لوله مکش (Suction)</text>
+        <!-- droplets rising up the suction pipe into the eye of impeller -->
+        <g fill="#55c7d6">
+          <circle class="droplet" cx="195" cy="100" r="4" style="animation-delay:0s"/>
+          <circle class="droplet" cx="205" cy="100" r="3" style="animation-delay:.3s"/>
+          <circle class="droplet" cx="200" cy="100" r="3.5" style="animation-delay:.65s"/>
+          <circle class="droplet" cx="210" cy="100" r="2.5" style="animation-delay:.95s"/>
+        </g>
+
+        <!-- ================= VOLUTE CASING (cutaway) ================= -->
+        <g id="casingGlow">
+          <circle cx="201" cy="180" r="92" fill="url(#glowGrad)"/>
+        </g>
+        <path d="M 201 88
+                 A 92 92 0 1 1 200.9 88
+                 L 260 88
+                 Q 330 100 330 180
+                 Q 330 230 270 240
+                 L 210 240
+                 A 92 92 0 0 1 201 88 Z"
+              fill="url(#bodyGrad)" stroke="url(#accentGrad)" stroke-width="4"/>
+
+        <!-- volute inner shading ring -->
+        <circle cx="201" cy="180" r="70" fill="#171f26" stroke="#0f1519" stroke-width="2"/>
+
+        <!-- ================= IMPELLER (rotating) ================= -->
+        <g id="impellerGroup">
+          <circle cx="201" cy="180" r="14" fill="url(#accentGrad)"/>
+          <g stroke="url(#accentGrad)" stroke-width="7" stroke-linecap="round">
+            <path d="M201 180 L201 122 Q225 132 236 155" fill="none"/>
+            <path d="M201 180 L246 150 Q262 168 258 195" fill="none"/>
+            <path d="M201 180 L250 210 Q250 235 228 246" fill="none"/>
+            <path d="M201 180 L201 238 Q175 232 162 208" fill="none"/>
+            <path d="M201 180 L156 210 Q140 192 144 165" fill="none"/>
+            <path d="M201 180 L152 150 Q152 125 174 114" fill="none"/>
+          </g>
+          <circle cx="201" cy="180" r="6" fill="#111"/>
+        </g>
+
+        <!-- volute rim highlight -->
+        <circle cx="201" cy="180" r="70" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+        <!-- ================= DISCHARGE NOZZLE (right side) ================= -->
+        <rect x="322" y="158" width="70" height="44" rx="6" fill="url(#bodyGrad)" stroke="#0f1519" stroke-width="2"/>
+        <text x="357" y="150" text-anchor="middle" font-family="Vazirmatn" font-size="12" fill="#93a3ad">دهش (Discharge)</text>
+        <!-- spray particles leaving discharge -->
+        <g fill="url(#waterGrad)">
+          <circle class="spark" cx="392" cy="172" r="3" style="animation-delay:0s"/>
+          <circle class="spark" cx="392" cy="180" r="3.5" style="animation-delay:.2s"/>
+          <circle class="spark" cx="392" cy="188" r="3" style="animation-delay:.4s"/>
+          <circle class="spark" cx="392" cy="176" r="2.5" style="animation-delay:.6s"/>
+        </g>
+
+        <!-- discharge pipe going down and along the header -->
+        <path class="flow-line" d="M 392 180 H 470 V 260 H 560" fill="none" stroke="url(#waterGrad)" stroke-width="7" stroke-linecap="round"/>
+        <rect x="460" y="176" width="20" height="8" fill="#333f47"/>
+
+        <!-- ================= PRESSURE GAUGE (analog) ================= -->
+        <g transform="translate(470,150)">
+          <circle r="30" fill="#151d24" stroke="var(--accent-dim, #7a5a26)" stroke-width="3"/>
+          <circle r="30" fill="none" stroke="#0f1519" stroke-width="1"/>
+          <text y="-14" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#93a3ad">bar</text>
+          <g stroke="#3a464e" stroke-width="1">
+            <line x1="0" y1="-24" x2="0" y2="-20"/>
+            <line x1="17" y1="-17" x2="14.5" y2="-14.5" transform="rotate(30)"/>
+          </g>
+          <line id="pressureNeedle" x1="0" y1="0" x2="0" y2="-20" stroke="#ffb545" stroke-width="2.4" stroke-linecap="round" transform="rotate(-90)"/>
+          <circle r="3" fill="#ffb545"/>
+          <text y="18" text-anchor="middle" font-family="Vazirmatn" font-size="9" fill="#93a3ad">فشار</text>
+        </g>
+
+        <!-- ================= SHAFT + COUPLING ================= -->
+        <rect x="330" y="172" width="0" height="0"/>
+        <rect x="392" y="172" width="0" height="0"/>
+        <rect x="238" y="174" width="0" height="0"/>
+        <!-- shaft extends left from motor to impeller hub through seal housing -->
+        <rect x="40" y="172" width="0" height="0"/>
+
+        <!-- Mechanical seal housing between casing and motor -->
+        <rect x="8" y="150" width="0" height="0"/>
+
+        <!-- ================= MOTOR (left side) ================= -->
+        <g transform="translate(0,0)">
+          <!-- shaft coupling disc -->
+          <g id="shaftCoupling" transform="translate(60,180)">
+            <circle r="16" fill="#3a464e" stroke="url(#accentGrad)" stroke-width="3"/>
+            <circle r="16" fill="none" stroke="#0f1519" stroke-width="1"/>
+            <g stroke="#0f1519" stroke-width="2">
+              <line x1="-10" y1="0" x2="10" y2="0"/>
+              <line x1="0" y1="-10" x2="0" y2="10"/>
+            </g>
+          </g>
+          <!-- shaft between coupling and impeller -->
+          <rect x="76" y="176" width="125" height="8" fill="#4a5860" stroke="#0f1519" stroke-width="1"/>
+
+          <!-- bearing housing -->
+          <rect x="40" y="164" width="26" height="32" rx="4" fill="url(#bodyGrad)" stroke="#0f1519" stroke-width="2"/>
+          <g class="heat-line" stroke="#e2686b" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <path d="M44 160 q3 -8 0 -14"/>
+            <path d="M52 160 q3 -8 0 -14"/>
+            <path d="M60 160 q3 -8 0 -14"/>
+          </g>
+
+          <!-- motor body -->
+          <rect x="-90" y="130" width="130" height="100" rx="10" fill="url(#bodyGrad)" stroke="url(#accentGrad)" stroke-width="3"/>
+          <!-- cooling fins -->
+          <g stroke="#0f1519" stroke-width="2">
+            <line x1="-80" y1="140" x2="-80" y2="220"/>
+            <line x1="-64" y1="140" x2="-64" y2="220"/>
+            <line x1="-48" y1="140" x2="-48" y2="220"/>
+            <line x1="-32" y1="140" x2="-32" y2="220"/>
+            <line x1="-16" y1="140" x2="-16" y2="220"/>
+          </g>
+          <!-- motor fan cap -->
+          <circle cx="-90" cy="180" r="26" fill="#232c33" stroke="#0f1519" stroke-width="2"/>
+          <g id="motorFan" transform="translate(-90,180)" stroke="url(#accentGrad)" stroke-width="4" stroke-linecap="round">
+            <line x1="0" y1="0" x2="0" y2="-18"/>
+            <line x1="0" y1="0" x2="16" y2="9"/>
+            <line x1="0" y1="0" x2="-16" y2="9"/>
+            <circle r="4" fill="url(#accentGrad)" stroke="none"/>
+          </g>
+          <text x="-25" y="118" text-anchor="middle" font-family="Vazirmatn" font-weight="bold" font-size="12" fill="#e7edf1">موتور محرک</text>
+
+          <!-- RPM gauge on motor -->
+          <g transform="translate(-25,255)">
+            <circle r="28" fill="#151d24" stroke="var(--accent-dim, #7a5a26)" stroke-width="3"/>
+            <text y="-12" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#93a3ad">rpm</text>
+            <line id="rpmNeedle" x1="0" y1="0" x2="0" y2="-18" stroke="#5fd192" stroke-width="2.2" stroke-linecap="round" transform="rotate(-90)"/>
+            <circle r="3" fill="#5fd192"/>
+            <text y="18" text-anchor="middle" font-family="Vazirmatn" font-size="8" fill="#93a3ad">دور موتور</text>
+          </g>
+        </g>
+
+        <!-- ================= BASE PLATE + FOUNDATION BOLTS ================= -->
+        <g fill="#333f47" stroke="#0f1519" stroke-width="1.5">
+          <rect x="-96" y="228" width="16" height="14"/>
+          <rect x="-20" y="228" width="16" height="14"/>
+          <rect x="150" y="242" width="16" height="14"/>
+          <rect x="330" y="200" width="16" height="14"/>
+        </g>
+
+        <!-- Labels row -->
+        <text x="201" y="290" text-anchor="middle" font-family="Vazirmatn" font-weight="bold" font-size="12" fill="#e7edf1">محفظه مارپیچی (Volute)</text>
+        <text x="357" y="222" text-anchor="middle" font-family="Vazirmatn" font-size="11" fill="#93a3ad">به سمت خط لوله فرآیند</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Control Deck -->
+  <div class="control-panel">
+    <div class="calc-title">🎛️ پانل کنترل پمپ نمایشی</div>
+    <div class="control-grid">
+
+      <div class="ctrl-group">
+        <label>روشن / خاموش</label>
+        <div class="toggle-row">
+          <div class="switch on" id="powerSwitch"></div>
+          <span id="powerLabel" style="font-size:12.5px; color:var(--green);">پمپ در حال کار است</span>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <label>سرعت دورانی N (rpm): <b id="lblRpm" style="color:var(--green);">2900</b></label>
+        <input type="range" id="rngRpm" min="500" max="4000" step="50" value="2900">
+      </div>
+
+      <div class="ctrl-group">
+        <label>مقاومت خط دهش (شبیه‌سازی فشار سیستم): <b id="lblResist" style="color:var(--accent);">55%</b></label>
+        <input type="range" id="rngResist" min="0" max="100" value="55">
+      </div>
+
+    </div>
+
+    <div class="legend">
+      <span><i style="background:var(--accent);"></i> پروانه و شفت (چرخان)</span>
+      <span><i style="background:var(--cyan);"></i> جریان مکش</span>
+      <span><i style="background:var(--green);"></i> جریان دهش</span>
+      <span><i style="background:var(--red);"></i> هشدار فشار بالا (&gt; 55 rpm نسبی)</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const body = document.body;
+const rngRpm = document.getElementById('rngRpm');
+const rngResist = document.getElementById('rngResist');
+const lblRpm = document.getElementById('lblRpm');
+const lblResist = document.getElementById('lblResist');
+const powerSwitch = document.getElementById('powerSwitch');
+const powerLabel = document.getElementById('powerLabel');
+const statusPill = document.getElementById('statusPill');
+const statusPillText = document.getElementById('statusPillText');
+
+const valStatus = document.getElementById('valStatus');
+const valRpm = document.getElementById('valRpm');
+const valPress = document.getElementById('valPress');
+const valFlow = document.getElementById('valFlow');
+const valTemp = document.getElementById('valTemp');
+
+const pressureNeedle = document.getElementById('pressureNeedle');
+const rpmNeedle = document.getElementById('rpmNeedle');
+
+let running = true;
+let rpm = 2900;
+let resist = 55;
+
+function update() {
+  const rpmRatio = rpm / 4000; // 0..1
+  const resistRatio = resist / 100; // 0..1
+
+  // Estimated discharge pressure (bar) from affinity-like relation + system resistance
+  const pressure = running ? (Math.pow(rpm / 2900, 2) * 4.4) * (0.6 + 0.5 * resistRatio) : 0;
+  // Estimated flow drops as resistance rises
+  const flow = running ? Math.max(0, 120 * (rpm / 2900) * (1.15 - resistRatio * 0.7)) : 0;
+  // Bearing temperature rises with speed and pressure
+  const temp = running ? (32 + rpmRatio * 28 + pressure * 1.4) : 24;
+
+  // Update dashboard
+  valStatus.textContent = running ? "روشن" : "خاموش";
+  valStatus.style.color = running ? "var(--green)" : "var(--text-faint)";
+  valRpm.innerHTML = `${rpm} <span class="unit">rpm</span>`;
+  valPress.innerHTML = `${pressure.toFixed(1)} <span class="unit">bar</span>`;
+  valFlow.innerHTML = `${flow.toFixed(0)} <span class="unit">m³/h</span>`;
+  valTemp.innerHTML = `${temp.toFixed(0)} <span class="unit">°C</span>`;
+
+  // Gauge needles: map 0..~7 bar to -90deg..+90deg, 0..4000 rpm similarly
+  const pressAngle = -90 + Math.min(1, pressure / 7) * 180;
+  const rpmAngle = -90 + Math.min(1, rpm / 4000) * 180;
+  pressureNeedle.style.transform = `rotate(${pressAngle}deg)`;
+  rpmNeedle.style.transform = `rotate(${rpmAngle}deg)`;
+
+  // Rotation speed of impeller/fan/coupling scales inversely with rpm (faster rpm = shorter duration)
+  const spinDur = Math.max(0.18, 3.2 - rpmRatio * 3.0);
+  document.documentElement.style.setProperty('--spin-dur', spinDur + 's');
+
+  // Body state classes drive CSS animations
+  body.classList.toggle('running', running);
+  body.classList.toggle('stopped', !running);
+  body.classList.toggle('high-pressure', running && pressure > 5.2);
+
+  statusPill.classList.toggle('running', running);
+  statusPillText.textContent = running ? "در حال کار" : "متوقف";
+}
+
+rngRpm.addEventListener('input', (e) => {
+  rpm = parseFloat(e.target.value);
+  lblRpm.textContent = rpm;
+  update();
+});
+
+rngResist.addEventListener('input', (e) => {
+  resist = parseFloat(e.target.value);
+  lblResist.textContent = resist + '%';
+  update();
+});
+
+powerSwitch.addEventListener('click', () => {
+  running = !running;
+  powerSwitch.classList.toggle('on', running);
+  powerLabel.textContent = running ? "پمپ در حال کار است" : "پمپ متوقف است";
+  powerLabel.style.color = running ? "var(--green)" : "var(--text-faint)";
+  update();
+});
+
+document.getElementById('themeToggleBtn').addEventListener('click', () => {
+  document.body.classList.toggle('light');
+});
+
+update();
+</script>
+
+</body>
+</html>
