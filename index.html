@@ -18,6 +18,7 @@
       --bg-dark: #07090e;
       --bg-card: #0d1117;
       --bg-card-hover: #131922;
+      --bg-void: #05070a;
       --border: #1a2230;
       --border-bright: #2d3b52;
       --text-main: #f0f4f8;
@@ -170,17 +171,18 @@
 
     /* LIGHT MODE THEME */
     html.light-mode {
-      --bg-dark: #f5f7fa;
+      --bg-dark: #eef1f6;
       --bg-card: #ffffff;
-      --bg-card-hover: #eef1f6;
-      --border: #dde3ec;
-      --border-bright: #c3ccdb;
+      --bg-card-hover: #e6eaf1;
+      --bg-void: #dde3ec;
+      --border: #d6dce6;
+      --border-bright: #b7c1d1;
       --text-main: #10151d;
       --text-muted: #4b5a70;
-      --text-dim: #8592a6;
-      --accent-cyan: #0091b3;
+      --text-dim: #7c8aa0;
+      --accent-cyan: #0089ad;
       --accent-blue: #0072ff;
-      --accent-glow: rgba(0, 145, 179, 0.10);
+      --accent-glow: rgba(0, 137, 173, 0.08);
     }
     html.light-mode header.nav-bar {
       background: rgba(245, 247, 250, 0.85);
@@ -345,7 +347,7 @@
     }
     .project-preview {
       height: 220px;
-      background: #05070a;
+      background: var(--bg-void);
       position: relative;
       display: flex;
       align-items: center;
@@ -447,7 +449,7 @@
       position: relative;
       width: 100%;
       height: 300px;
-      background: #040608;
+      background: var(--bg-void);
       border: 1px solid var(--border);
       border-radius: 6px;
       overflow: hidden;
@@ -1114,14 +1116,16 @@
     }));
 
     function renderHeroCanvas() {
-      hCtx.fillStyle = '#0d1117';
+      const isLight = rootEl.classList.contains('light-mode');
+
+      hCtx.fillStyle = isLight ? '#dde3ec' : '#0d1117';
       hCtx.fillRect(0, 0, hCanvas.width, hCanvas.height);
 
       const cx = hCanvas.width / 2;
       const cy = hCanvas.height / 2;
 
       // Draw Coordinates / Engineering Grid
-      hCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      hCtx.strokeStyle = isLight ? 'rgba(16, 21, 29, 0.06)' : 'rgba(255, 255, 255, 0.04)';
       hCtx.lineWidth = 1;
       hCtx.beginPath();
       hCtx.moveTo(cx, 0); hCtx.lineTo(cx, hCanvas.height);
@@ -1129,7 +1133,7 @@
       hCtx.stroke();
 
       // Outer Casing Ring
-      hCtx.strokeStyle = '#1a2230';
+      hCtx.strokeStyle = isLight ? '#b7c1d1' : '#1a2230';
       hCtx.lineWidth = 2;
       hCtx.beginPath();
       hCtx.arc(cx, cy, 140, 0, Math.PI * 2);
@@ -1140,7 +1144,7 @@
       hCtx.translate(cx, cy);
       hCtx.rotate(hAngle);
 
-      hCtx.strokeStyle = '#00f2fe';
+      hCtx.strokeStyle = isLight ? '#0089ad' : '#00f2fe';
       hCtx.lineWidth = 2;
       for (let i = 0; i < 6; i++) {
         hCtx.rotate((Math.PI * 2) / 6);
@@ -1152,7 +1156,7 @@
       hCtx.restore();
 
       // Particle Kinematics
-      hCtx.fillStyle = 'rgba(0, 242, 254, 0.6)';
+      hCtx.fillStyle = isLight ? 'rgba(0, 137, 173, 0.55)' : 'rgba(0, 242, 254, 0.6)';
       heroParticles.forEach(p => {
         p.r += p.speed * 20;
         if (p.r > 140) p.r = 15;
@@ -1194,14 +1198,16 @@
     }));
 
     function renderChipCanvas() {
-      cCtx.fillStyle = '#040608';
+      const isLight = rootEl.classList.contains('light-mode');
+
+      cCtx.fillStyle = isLight ? '#dde3ec' : '#040608';
       cCtx.fillRect(0, 0, cCanvas.width, cCanvas.height);
 
       const h = cCanvas.height;
       const w = cCanvas.width;
 
       // Microfluidic Channel Walls
-      cCtx.strokeStyle = '#1a2230';
+      cCtx.strokeStyle = isLight ? '#b7c1d1' : '#1a2230';
       cCtx.lineWidth = 4;
       
       // Main Channel
@@ -1220,7 +1226,7 @@
       cCtx.stroke();
 
       // Fluid Particle Animation
-      cCtx.fillStyle = '#00f2fe';
+      cCtx.fillStyle = isLight ? '#0089ad' : '#00f2fe';
       chipParticles.forEach(p => {
         p.x += p.vx;
         if (p.x > w) p.x = 0;
