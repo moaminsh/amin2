@@ -2649,6 +2649,72 @@ function buildEpsChartSvg(nqPoint, epsPoint){
   </svg>`;
 }
 
+/* ---- نمودارهای تک‌خطی β₁ (زاویه جریان نسبی ورودی) و f_dS (ضریب ثانویه، روش حداقل w₁) بر حسب nq
+   — تخمین از نمودارهای مرجع CFTurbo، به همان روش نمودار ε ---- */
+const CHART_DEFS = {
+  beta1: {
+    title: 'نمودار β₁ — زاویه جریان نسبی ورودی بر حسب n_q (تخمین از نمودار مرجع CFTurbo)',
+    xMin:10, xMax:150, yMin:10, yMax:28, yStep:4, yDecimals:0,
+    curve: [[10,12],[40,15],[90,20],[150,26]],
+    color:'var(--cyan)', unit:'°'
+  },
+  fds: {
+    title: 'نمودار f_dS — ضریب ثانویه بر حسب n_q (تخمین از نمودار مرجع CFTurbo، پروانه استاندارد)',
+    xMin:10, xMax:150, yMin:1.03, yMax:1.17, yStep:0.02, yDecimals:2,
+    curve: [[10,1.15],[15,1.15],[40,1.05],[150,1.05]],
+    color:'var(--cyan)', unit:''
+  }
+};
+function genChartX(def, nq){
+  const {W,mL,mR} = EPS_SVG;
+  return mL + (nq-def.xMin)/(def.xMax-def.xMin)*(W-mL-mR);
+}
+function genChartY(def, v){
+  const {H,mT,mB} = EPS_SVG;
+  return mT + (def.yMax-v)/(def.yMax-def.yMin)*(H-mT-mB);
+}
+function genChartInvY(def, py){
+  const {H,mT,mB} = EPS_SVG;
+  const t = (py-mT)/(H-mT-mB);
+  return def.yMax - t*(def.yMax-def.yMin);
+}
+function buildLineChartSvg(defKey, nqPoint, valPoint){
+  const def = CHART_DEFS[defKey];
+  const {W,H,mL,mR,mT,mB} = EPS_SVG;
+  const ptsLine = def.curve.map(([nq,v])=>`${genChartX(def,nq).toFixed(1)},${genChartY(def,v).toFixed(1)}`).join(' ');
+  let grid = '';
+  for (let nq=def.xMin; nq<=def.xMax; nq+=20){
+    grid += `<line x1="${genChartX(def,nq).toFixed(1)}" y1="${mT}" x2="${genChartX(def,nq).toFixed(1)}" y2="${H-mB}" stroke="var(--line-soft)" stroke-width="1"/>
+      <text x="${genChartX(def,nq).toFixed(1)}" y="${H-mB+13}" font-size="8" fill="var(--text-faint)" text-anchor="middle">${nq}</text>`;
+  }
+  const decimals = def.yDecimals!=null ? def.yDecimals : 2;
+  const steps = Math.round((def.yMax-def.yMin)/def.yStep);
+  for (let i=0;i<=steps;i++){
+    const vv = def.yMin + i*def.yStep;
+    grid += `<line x1="${mL}" y1="${genChartY(def,vv).toFixed(1)}" x2="${W-mR}" y2="${genChartY(def,vv).toFixed(1)}" stroke="var(--line-soft)" stroke-width="1"/>
+      <text x="${mL-5}" y="${(genChartY(def,vv)+3).toFixed(1)}" font-size="8" fill="var(--text-faint)" text-anchor="end">${vv.toFixed(decimals)}</text>`;
+  }
+  let markerSvg = '';
+  if (nqPoint!=null && !isNaN(nqPoint) && valPoint!=null && !isNaN(valPoint)){
+    const cnq = Math.min(Math.max(nqPoint, def.xMin), def.xMax);
+    const cval = Math.min(Math.max(valPoint, def.yMin), def.yMax);
+    const mx = genChartX(def,cnq).toFixed(1), my = genChartY(def,cval).toFixed(1);
+    markerSvg = `
+      <line x1="${mx}" y1="${my}" x2="${mx}" y2="${H-mB}" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="${mL}" y1="${my}" x2="${mx}" y2="${my}" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="${mx}" cy="${my}" r="5.5" fill="var(--accent)" stroke="#fff" stroke-width="1.5"/>`;
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" class="ds-eps-chart-svg" id="dsChartSvg">
+    <rect x="0" y="0" width="${W}" height="${H}" fill="var(--panel)" rx="8"/>
+    ${grid}
+    <polyline points="${ptsLine}" fill="none" stroke="${def.color}" stroke-width="2"/>
+    ${markerSvg}
+    <line x1="${mL}" y1="${mT}" x2="${mL}" y2="${H-mB}" stroke="var(--text-faint)" stroke-width="1"/>
+    <line x1="${mL}" y1="${H-mB}" x2="${W-mR}" y2="${H-mB}" stroke="var(--text-faint)" stroke-width="1"/>
+    <rect id="dsChartClickRect" x="${mL}" y="${mT}" width="${W-mL-mR}" height="${H-mT-mB}" fill="transparent"/>
+  </svg>`;
+}
+
 /* بازه‌های راهنما بر اساس نوع پروانه/جریان مکش (برای تخمین u1 و مقایسه n_ss) */
 const DS_NSS_TYPES = [
   { key:'std',      label:'پروانه مکش استاندارد',            nss:[160,220], u1:'کمتر از ۵۰ m/s' },
@@ -2876,13 +2942,22 @@ function setupDsBox(container, k, boxId){
         <div class="ds-hint">در نرم‌افزارهایی مثل CFTurbo این ضریب معادل k<sub>m1</sub> استپانف در نظر گرفته می‌شود.</div>`;
       panelEl.querySelector('#dsEps').addEventListener('input', e => { ds.eps=e.target.value; clearTimeout(saveTimer); saveTimer=setTimeout(persist,500); recompute(); });
     } else if (ds.method === 'beta1'){
+      const nqForChart1 = (!isNaN(shared.n) && !isNaN(shared.H) && shared.H>0 && !isNaN(shared.Q) && shared.Q>=0)
+        ? shared.n*Math.sqrt(shared.Q)/Math.pow(shared.H,0.75) : null;
+      const beta1ChartVal = epsInterp(CHART_DEFS.beta1.curve, nqForChart1);
       panelEl.innerHTML = `
         <div class="ds-panel-desc">زاویه جریان نسبی ورودی؛ زاویه بزرگ‌تر یعنی ابعاد کوچک‌تر و افت اصطکاکی کمتر، اما زاویه کمتر از ۲۰° برای کنترل ریسک کاویتاسیون لازم است. بازه ۱۲° تا ۱۷° برای مکش خوب توصیه می‌شود.</div>
         <div class="ds-formula">tan β₁ = c_m1 / u₁ ,  c_m1 = Q / [(π/4)(d_s²−d_n²)] ,  u₁ = π·d_s·n/60</div>
         <div class="ds-row"><label>β₁ (درجه)<input type="number" step="any" id="dsBeta1" value="${ds.beta1}"></label></div>
+        ${ beta1ChartVal!=null
+          ? `<div class="ds-chart-band">مقدار نمودار در n<sub>q</sub> = ${nqForChart1.toFixed(1)}: <b>${dsFmt(beta1ChartVal,1)}°</b> — نمودار کنار همین نتیجه نمایش داده شده؛ برای انتخاب مقدار می‌توانید روی نمودار کلیک کنید.</div>`
+          : `<div class="ds-chart-band">برای دیدن مقدار نمودار، ابتدا n، Q و H را وارد کنید.</div>` }
         <div class="ds-hint">توصیه: β₁ &lt; ۲۰° (پیشگیری از کاویتاسیون) و β₁ &gt; ۱۵° (بازده)؛ بازه مطلوب ۱۲°...۱۷°.</div>`;
       panelEl.querySelector('#dsBeta1').addEventListener('input', e => { ds.beta1=e.target.value; clearTimeout(saveTimer); saveTimer=setTimeout(persist,500); recompute(); });
     } else if (ds.method === 'wmin'){
+      const nqForChart2 = (!isNaN(shared.n) && !isNaN(shared.H) && shared.H>0 && !isNaN(shared.Q) && shared.Q>=0)
+        ? shared.n*Math.sqrt(shared.Q)/Math.pow(shared.H,0.75) : null;
+      const fdsChartVal = epsInterp(CHART_DEFS.fds.curve, nqForChart2);
       panelEl.innerHTML = `
         <div class="ds-panel-desc">قطری که سرعت نسبی ورودی (w₁) را کمینه می‌کند — کمترین افت اصطکاکی و ضربه‌ای؛ فقط زمانی که ریسک کاویتاسیون وجود نداشته باشد قابل استفاده است. ضریب اطمینان f<sub>dS</sub> روی قطر بهینه اعمال می‌شود.</div>
         <div class="ds-formula">d_s,opt = [32·Q² / (π²·(π·n/60)²)]^(1/6)   ⇒   d_s = f_dS · d_s,opt</div>
@@ -2893,6 +2968,9 @@ function setupDsBox(container, k, boxId){
           </select></label>
           <label>f<sub>dS</sub><input type="number" step="any" id="dsFds" value="${ds.fds}"></label>
         </div>
+        ${ fdsChartVal!=null
+          ? `<div class="ds-chart-band">مقدار نمودار در n<sub>q</sub> = ${nqForChart2.toFixed(1)}: <b>${dsFmt(fdsChartVal,3)}</b> — نمودار کنار همین نتیجه نمایش داده شده (پروانه استاندارد)؛ برای انتخاب مقدار می‌توانید روی نمودار کلیک کنید.</div>`
+          : `<div class="ds-chart-band">برای دیدن مقدار نمودار، ابتدا n، Q و H را وارد کنید.</div>` }
         <div class="ds-hint">فقط در صورت نبود ریسک کاویتاسیون از این روش استفاده کنید؛ در غیر این‌صورت از روش β₁ یا NPSH استفاده کنید.</div>`;
       const kindEl = panelEl.querySelector('#dsFdsKind');
       kindEl.value = ds.fdsKind;
@@ -3014,12 +3092,12 @@ function setupDsBox(container, k, boxId){
         `قطر مکش (روش NPSH): d_s ≈ ${dsFmtMm(Math.min(...r.roots))} mm برای NPSH_R هدف=${ds.npshTarget} m (λ_c=${ds.lamC}, λ_w=${ds.lamW}؛ بازه مجاز تا ${dsFmtMm(Math.max(...r.roots))} mm، بهینه در ${dsFmtMm(r.dsBest)} mm).`
       ));
     }
-    updateEpsChart(shared);
+    updateDsChart(shared);
   }
 
-  function updateEpsChart(shared){
+  function updateDsChart(shared){
     if (!chartBoxEl) return;
-    if (ds.method !== 'eps'){
+    if (!['eps','beta1','wmin'].includes(ds.method)){
       chartBoxEl.classList.add('hidden');
       chartBoxEl.innerHTML = '';
       return;
@@ -3027,44 +3105,84 @@ function setupDsBox(container, k, boxId){
     chartBoxEl.classList.remove('hidden');
     const nqVal = (!isNaN(shared.n) && !isNaN(shared.H) && shared.H>0 && !isNaN(shared.Q) && shared.Q>=0)
       ? shared.n*Math.sqrt(shared.Q)/Math.pow(shared.H,0.75) : null;
-    const epsVal = parseFloat(ds.eps);
-    const band = epsBandAt(nqVal);
-    chartBoxEl.innerHTML = `
-      <div class="ds-chart-title">نمودار ε — ضریب ورودی بر حسب n<sub>q</sub></div>
-      ${buildEpsChartSvg(nqVal, isNaN(epsVal) ? null : epsVal)}
-      <div class="ds-chart-legend">
-        <span><i style="border-color:var(--cyan);"></i>حد پایین (CFturbo)</span>
-        <span><i style="border-color:var(--green); border-top-style:dashed;"></i>حد بالا</span>
-      </div>
-      ${ band ? `<button type="button" class="ds-eps-suggest-btn" id="dsEpsSuggestBtn">↧ استفاده از مقدار میانی نمودار (${dsFmt(band.mid,3)})</button>` : '' }
-      <div class="ds-chart-hint">${ nqVal!=null ? 'برای انتخاب مقدار دیگر از داخل بازه، روی نمودار کلیک کنید.' : 'با وارد کردن n، Q و H، نقطه شما روی نمودار مشخص می‌شود.' }</div>`;
-    const suggestBtn = chartBoxEl.querySelector('#dsEpsSuggestBtn');
-    if (suggestBtn){
-      suggestBtn.addEventListener('click', () => {
-        const epsInput = panelEl.querySelector('#dsEps');
-        if (!epsInput) return;
-        epsInput.value = band.mid.toFixed(3);
-        ds.eps = epsInput.value;
-        clearTimeout(saveTimer); saveTimer = setTimeout(persist, 500);
-        recompute();
-      });
+
+    if (ds.method === 'eps'){
+      const epsVal = parseFloat(ds.eps);
+      const band = epsBandAt(nqVal);
+      chartBoxEl.innerHTML = `
+        <div class="ds-chart-title">نمودار ε — ضریب ورودی بر حسب n<sub>q</sub></div>
+        ${buildEpsChartSvg(nqVal, isNaN(epsVal) ? null : epsVal)}
+        <div class="ds-chart-legend">
+          <span><i style="border-color:var(--cyan);"></i>حد پایین (CFturbo)</span>
+          <span><i style="border-color:var(--green); border-top-style:dashed;"></i>حد بالا</span>
+        </div>
+        ${ band ? `<button type="button" class="ds-eps-suggest-btn" id="dsEpsSuggestBtn">↧ استفاده از مقدار میانی نمودار (${dsFmt(band.mid,3)})</button>` : '' }
+        <div class="ds-chart-hint">${ nqVal!=null ? 'برای انتخاب مقدار دیگر از داخل بازه، روی نمودار کلیک کنید.' : 'با وارد کردن n، Q و H، نقطه شما روی نمودار مشخص می‌شود.' }</div>`;
+      const suggestBtn = chartBoxEl.querySelector('#dsEpsSuggestBtn');
+      if (suggestBtn){
+        suggestBtn.addEventListener('click', () => {
+          const epsInput = panelEl.querySelector('#dsEps');
+          if (!epsInput) return;
+          epsInput.value = band.mid.toFixed(3);
+          ds.eps = epsInput.value;
+          clearTimeout(saveTimer); saveTimer = setTimeout(persist, 500);
+          recompute();
+        });
+      }
+      const svgEl = chartBoxEl.querySelector('#dsEpsChartSvg');
+      const clickRectEl = chartBoxEl.querySelector('#dsEpsClickRect');
+      if (svgEl && clickRectEl){
+        clickRectEl.style.cursor = 'pointer';
+        clickRectEl.addEventListener('click', (ev) => {
+          const rectBounds = svgEl.getBoundingClientRect();
+          const scaleY = EPS_SVG.H / rectBounds.height;
+          const py = (ev.clientY - rectBounds.top) * scaleY;
+          let epsClicked = epsChartInvY(py);
+          epsClicked = Math.min(EPS_CHART.yMax, Math.max(EPS_CHART.yMin, epsClicked));
+          const epsInput = panelEl.querySelector('#dsEps');
+          if (!epsInput) return;
+          epsInput.value = epsClicked.toFixed(3);
+          ds.eps = epsInput.value;
+          clearTimeout(saveTimer); saveTimer = setTimeout(persist, 500);
+          recompute();
+        });
+      }
+      return;
     }
-    const svgEl = chartBoxEl.querySelector('#dsEpsChartSvg');
-    const clickRectEl = chartBoxEl.querySelector('#dsEpsClickRect');
+
+    /* β₁ و f_dS: نمودار تک‌خطی با همان روش کلیک/پیشنهاد نمودار ε */
+    const defKey = ds.method === 'beta1' ? 'beta1' : 'fds';
+    const def = CHART_DEFS[defKey];
+    const inputSel = ds.method === 'beta1' ? '#dsBeta1' : '#dsFds';
+    const curVal = parseFloat(ds.method === 'beta1' ? ds.beta1 : ds.fds);
+    const chartVal = epsInterp(def.curve, nqVal);
+    const fmtDigits = defKey === 'fds' ? 3 : 1;
+    chartBoxEl.innerHTML = `
+      <div class="ds-chart-title">${def.title}</div>
+      ${buildLineChartSvg(defKey, nqVal, isNaN(curVal) ? null : curVal)}
+      ${ chartVal!=null ? `<button type="button" class="ds-eps-suggest-btn" id="dsChartSuggestBtn">↧ استفاده از مقدار نمودار (${dsFmt(chartVal, fmtDigits)}${def.unit})</button>` : '' }
+      <div class="ds-chart-hint">${ nqVal!=null ? 'برای انتخاب مقدار دیگر، روی نمودار کلیک کنید.' : 'با وارد کردن n، Q و H، نقطه شما روی نمودار مشخص می‌شود.' }</div>`;
+    const applyVal = (v) => {
+      const inp = panelEl.querySelector(inputSel);
+      if (!inp) return;
+      inp.value = v.toFixed(fmtDigits);
+      if (ds.method === 'beta1') ds.beta1 = inp.value; else ds.fds = inp.value;
+      clearTimeout(saveTimer); saveTimer = setTimeout(persist, 500);
+      recompute();
+    };
+    const suggestBtn = chartBoxEl.querySelector('#dsChartSuggestBtn');
+    if (suggestBtn) suggestBtn.addEventListener('click', () => applyVal(chartVal));
+    const svgEl = chartBoxEl.querySelector('#dsChartSvg');
+    const clickRectEl = chartBoxEl.querySelector('#dsChartClickRect');
     if (svgEl && clickRectEl){
       clickRectEl.style.cursor = 'pointer';
       clickRectEl.addEventListener('click', (ev) => {
         const rectBounds = svgEl.getBoundingClientRect();
         const scaleY = EPS_SVG.H / rectBounds.height;
         const py = (ev.clientY - rectBounds.top) * scaleY;
-        let epsClicked = epsChartInvY(py);
-        epsClicked = Math.min(EPS_CHART.yMax, Math.max(EPS_CHART.yMin, epsClicked));
-        const epsInput = panelEl.querySelector('#dsEps');
-        if (!epsInput) return;
-        epsInput.value = epsClicked.toFixed(3);
-        ds.eps = epsInput.value;
-        clearTimeout(saveTimer); saveTimer = setTimeout(persist, 500);
-        recompute();
+        let clicked = genChartInvY(def, py);
+        clicked = Math.min(def.yMax, Math.max(def.yMin, clicked));
+        applyVal(clicked);
       });
     }
   }
