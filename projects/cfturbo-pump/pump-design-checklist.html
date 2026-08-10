@@ -203,7 +203,18 @@
     border-radius:7px;
     padding:8px 10px;
     min-width:150px;
+    max-width:220px;
     cursor:pointer;
+  }
+  .project-actions{
+    display:flex; gap:6px;
+  }
+  .btn-icon{
+    width:34px; height:34px;
+    padding:0;
+    justify-content:center;
+    font-size:14px;
+    flex:none;
   }
 
   .sync-row{
@@ -1553,11 +1564,13 @@
   </header>
 
   <div class="project-bar">
-    <span class="project-label">پروژه (اسم فایل):</span>
+    <span class="project-label">پروژه:</span>
     <select id="projectSelect"></select>
-    <button id="newProjectBtn" class="btn-primary">+ پروژه جدید</button>
-    <button id="renameProjectBtn" class="btn-ghost">✎ تغییر نام</button>
-    <button id="deleteProjectBtn" class="btn-ghost">🗑 حذف این پروژه</button>
+    <div class="project-actions">
+      <button id="newProjectBtn" class="btn-icon btn-primary" type="button" title="پروژه جدید">+</button>
+      <button id="renameProjectBtn" class="btn-icon btn-ghost" type="button" title="تغییر نام">✎</button>
+      <button id="deleteProjectBtn" class="btn-icon btn-ghost" type="button" title="حذف این پروژه">🗑</button>
+    </div>
   </div>
 
   <div class="toolbar">
@@ -1919,10 +1932,11 @@ const I18N_MAP = {
   "درصد پیشرفت": "Progress percent",
   "📋 چک‌لیست": "📋 Checklist",
   "📁 محاسبه‌گر": "📁 Calculator",
-  "پروژه (اسم فایل):": "Project (file name):",
-  "+ پروژه جدید": "+ New project",
-  "✎ تغییر نام": "✎ Rename",
-  "🗑 حذف این پروژه": "🗑 Delete this project",
+  "پروژه:": "Project:",
+  "پروژه جدید": "New project",
+  "تغییر نام": "Rename",
+  "حذف این پروژه": "Delete this project",
+  "بدون‌نام": "Untitled",
   "⇄ مقایسه دو پروژه": "⇄ Compare two projects",
   "↺ پاک‌کردن تیک‌های این پروژه": "↺ Clear checks for this project",
   "پروژه A:": "Project A:",
@@ -2257,11 +2271,26 @@ window.__getCornerPumpValveOpen = function(){ return pumpValveOpen; };
 
 
 /* ---------- مدیریت پروژه‌ها ---------- */
+/* حتی اگر کاربر هیچ پروژه‌ای نساخته باشد، یک پروژه پیش‌فرض («بدون‌نام») به‌صورت خودکار
+   ساخته و فعال می‌شود تا همه امکانات صفحه بدون نیاز به ساختن دستی پروژه در دسترس باشند.
+   کاربر هر وقت خواست می‌تواند این پروژه را تغییر نام دهد یا پروژه‌های دیگری کنارش بسازد. */
+async function ensureDefaultProject(){
+  if (currentProject && projectList.includes(currentProject)) return;
+  const base = 'بدون‌نام';
+  let name = base, i = 1;
+  while (projectList.includes(name)){ name = `${base} ${++i}`; }
+  projectList.push(name);
+  currentProject = name;
+  await saveProjectList();
+}
 async function loadProjectList(){
   const raw = await storeGet('cfturbo-project-list');
   projectList = raw ? JSON.parse(raw) : [];
   const active = await storeGet('cfturbo-active-project');
   currentProject = active || (projectList[0] || null);
+  if (!currentProject || !projectList.includes(currentProject)){
+    await ensureDefaultProject();
+  }
 }
 async function saveProjectList(){
   await storeSet('cfturbo-project-list', JSON.stringify(projectList));
@@ -2386,6 +2415,7 @@ async function deleteCurrentProject(){
   await storeDelete(projectKey(currentProject));
   projectList = projectList.filter(n => n !== currentProject);
   currentProject = projectList[0] || null;
+  if (!currentProject) await ensureDefaultProject();
   await saveProjectList();
   await loadCurrentProjectData();
   renderProjectSelect();
@@ -3270,24 +3300,8 @@ function render(){
   const navList = document.getElementById('stageNavList');
   root.innerHTML = '';
 
-  document.getElementById('exportBtn').disabled = !currentProject;
-  document.getElementById('exportExcelBtn').disabled = !currentProject;
-  document.getElementById('resetBtn').disabled = !currentProject;
-  document.getElementById('deleteProjectBtn').disabled = !currentProject;
-  document.getElementById('renameProjectBtn').disabled = !currentProject;
-  ['calcN','calcQ','calcH','calcQUnit','manualNqInput'].forEach(id => document.getElementById(id).disabled = !currentProject);
+  if (!currentProject) currentProject = 'بدون‌نام'; // محافظتی؛ در عمل init() همیشه یک پروژه فعال تضمین می‌کند
   renderCalcBox();
-
-  if (!currentProject){
-    navList.innerHTML = '';
-    root.innerHTML = `<div class="empty-state">
-      برای شروع، یک پروژه بسازید — کارها و یادداشت‌های هر پروژه جدا ذخیره می‌شوند و
-      تا وقتی خودتان حذفش نکنید، پاک نمی‌شوند.
-    </div>`;
-    updateStats();
-    renderAllPumpTypeBoxes();
-    return;
-  }
 
   navList.innerHTML = '';
   DATA.forEach((stage, si) => {
