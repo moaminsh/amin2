@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thermodynamics // MOHAMMADAMIN SHARIF</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: #0d1117;
+      --bg-card-hover: #131922;
+      --bg-void: #05070a;
+      --border: #1a2230;
+      --border-bright: #2d3b52;
+      --text-main: #f0f4f8;
+      --text-muted: #62748e;
+      --text-dim: #3d4b5e;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 242, 254, 0.12);
+      
+      --font-mono: 'Fira Code', monospace;
+      --font-sans: 'Plus Jakarta Sans', 'Vazirmatn', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      selection-background-color: var(--accent-cyan);
+      selection-color: var(--bg-dark);
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Custom Cursor Indicator */
+    .custom-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+      mix-blend-mode: difference;
+    }
+    .custom-cursor.hover {
+      width: 36px; height: 36px;
+      background: rgba(0, 242, 254, 0.3);
+      border: 1px solid var(--accent-cyan);
+    }
+
+    /* Grid Overlay Background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header / Nav Bar */
+    header.nav-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-brand-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+    .nav-menu {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+    .nav-link:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* NAV TOOLS: theme + language toggles */
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 28px;
+    }
+    .tool-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .tool-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+    }
+
+    /* LIGHT MODE THEME */
+    html.light-mode {
+      --bg-dark: #eef1f6;
+      --bg-card: #ffffff;
+      --bg-card-hover: #e6eaf1;
+      --bg-void: #dde3ec;
+      --border: #d6dce6;
+      --border-bright: #b7c1d1;
+      --text-main: #10151d;
+      --text-muted: #4b5a70;
+      --text-dim: #7c8aa0;
+      --accent-cyan: #0089ad;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 137, 173, 0.08);
+    }
+    html.light-mode header.nav-bar {
+      background: rgba(245, 247, 250, 0.85);
+    }
+    html.light-mode .custom-cursor {
+      mix-blend-mode: normal;
+    }
+
+    /* PERSIAN TYPOGRAPHY FIX
+       - Latin letter-spacing/tracking breaks Persian glyph joining, so it's reset to normal.
+       - Vazirmatn replaces Fira Code (which has no Persian glyphs) everywhere, incl. mono-styled labels.
+       - Slightly taller line-height, since Vazirmatn needs more vertical breathing room than Latin faces. */
+    html[lang="fa"] {
+      --font-mono: 'Vazirmatn', 'Plus Jakarta Sans', sans-serif;
+      --font-sans: 'Vazirmatn', 'Plus Jakarta Sans', sans-serif;
+    }
+    html[lang="fa"] * {
+      letter-spacing: normal !important;
+    }
+    html[lang="fa"] body {
+      line-height: 1.85;
+    }
+    html[lang="fa"] .hero-title,
+    html[lang="fa"] .section-title-text,
+    html[lang="fa"] .module-info-title {
+      font-weight: 700;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 40px;
+      padding-top: 100px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-title {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .hero-title span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 48px;
+      font-weight: 700;
+    }
+    .hero-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+      font-family: var(--font-mono);
+    }
+    .spec-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 4px;
+    }
+    .spec-key {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .spec-value {
+      font-size: 13px;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* HERO VISUAL CANVAS */
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .canvas-overlay {
+      position: absolute;
+      top: 12px; left: 16px; right: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+    #heroCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 80px 0 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .section-title-text {
+      font-size: 28px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    /* SUBSECTION HEADER (chapter-like heading within a section) */
+    .subsection-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .subsection-header:first-of-type {
+      margin-top: 0;
+    }
+
+    /* PLACEHOLDER CARDS (content coming soon) */
+    .project-card-placeholder {
+      opacity: 0.6;
+    }
+    .project-card-placeholder .project-preview-icon {
+      opacity: 0.4;
+    }
+
+    /* VISUAL PROJECTS GALLERY */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .project-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+    .project-preview {
+      height: 220px;
+      background: var(--bg-void);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .project-preview-icon {
+      color: var(--accent-cyan);
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+    .project-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition);
+    }
+    .project-card:hover .project-preview img {
+      transform: scale(1.04);
+    }
+    .project-card:hover .project-preview-icon {
+      transform: scale(1.1) rotate(5deg);
+      opacity: 1;
+    }
+    .project-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+    .project-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .project-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .project-year {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .project-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 16px 0;
+      font-family: var(--font-mono);
+      background: var(--bg-dark);
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .p-metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .p-metric-lbl { font-size: 9px; color: var(--text-dim); text-transform: uppercase; }
+    .p-metric-val { font-size: 12px; color: var(--accent-cyan); font-weight: 600; }
+
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .p-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* INTERACTIVE MICROFLUIDICS / PUMP DEMO MODULE */
+    .interactive-module {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .module-info-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .module-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .chip-canvas-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: var(--bg-void);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    #chipCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* TECHNICAL CAPABILITIES GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .skill-cat-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+    }
+    .skill-pill {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-main);
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    /* INFO & CONTACT SECTION */
+    .info-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 8px;
+    }
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-cyan);
+      background: var(--bg-dark);
+    }
+    .contact-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-label { color: var(--text-dim); text-transform: uppercase; }
+    .contact-link { color: var(--text-main); text-decoration: none; font-weight: 600; transition: var(--transition); }
+    .contact-link:hover { color: var(--accent-cyan); }
+
+    /* FOOTER */
+    footer {
+      margin-top: 80px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Hamburger button: hidden by default (desktop/laptop untouched) */
+    .hamburger-btn { display: none; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .interactive-module { grid-template-columns: 1fr; }
+      .info-section { grid-template-columns: 1fr; }
+      .hero-title { font-size: 40px; }
+      .hero-title span { font-size: 32px; }
+
+      /* Collapse the nav links into a dropdown driven by the hamburger button */
+      .hamburger-btn { display: flex; order: -1; }
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        padding: 4px 24px 12px;
+        z-index: 100;
+      }
+      .nav-menu.mobile-open { display: flex; }
+      .nav-menu .nav-link {
+        display: block;
+        padding: 14px 0;
+        border-bottom: 1px dashed var(--border);
+        font-size: 12px;
+      }
+      .nav-menu li:last-child .nav-link { border-bottom: none; }
+
+      /* Grids that assumed wide cards need to stack on narrow viewports */
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .container { padding: 0 18px; }
+      .hero-specs { grid-template-columns: 1fr; }
+      .hero-visual { height: 320px; }
+      .hero-title { font-size: 30px; }
+      .hero-title span { font-size: 24px; }
+      .section-title-text { font-size: 20px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .nav-brand { font-size: 11px; gap: 6px; }
+      .nav-tools { gap: 6px; margin-left: 12px; }
+      .tool-btn { padding: 7px 8px; }
+      #langToggleLabel { display: none; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+      .profile-card { flex-direction: column; text-align: center; }
+      .contact-row { flex-wrap: wrap; gap: 4px; }
+    }
+
+    /* Touch devices have no hover-driven cursor to move, so hide the custom dot */
+    @media (pointer: coarse) {
+      .custom-cursor { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="bg-grid"></div>
+
+  <!-- NAVIGATION -->
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-brand-dot"></span>
+        MOHAMMADAMIN SHARIF
+      </a>
+      <ul class="nav-menu">
+        <li><a href="../index.html#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+        <li><a href="../index.html#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
+        <li><a href="../index.html#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
+        <li><a href="../index.html#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
+        <li><a href="../index.html#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
+        <li><a href="../index.html#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
+        <li><a href="../index.html#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
+          <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
+          <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
+        </button>
+        <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
+          <i data-lucide="languages" style="width: 16px;"></i>
+          <span id="langToggleLabel">FA</span>
+        </button>
+        <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
+          <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
+          <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 100px;">
+
+    <!-- BOOK CATEGORY HEADER -->
+    <section>
+      <div class="section-header" style="margin-top: 0;">
+        <div>
+          <div class="section-label" data-en="// SCIENTIFIC LIBRARY" data-fa="// کتابخانه علمی">// SCIENTIFIC LIBRARY</div>
+          <div class="section-title-text" data-en="Thermodynamics" data-fa="ترمودینامیک">Thermodynamics</div>
+        </div>
+        <a href="../index.html#books" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-decoration: none;" data-en="← BACK TO BOOKS" data-fa="→ بازگشت به کتاب‌ها">← BACK TO BOOKS</a>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PLACEHOLDER: replace with real book entries as they are added -->
+        <div class="project-card project-card-placeholder" style="cursor: default;">
+          <div class="project-preview">
+            <i data-lucide="flame" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Books coming soon" data-fa="کتاب‌ها به‌زودی">Books coming soon</h3>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="This category will host scientific books on thermodynamics together with their answer keys, downloadable as PDF." data-fa="این بخش کتاب‌های علمی حوزه‌ی ترمودینامیک را همراه با پاسخنامه‌ی هرکدام، به‌صورت فایل PDF قابل دانلود در اختیار قرار می‌دهد.">
+                This category will host scientific books on thermodynamics together with their answer keys, downloadable as PDF.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!--
+          TEMPLATE FOR EACH BOOK — copy this block and fill it in for every new book added to this category.
+          Keep data-en / data-fa in sync on every translatable element so the language toggle works.
+
+        <div class="project-card">
+          <div class="project-preview">
+            <i data-lucide="flame" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Book Title (English)" data-fa="عنوان کتاب (فارسی)">Book Title (English)</h3>
+                <span class="project-year">2026</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Short description of the book in English." data-fa="توضیح کوتاه کتاب به فارسی.">
+                Short description of the book in English.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag" data-en="Book" data-fa="کتاب">Book</span>
+              <span class="p-tag" data-en="Answer Key Included" data-fa="دارای پاسخنامه">Answer Key Included</span>
+            </div>
+            <div class="project-tags" style="margin-top: 8px;">
+              <a href="../assets/downloads/books/BOOK-FILE.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">↓ Download Book</a>
+              <a href="../assets/downloads/books/BOOK-ANSWERS-FILE.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px; margin-left: 16px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">↓ Download Answer Key</a>
+            </div>
+          </div>
+        </div>
+
+        -->
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 MOHAMMADAMIN SHARIF</span>
+      <span data-en="MECHANICAL & FLUID DYNAMICS PORTFOLIO" data-fa="نمونه‌کار مهندسی مکانیک و دینامیک سیالات">MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
+    </footer>
+
+  </main>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // --- DAY / NIGHT MODE TOGGLE ---
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('themeIconSun');
+    const moonIcon = document.getElementById('themeIconMoon');
+    const rootEl = document.documentElement;
+
+    function applyTheme(mode) {
+      if (mode === 'light') {
+        rootEl.classList.add('light-mode');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      } else {
+        rootEl.classList.remove('light-mode');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('site-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isLight = rootEl.classList.contains('light-mode');
+      const next = isLight ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem('site-theme', next);
+    });
+
+    // --- LANGUAGE TOGGLE (EN / FA) ---
+    const langToggleBtn = document.getElementById('langToggle');
+    const langToggleLabel = document.getElementById('langToggleLabel');
+    const i18nEls = document.querySelectorAll('[data-en][data-fa]');
+
+    function applyLanguage(lang) {
+      i18nEls.forEach(el => {
+        el.textContent = lang === 'fa' ? el.dataset.fa : el.dataset.en;
+      });
+      if (lang === 'fa') {
+        langToggleLabel.textContent = 'EN';
+      } else {
+        langToggleLabel.textContent = 'FA';
+      }
+      rootEl.setAttribute('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('site-lang') || 'en';
+    applyLanguage(savedLang);
+
+    langToggleBtn.addEventListener('click', () => {
+      const current = rootEl.getAttribute('lang') === 'fa' ? 'fa' : 'en';
+      const next = current === 'fa' ? 'en' : 'fa';
+      applyLanguage(next);
+      localStorage.setItem('site-lang', next);
+    });
+
+    // --- MOBILE NAV MENU TOGGLE ---
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navMenuEl = document.querySelector('.nav-menu');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+
+    function setMobileMenu(open) {
+      navMenuEl.classList.toggle('mobile-open', open);
+      menuIconOpen.style.display = open ? 'none' : 'block';
+      menuIconClose.style.display = open ? 'block' : 'none';
+    }
+
+    mobileMenuToggle.addEventListener('click', () => {
+      setMobileMenu(!navMenuEl.classList.contains('mobile-open'));
+    });
+
+    navMenuEl.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => setMobileMenu(false));
+    });
+
+    // Custom Cursor Movement
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluid Mechanics // MOHAMMADAMIN SHARIF</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="bg-grid"></div>
+
+  <!-- NAVIGATION -->
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <span class="nav-brand-dot"></span>
+        MOHAMMADAMIN SHARIF
+      </a>
+      <ul class="nav-menu">
+        <li><a href="../index.html#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+        <li><a href="../index.html#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
+        <li><a href="../index.html#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
+        <li><a href="../index.html#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
+        <li><a href="../index.html#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
+        <li><a href="../index.html#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
+        <li><a href="../index.html#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
+          <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
+          <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
+        </button>
+        <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
+          <i data-lucide="languages" style="width: 16px;"></i>
+          <span id="langToggleLabel">FA</span>
+        </button>
+        <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
+          <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
+          <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 100px;">
+
+    <!-- BOOK CATEGORY HEADER -->
+    <section>
+      <div class="section-header" style="margin-top: 0;">
+        <div>
+          <div class="section-label" data-en="// SCIENTIFIC LIBRARY" data-fa="// کتابخانه علمی">// SCIENTIFIC LIBRARY</div>
+          <div class="section-title-text" data-en="Fluid Mechanics" data-fa="سیالات">Fluid Mechanics</div>
+        </div>
+        <a href="../index.html#books" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-decoration: none;" data-en="← BACK TO BOOKS" data-fa="→ بازگشت به کتاب‌ها">← BACK TO BOOKS</a>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PLACEHOLDER: replace with real book entries as they are added -->
+        <div class="project-card project-card-placeholder" style="cursor: default;">
+          <div class="project-preview">
+            <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Books coming soon" data-fa="کتاب‌ها به‌زودی">Books coming soon</h3>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="This category will host scientific books on fluid mechanics together with their answer keys, downloadable as PDF." data-fa="این بخش کتاب‌های علمی حوزه‌ی سیالات را همراه با پاسخنامه‌ی هرکدام، به‌صورت فایل PDF قابل دانلود در اختیار قرار می‌دهد.">
+                This category will host scientific books on fluid mechanics together with their answer keys, downloadable as PDF.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!--
+          TEMPLATE FOR EACH BOOK — copy this block and fill it in for every new book added to this category.
+          Keep data-en / data-fa in sync on every translatable element so the language toggle works.
+
+        <div class="project-card">
+          <div class="project-preview">
+            <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+          </div>
+          <div class="project-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Book Title (English)" data-fa="عنوان کتاب (فارسی)">Book Title (English)</h3>
+                <span class="project-year">2026</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);" data-en="Short description of the book in English." data-fa="توضیح کوتاه کتاب به فارسی.">
+                Short description of the book in English.
+              </p>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag" data-en="Book" data-fa="کتاب">Book</span>
+              <span class="p-tag" data-en="Answer Key Included" data-fa="دارای پاسخنامه">Answer Key Included</span>
+            </div>
+            <div class="project-tags" style="margin-top: 8px;">
+              <a href="../assets/downloads/books/BOOK-FILE.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">↓ Download Book</a>
+              <a href="../assets/downloads/books/BOOK-ANSWERS-FILE.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px; margin-left: 16px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">↓ Download Answer Key</a>
+            </div>
+          </div>
+        </div>
+
+        -->
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 MOHAMMADAMIN SHARIF</span>
+      <span data-en="MECHANICAL & FLUID DYNAMICS PORTFOLIO" data-fa="نمونه‌کار مهندسی مکانیک و دینامیک سیالات">MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
+    </footer>
+
+  </main>
+
+  <script src="../assets/js/common.js"></script>
+</body>
+</html>
