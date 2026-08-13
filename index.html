@@ -657,9 +657,35 @@
     }
   </style>
 
+  <!-- ================================================================
+       ENGINEERING BACKGROUND SYSTEM (self-contained, prefixed "engineering-bg-")
+       A very subtle animated thermodynamic/fluid schematic that lives
+       behind all site content. Safe to copy into any other page: it
+       only touches elements with the engineering-bg- prefix and reads
+       (never writes) the site's existing --accent-cyan / light-mode
+       state to stay in sync with the current theme.
+       ================================================================ -->
+  <style>
+    .engineering-bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;           /* always behind .bg-grid (0) and .container (1) */
+      pointer-events: none;  /* never intercepts clicks/scroll/hover */
+      display: block;
+    }
+
+    /* Reduced motion: JS also freezes the animation loop, but this
+       guarantees no CSS-driven motion sneaks in even before JS runs. */
+    @media (prefers-reduced-motion: reduce) {
+      .engineering-bg-canvas { opacity: 0.5; }
+    }
+  </style>
 </head>
 <body>
 
+  <canvas class="engineering-bg-canvas" id="engineeringBgCanvas" aria-hidden="true"></canvas>
   <div class="custom-cursor" id="cursor"></div>
   <div class="bg-grid"></div>
 
@@ -1583,6 +1609,517 @@
       requestAnimationFrame(renderChipCanvas);
     }
     renderChipCanvas();
+  </script>
+  <script>
+(function () {
+  'use strict';
+
+  var canvas = document.getElementById('engineeringBgCanvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var rootEl = document.documentElement;
+
+  var reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var coarsePointerMQ = window.matchMedia('(pointer: coarse)');
+
+  var W = 0, H = 0, DPR = 1;
+  var tier = 'desktop';
+  var layout = null;
+  var rafId = null;
+  var running = false;
+  var lastTime = 0;
+  var elapsed = 0;
+
+  var mouseTX = 0, mouseTY = 0, mouseX = 0, mouseY = 0;
+  var parallaxEnabled = false;
+
+  var pumpAngle = 0;
+  var bubbles = [];
+
+  var PALETTES = {
+    dark: {
+      pipe: 'rgba(120,150,180,0.16)',
+      pipeSteam: 'rgba(150,220,230,0.18)',
+      component: 'rgba(150,180,205,0.22)',
+      water: 'rgba(80,155,255,0.55)',
+      waterGlow: 'rgba(80,155,255,0.20)',
+      steam: 'rgba(215,247,250,0.60)',
+      steamGlow: 'rgba(0,242,254,0.22)',
+      heatGlow: 'rgba(0,242,254,0.10)',
+      valve: 'rgba(150,180,205,0.24)'
+    },
+    light: {
+      pipe: 'rgba(60,85,115,0.11)',
+      pipeSteam: 'rgba(0,137,173,0.13)',
+      component: 'rgba(60,85,115,0.18)',
+      water: 'rgba(0,114,255,0.32)',
+      waterGlow: 'rgba(0,114,255,0.12)',
+      steam: 'rgba(0,137,173,0.38)',
+      steamGlow: 'rgba(0,137,173,0.14)',
+      heatGlow: 'rgba(0,137,173,0.08)',
+      valve: 'rgba(60,85,115,0.20)'
+    }
+  };
+  var pal = PALETTES.dark;
+
+  var MASTER_OPACITY = 0.62;
+
+  function computeTier() {
+    if (W < 640) return 'mobile';
+    if (W < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  function buildPathSampler(points) {
+    var lens = [0];
+    var total = 0;
+    var i;
+    for (i = 1; i < points.length; i++) {
+      var dx = points[i].x - points[i - 1].x;
+      var dy = points[i].y - points[i - 1].y;
+      total += Math.sqrt(dx * dx + dy * dy);
+      lens.push(total);
+    }
+    return {
+      points: points,
+      total: total || 1,
+      at: function (t) {
+        var target = t * this.total;
+        var idx = 1;
+        while (idx < lens.length && lens[idx] < target) idx++;
+        if (idx >= points.length) idx = points.length - 1;
+        var segLen = (lens[idx] - lens[idx - 1]) || 1;
+        var segT = (target - lens[idx - 1]) / segLen;
+        var p0 = points[idx - 1], p1 = points[idx];
+        var x = p0.x + (p1.x - p0.x) * segT;
+        var y = p0.y + (p1.y - p0.y) * segT;
+        var ddx = p1.x - p0.x, ddy = p1.y - p0.y;
+        var len = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
+        return { x: x, y: y, nx: -ddy / len, ny: ddx / len };
+      }
+    };
+  }
+
+  function makeParticles(count, speedMin, speedMax, sizeMin, sizeMax) {
+    var list = [];
+    var i;
+    for (i = 0; i < count; i++) {
+      list.push({
+        t: Math.random(),
+        speed: speedMin + Math.random() * (speedMax - speedMin),
+        size: sizeMin + Math.random() * (sizeMax - sizeMin),
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+    return list;
+  }
+
+  function buildLayout() {
+    tier = computeTier();
+
+    var mx = Math.max(26, W * 0.045);
+    var my = Math.max(38, H * 0.08);
+
+    var pumpR = tier === 'mobile' ? 13 : tier === 'tablet' ? 16 : 19;
+    var boilerW = tier === 'mobile' ? 26 : 34;
+    var boilerH = tier === 'mobile' ? 54 : 74;
+    var condW = tier === 'mobile' ? 54 : 78;
+    var condH = tier === 'mobile' ? 26 : 34;
+    var tankR = tier === 'mobile' ? 11 : 15;
+
+    var pump = { x: mx, y: H - my, r: pumpR };
+    var boiler = { x: mx, y: my + boilerH / 2, w: boilerW, h: boilerH };
+    var condenser = { x: W - mx, y: my + condH / 2, w: condW, h: condH };
+    var tank = { x: W - mx, y: H - my, r: tankR };
+
+    var water1 = buildPathSampler([
+      { x: pump.x, y: pump.y - pump.r - 4 },
+      { x: pump.x, y: boiler.y + boiler.h / 2 + 6 }
+    ]);
+    var steam = buildPathSampler([
+      { x: boiler.x, y: boiler.y - boiler.h / 2 - 6 },
+      { x: boiler.x, y: Math.max(18, my * 0.32) },
+      { x: condenser.x - condenser.w / 2 - 6, y: Math.max(18, my * 0.32) },
+      { x: condenser.x - condenser.w / 2 - 6, y: condenser.y }
+    ]);
+    var water2 = buildPathSampler([
+      { x: condenser.x, y: condenser.y + condenser.h / 2 + 6 },
+      { x: condenser.x, y: tank.y - tank.r - 4 }
+    ]);
+    var water3 = buildPathSampler([
+      { x: tank.x - tank.r - 4, y: tank.y },
+      { x: pump.x + pump.r + 4, y: pump.y }
+    ]);
+
+    layout = {
+      mx: mx, my: my,
+      pump: pump, boiler: boiler, condenser: condenser, tank: tank,
+      segs: { water1: water1, steam: steam, water2: water2, water3: water3 },
+      valves: [
+        { seg: 'water1', t: 0.5 },
+        { seg: 'water3', t: 0.5 }
+      ]
+    };
+
+    var counts = tier === 'mobile'
+      ? { water: 2, steam: 2, bubbles: 3 }
+      : tier === 'tablet'
+        ? { water: 3, steam: 3, bubbles: 4 }
+        : { water: 4, steam: 4, bubbles: 6 };
+
+    layout.particles = {
+      water1: makeParticles(counts.water, 0.00009, 0.00014, 1.1, 1.8),
+      water2: makeParticles(counts.water, 0.00009, 0.00014, 1.1, 1.8),
+      water3: makeParticles(counts.water, 0.00009, 0.00014, 1.1, 1.8),
+      steam: makeParticles(counts.steam, 0.00016, 0.00022, 0.9, 1.5)
+    };
+
+    bubbles = [];
+    var i;
+    for (i = 0; i < counts.bubbles; i++) {
+      bubbles.push({
+        x: (Math.random() - 0.5) * boiler.w * 0.55,
+        y: Math.random(),
+        speed: 0.00006 + Math.random() * 0.00006,
+        size: 0.8 + Math.random() * 1.2
+      });
+    }
+
+    parallaxEnabled = tier !== 'mobile' && !coarsePointerMQ.matches && !reduceMotionMQ.matches;
+  }
+
+  function setupCanvas() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    buildLayout();
+  }
+
+  function drawPipeSegment(sampler, color, lineWidth) {
+    var pts = sampler.points;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    var i;
+    for (i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+
+  function drawParticlesOnSegment(sampler, list, color, glowColor, jitter) {
+    var i, p, pos, jx, jy;
+    ctx.fillStyle = color;
+    for (i = 0; i < list.length; i++) {
+      p = list[i];
+      pos = sampler.at(p.t);
+      jx = 0; jy = 0;
+      if (jitter) {
+        var w = Math.sin(elapsed * 0.0016 + p.phase) * jitter;
+        jx = pos.nx * w;
+        jy = pos.ny * w;
+      }
+      ctx.save();
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = glowColor;
+      ctx.beginPath();
+      ctx.arc(pos.x + jx, pos.y + jy, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function drawValve(seg, t, color) {
+    var pos = seg.at(t);
+    var size = tier === 'mobile' ? 4 : 5.5;
+    ctx.save();
+    ctx.translate(pos.x, pos.y);
+    ctx.rotate(Math.atan2(pos.ny, pos.nx) + Math.PI / 2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(-size, -size); ctx.lineTo(size, size);
+    ctx.moveTo(-size, size); ctx.lineTo(size, -size);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0, 0, size * 1.4, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawPump() {
+    var p = layout.pump;
+    ctx.save();
+    ctx.strokeStyle = pal.component;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.translate(p.x, p.y);
+    ctx.rotate(pumpAngle);
+    var i;
+    for (i = 0; i < 6; i++) {
+      ctx.rotate((Math.PI * 2) / 6);
+      ctx.beginPath();
+      ctx.moveTo(p.r * 0.25, 0);
+      ctx.lineTo(p.r * 0.85, 0);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawBoiler() {
+    var b = layout.boiler;
+    var x = b.x - b.w / 2, y = b.y - b.h / 2;
+    var r = 6;
+
+    var glowR = b.w * (1.1 + Math.sin(elapsed * 0.0009) * 0.15);
+    var grad = ctx.createRadialGradient(b.x, y + b.h, 2, b.x, y + b.h, glowR);
+    grad.addColorStop(0, pal.heatGlow);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(b.x, y + b.h, glowR, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = pal.component;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + b.w - r, y);
+    ctx.quadraticCurveTo(x + b.w, y, x + b.w, y + r);
+    ctx.lineTo(x + b.w, y + b.h - r);
+    ctx.quadraticCurveTo(x + b.w, y + b.h, x + b.w - r, y + b.h);
+    ctx.lineTo(x + r, y + b.h);
+    ctx.quadraticCurveTo(x, y + b.h, x, y + b.h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x, y, b.w, b.h);
+    ctx.clip();
+    ctx.fillStyle = pal.water;
+    var i, bub;
+    for (i = 0; i < bubbles.length; i++) {
+      bub = bubbles[i];
+      bub.y -= bub.speed * 16;
+      if (bub.y < 0) bub.y = 1;
+      var alpha = 1 - bub.y;
+      ctx.globalAlpha = alpha * 0.5;
+      ctx.beginPath();
+      ctx.arc(b.x + bub.x, y + bub.y * b.h, bub.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+
+  function drawCondenser() {
+    var c = layout.condenser;
+    var x = c.x - c.w / 2, y = c.y - c.h / 2;
+    var r = 6;
+
+    ctx.strokeStyle = pal.component;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + c.w - r, y);
+    ctx.quadraticCurveTo(x + c.w, y, x + c.w, y + r);
+    ctx.lineTo(x + c.w, y + c.h - r);
+    ctx.quadraticCurveTo(x + c.w, y + c.h, x + c.w - r, y + c.h);
+    ctx.lineTo(x + r, y + c.h);
+    ctx.quadraticCurveTo(x, y + c.h, x, y + c.h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+    ctx.stroke();
+
+    if (tier !== 'mobile') {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, y, c.w, c.h);
+      ctx.clip();
+      ctx.strokeStyle = pal.pipeSteam;
+      ctx.lineWidth = 1;
+      var coils = 5, i;
+      var step = c.w / coils;
+      ctx.beginPath();
+      for (i = 0; i <= coils; i++) {
+        var cx = x + i * step;
+        if (i % 2 === 0) ctx.moveTo(cx, y + 4);
+        ctx.lineTo(cx, y + c.h - 4);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function drawTank() {
+    var t = layout.tank;
+    ctx.strokeStyle = pal.component;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    var lvl = t.y + Math.sin(elapsed * 0.0007) * 1.2;
+    ctx.strokeStyle = pal.pipe;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(t.x - t.r * 0.6, lvl);
+    ctx.lineTo(t.x + t.r * 0.6, lvl);
+    ctx.stroke();
+  }
+
+  function update(dt) {
+    elapsed += dt;
+    pumpAngle += dt * 0.00035;
+
+    mouseX += (mouseTX - mouseX) * 0.04;
+    mouseY += (mouseTY - mouseY) * 0.04;
+
+    if (!layout) return;
+    var segs = layout.particles;
+    var advance = function (list) {
+      var i, p;
+      for (i = 0; i < list.length; i++) {
+        p = list[i];
+        p.t += p.speed * dt;
+        if (p.t > 1) p.t -= 1;
+      }
+    };
+    advance(segs.water1);
+    advance(segs.water2);
+    advance(segs.water3);
+    advance(segs.steam);
+  }
+
+  function render() {
+    if (!layout) return;
+    var isLight = rootEl.classList.contains('light-mode');
+    pal = isLight ? PALETTES.light : PALETTES.dark;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    ctx.globalAlpha = MASTER_OPACITY;
+    if (parallaxEnabled) ctx.translate(mouseX, mouseY);
+
+    var segs = layout.segs;
+    drawPipeSegment(segs.water1, pal.pipe, 1.2);
+    drawPipeSegment(segs.water2, pal.pipe, 1.2);
+    drawPipeSegment(segs.water3, pal.pipe, 1.2);
+    drawPipeSegment(segs.steam, pal.pipeSteam, 1.2);
+
+    drawBoiler();
+    drawCondenser();
+    drawPump();
+    drawTank();
+
+    var i;
+    for (i = 0; i < layout.valves.length; i++) {
+      var v = layout.valves[i];
+      drawValve(segs[v.seg], v.t, pal.valve);
+    }
+
+    var p = layout.particles;
+    drawParticlesOnSegment(segs.water1, p.water1, pal.water, pal.waterGlow, 0);
+    drawParticlesOnSegment(segs.water2, p.water2, pal.water, pal.waterGlow, 0);
+    drawParticlesOnSegment(segs.water3, p.water3, pal.water, pal.waterGlow, 0);
+    drawParticlesOnSegment(segs.steam, p.steam, pal.steam, pal.steamGlow, 1.6);
+
+    ctx.restore();
+  }
+
+  function renderStatic() {
+    if (!layout) return;
+    var isLight = rootEl.classList.contains('light-mode');
+    pal = isLight ? PALETTES.light : PALETTES.dark;
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    ctx.globalAlpha = MASTER_OPACITY * 0.7;
+    var segs = layout.segs;
+    drawPipeSegment(segs.water1, pal.pipe, 1.2);
+    drawPipeSegment(segs.water2, pal.pipe, 1.2);
+    drawPipeSegment(segs.water3, pal.pipe, 1.2);
+    drawPipeSegment(segs.steam, pal.pipeSteam, 1.2);
+    drawBoiler();
+    drawCondenser();
+    drawPump();
+    drawTank();
+    ctx.restore();
+  }
+
+  function frame(now) {
+    var dt = Math.min(now - lastTime, 50);
+    lastTime = now;
+    update(dt);
+    render();
+    rafId = window.requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    lastTime = performance.now();
+    rafId = window.requestAnimationFrame(frame);
+  }
+
+  function stop() {
+    running = false;
+    if (rafId) window.cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function applyMotionPreference() {
+    stop();
+    setupCanvas();
+    if (reduceMotionMQ.matches) {
+      renderStatic();
+    } else {
+      start();
+    }
+  }
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      setupCanvas();
+      if (reduceMotionMQ.matches) renderStatic();
+    }, 150);
+  }, { passive: true });
+
+  window.addEventListener('mousemove', function (e) {
+    if (!parallaxEnabled) return;
+    var nx = (e.clientX / W) * 2 - 1;
+    var ny = (e.clientY / H) * 2 - 1;
+    mouseTX = nx * 8;
+    mouseTY = ny * 6;
+  }, { passive: true });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stop();
+    } else if (!reduceMotionMQ.matches) {
+      lastTime = performance.now();
+      start();
+    }
+  });
+
+  if (typeof reduceMotionMQ.addEventListener === 'function') {
+    reduceMotionMQ.addEventListener('change', applyMotionPreference);
+  }
+
+  applyMotionPreference();
+})();
   </script>
 </body>
 </html>
