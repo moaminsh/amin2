@@ -13,6 +13,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Liquid Glass Design System -->
+  <link rel="stylesheet" href="../assets/css/liquid-glass.css">
+
   <style>
     :root {
       --bg-dark: #07090e;
@@ -659,67 +662,87 @@
 </head>
 <body>
 
+  <div class="spatial-ambient-glow" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+  <div class="spatial-texture" aria-hidden="true"></div>
+
   <div class="custom-cursor" id="cursor"></div>
-  <div class="bg-grid"></div>
 
   <!-- NAVIGATION -->
   <header class="nav-bar">
-    <div class="container nav-inner">
-      <a href="../index.html" class="nav-brand">
-        <span class="nav-brand-dot"></span>
-        MOHAMMADAMIN SHARIF
-      </a>
-      <ul class="nav-menu">
-        <li><a href="../index.html#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
-        <li><a href="../index.html#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
-        <li><a href="../index.html#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
-        <li><a href="../index.html#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
-        <li><a href="../index.html#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
-        <li><a href="../index.html#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
-        <li><a href="../index.html#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
-      </ul>
-      <div class="nav-tools">
-        <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
-          <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
-          <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
-        </button>
-        <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
-          <i data-lucide="languages" style="width: 16px;"></i>
-          <span id="langToggleLabel">FA</span>
-        </button>
-        <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
-          <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
-          <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
-        </button>
+    <div class="nav-glass-container">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-brand">
+          <span class="nav-brand-dot"></span>
+          <span>MOHAMMADAMIN SHARIF</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="../index.html#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+          <li><a href="../index.html#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
+          <li><a href="../index.html#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
+          <li><a href="../index.html#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
+          <li><a href="../index.html#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
+          <li><a href="../index.html#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
+          <li><a href="../index.html#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
+        </ul>
+        <div class="nav-tools">
+          <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
+            <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
+            <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
+          </button>
+          <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
+            <i data-lucide="languages" style="width: 16px;"></i>
+            <span id="langToggleLabel">FA</span>
+          </button>
+          <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
+            <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
+            <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="container" style="padding-top: 100px;">
+  <main class="container" style="padding-top: 110px;">
 
     <!-- BOOK CATEGORY HEADER -->
-    <section>
-      <div class="section-header" style="margin-top: 0;">
+    <section class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="section-glass-header">
         <div>
-          <div class="section-label" data-en="// SCIENTIFIC LIBRARY" data-fa="// کتابخانه علمی">// SCIENTIFIC LIBRARY</div>
-          <div class="section-title-text" data-en="Fluid Mechanics" data-fa="سیالات">Fluid Mechanics</div>
+          <div class="section-eyebrow" data-en="// SCIENTIFIC LIBRARY" data-fa="// کتابخانه علمی">
+            <i data-lucide="droplets" style="width: 14px;"></i>
+            <span>// SCIENTIFIC LIBRARY</span>
+          </div>
+          <div class="section-main-heading" data-en="Fluid Mechanics" data-fa="سیالات">Fluid Mechanics</div>
         </div>
-        <a href="../index.html#books" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-decoration: none;" data-en="← BACK TO BOOKS" data-fa="→ بازگشت به کتاب‌ها">← BACK TO BOOKS</a>
+        <a href="../index.html#books" class="tool-btn" style="text-decoration: none;" data-en="← BACK TO BOOKS" data-fa="→ بازگشت به کتاب‌ها">
+          <i data-lucide="arrow-left" style="width: 14px;"></i>
+          <span>BACK TO BOOKS</span>
+        </a>
       </div>
 
-      <div class="projects-grid">
+      <div class="projects-glass-grid">
 
         <!-- WHITE - FLUID MECHANICS, 7TH EDITION -->
-        <div class="project-card">
-          <div class="project-preview">
+        <div class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="White — Fluid Mechanics, 7th Edition" data-fa="وایت - مکانیک سیالات، ویرایش هفتم">White — Fluid Mechanics, 7th Edition</h3>
+                <span class="project-year-badge">7TH ED</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Classic reference textbook on fluid mechanics by Frank M. White, 7th edition." data-fa="کتاب مرجع کلاسیک مکانیک سیالات نوشته‌ی فرانک وایت، ویرایش هفتم.">
+              <p class="project-desc" data-en="Classic reference textbook on fluid mechanics by Frank M. White, 7th edition." data-fa="کتاب مرجع کلاسیک مکانیک سیالات نوشته‌ی فرانک وایت، ویرایش هفتم.">
                 Classic reference textbook on fluid mechanics by Frank M. White, 7th edition.
               </p>
             </div>
@@ -727,24 +750,31 @@
               <span class="p-tag" data-en="Book" data-fa="کتاب">Book</span>
               <span class="p-tag" data-en="Answer Key Included" data-fa="دارای پاسخنامه">Answer Key Included</span>
             </div>
-            <div class="project-tags" style="margin-top: 8px;">
-              <a href="../assets/downloads/books/fluids/white-fluid-mechanics-7th.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">↓ Download Book</a>
-              <a href="../assets/downloads/books/fluids/white-fluid-mechanics-7th-solutions.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px; margin-left: 16px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">↓ Download Answer Key</a>
+            <div class="project-tags" style="margin-top: 14px; gap: 8px;">
+              <a href="../assets/downloads/books/fluids/white-fluid-mechanics-7th.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">
+                <i data-lucide="download" style="width: 12px;"></i>
+                <span>Download Book</span>
+              </a>
+              <a href="../assets/downloads/books/fluids/white-fluid-mechanics-7th-solutions.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">
+                <i data-lucide="key" style="width: 12px;"></i>
+                <span>Download Answer Key</span>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- CENGEL - FLUID MECHANICS -->
-        <div class="project-card">
-          <div class="project-preview">
+        <div class="project-glass-card card-jewel-blue">
+          <div class="project-glass-preview">
             <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Cengel — Fluid Mechanics" data-fa="سنجل - مکانیک سیالات">Cengel — Fluid Mechanics</h3>
+                <span class="project-year-badge">SI ED</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Widely used fluid mechanics textbook by Yunus Cengel, with clear worked examples." data-fa="کتاب پرکاربرد مکانیک سیالات نوشته‌ی یونس سنجل، همراه با مثال‌های حل‌شده‌ی روشن.">
+              <p class="project-desc" data-en="Widely used fluid mechanics textbook by Yunus Cengel, with clear worked examples." data-fa="کتاب پرکاربرد مکانیک سیالات نوشته‌ی یونس سنجل، همراه با مثال‌های حل‌شده‌ی روشن.">
                 Widely used fluid mechanics textbook by Yunus Cengel, with clear worked examples.
               </p>
             </div>
@@ -752,24 +782,31 @@
               <span class="p-tag" data-en="Book" data-fa="کتاب">Book</span>
               <span class="p-tag" data-en="Answer Key Included" data-fa="دارای پاسخنامه">Answer Key Included</span>
             </div>
-            <div class="project-tags" style="margin-top: 8px;">
-              <a href="../assets/downloads/books/fluids/cengel-fluid-mechanics.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">↓ Download Book</a>
-              <a href="../assets/downloads/books/fluids/cengel-fluid-mechanics-solutions.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px; margin-left: 16px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">↓ Download Answer Key</a>
+            <div class="project-tags" style="margin-top: 14px; gap: 8px;">
+              <a href="../assets/downloads/books/fluids/cengel-fluid-mechanics.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">
+                <i data-lucide="download" style="width: 12px;"></i>
+                <span>Download Book</span>
+              </a>
+              <a href="../assets/downloads/books/fluids/cengel-fluid-mechanics-solutions.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">
+                <i data-lucide="key" style="width: 12px;"></i>
+                <span>Download Answer Key</span>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- STREETER - FLUID MECHANICS -->
-        <div class="project-card">
-          <div class="project-preview">
+        <div class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Streeter — Fluid Mechanics" data-fa="استریتر - مکانیک سیالات">Streeter — Fluid Mechanics</h3>
+                <span class="project-year-badge">CLASSIC</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Foundational fluid mechanics textbook by Victor Streeter." data-fa="کتاب پایه و کلاسیک مکانیک سیالات نوشته‌ی ویکتور استریتر.">
+              <p class="project-desc" data-en="Foundational fluid mechanics textbook by Victor Streeter." data-fa="کتاب پایه و کلاسیک مکانیک سیالات نوشته‌ی ویکتور استریتر.">
                 Foundational fluid mechanics textbook by Victor Streeter.
               </p>
             </div>
@@ -777,32 +814,42 @@
               <span class="p-tag" data-en="Book" data-fa="کتاب">Book</span>
               <span class="p-tag" data-en="Answer Key Included" data-fa="دارای پاسخنامه">Answer Key Included</span>
             </div>
-            <div class="project-tags" style="margin-top: 8px;">
-              <a href="../assets/downloads/books/fluids/streeter-fluid-mechanics.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">↓ Download Book</a>
-              <a href="../assets/downloads/books/fluids/streeter-fluid-mechanics-solutions.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px; margin-left: 16px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">↓ Download Answer Key</a>
+            <div class="project-tags" style="margin-top: 14px; gap: 8px;">
+              <a href="../assets/downloads/books/fluids/streeter-fluid-mechanics.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">
+                <i data-lucide="download" style="width: 12px;"></i>
+                <span>Download Book</span>
+              </a>
+              <a href="../assets/downloads/books/fluids/streeter-fluid-mechanics-solutions.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Answer Key" data-fa="↓ دانلود پاسخنامه">
+                <i data-lucide="key" style="width: 12px;"></i>
+                <span>Download Answer Key</span>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- CURRIE - ADVANCED FLUID MECHANICS -->
-        <div class="project-card">
-          <div class="project-preview">
+        <div class="project-glass-card card-jewel-violet">
+          <div class="project-glass-preview">
             <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Currie — Advanced Fluid Mechanics" data-fa="کوری - سیالات پیشرفته">Currie — Advanced Fluid Mechanics</h3>
+                <span class="project-year-badge">ADVANCED</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Graduate-level textbook covering advanced topics in fluid mechanics by I. G. Currie." data-fa="کتاب مقطع تحصیلات تکمیلی درباره‌ی مباحث پیشرفته‌ی سیالات نوشته‌ی کوری.">
+              <p class="project-desc" data-en="Graduate-level textbook covering advanced topics in fluid mechanics by I. G. Currie." data-fa="کتاب مقطع تحصیلات تکمیلی درباره‌ی مباحث پیشرفته‌ی سیالات نوشته‌ی کوری.">
                 Graduate-level textbook covering advanced topics in fluid mechanics by I. G. Currie.
               </p>
             </div>
             <div class="project-tags">
               <span class="p-tag" data-en="Book" data-fa="کتاب">Book</span>
             </div>
-            <div class="project-tags" style="margin-top: 8px;">
-              <a href="../assets/downloads/books/fluids/currie-advanced-fluid-mechanics.pdf" download class="contact-link" style="font-family: var(--font-mono); font-size: 11px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">↓ Download Book</a>
+            <div class="project-tags" style="margin-top: 14px; gap: 8px;">
+              <a href="../assets/downloads/books/fluids/currie-advanced-fluid-mechanics.pdf" download class="contact-glass-link" style="font-size: 11px; display: inline-flex; align-items: center; gap: 4px;" data-en="↓ Download Book" data-fa="↓ دانلود کتاب">
+                <i data-lucide="download" style="width: 12px;"></i>
+                <span>Download Book</span>
+              </a>
             </div>
           </div>
         </div>
@@ -811,7 +858,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="glass-footer">
       <span>© 2026 MOHAMMADAMIN SHARIF</span>
       <span data-en="MECHANICAL & FLUID DYNAMICS PORTFOLIO" data-fa="نمونه‌کار مهندسی مکانیک و دینامیک سیالات">MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
     </footer>
@@ -903,7 +950,7 @@
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-    document.querySelectorAll('a, button, .project-card').forEach(el => {
+    document.querySelectorAll('a, button, .project-card, .project-glass-card, .tool-btn').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });

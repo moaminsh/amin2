@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOHAMMADAMIN SHARIF // MECHANICAL & FLUIDS ENGINEERING</title>
+  <meta name="description" content="Mechanical and fluids engineering portfolio, digital twin simulations, pump design, and engineering textbooks.">
+  <meta property="og:title" content="MOHAMMADAMIN SHARIF // MECHANICAL & FLUIDS ENGINEERING">
+  <meta property="og:description" content="Mechanical and fluids engineering portfolio, digital twin simulations, pump design, and engineering textbooks.">
   
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +15,9 @@
   
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Liquid Glass Design System -->
+  <link rel="stylesheet" href="assets/css/liquid-glass.css">
 
   <style>
     :root {
@@ -685,118 +691,181 @@
 </head>
 <body>
 
+  <div class="spatial-ambient-glow" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+  <div class="spatial-texture" aria-hidden="true"></div>
   <canvas class="engineering-bg-canvas" id="engineeringBgCanvas" aria-hidden="true"></canvas>
   <div class="custom-cursor" id="cursor"></div>
-  <div class="bg-grid"></div>
 
   <!-- NAVIGATION -->
   <header class="nav-bar">
-    <div class="container nav-inner">
-      <a href="#" class="nav-brand">
-        <span class="nav-brand-dot"></span>
-        MOHAMMADAMIN SHARIF
-      </a>
-      <ul class="nav-menu">
-        <li><a href="#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
-        <li><a href="#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
-        <li><a href="#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
-        <li><a href="#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
-        <li><a href="#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
-        <li><a href="#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
-        <li><a href="#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
-      </ul>
-      <div class="nav-tools">
-        <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
-          <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
-          <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
-        </button>
-        <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
-          <i data-lucide="languages" style="width: 16px;"></i>
-          <span id="langToggleLabel">FA</span>
-        </button>
-        <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
-          <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
-          <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
-        </button>
+    <div class="nav-glass-container">
+      <div class="nav-inner">
+        <a href="#" class="nav-brand">
+          <span class="nav-brand-dot"></span>
+          <span>MOHAMMADAMIN SHARIF</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+          <li><a href="#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
+          <li><a href="#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
+          <li><a href="#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
+          <li><a href="#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
+          <li><a href="#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
+          <li><a href="#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
+        </ul>
+        <div class="nav-tools">
+          <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
+            <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
+            <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
+          </button>
+          <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
+            <i data-lucide="languages" style="width: 16px;"></i>
+            <span id="langToggleLabel">FA</span>
+          </button>
+          <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
+            <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
+            <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div>
-        <div class="hero-meta">
-          <i data-lucide="cpu" style="width: 14px;"></i>
-          <span data-en="MECHANICAL ENGINEERING // IUST" data-fa="مهندسی مکانیک // دانشگاه علم و صنعت">MECHANICAL ENGINEERING // IUST</span>
-        </div>
-        <h1 class="hero-title">
-          MOHAMMADAMIN
-          <span>SHARIF</span>
-        </h1>
+    <!-- HERO SECTION (MASTER LIQUID GLASS BOARD) -->
+    <section class="glass-board" style="margin-top: 100px;">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
 
-        <div class="hero-specs">
-          <div class="spec-node">
-            <div class="spec-key" data-en="INSTITUTION" data-fa="دانشگاه">INSTITUTION</div>
-            <div class="spec-value" data-en="Iran Univ. of Science & Tech (IUST)" data-fa="دانشگاه علم و صنعت ایران">Iran Univ. of Science & Tech (IUST)</div>
+      <div class="hero-glass-grid" style="margin: 0;">
+        <div>
+          <div class="hero-badge-pill">
+            <i data-lucide="cpu" style="width: 14px;"></i>
+            <span data-en="MECHANICAL ENGINEERING // IUST" data-fa="مهندسی مکانیک // دانشگاه علم و صنعت">MECHANICAL ENGINEERING // IUST</span>
           </div>
-          <div class="spec-node">
-            <div class="spec-key" data-en="FIELD OF ACTIVITY" data-fa="حوزه فعالیت">FIELD OF ACTIVITY</div>
-            <div class="spec-value" data-en="SolidWorks • Microfluidics • Microfluidic Chip • Pumps" data-fa="سالیدورکس • میکروفلوییدیک • چیپ میکروفلوییدیک • پمپ‌ها">SolidWorks • Microfluidics • Microfluidic Chip • Pumps</div>
-          </div>
-          <div class="spec-node">
-            <div class="spec-key" data-en="ORIENTATION" data-fa="گرایش">ORIENTATION</div>
-            <div class="spec-value" data-en="Thermal & Fluids Engineering" data-fa="حرارت و سیالات">Thermal & Fluids Engineering</div>
-          </div>
-          <div class="spec-node">
-            <div class="spec-key" data-en="LOCATION" data-fa="موقعیت">LOCATION</div>
-            <div class="spec-value" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</div>
-          </div>
-        </div>
-      </div>
+          <h1 class="hero-main-title">
+            MOHAMMADAMIN
+            <span style="display:block; color: var(--lg-text-secondary); font-size: 40px; font-weight: 700;">SHARIF</span>
+          </h1>
+          <p class="hero-tagline" data-en="Specialized in turbomachinery, fluid dynamics simulations, precision SolidWorks modeling, and digital twin engineering." data-fa="متخصص در حوزه توربوماشین، شبیه‌سازی دینامیک سیالات، مدل‌سازی دقیق سالیدورکس و مهندسی دوقلوی دیجیتال.">
+            Specialized in turbomachinery, fluid dynamics simulations, precision SolidWorks modeling, and digital twin engineering.
+          </p>
 
-      <!-- KINEMATICS & FLUID VECTOR CANVAS -->
-      <div class="hero-visual">
-        <div class="canvas-overlay">
-          <span data-en="VECTOR FIELD // DYNAMIC SIMULATION" data-fa="میدان برداری // شبیه‌سازی دینامیک">VECTOR FIELD // DYNAMIC SIMULATION</span>
-          <span id="fpsCounter">60 FPS</span>
+          <div class="specs-glass-grid">
+            <div class="spec-glass-node">
+              <div class="spec-key" data-en="INSTITUTION" data-fa="دانشگاه">INSTITUTION</div>
+              <div class="spec-value" data-en="Iran Univ. of Science & Tech (IUST)" data-fa="دانشگاه علم و صنعت ایران">Iran Univ. of Science & Tech (IUST)</div>
+            </div>
+            <div class="spec-glass-node">
+              <div class="spec-key" data-en="FIELD OF ACTIVITY" data-fa="حوزه فعالیت">FIELD OF ACTIVITY</div>
+              <div class="spec-value" data-en="SolidWorks • Microfluidics • Microfluidic Chip • Pumps" data-fa="سالیدورکس • میکروفلوییدیک • چیپ میکروفلوییدیک • پمپ‌ها">SolidWorks • Microfluidics • Microfluidic Chip • Pumps</div>
+            </div>
+            <div class="spec-glass-node">
+              <div class="spec-key" data-en="ORIENTATION" data-fa="گرایش">ORIENTATION</div>
+              <div class="spec-value" data-en="Thermal & Fluids Engineering" data-fa="حرارت و سیالات">Thermal & Fluids Engineering</div>
+            </div>
+            <div class="spec-glass-node">
+              <div class="spec-key" data-en="LOCATION" data-fa="موقعیت">LOCATION</div>
+              <div class="spec-value" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</div>
+            </div>
+          </div>
         </div>
-        <canvas id="heroCanvas"></canvas>
+
+        <!-- KINEMATICS & FLUID VECTOR CANVAS -->
+        <div class="hero-canvas-frame">
+          <div class="canvas-glass-overlay">
+            <span class="overlay-chip" data-en="VECTOR FIELD // DYNAMIC SIMULATION" data-fa="میدان برداری // شبیه‌سازی دینامیک">VECTOR FIELD // DYNAMIC SIMULATION</span>
+            <span class="overlay-chip" id="fpsCounter">60 FPS</span>
+          </div>
+          <canvas id="heroCanvas"></canvas>
+        </div>
       </div>
     </section>
 
+    <!-- LIQUID GLASS FILTER DOCK (Reference: Spatial UI Pill Controls) -->
+    <div class="filter-glass-dock" id="categoryFilterDock" role="toolbar" aria-label="Portfolio Category Filters">
+      <button class="filter-pill active" data-filter="all">
+        <i data-lucide="layers" style="width: 14px;"></i>
+        <span data-en="ALL MODULES" data-fa="همه بخش‌ها">ALL MODULES</span>
+        <span class="filter-pill-count">18</span>
+      </button>
+      <button class="filter-pill" data-filter="projects">
+        <i data-lucide="disc" style="width: 14px;"></i>
+        <span data-en="PUMP DESIGN" data-fa="طراحی پمپ">PUMP DESIGN</span>
+        <span class="filter-pill-count">01</span>
+      </button>
+      <button class="filter-pill" data-filter="solidworks">
+        <i data-lucide="box" style="width: 14px;"></i>
+        <span data-en="SOLIDWORKS CAD" data-fa="سالیدورکس">SOLIDWORKS CAD</span>
+        <span class="filter-pill-count">05</span>
+      </button>
+      <button class="filter-pill" data-filter="simulations">
+        <i data-lucide="activity" style="width: 14px;"></i>
+        <span data-en="DIGITAL TWINS" data-fa="دوقلوهای دیجیتال">DIGITAL TWINS</span>
+        <span class="filter-pill-count">05</span>
+      </button>
+      <button class="filter-pill" data-filter="microfluidics">
+        <i data-lucide="git-commit" style="width: 14px;"></i>
+        <span data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</span>
+        <span class="filter-pill-count">LIVE</span>
+      </button>
+      <button class="filter-pill" data-filter="books">
+        <i data-lucide="book-open" style="width: 14px;"></i>
+        <span data-en="BOOKS LIBRARY" data-fa="کتابخانه">BOOKS LIBRARY</span>
+        <span class="filter-pill-count">07</span>
+      </button>
+      <button class="filter-pill" data-filter="capabilities">
+        <i data-lucide="cpu" style="width: 14px;"></i>
+        <span data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</span>
+      </button>
+    </div>
+
     <!-- PROJECTS GALLERY -->
-    <section id="projects">
-      <div class="section-header">
+    <section id="projects" class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="section-glass-header">
         <div>
-          <div class="section-label" data-en="// SELECTED WORK" data-fa="// منتخب آثار">// SELECTED WORK</div>
-          <div class="section-title-text" data-en="PUMP DESIGN" data-fa="طراحی پمپ">PUMP DESIGN</div>
+          <div class="section-eyebrow" data-en="// SELECTED WORK" data-fa="// منتخب آثار">
+            <i data-lucide="disc" style="width: 14px;"></i>
+            <span>// SELECTED WORK</span>
+          </div>
+          <div class="section-main-heading" data-en="PUMP DESIGN" data-fa="طراحی پمپ">PUMP DESIGN</div>
         </div>
-        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">
+        <div class="section-pill-indicator">
           [01 / 01]
         </div>
       </div>
 
-      <div class="projects-grid">
+      <div class="projects-glass-grid">
 
         <!-- PROJECT 01: CFTURBO PUMP -->
-        <a href="projects/cfturbo-pump/pump-design-checklist.html" class="project-card">
-          <div class="project-preview">
+        <a href="projects/cfturbo-pump/pump-design-checklist.html" class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Pump Design Checklist in CFTurbo" data-fa="چک‌لیست طراحی پمپ در CFTurbo">Pump Design Checklist in CFTurbo</h3>
-                <span class="project-year">2026</span>
+                <span class="project-year-badge">2026</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="A checklist built on CFTurbo's official pump design stages (impeller, volute, stator), with a quality note and a reference source for every item. Progress is saved as items are checked off, with a final report exportable to Word or Excel." data-fa="فهرست کنترلی مبتنی بر مراحل رسمی طراحی پمپ در نرم‌افزار CFTurbo (پروانه، ولوت، استاتور) به‌همراه نکات کیفی و منبع هر مورد. با تیک‌زدن هر بند، پیشرفت کار ذخیره می‌شود و در پایان می‌توانید گزارش نهایی را به‌صورت فایل Word یا Excel خروجی بگیرید.">
+              <p class="project-desc" data-en="A checklist built on CFTurbo's official pump design stages (impeller, volute, stator), with a quality note and a reference source for every item. Progress is saved as items are checked off, with a final report exportable to Word or Excel." data-fa="فهرست کنترلی مبتنی بر مراحل رسمی طراحی پمپ در نرم‌افزار CFTurbo (پروانه، ولوت، استاتور) به‌همراه نکات کیفی و منبع هر مورد. با تیک‌زدن هر بند، پیشرفت کار ذخیره می‌شود و در پایان می‌توانید گزارش نهایی را به‌صورت فایل Word یا Excel خروجی بگیرید.">
                 A checklist built on CFTurbo's official pump design stages (impeller, volute, stator), with a quality note and a reference source for every item. Progress is saved as items are checked off, with a final report exportable to Word or Excel.
               </p>
             </div>
 
-            <div class="project-metrics">
+            <div class="project-metrics-glass">
               <div class="p-metric-item">
                 <span class="p-metric-lbl" data-en="IMPELLER STAGES" data-fa="مراحل پروانه">IMPELLER STAGES</span>
                 <span class="p-metric-val" data-en="6 (1D → Blade Edges)" data-fa="۶ مرحله (1D تا لبه پره)">6 (1D → Blade Edges)</span>
@@ -821,32 +890,44 @@
     </section>
 
     <!-- SOLIDWORKS GALLERY -->
-    <section id="solidworks">
-      <div class="section-header">
+    <section id="solidworks" class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="section-glass-header">
         <div>
-          <div class="section-label" data-en="// CAD MODELING" data-fa="// مدل‌سازی CAD">// CAD MODELING</div>
-          <div class="section-title-text" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</div>
+          <div class="section-eyebrow" data-en="// CAD MODELING" data-fa="// مدل‌سازی CAD">
+            <i data-lucide="box" style="width: 14px;"></i>
+            <span>// CAD MODELING</span>
+          </div>
+          <div class="section-main-heading" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</div>
+        </div>
+        <div class="section-pill-indicator">
+          [05 MODELS]
         </div>
       </div>
 
       <!-- SUBSECTION: 3D SAMPLE -->
-      <div class="subsection-header">
+      <div class="subsection-glass-header">
         <i data-lucide="box" style="width: 16px;"></i>
         <span data-en="3D SAMPLE" data-fa="نمونه سه‌بعدی">3D SAMPLE</span>
       </div>
-      <div class="projects-grid">
+      <div class="projects-glass-grid">
 
         <!-- 3D 01: MODEL ROCKET ASSEMBLY -->
-        <a href="assets/downloads/solidworks/rocket-assembly.zip" download class="project-card">
-          <div class="project-preview">
+        <a href="assets/downloads/solidworks/rocket-assembly.zip" download class="project-glass-card card-jewel-blue">
+          <div class="project-glass-preview">
             <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="Model Rocket Assembly render">
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Model Rocket Assembly" data-fa="مونتاژ راکت مدل">Model Rocket Assembly</h3>
+                <span class="project-year-badge">CAD</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Full multi-stage model rocket assembly, including engine, fuel tank, nose cone, reducer, and stage-to-stage connections." data-fa="مونتاژ کامل چندمرحله‌ای راکت مدل شامل موتور، مخزن سوخت، نوک مخروطی، رابط کاهنده و اتصالات بین مراحل.">
+              <p class="project-desc" data-en="Full multi-stage model rocket assembly, including engine, fuel tank, nose cone, reducer, and stage-to-stage connections." data-fa="مونتاژ کامل چندمرحله‌ای راکت مدل شامل موتور، مخزن سوخت، نوک مخروطی، رابط کاهنده و اتصالات بین مراحل.">
                 Full multi-stage model rocket assembly, including engine, fuel tank, nose cone, reducer, and stage-to-stage connections.
               </p>
             </div>
@@ -859,16 +940,17 @@
         </a>
 
         <!-- 3D 02: SHOCK ASSEMBLY -->
-        <a href="assets/downloads/solidworks/shock-assembly.zip" download class="project-card">
-          <div class="project-preview">
+        <a href="assets/downloads/solidworks/shock-assembly.zip" download class="project-glass-card card-jewel-violet">
+          <div class="project-glass-preview">
             <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Shock Assembly" data-fa="مجموعه ضربه‌گیر">Shock Assembly</h3>
+                <span class="project-year-badge">CAD</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Pivoting shock/suspension linkage built from a bracket, pivot, U-support, bushing, washer, and fastener set (bolt, castle nut, self-locking nut)." data-fa="لینک ضربه‌گیر/تعلیق چرخشی متشکل از بریکت، پیوت، U-ساپورت، بوش، واشر و مجموعه پیچ‌ومهره (پیچ، مهره قفلی، مهره خودقفل‌شونده).">
+              <p class="project-desc" data-en="Pivoting shock/suspension linkage built from a bracket, pivot, U-support, bushing, washer, and fastener set (bolt, castle nut, self-locking nut)." data-fa="لینک ضربه‌گیر/تعلیق چرخشی متشکل از بریکت، پیوت، U-ساپورت، بوش، واشر و مجموعه پیچ‌ومهره (پیچ، مهره قفلی، مهره خودقفل‌شونده).">
                 Pivoting shock/suspension linkage built from a bracket, pivot, U-support, bushing, washer, and fastener set (bolt, castle nut, self-locking nut).
               </p>
             </div>
@@ -881,16 +963,17 @@
         </a>
 
         <!-- 3D 03: CLAMP MECHANISM -->
-        <a href="assets/downloads/solidworks/clamp-assembly.zip" download class="project-card">
-          <div class="project-preview">
+        <a href="assets/downloads/solidworks/clamp-assembly.zip" download class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="wrench" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Bench Clamp Mechanism" data-fa="مکانیزم گیره رومیزی">Bench Clamp Mechanism</h3>
+                <span class="project-year-badge">CAD</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Toggle-clamp style mechanism with a base, jaw and jaw face, clamp screw with handle, handle stop, and safety handle." data-fa="مکانیزم گیره از نوع اهرمی شامل بیس، فک و صفحه فک، پیچ گیره همراه دسته، توقف‌گاه دسته و دسته ایمنی.">
+              <p class="project-desc" data-en="Toggle-clamp style mechanism with a base, jaw and jaw face, clamp screw with handle, handle stop, and safety handle." data-fa="مکانیزم گیره از نوع اهرمی شامل بیس، فک و صفحه فک، پیچ گیره همراه دسته، توقف‌گاه دسته و دسته ایمنی.">
                 Toggle-clamp style mechanism with a base, jaw and jaw face, clamp screw with handle, handle stop, and safety handle.
               </p>
             </div>
@@ -903,16 +986,17 @@
         </a>
 
         <!-- 3D 04: MECHANICAL ASSEMBLY 04 -->
-        <a href="assets/downloads/solidworks/mechanical-assembly-04.zip" download class="project-card">
-          <div class="project-preview">
+        <a href="assets/downloads/solidworks/mechanical-assembly-04.zip" download class="project-glass-card card-jewel-blue">
+          <div class="project-glass-preview">
             <i data-lucide="cog" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Mechanical Assembly 04" data-fa="مجموعه مکانیکی ۰۴">Mechanical Assembly 04</h3>
+                <span class="project-year-badge">CAD</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="A 10-part mechanical assembly modeled and detailed in SolidWorks." data-fa="یک مجموعه مکانیکی ۱۰ قطعه‌ای که در سالیدورکس مدل‌سازی و جزئیات آن ترسیم شده است.">
+              <p class="project-desc" data-en="A 10-part mechanical assembly modeled and detailed in SolidWorks." data-fa="یک مجموعه مکانیکی ۱۰ قطعه‌ای که در سالیدورکس مدل‌سازی و جزئیات آن ترسیم شده است.">
                 A 10-part mechanical assembly modeled and detailed in SolidWorks.
               </p>
             </div>
@@ -927,23 +1011,28 @@
       </div>
 
       <!-- SUBSECTION: 2D DESIGN -->
-      <div class="subsection-header">
+      <div class="subsection-glass-header">
         <i data-lucide="ruler" style="width: 16px;"></i>
         <span data-en="2D DESIGN" data-fa="طرح دوبعدی">2D DESIGN</span>
       </div>
-      <div class="projects-grid">
-        <div class="project-card project-card-placeholder" style="cursor: default;">
-          <div class="project-preview">
+      <div class="projects-glass-grid">
+        <div class="project-glass-card card-jewel-emerald" style="cursor: default;">
+          <div class="project-glass-preview">
             <i data-lucide="ruler" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="2D drawings coming soon" data-fa="طرح‌های دوبعدی به‌زودی">2D drawings coming soon</h3>
+                <span class="project-year-badge">WIP</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="This section will showcase 2D SolidWorks drawings." data-fa="این بخش طرح‌های دوبعدی طراحی‌شده در سالیدورکس را نمایش خواهد داد.">
+              <p class="project-desc" data-en="This section will showcase 2D SolidWorks drawings." data-fa="این بخش طرح‌های دوبعدی طراحی‌شده در سالیدورکس را نمایش خواهد داد.">
                 This section will showcase 2D SolidWorks drawings.
               </p>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks 2D</span>
+              <span class="p-tag" data-en="Technical Drawings" data-fa="نقشه‌کشی صنعتی">Technical Drawings</span>
             </div>
           </div>
         </div>
@@ -951,31 +1040,39 @@
     </section>
 
     <!-- SIMULATIONS GALLERY -->
-    <section id="simulations">
-      <div class="section-header">
+    <section id="simulations" class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="section-glass-header">
         <div>
-          <div class="section-label" data-en="// DIGITAL TWINS" data-fa="// دوقلوهای دیجیتال">// DIGITAL TWINS</div>
-          <div class="section-title-text" data-en="INTERACTIVE SIMULATIONS" data-fa="شبیه‌سازی‌های تعاملی">INTERACTIVE SIMULATIONS</div>
+          <div class="section-eyebrow" data-en="// DIGITAL TWINS" data-fa="// دوقلوهای دیجیتال">
+            <i data-lucide="activity" style="width: 14px;"></i>
+            <span>// DIGITAL TWINS</span>
+          </div>
+          <div class="section-main-heading" data-en="INTERACTIVE SIMULATIONS" data-fa="شبیه‌سازی‌های تعاملی">INTERACTIVE SIMULATIONS</div>
         </div>
-        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">
-          [01 / 05]
+        <div class="section-pill-indicator">
+          [05 ENGINES]
         </div>
       </div>
 
-      <div class="projects-grid">
+      <div class="projects-glass-grid">
 
         <!-- SIM 01: RANKINE POWER PLANT ENGINE -->
-        <a href="simulations/Power_Plant_Digital_Twin_Engine.html" target="_blank" class="project-card">
-          <div class="project-preview">
+        <a href="simulations/Power_Plant_Digital_Twin_Engine.html" target="_blank" class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="factory" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Rankine Power Plant Engine" data-fa="شبیه‌ساز نیروگاه سیکل رانکین">Rankine Power Plant Engine</h3>
-                <span class="project-year">2026</span>
+                <span class="project-year-badge">LIVE</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Live digital twin linking a pump design directly into a full Rankine cycle — boiler, turbine, generator, condenser, and feedwater pump." data-fa="دیجیتال توین زنده‌ای که مشخصات طراحی پمپ را مستقیماً به یک سیکل کامل رانکین شامل بویلر، توربین، ژنراتور، کندانسور و پمپ تغذیه متصل می‌کند.">
+              <p class="project-desc" data-en="Live digital twin linking a pump design directly into a full Rankine cycle — boiler, turbine, generator, condenser, and feedwater pump." data-fa="دیجیتال توین زنده‌ای که مشخصات طراحی پمپ را مستقیماً به یک سیکل کامل رانکین شامل بویلر، توربین، ژنراتور، کندانسور و پمپ تغذیه متصل می‌کند.">
                 Live digital twin linking a pump design directly into a full Rankine cycle — boiler, turbine, generator, condenser, and feedwater pump.
               </p>
             </div>
@@ -988,17 +1085,17 @@
         </a>
 
         <!-- SIM 02: THERMAL POWER PLANT TWIN -->
-        <a href="simulations/Digital_Twin___Thermal_Power_Simulation.html" target="_blank" class="project-card">
-          <div class="project-preview">
+        <a href="simulations/Digital_Twin___Thermal_Power_Simulation.html" target="_blank" class="project-glass-card card-jewel-amber">
+          <div class="project-glass-preview">
             <i data-lucide="flame" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Steam Power Plant Twin" data-fa="دیجیتال توین نیروگاه بخار">Steam Power Plant Twin</h3>
-                <span class="project-year">2026</span>
+                <span class="project-year-badge">LIVE</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Interactive digital twin of an industrial steam power plant, modeling live thermodynamic behavior across the full generation cycle." data-fa="دیجیتال توین تعاملی یک نیروگاه بخار صنعتی که رفتار ترمودینامیکی زنده در کل سیکل تولید را مدل‌سازی می‌کند.">
+              <p class="project-desc" data-en="Interactive digital twin of an industrial steam power plant, modeling live thermodynamic behavior across the full generation cycle." data-fa="دیجیتال توین تعاملی یک نیروگاه بخار صنعتی که رفتار ترمودینامیکی زنده در کل سیکل تولید را مدل‌سازی می‌کند.">
                 Interactive digital twin of an industrial steam power plant, modeling live thermodynamic behavior across the full generation cycle.
               </p>
             </div>
@@ -1010,17 +1107,17 @@
         </a>
 
         <!-- SIM 03: BOILER & FEEDWATER PUMP TWIN -->
-        <a href="simulations/Digital_Twin___Hydraulic_Simulation.html" target="_blank" class="project-card">
-          <div class="project-preview">
+        <a href="simulations/Digital_Twin___Hydraulic_Simulation.html" target="_blank" class="project-glass-card card-jewel-blue">
+          <div class="project-glass-preview">
             <i data-lucide="waves" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Boiler & Feedwater Pump Twin" data-fa="دیجیتال توین بویلر و پمپ تغذیه">Boiler & Feedwater Pump Twin</h3>
-                <span class="project-year">2026</span>
+                <span class="project-year-badge">LIVE</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Digital twin of an industrial boiler and feedwater pump loop, tracking hydraulic performance across the closed circuit." data-fa="دیجیتال توین حلقه بویلر صنعتی و پمپ تغذیه آب که عملکرد هیدرولیکی را در مدار بسته دنبال می‌کند.">
+              <p class="project-desc" data-en="Digital twin of an industrial boiler and feedwater pump loop, tracking hydraulic performance across the closed circuit." data-fa="دیجیتال توین حلقه بویلر صنعتی و پمپ تغذیه آب که عملکرد هیدرولیکی را در مدار بسته دنبال می‌کند.">
                 Digital twin of an industrial boiler and feedwater pump loop, tracking hydraulic performance across the closed circuit.
               </p>
             </div>
@@ -1032,17 +1129,17 @@
         </a>
 
         <!-- SIM 04: INTERACTIVE BOILER SIMULATOR -->
-        <a href="simulations/Digital_Twin___Simulation.html" target="_blank" class="project-card">
-          <div class="project-preview">
+        <a href="simulations/Digital_Twin___Simulation.html" target="_blank" class="project-glass-card card-jewel-amber">
+          <div class="project-glass-preview">
             <i data-lucide="flame-kindling" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Interactive Boiler Simulator" data-fa="شبیه‌ساز و مدل تعاملی بویلر">Interactive Boiler Simulator</h3>
-                <span class="project-year">2026</span>
+                <span class="project-year-badge">LIVE</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Interactive simulator and model of an industrial boiling-water boiler, walking through its live operating behavior step by step." data-fa="شبیه‌ساز و مدل تعاملی یک بویلر صنعتی آب جوش که رفتار عملکردی زنده‌ی آن را گام‌به‌گام نشان می‌دهد.">
+              <p class="project-desc" data-en="Interactive simulator and model of an industrial boiling-water boiler, walking through its live operating behavior step by step." data-fa="شبیه‌ساز و مدل تعاملی یک بویلر صنعتی آب جوش که رفتار عملکردی زنده‌ی آن را گام‌به‌گام نشان می‌دهد.">
                 Interactive simulator and model of an industrial boiling-water boiler, walking through its live operating behavior step by step.
               </p>
             </div>
@@ -1054,17 +1151,17 @@
         </a>
 
         <!-- SIM 05: INTERACTIVE PUMP ANATOMY -->
-        <a href="simulations/Interactive_Pump_Anatomy.html" target="_blank" class="project-card">
-          <div class="project-preview">
+        <a href="simulations/Interactive_Pump_Anatomy.html" target="_blank" class="project-glass-card card-jewel-violet">
+          <div class="project-glass-preview">
             <i data-lucide="gauge" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Interactive Pump Anatomy" data-fa="آناتومی تعاملی پمپ">Interactive Pump Anatomy</h3>
-                <span class="project-year">2026</span>
+                <span class="project-year-badge">LIVE</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Cutaway view of a single-stage centrifugal pump with a live control panel to explore its internal components." data-fa="نمای برش‌خورده یک پمپ سانتریفیوژ تک‌مرحله‌ای همراه با پانل کنترل زنده برای کاوش در اجزای داخلی آن.">
+              <p class="project-desc" data-en="Cutaway view of a single-stage centrifugal pump with a live control panel to explore its internal components." data-fa="نمای برش‌خورده یک پمپ سانتریفیوژ تک‌مرحله‌ای همراه با پانل کنترل زنده برای کاوش در اجزای داخلی آن.">
                 Cutaway view of a single-stage centrifugal pump with a live control panel to explore its internal components.
               </p>
             </div>
@@ -1079,50 +1176,70 @@
     </section>
 
     <!-- INTERACTIVE MICROFLUIDICS MODULE -->
-    <section id="microfluidics">
-      <div class="interactive-module">
+    <section id="microfluidics" class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="interactive-glass-module">
         <div>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-bottom: 8px;" data-en="// INTERACTIVE DEMO" data-fa="// دموی تعاملی">
-            // INTERACTIVE DEMO
+          <div class="section-eyebrow" data-en="// INTERACTIVE DEMO" data-fa="// دموی تعاملی">
+            <i data-lucide="git-commit" style="width: 14px;"></i>
+            <span>// INTERACTIVE DEMO</span>
           </div>
-          <h2 class="module-info-title" data-en="Diverging Nozzle Flow" data-fa="جریان نازل واگرا">Diverging Nozzle Flow</h2>
-          <p class="module-desc" data-en="Interactive visual simulation of fluid flow through a diverging nozzle. As the channel cross-section widens along the flow direction, particle velocity is highest at the narrow inlet and progressively decreases downstream, in accordance with the continuity equation." data-fa="شبیه‌سازی بصری تعاملی جریان سیال درون یک نازل واگرا. با افزایش سطح مقطع کانال در مسیر جریان، سرعت ذرات در ورودی باریک نازل بیشترین مقدار را دارد و با پیشروی به سمت جلو، طبق معادله پیوستگی، به‌تدریج کاهش می‌یابد.">
+          <h2 class="module-glass-title" data-en="Diverging Nozzle Flow" data-fa="جریان نازل واگرا">Diverging Nozzle Flow</h2>
+          <p class="module-glass-desc" data-en="Interactive visual simulation of fluid flow through a diverging nozzle. As the channel cross-section widens along the flow direction, particle velocity is highest at the narrow inlet and progressively decreases downstream, in accordance with the continuity equation." data-fa="شبیه‌سازی بصری تعاملی جریان سیال درون یک نازل واگرا. با افزایش سطح مقطع کانال در مسیر جریان، سرعت ذرات در ورودی باریک نازل بیشترین مقدار را دارد و با پیشروی به سمت جلو، طبق معادله پیوستگی، به‌تدریج کاهش می‌یابد.">
             Interactive visual simulation of fluid flow through a diverging nozzle. As the channel cross-section widens along the flow direction, particle velocity is highest at the narrow inlet and progressively decreases downstream, in accordance with the continuity equation.
           </p>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);" data-en="STATUS: ACTIVE // DECELERATING FLOW (DIVERGING SECTION)" data-fa="وضعیت: فعال // جریان کاهشی (بخش واگرا)">
-            STATUS: ACTIVE // DECELERATING FLOW (DIVERGING SECTION)
+          <div class="status-glass-indicator">
+            <span class="status-dot"></span>
+            <span data-en="STATUS: ACTIVE // DECELERATING FLOW (DIVERGING SECTION)" data-fa="وضعیت: فعال // جریان کاهشی (بخش واگرا)">
+              STATUS: ACTIVE // DECELERATING FLOW (DIVERGING SECTION)
+            </span>
           </div>
         </div>
 
-        <div class="chip-canvas-wrapper">
+        <div class="chip-canvas-frame">
           <canvas id="chipCanvas"></canvas>
         </div>
       </div>
     </section>
 
     <!-- SCIENTIFIC BOOKS LIBRARY -->
-    <section id="books">
-      <div class="section-header">
+    <section id="books" class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="section-glass-header">
         <div>
-          <div class="section-label" data-en="// SCIENTIFIC LIBRARY" data-fa="// کتابخانه علمی">// SCIENTIFIC LIBRARY</div>
-          <div class="section-title-text" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</div>
+          <div class="section-eyebrow" data-en="// SCIENTIFIC LIBRARY" data-fa="// کتابخانه علمی">
+            <i data-lucide="book-open" style="width: 14px;"></i>
+            <span>// SCIENTIFIC LIBRARY</span>
+          </div>
+          <div class="section-main-heading" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</div>
+        </div>
+        <div class="section-pill-indicator">
+          [07 VOLUMES]
         </div>
       </div>
 
-      <div class="projects-grid">
+      <div class="projects-glass-grid">
 
         <!-- CHAPTER 1: FLUID MECHANICS -->
-        <a href="books/fluids.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/fluids.html" class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="droplets" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Fluid Mechanics" data-fa="سیالات">Fluid Mechanics</h3>
-                <span class="project-year">01</span>
+                <span class="project-year-badge">VOL. 01</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on fluid mechanics, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی سیالات، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on fluid mechanics, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی سیالات، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on fluid mechanics, each with a full answer key.
               </p>
             </div>
@@ -1133,17 +1250,17 @@
         </a>
 
         <!-- CHAPTER 2: THERMODYNAMICS -->
-        <a href="books/thermodynamics.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/thermodynamics.html" class="project-glass-card card-jewel-amber">
+          <div class="project-glass-preview">
             <i data-lucide="flame" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Thermodynamics" data-fa="ترمودینامیک">Thermodynamics</h3>
-                <span class="project-year">02</span>
+                <span class="project-year-badge">VOL. 02</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on thermodynamics, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی ترمودینامیک، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on thermodynamics, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی ترمودینامیک، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on thermodynamics, each with a full answer key.
               </p>
             </div>
@@ -1154,17 +1271,17 @@
         </a>
 
         <!-- CHAPTER 3: HEAT TRANSFER -->
-        <a href="books/heat-transfer.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/heat-transfer.html" class="project-glass-card card-jewel-blue">
+          <div class="project-glass-preview">
             <i data-lucide="thermometer" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Heat Transfer" data-fa="انتقال حرارت">Heat Transfer</h3>
-                <span class="project-year">03</span>
+                <span class="project-year-badge">VOL. 03</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on heat transfer, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی انتقال حرارت، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on heat transfer, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی انتقال حرارت، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on heat transfer, each with a full answer key.
               </p>
             </div>
@@ -1175,17 +1292,17 @@
         </a>
 
         <!-- CHAPTER 4: STATICS, STRENGTH OF MATERIALS & MACHINE DESIGN -->
-        <a href="books/statics-strength-machine-design.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/statics-strength-machine-design.html" class="project-glass-card card-jewel-emerald">
+          <div class="project-glass-preview">
             <i data-lucide="ruler" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Statics, Strength of Materials & Machine Design" data-fa="استاتیک، مقاومت مصالح و طراحی اجزا">Statics, Strength of Materials &amp; Machine Design</h3>
-                <span class="project-year">04</span>
+                <span class="project-year-badge">VOL. 04</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on statics, strength of materials, and machine design, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی استاتیک، مقاومت مصالح و طراحی اجزا، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on statics, strength of materials, and machine design, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی استاتیک، مقاومت مصالح و طراحی اجزا، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on statics, strength of materials, and machine design, each with a full answer key.
               </p>
             </div>
@@ -1196,17 +1313,17 @@
         </a>
 
         <!-- CHAPTER 5: PUMP DESIGN -->
-        <a href="books/pump-design.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/pump-design.html" class="project-glass-card card-jewel-cyan">
+          <div class="project-glass-preview">
             <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Pump Design" data-fa="طراحی پمپ">Pump Design</h3>
-                <span class="project-year">05</span>
+                <span class="project-year-badge">VOL. 05</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on pump design, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی طراحی پمپ، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on pump design, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی طراحی پمپ، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on pump design, each with a full answer key.
               </p>
             </div>
@@ -1217,17 +1334,17 @@
         </a>
 
         <!-- CHAPTER 6: CONTROL & VIBRATIONS OF MECHANICAL SYSTEMS -->
-        <a href="books/controls-vibrations.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/controls-vibrations.html" class="project-glass-card card-jewel-violet">
+          <div class="project-glass-preview">
             <i data-lucide="activity" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Control & Vibrations of Mechanical Systems" data-fa="کنترل و ارتعاشات سیستم‌های مکانیکی">Control &amp; Vibrations of Mechanical Systems</h3>
-                <span class="project-year">06</span>
+                <span class="project-year-badge">VOL. 06</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on control systems and mechanical vibrations, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی کنترل و ارتعاشات سیستم‌های مکانیکی، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on control systems and mechanical vibrations, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی کنترل و ارتعاشات سیستم‌های مکانیکی، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on control systems and mechanical vibrations, each with a full answer key.
               </p>
             </div>
@@ -1238,17 +1355,17 @@
         </a>
 
         <!-- CHAPTER 7: DYNAMICS & DYNAMICS OF MACHINERY -->
-        <a href="books/dynamics-machine-dynamics.html" class="project-card">
-          <div class="project-preview">
+        <a href="books/dynamics-machine-dynamics.html" class="project-glass-card card-jewel-blue">
+          <div class="project-glass-preview">
             <i data-lucide="rotate-cw" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
           </div>
-          <div class="project-body">
+          <div class="project-glass-body">
             <div>
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Dynamics & Dynamics of Machinery" data-fa="دینامیک و دینامیک ماشین">Dynamics &amp; Dynamics of Machinery</h3>
-                <span class="project-year">07</span>
+                <span class="project-year-badge">VOL. 07</span>
               </div>
-              <p style="font-size: 13px; color: var(--text-muted);" data-en="Scientific books on dynamics and dynamics of machinery, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی دینامیک و دینامیک ماشین، هرکدام به‌همراه پاسخنامه‌ی کامل.">
+              <p class="project-desc" data-en="Scientific books on dynamics and dynamics of machinery, each with a full answer key." data-fa="کتاب‌های علمی حوزه‌ی دینامیک و دینامیک ماشین، هرکدام به‌همراه پاسخنامه‌ی کامل.">
                 Scientific books on dynamics and dynamics of machinery, each with a full answer key.
               </p>
             </div>
@@ -1262,16 +1379,24 @@
     </section>
 
     <!-- TECHNICAL CAPABILITIES -->
-    <section id="capabilities">
-      <div class="section-header">
+    <section id="capabilities" class="glass-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <div class="section-glass-header">
         <div>
-          <div class="section-label" data-en="// TECHNICAL STACK" data-fa="// مجموعه فنی">// TECHNICAL STACK</div>
-          <div class="section-title-text" data-en="CAPABILITIES & TOOLS" data-fa="توانمندی‌ها و ابزارها">CAPABILITIES & TOOLS</div>
+          <div class="section-eyebrow" data-en="// TECHNICAL STACK" data-fa="// مجموعه فنی">
+            <i data-lucide="cpu" style="width: 14px;"></i>
+            <span>// TECHNICAL STACK</span>
+          </div>
+          <div class="section-main-heading" data-en="CAPABILITIES & TOOLS" data-fa="توانمندی‌ها و ابزارها">CAPABILITIES & TOOLS</div>
         </div>
       </div>
 
-      <div class="skills-grid">
-        <div class="skill-category">
+      <div class="skills-glass-grid">
+        <div class="skill-glass-box">
           <div class="skill-cat-title">
             <i data-lucide="layers" style="width: 14px;"></i> <span data-en="TURBOMACHINERY & CAD" data-fa="توربوماشین و CAD">TURBOMACHINERY & CAD</span>
           </div>
@@ -1283,7 +1408,7 @@
           </ul>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-glass-box">
           <div class="skill-cat-title">
             <i data-lucide="box" style="width: 14px;"></i> <span data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</span>
           </div>
@@ -1295,7 +1420,7 @@
           </ul>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-glass-box">
           <div class="skill-cat-title">
             <i data-lucide="git-commit" style="width: 14px;"></i> <span data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</span>
           </div>
@@ -1307,7 +1432,7 @@
           </ul>
         </div>
 
-        <div class="skill-category">
+        <div class="skill-glass-box">
           <div class="skill-cat-title">
             <i data-lucide="thermometer" style="width: 14px;"></i> <span data-en="THERMODYNAMICS & FLUIDS" data-fa="ترمودینامیک و سیالات">THERMODYNAMICS & FLUIDS</span>
           </div>
@@ -1322,46 +1447,46 @@
     </section>
 
     <!-- INFO & CONTACT -->
-    <section id="info" class="info-section">
-      <div class="profile-card">
-        <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-avatar" onerror="this.src='https://via.placeholder.com/90/0d1117/00f2fe?text=Sharif'">
+    <section id="info" class="info-glass-section">
+      <div class="profile-glass-card">
+        <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-glass-avatar" onerror="this.src='https://via.placeholder.com/90/0d1117/00f2fe?text=Sharif'">
         <div>
-          <h3 style="font-size: 20px; font-weight: 700;">Mohammadamin Sharif</h3>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" data-en="B.Sc. Student in Mechanical Engineering" data-fa="دانشجوی کارشناسی مهندسی مکانیک">
+          <h3 style="font-size: 20px; font-weight: 700; color: var(--lg-text-primary);">Mohammadamin Sharif</h3>
+          <p style="font-size: 13px; color: var(--lg-text-secondary); margin-top: 4px;" data-en="B.Sc. Student in Mechanical Engineering" data-fa="دانشجوی کارشناسی مهندسی مکانیک">
             B.Sc. Student in Mechanical Engineering
           </p>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); margin-top: 8px;" data-en="Iran University of Science & Technology (IUST)" data-fa="دانشگاه علم و صنعت ایران">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--lg-cyan); margin-top: 8px;" data-en="Iran University of Science & Technology (IUST)" data-fa="دانشگاه علم و صنعت ایران">
             Iran University of Science & Technology (IUST)
           </div>
         </div>
       </div>
 
-      <div class="contact-block">
-        <div class="contact-row">
+      <div class="contact-glass-block">
+        <div class="contact-glass-row">
           <span class="contact-label" data-en="EMAIL" data-fa="ایمیل">EMAIL</span>
-          <a href="mailto:mohammadaminsh1384@gmail.com" class="contact-link">mohammadaminsh1384@gmail.com</a>
+          <a href="mailto:mohammadaminsh1384@gmail.com" class="contact-glass-link">mohammadaminsh1384@gmail.com</a>
         </div>
-        <div class="contact-row">
+        <div class="contact-glass-row">
           <span class="contact-label" data-en="PHONE" data-fa="تلفن">PHONE</span>
-          <a href="tel:+989032764840" class="contact-link" dir="ltr">0903 276 4840</a>
+          <a href="tel:+989032764840" class="contact-glass-link" dir="ltr">0903 276 4840</a>
         </div>
-        <div class="contact-row">
+        <div class="contact-glass-row">
           <span class="contact-label">GITHUB</span>
-          <a href="https://github.com" target="_blank" class="contact-link">github.com/m-sharif</a>
+          <a href="https://github.com" target="_blank" class="contact-glass-link">github.com/m-sharif</a>
         </div>
-        <div class="contact-row">
+        <div class="contact-glass-row">
           <span class="contact-label">LINKEDIN</span>
-          <a href="https://linkedin.com" target="_blank" class="contact-link">linkedin.com/in/m-sharif</a>
+          <a href="https://linkedin.com" target="_blank" class="contact-glass-link">linkedin.com/in/m-sharif</a>
         </div>
-        <div class="contact-row">
+        <div class="contact-glass-row">
           <span class="contact-label" data-en="ACADEMIC PROFILE" data-fa="پروفایل دانشگاهی">ACADEMIC PROFILE</span>
-          <span style="color: var(--text-main);" data-en="IUST Mechanical Dept." data-fa="دانشکده مکانیک IUST">IUST Mechanical Dept.</span>
+          <span style="color: var(--lg-text-primary);" data-en="IUST Mechanical Dept." data-fa="دانشکده مکانیک IUST">IUST Mechanical Dept.</span>
         </div>
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="glass-footer">
       <span>© 2026 MOHAMMADAMIN SHARIF</span>
       <span data-en="MECHANICAL & FLUID DYNAMICS PORTFOLIO" data-fa="نمونه‌کار مهندسی مکانیک و دینامیک سیالات">MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
     </footer>
@@ -1447,13 +1572,50 @@
       link.addEventListener('click', () => setMobileMenu(false));
     });
 
+    // --- FILTER DOCK FUNCTIONALITY ---
+    const filterBtns = document.querySelectorAll('.filter-pill, .filter-btn');
+    const filterableSections = {
+      'projects': document.getElementById('projects'),
+      'solidworks': document.getElementById('solidworks'),
+      'simulations': document.getElementById('simulations'),
+      'microfluidics': document.getElementById('microfluidics'),
+      'books': document.getElementById('books')
+    };
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        if (filter === 'all') {
+          Object.values(filterableSections).forEach(sec => {
+            if (sec) sec.style.display = '';
+          });
+        } else {
+          Object.entries(filterableSections).forEach(([key, sec]) => {
+            if (sec) {
+              if (key === filter) {
+                sec.style.display = '';
+                setTimeout(() => {
+                  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+              } else {
+                sec.style.display = 'none';
+              }
+            }
+          });
+        }
+      });
+    });
+
     // Custom Cursor Movement
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-    document.querySelectorAll('a, button, .project-card').forEach(el => {
+    document.querySelectorAll('a, button, .project-card, .project-glass-card, .filter-pill, .tool-btn').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
