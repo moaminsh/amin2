@@ -67,6 +67,7 @@
           <span>MOHAMMADAMIN SHARIF</span>
         </a>
         <ul class="nav-menu">
+          <li><a href="#foundations" class="nav-link" data-en="FOUNDATIONS" data-fa="پایه‌ها">FOUNDATIONS</a></li>
           <li><a href="#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
           <li><a href="#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
           <li><a href="#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
@@ -152,7 +153,12 @@
       <button class="filter-pill active" data-filter="all">
         <i data-lucide="layers" style="width: 14px;"></i>
         <span data-en="ALL MODULES" data-fa="همه بخش‌ها">ALL MODULES</span>
-        <span class="filter-pill-count">18</span>
+        <span class="filter-pill-count">19</span>
+      </button>
+      <button class="filter-pill" data-filter="foundations">
+        <i data-lucide="sparkles" style="width: 14px;"></i>
+        <span data-en="FOUNDATIONS" data-fa="پایه‌های شیشه">FOUNDATIONS</span>
+        <span class="filter-pill-count">REF</span>
       </button>
       <button class="filter-pill" data-filter="projects">
         <i data-lucide="disc" style="width: 14px;"></i>
@@ -184,6 +190,162 @@
         <span data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</span>
       </button>
     </div>
+
+    <!-- LIQUID GLASS FOUNDATIONS SHOWCASE BOARD (DIRECT REPLICA OF REFERENCE MOCKUP) -->
+    <section id="foundations" class="glass-board lg-foundations-board">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Board Header -->
+      <div class="lg-foundations-header">
+        <h2 class="lg-foundations-title" data-en="Liquid Glass Foundations" data-fa="پایه‌های مایع و شیشه‌ای">Liquid Glass Foundations</h2>
+        <div class="lg-foundations-actions">
+          <button class="lg-pill-action" id="viewUiToggle" aria-label="Toggle Custom UI View">
+            <span data-en="Custom UI View" data-fa="نمای کاربری سفارشی">Custom UI View</span>
+          </button>
+          <button class="lg-circle-action" id="canvasNavigateBtn" aria-label="Explore Foundations">
+            <i data-lucide="navigation" style="width: 14px; height: 14px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Middle Section: liquid glass & grid + controls -->
+      <div class="lg-middle-section">
+        <div class="lg-middle-header">
+          <div class="lg-middle-title-group">
+            <span class="lg-middle-title">liquid glass</span>
+            <span class="lg-middle-badge">Plexiglas Board</span>
+          </div>
+          <span class="lg-middle-size">Size: 512px</span>
+        </div>
+
+        <div class="lg-middle-content">
+          <!-- 3x2 Grid of 6 Liquid Glass Tiles -->
+          <div class="lg-tile-grid" id="prismaticTileGrid">
+            <!-- Tile 1: Sunset Peach / Coral -->
+            <div class="lg-tile lg-tile-1" data-swatch="coral" title="Sunset Coral Prism (Click to activate accent)">
+              <span class="lg-tile-specular"></span>
+            </div>
+            <!-- Tile 2: Electric Sky / Magenta Glow -->
+            <div class="lg-tile lg-tile-2" data-swatch="cyan" title="Electric Sky & Magenta (Click to activate accent)">
+              <span class="lg-tile-specular"></span>
+            </div>
+            <!-- Tile 3: Optical Lens Clear Glass with Caustic Arc -->
+            <div class="lg-tile lg-tile-3" data-swatch="clear" title="Optical Clear Refractive Glass (Click to activate accent)">
+              <span class="lg-tile-specular"></span>
+              <svg class="lg-caustic-arc" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 22 75 C 38 25, 72 25, 84 48" stroke="rgba(255,255,255,0.92)" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <!-- Tile 4: Oceanic Violet / Cyan with Glint -->
+            <div class="lg-tile lg-tile-4" data-swatch="violet" title="Oceanic Royal Violet (Click to activate accent)">
+              <span class="lg-tile-specular"></span>
+              <span class="lg-glint-dot"></span>
+            </div>
+            <!-- Tile 5: Amber Honey Gold -->
+            <div class="lg-tile lg-tile-5" data-swatch="amber" title="Amber Honey Refraction (Click to activate accent)">
+              <span class="lg-tile-specular"></span>
+            </div>
+            <!-- Tile 6: Radiant Aquamarine Teal -->
+            <div class="lg-tile lg-tile-6" data-swatch="teal" title="Aquamarine Teal Pool (Click to activate accent)">
+              <span class="lg-tile-specular"></span>
+            </div>
+          </div>
+
+          <!-- Right Side Recipe Buttons & Slider -->
+          <div class="lg-controls-column">
+            <button class="lg-recipe-btn" id="btnBlurRecipes">
+              <span data-en="Blur Recipes" data-fa="فرمول‌های مات‌سازی">Blur Recipes</span>
+            </button>
+            <button class="lg-recipe-btn" id="btnRadiusLevels">
+              <span data-en="Corner Radius Levels" data-fa="سطوح گردی لبه">Corner Radius Levels</span>
+            </button>
+            <div class="lg-slider-box">
+              <div class="lg-slider-header">
+                <span class="lg-slider-label" data-en="Focal distance" data-fa="فاصله کانونی">Focal distance</span>
+                <span class="lg-slider-value" id="focalDistValue">80%</span>
+              </div>
+              <div class="lg-slider-track-wrap">
+                <input type="range" min="20" max="100" value="80" class="lg-range-slider" id="focalRangeSlider" aria-label="Focal distance slider" />
+              </div>
+            </div>
+            <button class="lg-recipe-btn lg-recipe-btn-highlight" id="btnHighlight">
+              <span data-en="Highlight 12%" data-fa="هایلایت ۱۲٪">Highlight 12%</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Row 1: Surface 01 & Chips -->
+      <div class="lg-surface-row">
+        <div class="lg-surface-header">
+          <span class="lg-surface-title">Surface 01</span>
+          <span class="lg-surface-scaling" data-en="Scaling" data-fa="مقیاس‌بندی">Scaling</span>
+        </div>
+        <div class="lg-chips-track">
+          <div class="lg-chip-blur-active" id="chipGlassBlur" role="button" tabindex="0">
+            <span data-en="Glass blur 24" data-fa="مات‌سازی شیشه ۲۴">Glass blur 24</span>
+          </div>
+          <div class="lg-chip-cyan-square" data-scale="4">4</div>
+          <div class="lg-chip-white-square" data-scale="12">12</div>
+          <div class="lg-chip-white-square" data-scale="16">16</div>
+          <div class="lg-chip-white-square" data-scale="2%">2%</div>
+          <div class="lg-chip-white-square" data-scale="32">32</div>
+          <div class="lg-chip-white-pill" id="chipShadowSoft" role="button" tabindex="0">
+            <span data-en="Shadow soft" data-fa="سایه نرم">Shadow soft</span>
+          </div>
+        </div>
+        <div class="lg-chips-numbers">
+          <span>4</span>
+          <span>8</span>
+          <span>12</span>
+          <span>12</span>
+          <span>16</span>
+          <span>24</span>
+          <span>10</span>
+          <span>32</span>
+        </div>
+      </div>
+
+      <!-- Lower Row 2: Radius Style & 3D Tokens / Badges -->
+      <div class="lg-radius-row">
+        <div class="lg-radius-header">
+          <span class="lg-radius-title">Radius Style</span>
+        </div>
+        <div class="lg-tokens-track">
+          <!-- 1. Blue Poker Chip 16 -->
+          <div class="poker-chip chip-blue" data-radius="16" title="Radius 16px (Blue Token)">
+            <div class="poker-chip-inner">16</div>
+          </div>
+          <!-- 2. Green Poker Chip 10 -->
+          <div class="poker-chip chip-green" data-radius="10" title="Radius 10px (Green Token)">
+            <div class="poker-chip-inner">10</div>
+          </div>
+          <!-- 3. Orange Poker Chip 20 -->
+          <div class="poker-chip chip-orange" data-radius="20" title="Radius 20px (Orange Token)">
+            <div class="poker-chip-inner">20</div>
+          </div>
+          <!-- 4. Purple Poker Chip 24 -->
+          <div class="poker-chip chip-purple" data-radius="24" title="Radius 24px (Purple Token)">
+            <div class="poker-chip-inner">24</div>
+          </div>
+          <!-- 5. Hexagonal White Sculpted Badge 7 -->
+          <div class="sculpted-badge badge-hex" data-radius="8" title="Sculpted Hexagon (Level 7)">
+            <span>7</span>
+          </div>
+          <!-- 6. Rounded Square White Sculpted Badge 24 -->
+          <div class="sculpted-badge badge-square" data-radius="24" title="Sculpted Smooth Square (Radius 24px)">
+            <span>24</span>
+          </div>
+          <!-- 7. Radar / Target Icon Glass Badge -->
+          <div class="sculpted-badge badge-target" id="badgeTargetIcon" title="Optical Target Focal Lens">
+            <i data-lucide="crosshair" style="width: 18px; height: 18px;"></i>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- PROJECTS GALLERY -->
     <section id="projects" class="glass-board">
@@ -864,16 +1026,18 @@
     function applyTheme(mode) {
       if (mode === 'light') {
         rootEl.classList.add('light-mode');
+        rootEl.classList.remove('dark-mode');
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'block';
       } else {
         rootEl.classList.remove('light-mode');
+        rootEl.classList.add('dark-mode');
         sunIcon.style.display = 'block';
         moonIcon.style.display = 'none';
       }
     }
 
-    const savedTheme = localStorage.getItem('site-theme') || 'dark';
+    const savedTheme = localStorage.getItem('site-theme') || 'light';
     applyTheme(savedTheme);
 
     themeToggleBtn.addEventListener('click', () => {
@@ -933,6 +1097,7 @@
     // --- FILTER DOCK FUNCTIONALITY ---
     const filterBtns = document.querySelectorAll('.filter-pill, .filter-btn');
     const filterableSections = {
+      'foundations': document.getElementById('foundations'),
       'projects': document.getElementById('projects'),
       'solidworks': document.getElementById('solidworks'),
       'simulations': document.getElementById('simulations'),
@@ -967,13 +1132,77 @@
       });
     });
 
-    // Custom Cursor Movement
+    // --- LIQUID GLASS FOUNDATIONS SHOWCASE INTERACTIVITY ---
+    // 1. Focal Distance Slider
+    const focalSlider = document.getElementById('focalRangeSlider');
+    const focalVal = document.getElementById('focalDistValue');
+    if (focalSlider && focalVal) {
+      focalSlider.addEventListener('input', (e) => {
+        const v = e.target.value;
+        focalVal.textContent = v + '%';
+        const blurPx = Math.round(10 + (v / 100) * 20);
+        document.documentElement.style.setProperty('--lg-blur-panel', `blur(${blurPx}px) saturate(${130 + Math.round(v * 0.4)}%)`);
+      });
+    }
+
+    // 2. Prismatic Tile Accents (Coral, Cyan, Clear, Violet, Amber, Teal)
+    const tileSwatches = {
+      'coral': { hex: '#ff5277', rgb: '255, 82, 119' },
+      'cyan': { hex: '#0089ad', rgb: '0, 137, 173' },
+      'clear': { hex: '#0284c7', rgb: '2, 132, 199' },
+      'violet': { hex: '#7c3aed', rgb: '124, 58, 237' },
+      'amber': { hex: '#ea580c', rgb: '234, 88, 12' },
+      'teal': { hex: '#0d9488', rgb: '13, 148, 136' }
+    };
+    document.querySelectorAll('.lg-tile').forEach(tile => {
+      tile.addEventListener('click', () => {
+        const swatch = tile.dataset.swatch;
+        if (tileSwatches[swatch]) {
+          const { hex, rgb } = tileSwatches[swatch];
+          document.documentElement.style.setProperty('--lg-cyan', hex);
+          document.documentElement.style.setProperty('--lg-cyan-rgb', rgb);
+          tile.style.transform = 'scale(0.94)';
+          setTimeout(() => { tile.style.transform = ''; }, 180);
+        }
+      });
+    });
+
+    // 3. Radius Tokens & Badges (Live Corner Radius morphing)
+    document.querySelectorAll('.poker-chip, .sculpted-badge').forEach(token => {
+      token.addEventListener('click', () => {
+        const rad = token.dataset.radius;
+        if (rad) {
+          const r = parseInt(rad, 10);
+          document.documentElement.style.setProperty('--lg-radius-panel', (r + 8) + 'px');
+          document.documentElement.style.setProperty('--lg-radius-card', r + 'px');
+          token.style.transform = 'scale(1.22)';
+          setTimeout(() => { token.style.transform = ''; }, 200);
+        }
+      });
+    });
+
+    // 4. Blur Recipes Button
+    const blurRecipes = ['blur(14px) saturate(140%)', 'blur(24px) saturate(160%)', 'blur(34px) saturate(180%)'];
+    let blurIdx = 1;
+    const btnBlur = document.getElementById('btnBlurRecipes');
+    if (btnBlur) {
+      btnBlur.addEventListener('click', () => {
+        blurIdx = (blurIdx + 1) % blurRecipes.length;
+        document.documentElement.style.setProperty('--lg-blur-panel', blurRecipes[blurIdx]);
+        const chip = document.getElementById('chipGlassBlur');
+        if (chip) {
+          chip.querySelector('span').textContent = `Glass blur ${blurIdx === 0 ? '14' : blurIdx === 1 ? '24' : '34'}`;
+        }
+      });
+    }
+
+    // 5. Custom Cursor Movement
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-    document.querySelectorAll('a, button, .project-card, .project-glass-card, .filter-pill, .tool-btn').forEach(el => {
+    document.querySelectorAll('a, button, .project-card, .project-glass-card, .filter-pill, .tool-btn, .lg-tile, .poker-chip, .sculpted-badge').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
