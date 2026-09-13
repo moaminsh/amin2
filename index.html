@@ -62,19 +62,20 @@
   <header class="nav-bar">
     <div class="nav-glass-container">
       <div class="nav-inner">
-        <a href="#" class="nav-brand">
+        <a href="#home" class="nav-brand" data-nav="home">
           <span class="nav-brand-dot"></span>
           <span>MOHAMMADAMIN SHARIF</span>
         </a>
         <ul class="nav-menu">
-          <li><a href="#foundations" class="nav-link" data-en="FOUNDATIONS" data-fa="پایه‌ها">FOUNDATIONS</a></li>
-          <li><a href="#projects" class="nav-link" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
-          <li><a href="#solidworks" class="nav-link" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
-          <li><a href="#simulations" class="nav-link" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
-          <li><a href="#microfluidics" class="nav-link" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
-          <li><a href="#books" class="nav-link" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
-          <li><a href="#capabilities" class="nav-link" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
-          <li><a href="#info" class="nav-link" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
+          <li><a href="#home" class="nav-link active" data-nav="home" data-en="HOME" data-fa="صفحه اصلی">HOME</a></li>
+          <li><a href="#projects" class="nav-link" data-nav="projects" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
+          <li><a href="#solidworks" class="nav-link" data-nav="solidworks" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
+          <li><a href="#simulations" class="nav-link" data-nav="simulations" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
+          <li><a href="#microfluidics" class="nav-link" data-nav="microfluidics" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
+          <li><a href="#books" class="nav-link" data-nav="books" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
+          <li><a href="#capabilities" class="nav-link" data-nav="capabilities" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
+          <li><a href="#foundations" class="nav-link" data-nav="foundations" data-en="FOUNDATIONS" data-fa="پایه‌ها">FOUNDATIONS</a></li>
+          <li><a href="#info" class="nav-link" data-nav="info" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
         </ul>
         <div class="nav-tools">
           <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
@@ -86,8 +87,8 @@
             <span id="langToggleLabel">FA</span>
           </button>
           <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
-            <i data-lucide="sun" id="themeIconSun" style="width: 16px;"></i>
-            <i data-lucide="moon" id="themeIconMoon" style="width: 16px; display:none;"></i>
+            <i data-lucide="sun" id="themeIconSun" style="width: 16px; display:none;"></i>
+            <i data-lucide="moon" id="themeIconMoon" style="width: 16px;"></i>
           </button>
         </div>
       </div>
@@ -96,69 +97,270 @@
 
   <main class="container">
 
-    <!-- HERO SECTION (MASTER LIQUID GLASS BOARD) -->
-    <section class="glass-board">
+    <!-- ============================================================
+         HOME SECTION: MASTER LIQUID GLASS BOARD
+         "فقط اطلاعات اولیه و عکس خودم رو صفحه اصلی باشه"
+         Only basic info, photo, and modular portal cards to enter sections
+         ============================================================ -->
+    <section id="home" class="site-section active glass-board home-glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
 
-      <div class="hero-glass-grid" style="margin: 0;">
-        <div>
-          <div class="hero-badge-pill">
-            <i data-lucide="cpu" style="width: 14px;"></i>
-            <span data-en="MECHANICAL ENGINEERING // IUST" data-fa="مهندسی مکانیک // دانشگاه علم و صنعت">MECHANICAL ENGINEERING // IUST</span>
+      <!-- Board Top Bar -->
+      <div class="lg-foundations-header" style="margin-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="home-status-beacon"></span>
+          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--lg-text-secondary);" data-en="PORTFOLIO // LIQUID GLASS CONSOLE" data-fa="پورتفولیو // کنسول شیشه مایع">PORTFOLIO // LIQUID GLASS CONSOLE</span>
+        </div>
+        <div class="lg-foundations-actions">
+          <a href="assets/downloads/Turbomachinery-Lab-Report.pdf" download class="lg-pill-action" title="Download CV">
+            <i data-lucide="download" style="width: 12px; height: 12px;"></i>
+            <span data-en="Resume / CV" data-fa="رزومه / سوابق">Resume / CV</span>
+          </a>
+          <button class="lg-circle-action" onclick="navigateToSection('info')" title="Direct Contact" aria-label="Direct Contact">
+            <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Identity & Basic Info Layout (Photo & Primary Specs) -->
+      <div class="home-hero-layout">
+        <!-- Photo Bezel -->
+        <div class="home-avatar-bezel">
+          <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="home-avatar-img">
+          <span class="home-avatar-status" title="Active"></span>
+        </div>
+
+        <!-- Basic Information -->
+        <div class="home-info-content">
+          <div class="home-badge-row">
+            <div class="home-badge-pill">
+              <i data-lucide="cpu" style="width: 12px;"></i>
+              <span data-en="MECHANICAL ENGINEERING // IUST" data-fa="مهندسی مکانیک // دانشگاه علم و صنعت ایران">MECHANICAL ENGINEERING // IUST</span>
+            </div>
+            <div class="home-badge-pill">
+              <span class="home-status-beacon"></span>
+              <span data-en="AVAILABLE FOR COLLABORATION" data-fa="آماده همکاری‌های پژوهشی">AVAILABLE FOR COLLABORATION</span>
+            </div>
           </div>
-          <h1 class="hero-main-title">
-            MOHAMMADAMIN
-            <span>SHARIF</span>
+
+          <h1 class="home-main-name">
+            MOHAMMADAMIN <span>SHARIF</span>
           </h1>
-          <p class="hero-tagline" data-en="Specialized in turbomachinery, fluid dynamics simulations, precision SolidWorks modeling, and digital twin engineering." data-fa="متخصص در حوزه توربوماشین، شبیه‌سازی دینامیک سیالات، مدل‌سازی دقیق سالیدورکس و مهندسی دوقلوی دیجیتال.">
-            Specialized in turbomachinery, fluid dynamics simulations, precision SolidWorks modeling, and digital twin engineering.
+
+          <p class="home-tagline-text" data-en="Undergraduate Researcher in Mechanical Engineering at Iran University of Science & Technology (IUST), specializing in turbomachinery, fluid dynamics simulations, precision SolidWorks CAD modeling, and microfluidics." data-fa="پژوهشگر کارشناسی مهندسی مکانیک در دانشگاه علم و صنعت ایران، متخصص در طراحی توربوماشین، شبیه‌سازی دینامیک سیالات، مدل‌سازی دقیق سالیدورکس و تراشه‌های میکروسیالاتی.">
+            Undergraduate Researcher in Mechanical Engineering at Iran University of Science & Technology (IUST), specializing in turbomachinery, fluid dynamics simulations, precision SolidWorks CAD modeling, and microfluidics.
           </p>
 
-          <div class="specs-glass-grid">
-            <div class="spec-glass-node">
-              <div class="spec-key" data-en="INSTITUTION" data-fa="دانشگاه">INSTITUTION</div>
-              <div class="spec-value" data-en="Iran Univ. of Science & Tech (IUST)" data-fa="دانشگاه علم و صنعت ایران">Iran Univ. of Science & Tech (IUST)</div>
+          <!-- 4-node Specs Grid -->
+          <div class="home-specs-grid">
+            <div class="home-spec-item">
+              <div class="home-spec-key" data-en="INSTITUTION" data-fa="دانشگاه">INSTITUTION</div>
+              <div class="home-spec-val" data-en="Iran Univ. of Science & Tech (IUST)" data-fa="دانشگاه علم و صنعت ایران">Iran Univ. of Science & Tech (IUST)</div>
             </div>
-            <div class="spec-glass-node">
-              <div class="spec-key" data-en="FIELD OF ACTIVITY" data-fa="حوزه فعالیت">FIELD OF ACTIVITY</div>
-              <div class="spec-value" data-en="SolidWorks • Microfluidics • Microfluidic Chip • Pumps" data-fa="سالیدورکس • میکروفلوییدیک • چیپ میکروفلوییدیک • پمپ‌ها">SolidWorks • Microfluidics • Microfluidic Chip • Pumps</div>
+            <div class="home-spec-item">
+              <div class="home-spec-key" data-en="ORIENTATION" data-fa="گرایش">ORIENTATION</div>
+              <div class="home-spec-val" data-en="Thermal & Fluids Engineering" data-fa="حرارت و سیالات">Thermal & Fluids Engineering</div>
             </div>
-            <div class="spec-glass-node">
-              <div class="spec-key" data-en="ORIENTATION" data-fa="گرایش">ORIENTATION</div>
-              <div class="spec-value" data-en="Thermal & Fluids Engineering" data-fa="حرارت و سیالات">Thermal & Fluids Engineering</div>
+            <div class="home-spec-item">
+              <div class="home-spec-key" data-en="FOCUS AREAS" data-fa="زمینه‌های اصلی">FOCUS AREAS</div>
+              <div class="home-spec-val" data-en="Pumps • Microfluidics • CAD" data-fa="پمپ‌ها • میکروفلوئیدیک • CAD">Pumps • Microfluidics • CAD</div>
             </div>
-            <div class="spec-glass-node">
-              <div class="spec-key" data-en="LOCATION" data-fa="موقعیت">LOCATION</div>
-              <div class="spec-value" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</div>
+            <div class="home-spec-item">
+              <div class="home-spec-key" data-en="LOCATION" data-fa="موقعیت">LOCATION</div>
+              <div class="home-spec-val" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</div>
             </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="home-actions-row">
+            <button class="home-action-btn-primary" onclick="navigateToSection('projects')">
+              <i data-lucide="disc" style="width: 14px;"></i>
+              <span data-en="Explore Pump Design" data-fa="مشاهده پروژه طراحی پمپ">Explore Pump Design</span>
+            </button>
+            <button class="home-action-btn-secondary" onclick="navigateToSection('solidworks')">
+              <i data-lucide="box" style="width: 14px;"></i>
+              <span data-en="SolidWorks CAD" data-fa="مدل‌های سالیدورکس">SolidWorks CAD</span>
+            </button>
+            <button class="home-action-btn-secondary" onclick="navigateToSection('info')">
+              <i data-lucide="user" style="width: 14px;"></i>
+              <span data-en="Full Bio & Contact" data-fa="بیوگرافی کامل و تماس">Full Bio & Contact</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Portals Divider & Grid -->
+      <div class="portals-section-divider">
+        <h2 class="portals-section-heading">
+          <i data-lucide="layout-grid" style="width: 16px; color: var(--lg-cyan);"></i>
+          <span data-en="PORTFOLIO WORKSPACES" data-fa="بخش‌های تخصصی پورتفولیو">PORTFOLIO WORKSPACES</span>
+        </h2>
+        <span class="portals-section-subtext" data-en="SELECT A SECTION TO ENTER DEDICATED WORKSPACE" data-fa="برای ورود، روی هر بخش کلیک کنید">SELECT A SECTION TO ENTER DEDICATED WORKSPACE</span>
+      </div>
+
+      <div class="portals-grid">
+        <!-- Portal 1: Pump Design -->
+        <div class="portal-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #ff5277;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #ff5277;">
+                <i data-lucide="disc" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">01 PROJECT</span>
+            </div>
+            <div class="portal-card-title" data-en="Pump Design & Turbomachinery" data-fa="طراحی پمپ و توربوماشین">Pump Design & Turbomachinery</div>
+            <div class="portal-card-desc" data-en="Radial impeller geometry, Euler head analysis, velocity triangles, and CFD validation." data-fa="هندسه پروانه شعاعی، تحلیل هد اویلر، مثلث‌های سرعت و اعتبارسنجی CFD.">Radial impeller geometry, Euler head analysis, velocity triangles, and CFD validation.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
           </div>
         </div>
 
-        <!-- KINEMATICS & FLUID VECTOR CANVAS -->
-        <div class="hero-canvas-frame">
-          <div class="canvas-glass-overlay">
-            <span class="overlay-chip" data-en="VECTOR FIELD // DYNAMIC SIMULATION" data-fa="میدان برداری // شبیه‌سازی دینامیک">VECTOR FIELD // DYNAMIC SIMULATION</span>
-            <span class="overlay-chip" id="fpsCounter">60 FPS</span>
+        <!-- Portal 2: SolidWorks CAD -->
+        <div class="portal-card" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #0089ad;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #0089ad;">
+                <i data-lucide="box" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">05 CAD MODELS</span>
+            </div>
+            <div class="portal-card-title" data-en="SolidWorks 3D CAD" data-fa="مدل‌سازی سه‌بعدی سالیدورکس">SolidWorks 3D CAD</div>
+            <div class="portal-card-desc" data-en="Interactive 3D viewers, exploded views, industrial assemblies, and parametric models." data-fa="نمایشگرهای تعاملی سه‌بعدی، نماهای انفجاری، مجموعه‌های صنعتی و مدل‌های پارامتریک.">Interactive 3D viewers, exploded views, industrial assemblies, and parametric models.</div>
           </div>
-          <canvas id="heroCanvas"></canvas>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
+        </div>
+
+        <!-- Portal 3: Digital Twins -->
+        <div class="portal-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #5b86e5;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #5b86e5;">
+                <i data-lucide="activity" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">05 SIMULATIONS</span>
+            </div>
+            <div class="portal-card-title" data-en="Simulations & Digital Twins" data-fa="شبیه‌سازی و دوقلوهای دیجیتال">Simulations & Digital Twins</div>
+            <div class="portal-card-desc" data-en="Rankine cycle thermodynamics, Navier-Stokes fluid fields, and real-time CFD visualizers." data-fa="ترمودینامیک سیکل رانکین، میدان‌های سیال ناویه-استوکس و بصری‌سازهای زنده CFD.">Rankine cycle thermodynamics, Navier-Stokes fluid fields, and real-time CFD visualizers.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
+        </div>
+
+        <!-- Portal 4: Microfluidics -->
+        <div class="portal-card" onclick="navigateToSection('microfluidics')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #9b51e0;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #9b51e0;">
+                <i data-lucide="git-commit" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">LIVE MODULE</span>
+            </div>
+            <div class="portal-card-title" data-en="Microfluidic Chip Lab" data-fa="آزمایشگاه چیپ میکروسیالاتی">Microfluidic Chip Lab</div>
+            <div class="portal-card-desc" data-en="Diverging nozzle flow, particle deceleration, microchannel architecture, and continuity." data-fa="جریان نازل واگرا، کاهش سرعت ذرات، معماری میکروکانال و معادله پیوستگی.">Diverging nozzle flow, particle deceleration, microchannel architecture, and continuity.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
+        </div>
+
+        <!-- Portal 5: Books Library -->
+        <div class="portal-card" onclick="navigateToSection('books')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #ea580c;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #ea580c;">
+                <i data-lucide="book-open" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">07 TEXTBOOKS</span>
+            </div>
+            <div class="portal-card-title" data-en="Scientific Books Library" data-fa="کتابخانه کتب علمی و دانشگاهی">Scientific Books Library</div>
+            <div class="portal-card-desc" data-en="Curated engineering texts in fluid mechanics, heat transfer, and turbomachinery." data-fa="مجموعه کتاب‌های مرجع دانشگاهی در مکانیک سیالات، انتقال حرارت و توربوماشین.">Curated engineering texts in fluid mechanics, heat transfer, and turbomachinery.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
+        </div>
+
+        <!-- Portal 6: Capabilities -->
+        <div class="portal-card" onclick="navigateToSection('capabilities')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #0d9488;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #0d9488;">
+                <i data-lucide="cpu" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">CAD • CFD • FEA</span>
+            </div>
+            <div class="portal-card-title" data-en="Engineering Capabilities" data-fa="توانمندی‌ها و تسلط نرم‌افزاری">Engineering Capabilities</div>
+            <div class="portal-card-desc" data-en="SolidWorks, CFturbo, ANSYS Fluent, Python, MATLAB, and thermo-fluid numerical methods." data-fa="سالیدورکس، سی‌اف‌توربو، انسیس فلوئنت، پایتون، متلب و روش‌های عددی حرارت و سیالات.">SolidWorks, CFturbo, ANSYS Fluent, Python, MATLAB, and thermo-fluid numerical methods.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
+        </div>
+
+        <!-- Portal 7: Foundations Showcase -->
+        <div class="portal-card" onclick="navigateToSection('foundations')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #06b6d4;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #06b6d4;">
+                <i data-lucide="sparkles" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">DESIGN SYSTEM</span>
+            </div>
+            <div class="portal-card-title" data-en="Liquid Glass Foundations" data-fa="پایه‌های شیشه مایع">Liquid Glass Foundations</div>
+            <div class="portal-card-desc" data-en="The reference interactive board featuring 6 prismatic tiles, blur slider, and 3D tokens." data-fa="بورد تعاملی مرجع شامل ۶ تایل منشوری، اسلایدر فاصله کانونی و توکن‌های ۳ بعدی.">The reference interactive board featuring 6 prismatic tiles, blur slider, and 3D tokens.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
+        </div>
+
+        <!-- Portal 8: Info & Bio -->
+        <div class="portal-card" onclick="navigateToSection('info')" role="button" tabindex="0">
+          <div class="portal-glow-accent" style="background: #10b981;"></div>
+          <div>
+            <div class="portal-top-row">
+              <div class="portal-icon-box" style="color: #10b981;">
+                <i data-lucide="user-check" style="width: 20px;"></i>
+              </div>
+              <span class="portal-count-badge">BIO & CONTACT</span>
+            </div>
+            <div class="portal-card-title" data-en="Biography & Contact" data-fa="بیوگرافی، اطلاعات و ارتباط">Biography & Contact</div>
+            <div class="portal-card-desc" data-en="Academic credentials at IUST, contact channels, direct email, Telegram, and resume." data-fa="سوابق تحصیلی دانشگاه علم و صنعت، راه‌های ارتباطی، ایمیل، تلگرام و رزومه.">Academic credentials at IUST, contact channels, direct email, Telegram, and resume.</div>
+          </div>
+          <div class="portal-footer-row">
+            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
+            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- LIQUID GLASS FILTER DOCK (Reference: Spatial UI Pill Controls) -->
-    <div class="filter-glass-dock" id="categoryFilterDock" role="toolbar" aria-label="Portfolio Category Filters">
-      <button class="filter-pill active" data-filter="all">
-        <i data-lucide="layers" style="width: 14px;"></i>
-        <span data-en="ALL MODULES" data-fa="همه بخش‌ها">ALL MODULES</span>
-        <span class="filter-pill-count">19</span>
-      </button>
-      <button class="filter-pill" data-filter="foundations">
-        <i data-lucide="sparkles" style="width: 14px;"></i>
-        <span data-en="FOUNDATIONS" data-fa="پایه‌های شیشه">FOUNDATIONS</span>
-        <span class="filter-pill-count">REF</span>
+    <!-- LIQUID GLASS FILTER DOCK (Modular Quick Switcher) -->
+    <div class="filter-glass-dock" id="categoryFilterDock" role="toolbar" aria-label="Portfolio Category Switcher">
+      <button class="filter-pill active" data-filter="home">
+        <i data-lucide="home" style="width: 14px;"></i>
+        <span data-en="HOME" data-fa="صفحه اصلی">HOME</span>
       </button>
       <button class="filter-pill" data-filter="projects">
         <i data-lucide="disc" style="width: 14px;"></i>
@@ -189,14 +391,36 @@
         <i data-lucide="cpu" style="width: 14px;"></i>
         <span data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</span>
       </button>
+      <button class="filter-pill" data-filter="foundations">
+        <i data-lucide="sparkles" style="width: 14px;"></i>
+        <span data-en="FOUNDATIONS" data-fa="پایه‌های شیشه">FOUNDATIONS</span>
+        <span class="filter-pill-count">REF</span>
+      </button>
+      <button class="filter-pill" data-filter="info">
+        <i data-lucide="user-check" style="width: 14px;"></i>
+        <span data-en="INFO" data-fa="اطلاعات">INFO</span>
+      </button>
     </div>
 
     <!-- LIQUID GLASS FOUNDATIONS SHOWCASE BOARD (DIRECT REPLICA OF REFERENCE MOCKUP) -->
-    <section id="foundations" class="glass-board lg-foundations-board">
+    <section id="foundations" class="site-section glass-board lg-foundations-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="FOUNDATIONS" data-fa="پایه‌های شیشه">FOUNDATIONS</span>
+        </div>
+      </div>
 
       <!-- Board Header -->
       <div class="lg-foundations-header">
@@ -345,14 +569,35 @@
           </div>
         </div>
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- PROJECTS GALLERY -->
-    <section id="projects" class="glass-board">
+    <section id="projects" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="PUMP DESIGN & TURBOMACHINERY" data-fa="طراحی پمپ و توربوماشین">PUMP DESIGN & TURBOMACHINERY</span>
+        </div>
+      </div>
 
       <div class="section-glass-header">
         <div>
@@ -407,14 +652,35 @@
         </a>
 
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- SOLIDWORKS GALLERY -->
-    <section id="solidworks" class="glass-board">
+    <section id="solidworks" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="SOLIDWORKS CAD" data-fa="سالیدورکس">SOLIDWORKS CAD</span>
+        </div>
+      </div>
 
       <div class="section-glass-header">
         <div>
@@ -557,14 +823,35 @@
           </div>
         </div>
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- SIMULATIONS GALLERY -->
-    <section id="simulations" class="glass-board">
+    <section id="simulations" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="SIMULATIONS & DIGITAL TWINS" data-fa="دوقلوهای دیجیتال">SIMULATIONS & DIGITAL TWINS</span>
+        </div>
+      </div>
 
       <div class="section-glass-header">
         <div>
@@ -693,14 +980,35 @@
         </a>
 
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- INTERACTIVE MICROFLUIDICS MODULE -->
-    <section id="microfluidics" class="glass-board">
+    <section id="microfluidics" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="MICROFLUIDIC CHIP LAB" data-fa="تراشه‌های میکروسیالاتی">MICROFLUIDIC CHIP LAB</span>
+        </div>
+      </div>
 
       <div class="interactive-glass-module">
         <div>
@@ -724,14 +1032,35 @@
           <canvas id="chipCanvas"></canvas>
         </div>
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- SCIENTIFIC BOOKS LIBRARY -->
-    <section id="books" class="glass-board">
+    <section id="books" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="SCIENTIFIC BOOKS LIBRARY" data-fa="کتابخانه کتب علمی">SCIENTIFIC BOOKS LIBRARY</span>
+        </div>
+      </div>
 
       <div class="section-glass-header">
         <div>
@@ -896,14 +1225,35 @@
         </a>
 
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- TECHNICAL CAPABILITIES -->
-    <section id="capabilities" class="glass-board">
+    <section id="capabilities" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="TECHNICAL CAPABILITIES" data-fa="توانمندی‌ها و ابزارها">TECHNICAL CAPABILITIES</span>
+        </div>
+      </div>
 
       <div class="section-glass-header">
         <div>
@@ -964,10 +1314,36 @@
           </ul>
         </div>
       </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+      </div>
     </section>
 
     <!-- INFO & CONTACT -->
-    <section id="info" class="info-glass-section">
+    <section id="info" class="site-section glass-board info-glass-section">
+      <span class="glass-pin pin-tl" aria-hidden="true"></span>
+      <span class="glass-pin pin-tr" aria-hidden="true"></span>
+      <span class="glass-pin pin-bl" aria-hidden="true"></span>
+      <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Section Navigation Top Bar -->
+      <div class="section-view-bar">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
+        <div class="section-breadcrumbs">
+          <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
+          <span>/</span>
+          <span class="section-breadcrumb-active" data-en="BIOGRAPHY & CONTACT" data-fa="اطلاعات و تماس">BIOGRAPHY & CONTACT</span>
+        </div>
+      </div>
+
       <div class="profile-glass-card">
         <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-glass-avatar" onerror="this.src='https://via.placeholder.com/90/0d1117/00f2fe?text=Sharif'">
         <div>
@@ -1002,6 +1378,14 @@
           <span class="contact-label" data-en="ACADEMIC PROFILE" data-fa="پروفایل دانشگاهی">ACADEMIC PROFILE</span>
           <span style="color: var(--lg-text-primary);" data-en="IUST Mechanical Dept." data-fa="دانشکده مکانیک IUST">IUST Mechanical Dept.</span>
         </div>
+      </div>
+
+      <!-- Section Navigation Bottom Bar -->
+      <div class="section-view-bar-bottom">
+        <button class="section-back-btn" onclick="navigateToSection('home')">
+          <i data-lucide="arrow-left" style="width: 15px;"></i>
+          <span data-en="← Return to Main Board" data-fa="← بازگشت به صفحه اصلی">← Return to Main Board</span>
+        </button>
       </div>
     </section>
 
@@ -1094,41 +1478,100 @@
       link.addEventListener('click', () => setMobileMenu(false));
     });
 
-    // --- FILTER DOCK FUNCTIONALITY ---
-    const filterBtns = document.querySelectorAll('.filter-pill, .filter-btn');
-    const filterableSections = {
-      'foundations': document.getElementById('foundations'),
-      'projects': document.getElementById('projects'),
-      'solidworks': document.getElementById('solidworks'),
-      'simulations': document.getElementById('simulations'),
-      'microfluidics': document.getElementById('microfluidics'),
-      'books': document.getElementById('books')
-    };
+    // --- MODULAR SECTION NAVIGATION ENGINE ---
+    // User request: "میخوام کل سایتم بشه به بخش این مدلی که هرکی خواست وارد هر بخش سایتم بشه یعنی سایتم به هم پیوسته نباشه و فقط اطلاعات اولیه و عکس خودم رو صفحه اصلی باشه"
+    const allSiteSections = document.querySelectorAll('.site-section');
+    const allNavLinks = document.querySelectorAll('.nav-link, .nav-brand');
+    const allFilterPills = document.querySelectorAll('.filter-pill');
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
+    function navigateToSection(targetId, updateHash = true) {
+      if (!targetId) targetId = 'home';
+      targetId = targetId.replace('#', '');
+      
+      const targetSec = document.getElementById(targetId);
+      if (!targetSec) targetId = 'home';
 
-        if (filter === 'all') {
-          Object.values(filterableSections).forEach(sec => {
-            if (sec) sec.style.display = '';
-          });
+      allSiteSections.forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      const activeSec = document.getElementById(targetId);
+      if (activeSec) {
+        activeSec.classList.add('active');
+      }
+
+      // Update Nav Bar Links
+      allNavLinks.forEach(link => {
+        const linkNav = link.dataset.nav || (link.getAttribute('href') ? link.getAttribute('href').replace('#', '') : '');
+        if (linkNav === targetId) {
+          link.classList.add('active');
         } else {
-          Object.entries(filterableSections).forEach(([key, sec]) => {
-            if (sec) {
-              if (key === filter) {
-                sec.style.display = '';
-                setTimeout(() => {
-                  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
-              } else {
-                sec.style.display = 'none';
-              }
-            }
-          });
+          link.classList.remove('active');
         }
+      });
+
+      // Update Filter Dock Pills
+      allFilterPills.forEach(pill => {
+        if (pill.dataset.filter === targetId) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      if (updateHash) {
+        try {
+          history.pushState(null, '', '#' + targetId);
+        } catch (e) {
+          window.location.hash = targetId;
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Trigger redraw of interactive canvas modules when opened
+      setTimeout(() => {
+        if (typeof resizeHeroCanvas === 'function') resizeHeroCanvas();
+        if (typeof resizeChipCanvas === 'function') resizeChipCanvas();
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      }, 60);
+    }
+
+    // Expose globally for onclick handlers
+    window.navigateToSection = navigateToSection;
+
+    // Handle initial routing and back/forward browser navigation
+    function handleRouteFromHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash) && document.getElementById(hash).classList.contains('site-section')) {
+        navigateToSection(hash, false);
+      } else {
+        navigateToSection('home', false);
+      }
+    }
+
+    window.addEventListener('hashchange', handleRouteFromHash);
+    window.addEventListener('DOMContentLoaded', handleRouteFromHash);
+
+    // Wire clicks on nav links
+    document.querySelectorAll('.nav-menu .nav-link, .nav-brand').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = link.dataset.nav || href.replace('#', '');
+          navigateToSection(target);
+        }
+      });
+    });
+
+    // Wire clicks on filter dock pills
+    allFilterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const filter = pill.dataset.filter;
+        navigateToSection(filter);
       });
     });
 
