@@ -880,58 +880,322 @@
         <div class="section-breadcrumbs">
           <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
           <span>/</span>
-          <span class="section-breadcrumb-active" data-en="PUMP DESIGN & TURBOMACHINERY" data-fa="طراحی پمپ و توربوماشین">PUMP DESIGN & TURBOMACHINERY</span>
+          <span class="section-breadcrumb-active" data-en="ENGINEERING PROJECTS & WORKSPACES" data-fa="پروژه‌ها و کارگاه‌های مهندسی">ENGINEERING PROJECTS &amp; WORKSPACES</span>
         </div>
       </div>
 
-      <div class="section-glass-header">
-        <div>
-          <div class="section-eyebrow" data-en="// SELECTED WORK" data-fa="// منتخب آثار">
-            <i data-lucide="disc" style="width: 14px;"></i>
-            <span>// SELECTED WORK</span>
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero">
+        <img src="assets/images/projects-banner.jpg" alt="Engineering Projects Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// ENGINEERING WORKSPACES" data-fa="// کارگاه‌های مهندسی">// ENGINEERING WORKSPACES</span>
+            </span>
+            <span class="section-banner-pill">[08 PROJECTS &bull; CFD / PUMPS / CAD / TWINS]</span>
           </div>
-          <div class="section-main-heading" data-en="PUMP DESIGN" data-fa="طراحی پمپ">PUMP DESIGN</div>
-        </div>
-        <div class="section-pill-indicator">
-          [01 / 01]
+          <h2 class="section-banner-title" data-en="ENGINEERING PROJECTS & SIMULATIONS" data-fa="پروژه‌ها، تحلیل‌های CFD و کارگاه‌های مهندسی">
+            ENGINEERING PROJECTS &amp; SIMULATIONS
+          </h2>
+          <p class="section-banner-subtitle" data-en="Applied research in turbomachinery, computational fluid dynamics, SolidWorks 3D assemblies, and real-time digital twins." data-fa="پروژه‌های کاربردی و تحقیقاتی در طراحی توربوماشین، دینامیک سیالات محاسباتی، مجموعه‌های سه‌بعدی سالیدورکس و دوقلوهای دیجیتال.">
+            Applied research in turbomachinery, computational fluid dynamics, SolidWorks 3D assemblies, and real-time digital twins.
+          </p>
         </div>
       </div>
 
-      <div class="projects-glass-grid">
+      <!-- Category Filter Bar -->
+      <div class="projects-filter-bar">
+        <button class="proj-filter-btn active" onclick="filterProjectsByCategory('all', this)">[All Projects (08)]</button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('turbo', this)">[Turbomachinery &amp; Pumps]</button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('cfd', this)">[CFD &amp; Aerodynamics]</button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('cad', this)">[SolidWorks CAD]</button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('twin', this)">[Digital Twins]</button>
+      </div>
+
+      <div class="projects-glass-grid" id="projectsGalleryGrid">
 
         <!-- PROJECT 01: CFTURBO PUMP -->
-        <a href="projects/cfturbo-pump/pump-design-checklist.html" class="project-glass-card card-jewel-cyan">
-          <div class="project-glass-preview">
-            <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+        <a href="projects/cfturbo-pump/pump-design-checklist.html" class="project-glass-card card-jewel-cyan" data-cat="turbo">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal pump impeller blade" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">CFturbo 2026</span>
           </div>
           <div class="project-glass-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title" data-en="Pump Design Checklist in CFTurbo" data-fa="چک‌لیست طراحی پمپ در CFTurbo">Pump Design Checklist in CFTurbo</h3>
-                <span class="project-year-badge">2026</span>
+                <h3 class="project-title" data-en="Pump Design Checklist in CFturbo" data-fa="چک‌لیست طراحی پمپ در CFturbo">Pump Design Checklist in CFturbo</h3>
               </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Comprehensive 6-stage impeller & 5-stage volute design protocol from 1D sizing to 3D blades." data-fa="پروتکل جامع ۶ مرحله‌ای پروانه و ۵ مرحله‌ای ولوت از سایزبندی یک‌بعدی تا تیغه‌های سه‌بعدی.">
+                Comprehensive 6-stage impeller &amp; 5-stage volute design protocol from 1D sizing to 3D blades.
+              </p>
             </div>
 
             <div class="project-metrics-glass">
               <div class="p-metric-item">
-                <span class="p-metric-lbl" data-en="IMPELLER STAGES" data-fa="مراحل پروانه">IMPELLER STAGES</span>
-                <span class="p-metric-val" data-en="6 (1D → Blade Edges)" data-fa="۶ مرحله (1D تا لبه پره)">6 (1D → Blade Edges)</span>
+                <span class="p-metric-lbl" data-en="IMPELLER" data-fa="پروانه">IMPELLER</span>
+                <span class="p-metric-val" data-en="6 Stages (1D → 3D)" data-fa="۶ مرحله (1D تا 3D)">6 Stages (1D → 3D)</span>
               </div>
               <div class="p-metric-item">
-                <span class="p-metric-lbl" data-en="VOLUTE STAGES" data-fa="مراحل ولوت">VOLUTE STAGES</span>
-                <span class="p-metric-val" data-en="5 (Inlet → Cutwater)" data-fa="۵ مرحله (ورودی تا زبانه)">5 (Inlet → Cutwater)</span>
+                <span class="p-metric-lbl" data-en="VOLUTE" data-fa="ولوت">VOLUTE</span>
+                <span class="p-metric-val" data-en="5 Stages (Cutwater)" data-fa="۵ مرحله (زبانه)">5 Stages (Cutwater)</span>
               </div>
             </div>
 
             <div class="project-tags">
               <span class="p-tag">CFturbo</span>
-              <span class="p-tag" data-en="Impeller" data-fa="پروانه">Impeller</span>
-              <span class="p-tag" data-en="Volute" data-fa="ولوت">Volute</span>
-              <span class="p-tag" data-en="Stator" data-fa="استاتور">Stator</span>
-              <span class="p-tag" data-en="Design Checklist" data-fa="چک‌لیست طراحی">Design Checklist</span>
+              <span class="p-tag">Impeller</span>
+              <span class="p-tag">Volute</span>
+              <span class="p-tag">Centrifugal Pump</span>
             </div>
           </div>
         </a>
+
+        <!-- PROJECT 02: CYLINDER VORTEX SHEDDING (ANSYS FLUENT) -->
+        <div class="project-glass-card card-jewel-blue" data-cat="cfd" style="cursor: pointer;" onclick="openProjectModal('cylinder')">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/cylinder-flow-cfd.jpg" alt="Vortex shedding around a cylinder" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">ANSYS Fluent</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Flow Around a Cylinder (ANSYS Fluent)" data-fa="جریان حول استوانه و گردابه‌های کارمن">Flow Around a Cylinder (ANSYS Fluent)</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Unsteady vortex shedding analysis, Strouhal number St=0.21, lift & drag coefficient tracking." data-fa="تحلیل ناپایدار ریزش گردابه‌های کارمن، عدد استروهال St=۰.۲۱، نوسانات ضرایب برآ و پسا.">
+                Unsteady vortex shedding analysis, Strouhal number St=0.21, lift &amp; drag coefficient tracking.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">REYNOLDS Re</span>
+                <span class="p-metric-val">100 &ndash; 10,000</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">STROUHAL St</span>
+                <span class="p-metric-val">0.21 Periodic</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">ANSYS Fluent</span>
+              <span class="p-tag">Vortex Shedding</span>
+              <span class="p-tag">Transient CFD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 03: TURBINE BLADE & IMPELLER OPTIMIZATION -->
+        <div class="project-glass-card card-jewel-emerald" data-cat="turbo" style="cursor: pointer;" onclick="openProjectModal('blade')">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="Centrifugal turbine impeller blade" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">CFD + CAD</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Turbine Blade &amp; Impeller Optimization" data-fa="بهینه‌سازی پره توربین و پروانه پمپ">Turbine Blade &amp; Impeller Optimization</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Multi-objective blade angle β2 parameterization, cavitation inception avoidance, and hydraulic efficiency boost." data-fa="پارامتری‌سازی زاویه پره β2، جلوگیری از ایجاد کاویتاسیون و افزایش راندمان هیدرولیکی.">
+                Multi-objective blade angle β2 parameterization, cavitation inception avoidance, and hydraulic efficiency boost.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">EFFICIENCY η</span>
+                <span class="p-metric-val">83.4% Hydraulic</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">CAVITATION</span>
+                <span class="p-metric-val">NPSHa &gt; 1.3 NPSHr</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">Blade Design</span>
+              <span class="p-tag">ANSYS TurboGrid</span>
+              <span class="p-tag">Cavitation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 04: MULTIPHASE PIPE FLOW -->
+        <div class="project-glass-card card-jewel-violet" data-cat="cfd" style="cursor: pointer;" onclick="openProjectModal('multiphase')">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/two-phase-flow-cfd.jpg" alt="Two-phase gas liquid multiphase flow" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">VOF Multiphase</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Two-Phase Gas-Liquid Flow in Pipe" data-fa="جریان دوفازی گاز-مایع در خط لوله">Two-Phase Gas-Liquid Flow in Pipe</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Volume of Fluid (VOF) interface reconstruction, slug-to-annular regime transition, and pressure drop." data-fa="بازسازی سطح مشترک دوفازی با مدل VOF، انتقال رژیم اسلاگ به حلقوی و افت فشار اصطکاکی.">
+                Volume of Fluid (VOF) interface reconstruction, slug-to-annular regime transition, and pressure drop.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">METHOD</span>
+                <span class="p-metric-val">Geo-Reconstruct VOF</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">REGIME</span>
+                <span class="p-metric-val">Slug &rarr; Annular</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">Multiphase</span>
+              <span class="p-tag">VOF Model</span>
+              <span class="p-tag">Pipe Hydraulics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 05: SOLIDWORKS MODEL ROCKET ASSEMBLY -->
+        <a href="assets/downloads/solidworks/rocket-assembly.zip" download class="project-glass-card card-jewel-blue" data-cat="cad">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="SolidWorks Model Rocket CAD Assembly" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Model Rocket Multi-Stage Assembly" data-fa="مونتاژ سه‌بعدی راکت مدل چندمرحله‌ای">Model Rocket Multi-Stage Assembly</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay. Available for download." data-fa="مجموعه مونتاژی آیرودینامیکی با پره‌ها، دماغه و بخش‌های جدایش چندمرحله‌ای به همراه دانلود مستقیم.">
+                Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay. Available for download.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">PARTS</span>
+                <span class="p-metric-val">12 Custom Mates</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">FORMAT</span>
+                <span class="p-metric-val">SLDASM &amp; STEP ZIP</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag">Aerospace</span>
+              <span class="p-tag">Download ZIP</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROJECT 06: SOLIDWORKS SHOCK SUSPENSION -->
+        <a href="assets/downloads/solidworks/shock-assembly.zip" download class="project-glass-card card-jewel-amber" data-cat="cad">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/solidworks/shock-assembly.jpg" alt="SolidWorks Coilover Shock Assembly" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Coilover Shock &amp; Suspension Linkage" data-fa="مجموعه فنر-کمک‌فنر و اتصالات تعلیق">Coilover Shock &amp; Suspension Linkage</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Kinematic suspension mechanism with machined damper body, coil spring mates, and spherical bushings." data-fa="مکانیزم سینماتیکی تعلیق با سیلندر دمپر ماشین‌کاری‌شده، جفت‌بندی فنر لول و بوش‌های مفصلی.">
+                Kinematic suspension mechanism with machined damper body, coil spring mates, and spherical bushings.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">COMPONENTS</span>
+                <span class="p-metric-val">14 Precision Parts</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">KINEMATICS</span>
+                <span class="p-metric-val">Dynamic Stroke</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag">Suspension</span>
+              <span class="p-tag">Download ZIP</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROJECT 07: RANKINE POWER PLANT DIGITAL TWIN ENGINE -->
+        <a href="simulations/Power_Plant_Digital_Twin_Engine.html" target="_blank" class="project-glass-card card-jewel-cyan" data-cat="twin">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/twin-banner.jpg" alt="Rankine Power Plant Digital Twin Engine" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">Live Simulator</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Rankine Steam Cycle Digital Twin" data-fa="دوقلوی دیجیتال سیکل بخار رانکین">Rankine Steam Cycle Digital Twin</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Real-time thermodynamic simulation engine with interactive T-s & P-h diagrams, boiler and turbine power balance." data-fa="موتور شبیه‌سازی بلادرنگ ترمودینامیکی با نمودارهای T-s و P-h، تعادل توان بویلر و توربین.">
+                Real-time thermodynamic simulation engine with interactive T-s &amp; P-h diagrams, boiler and turbine power balance.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">DIAGRAMS</span>
+                <span class="p-metric-val">Live T-s &amp; P-h State</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">ENGINE</span>
+                <span class="p-metric-val">WebGL / Canvas</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">Digital Twin</span>
+              <span class="p-tag">Rankine Cycle</span>
+              <span class="p-tag">Thermodynamics</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROJECT 08: MICROFLUIDIC CHIP LAB -->
+        <div class="project-glass-card card-jewel-emerald" data-cat="cfd" style="cursor: pointer;" onclick="navigateToSection('microfluidics')">
+          <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
+            <img src="assets/images/two_phase_flow_1789395385404.jpg" alt="Microfluidic chip diverging nozzle lab" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">Interactive Lab</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Microfluidic Chip Lab (Diverging Nozzle)" data-fa="آزمایشگاه تراشه میکروسیالاتی (نازل واگرا)">Microfluidic Chip Lab (Diverging Nozzle)</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Interactive Navier-Stokes continuity solver with real-time particle tracking through a microchannel nozzle." data-fa="حل‌کننده تعاملی پیوستگی ناویر-استوکس و ردیابی ذره‌ای در میکروکانال با هندسه واگرا.">
+                Interactive Navier-Stokes continuity solver with real-time particle tracking through a microchannel nozzle.
+              </p>
+            </div>
+
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">CONTINUITY</span>
+                <span class="p-metric-val">A1&bull;V1 = A2&bull;V2</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">REYNOLDS</span>
+                <span class="p-metric-val">Laminar Re &lt; 10</span>
+              </div>
+            </div>
+
+            <div class="project-tags">
+              <span class="p-tag">Microfluidics</span>
+              <span class="p-tag">Navier-Stokes</span>
+              <span class="p-tag">Particle Flow</span>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -961,6 +1225,27 @@
           <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
           <span>/</span>
           <span class="section-breadcrumb-active" data-en="SOLIDWORKS CAD" data-fa="سالیدورکس">SOLIDWORKS CAD</span>
+        </div>
+      </div>
+
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero">
+        <img src="assets/images/cad-banner.jpg" alt="SolidWorks CAD Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// MECHANICAL CAD LAB" data-fa="// آزمایشگاه CAD مکانیک">// MECHANICAL CAD LAB</span>
+            </span>
+            <span class="section-banner-pill">[05 CAD MODELS &bull; SLDPRT / SLDASM / STEP]</span>
+          </div>
+          <h2 class="section-banner-title" data-en="SOLIDWORKS 3D CAD &amp; MECHANICAL ASSEMBLIES" data-fa="مدل‌سازی سه‌بعدی سالیدورکس و مجموعه‌های مکانیکی">
+            SOLIDWORKS 3D CAD &amp; MECHANICAL ASSEMBLIES
+          </h2>
+          <p class="section-banner-subtitle" data-en="Precision part engineering, multi-body kinematics, aerospace rocket staging, and suspension shock linkages." data-fa="طراحی و مدل‌سازی دقیق قطعات، سینماتیک مکانیزم‌ها، راکت‌های هوافضا و سیستم تعلیق خودرو.">
+            Precision part engineering, multi-body kinematics, aerospace rocket staging, and suspension shock linkages.
+          </p>
         </div>
       </div>
 
@@ -1124,6 +1409,27 @@
         </div>
       </div>
 
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero">
+        <img src="assets/images/twin-banner.jpg" alt="Digital Twins Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// DYNAMIC TWINS" data-fa="// دوقلوهای دیجیتال">// DYNAMIC TWINS</span>
+            </span>
+            <span class="section-banner-pill">[05 LIVE ENGINES &bull; STEAM CYCLE / BOILER / PUMPS]</span>
+          </div>
+          <h2 class="section-banner-title" data-en="DIGITAL TWINS &amp; REAL-TIME ENGINES" data-fa="دوقلوهای دیجیتال و شبیه‌سازهای بلادرنگ چرخه قدرت">
+            DIGITAL TWINS &amp; REAL-TIME ENGINES
+          </h2>
+          <p class="section-banner-subtitle" data-en="Real-time mathematical simulations of Rankine thermal power plants, dynamic steam boiler drums, and feed pump hydraulic loops." data-fa="شبیه‌سازی‌های بلادرنگ ریاضی نیروگاه‌های بخار رانکین، درام بویلر دینامیک و حلقه هیدرولیکی پمپ‌های تغذیه.">
+            Real-time mathematical simulations of Rankine thermal power plants, dynamic steam boiler drums, and feed pump hydraulic loops.
+          </p>
+        </div>
+      </div>
+
       <div class="section-glass-header">
         <div>
           <div class="section-eyebrow" data-en="// DIGITAL TWINS" data-fa="// دوقلوهای دیجیتال">
@@ -1270,6 +1576,27 @@
         </div>
       </div>
 
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero">
+        <img src="assets/images/two-phase-flow-cfd.jpg" alt="Microfluidic Lab Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// MICRO-HYDRODYNAMICS" data-fa="// هیدرودینامیک میکروسیالات">// MICRO-HYDRODYNAMICS</span>
+            </span>
+            <span class="section-banner-pill">[INTERACTIVE CANVAS &bull; CONTINUITY SOLVER]</span>
+          </div>
+          <h2 class="section-banner-title" data-en="MICROFLUIDIC CHIP LAB (DIVERGING NOZZLE)" data-fa="آزمایشگاه تراشه‌های میکروسیالاتی (جریان نازل واگرا)">
+            MICROFLUIDIC CHIP LAB (DIVERGING NOZZLE)
+          </h2>
+          <p class="section-banner-subtitle" data-en="Interactive 2D Navier-Stokes velocity field solver, laminar deceleration, and real-time Lagrangian particle tracer." data-fa="حل‌کننده تعاملی میدان سرعت دو بعدی ناویر-استوکس، کاهش سرعت در رژیم آرام و ردیابی بلادرنگ لاگرانژی ذرات.">
+            Interactive 2D Navier-Stokes velocity field solver, laminar deceleration, and real-time Lagrangian particle tracer.
+          </p>
+        </div>
+      </div>
+
       <div class="interactive-glass-module">
         <div>
           <div class="section-eyebrow" data-en="// INTERACTIVE DEMO" data-fa="// دموی تعاملی">
@@ -1322,6 +1649,27 @@
           <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
           <span>/</span>
           <span class="section-breadcrumb-active" data-en="SCIENTIFIC BOOKS LIBRARY" data-fa="کتابخانه کتب علمی">SCIENTIFIC BOOKS LIBRARY</span>
+        </div>
+      </div>
+
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero">
+        <img src="assets/images/library-banner.jpg" alt="Scientific Reference Library Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// SCIENTIFIC COMPENDIUM" data-fa="// مرجع علمی مهندسی">// SCIENTIFIC COMPENDIUM</span>
+            </span>
+            <span class="section-banner-pill">[07 VOLUMES &bull; TEXTBOOKS &amp; MANUALS]</span>
+          </div>
+          <h2 class="section-banner-title" data-en="SCIENTIFIC REFERENCE &amp; TEXTBOOK LIBRARY" data-fa="کتابخانه کتب مرجع علمی و حل‌المسائل مهندسی">
+            SCIENTIFIC REFERENCE &amp; TEXTBOOK LIBRARY
+          </h2>
+          <p class="section-banner-subtitle" data-en="Comprehensive library covering Fluid Mechanics (White, Fox), Thermodynamics (Cengel), Heat Transfer (Incropera), and Mechanical Vibrations (Rao)." data-fa="کتابخانه جامع مراجع مهندسی مکانیک شامل مکانیک سیالات وایت، فاکس، ترمودینامیک سنجل، انتقال حرارت اینکروپرا و ارتعاشات رائو.">
+            Comprehensive library covering Fluid Mechanics (White, Fox), Thermodynamics (Cengel), Heat Transfer (Incropera), and Mechanical Vibrations (Rao).
+          </p>
         </div>
       </div>
 
@@ -1504,6 +1852,27 @@
         </div>
       </div>
 
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero">
+        <img src="assets/images/turbine-blade-cfd.jpg" alt="Technical Stack Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// ENGINEERING TOOLCHAIN" data-fa="// جعبه‌ابزار مهندسی">// ENGINEERING TOOLCHAIN</span>
+            </span>
+            <span class="section-banner-pill">[CFD &bull; CAD &bull; FEA &bull; TURBOMACHINERY]</span>
+          </div>
+          <h2 class="section-banner-title" data-en="TECHNICAL COMPETENCIES &amp; SOFTWARE STACK" data-fa="توانمندی‌های فنی و جعبه‌ابزار نرم‌افزاری">
+            TECHNICAL COMPETENCIES &amp; SOFTWARE STACK
+          </h2>
+          <p class="section-banner-subtitle" data-en="Industrial simulation tools including ANSYS Fluent, CFturbo, SolidWorks, MATLAB, and specialized digital twin development." data-fa="ابزارهای تخصصی صنعتی شامل انسیس فلوئنت، سی‌اف‌توربو، سالیدورکس، متلب و توسعه دوقلوهای دیجیتال.">
+            Industrial simulation tools including ANSYS Fluent, CFturbo, SolidWorks, MATLAB, and specialized digital twin development.
+          </p>
+        </div>
+      </div>
+
       <div class="section-glass-header">
         <div>
           <div class="section-eyebrow" data-en="// TECHNICAL STACK" data-fa="// مجموعه فنی">
@@ -1590,6 +1959,27 @@
           <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
           <span>/</span>
           <span class="section-breadcrumb-active" data-en="BIOGRAPHY & CONTACT" data-fa="اطلاعات و تماس">BIOGRAPHY & CONTACT</span>
+        </div>
+      </div>
+
+      <!-- Section Futuristic Visual Header Banner -->
+      <div class="section-banner-hero" style="height: 180px;">
+        <img src="assets/images/wave-vortex-cta.jpg" alt="Research Profile Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <div class="section-banner-gradient-overlay"></div>
+        <div class="section-banner-content">
+          <div class="section-banner-top-tags">
+            <span class="section-banner-badge">
+              <span class="pulse-dot"></span>
+              <span data-en="// RESEARCH PROFILE" data-fa="// مشخصات و ارتباط">// RESEARCH PROFILE</span>
+            </span>
+            <span class="section-banner-pill">[IUST &bull; B.SC. MECHANICAL ENG]</span>
+          </div>
+          <h2 class="section-banner-title" data-en="RESEARCH PROFILE &amp; ACADEMIC INQUIRIES" data-fa="رزومه پژوهشی، اطلاعات تماس و ارتباط علمی">
+            RESEARCH PROFILE &amp; ACADEMIC INQUIRIES
+          </h2>
+          <p class="section-banner-subtitle" data-en="Undergraduate researcher at Iran University of Science & Technology focusing on turbomachinery, multiphase CFD, and digital twin systems." data-fa="پژوهشگر مهندسی مکانیک دانشگاه علم و صنعت ایران با تمرکز بر توربوماشین‌ها، CFD دوفازی و سیستم‌های دوقلوی دیجیتال.">
+            Undergraduate researcher at Iran University of Science &amp; Technology focusing on turbomachinery, multiphase CFD, and digital twin systems.
+          </p>
         </div>
       </div>
 
@@ -2494,9 +2884,249 @@
     .light-mode .fm-ref-card-footer {
       border-top-color: rgba(0, 0, 0, 0.06);
     }
+
+    /* --- SECTION HERO BANNERS --- */
+    .section-banner-hero {
+      position: relative;
+      width: 100%;
+      height: 210px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(0, 242, 254, 0.35);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 242, 254, 0.08);
+      background: #060b14;
+    }
+    @media (max-width: 768px) {
+      .section-banner-hero {
+        height: 170px;
+        margin-bottom: 16px;
+      }
+    }
+    .section-banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.85) contrast(1.1);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .section-banner-hero:hover .section-banner-img {
+      transform: scale(1.025);
+    }
+    .section-banner-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(4, 8, 16, 0.94) 0%,
+        rgba(4, 8, 16, 0.8) 45%,
+        rgba(4, 8, 16, 0.4) 80%,
+        rgba(4, 8, 16, 0.2) 100%
+      );
+      pointer-events: none;
+    }
+    .light-mode .section-banner-gradient-overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(240, 246, 255, 0.96) 0%,
+        rgba(240, 246, 255, 0.85) 45%,
+        rgba(240, 246, 255, 0.5) 80%,
+        rgba(240, 246, 255, 0.25) 100%
+      );
+    }
+    .section-banner-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px 28px;
+      z-index: 2;
+    }
+    @media (max-width: 640px) {
+      .section-banner-content {
+        padding: 16px 18px;
+      }
+    }
+    .section-banner-top-tags {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .section-banner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #00f2fe;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00f2fe;
+      box-shadow: 0 0 8px #00f2fe;
+      animation: pulse-dot-anim 2s infinite;
+      display: inline-block;
+    }
+    @keyframes pulse-dot-anim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .section-banner-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: #f1f5f9;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .section-banner-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      margin: 0 0 6px 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    @media (max-width: 640px) {
+      .section-banner-title {
+        font-size: 18px;
+      }
+    }
+    .light-mode .section-banner-title {
+      color: #0f172a;
+      text-shadow: none;
+    }
+    .section-banner-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      max-width: 700px;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .light-mode .section-banner-subtitle {
+      color: #334155;
+    }
+
+    /* Projects Category Filter Bar */
+    .projects-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .proj-filter-btn {
+      background: rgba(14, 21, 37, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .proj-filter-btn:hover, .proj-filter-btn.active {
+      background: rgba(0, 242, 254, 0.12);
+      border-color: rgba(0, 242, 254, 0.4);
+      color: #00f2fe;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+    }
+    .light-mode .proj-filter-btn {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: #475569;
+    }
+    .light-mode .proj-filter-btn:hover, .light-mode .proj-filter-btn.active {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0284c7;
+    }
   </style>
 
   <script>
+    function filterProjectsByCategory(category, btn) {
+      document.querySelectorAll('.proj-filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const cards = document.querySelectorAll('#projectsGalleryGrid .project-glass-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-cat');
+        if (category === 'all' || cat === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function openProjectModal(projKey) {
+      const details = {
+        cylinder: {
+          title: 'Flow Around a Cylinder: Karman Vortex Shedding (ANSYS Fluent)',
+          img: 'assets/images/cylinder-flow-cfd.jpg',
+          meta: 'ANSYS Fluent &bull; Transient CFD &bull; Reynolds Re = 100 - 10,000',
+          desc: 'Transient simulation of incompressible 2D flow over a circular cylinder showing unsteadiness and laminar vortex street shedding. Monitored periodic oscillations of lift coefficient (Cl) and drag coefficient (Cd) with fast Fourier transform (FFT) confirming Strouhal number St ≈ 0.21.'
+        },
+        blade: {
+          title: 'Centrifugal Impeller Blade & Volute Parametric Optimization',
+          img: 'assets/images/turbine_blade_cfd_1789395360148.jpg',
+          meta: 'CFturbo + SolidWorks + ANSYS TurboGrid &bull; Hydraulic η = 83.4%',
+          desc: 'Multi-objective hydrodynamic optimization of a high-efficiency centrifugal impeller using CFturbo and ANSYS Fluent TurboGrid. Investigated leading edge thickness, wrap angle, and outlet blade angle β2 to minimize recirculation losses and eliminate cavitation inception zones.'
+        },
+        multiphase: {
+          title: 'Two-Phase Gas-Liquid Multiphase Flow in Horizontal Pipe',
+          img: 'assets/images/two-phase-flow-cfd.jpg',
+          meta: 'Volume of Fluid (VOF) &bull; Geo-Reconstruct Scheme &bull; Slug / Annular Regime',
+          desc: 'Comprehensive multiphase flow analysis in a horizontal piping system using the Volume of Fluid (VOF) model with high-resolution interface capturing. Evaluated superficial liquid/gas velocities, friction factors, and transient liquid slug frequency.'
+        }
+      };
+
+      const item = details[projKey];
+      if (!item) return;
+
+      let modal = document.getElementById('projectDetailModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'projectDetailModal';
+        modal.className = 'fm-search-modal-backdrop';
+        modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+        document.body.appendChild(modal);
+      }
+
+      modal.innerHTML = `
+        <div class="fm-search-modal-box" style="max-width: 680px;">
+          <div class="fm-search-header" style="justify-content: space-between;">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: #00f2fe; font-weight: 700;">// PROJECT BRIEFING</div>
+            <button class="fm-search-close" onclick="document.getElementById('projectDetailModal').style.display='none'">&times;</button>
+          </div>
+          <div style="border-radius: 12px; overflow: hidden; height: 230px; margin-bottom: 16px; border: 1px solid rgba(0,242,254,0.3);">
+            <img src="${item.img}" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <h3 style="font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px;">${item.title}</h3>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: #38bdf8; margin-bottom: 12px;">${item.meta}</div>
+          <p style="font-size: 13.5px; color: #94a3b8; line-height: 1.6; margin-bottom: 18px;">${item.desc}</p>
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button onclick="document.getElementById('projectDetailModal').style.display='none'" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 8px 18px; border-radius: 8px; font-family: var(--font-mono); font-size: 12px; cursor: pointer;">Close</button>
+          </div>
+        </div>
+      `;
+      modal.style.display = 'flex';
+      if (window.lucide) lucide.createIcons();
+    }
+
     function openSearchModal() {
       const m = document.getElementById('fmSearchModal');
       if (m) {
