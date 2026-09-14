@@ -74,13 +74,13 @@
         </a>
         <ul class="nav-menu">
           <li><a href="#home" class="nav-link active" data-nav="home" data-en="Home" data-fa="خانه">Home</a></li>
-          <li><a href="#about" class="nav-link" data-nav="about" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;" data-en="About" data-fa="درباره">About</a></li>
-          <li><a href="#courses" class="nav-link" data-nav="courses" onclick="navigateToSection('books'); return false;" data-en="Courses" data-fa="دوره‌ها">Courses</a></li>
-          <li><a href="#projects" class="nav-link" data-nav="projects" onclick="navigateToSection('projects'); return false;" data-en="Projects" data-fa="پروژه‌ها">Projects</a></li>
-          <li><a href="#research" class="nav-link" data-nav="research" onclick="document.getElementById('researchInterestsSection')?.scrollIntoView({behavior:'smooth'}); return false;" data-en="Research" data-fa="پژوهش">Research</a></li>
-          <li><a href="#resources" class="nav-link" data-nav="resources" onclick="navigateToSection('solidworks'); return false;" data-en="Resources" data-fa="منابع">Resources</a></li>
-          <li><a href="#blog" class="nav-link" data-nav="blog" onclick="navigateToSection('simulations'); return false;" data-en="Blog" data-fa="مقالات">Blog</a></li>
-          <li><a href="#contact" class="nav-link" data-nav="contact" onclick="document.getElementById('contactCtaBanner')?.scrollIntoView({behavior:'smooth'}); return false;" data-en="Contact" data-fa="تماس">Contact</a></li>
+          <li><a href="#books" class="nav-link" data-nav="books" onclick="navigateToSection('books'); return false;" data-en="Scientific Library [07]" data-fa="رفرنس‌های علمی [۰۷]">Scientific Library [07]</a></li>
+          <li><a href="#projects" class="nav-link" data-nav="projects" onclick="navigateToSection('projects'); return false;" data-en="Pump Design" data-fa="طراحی پمپ">Pump Design</a></li>
+          <li><a href="#solidworks" class="nav-link" data-nav="solidworks" onclick="navigateToSection('solidworks'); return false;" data-en="SolidWorks CAD" data-fa="سالیدورکس CAD">SolidWorks CAD</a></li>
+          <li><a href="#simulations" class="nav-link" data-nav="simulations" onclick="navigateToSection('simulations'); return false;" data-en="Digital Twins" data-fa="دوقلوهای دیجیتال">Digital Twins</a></li>
+          <li><a href="#microfluidics" class="nav-link" data-nav="microfluidics" onclick="navigateToSection('microfluidics'); return false;" data-en="Microfluidics" data-fa="میکروفلوئیدیک">Microfluidics</a></li>
+          <li><a href="#capabilities" class="nav-link" data-nav="capabilities" onclick="navigateToSection('capabilities'); return false;" data-en="Capabilities" data-fa="توانمندی‌ها">Capabilities</a></li>
+          <li><a href="#info" class="nav-link" data-nav="info" onclick="navigateToSection('info'); return false;" data-en="About & Contact" data-fa="درباره و تماس">About & Contact</a></li>
         </ul>
         <div class="nav-tools">
           <button id="searchOpenBtn" class="tool-btn" title="Search simulations & models" aria-label="Search" onclick="openSearchModal()">
@@ -184,43 +184,44 @@
                 Exploring fluid mechanics through simulation, engineering design, and real-world applications. Welcome to my personal space, where engineering meets creativity.
               </p>
               <div class="fm-hero-ctas">
-                <a href="#projects" class="fm-cta-primary" onclick="navigateToSection('projects'); return false;">
-                  <span data-en="Explore My Projects" data-fa="مشاهده پروژه‌ها">Explore My Projects</span>
-                  <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+                <a href="#books" class="fm-cta-primary" onclick="navigateToSection('books'); return false;">
+                  <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
+                  <span data-en="Scientific Library (07 Vols)" data-fa="کتابخانه و رفرنس‌های علمی (۷ جلد)">Scientific Library (07 Vols)</span>
                 </a>
-                <a href="#about" class="fm-cta-secondary" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;">
-                  <span data-en="About Me" data-fa="درباره من">About Me</span>
+                <a href="#projects" class="fm-cta-secondary" onclick="navigateToSection('projects'); return false;">
+                  <i data-lucide="disc" style="width: 15px; height: 15px;"></i>
+                  <span data-en="Pump Projects & CAD" data-fa="پروژه‌ها و طراحی پمپ">Pump Projects &amp; CAD</span>
                 </a>
               </div>
             </div>
 
             <!-- Hero Statistics Row -->
             <div class="fm-hero-stats-row">
-              <div class="fm-stat-item">
+              <div class="fm-stat-item" onclick="navigateToSection('books')" role="button" tabindex="0" title="View 7 Academic Reference Volumes">
                 <div class="fm-stat-icon">
-                  <i data-lucide="folder-git-2" style="width: 14px; height: 14px;"></i>
+                  <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
                 </div>
                 <div>
-                  <div class="fm-stat-num">3+</div>
-                  <div class="fm-stat-label" data-en="Major Projects" data-fa="پروژه شاخص">Major Projects</div>
+                  <div class="fm-stat-num">07 Vols</div>
+                  <div class="fm-stat-label" data-en="Scientific Books & Solutions" data-fa="کتب مرجع و پاسخنامه تشریحی">Scientific Books &amp; Solutions</div>
                 </div>
               </div>
-              <div class="fm-stat-item">
+              <div class="fm-stat-item" onclick="navigateToSection('solidworks')" role="button" tabindex="0" title="View 5 SolidWorks CAD Assemblies">
                 <div class="fm-stat-icon">
-                  <i data-lucide="award" style="width: 14px; height: 14px;"></i>
+                  <i data-lucide="box" style="width: 14px; height: 14px;"></i>
                 </div>
                 <div>
-                  <div class="fm-stat-num">5+</div>
-                  <div class="fm-stat-label" data-en="Courses Completed" data-fa="دوره گذرانده">Courses Completed</div>
+                  <div class="fm-stat-num">05 CAD</div>
+                  <div class="fm-stat-label" data-en="SolidWorks Assemblies" data-fa="مجموعه‌های مونتاژی سالیدورکس">SolidWorks Assemblies</div>
                 </div>
               </div>
-              <div class="fm-stat-item">
-                <div class="fm-stat-icon" style="color: #ff5277; background: rgba(255, 82, 119, 0.12); border-color: rgba(255, 82, 119, 0.25);">
-                  <i data-lucide="heart" style="width: 14px; height: 14px;"></i>
+              <div class="fm-stat-item" onclick="navigateToSection('simulations')" role="button" tabindex="0" title="View 5 Digital Twins & Simulations">
+                <div class="fm-stat-icon" style="color: #00f2fe; background: rgba(0, 242, 254, 0.12); border-color: rgba(0, 242, 254, 0.25);">
+                  <i data-lucide="activity" style="width: 14px; height: 14px;"></i>
                 </div>
                 <div>
-                  <div class="fm-stat-num">100%</div>
-                  <div class="fm-stat-label" data-en="Passion for Fluids" data-fa="عشق به سیالات">Passion for Fluids</div>
+                  <div class="fm-stat-num">05 Twins</div>
+                  <div class="fm-stat-label" data-en="Live Digital Twins" data-fa="دوقلوهای دیجیتال زنده">Live Digital Twins</div>
                 </div>
               </div>
             </div>
@@ -269,70 +270,70 @@
            2. ENGINEERING FEATURE CARDS (Row of 5 Cards)
            ============================================================ -->
       <div class="fm-features-grid">
-        <!-- Card 1: Fluid Mechanics -->
-        <div class="fm-feature-card" onclick="navigateToSection('microfluidics')" role="button" tabindex="0">
+        <!-- Card 1: Scientific Library [07 Volumes] -->
+        <div class="fm-feature-card" onclick="navigateToSection('books')" role="button" tabindex="0">
           <div>
-            <div class="fm-feature-icon-box">
-              <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
+            <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #0284c7 0%, #034870 100%);">
+              <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="fm-feature-title" data-en="Fluid Mechanics" data-fa="مکانیک سیالات">Fluid Mechanics</div>
-            <div class="fm-feature-desc" data-en="Learn the fundamental principles of fluid behavior and applications in engineering." data-fa="یادگیری اصول بنیادین رفتار سیالات، لایه مرزی و کاربردهای آن در مهندسی.">
-              Learn the fundamental principles of fluid behavior and applications in engineering.
+            <div class="fm-feature-title" data-en="Scientific Library (07 Vols)" data-fa="کتابخانه و رفرنس‌های علمی (۷ جلد)">Scientific Library (07 Vols)</div>
+            <div class="fm-feature-desc" data-en="7 volumes of standard university textbooks and complete step-by-step solution manuals." data-fa="۷ جلد کتاب‌های درسی مرجع دانشگاهی مهندسی مکانیک همراه با حل‌المسائل تشریحی کامل.">
+              7 volumes of standard university textbooks and complete step-by-step solution manuals.
             </div>
           </div>
           <div class="fm-feature-link">
-            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <span data-en="Explore 7 Volumes" data-fa="مشاهده ۷ جلد مرجع">Explore 7 Volumes</span>
             <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Card 2: CFD & Simulation -->
-        <div class="fm-feature-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
+        <!-- Card 2: Turbomachinery & Pump Design -->
+        <div class="fm-feature-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
           <div>
             <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #00b4d8 0%, #0369a1 100%);">
-              <i data-lucide="box" style="width: 20px; height: 20px;"></i>
+              <i data-lucide="disc" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="fm-feature-title" data-en="CFD & Simulation" data-fa="شبیه‌سازی و CFD">CFD & Simulation</div>
-            <div class="fm-feature-desc" data-en="Use computational tools to solve complex fluid problems and visualize results." data-fa="به‌کارگیری ابزارهای محاسباتی جهت حل مسائل پیچیده دینامیک سیالات و تجسم میدان‌ها.">
-              Use computational tools to solve complex fluid problems and visualize results.
+            <div class="fm-feature-title" data-en="Pump Design & Turbomachinery" data-fa="طراحی پمپ و توربوماشین">Pump Design &amp; Turbomachinery</div>
+            <div class="fm-feature-desc" data-en="Complete centrifugal pump impeller and volute engineering design checklist in CFturbo." data-fa="چک‌لیست مهندسی طراحی پروانه و حلزونی پمپ سانتریفیوژ در نرم‌افزار CFturbo.">
+              Complete centrifugal pump impeller and volute engineering design checklist in CFturbo.
             </div>
           </div>
           <div class="fm-feature-link">
-            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
             <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Card 3: Mechanical Design -->
+        <!-- Card 3: SolidWorks 3D CAD [05 Models] -->
         <div class="fm-feature-card" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
           <div>
             <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #2563eb 0%, #1e3a8a 100%);">
-              <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
+              <i data-lucide="box" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="fm-feature-title" data-en="Mechanical Design" data-fa="طراحی مکانیکی">Mechanical Design</div>
-            <div class="fm-feature-desc" data-en="Integrate fluid dynamics with mechanical systems for innovative solutions." data-fa="تلفیق دینامیک سیالات با سیستم‌های مکانیکی و مدل‌سازی پیشرفته سه‌بعدی CAD.">
-              Integrate fluid dynamics with mechanical systems for innovative solutions.
+            <div class="fm-feature-title" data-en="SolidWorks CAD (05 Models)" data-fa="طراحی سه‌بعدی سالیدورکس (۵ مدل)">SolidWorks CAD (05 Models)</div>
+            <div class="fm-feature-desc" data-en="Rocket assemblies, shock linkages, technical drawings, and downloadable STEP/ZIP files." data-fa="مجموعه‌های مونتاژی راکت، مکانیزم تعلیق، نقشه‌های فنی و فایل‌های دانلودی STEP و ZIP.">
+              Rocket assemblies, shock linkages, technical drawings, and downloadable STEP/ZIP files.
             </div>
           </div>
           <div class="fm-feature-link">
-            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <span data-en="View 5 Models" data-fa="مشاهده ۵ مدل">View 5 Models</span>
             <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Card 4: Sustainability -->
-        <div class="fm-feature-card" onclick="navigateToSection('capabilities')" role="button" tabindex="0">
+        <!-- Card 4: Digital Twins & Steam Engines -->
+        <div class="fm-feature-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
           <div>
             <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #059669 0%, #064e3b 100%);">
-              <i data-lucide="leaf" style="width: 20px; height: 20px;"></i>
+              <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="fm-feature-title" data-en="Sustainability" data-fa="پایداری و انرژی نو">Sustainability</div>
-            <div class="fm-feature-desc" data-en="Build a cleaner and more efficient future through smart engineering and renewable energy." data-fa="خلق آینده‌ای پاک‌تر و با بهره‌وری بالاتر از طریق مهندسی هوشمند و انرژی‌های تجدیدپذیر.">
-              Build a cleaner and more efficient future through smart engineering and renewable energy.
+            <div class="fm-feature-title" data-en="Digital Twins (05 Simulations)" data-fa="دوقلوهای دیجیتال (۵ شبیه‌ساز)">Digital Twins (05 Simulations)</div>
+            <div class="fm-feature-desc" data-en="Real-time Rankine steam cycle, boiler simulator, and hydraulic digital twin engines." data-fa="شبیه‌ساز بلادرنگ سیکل بخار رانکین، دیگ بخار و موتورهای دوقلوی دیجیتال هیدرولیکی.">
+              Real-time Rankine steam cycle, boiler simulator, and hydraulic digital twin engines.
             </div>
           </div>
           <div class="fm-feature-link">
-            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <span data-en="Launch Simulators" data-fa="اجرای شبیه‌سازها">Launch Simulators</span>
             <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
@@ -361,7 +362,7 @@
 
       <!-- ============================================================
            3. FEATURED PROJECTS (01) & ABOUT ME (02)
-           Faithfully matching the exact 2-column layout in the mockup
+           Directly featuring authentic engineering projects
            ============================================================ -->
       <div class="fm-split-section">
         <!-- 01 Featured Projects -->
@@ -369,97 +370,97 @@
           <div class="fm-panel-header">
             <div class="fm-panel-num-title">
               <span class="fm-panel-num">01</span>
-              <h2 class="fm-panel-title" data-en="Featured Projects" data-fa="پروژه‌های شاخص">Featured Projects</h2>
+              <h2 class="fm-panel-title" data-en="Featured Projects & Workspaces" data-fa="پروژه‌ها و کارگاه‌های مهندسی شاخص">Featured Projects &amp; Workspaces</h2>
             </div>
             <a href="#projects" class="fm-panel-action-link" onclick="navigateToSection('projects'); return false;">
-              <span data-en="View All Projects" data-fa="مشاهده همه پروژه‌ها">View All Projects</span>
+              <span data-en="View All Projects" data-fa="مشاهده پروژه‌ها">View All Projects</span>
               <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
             </a>
           </div>
 
-          <!-- 3 Project Cards Grid -->
+          <!-- Real Projects Grid -->
           <div class="fm-projects-grid">
-            <!-- Project 1: Flow Around a Cylinder -->
-            <div class="fm-project-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
+            <!-- Project 1: CFturbo Pump Design Checklist -->
+            <div class="fm-project-card" onclick="window.location.href='projects/cfturbo-pump/pump-design-checklist.html'" role="button" tabindex="0">
               <div class="fm-project-img-wrap">
-                <img src="assets/images/cylinder-flow-cfd.jpg" alt="CFD visualization of vortex shedding behind a cylinder" class="fm-project-img">
-                <span class="fm-project-badge">CFD</span>
+                <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal pump impeller blade in CFturbo" class="fm-project-img">
+                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(0, 242, 254, 0.6); color: #00f2fe;">TURBO // CFTURBO</span>
               </div>
               <div class="fm-project-body">
                 <div>
-                  <div class="fm-project-title" data-en="Flow Around a Cylinder" data-fa="جریان حول استوانه">Flow Around a Cylinder</div>
-                  <div class="fm-project-desc" data-en="Analyzing vortex shedding and drag coefficient using Fluent." data-fa="تحلیل ریزش گردابه‌ها و ضریب پسا با انسیس فلوئنت.">
-                    Analyzing vortex shedding and drag coefficient using Fluent.
+                  <div class="fm-project-title" data-en="Pump Design Checklist in CFturbo" data-fa="چک‌لیست طراحی پمپ در CFturbo">Pump Design Checklist in CFturbo</div>
+                  <div class="fm-project-desc" data-en="Comprehensive 6-stage impeller and 5-stage volute design checklist from 1D sizing to 3D blades." data-fa="چک‌لیست جامع ۶ مرحله‌ای پروانه و ۵ مرحله‌ای حلزونی از سایزبندی یک‌بعدی تا تیغه‌های سه‌بعدی.">
+                    Comprehensive 6-stage impeller and 5-stage volute design checklist from 1D sizing to 3D blades.
                   </div>
                 </div>
                 <div class="fm-project-footer">
                   <div class="fm-project-meta-item">
-                    <i data-lucide="cpu" style="width: 12px; height: 12px; color: #00f2fe;"></i>
-                    <span>ANSYS Fluent</span>
+                    <i data-lucide="disc" style="width: 12px; height: 12px; color: #00f2fe;"></i>
+                    <span>CFturbo 2026</span>
                   </div>
                   <div class="fm-project-meta-item">
-                    <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
-                    <span>2024</span>
+                    <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
+                    <span>11 Stages</span>
                   </div>
-                  <div class="fm-project-arrow-btn">
+                  <div class="fm-project-arrow-btn" title="Open Project Checklist">
                     <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Project 2: Turbine Blade Optimization -->
-            <div class="fm-project-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
+            <!-- Project 2: SolidWorks 3D Rocket & Suspension Assemblies -->
+            <div class="fm-project-card" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
               <div class="fm-project-img-wrap">
-                <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal impeller and turbine blade with CFD streamlines" class="fm-project-img">
-                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(2, 132, 199, 0.6); color: #38bdf8;">Design + CFD</span>
+                <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="Model Rocket 3D SolidWorks Assembly" class="fm-project-img">
+                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
               </div>
               <div class="fm-project-body">
                 <div>
-                  <div class="fm-project-title" data-en="Turbine Blade Optimization" data-fa="بهینه‌سازی پره توربوماشین">Turbine Blade Optimization</div>
-                  <div class="fm-project-desc" data-en="Improving efficiency using parametric design and CFD analysis." data-fa="ارتقای راندمان هیدرولیکی پروانه با طراحی پارامتریک و CFD.">
-                    Improving efficiency using parametric design and CFD analysis.
+                  <div class="fm-project-title" data-en="SolidWorks CAD Assemblies & STEP" data-fa="مجموعه‌های مونتاژی سالیدورکس و STEP">SolidWorks CAD Assemblies &amp; STEP</div>
+                  <div class="fm-project-desc" data-en="5 mechanical assemblies including multi-stage Model Rocket, shock linkage, and downloadable packages." data-fa="۵ مجموعه مونتاژی مکانیکی شامل راکت چندمرحله‌ای، اتصالات تعلیق و بسته‌های دانلودی STEP و ZIP.">
+                    5 mechanical assemblies including multi-stage Model Rocket, shock linkage, and downloadable packages.
                   </div>
                 </div>
                 <div class="fm-project-footer">
                   <div class="fm-project-meta-item">
                     <i data-lucide="box" style="width: 12px; height: 12px; color: #38bdf8;"></i>
-                    <span>SolidWorks + Fluent</span>
+                    <span>SolidWorks</span>
                   </div>
                   <div class="fm-project-meta-item">
-                    <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
-                    <span>2024</span>
+                    <i data-lucide="download" style="width: 12px; height: 12px;"></i>
+                    <span>STEP / ZIP</span>
                   </div>
-                  <div class="fm-project-arrow-btn">
+                  <div class="fm-project-arrow-btn" title="Open SolidWorks Gallery">
                     <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Project 3: Two-Phase Flow -->
-            <div class="fm-project-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
+            <!-- Project 3: Power Plant Digital Twin Engine -->
+            <div class="fm-project-card" onclick="window.location.href='simulations/Power_Plant_Digital_Twin_Engine.html'" role="button" tabindex="0">
               <div class="fm-project-img-wrap">
-                <img src="assets/images/two-phase-flow-cfd.jpg" alt="Gas-liquid multiphase flow inside pipe" class="fm-project-img">
-                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(16, 185, 129, 0.6); color: #10b981;">Simulation</span>
+                <img src="assets/images/cylinder-flow-cfd.jpg" alt="Thermal steam power plant Rankine cycle simulation" class="fm-project-img">
+                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(16, 185, 129, 0.6); color: #10b981;">TWIN // SIMULATION</span>
               </div>
               <div class="fm-project-body">
                 <div>
-                  <div class="fm-project-title" data-en="Two-Phase Flow" data-fa="جریان دوفازی در لوله">Two-Phase Flow</div>
-                  <div class="fm-project-desc" data-en="Studying gas-liquid flow behavior in horizontal pipe." data-fa="بررسی هیدرودینامیک جریان دوفازی مایع-گاز در لوله افقی.">
-                    Studying gas-liquid flow behavior in horizontal pipe.
+                  <div class="fm-project-title" data-en="Rankine Cycle Digital Twin" data-fa="دوقلوی دیجیتال سیکل بخار رانکین">Rankine Cycle Digital Twin</div>
+                  <div class="fm-project-desc" data-en="Live thermodynamic engine with real-time T-s & P-h state diagrams, boiler expansion, and condenser." data-fa="موتور ترمودینامیکی زنده همراه با نمودارهای T-s و P-h، توربین انبساط، بویلر و کندانسور.">
+                    Live thermodynamic engine with real-time T-s &amp; P-h state diagrams, boiler expansion, and condenser.
                   </div>
                 </div>
                 <div class="fm-project-footer">
                   <div class="fm-project-meta-item">
                     <i data-lucide="activity" style="width: 12px; height: 12px; color: #10b981;"></i>
-                    <span>OpenFOAM</span>
+                    <span>Live WebGL/Canvas</span>
                   </div>
                   <div class="fm-project-meta-item">
-                    <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
-                    <span>2024</span>
+                    <i data-lucide="play-circle" style="width: 12px; height: 12px;"></i>
+                    <span>Interactive</span>
                   </div>
-                  <div class="fm-project-arrow-btn">
+                  <div class="fm-project-arrow-btn" title="Launch Simulator">
                     <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                   </div>
                 </div>
@@ -484,7 +485,7 @@
             <div class="fm-about-identity-info">
               <div class="fm-about-name">Mohammadamin Sharif</div>
               <div class="fm-about-role" data-en="Mechanical Engineering Student" data-fa="دانشجوی مهندسی مکانیک">Mechanical Engineering Student</div>
-              <div class="fm-about-tag">Fluid Mechanics</div>
+              <div class="fm-about-tag">Fluid Mechanics &amp; CFD</div>
             </div>
           </div>
 
@@ -513,6 +514,128 @@
               <path d="M2 7C6 2 10 12 14 7C18 2 22 12 26 7" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           03 SCIENTIFIC REFERENCE LIBRARY (07 VOLUMES & COMPLETE SOLUTIONS)
+           کتابخانه تخصصی و رفرنس‌های علمی مهندسی مکانیک - ۷ جلد کامل
+           ============================================================ -->
+      <div class="fm-section-panel" style="margin-bottom: 24px;" id="homeScientificLibrary">
+        <div class="fm-panel-header" style="flex-wrap: wrap; gap: 12px;">
+          <div class="fm-panel-num-title">
+            <span class="fm-panel-num">03</span>
+            <div>
+              <h2 class="fm-panel-title" data-en="Scientific Reference Library (07 Volumes)" data-fa="کتابخانه تخصصی و رفرنس‌های علمی (۷ جلد)">Scientific Reference Library (07 Volumes)</h2>
+              <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;" data-en="Standard academic textbooks, engineering references, and full solution manuals" data-fa="کتب مرجع معتبر دانشگاهی، مراجع مهندسی و حل‌المسائل تشریحی گام‌به‌گام">Standard academic textbooks, engineering references, and full solution manuals</div>
+            </div>
+          </div>
+          <a href="#books" class="fm-panel-action-link" onclick="navigateToSection('books'); return false;">
+            <i data-lucide="library" style="width: 14px; height: 14px;"></i>
+            <span data-en="Open Full Library [07]" data-fa="مشاهده کتابخانه جامع [۰۷]">Open Full Library [07]</span>
+            <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+          </a>
+        </div>
+
+        <!-- 7 Reference Volumes Grid -->
+        <div class="fm-home-books-grid">
+          <!-- Vol 1: Fluid Mechanics -->
+          <a href="books/fluids.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well"><i data-lucide="droplets" style="width: 18px; height: 18px; color: #00f2fe;"></i></div>
+              <span class="fm-ref-vol-badge">VOL 01</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Fluid Mechanics" data-fa="مکانیک سیالات">Fluid Mechanics</div>
+            <div class="fm-ref-card-authors">Frank M. White &bull; Fox &amp; McDonald &bull; Munson &bull; Yunus Çengel</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> 4 Books + Solutions</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
+
+          <!-- Vol 2: Thermodynamics -->
+          <a href="books/thermodynamics.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well" style="background: rgba(251, 146, 60, 0.12); border-color: rgba(251, 146, 60, 0.3);"><i data-lucide="flame" style="width: 18px; height: 18px; color: #fb923c;"></i></div>
+              <span class="fm-ref-vol-badge" style="color: #fb923c; border-color: rgba(251, 146, 60, 0.4);">VOL 02</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Thermodynamics" data-fa="ترمودینامیک">Thermodynamics</div>
+            <div class="fm-ref-card-authors">Çengel &amp; Boles &bull; Van Wylen &bull; Moran &amp; Shapiro</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> 3 Books + Solutions</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
+
+          <!-- Vol 3: Heat Transfer -->
+          <a href="books/heat-transfer.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well" style="background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.3);"><i data-lucide="thermometer" style="width: 18px; height: 18px; color: #ef4444;"></i></div>
+              <span class="fm-ref-vol-badge" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">VOL 03</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Heat Transfer" data-fa="انتقال حرارت">Heat Transfer</div>
+            <div class="fm-ref-card-authors">Incropera &amp; DeWitt &bull; J.P. Holman &bull; Yunus Çengel</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Standard References</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
+
+          <!-- Vol 4: Statics, Strength & Machine Design -->
+          <a href="books/statics-strength-machine-design.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well" style="background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.3);"><i data-lucide="ruler" style="width: 18px; height: 18px; color: #c084fc;"></i></div>
+              <span class="fm-ref-vol-badge" style="color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">VOL 04</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Statics, Strength & Machine Design" data-fa="استاتیک، مقاومت مصالح و طراحی اجزا">Statics, Strength &amp; Machine Design</div>
+            <div class="fm-ref-card-authors">J.L. Meriam &bull; Beer &amp; Johnston &bull; Joseph Shigley</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> 2 Books + Solutions</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
+
+          <!-- Vol 5: Pump Design & Turbomachinery -->
+          <a href="books/pump-design.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well" style="background: rgba(6, 182, 212, 0.12); border-color: rgba(6, 182, 212, 0.3);"><i data-lucide="disc" style="width: 18px; height: 18px; color: #06b6d4;"></i></div>
+              <span class="fm-ref-vol-badge" style="color: #06b6d4; border-color: rgba(6, 182, 212, 0.4);">VOL 05</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Pump Design & Turbomachinery" data-fa="طراحی پمپ و توربوماشین">Pump Design &amp; Turbomachinery</div>
+            <div class="fm-ref-card-authors">A.J. Stepanoff &bull; Johann Friedrich Gülich &bull; Igor J. Karassik</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Turbomachinery Handbooks</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
+
+          <!-- Vol 6: Control & Vibrations -->
+          <a href="books/controls-vibrations.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well" style="background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.3);"><i data-lucide="activity" style="width: 18px; height: 18px; color: #22c55e;"></i></div>
+              <span class="fm-ref-vol-badge" style="color: #22c55e; border-color: rgba(34, 197, 94, 0.4);">VOL 06</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Control & Vibrations" data-fa="کنترل و ارتعاشات مکانیکی">Control &amp; Vibrations</div>
+            <div class="fm-ref-card-authors">Katsuhiko Ogata &bull; Singiresu S. Rao &bull; William T. Thomson</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Dynamics &amp; Feedback</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
+
+          <!-- Vol 7: Dynamics & Dynamics of Machinery -->
+          <a href="books/dynamics-machine-dynamics.html" class="fm-ref-card">
+            <div class="fm-ref-card-header">
+              <div class="fm-ref-icon-well" style="background: rgba(234, 179, 8, 0.12); border-color: rgba(234, 179, 8, 0.3);"><i data-lucide="rotate-cw" style="width: 18px; height: 18px; color: #eab308;"></i></div>
+              <span class="fm-ref-vol-badge" style="color: #eab308; border-color: rgba(234, 179, 8, 0.4);">VOL 07</span>
+            </div>
+            <div class="fm-ref-card-title" data-en="Dynamics & Dynamics of Machinery" data-fa="دینامیک و دینامیک ماشین">Dynamics &amp; Dynamics of Machinery</div>
+            <div class="fm-ref-card-authors">J.L. Meriam &bull; Hamilton H. Mabie &bull; Charles F. Reinholtz</div>
+            <div class="fm-ref-card-footer">
+              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Kinematics &amp; Linkages</span>
+              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -1680,6 +1803,9 @@
       } else {
         navigateToSection('home', false);
       }
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
     }
 
     window.addEventListener('hashchange', handleRouteFromHash);
@@ -2070,39 +2196,84 @@
         <button class="fm-search-close-btn" onclick="closeSearchModal()"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
       </div>
       <div class="fm-search-results" id="fmSearchResults">
-        <div class="fm-search-item" onclick="navigateToSection('projects');closeSearchModal()">
+        <!-- Projects & Engineering Workspaces -->
+        <div class="fm-search-item" onclick="window.location.href='projects/cfturbo-pump/pump-design-checklist.html'">
           <div class="fm-search-icon"><i data-lucide="disc" style="width: 16px; height: 16px;"></i></div>
           <div>
-            <div class="fm-search-title">Flow Around a Cylinder (ANSYS Fluent)</div>
-            <div class="fm-search-sub">CFD vortex shedding simulation & drag coefficient analysis</div>
-          </div>
-        </div>
-        <div class="fm-search-item" onclick="navigateToSection('projects');closeSearchModal()">
-          <div class="fm-search-icon"><i data-lucide="settings" style="width: 16px; height: 16px;"></i></div>
-          <div>
-            <div class="fm-search-title">Turbine Blade Optimization & Impeller Design</div>
-            <div class="fm-search-sub">Centrifugal turbomachinery modeling in SolidWorks + Fluent</div>
-          </div>
-        </div>
-        <div class="fm-search-item" onclick="navigateToSection('simulations');closeSearchModal()">
-          <div class="fm-search-icon"><i data-lucide="activity" style="width: 16px; height: 16px;"></i></div>
-          <div>
-            <div class="fm-search-title">Rankine Cycle Digital Twin</div>
-            <div class="fm-search-sub">Thermodynamic steam power cycle with T-s & P-h diagrams</div>
-          </div>
-        </div>
-        <div class="fm-search-item" onclick="navigateToSection('microfluidics');closeSearchModal()">
-          <div class="fm-search-icon"><i data-lucide="git-commit" style="width: 16px; height: 16px;"></i></div>
-          <div>
-            <div class="fm-search-title">Microfluidic Chip Lab</div>
-            <div class="fm-search-sub">Diverging nozzle continuity & Reynolds flow simulation</div>
+            <div class="fm-search-title">Pump Design Checklist in CFturbo (Impeller &amp; Volute)</div>
+            <div class="fm-search-sub">Turbomachinery 6-stage impeller &amp; 5-stage volute design project</div>
           </div>
         </div>
         <div class="fm-search-item" onclick="navigateToSection('solidworks');closeSearchModal()">
           <div class="fm-search-icon"><i data-lucide="box" style="width: 16px; height: 16px;"></i></div>
           <div>
-            <div class="fm-search-title">SolidWorks 3D CAD Assemblies</div>
-            <div class="fm-search-sub">5 mechanical assemblies, engineering drawings, and STEP files</div>
+            <div class="fm-search-title">SolidWorks 3D CAD Assemblies (Model Rocket &amp; Suspension)</div>
+            <div class="fm-search-sub">5 mechanical assemblies, engineering drawings, and STEP/ZIP archives</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='simulations/Power_Plant_Digital_Twin_Engine.html'">
+          <div class="fm-search-icon"><i data-lucide="activity" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Rankine Cycle &amp; Power Plant Digital Twin Engine</div>
+            <div class="fm-search-sub">Live thermodynamic steam power plant simulation with T-s &amp; P-h diagrams</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="navigateToSection('microfluidics');closeSearchModal()">
+          <div class="fm-search-icon"><i data-lucide="git-commit" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Microfluidic Chip Lab (Diverging Nozzle)</div>
+            <div class="fm-search-sub">Interactive Navier-Stokes continuity &amp; Reynolds flow simulation</div>
+          </div>
+        </div>
+
+        <!-- 7 Academic Reference Volumes -->
+        <div class="fm-search-item" onclick="window.location.href='books/fluids.html'">
+          <div class="fm-search-icon" style="background: rgba(0, 242, 254, 0.15); color: #00f2fe;"><i data-lucide="droplets" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 01: Fluid Mechanics (White, Fox, Munson, Çengel)</div>
+            <div class="fm-search-sub">4 textbooks with step-by-step solution manuals</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='books/thermodynamics.html'">
+          <div class="fm-search-icon" style="background: rgba(251, 146, 60, 0.15); color: #fb923c;"><i data-lucide="flame" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 02: Thermodynamics (Çengel &amp; Boles, Van Wylen, Moran)</div>
+            <div class="fm-search-sub">3 reference textbooks &amp; complete solution manuals</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='books/heat-transfer.html'">
+          <div class="fm-search-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;"><i data-lucide="thermometer" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 03: Heat Transfer (Incropera &amp; DeWitt, Holman, Çengel)</div>
+            <div class="fm-search-sub">Conduction, convection, radiation engineering references</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='books/statics-strength-machine-design.html'">
+          <div class="fm-search-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;"><i data-lucide="ruler" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 04: Statics, Strength of Materials &amp; Machine Design (Meriam, Shigley)</div>
+            <div class="fm-search-sub">Stress analysis, mechanical design &amp; solutions</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='books/pump-design.html'">
+          <div class="fm-search-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;"><i data-lucide="disc" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 05: Pump Design &amp; Turbomachinery (Stepanoff, Gülich, Karassik)</div>
+            <div class="fm-search-sub">Centrifugal pump design handbooks and hydraulic guides</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='books/controls-vibrations.html'">
+          <div class="fm-search-icon" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;"><i data-lucide="activity" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 06: Control &amp; Vibrations (Ogata, Rao, Thomson)</div>
+            <div class="fm-search-sub">Dynamic systems, modal analysis &amp; feedback control</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="window.location.href='books/dynamics-machine-dynamics.html'">
+          <div class="fm-search-icon" style="background: rgba(234, 179, 8, 0.15); color: #eab308;"><i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Vol 07: Dynamics &amp; Dynamics of Machinery (Meriam, Mabie)</div>
+            <div class="fm-search-sub">Kinematics, mechanisms, and kinetics textbooks</div>
           </div>
         </div>
       </div>
@@ -2200,6 +2371,128 @@
       font-size: 11px;
       color: #94a3b8;
       margin-top: 2px;
+    }
+
+    /* --- HOME SCIENTIFIC REFERENCE LIBRARY STYLES --- */
+    .fm-home-books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .fm-ref-card {
+      background: rgba(14, 21, 37, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 18px 16px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .fm-ref-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 242, 254, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.15);
+    }
+    .fm-ref-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .fm-ref-icon-well {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fm-ref-vol-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #00f2fe;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+    .fm-ref-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .fm-ref-card-authors {
+      font-size: 11.5px;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .fm-ref-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding-top: 10px;
+    }
+    .fm-ref-sol-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    .fm-ref-view-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .fm-ref-card:hover .fm-ref-view-btn {
+      background: #00f2fe;
+      color: #040810;
+      transform: translate(2px, -2px);
+    }
+    /* Light mode adaptations */
+    .light-mode .fm-ref-card {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    .light-mode .fm-ref-card:hover {
+      border-color: #0284c7;
+      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.15);
+    }
+    .light-mode .fm-ref-card-title {
+      color: #0f172a;
+    }
+    .light-mode .fm-ref-card-authors {
+      color: #64748b;
+    }
+    .light-mode .fm-ref-sol-tag {
+      color: #0284c7;
+    }
+    .light-mode .fm-ref-card-footer {
+      border-top-color: rgba(0, 0, 0, 0.06);
     }
   </style>
 
