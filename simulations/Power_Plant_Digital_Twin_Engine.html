@@ -532,6 +532,7 @@ const canvas = document.getElementById('plantCanvas');
 const ctx = canvas.getContext('2d');
 
 function resizeCanvas() {
+  if (!canvas || !canvas.parentElement) return;
   canvas.width = canvas.parentElement.clientWidth;
   canvas.height = canvas.parentElement.clientHeight;
 }

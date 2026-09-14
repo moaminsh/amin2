@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOHAMMADAMIN SHARIF // MECHANICAL & FLUIDS ENGINEERING</title>
-  <meta name="description" content="Mechanical and fluids engineering portfolio, digital twin simulations, pump design, and engineering textbooks.">
-  <meta property="og:title" content="MOHAMMADAMIN SHARIF // MECHANICAL & FLUIDS ENGINEERING">
-  <meta property="og:description" content="Mechanical and fluids engineering portfolio, digital twin simulations, pump design, and engineering textbooks.">
+  <title>FluidMind // Mechanical Engineering & Fluid Mechanics</title>
+  <meta name="description" content="Award-winning futuristic engineering portfolio of Mohammadamin Sharif specializing in Fluid Mechanics, Computational Fluid Dynamics (CFD), and Turbomachinery.">
+  <meta property="og:title" content="FluidMind // Mechanical Engineering & Fluid Mechanics">
+  <meta property="og:description" content="Award-winning futuristic engineering portfolio of Mohammadamin Sharif specializing in Fluid Mechanics, Computational Fluid Dynamics (CFD), and Turbomachinery.">
   
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,37 +57,46 @@
   <div class="spatial-texture" aria-hidden="true"></div>
   <canvas class="engineering-bg-canvas" id="engineeringBgCanvas" aria-hidden="true"></canvas>
   <div class="custom-cursor" id="cursor"></div>
+  <div class="custom-cursor-halo" id="cursorHalo"></div>
 
-  <!-- NAVIGATION -->
+  <!-- NAVIGATION: FLUIDMIND GLASS NAVBAR -->
   <header class="nav-bar">
     <div class="nav-glass-container">
       <div class="nav-inner">
-        <a href="#home" class="nav-brand" data-nav="home">
-          <span class="nav-brand-dot"></span>
-          <span>MOHAMMADAMIN SHARIF</span>
+        <a href="#home" class="fm-navbar-brand" data-nav="home">
+          <div class="fm-brand-icon">
+            <i data-lucide="waves" style="width: 20px; height: 20px;"></i>
+          </div>
+          <div class="fm-brand-text">
+            <span class="fm-brand-title">FluidMind</span>
+            <span class="fm-brand-sub" data-en="Mechanical Engineering | Fluid Mechanics" data-fa="مهندسی مکانیک | مکانیک سیالات">Mechanical Engineering | Fluid Mechanics</span>
+          </div>
         </a>
         <ul class="nav-menu">
-          <li><a href="#home" class="nav-link active" data-nav="home" data-en="HOME" data-fa="صفحه اصلی">HOME</a></li>
-          <li><a href="#projects" class="nav-link" data-nav="projects" data-en="PROJECTS" data-fa="پروژه‌ها">PROJECTS</a></li>
-          <li><a href="#solidworks" class="nav-link" data-nav="solidworks" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</a></li>
-          <li><a href="#simulations" class="nav-link" data-nav="simulations" data-en="SIMULATIONS" data-fa="شبیه‌سازی">SIMULATIONS</a></li>
-          <li><a href="#microfluidics" class="nav-link" data-nav="microfluidics" data-en="MICROFLUIDICS" data-fa="میکروفلوئیدیک">MICROFLUIDICS</a></li>
-          <li><a href="#books" class="nav-link" data-nav="books" data-en="BOOKS" data-fa="کتاب‌ها">BOOKS</a></li>
-          <li><a href="#capabilities" class="nav-link" data-nav="capabilities" data-en="CAPABILITIES" data-fa="توانمندی‌ها">CAPABILITIES</a></li>
-          <li><a href="#info" class="nav-link" data-nav="info" data-en="INFO" data-fa="اطلاعات">INFO</a></li>
+          <li><a href="#home" class="nav-link active" data-nav="home" data-en="Home" data-fa="خانه">Home</a></li>
+          <li><a href="#about" class="nav-link" data-nav="about" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;" data-en="About" data-fa="درباره">About</a></li>
+          <li><a href="#courses" class="nav-link" data-nav="courses" onclick="navigateToSection('books'); return false;" data-en="Courses" data-fa="دوره‌ها">Courses</a></li>
+          <li><a href="#projects" class="nav-link" data-nav="projects" onclick="navigateToSection('projects'); return false;" data-en="Projects" data-fa="پروژه‌ها">Projects</a></li>
+          <li><a href="#research" class="nav-link" data-nav="research" onclick="document.getElementById('researchInterestsSection')?.scrollIntoView({behavior:'smooth'}); return false;" data-en="Research" data-fa="پژوهش">Research</a></li>
+          <li><a href="#resources" class="nav-link" data-nav="resources" onclick="navigateToSection('solidworks'); return false;" data-en="Resources" data-fa="منابع">Resources</a></li>
+          <li><a href="#blog" class="nav-link" data-nav="blog" onclick="navigateToSection('simulations'); return false;" data-en="Blog" data-fa="مقالات">Blog</a></li>
+          <li><a href="#contact" class="nav-link" data-nav="contact" onclick="document.getElementById('contactCtaBanner')?.scrollIntoView({behavior:'smooth'}); return false;" data-en="Contact" data-fa="تماس">Contact</a></li>
         </ul>
         <div class="nav-tools">
+          <button id="searchOpenBtn" class="tool-btn" title="Search simulations & models" aria-label="Search" onclick="openSearchModal()">
+            <i data-lucide="search" style="width: 16px;"></i>
+          </button>
+          <button id="themeToggle" class="tool-btn" title="Toggle dark/light mode" aria-label="Toggle theme">
+            <i data-lucide="sun" id="themeIconSun" style="width: 16px; display:none;"></i>
+            <i data-lucide="moon" id="themeIconMoon" style="width: 16px;"></i>
+          </button>
+          <a href="#about" class="fm-profile-btn" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;" title="My Profile">
+            <i data-lucide="user" style="width: 13px; height: 13px;"></i>
+            <span data-en="My Profile" data-fa="پروفایل من">My Profile</span>
+          </a>
           <button id="mobileMenuToggle" class="tool-btn hamburger-btn" title="Menu" aria-label="Toggle menu">
             <i data-lucide="menu" id="menuIconOpen" style="width: 16px;"></i>
             <i data-lucide="x" id="menuIconClose" style="width: 16px; display:none;"></i>
-          </button>
-          <button id="langToggle" class="tool-btn" title="Translate page" aria-label="Toggle language">
-            <i data-lucide="languages" style="width: 16px;"></i>
-            <span id="langToggleLabel">FA</span>
-          </button>
-          <button id="themeToggle" class="tool-btn" title="Toggle day/night mode" aria-label="Toggle theme">
-            <i data-lucide="sun" id="themeIconSun" style="width: 16px; display:none;"></i>
-            <i data-lucide="moon" id="themeIconMoon" style="width: 16px;"></i>
           </button>
         </div>
       </div>
@@ -124,243 +133,571 @@
         </div>
       </div>
 
-      <!-- Hero Identity & Basic Info Layout (Photo & Primary Specs) -->
-      <div class="home-hero-layout">
-        <!-- Photo Bezel -->
-        <div class="home-avatar-bezel">
-          <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="home-avatar-img">
-          <span class="home-avatar-status" title="Active"></span>
+      <!-- Engineering HUD Cockpit Telemetry Ribbon -->
+      <div class="hud-telemetry-ribbon" id="hudRibbon">
+        <div class="hud-metric">
+          <span class="hud-metric-label"><i data-lucide="activity" style="width: 11px;"></i> <span data-en="SYS TELEMETRY:" data-fa="تله‌متری سیستم:">SYS TELEMETRY:</span></span>
+          <span class="hud-metric-val hud-status-pulse">
+            <span class="home-status-beacon" style="width: 5px; height: 5px;"></span>
+            <span data-en="ACTIVE // NOMINAL" data-fa="فعال // نرمال">ACTIVE // NOMINAL</span>
+          </span>
         </div>
+        <div class="hud-metric">
+          <span class="hud-metric-label"><i data-lucide="gauge" style="width: 11px;"></i> <span data-en="REYNOLDS NO:" data-fa="عدد رینولدز:">REYNOLDS NO:</span></span>
+          <span class="hud-metric-val laminar" id="hudReynolds">Re: 1,850 [LAMINAR]</span>
+        </div>
+        <div class="hud-metric">
+          <span class="hud-metric-label"><i data-lucide="crosshair" style="width: 11px;"></i> <span data-en="CFD PROBE:" data-fa="پروب CFD:">CFD PROBE:</span></span>
+          <span class="hud-metric-val" id="hudCoords">X: 0.00 | Y: 0.00 mm</span>
+        </div>
+        <div class="hud-metric">
+          <span class="hud-metric-label"><i data-lucide="disc" style="width: 11px;"></i> <span data-en="IMPELLER SPEED:" data-fa="دور پروانه:">IMPELLER SPEED:</span></span>
+          <span class="hud-metric-val" id="hudRpm">2,950 RPM</span>
+        </div>
+        <div class="hud-metric">
+          <button id="soundHapticToggle" class="hud-sound-btn" title="Toggle audio feedback" aria-label="Toggle haptic audio">
+            <i data-lucide="volume-2" id="soundIconOn" style="width: 12px; display:none;"></i>
+            <i data-lucide="volume-x" id="soundIconOff" style="width: 12px;"></i>
+            <span id="soundLabel">HAPTICS: OFF</span>
+          </button>
+        </div>
+      </div>
 
-        <!-- Basic Information -->
-        <div class="home-info-content">
-          <div class="home-badge-row">
-            <div class="home-badge-pill">
-              <i data-lucide="cpu" style="width: 12px;"></i>
-              <span data-en="MECHANICAL ENGINEERING // IUST" data-fa="مهندسی مکانیک // دانشگاه علم و صنعت ایران">MECHANICAL ENGINEERING // IUST</span>
+      <!-- ============================================================
+           1. HERO SECTION: FLUID FLOWS SHAPE OUR WORLD
+           Directly featuring realistic CFD simulation of F1 aerodynamics
+           ============================================================ -->
+      <div class="fm-hero-container">
+        <div class="fm-hero-grid">
+          <!-- Hero Left Column -->
+          <div class="fm-hero-left">
+            <div>
+              <div class="fm-student-badge">
+                <i data-lucide="graduation-cap" style="width: 14px; height: 14px; color: #00f2fe;"></i>
+                <span data-en="Mechanical Engineering Student" data-fa="دانشجوی مهندسی مکانیک">Mechanical Engineering Student</span>
+              </div>
+              <h1 class="fm-hero-title">
+                Fluid Flows<br>
+                <span class="fm-hero-title-accent">Shape Our World</span>
+              </h1>
+              <p class="fm-hero-desc" data-en="Exploring fluid mechanics through simulation, engineering design, and real-world applications. Welcome to my personal space, where engineering meets creativity." data-fa="کاوش در مکانیک سیالات از طریق شبیه‌سازی، طراحی مهندسی و کاربردهای دنیای واقعی. به فضای شخصی من، جایی که مهندسی با خلاقیت پیوند می‌خورد، خوش آمدید.">
+                Exploring fluid mechanics through simulation, engineering design, and real-world applications. Welcome to my personal space, where engineering meets creativity.
+              </p>
+              <div class="fm-hero-ctas">
+                <a href="#projects" class="fm-cta-primary" onclick="navigateToSection('projects'); return false;">
+                  <span data-en="Explore My Projects" data-fa="مشاهده پروژه‌ها">Explore My Projects</span>
+                  <i data-lucide="arrow-right" style="width: 15px; height: 15px;"></i>
+                </a>
+                <a href="#about" class="fm-cta-secondary" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;">
+                  <span data-en="About Me" data-fa="درباره من">About Me</span>
+                </a>
+              </div>
             </div>
-            <div class="home-badge-pill">
-              <span class="home-status-beacon"></span>
-              <span data-en="AVAILABLE FOR COLLABORATION" data-fa="آماده همکاری‌های پژوهشی">AVAILABLE FOR COLLABORATION</span>
+
+            <!-- Hero Statistics Row -->
+            <div class="fm-hero-stats-row">
+              <div class="fm-stat-item">
+                <div class="fm-stat-icon">
+                  <i data-lucide="folder-git-2" style="width: 14px; height: 14px;"></i>
+                </div>
+                <div>
+                  <div class="fm-stat-num">3+</div>
+                  <div class="fm-stat-label" data-en="Major Projects" data-fa="پروژه شاخص">Major Projects</div>
+                </div>
+              </div>
+              <div class="fm-stat-item">
+                <div class="fm-stat-icon">
+                  <i data-lucide="award" style="width: 14px; height: 14px;"></i>
+                </div>
+                <div>
+                  <div class="fm-stat-num">5+</div>
+                  <div class="fm-stat-label" data-en="Courses Completed" data-fa="دوره گذرانده">Courses Completed</div>
+                </div>
+              </div>
+              <div class="fm-stat-item">
+                <div class="fm-stat-icon" style="color: #ff5277; background: rgba(255, 82, 119, 0.12); border-color: rgba(255, 82, 119, 0.25);">
+                  <i data-lucide="heart" style="width: 14px; height: 14px;"></i>
+                </div>
+                <div>
+                  <div class="fm-stat-num">100%</div>
+                  <div class="fm-stat-label" data-en="Passion for Fluids" data-fa="عشق به سیالات">Passion for Fluids</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <h1 class="home-main-name">
-            MOHAMMADAMIN <span>SHARIF</span>
-          </h1>
+          <!-- Hero Right Column: Authentic CFD Aerodynamics Image & HUD -->
+          <div class="fm-hero-right">
+            <img src="assets/images/hero-f1-cfd.jpg" alt="Realistic CFD simulation of airflow around Formula 1 aerodynamic body with velocity streamlines" class="fm-hero-bg-img">
+            
+            <!-- Floating CFD Simulation Info Panel -->
+            <div class="fm-cfd-hud-card">
+              <div class="fm-cfd-hud-title">
+                <i data-lucide="atom" style="width: 13px; height: 13px;"></i>
+                <span>CFD Simulation</span>
+              </div>
+              <div class="fm-cfd-metric-list">
+                <div class="fm-cfd-dot-item">
+                  <span class="fm-cfd-dot" style="background: #00f2fe; box-shadow: 0 0 6px #00f2fe;"></span>
+                  <span>Velocity</span>
+                </div>
+                <div class="fm-cfd-dot-item">
+                  <span class="fm-cfd-dot" style="background: #0ea5e9; box-shadow: 0 0 6px #0ea5e9;"></span>
+                  <span>Pressure</span>
+                </div>
+                <div class="fm-cfd-dot-item">
+                  <span class="fm-cfd-dot" style="background: #10b981; box-shadow: 0 0 6px #10b981;"></span>
+                  <span>Turbulence</span>
+                </div>
+                <div class="fm-cfd-dot-item">
+                  <span class="fm-cfd-dot" style="background: #a855f7; box-shadow: 0 0 6px #a855f7;"></span>
+                  <span>Streamlines</span>
+                </div>
+              </div>
+            </div>
 
-          <!-- 4-node Specs Grid -->
-          <div class="home-specs-grid">
-            <div class="home-spec-item">
-              <div class="home-spec-key" data-en="INSTITUTION" data-fa="دانشگاه">INSTITUTION</div>
-              <div class="home-spec-val" data-en="Iran Univ. of Science & Tech (IUST)" data-fa="دانشگاه علم و صنعت ایران">Iran Univ. of Science & Tech (IUST)</div>
+            <!-- Floating Hero Quote Badge -->
+            <div class="fm-hero-quote-badge">
+              <i data-lucide="quote" style="width: 12px; height: 12px; color: #38bdf8;"></i>
+              <span>Better designs. A more sustainable future.</span>
             </div>
-            <div class="home-spec-item">
-              <div class="home-spec-key" data-en="ORIENTATION" data-fa="گرایش">ORIENTATION</div>
-              <div class="home-spec-val" data-en="Thermal & Fluids Engineering" data-fa="حرارت و سیالات">Thermal & Fluids Engineering</div>
-            </div>
-            <div class="home-spec-item">
-              <div class="home-spec-key" data-en="FOCUS AREAS" data-fa="زمینه‌های اصلی">FOCUS AREAS</div>
-              <div class="home-spec-val" data-en="Pumps • Microfluidics • CAD" data-fa="پمپ‌ها • میکروفلوئیدیک • CAD">Pumps • Microfluidics • CAD</div>
-            </div>
-            <div class="home-spec-item">
-              <div class="home-spec-key" data-en="LOCATION" data-fa="موقعیت">LOCATION</div>
-              <div class="home-spec-val" data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</div>
-            </div>
-          </div>
-
-          <!-- Quick Actions -->
-          <div class="home-actions-row">
-            <button class="home-action-btn-primary" onclick="navigateToSection('projects')">
-              <i data-lucide="disc" style="width: 14px;"></i>
-              <span data-en="Explore Pump Design" data-fa="مشاهده پروژه طراحی پمپ">Explore Pump Design</span>
-            </button>
-            <button class="home-action-btn-secondary" onclick="navigateToSection('solidworks')">
-              <i data-lucide="box" style="width: 14px;"></i>
-              <span data-en="SolidWorks CAD" data-fa="مدل‌های سالیدورکس">SolidWorks CAD</span>
-            </button>
-            <button class="home-action-btn-secondary" onclick="navigateToSection('info')">
-              <i data-lucide="user" style="width: 14px;"></i>
-              <span data-en="Full Bio & Contact" data-fa="بیوگرافی کامل و تماس">Full Bio & Contact</span>
-            </button>
           </div>
         </div>
       </div>
 
-      <!-- Section Portals Divider & Grid -->
-      <div class="portals-section-divider">
-        <h2 class="portals-section-heading">
-          <i data-lucide="layout-grid" style="width: 16px; color: var(--lg-cyan);"></i>
-          <span data-en="PORTFOLIO WORKSPACES" data-fa="بخش‌های تخصصی پورتفولیو">PORTFOLIO WORKSPACES</span>
-        </h2>
-        <span class="portals-section-subtext" data-en="SELECT A SECTION TO ENTER DEDICATED WORKSPACE" data-fa="برای ورود، روی هر بخش کلیک کنید">SELECT A SECTION TO ENTER DEDICATED WORKSPACE</span>
-      </div>
-
-      <div class="portals-grid">
-        <!-- Portal 1: Pump Design -->
-        <div class="portal-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #ff5277;"></div>
+      <!-- ============================================================
+           2. ENGINEERING FEATURE CARDS (Row of 5 Cards)
+           ============================================================ -->
+      <div class="fm-features-grid">
+        <!-- Card 1: Fluid Mechanics -->
+        <div class="fm-feature-card" onclick="navigateToSection('microfluidics')" role="button" tabindex="0">
           <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #ff5277;">
-                <i data-lucide="disc" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">01 PROJECT</span>
+            <div class="fm-feature-icon-box">
+              <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="portal-card-title" data-en="Pump Design & Turbomachinery" data-fa="طراحی پمپ و توربوماشین">Pump Design & Turbomachinery</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">Impeller</span>
-              <span class="p-tag">Volute</span>
-              <span class="p-tag">CFturbo</span>
-              <span class="p-tag">CFD</span>
+            <div class="fm-feature-title" data-en="Fluid Mechanics" data-fa="مکانیک سیالات">Fluid Mechanics</div>
+            <div class="fm-feature-desc" data-en="Learn the fundamental principles of fluid behavior and applications in engineering." data-fa="یادگیری اصول بنیادین رفتار سیالات، لایه مرزی و کاربردهای آن در مهندسی.">
+              Learn the fundamental principles of fluid behavior and applications in engineering.
             </div>
           </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          <div class="fm-feature-link">
+            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Portal 2: SolidWorks CAD -->
-        <div class="portal-card" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #0089ad;"></div>
+        <!-- Card 2: CFD & Simulation -->
+        <div class="fm-feature-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
           <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #0089ad;">
-                <i data-lucide="box" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">05 CAD MODELS</span>
+            <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #00b4d8 0%, #0369a1 100%);">
+              <i data-lucide="box" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="portal-card-title" data-en="SolidWorks 3D CAD" data-fa="مدل‌سازی سه‌بعدی سالیدورکس">SolidWorks 3D CAD</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">Assemblies</span>
-              <span class="p-tag">2D / 3D</span>
-              <span class="p-tag">STEP / ZIP</span>
+            <div class="fm-feature-title" data-en="CFD & Simulation" data-fa="شبیه‌سازی و CFD">CFD & Simulation</div>
+            <div class="fm-feature-desc" data-en="Use computational tools to solve complex fluid problems and visualize results." data-fa="به‌کارگیری ابزارهای محاسباتی جهت حل مسائل پیچیده دینامیک سیالات و تجسم میدان‌ها.">
+              Use computational tools to solve complex fluid problems and visualize results.
             </div>
           </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          <div class="fm-feature-link">
+            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Portal 3: Digital Twins -->
-        <div class="portal-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #5b86e5;"></div>
+        <!-- Card 3: Mechanical Design -->
+        <div class="fm-feature-card" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
           <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #5b86e5;">
-                <i data-lucide="activity" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">05 SIMULATIONS</span>
+            <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #2563eb 0%, #1e3a8a 100%);">
+              <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="portal-card-title" data-en="Simulations & Digital Twins" data-fa="شبیه‌سازی و دوقلوهای دیجیتال">Simulations & Digital Twins</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">Rankine Cycle</span>
-              <span class="p-tag">Boiler Loop</span>
-              <span class="p-tag">Hydraulics</span>
+            <div class="fm-feature-title" data-en="Mechanical Design" data-fa="طراحی مکانیکی">Mechanical Design</div>
+            <div class="fm-feature-desc" data-en="Integrate fluid dynamics with mechanical systems for innovative solutions." data-fa="تلفیق دینامیک سیالات با سیستم‌های مکانیکی و مدل‌سازی پیشرفته سه‌بعدی CAD.">
+              Integrate fluid dynamics with mechanical systems for innovative solutions.
             </div>
           </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          <div class="fm-feature-link">
+            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Portal 4: Microfluidics -->
-        <div class="portal-card" onclick="navigateToSection('microfluidics')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #9b51e0;"></div>
+        <!-- Card 4: Sustainability -->
+        <div class="fm-feature-card" onclick="navigateToSection('capabilities')" role="button" tabindex="0">
           <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #9b51e0;">
-                <i data-lucide="git-commit" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">LIVE MODULE</span>
+            <div class="fm-feature-icon-box" style="background: radial-gradient(circle at 35% 35%, #059669 0%, #064e3b 100%);">
+              <i data-lucide="leaf" style="width: 20px; height: 20px;"></i>
             </div>
-            <div class="portal-card-title" data-en="Microfluidic Chip Lab" data-fa="آزمایشگاه چیپ میکروسیالاتی">Microfluidic Chip Lab</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">Diverging Nozzle</span>
-              <span class="p-tag">Continuity</span>
-              <span class="p-tag">Live Canvas</span>
+            <div class="fm-feature-title" data-en="Sustainability" data-fa="پایداری و انرژی نو">Sustainability</div>
+            <div class="fm-feature-desc" data-en="Build a cleaner and more efficient future through smart engineering and renewable energy." data-fa="خلق آینده‌ای پاک‌تر و با بهره‌وری بالاتر از طریق مهندسی هوشمند و انرژی‌های تجدیدپذیر.">
+              Build a cleaner and more efficient future through smart engineering and renewable energy.
             </div>
           </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
+          <div class="fm-feature-link">
+            <span data-en="View Details" data-fa="مشاهده جزئیات">View Details</span>
+            <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
           </div>
         </div>
 
-        <!-- Portal 5: Books Library -->
-        <div class="portal-card" onclick="navigateToSection('books')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #ea580c;"></div>
+        <!-- Card 5: Quote Card -->
+        <div class="fm-quote-card">
           <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #ea580c;">
-                <i data-lucide="book-open" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">07 TEXTBOOKS</span>
+            <i data-lucide="quote" style="width: 20px; height: 20px; color: #38bdf8;"></i>
+            <div class="fm-quote-text" data-en="&ldquo;The most beautiful thing we can experience is the mysterious.&rdquo;" data-fa="«زیباترین چیزی که می‌توانیم تجربه کنیم، رازآلودگی است.»">
+              &ldquo;The most beautiful thing we can experience is the mysterious.&rdquo;
             </div>
-            <div class="portal-card-title" data-en="Scientific Books Library" data-fa="کتابخانه کتب علمی و دانشگاهی">Scientific Books Library</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">Fluids</span>
-              <span class="p-tag">Thermodynamics</span>
-              <span class="p-tag">Heat Transfer</span>
-            </div>
+            <div class="fm-quote-author">&mdash; Albert Einstein</div>
           </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
-          </div>
-        </div>
-
-        <!-- Portal 6: Capabilities -->
-        <div class="portal-card" onclick="navigateToSection('capabilities')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #0d9488;"></div>
-          <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #0d9488;">
-                <i data-lucide="cpu" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">CAD • CFD • FEA</span>
-            </div>
-            <div class="portal-card-title" data-en="Engineering Capabilities" data-fa="توانمندی‌ها و تسلط نرم‌افزاری">Engineering Capabilities</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">SolidWorks</span>
-              <span class="p-tag">CFturbo</span>
-              <span class="p-tag">ANSYS</span>
-              <span class="p-tag">Python</span>
-            </div>
-          </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
-          </div>
-        </div>
-
-        <!-- Portal 7: Info & Bio -->
-        <div class="portal-card" onclick="navigateToSection('info')" role="button" tabindex="0">
-          <div class="portal-glow-accent" style="background: #10b981;"></div>
-          <div>
-            <div class="portal-top-row">
-              <div class="portal-icon-box" style="color: #10b981;">
-                <i data-lucide="user-check" style="width: 20px;"></i>
-              </div>
-              <span class="portal-count-badge">BIO & CONTACT</span>
-            </div>
-            <div class="portal-card-title" data-en="Biography & Contact" data-fa="بیوگرافی، اطلاعات و ارتباط">Biography & Contact</div>
-            <div class="project-tags" style="margin-top: 12px;">
-              <span class="p-tag">IUST</span>
-              <span class="p-tag">Email</span>
-              <span class="p-tag">Phone</span>
-              <span class="p-tag">GitHub</span>
-            </div>
-          </div>
-          <div class="portal-footer-row">
-            <span class="portal-enter-prompt"><span data-en="ENTER SECTION" data-fa="ورود به بخش">ENTER SECTION</span></span>
-            <div class="portal-arrow-circle"><i data-lucide="arrow-right" style="width: 14px;"></i></div>
-          </div>
+          <svg class="fm-quote-wave" viewBox="0 0 200 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 12C30 4 50 20 80 12C110 4 130 20 160 12C180 6 195 14 200 12" stroke="url(#waveGrad)" stroke-width="2.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="waveGrad" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00f2fe" stop-opacity="0.2"/>
+                <stop offset="0.5" stop-color="#00f2fe"/>
+                <stop offset="1" stop-color="#38bdf8" stop-opacity="0.1"/>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
       </div>
+
+      <!-- ============================================================
+           3. FEATURED PROJECTS (01) & ABOUT ME (02)
+           Faithfully matching the exact 2-column layout in the mockup
+           ============================================================ -->
+      <div class="fm-split-section">
+        <!-- 01 Featured Projects -->
+        <div class="fm-section-panel">
+          <div class="fm-panel-header">
+            <div class="fm-panel-num-title">
+              <span class="fm-panel-num">01</span>
+              <h2 class="fm-panel-title" data-en="Featured Projects" data-fa="پروژه‌های شاخص">Featured Projects</h2>
+            </div>
+            <a href="#projects" class="fm-panel-action-link" onclick="navigateToSection('projects'); return false;">
+              <span data-en="View All Projects" data-fa="مشاهده همه پروژه‌ها">View All Projects</span>
+              <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+            </a>
+          </div>
+
+          <!-- 3 Project Cards Grid -->
+          <div class="fm-projects-grid">
+            <!-- Project 1: Flow Around a Cylinder -->
+            <div class="fm-project-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
+              <div class="fm-project-img-wrap">
+                <img src="assets/images/cylinder-flow-cfd.jpg" alt="CFD visualization of vortex shedding behind a cylinder" class="fm-project-img">
+                <span class="fm-project-badge">CFD</span>
+              </div>
+              <div class="fm-project-body">
+                <div>
+                  <div class="fm-project-title" data-en="Flow Around a Cylinder" data-fa="جریان حول استوانه">Flow Around a Cylinder</div>
+                  <div class="fm-project-desc" data-en="Analyzing vortex shedding and drag coefficient using Fluent." data-fa="تحلیل ریزش گردابه‌ها و ضریب پسا با انسیس فلوئنت.">
+                    Analyzing vortex shedding and drag coefficient using Fluent.
+                  </div>
+                </div>
+                <div class="fm-project-footer">
+                  <div class="fm-project-meta-item">
+                    <i data-lucide="cpu" style="width: 12px; height: 12px; color: #00f2fe;"></i>
+                    <span>ANSYS Fluent</span>
+                  </div>
+                  <div class="fm-project-meta-item">
+                    <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
+                    <span>2024</span>
+                  </div>
+                  <div class="fm-project-arrow-btn">
+                    <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2: Turbine Blade Optimization -->
+            <div class="fm-project-card" onclick="navigateToSection('projects')" role="button" tabindex="0">
+              <div class="fm-project-img-wrap">
+                <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal impeller and turbine blade with CFD streamlines" class="fm-project-img">
+                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(2, 132, 199, 0.6); color: #38bdf8;">Design + CFD</span>
+              </div>
+              <div class="fm-project-body">
+                <div>
+                  <div class="fm-project-title" data-en="Turbine Blade Optimization" data-fa="بهینه‌سازی پره توربوماشین">Turbine Blade Optimization</div>
+                  <div class="fm-project-desc" data-en="Improving efficiency using parametric design and CFD analysis." data-fa="ارتقای راندمان هیدرولیکی پروانه با طراحی پارامتریک و CFD.">
+                    Improving efficiency using parametric design and CFD analysis.
+                  </div>
+                </div>
+                <div class="fm-project-footer">
+                  <div class="fm-project-meta-item">
+                    <i data-lucide="box" style="width: 12px; height: 12px; color: #38bdf8;"></i>
+                    <span>SolidWorks + Fluent</span>
+                  </div>
+                  <div class="fm-project-meta-item">
+                    <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
+                    <span>2024</span>
+                  </div>
+                  <div class="fm-project-arrow-btn">
+                    <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3: Two-Phase Flow -->
+            <div class="fm-project-card" onclick="navigateToSection('simulations')" role="button" tabindex="0">
+              <div class="fm-project-img-wrap">
+                <img src="assets/images/two-phase-flow-cfd.jpg" alt="Gas-liquid multiphase flow inside pipe" class="fm-project-img">
+                <span class="fm-project-badge" style="background: rgba(14, 21, 37, 0.85); border-color: rgba(16, 185, 129, 0.6); color: #10b981;">Simulation</span>
+              </div>
+              <div class="fm-project-body">
+                <div>
+                  <div class="fm-project-title" data-en="Two-Phase Flow" data-fa="جریان دوفازی در لوله">Two-Phase Flow</div>
+                  <div class="fm-project-desc" data-en="Studying gas-liquid flow behavior in horizontal pipe." data-fa="بررسی هیدرودینامیک جریان دوفازی مایع-گاز در لوله افقی.">
+                    Studying gas-liquid flow behavior in horizontal pipe.
+                  </div>
+                </div>
+                <div class="fm-project-footer">
+                  <div class="fm-project-meta-item">
+                    <i data-lucide="activity" style="width: 12px; height: 12px; color: #10b981;"></i>
+                    <span>OpenFOAM</span>
+                  </div>
+                  <div class="fm-project-meta-item">
+                    <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
+                    <span>2024</span>
+                  </div>
+                  <div class="fm-project-arrow-btn">
+                    <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 About Me Column -->
+        <div class="fm-section-panel fm-about-card" id="fmAboutMeBlock">
+          <div class="fm-panel-header" style="margin-bottom: 12px;">
+            <div class="fm-panel-num-title">
+              <span class="fm-panel-num">02</span>
+              <h2 class="fm-panel-title" data-en="About Me" data-fa="درباره من">About Me</h2>
+            </div>
+          </div>
+
+          <div class="fm-about-profile-header">
+            <div class="fm-about-avatar-bezel">
+              <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif portrait" class="fm-about-avatar-img">
+            </div>
+            <div class="fm-about-identity-info">
+              <div class="fm-about-name">Mohammadamin Sharif</div>
+              <div class="fm-about-role" data-en="Mechanical Engineering Student" data-fa="دانشجوی مهندسی مکانیک">Mechanical Engineering Student</div>
+              <div class="fm-about-tag">Fluid Mechanics</div>
+            </div>
+          </div>
+
+          <div class="fm-about-bio" data-en="I'm a mechanical engineering student specializing in fluid mechanics. Passionate about simulation, design, and solving real-world problems through engineering." data-fa="من دانشجوی مهندسی مکانیک با تخصص در مکانیک سیالات و حرارت هستم. مشتاق شبیه‌سازی عددی، طراحی و حل چالش‌های واقعی دنیای مهندسی.">
+            I'm a mechanical engineering student specializing in fluid mechanics. Passionate about simulation, design, and solving real-world problems through engineering.
+          </div>
+
+          <div class="fm-about-list">
+            <div class="fm-about-list-item">
+              <div class="fm-about-list-icon"><i data-lucide="graduation-cap" style="width: 13px; height: 13px;"></i></div>
+              <span data-en="University Student (IUST)" data-fa="دانشجوی دانشگاه علم و صنعت ایران (IUST)">University Student (IUST)</span>
+            </div>
+            <div class="fm-about-list-item">
+              <div class="fm-about-list-icon"><i data-lucide="cpu" style="width: 13px; height: 13px;"></i></div>
+              <span data-en="Mechanical Engineering (Fluid Mechanics)" data-fa="مهندسی مکانیک (مکانیک سیالات)">Mechanical Engineering (Fluid Mechanics)</span>
+            </div>
+            <div class="fm-about-list-item">
+              <div class="fm-about-list-icon"><i data-lucide="crosshair" style="width: 13px; height: 13px;"></i></div>
+              <span data-en="Simulation | Design | Problem Solving" data-fa="شبیه‌سازی | طراحی | حل مسئله">Simulation | Design | Problem Solving</span>
+            </div>
+          </div>
+
+          <div class="fm-about-signature">
+            <span>Keep Flowing</span>
+            <svg width="28" height="14" viewBox="0 0 28 14" fill="none">
+              <path d="M2 7C6 2 10 12 14 7C18 2 22 12 26 7" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           4. ENGINEERING THROUGH SIMULATION (Interactive CFD Lab)
+           Authentic scientific visualization with toggleable contours
+           ============================================================ -->
+      <div class="fm-sim-lab-section" id="engineeringSimLab">
+        <div class="fm-panel-header">
+          <div class="fm-panel-num-title">
+            <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #00f2fe;"></i>
+            <h2 class="fm-panel-title" data-en="Engineering Through Simulation" data-fa="مهندسی از دریچه شبیه‌سازی">Engineering Through Simulation</h2>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8;" data-en="INTERACTIVE CFD POST-PROCESSING" data-fa="پردازش گرافیکی تعاملی CFD">INTERACTIVE CFD POST-PROCESSING</span>
+        </div>
+
+        <!-- Simulation Contour Tabs -->
+        <div class="fm-sim-tabs" role="tablist">
+          <button class="fm-sim-tab-btn active" data-contour="velocity" onclick="switchCfdContour('velocity')">
+            <i data-lucide="wind" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Velocity Field (u, v)
+          </button>
+          <button class="fm-sim-tab-btn" data-contour="pressure" onclick="switchCfdContour('pressure')">
+            <i data-lucide="gauge" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Pressure Field (p)
+          </button>
+          <button class="fm-sim-tab-btn" data-contour="vorticity" onclick="switchCfdContour('vorticity')">
+            <i data-lucide="repeat" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Turbulence &amp; Vorticity (&omega;)
+          </button>
+          <button class="fm-sim-tab-btn" data-contour="streamlines" onclick="switchCfdContour('streamlines')">
+            <i data-lucide="git-commit" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Streamlines (&psi;)
+          </button>
+          <button class="fm-sim-tab-btn" data-contour="mesh" onclick="switchCfdContour('mesh')">
+            <i data-lucide="grid" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Computational Mesh
+          </button>
+        </div>
+
+        <!-- Interactive CFD Canvas Display Box -->
+        <div class="fm-sim-display-box" id="cfdSimBox">
+          <canvas id="cfdInteractiveCanvas" class="fm-sim-interactive-canvas"></canvas>
+          <div class="fm-sim-colorbar">
+            <span id="colorbarMin">0.0 m/s</span>
+            <div class="fm-colorbar-gradient" id="colorbarBar"></div>
+            <span id="colorbarMax">45.0 m/s</span>
+            <span style="color: #00f2fe; margin-left: 6px;" id="cfdFieldLabel">| VELOCITY</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           5. RESEARCH INTERESTS SECTION
+           ============================================================ -->
+      <div class="fm-research-section" id="researchInterestsSection">
+        <div class="fm-panel-header" style="margin-bottom: 18px;">
+          <div class="fm-panel-num-title">
+            <i data-lucide="microscope" style="width: 18px; height: 18px; color: #00f2fe;"></i>
+            <h2 class="fm-panel-title" data-en="Research Interests" data-fa="زمینه‌های پژوهشی">Research Interests</h2>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8;" data-en="SCIENTIFIC DISCIPLINES" data-fa="حوزه‌های تخصصی">SCIENTIFIC DISCIPLINES</span>
+        </div>
+
+        <div class="fm-research-grid">
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="waves" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Fluid Dynamics</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="cpu" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">CFD &amp; Numerical Methods</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Turbulence Modeling</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="flame" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Heat Transfer</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="disc" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Turbomachinery</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Aerodynamics</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="sun" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Renewable Energy</span>
+          </div>
+          <div class="fm-research-card">
+            <div class="fm-research-icon"><i data-lucide="droplets" style="width: 16px; height: 16px;"></i></div>
+            <span class="fm-research-label">Multiphase Flow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           6. CONTACT / CTA SECTION
+           With authentic fluid vortex wave background
+           ============================================================ -->
+      <div class="fm-cta-banner" id="contactCtaBanner">
+        <img src="assets/images/wave-vortex-cta.jpg" alt="Turbulent fluid vortex wave visualization" class="fm-cta-bg-img">
+        <div class="fm-cta-content">
+          <div>
+            <div class="fm-cta-eyebrow" data-en="Next Step..." data-fa="گام بعدی...">Next Step...</div>
+            <h2 class="fm-cta-heading" data-en="Let's Build Something Amazing" data-fa="بیایید اثری ماندگار خلق کنیم">Let's Build Something Amazing</h2>
+            <p class="fm-cta-subtext" data-en="Interested in engineering, simulation, research, or collaboration? Feel free to reach out!" data-fa="علاقه‌مند به همکاری‌های مهندسی، شبیه‌سازی، پروژه‌های صنعتی یا تبادل نظر علمی؟ با کمال میل پاسخگوی شما هستم.">
+              Interested in engineering, simulation, research, or collaboration? Feel free to reach out!
+            </p>
+            <a href="mailto:mohammadaminsh1384@gmail.com" class="fm-cta-primary" style="padding: 12px 28px; font-size: 14px;">
+              <span data-en="Get in Touch" data-fa="ارتباط با من">Get in Touch</span>
+              <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+            </a>
+          </div>
+
+          <div class="fm-contact-info-column">
+            <a href="mailto:mohammadaminsh1384@gmail.com" class="fm-contact-item">
+              <div class="fm-contact-icon-box">
+                <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
+              </div>
+              <div>
+                <div class="fm-contact-meta-label">Email</div>
+                <div class="fm-contact-meta-val">mohammadaminsh1384@gmail.com</div>
+              </div>
+            </a>
+            <a href="https://t.me/aminsharif_mech" target="_blank" rel="noopener noreferrer" class="fm-contact-item">
+              <div class="fm-contact-icon-box" style="background: rgba(14, 165, 233, 0.15); border-color: rgba(14, 165, 233, 0.4); color: #38bdf8;">
+                <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+              </div>
+              <div>
+                <div class="fm-contact-meta-label">Telegram</div>
+                <div class="fm-contact-meta-val">@aminsharif_mech</div>
+              </div>
+            </a>
+            <div class="fm-contact-item">
+              <div class="fm-contact-icon-box" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #10b981;">
+                <i data-lucide="map-pin" style="width: 16px; height: 16px;"></i>
+              </div>
+              <div>
+                <div class="fm-contact-meta-label">Location</div>
+                <div class="fm-contact-meta-val">Iran &mdash; IUST University</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           7. FOOTER
+           ============================================================ -->
+      <footer class="fm-footer">
+        <div class="fm-footer-main">
+          <div class="fm-navbar-brand">
+            <div class="fm-brand-icon">
+              <i data-lucide="waves" style="width: 18px; height: 18px;"></i>
+            </div>
+            <div class="fm-brand-text">
+              <span class="fm-brand-title">FluidMind</span>
+              <span class="fm-brand-sub">Mechanical Engineering | Fluid Mechanics</span>
+            </div>
+          </div>
+
+          <ul class="fm-footer-links">
+            <li><a href="#home" onclick="navigateToSection('home'); return false;">Home</a></li>
+            <li><a href="#about" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;">About</a></li>
+            <li><a href="#courses" onclick="navigateToSection('books'); return false;">Courses</a></li>
+            <li><a href="#projects" onclick="navigateToSection('projects'); return false;">Projects</a></li>
+            <li><a href="#research" onclick="document.getElementById('researchInterestsSection')?.scrollIntoView({behavior:'smooth'}); return false;">Research</a></li>
+            <li><a href="#resources" onclick="navigateToSection('solidworks'); return false;">Resources</a></li>
+            <li><a href="#blog" onclick="navigateToSection('simulations'); return false;">Blog</a></li>
+            <li><a href="#contact" onclick="document.getElementById('contactCtaBanner')?.scrollIntoView({behavior:'smooth'}); return false;">Contact</a></li>
+          </ul>
+
+          <div class="fm-footer-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="GitHub"><i data-lucide="github" style="width: 14px; height: 14px;"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="LinkedIn"><i data-lucide="linkedin" style="width: 14px; height: 14px;"></i></a>
+            <a href="https://t.me/aminsharif_mech" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="Telegram"><i data-lucide="send" style="width: 14px; height: 14px;"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="YouTube"><i data-lucide="video" style="width: 14px; height: 14px;"></i></a>
+          </div>
+        </div>
+
+        <div class="fm-footer-bottom">
+          <span>&copy; 2026 FluidMind. All rights reserved.</span>
+          <span style="color: #00f2fe; font-family: var(--font-mono); font-size: 10px;">Fluid Dynamics &times; Better Tomorrow</span>
+        </div>
+      </footer>
     </section>
 
     <!-- LIQUID GLASS FILTER DOCK (Modular Quick Switcher) -->
@@ -1318,6 +1655,10 @@
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
+      if (typeof playHapticSound === 'function') {
+        playHapticSound('portal');
+      }
+
       // Trigger redraw of interactive canvas modules when opened
       setTimeout(() => {
         if (typeof resizeHeroCanvas === 'function') resizeHeroCanvas();
@@ -1364,120 +1705,309 @@
       });
     });
 
-    // Custom Cursor Movement
+    // --- CYBERNETIC COCKPIT & HAPTIC AUDIO ENGINE ---
+    let audioCtx = null;
+    let soundEnabled = localStorage.getItem('site_sound_haptics') === 'true';
+
+    function initAudioContext() {
+      if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playHapticSound(type) {
+      if (!soundEnabled) return;
+      try {
+        initAudioContext();
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'hover') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(920, now);
+          osc.frequency.exponentialRampToValueAtTime(1400, now + 0.035);
+          gain.gain.setValueAtTime(0.015, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'click') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(120, now + 0.04);
+          gain.gain.setValueAtTime(0.035, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+          osc.start(now);
+          osc.stop(now + 0.045);
+        } else if (type === 'portal') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(140, now);
+          osc.frequency.exponentialRampToValueAtTime(420, now + 0.12);
+          gain.gain.setValueAtTime(0.03, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+          osc.start(now);
+          osc.stop(now + 0.18);
+        }
+      } catch (err) {}
+    }
+
+    // Sound toggle UI wiring
+    const soundToggleBtn = document.getElementById('soundHapticToggle');
+    const soundIconOn = document.getElementById('soundIconOn');
+    const soundIconOff = document.getElementById('soundIconOff');
+    const soundLabel = document.getElementById('soundLabel');
+
+    function updateSoundUI() {
+      if (!soundToggleBtn) return;
+      if (soundEnabled) {
+        soundToggleBtn.classList.add('active');
+        if (soundIconOn) soundIconOn.style.display = 'inline-block';
+        if (soundIconOff) soundIconOff.style.display = 'none';
+        if (soundLabel) soundLabel.textContent = 'HAPTICS: ON';
+      } else {
+        soundToggleBtn.classList.remove('active');
+        if (soundIconOn) soundIconOn.style.display = 'none';
+        if (soundIconOff) soundIconOff.style.display = 'inline-block';
+        if (soundLabel) soundLabel.textContent = 'HAPTICS: OFF';
+      }
+    }
+    updateSoundUI();
+
+    if (soundToggleBtn) {
+      soundToggleBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        localStorage.setItem('site_sound_haptics', soundEnabled);
+        if (soundEnabled) {
+          initAudioContext();
+          playHapticSound('click');
+        }
+        updateSoundUI();
+      });
+    }
+
+    // --- DUAL CYBERNETIC CURSOR (Precision Core + Lagging Spring Halo) ---
     const cursor = document.getElementById('cursor');
+    const cursorHalo = document.getElementById('cursorHalo');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let haloX = mouseX;
+    let haloY = mouseY;
+    let lastMouseX = mouseX;
+    let lastMouseY = mouseY;
+    let currentSpeed = 0;
+
     document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (cursor) {
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+      }
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      currentSpeed = Math.hypot(dx, dy);
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+
+      const hudCoords = document.getElementById('hudCoords');
+      if (hudCoords) {
+        hudCoords.textContent = `X: ${(mouseX * 0.28).toFixed(1)} | Y: ${(mouseY * 0.28).toFixed(1)} mm`;
+      }
     });
-    document.querySelectorAll('a, button, .project-card, .project-glass-card, .filter-pill, .tool-btn, .portal-glass-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+
+    // Smooth Halo loop & Real-time Reynolds calculation
+    const hudReynolds = document.getElementById('hudReynolds');
+    const hudRpm = document.getElementById('hudRpm');
+    let smoothedSpeed = 0;
+    let rpmBase = 2950;
+
+    function renderCursorAndTelemetry() {
+      haloX += (mouseX - haloX) * 0.18;
+      haloY += (mouseY - haloY) * 0.18;
+      if (cursorHalo) {
+        cursorHalo.style.left = haloX + 'px';
+        cursorHalo.style.top = haloY + 'px';
+      }
+
+      smoothedSpeed += (currentSpeed - smoothedSpeed) * 0.12;
+      currentSpeed *= 0.92;
+
+      const re = Math.round(920 + smoothedSpeed * 125);
+      if (hudReynolds) {
+        if (re < 2300) {
+          hudReynolds.textContent = `Re: ${re.toLocaleString()} [LAMINAR]`;
+          hudReynolds.className = 'hud-metric-val laminar';
+        } else if (re < 4000) {
+          hudReynolds.textContent = `Re: ${re.toLocaleString()} [TRANSITIONAL]`;
+          hudReynolds.className = 'hud-metric-val transitional';
+        } else {
+          hudReynolds.textContent = `Re: ${re.toLocaleString()} [TURBULENT]`;
+          hudReynolds.className = 'hud-metric-val turbulent';
+        }
+      }
+
+      if (hudRpm && Math.random() < 0.08) {
+        const jitter = Math.round(Math.sin(Date.now() * 0.003) * 12 + (Math.random() * 6 - 3));
+        hudRpm.textContent = `${(rpmBase + jitter).toLocaleString()} RPM`;
+      }
+
+      requestAnimationFrame(renderCursorAndTelemetry);
+    }
+    requestAnimationFrame(renderCursorAndTelemetry);
+
+    // Wire Cursor Hover States & Haptics
+    const hoverSelectors = 'a, button, .portal-card, .project-card, .home-spec-item, .home-avatar-bezel, .tool-btn, .lg-pill-action, .home-action-btn-primary, .home-action-btn-secondary, [role="button"]';
+    document.querySelectorAll(hoverSelectors).forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (cursor) cursor.classList.add('hover');
+        if (cursorHalo) cursorHalo.classList.add('hover');
+        playHapticSound('hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        if (cursor) cursor.classList.remove('hover');
+        if (cursorHalo) cursorHalo.classList.remove('hover');
+      });
+      el.addEventListener('click', () => {
+        playHapticSound('click');
+      });
+    });
+
+    // --- 3D GYROSCOPIC PERSPECTIVE CARD TILT & SPECULAR RAYTRACING ---
+    const tiltCards = document.querySelectorAll('.portal-card, .project-card, #avatarBezel, .skill-glass-box');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const maxTilt = card.id === 'avatarBezel' ? 14 : 9;
+        const rotX = (0.5 - py) * (maxTilt * 2);
+        const rotY = (px - 0.5) * (maxTilt * 2);
+
+        card.style.setProperty('--mouse-x', `${(px * 100).toFixed(1)}%`);
+        card.style.setProperty('--mouse-y', `${(py * 100).toFixed(1)}%`);
+        card.style.transform = `perspective(900px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(8px) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale3d(1, 1, 1)';
+      });
     });
   </script>
 
   <script>
     // --- HERO CANVAS: ROTATING IMPELLER & FLUID PARTICLES ---
     const hCanvas = document.getElementById('heroCanvas');
-    const hCtx = hCanvas.getContext('2d');
-    
-    function resizeHeroCanvas() {
-      hCanvas.width = hCanvas.parentElement.clientWidth;
-      hCanvas.height = hCanvas.parentElement.clientHeight;
-    }
-    resizeHeroCanvas();
-    window.addEventListener('resize', resizeHeroCanvas);
-
-    let hAngle = 0;
-    const heroParticles = Array.from({ length: 50 }, () => ({
-      x: Math.random() * 400 - 200,
-      y: Math.random() * 400 - 200,
-      r: Math.random() * 80 + 20,
-      speed: Math.random() * 0.02 + 0.01
-    }));
-
-    function renderHeroCanvas() {
-      const isLight = rootEl.classList.contains('light-mode');
-
-      hCtx.fillStyle = isLight ? '#dde3ec' : '#0d1117';
-      hCtx.fillRect(0, 0, hCanvas.width, hCanvas.height);
-
-      const cx = hCanvas.width / 2;
-      const cy = hCanvas.height / 2;
-
-      // Draw Coordinates / Engineering Grid
-      hCtx.strokeStyle = isLight ? 'rgba(16, 21, 29, 0.06)' : 'rgba(255, 255, 255, 0.04)';
-      hCtx.lineWidth = 1;
-      hCtx.beginPath();
-      hCtx.moveTo(cx, 0); hCtx.lineTo(cx, hCanvas.height);
-      hCtx.moveTo(0, cy); hCtx.lineTo(hCanvas.width, cy);
-      hCtx.stroke();
-
-      // Outer Casing Ring
-      hCtx.strokeStyle = isLight ? '#b7c1d1' : '#1a2230';
-      hCtx.lineWidth = 2;
-      hCtx.beginPath();
-      hCtx.arc(cx, cy, 140, 0, Math.PI * 2);
-      hCtx.stroke();
-
-      // Rotating Impeller Geometry
-      hCtx.save();
-      hCtx.translate(cx, cy);
-      hCtx.rotate(hAngle);
-
-      hCtx.strokeStyle = isLight ? '#0089ad' : '#00f2fe';
-      hCtx.lineWidth = 2;
-      for (let i = 0; i < 6; i++) {
-        hCtx.rotate((Math.PI * 2) / 6);
-        hCtx.beginPath();
-        hCtx.moveTo(15, 0);
-        hCtx.quadraticCurveTo(50, 40, 130, 10);
-        hCtx.stroke();
+    if (hCanvas && hCanvas.getContext) {
+      const hCtx = hCanvas.getContext('2d');
+      
+      function resizeHeroCanvas() {
+        if (!hCanvas.parentElement) return;
+        hCanvas.width = hCanvas.parentElement.clientWidth;
+        hCanvas.height = hCanvas.parentElement.clientHeight;
       }
-      hCtx.restore();
+      resizeHeroCanvas();
+      window.addEventListener('resize', resizeHeroCanvas);
 
-      // Particle Kinematics
-      hCtx.fillStyle = isLight ? 'rgba(0, 137, 173, 0.55)' : 'rgba(0, 242, 254, 0.6)';
-      heroParticles.forEach(p => {
-        p.r += p.speed * 20;
-        if (p.r > 140) p.r = 15;
-        const pAngle = hAngle * 2 + p.x;
-        const px = cx + Math.cos(pAngle) * p.r;
-        const py = cy + Math.sin(pAngle) * p.r;
+      let hAngle = 0;
+      const heroParticles = Array.from({ length: 50 }, () => ({
+        x: Math.random() * 400 - 200,
+        y: Math.random() * 400 - 200,
+        r: Math.random() * 80 + 20,
+        speed: Math.random() * 0.02 + 0.01
+      }));
 
+      function renderHeroCanvas() {
+        const isLight = rootEl.classList.contains('light-mode');
+
+        hCtx.fillStyle = isLight ? '#dde3ec' : '#0d1117';
+        hCtx.fillRect(0, 0, hCanvas.width, hCanvas.height);
+
+        const cx = hCanvas.width / 2;
+        const cy = hCanvas.height / 2;
+
+        // Draw Coordinates / Engineering Grid
+        hCtx.strokeStyle = isLight ? 'rgba(16, 21, 29, 0.06)' : 'rgba(255, 255, 255, 0.04)';
+        hCtx.lineWidth = 1;
         hCtx.beginPath();
-        hCtx.arc(px, py, 2, 0, Math.PI * 2);
-        hCtx.fill();
-      });
+        hCtx.moveTo(cx, 0); hCtx.lineTo(cx, hCanvas.height);
+        hCtx.moveTo(0, cy); hCtx.lineTo(hCanvas.width, cy);
+        hCtx.stroke();
 
-      hAngle += 0.01;
-      requestAnimationFrame(renderHeroCanvas);
+        // Outer Casing Ring
+        hCtx.strokeStyle = isLight ? '#b7c1d1' : '#1a2230';
+        hCtx.lineWidth = 2;
+        hCtx.beginPath();
+        hCtx.arc(cx, cy, 140, 0, Math.PI * 2);
+        hCtx.stroke();
+
+        // Rotating Impeller Geometry
+        hCtx.save();
+        hCtx.translate(cx, cy);
+        hCtx.rotate(hAngle);
+
+        hCtx.strokeStyle = isLight ? '#0089ad' : '#00f2fe';
+        hCtx.lineWidth = 2;
+        for (let i = 0; i < 6; i++) {
+          hCtx.rotate((Math.PI * 2) / 6);
+          hCtx.beginPath();
+          hCtx.moveTo(15, 0);
+          hCtx.quadraticCurveTo(50, 40, 130, 10);
+          hCtx.stroke();
+        }
+        hCtx.restore();
+
+        // Particle Kinematics
+        hCtx.fillStyle = isLight ? 'rgba(0, 137, 173, 0.55)' : 'rgba(0, 242, 254, 0.6)';
+        heroParticles.forEach(p => {
+          p.r += p.speed * 20;
+          if (p.r > 140) p.r = 15;
+          const pAngle = hAngle * 2 + p.x;
+          const px = cx + Math.cos(pAngle) * p.r;
+          const py = cy + Math.sin(pAngle) * p.r;
+
+          hCtx.beginPath();
+          hCtx.arc(px, py, 2, 0, Math.PI * 2);
+          hCtx.fill();
+        });
+
+        hAngle += 0.01;
+        requestAnimationFrame(renderHeroCanvas);
+      }
+      renderHeroCanvas();
     }
-    renderHeroCanvas();
 
     // --- NOZZLE CANVAS: DIVERGING NOZZLE FLOW SIMULATION ---
     const cCanvas = document.getElementById('chipCanvas');
-    const cCtx = cCanvas.getContext('2d');
+    if (cCanvas && cCanvas.getContext) {
+      const cCtx = cCanvas.getContext('2d');
 
-    function resizeChipCanvas() {
-      cCanvas.width = cCanvas.parentElement.clientWidth;
-      cCanvas.height = cCanvas.parentElement.clientHeight;
-    }
-    resizeChipCanvas();
-    window.addEventListener('resize', resizeChipCanvas);
+      function resizeChipCanvas() {
+        if (!cCanvas.parentElement) return;
+        cCanvas.width = cCanvas.parentElement.clientWidth;
+        cCanvas.height = cCanvas.parentElement.clientHeight;
+      }
+      resizeChipCanvas();
+      window.addEventListener('resize', resizeChipCanvas);
 
-    let chipMouseY = cCanvas.height / 2;
-    cCanvas.addEventListener('mousemove', (e) => {
-      const rect = cCanvas.getBoundingClientRect();
-      chipMouseY = e.clientY - rect.top;
-    });
+      let chipMouseY = cCanvas.height / 2;
+      cCanvas.addEventListener('mousemove', (e) => {
+        const rect = cCanvas.getBoundingClientRect();
+        chipMouseY = e.clientY - rect.top;
+      });
 
-    // yFrac: relative position of the particle within the local channel half-width (-1..1)
-    const chipParticles = Array.from({ length: 60 }, () => ({
-      x: Math.random() * 600,
-      yFrac: Math.random() * 2 - 1,
-      vx: Math.random() * 1.5 + 1.5
-    }));
+      // yFrac: relative position of the particle within the local channel half-width (-1..1)
+      const chipParticles = Array.from({ length: 60 }, () => ({
+        x: Math.random() * 600,
+        yFrac: Math.random() * 2 - 1,
+        vx: Math.random() * 1.5 + 1.5
+      }));
 
     function renderChipCanvas() {
       const isLight = rootEl.classList.contains('light-mode');
@@ -1526,6 +2056,525 @@
       requestAnimationFrame(renderChipCanvas);
     }
     renderChipCanvas();
+  }
+  </script>
+
+  <!-- ============================================================
+       CFD INTERACTIVE LAB ENGINE & SEARCH MODAL
+       ============================================================ -->
+  <div id="fmSearchModal" class="fm-search-modal-overlay" style="display:none;" onclick="if(event.target===this)closeSearchModal()">
+    <div class="fm-search-modal-box">
+      <div class="fm-search-header">
+        <i data-lucide="search" style="width: 18px; height: 18px; color: #00f2fe;"></i>
+        <input type="text" id="fmSearchInput" class="fm-search-input" placeholder="Search simulations, CFD projects, CAD models..." oninput="handleSearchQuery(this.value)">
+        <button class="fm-search-close-btn" onclick="closeSearchModal()"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+      </div>
+      <div class="fm-search-results" id="fmSearchResults">
+        <div class="fm-search-item" onclick="navigateToSection('projects');closeSearchModal()">
+          <div class="fm-search-icon"><i data-lucide="disc" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Flow Around a Cylinder (ANSYS Fluent)</div>
+            <div class="fm-search-sub">CFD vortex shedding simulation & drag coefficient analysis</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="navigateToSection('projects');closeSearchModal()">
+          <div class="fm-search-icon"><i data-lucide="settings" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Turbine Blade Optimization & Impeller Design</div>
+            <div class="fm-search-sub">Centrifugal turbomachinery modeling in SolidWorks + Fluent</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="navigateToSection('simulations');closeSearchModal()">
+          <div class="fm-search-icon"><i data-lucide="activity" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Rankine Cycle Digital Twin</div>
+            <div class="fm-search-sub">Thermodynamic steam power cycle with T-s & P-h diagrams</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="navigateToSection('microfluidics');closeSearchModal()">
+          <div class="fm-search-icon"><i data-lucide="git-commit" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">Microfluidic Chip Lab</div>
+            <div class="fm-search-sub">Diverging nozzle continuity & Reynolds flow simulation</div>
+          </div>
+        </div>
+        <div class="fm-search-item" onclick="navigateToSection('solidworks');closeSearchModal()">
+          <div class="fm-search-icon"><i data-lucide="box" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <div class="fm-search-title">SolidWorks 3D CAD Assemblies</div>
+            <div class="fm-search-sub">5 mechanical assemblies, engineering drawings, and STEP files</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .fm-search-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 16, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 100px;
+    }
+    .fm-search-modal-box {
+      width: 90%;
+      max-width: 620px;
+      background: rgba(14, 21, 37, 0.95);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 242, 254, 0.15);
+      overflow: hidden;
+    }
+    .fm-search-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .fm-search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 15px;
+    }
+    .fm-search-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+    .fm-search-close-btn:hover {
+      color: #fff;
+    }
+    .fm-search-results {
+      padding: 12px 16px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .fm-search-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .fm-search-item:hover {
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+    }
+    .fm-search-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(0, 242, 254, 0.12);
+      color: #00f2fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fm-search-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+    .fm-search-sub {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+  </style>
+
+  <script>
+    function openSearchModal() {
+      const m = document.getElementById('fmSearchModal');
+      if (m) {
+        m.style.display = 'flex';
+        setTimeout(() => {
+          document.getElementById('fmSearchInput')?.focus();
+          if (window.lucide) lucide.createIcons();
+        }, 50);
+      }
+    }
+    function closeSearchModal() {
+      const m = document.getElementById('fmSearchModal');
+      if (m) m.style.display = 'none';
+    }
+    function handleSearchQuery(query) {
+      const q = query.toLowerCase().trim();
+      const items = document.querySelectorAll('.fm-search-item');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // --- INTERACTIVE CFD POST-PROCESSING LABORATORY ---
+    let currentCfdMode = 'velocity';
+    const cfdCanvas = document.getElementById('cfdInteractiveCanvas');
+    let cfdCtx = null;
+    let cfdSimTime = 0;
+    let cfdProbeX = 0;
+    let cfdProbeY = 0;
+    let cfdHovered = false;
+
+    const cfdParticles = Array.from({ length: 120 }, () => ({
+      x: Math.random() * 800,
+      y: Math.random() * 400,
+      vx: 3 + Math.random() * 2,
+      vy: 0,
+      life: Math.random() * 200
+    }));
+
+    function switchCfdContour(mode) {
+      currentCfdMode = mode;
+      document.querySelectorAll('.fm-sim-tab-btn').forEach(btn => {
+        if (btn.dataset.contour === mode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const minEl = document.getElementById('colorbarMin');
+      const maxEl = document.getElementById('colorbarMax');
+      const labelEl = document.getElementById('cfdFieldLabel');
+      const barEl = document.getElementById('colorbarBar');
+
+      if (mode === 'velocity') {
+        if (minEl) minEl.textContent = '0.0 m/s';
+        if (maxEl) maxEl.textContent = '45.0 m/s';
+        if (labelEl) labelEl.textContent = '| VELOCITY FIELD';
+        if (barEl) barEl.style.background = 'linear-gradient(90deg, #0b1d3a, #0284c7, #10b981, #eab308, #ef4444)';
+      } else if (mode === 'pressure') {
+        if (minEl) minEl.textContent = '-32.0 kPa';
+        if (maxEl) maxEl.textContent = '+18.5 kPa';
+        if (labelEl) labelEl.textContent = '| STATIC PRESSURE';
+        if (barEl) barEl.style.background = 'linear-gradient(90deg, #7c3aed, #0284c7, #10b981, #ef4444)';
+      } else if (mode === 'vorticity') {
+        if (minEl) minEl.textContent = '-120 s⁻¹';
+        if (maxEl) maxEl.textContent = '+120 s⁻¹';
+        if (labelEl) labelEl.textContent = '| VORTICITY (ω_z)';
+        if (barEl) barEl.style.background = 'linear-gradient(90deg, #1d4ed8, #0f172a, #ef4444)';
+      } else if (mode === 'streamlines') {
+        if (minEl) minEl.textContent = 'Ψ_min';
+        if (maxEl) maxEl.textContent = 'Ψ_max';
+        if (labelEl) labelEl.textContent = '| STREAM FUNCTION';
+        if (barEl) barEl.style.background = 'linear-gradient(90deg, #0284c7, #00f2fe, #38bdf8)';
+      } else if (mode === 'mesh') {
+        if (minEl) minEl.textContent = 'y+ < 1';
+        if (maxEl) maxEl.textContent = 'Farfield';
+        if (labelEl) labelEl.textContent = '| STRUCTURED O-GRID';
+        if (barEl) barEl.style.background = 'linear-gradient(90deg, #10b981, #0284c7, #64748b)';
+      }
+    }
+
+    if (cfdCanvas && cfdCanvas.getContext) {
+      cfdCtx = cfdCanvas.getContext('2d');
+
+      function resizeCfdCanvas() {
+        if (!cfdCanvas.parentElement) return;
+        cfdCanvas.width = cfdCanvas.parentElement.clientWidth;
+        cfdCanvas.height = cfdCanvas.parentElement.clientHeight;
+      }
+      resizeCfdCanvas();
+      window.addEventListener('resize', resizeCfdCanvas);
+
+      cfdCanvas.addEventListener('mousemove', (e) => {
+        const rect = cfdCanvas.getBoundingClientRect();
+        cfdProbeX = e.clientX - rect.left;
+        cfdProbeY = e.clientY - rect.top;
+        cfdHovered = true;
+      });
+
+      cfdCanvas.addEventListener('mouseleave', () => {
+        cfdHovered = false;
+      });
+
+      function renderCfdLab() {
+        if (!cfdCtx) return;
+        const w = cfdCanvas.width;
+        const h = cfdCanvas.height;
+        cfdSimTime += 0.035;
+
+        // Background
+        cfdCtx.fillStyle = '#060a12';
+        cfdCtx.fillRect(0, 0, w, h);
+
+        const cylX = w * 0.24;
+        const cylY = h * 0.5;
+        const cylR = Math.min(w, h) * 0.12;
+
+        if (currentCfdMode === 'velocity') {
+          // Render fluid velocity contour field
+          const stepX = 16;
+          const stepY = 16;
+          for (let x = 0; x < w; x += stepX) {
+            for (let y = 0; y < h; y += stepY) {
+              const dx = x - cylX;
+              const dy = y - cylY;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < cylR) continue;
+
+              const u0 = 24.0;
+              const theta = Math.atan2(dy, dx);
+              const rRatio = (cylR * cylR) / (dist * dist);
+              let u = u0 * (1 - rRatio * Math.cos(2 * theta));
+              let v = -u0 * rRatio * Math.sin(2 * theta);
+
+              if (dx > 0) {
+                const wakeX = dx / (cylR * 2);
+                const wakeDecay = Math.exp(-dx / (w * 0.8));
+                u += (Math.sin(cfdSimTime * 3 - wakeX * 2) * 8.0) * wakeDecay;
+                v += (Math.cos(cfdSimTime * 3 - wakeX * 2) * 9.0) * wakeDecay;
+              }
+
+              const speed = Math.hypot(u, v);
+              const normSpeed = Math.min(1, Math.max(0, speed / 42.0));
+
+              let r = 0, g = 0, b = 0;
+              if (normSpeed < 0.25) {
+                const f = normSpeed / 0.25;
+                r = 10; g = Math.round(50 + f * 100); b = Math.round(150 + f * 80);
+              } else if (normSpeed < 0.5) {
+                const f = (normSpeed - 0.25) / 0.25;
+                r = 0; g = Math.round(150 + f * 100); b = Math.round(230 - f * 80);
+              } else if (normSpeed < 0.75) {
+                const f = (normSpeed - 0.5) / 0.25;
+                r = Math.round(f * 220); g = 230; b = 40;
+              } else {
+                const f = (normSpeed - 0.75) / 0.25;
+                r = 240; g = Math.round(230 * (1 - f)); b = 20;
+              }
+
+              cfdCtx.fillStyle = `rgb(${r},${g},${b})`;
+              cfdCtx.fillRect(x, y, stepX, stepY);
+            }
+          }
+        } else if (currentCfdMode === 'pressure') {
+          const stepX = 16;
+          const stepY = 16;
+          for (let x = 0; x < w; x += stepX) {
+            for (let y = 0; y < h; y += stepY) {
+              const dx = x - cylX;
+              const dy = y - cylY;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < cylR) continue;
+
+              let cp = 1 - 4 * (dy * dy) / (dist * dist);
+              if (dx < 0 && dist < cylR * 1.5) cp = 1.0;
+              if (dx > 0) {
+                const wakeX = dx / (cylR * 2);
+                cp -= Math.abs(Math.sin(wakeX * 2.5 - cfdSimTime * 3)) * 0.8 * Math.exp(-dx / (w * 0.6));
+              }
+
+              const normP = Math.min(1, Math.max(0, (cp + 2.5) / 3.5));
+              const r = Math.round(normP * 240);
+              const g = Math.round(Math.sin(normP * Math.PI) * 180);
+              const b = Math.round((1 - normP) * 255);
+
+              cfdCtx.fillStyle = `rgb(${r},${g},${b})`;
+              cfdCtx.fillRect(x, y, stepX, stepY);
+            }
+          }
+        } else if (currentCfdMode === 'vorticity') {
+          const stepX = 16;
+          const stepY = 16;
+          for (let x = 0; x < w; x += stepX) {
+            for (let y = 0; y < h; y += stepY) {
+              const dx = x - cylX;
+              const dy = y - cylY;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < cylR) continue;
+
+              let omega = 0;
+              if (dx > 0) {
+                const wakeX = dx / (cylR * 2);
+                const wave = Math.sin(wakeX * 2.4 - cfdSimTime * 3);
+                const decay = Math.exp(-dx / (w * 0.7)) * Math.exp(-Math.abs(dy) / (cylR * 2.2));
+                omega = wave * decay * 110;
+              }
+
+              let r = 15, g = 20, b = 30;
+              if (omega > 0) {
+                const f = Math.min(1, omega / 80);
+                r = Math.round(230 * f); g = Math.round(50 * f); b = 20;
+              } else if (omega < 0) {
+                const f = Math.min(1, -omega / 80);
+                r = 20; g = Math.round(140 * f); b = Math.round(250 * f);
+              }
+
+              cfdCtx.fillStyle = `rgb(${r},${g},${b})`;
+              cfdCtx.fillRect(x, y, stepX, stepY);
+            }
+          }
+        } else if (currentCfdMode === 'mesh') {
+          cfdCtx.strokeStyle = 'rgba(0, 242, 254, 0.4)';
+          cfdCtx.lineWidth = 1;
+
+          for (let layer = 1; layer <= 14; layer++) {
+            const rad = cylR + Math.pow(layer, 1.8) * 4;
+            cfdCtx.beginPath();
+            cfdCtx.arc(cylX, cylY, rad, 0, Math.PI * 2);
+            cfdCtx.stroke();
+          }
+
+          const numRays = 32;
+          for (let i = 0; i < numRays; i++) {
+            const ang = (i / numRays) * Math.PI * 2;
+            const maxRad = cylR + Math.pow(14, 1.8) * 4;
+            cfdCtx.beginPath();
+            cfdCtx.moveTo(cylX + Math.cos(ang) * cylR, cylY + Math.sin(ang) * cylR);
+            cfdCtx.lineTo(cylX + Math.cos(ang) * maxRad, cylY + Math.sin(ang) * maxRad);
+            cfdCtx.stroke();
+          }
+
+          cfdCtx.strokeStyle = 'rgba(100, 116, 139, 0.25)';
+          for (let x = 0; x < w; x += 32) {
+            cfdCtx.beginPath();
+            cfdCtx.moveTo(x, 0); cfdCtx.lineTo(x, h);
+            cfdCtx.stroke();
+          }
+          for (let y = 0; y < h; y += 32) {
+            cfdCtx.beginPath();
+            cfdCtx.moveTo(0, y); cfdCtx.lineTo(w, y);
+            cfdCtx.stroke();
+          }
+        }
+
+        // Streamlines & Tracer Particles
+        if (currentCfdMode === 'streamlines' || currentCfdMode === 'velocity') {
+          cfdCtx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+          cfdCtx.strokeStyle = 'rgba(0, 242, 254, 0.35)';
+          cfdCtx.lineWidth = 1.2;
+
+          cfdParticles.forEach(p => {
+            const dx = p.x - cylX;
+            const dy = p.y - cylY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < cylR + 4) {
+              const angle = Math.atan2(dy, dx);
+              p.x = cylX + Math.cos(angle) * (cylR + 5);
+              p.y = cylY + Math.sin(angle) * (cylR + 5);
+            }
+
+            let speedX = 4.2;
+            let speedY = 0;
+            if (dist < cylR * 3) {
+              const rRatio = (cylR * cylR) / (dist * dist);
+              speedY = (dy / dist) * rRatio * 4;
+            }
+            if (dx > 0 && Math.abs(dy) < cylR * 1.8) {
+              speedY += Math.sin(dx * 0.05 - cfdSimTime * 3) * 2.5;
+            }
+
+            p.x += speedX;
+            p.y += speedY;
+
+            if (p.x > w + 20) {
+              p.x = -10;
+              p.y = Math.random() * h;
+            }
+
+            cfdCtx.beginPath();
+            cfdCtx.arc(p.x, p.y, currentCfdMode === 'streamlines' ? 2.5 : 1.5, 0, Math.PI * 2);
+            cfdCtx.fill();
+          });
+        }
+
+        // Physical Cylinder Body
+        const cylGrad = cfdCtx.createRadialGradient(cylX - cylR * 0.3, cylY - cylR * 0.3, cylR * 0.1, cylX, cylY, cylR);
+        cylGrad.addColorStop(0, '#334155');
+        cylGrad.addColorStop(0.7, '#0f172a');
+        cylGrad.addColorStop(1, '#020617');
+
+        cfdCtx.fillStyle = cylGrad;
+        cfdCtx.beginPath();
+        cfdCtx.arc(cylX, cylY, cylR, 0, Math.PI * 2);
+        cfdCtx.fill();
+
+        cfdCtx.strokeStyle = '#00f2fe';
+        cfdCtx.lineWidth = 2.5;
+        cfdCtx.stroke();
+
+        // Stagnation front indicator
+        cfdCtx.fillStyle = '#ef4444';
+        cfdCtx.beginPath();
+        cfdCtx.arc(cylX - cylR, cylY, 4, 0, Math.PI * 2);
+        cfdCtx.fill();
+
+        // Interactive Scientific Probe Inspection Pill
+        if (cfdHovered) {
+          cfdCtx.strokeStyle = 'rgba(0, 242, 254, 0.8)';
+          cfdCtx.lineWidth = 1.5;
+          cfdCtx.setLineDash([4, 4]);
+
+          cfdCtx.beginPath();
+          cfdCtx.moveTo(cfdProbeX, 0); cfdCtx.lineTo(cfdProbeX, h);
+          cfdCtx.moveTo(0, cfdProbeY); cfdCtx.lineTo(w, cfdProbeY);
+          cfdCtx.stroke();
+          cfdCtx.setLineDash([]);
+
+          cfdCtx.beginPath();
+          cfdCtx.arc(cfdProbeX, cfdProbeY, 6, 0, Math.PI * 2);
+          cfdCtx.stroke();
+
+          const pDx = cfdProbeX - cylX;
+          const pDy = cfdProbeY - cylY;
+          const pDist = Math.hypot(pDx, pDy);
+          const probeU = pDist < cylR ? 0 : Math.min(45, (25 + Math.sin(pDx * 0.05) * 12)).toFixed(1);
+          const probeP = pDist < cylR ? 0 : (-12 + (pDx < 0 ? 25 : -10) * Math.exp(-pDist / 200)).toFixed(1);
+
+          const pillX = Math.min(w - 180, cfdProbeX + 15);
+          const pillY = Math.max(30, cfdProbeY - 20);
+
+          cfdCtx.fillStyle = 'rgba(10, 16, 28, 0.92)';
+          cfdCtx.strokeStyle = '#00f2fe';
+          cfdCtx.lineWidth = 1;
+          cfdCtx.beginPath();
+          cfdCtx.roundRect(pillX, pillY, 160, 52, 6);
+          cfdCtx.fill();
+          cfdCtx.stroke();
+
+          cfdCtx.fillStyle = '#00f2fe';
+          cfdCtx.font = '10px monospace';
+          cfdCtx.fillText(`PROBE: [${Math.round(cfdProbeX)}, ${Math.round(cfdProbeY)}] mm`, pillX + 8, pillY + 16);
+          cfdCtx.fillStyle = '#f1f5f9';
+          cfdCtx.fillText(`VELOCITY: ${probeU} m/s`, pillX + 8, pillY + 30);
+          cfdCtx.fillStyle = '#38bdf8';
+          cfdCtx.fillText(`PRESSURE: ${probeP} kPa`, pillX + 8, pillY + 44);
+        }
+
+        requestAnimationFrame(renderCfdLab);
+      }
+      renderCfdLab();
+    }
   </script>
   <script>
 (function () {
