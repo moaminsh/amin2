@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پنل مدیریت امن • سامانه یکپارچه Sharif</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --font-vazir: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      font-family: var(--font-vazir);
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    .font-mono-code {
+      font-family: var(--font-mono);
+    }
+    /* Liquid Glass Effect */
+    .glass-panel {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .glass-input {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
+    }
+    .glass-input:focus {
+      border-color: #06b6d4;
+      box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(6, 182, 212, 0.4);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#0b0f19] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed top-5 left-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- AUTHENTICATION VIEW (LOGIN / MFA) -->
+  <div id="authView" class="min-h-screen flex items-center justify-center p-4 relative z-10">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="w-full max-w-md glass-panel p-8 rounded-2xl shadow-2xl border border-white/10 relative z-20">
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 mb-4 shadow-lg shadow-cyan-500/5">
+          <i data-lucide="shield-check" class="w-8 h-8"></i>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-white">سامانه مدیریت امن</h1>
+        <p class="text-sm text-slate-400 mt-1">احراز هویت دومرحله‌ای و کنترل دسترسی سازمانی</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-5">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">ایمیل سازمانی مدیر</label>
+          <div class="relative">
+            <input type="email" id="loginEmail" required class="w-full glass-input text-white text-sm rounded-xl px-4 py-3 pl-10 focus:outline-none" placeholder="admin@fluidmind.internal" dir="ltr" />
+            <span class="absolute left-3 top-3.5 text-slate-500">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">رمز عبور امن</label>
+          <div class="relative">
+            <input type="password" id="loginPassword" required class="w-full glass-input text-white text-sm rounded-xl px-4 py-3 pl-10 focus:outline-none" placeholder="••••••••" dir="ltr" />
+            <button type="button" id="togglePassBtn" class="absolute left-3 top-3.5 text-slate-500 hover:text-slate-300 transition-colors">
+              <i data-lucide="eye" class="w-4 h-4" id="eyeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- MFA Code Field (Initially Hidden) -->
+        <div id="mfaFieldContainer" class="hidden">
+          <label class="block text-xs font-semibold text-cyan-400 mb-2 flex items-center gap-1.5">
+            <i data-lucide="key" class="w-3.5 h-3.5"></i>
+            کد تأیید ۶ رقمی (Authenticator / Backup Code)
+          </label>
+          <input type="text" id="loginMfaCode" class="w-full glass-input text-center text-cyan-300 font-mono text-lg tracking-widest rounded-xl px-4 py-2.5 focus:outline-none" placeholder="123456" maxlength="8" dir="ltr" />
+        </div>
+
+        <button type="submit" id="loginSubmitBtn" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium text-sm transition-all shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 flex items-center justify-center gap-2 cursor-pointer">
+          <span id="loginBtnText">ورود به پنل مدیریت</span>
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </button>
+      </form>
+
+      <div class="mt-6 pt-6 border-t border-white/5 text-center">
+        <p class="text-xs text-slate-500 leading-relaxed">
+          دسترسی به این پنل ثبت و نظارت می‌شود. کلیه نشست‌ها با توکن‌های رمزنگاری شده و محدودیت نرخ تلاش محافظت می‌گردند.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORCE PASSWORD CHANGE MODAL (Appears on first login or mandatory change) -->
+  <div id="forcePasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+    <div class="w-full max-w-md glass-panel p-6 rounded-2xl border border-amber-500/30 shadow-2xl relative">
+      <div class="flex items-center gap-3 text-amber-400 mb-4">
+        <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
+          <i data-lucide="shield-alert" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="text-lg font-bold text-white">تغییر اجباری رمز عبور اولیه</h2>
+          <p class="text-xs text-amber-300">برای حفظ امنیت، رمز عبور موقت باید فوراً تغییر یابد.</p>
+        </div>
+      </div>
+      <form id="forcePasswordForm" class="space-y-4">
+        <div>
+          <label class="block text-xs text-slate-300 mb-1.5">رمز عبور فعلی (موقت)</label>
+          <input type="password" id="currentTempPass" required class="w-full glass-input text-white text-sm rounded-xl px-4 py-2.5" dir="ltr" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1.5">رمز عبور جدید و قدرتمند (حداقل ۸ کاراکتر با حروف کوچک، بزرگ و عدد)</label>
+          <input type="password" id="newSecurePass" required class="w-full glass-input text-white text-sm rounded-xl px-4 py-2.5" dir="ltr" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1.5">تکرار رمز عبور جدید</label>
+          <input type="password" id="confirmSecurePass" required class="w-full glass-input text-white text-sm rounded-xl px-4 py-2.5" dir="ltr" />
+        </div>
+        <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-colors cursor-pointer mt-2">
+          ثبت رمز عبور جدید و ادامه
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN APPLICATION DASHBOARD VIEW (Initially Hidden) -->
+  <div id="dashboardView" class="min-h-screen flex flex-col md:flex-row hidden">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-l border-white/10 flex flex-col justify-between shrink-0 z-20">
+      <div>
+        <!-- Brand Header -->
+        <div class="p-6 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+              <i data-lucide="layers" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <span class="font-bold text-sm tracking-tight text-white block">مدیریت شریف</span>
+              <span class="text-[10px] text-cyan-400 font-mono">CORE ADMIN v2.0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current User Pill -->
+        <div class="px-4 py-3 mx-4 my-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-2.5 overflow-hidden">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 text-white font-bold flex items-center justify-center text-xs shrink-0" id="userAvatarText">
+              AD
+            </div>
+            <div class="overflow-hidden text-right">
+              <span class="text-xs font-semibold text-white block truncate" id="userNameDisplay">مدیر سیستم</span>
+              <span class="text-[10px] text-slate-400 block truncate" id="userRoleBadge">Super Admin</span>
+            </div>
+          </div>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50" title="آنلاین و احراز شده"></span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="p-3 space-y-1">
+          <button data-tab="tab-dashboard" class="nav-tab-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-white/5 cursor-pointer">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-cyan-400"></i>
+            داشبورد کلی
+          </button>
+
+          <button data-tab="tab-content" class="nav-tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-white/5 cursor-pointer">
+            <i data-lucide="file-text" class="w-4 h-4 text-blue-400"></i>
+            مدیریت محتوا و متون
+          </button>
+
+          <button data-tab="tab-files" class="nav-tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-white/5 cursor-pointer">
+            <i data-lucide="folder-archive" class="w-4 h-4 text-amber-400"></i>
+            مدیریت فایل و مدیا
+          </button>
+
+          <button data-tab="tab-users" class="nav-tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-white/5 cursor-pointer">
+            <i data-lucide="users" class="w-4 h-4 text-purple-400"></i>
+            کاربران و سطوح دسترسی
+          </button>
+
+          <button data-tab="tab-security" class="nav-tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-white/5 cursor-pointer">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-emerald-400"></i>
+            امنیت و نشست‌ها
+          </button>
+
+          <button data-tab="tab-audit" class="nav-tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-white/5 cursor-pointer">
+            <i data-lucide="history" class="w-4 h-4 text-rose-400"></i>
+            گزارش لاگ‌های امنیتی
+          </button>
+        </nav>
+      </div>
+
+      <!-- Sidebar Footer (Logout & Visit Site) -->
+      <div class="p-4 border-t border-white/10 space-y-2">
+        <a href="/" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs transition-colors">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          مشاهده وب‌سایت عمومی
+        </a>
+        <button id="logoutBtn" class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 text-xs font-medium transition-colors cursor-pointer">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          خروج امن از حساب
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8">
+
+      <!-- ================= TAB: DASHBOARD ================= -->
+      <div id="tab-dashboard" class="tab-content space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white">مرور وضعیت سامانه</h2>
+            <p class="text-xs text-slate-400 mt-0.5">وضعیت فعال امنیت، نشست‌های برخط و محتوای ذخیره‌شده</p>
+          </div>
+          <button id="refreshStatsBtn" class="px-3.5 py-1.5 rounded-xl glass-card text-xs font-medium text-slate-300 hover:text-white hover:border-cyan-500/40 flex items-center gap-2 cursor-pointer transition-all">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            بروزرسانی آمار
+          </button>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="glass-card p-5 rounded-2xl border border-white/5">
+            <div class="flex items-center justify-between text-slate-400 mb-3">
+              <span class="text-xs font-medium">آیتم‌های محتوا</span>
+              <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400"><i data-lucide="file-text" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-2xl font-bold text-white font-mono" id="statContentCount">-</div>
+            <span class="text-[11px] text-emerald-400 mt-1 inline-block">همگام با وب‌سایت عمومی</span>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl border border-white/5">
+            <div class="flex items-center justify-between text-slate-400 mb-3">
+              <span class="text-xs font-medium">فایل‌های ذخیره‌شده</span>
+              <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400"><i data-lucide="folder-archive" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-2xl font-bold text-white font-mono" id="statFileCount">-</div>
+            <span class="text-[11px] text-slate-400 mt-1 inline-block">محافظت‌شده با بررسی امضا</span>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl border border-white/5">
+            <div class="flex items-center justify-between text-slate-400 mb-3">
+              <span class="text-xs font-medium">نشست‌های فعال</span>
+              <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i data-lucide="radio" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-2xl font-bold text-white font-mono" id="statActiveSessions">-</div>
+            <span class="text-[11px] text-emerald-400 mt-1 inline-block">توکن‌های رمزنگاری SHA-256</span>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl border border-white/5">
+            <div class="flex items-center justify-between text-slate-400 mb-3">
+              <span class="text-xs font-medium">کاربران مجاز</span>
+              <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400"><i data-lucide="users" class="w-4 h-4"></i></div>
+            </div>
+            <div class="text-2xl font-bold text-white font-mono" id="statUserCount">-</div>
+            <span class="text-[11px] text-purple-400 mt-1 inline-block">سیاست نقش RBAC فعال</span>
+          </div>
+        </div>
+
+        <!-- Security Status Banner -->
+        <div class="glass-card p-6 rounded-2xl border border-cyan-500/20 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-start gap-3.5">
+              <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shrink-0">
+                <i data-lucide="shield-check" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-white">لایه‌های امنیتی سرور فعال است</h3>
+                <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                  احراز هویت توکن‌محور، کوکی‌های HttpOnly/SameSite، کنترل دسترسی سمت سرور (RBAC)، هشینگ رمز با Bcrypt، محدودکننده نرخ ورود، جلوگیری از تزریق SQL/XSS، و فیلتر فایل‌های آپلودی به طور پیوسته در حال فعالیت هستند.
+                </p>
+              </div>
+            </div>
+            <button onclick="switchTab('tab-security')" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-xl text-xs transition-colors shrink-0 cursor-pointer">
+              تنظیمات امنیتی و 2FA
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent Audit Activity -->
+        <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+          <div class="p-5 border-b border-white/5 flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="history" class="w-4 h-4 text-cyan-400"></i>
+              آخرین رویدادهای امنیتی
+            </h3>
+            <button onclick="switchTab('tab-audit')" class="text-xs text-cyan-400 hover:underline">مشاهده همه لاگ‌ها</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-white/5 text-slate-400">
+                <tr>
+                  <th class="p-3">زمان</th>
+                  <th class="p-3">عملیات</th>
+                  <th class="p-3">منبع</th>
+                  <th class="p-3">آدرس IP</th>
+                  <th class="p-3">نتیجه</th>
+                </tr>
+              </thead>
+              <tbody id="recentAuditTableBody" class="divide-y divide-white/5 text-slate-300">
+                <tr><td colspan="5" class="p-4 text-center text-slate-500">در حال بارگذاری...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: CONTENT MANAGEMENT ================= -->
+      <div id="tab-content" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white">مدیریت محتوا و متون سایت</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ویرایش زنده متون، عنوان‌ها، اطلاعات تماس و محتوای بخش‌ها با پشتیبانی دو زبانه</p>
+          </div>
+          <button id="openNewContentModalBtn" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition-colors cursor-pointer">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            افزودن آیتم جدید
+          </button>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="glass-card p-4 rounded-2xl border border-white/5 flex flex-wrap items-center gap-3">
+          <div class="relative flex-1 min-w-[200px]">
+            <input type="text" id="contentSearchInput" placeholder="جستجو در کلید یا متن..." class="w-full glass-input text-xs rounded-xl py-2 px-3 pr-8 text-white focus:outline-none" />
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-2.5"></i>
+          </div>
+          <select id="contentSectionFilter" class="glass-input text-xs rounded-xl py-2 px-3 text-slate-200 focus:outline-none">
+            <option value="">تمام بخش‌ها</option>
+            <option value="identity">بخش هویت (Identity)</option>
+            <option value="contact">اطلاعات تماس (Contact)</option>
+            <option value="seo">سئو و متادیتا (SEO)</option>
+            <option value="general">عمومی (General)</option>
+          </select>
+          <select id="contentStatusFilter" class="glass-input text-xs rounded-xl py-2 px-3 text-slate-200 focus:outline-none">
+            <option value="">همه وضعیت‌ها</option>
+            <option value="published">منتشر شده</option>
+            <option value="draft">پیش‌نویس</option>
+          </select>
+        </div>
+
+        <!-- Content Table -->
+        <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-white/5 text-slate-400">
+                <tr>
+                  <th class="p-3.5">بخش</th>
+                  <th class="p-3.5">کلید محتوا</th>
+                  <th class="p-3.5">مقدار فارسی</th>
+                  <th class="p-3.5">مقدار انگلیسی</th>
+                  <th class="p-3.5">وضعیت</th>
+                  <th class="p-3.5 text-center">عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="contentTableBody" class="divide-y divide-white/5 text-slate-300">
+                <tr><td colspan="6" class="p-6 text-center text-slate-500">در حال بارگذاری اطلاعات محتوا...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: FILE MANAGER ================= -->
+      <div id="tab-files" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white">مدیریت فایل و رسانه‌های ایمن</h2>
+            <p class="text-xs text-slate-400 mt-0.5">آپلود با بررسی امضای باینری (Magic Bytes)، نام‌گذاری تصادفی و تفکیک فایل‌های خصوصی</p>
+          </div>
+        </div>
+
+        <!-- Upload Dropzone -->
+        <div id="dropZone" class="glass-card p-8 rounded-2xl border-2 border-dashed border-white/10 hover:border-cyan-500/50 transition-all text-center cursor-pointer relative overflow-hidden group">
+          <input type="file" id="fileUploadInput" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+          <div class="flex flex-col items-center justify-center">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+            </div>
+            <p class="text-sm font-semibold text-white">فایل را به اینجا بکشید یا برای انتخاب کلیک کنید</p>
+            <p class="text-xs text-slate-400 mt-1">فرمت‌های مجاز: JPG, PNG, WEBP, GIF, SVG, PDF, ZIP (حداکثر ۲۵ مگابایت)</p>
+            <div class="flex items-center gap-4 mt-4 text-[11px] text-slate-400">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="uploadIsPrivate" class="rounded bg-slate-800 text-cyan-500" />
+                <span>فایل خصوصی (دسترسی فقط با ورود)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Files List -->
+        <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+          <div class="p-4 border-b border-white/5 flex items-center justify-between gap-3 flex-wrap">
+            <div class="relative flex-1 min-w-[200px]">
+              <input type="text" id="fileSearchInput" placeholder="جستجو بر اساس نام فایل..." class="w-full glass-input text-xs rounded-xl py-2 px-3 pr-8 text-white focus:outline-none" />
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-2.5"></i>
+            </div>
+            <button id="refreshFilesBtn" class="px-3 py-1.5 rounded-xl glass-card text-xs text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              تازه سازی
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-white/5 text-slate-400">
+                <tr>
+                  <th class="p-3.5">نام فایل</th>
+                  <th class="p-3.5">فرمت</th>
+                  <th class="p-3.5">حجم</th>
+                  <th class="p-3.5">دسترسی</th>
+                  <th class="p-3.5">تاریخ ثبت</th>
+                  <th class="p-3.5 text-center">عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="filesTableBody" class="divide-y divide-white/5 text-slate-300">
+                <tr><td colspan="6" class="p-6 text-center text-slate-500">در حال بارگذاری فایل‌ها...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: USERS & ROLES ================= -->
+      <div id="tab-users" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white">مدیریت کاربران و نقش‌های RBAC</h2>
+            <p class="text-xs text-slate-400 mt-0.5">تعریف دسترسی‌های گرانولار (Super Admin, Admin, Editor, File Manager)</p>
+          </div>
+          <button id="openNewUserModalBtn" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition-colors cursor-pointer">
+            <i data-lucide="user-plus" class="w-4 h-4"></i>
+            ایجاد کاربر جدید
+          </button>
+        </div>
+
+        <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-white/5 text-slate-400">
+                <tr>
+                  <th class="p-3.5">نام و نام خانوادگی</th>
+                  <th class="p-3.5">ایمیل سازمانی</th>
+                  <th class="p-3.5">نقش</th>
+                  <th class="p-3.5">وضعیت</th>
+                  <th class="p-3.5">تلاش‌های ناموفق</th>
+                  <th class="p-3.5 text-center">عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody" class="divide-y divide-white/5 text-slate-300">
+                <tr><td colspan="6" class="p-6 text-center text-slate-500">در حال بارگذاری کاربران...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: SECURITY & SESSIONS ================= -->
+      <div id="tab-security" class="tab-content space-y-6 hidden">
+        <div>
+          <h2 class="text-xl font-bold text-white">مرکز امنیت، MFA و نشست‌های فعال</h2>
+          <p class="text-xs text-slate-400 mt-0.5">مدیریت اعتبارسنجی دو مرحله‌ای، نشست‌های زنده و تغییر رمز عبور</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Two-Factor Authentication Card -->
+          <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-white">احراز هویت دو مرحله‌ای (TOTP 2FA)</h3>
+                <p class="text-xs text-slate-400" id="mfaStatusText">در حال استعلام...</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              با فعال‌سازی ۲FA، هنگام ورود علاوه بر رمز عبور، یک کد ۶ رقمی از برنامه‌هایی مانند Google Authenticator الزامی خواهد بود.
+            </p>
+            <div id="mfaActionArea">
+              <button id="startMfaSetupBtn" class="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-colors cursor-pointer">
+                شروع راه‌اندازی 2FA
+              </button>
+            </div>
+          </div>
+
+          <!-- Change Password Card -->
+          <div class="glass-card p-6 rounded-2xl border border-white/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <i data-lucide="key-round" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-white">تغییر رمز عبور ورود</h3>
+                <p class="text-xs text-slate-400">به‌روزرسانی کلید دسترسی به پنل مدیریت</p>
+              </div>
+            </div>
+            <form id="changePasswordForm" class="space-y-3">
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">رمز عبور فعلی</label>
+                <input type="password" id="chgCurrentPass" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" dir="ltr" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-300 mb-1">رمز عبور جدید</label>
+                <input type="password" id="chgNewPass" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" dir="ltr" />
+              </div>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs transition-colors cursor-pointer">
+                ذخیره رمز عبور جدید
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Active Sessions Section -->
+        <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+          <div class="p-5 border-b border-white/5 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="radio" class="w-4 h-4 text-emerald-400"></i>
+                نشست‌های فعال حساب شما
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">فهرست دستگاه‌ها و اتصال‌هایی که در حال حاضر به پنل دسترسی دارند</p>
+            </div>
+            <button id="revokeOtherSessionsBtn" class="px-3.5 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 text-xs font-medium transition-colors cursor-pointer">
+              خروج از همه نشست‌های دیگر
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-white/5 text-slate-400">
+                <tr>
+                  <th class="p-3.5">آدرس IP</th>
+                  <th class="p-3.5">مرورگر و سیستم‌عامل</th>
+                  <th class="p-3.5">آخرین فعالیت</th>
+                  <th class="p-3.5">وضعیت</th>
+                  <th class="p-3.5 text-center">عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="sessionsTableBody" class="divide-y divide-white/5 text-slate-300">
+                <tr><td colspan="5" class="p-6 text-center text-slate-500">در حال بارگذاری نشست‌ها...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB: AUDIT LOGS ================= -->
+      <div id="tab-audit" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white">لاگ‌های حسابرسی و رویدادهای امنیتی (Audit Trail)</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ثبت غیرقابل دستکاری تمام ورودها، دانلودها، تغییرات محتوا و تلاش‌های ناموفق</p>
+          </div>
+          <button id="refreshAuditBtn" class="px-3 py-1.5 rounded-xl glass-card text-xs text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            تازه سازی لاگ‌ها
+          </button>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="glass-card p-4 rounded-2xl border border-white/5 flex flex-wrap items-center gap-3">
+          <select id="auditResultFilter" class="glass-input text-xs rounded-xl py-2 px-3 text-slate-200 focus:outline-none">
+            <option value="">تمام نتایج</option>
+            <option value="SUCCESS">موفق (SUCCESS)</option>
+            <option value="FAILURE">ناموفق / مسدود (FAILURE)</option>
+          </select>
+        </div>
+
+        <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs">
+              <thead class="bg-white/5 text-slate-400">
+                <tr>
+                  <th class="p-3.5">زمان</th>
+                  <th class="p-3.5">کاربر</th>
+                  <th class="p-3.5">عملیات</th>
+                  <th class="p-3.5">منبع</th>
+                  <th class="p-3.5">جزئیات</th>
+                  <th class="p-3.5">IP</th>
+                  <th class="p-3.5">نتیجه</th>
+                </tr>
+              </thead>
+              <tbody id="auditTableBody" class="divide-y divide-white/5 text-slate-300 font-mono-code">
+                <tr><td colspan="7" class="p-6 text-center text-slate-500">در حال بارگذاری لاگ‌ها...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL: ADD / EDIT CONTENT -->
+  <div id="contentModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+    <div class="w-full max-w-lg glass-panel p-6 rounded-2xl border border-white/10 shadow-2xl relative">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-white" id="contentModalTitle">ویرایش محتوا</h3>
+        <button type="button" onclick="closeModal('contentModal')" class="text-slate-400 hover:text-white cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="contentModalForm" class="space-y-4">
+        <input type="hidden" id="modalContentId" />
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">بخش (Section)</label>
+            <input type="text" id="modalContentSection" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" placeholder="مثال: identity" />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">شناسه کلید (Key)</label>
+            <input type="text" id="modalContentKey" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" placeholder="مثال: author_name" dir="ltr" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">مقدار به زبان فارسی</label>
+          <textarea id="modalContentFa" rows="3" class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">مقدار به زبان انگلیسی</label>
+          <textarea id="modalContentEn" rows="3" class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" dir="ltr"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">نوع داده</label>
+            <select id="modalContentType" class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white">
+              <option value="text">متن ساده (Text)</option>
+              <option value="html">محتوای غنی (HTML)</option>
+              <option value="link">پیوند (Link)</option>
+              <option value="email">ایمیل (Email)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">وضعیت انتشار</label>
+            <select id="modalContentStatus" class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white">
+              <option value="published">منتشر شده (Published)</option>
+              <option value="draft">پیش‌نویس (Draft)</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-white/5">
+          <button type="button" onclick="closeModal('contentModal')" class="px-4 py-2 rounded-xl glass-card text-xs text-slate-300 hover:text-white cursor-pointer">انصراف</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-colors cursor-pointer">ذخیره تغییرات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MFA SETUP WIZARD -->
+  <div id="mfaSetupModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+    <div class="w-full max-w-md glass-panel p-6 rounded-2xl border border-cyan-500/30 shadow-2xl relative text-center">
+      <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="qr-code" class="w-6 h-6"></i>
+      </div>
+      <h3 class="text-base font-bold text-white mb-1">اسکن بارکد در اپلیکیشن اعتبارسنجی</h3>
+      <p class="text-xs text-slate-400 mb-4">کد QR زیر را در Google Authenticator یا اپلیکیشن سازگار اسکن نمایید:</p>
+      
+      <div class="bg-white p-3 rounded-2xl inline-block shadow-lg mb-4">
+        <img id="mfaQrCodeImg" src="" alt="QR Code" class="w-48 h-48 mx-auto" />
+      </div>
+
+      <div class="text-xs text-slate-400 mb-4">
+        کلید دستی: <span id="mfaSecretDisplay" class="font-mono text-cyan-300 select-all font-bold"></span>
+      </div>
+
+      <form id="mfaVerifyForm" class="space-y-3">
+        <input type="text" id="mfaVerifyCode" placeholder="کد ۶ رقمی حاصل را وارد کنید" maxlength="6" required class="w-full glass-input text-center text-cyan-300 font-mono text-base tracking-widest rounded-xl py-2 px-3" dir="ltr" />
+        <div class="flex items-center justify-center gap-2">
+          <button type="button" onclick="closeModal('mfaSetupModal')" class="px-4 py-2 rounded-xl glass-card text-xs text-slate-300 hover:text-white cursor-pointer">انصراف</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs cursor-pointer">تأیید و فعال‌سازی</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD USER -->
+  <div id="userModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+    <div class="w-full max-w-md glass-panel p-6 rounded-2xl border border-white/10 shadow-2xl relative">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-white">ایجاد کاربر و مدیر جدید</h3>
+        <button type="button" onclick="closeModal('userModal')" class="text-slate-400 hover:text-white cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="userModalForm" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">نام کامل</label>
+          <input type="text" id="newUserName" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">ایمیل سازمانی</label>
+          <input type="email" id="newUserEmail" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" dir="ltr" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">رمز عبور اولیه (کاربر در اولین ورود ملزم به تغییر خواهد بود)</label>
+          <input type="password" id="newUserPassword" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" dir="ltr" />
+        </div>
+        <div>
+          <label class="block text-xs text-slate-300 mb-1">نقش دسترسی</label>
+          <select id="newUserRole" class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white">
+            <option value="role_admin">Admin (مدیریت محتوا و فایل)</option>
+            <option value="role_editor">Editor (صرفاً ویرایش و انتشار محتوا)</option>
+            <option value="role_file_manager">File Manager (صرفاً آپلود و فایل‌ها)</option>
+            <option value="role_super_admin">Super Admin (دسترسی کامل سیستمی)</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-white/5">
+          <button type="button" onclick="closeModal('userModal')" class="px-4 py-2 rounded-xl glass-card text-xs text-slate-300 hover:text-white cursor-pointer">انصراف</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs cursor-pointer">ایجاد کاربر</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Frontend Engine -->
+  <script>
+    // State management
+    let currentUser = null;
+    let csrfToken = null;
+
+    // Helper: Toast Notifications
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      const bgColors = {
+        success: 'bg-emerald-950/90 border-emerald-500/40 text-emerald-200',
+        error: 'bg-rose-950/90 border-rose-500/40 text-rose-200',
+        info: 'bg-slate-900/90 border-cyan-500/40 text-cyan-200',
+        warning: 'bg-amber-950/90 border-amber-500/40 text-amber-200'
+      };
+      toast.className = `pointer-events-auto px-4 py-3 rounded-xl border backdrop-blur-md shadow-xl text-xs flex items-center gap-2.5 transition-all transform duration-300 translate-y-2 ${bgColors[type] || bgColors.info}`;
+      toast.innerHTML = `<span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.remove('translate-y-2'), 10);
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Modal Helpers
+    window.openModal = (id) => {
+      document.getElementById(id)?.classList.remove('hidden');
+      lucide.createIcons();
+    };
+    window.closeModal = (id) => {
+      document.getElementById(id)?.classList.add('hidden');
+    };
+
+    // CSRF Cookie Extraction
+    function getCsrfFromCookie() {
+      const match = document.cookie.match(new RegExp('(^| )fluidmind_csrf=([^;]+)'));
+      return match ? match[2] : csrfToken;
+    }
+
+    // Authenticated Fetch Wrapper
+    async function apiFetch(url, options = {}) {
+      options.headers = options.headers || {};
+      const token = getCsrfFromCookie();
+      if (token && !options.headers['x-csrf-token'] && options.method && options.method !== 'GET') {
+        options.headers['x-csrf-token'] = token;
+      }
+      const response = await fetch(url, options);
+      if (response.status === 401) {
+        showAuthView();
+      }
+      return response;
+    }
+
+    // Toggle Tab
+    window.switchTab = (tabId) => {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active', 'bg-white/10', 'text-white'));
+      
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove('hidden');
+      
+      const btn = document.querySelector(`[data-tab="${tabId}"]`);
+      if (btn) btn.classList.add('active', 'bg-white/10', 'text-white');
+
+      // Refresh tab specific data
+      if (tabId === 'tab-dashboard') loadDashboardStats();
+      if (tabId === 'tab-content') loadContentList();
+      if (tabId === 'tab-files') loadFilesList();
+      if (tabId === 'tab-users') loadUsersList();
+      if (tabId === 'tab-security') loadSecurityData();
+      if (tabId === 'tab-audit') loadAuditLogs();
+
+      lucide.createIcons();
+    };
+
+    // Navigation Tab click listeners
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // Check Auth on Startup
+    async function checkAuthStatus() {
+      try {
+        const res = await fetch('/api/admin/auth/me');
+        if (res.ok) {
+          const data = await res.json();
+          currentUser = data.user;
+          showDashboardView();
+        } else {
+          showAuthView();
+        }
+      } catch (err) {
+        showAuthView();
+      }
+    }
+
+    function showAuthView() {
+      document.getElementById('authView').classList.remove('hidden');
+      document.getElementById('dashboardView').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    function showDashboardView() {
+      document.getElementById('authView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('hidden');
+      
+      if (currentUser) {
+        document.getElementById('userNameDisplay').textContent = currentUser.full_name;
+        document.getElementById('userRoleBadge').textContent = currentUser.roles.join(', ');
+        document.getElementById('userAvatarText').textContent = currentUser.full_name.slice(0, 2);
+
+        if (currentUser.requires_password_change) {
+          document.getElementById('forcePasswordModal').classList.remove('hidden');
+        }
+      }
+
+      loadDashboardStats();
+      lucide.createIcons();
+    }
+
+    // Toggle Password Visibility
+    document.getElementById('togglePassBtn')?.addEventListener('click', () => {
+      const input = document.getElementById('loginPassword');
+      const isPass = input.type === 'password';
+      input.type = isPass ? 'text' : 'password';
+      document.getElementById('eyeIcon').setAttribute('data-lucide', isPass ? 'eye-off' : 'eye');
+      lucide.createIcons();
+    });
+
+    // Login Form Submit
+    document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const mfaToken = document.getElementById('loginMfaCode').value;
+
+      try {
+        const res = await fetch('/api/admin/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, mfaToken })
+        });
+        const data = await res.json();
+
+        if (data.requiresMfa) {
+          document.getElementById('mfaFieldContainer').classList.remove('hidden');
+          showToast('کد اعتبارسنجی دو مرحله‌ای را وارد کنید', 'info');
+          lucide.createIcons();
+          return;
+        }
+
+        if (res.ok && data.success) {
+          currentUser = data.user;
+          csrfToken = data.csrfToken;
+          showToast('ورود موفقیت‌آمیز بود', 'success');
+          showDashboardView();
+        } else {
+          showToast(data.message || 'ورود ناموفق بود', 'error');
+        }
+      } catch (err) {
+        showToast('خطای ارتباط با سرور', 'error');
+      }
+    });
+
+    // Force Password Change Form
+    document.getElementById('forcePasswordForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const currentPassword = document.getElementById('currentTempPass').value;
+      const newPassword = document.getElementById('newSecurePass').value;
+      const confirmPassword = document.getElementById('confirmSecurePass').value;
+
+      if (newPassword !== confirmPassword) {
+        return showToast('رمزهای عبور جدید با یکدیگر مطابقت ندارند', 'warning');
+      }
+
+      const res = await apiFetch('/api/admin/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword, newPassword })
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        showToast('رمز عبور جدید با موفقیت تنظیم شد', 'success');
+        document.getElementById('forcePasswordModal').classList.add('hidden');
+      } else {
+        showToast(data.message || 'خطا در تغییر رمز عبور', 'error');
+      }
+    });
+
+    // Logout
+    document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+      await apiFetch('/api/admin/auth/logout', { method: 'POST' });
+      currentUser = null;
+      showAuthView();
+      showToast('خروج امن انجام شد', 'info');
+    });
+
+    // Load Dashboard Stats
+    async function loadDashboardStats() {
+      try {
+        const res = await apiFetch('/api/admin/dashboard/stats');
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('statContentCount').textContent = data.stats.contentCount;
+          document.getElementById('statFileCount').textContent = data.stats.fileCount;
+          document.getElementById('statActiveSessions').textContent = data.stats.activeSessionCount;
+          document.getElementById('statUserCount').textContent = data.stats.userCount;
+
+          const tbody = document.getElementById('recentAuditTableBody');
+          tbody.innerHTML = (data.stats.recentAudit || []).map(log => `
+            <tr class="hover:bg-white/5">
+              <td class="p-3 text-slate-400 font-mono">${new Date(log.created_at).toLocaleTimeString('fa-IR')}</td>
+              <td class="p-3 font-semibold text-white">${log.action}</td>
+              <td class="p-3 text-slate-300">${log.resource || '-'}</td>
+              <td class="p-3 font-mono text-slate-400" dir="ltr">${log.ip_address}</td>
+              <td class="p-3">
+                <span class="px-2 py-0.5 rounded-full text-[10px] ${log.result === 'SUCCESS' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">${log.result}</span>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) {}
+    }
+
+    // Load Content List
+    async function loadContentList() {
+      const search = document.getElementById('contentSearchInput')?.value || '';
+      const section = document.getElementById('contentSectionFilter')?.value || '';
+      const status = document.getElementById('contentStatusFilter')?.value || '';
+
+      const query = new URLSearchParams({ search, section, status });
+      const res = await apiFetch(`/api/admin/content?${query}`);
+      const data = await res.json();
+      const tbody = document.getElementById('contentTableBody');
+
+      if (!data.items || data.items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-slate-500">هیچ آیتم محتوایی یافت نشد.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.items.map(item => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="p-3.5 font-mono text-cyan-300">${item.section}</td>
+          <td class="p-3.5 font-mono text-white font-semibold">${item.content_key}</td>
+          <td class="p-3.5 max-w-[200px] truncate text-slate-200">${item.value_fa || '-'}</td>
+          <td class="p-3.5 max-w-[200px] truncate text-slate-400 font-mono" dir="ltr">${item.value_en || '-'}</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] ${item.status === 'published' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">${item.status}</span>
+          </td>
+          <td class="p-3.5 text-center">
+            <div class="flex items-center justify-center gap-2">
+              <button onclick="editContent('${item.id}', '${item.section}', '${item.content_key}', \`${(item.value_fa || '').replace(/`/g, '\\`')}\`, \`${(item.value_en || '').replace(/`/g, '\\`')}\`, '${item.content_type}', '${item.status}')" class="p-1.5 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 cursor-pointer" title="ویرایش">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="deleteContent('${item.id}')" class="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 cursor-pointer" title="حذف نرم">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    window.editContent = (id, section, key, fa, en, type, status) => {
+      document.getElementById('modalContentId').value = id;
+      document.getElementById('modalContentSection').value = section;
+      document.getElementById('modalContentKey').value = key;
+      document.getElementById('modalContentFa').value = fa;
+      document.getElementById('modalContentEn').value = en;
+      document.getElementById('modalContentType').value = type || 'text';
+      document.getElementById('modalContentStatus').value = status || 'published';
+      document.getElementById('contentModalTitle').textContent = 'ویرایش محتوا';
+      openModal('contentModal');
+    };
+
+    window.deleteContent = async (id) => {
+      if (!confirm('آیا از آرشیو / حذف این آیتم اطمینان دارید؟')) return;
+      const res = await apiFetch(`/api/admin/content/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast('آیتم محتوا با موفقیت آرشیو شد', 'success');
+        loadContentList();
+      } else {
+        showToast('خطا در حذف آیتم', 'error');
+      }
+    };
+
+    document.getElementById('openNewContentModalBtn')?.addEventListener('click', () => {
+      document.getElementById('contentModalForm').reset();
+      document.getElementById('modalContentId').value = '';
+      document.getElementById('contentModalTitle').textContent = 'افزودن آیتم محتوا';
+      openModal('contentModal');
+    });
+
+    document.getElementById('contentModalForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('modalContentId').value;
+      const payload = {
+        section: document.getElementById('modalContentSection').value,
+        content_key: document.getElementById('modalContentKey').value,
+        value_fa: document.getElementById('modalContentFa').value,
+        value_en: document.getElementById('modalContentEn').value,
+        content_type: document.getElementById('modalContentType').value,
+        status: document.getElementById('modalContentStatus').value
+      };
+
+      const url = id ? `/api/admin/content/${id}` : '/api/admin/content';
+      const method = id ? 'PUT' : 'POST';
+
+      const res = await apiFetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        showToast(id ? 'محتوا بروزرسانی شد' : 'محتوای جدید ثبت گردید', 'success');
+        closeModal('contentModal');
+        loadContentList();
+      } else {
+        showToast('خطا در ثبت اطلاعات محتوا', 'error');
+      }
+    });
+
+    // Content Filter listeners
+    document.getElementById('contentSearchInput')?.addEventListener('input', loadContentList);
+    document.getElementById('contentSectionFilter')?.addEventListener('change', loadContentList);
+    document.getElementById('contentStatusFilter')?.addEventListener('change', loadContentList);
+
+    // Load Files List
+    async function loadFilesList() {
+      const search = document.getElementById('fileSearchInput')?.value || '';
+      const res = await apiFetch(`/api/admin/files?search=${encodeURIComponent(search)}`);
+      const data = await res.json();
+      const tbody = document.getElementById('filesTableBody');
+
+      if (!data.files || data.files.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-slate-500">هیچ فایلی آپلود نشده است.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.files.map(file => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="p-3.5 font-semibold text-white flex items-center gap-2">
+            <i data-lucide="file" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+            <span class="truncate max-w-[200px]" title="${file.original_name}">${file.original_name}</span>
+          </td>
+          <td class="p-3.5 font-mono text-slate-400 uppercase">${file.extension}</td>
+          <td class="p-3.5 font-mono text-slate-300">${(file.file_size / 1024).toFixed(1)} KB</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] ${file.is_private ? 'bg-rose-500/20 text-rose-300' : 'bg-emerald-500/20 text-emerald-300'}">
+              ${file.is_private ? 'خصوصی (محافظت‌شده)' : 'عمومی'}
+            </span>
+          </td>
+          <td class="p-3.5 text-slate-400 font-mono">${new Date(file.created_at).toLocaleDateString('fa-IR')}</td>
+          <td class="p-3.5 text-center">
+            <div class="flex items-center justify-center gap-2">
+              <a href="${file.is_private ? `/api/admin/files/download/${file.id}` : `/api/files/${file.stored_name}`}" target="_blank" class="p-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400" title="دانلود یا مشاهده">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              </a>
+              <button onclick="deleteFile('${file.id}')" class="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 cursor-pointer" title="حذف">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    window.deleteFile = async (id) => {
+      if (!confirm('آیا از حذف این فایل اطمینان دارید؟')) return;
+      const res = await apiFetch(`/api/admin/files/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        showToast('فایل با موفقیت حذف شد', 'success');
+        loadFilesList();
+      } else {
+        showToast('خطا در حذف فایل', 'error');
+      }
+    };
+
+    // File Upload Handler
+    document.getElementById('fileUploadInput')?.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('is_private', document.getElementById('uploadIsPrivate').checked);
+
+      showToast('در حال آپلود و اعتبارسنجی امنیتی امضای فایل...', 'info');
+
+      try {
+        const res = await apiFetch('/api/admin/files/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('فایل با موفقیت آپلود شد', 'success');
+          loadFilesList();
+        } else {
+          showToast(data.message || 'خطا در اعتبارسنجی فایل', 'error');
+        }
+      } catch (err) {
+        showToast('خطا در بارگذاری فایل', 'error');
+      }
+      e.target.value = '';
+    });
+
+    // Load Users List
+    async function loadUsersList() {
+      const res = await apiFetch('/api/admin/users');
+      const data = await res.json();
+      const tbody = document.getElementById('usersTableBody');
+
+      if (!data.users || data.users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-6 text-center text-slate-500">هیچ کاربری یافت نشد.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.users.map(u => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="p-3.5 font-semibold text-white">${u.full_name}</td>
+          <td class="p-3.5 font-mono text-slate-300" dir="ltr">${u.email}</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300">${u.roles.map(r => r.name).join(', ')}</span>
+          </td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] ${u.is_active ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">${u.is_active ? 'فعال' : 'غیرفعال'}</span>
+          </td>
+          <td class="p-3.5 font-mono text-slate-400">${u.failed_attempts || 0}</td>
+          <td class="p-3.5 text-center">
+            <button onclick="toggleUserStatus('${u.id}', ${u.is_active ? 0 : 1})" class="p-1.5 rounded-lg ${u.is_active ? 'bg-rose-500/10 text-rose-400' : 'bg-emerald-500/10 text-emerald-400'} cursor-pointer" title="${u.is_active ? 'غیرفعال‌سازی' : 'فعال‌سازی'}">
+              <i data-lucide="${u.is_active ? 'user-x' : 'user-check'}" class="w-3.5 h-3.5"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    window.toggleUserStatus = async (id, nextStatus) => {
+      const res = await apiFetch(`/api/admin/users/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ is_active: nextStatus })
+      });
+      if (res.ok) {
+        showToast('وضعیت کاربر تغییر یافت', 'success');
+        loadUsersList();
+      } else {
+        showToast('خطا در تغییر وضعیت کاربر', 'error');
+      }
+    };
+
+    document.getElementById('openNewUserModalBtn')?.addEventListener('click', () => {
+      document.getElementById('userModalForm').reset();
+      openModal('userModal');
+    });
+
+    document.getElementById('userModalForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        full_name: document.getElementById('newUserName').value,
+        email: document.getElementById('newUserEmail').value,
+        password: document.getElementById('newUserPassword').value,
+        role_id: document.getElementById('newUserRole').value
+      };
+
+      const res = await apiFetch('/api/admin/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        showToast('کاربر جدید ایجاد شد', 'success');
+        closeModal('userModal');
+        loadUsersList();
+      } else {
+        showToast(data.message || 'خطا در ایجاد کاربر', 'error');
+      }
+    });
+
+    // Load Security & Sessions Data
+    async function loadSecurityData() {
+      // MFA Status
+      const mfaArea = document.getElementById('mfaActionArea');
+      const mfaText = document.getElementById('mfaStatusText');
+      if (currentUser?.is_mfa_enabled) {
+        mfaText.textContent = 'فعال (امنیت حداکثری بر روی حساب شما برقرار است)';
+        mfaText.className = 'text-xs text-emerald-400 font-semibold';
+        mfaArea.innerHTML = `
+          <button id="disableMfaBtn" class="px-4 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-semibold cursor-pointer">
+            غیرفعال‌سازی ۲FA
+          </button>
+        `;
+        document.getElementById('disableMfaBtn')?.addEventListener('click', disableMfaFlow);
+      } else {
+        mfaText.textContent = 'غیرفعال (پیشنهاد می‌شود جهت امنیت حساب فعال گردد)';
+        mfaText.className = 'text-xs text-amber-400 font-semibold';
+        mfaArea.innerHTML = `
+          <button id="startMfaSetupBtn" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs cursor-pointer">
+            شروع راه‌اندازی 2FA
+          </button>
+        `;
+        document.getElementById('startMfaSetupBtn')?.addEventListener('click', startMfaSetup);
+      }
+
+      // Sessions List
+      const res = await apiFetch('/api/admin/auth/sessions');
+      const data = await res.json();
+      const tbody = document.getElementById('sessionsTableBody');
+
+      if (!data.sessions || data.sessions.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-slate-500">هیچ نشستی یافت نشد.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.sessions.map(s => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="p-3.5 font-mono text-cyan-300" dir="ltr">${s.ip_address}</td>
+          <td class="p-3.5 text-slate-300 max-w-[200px] truncate" title="${s.user_agent}">${s.user_agent}</td>
+          <td class="p-3.5 font-mono text-slate-400">${new Date(s.last_active_at).toLocaleTimeString('fa-IR')}</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] ${s.isCurrent ? 'bg-cyan-500/20 text-cyan-300 font-bold' : 'bg-slate-500/20 text-slate-300'}">
+              ${s.isCurrent ? 'نشست فعلی شما' : 'فعال'}
+            </span>
+          </td>
+          <td class="p-3.5 text-center">
+            ${s.isCurrent ? '-' : `
+              <button onclick="revokeSession('${s.id}')" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-[11px] cursor-pointer">
+                لغو نشست
+              </button>
+            `}
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    async function startMfaSetup() {
+      const res = await apiFetch('/api/admin/auth/mfa/setup', { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        document.getElementById('mfaQrCodeImg').src = data.qrCode;
+        document.getElementById('mfaSecretDisplay').textContent = data.secret;
+        openModal('mfaSetupModal');
+      } else {
+        showToast('خطا در دریافت کلید ۲FA', 'error');
+      }
+    }
+
+    document.getElementById('mfaVerifyForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = document.getElementById('mfaVerifyCode').value;
+      const res = await apiFetch('/api/admin/auth/mfa/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showToast('۲FA با موفقیت فعال گردید', 'success');
+        closeModal('mfaSetupModal');
+        currentUser.is_mfa_enabled = true;
+        loadSecurityData();
+      } else {
+        showToast('کد وارد شده نامعتبر است', 'error');
+      }
+    });
+
+    async function disableMfaFlow() {
+      const password = prompt('جهت تأیید، رمز عبور حساب خود را وارد کنید:');
+      if (!password) return;
+      const token = prompt('کد فعلی ۲FA اپلیکیشن خود را وارد کنید:');
+      if (!token) return;
+
+      const res = await apiFetch('/api/admin/auth/mfa/disable', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, token })
+      });
+      if (res.ok) {
+        showToast('۲FA غیرفعال شد', 'info');
+        currentUser.is_mfa_enabled = false;
+        loadSecurityData();
+      } else {
+        showToast('اطلاعات تأییدیه صحیح نبود', 'error');
+      }
+    }
+
+    window.revokeSession = async (sessionId) => {
+      const res = await apiFetch('/api/admin/auth/sessions/revoke', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId })
+      });
+      if (res.ok) {
+        showToast('نشست مورد نظر خاتمه یافت', 'success');
+        loadSecurityData();
+      }
+    };
+
+    document.getElementById('revokeOtherSessionsBtn')?.addEventListener('click', async () => {
+      if (!confirm('آیا از خاتمه دادن به تمامی نشست‌های دیگر اطمینان دارید؟')) return;
+      const res = await apiFetch('/api/admin/auth/sessions/revoke', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ revokeOthers: true })
+      });
+      if (res.ok) {
+        showToast('کلیه نشست‌های دیگر خاتمه یافتند', 'success');
+        loadSecurityData();
+      }
+    });
+
+    // Change Password Form
+    document.getElementById('changePasswordForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const currentPassword = document.getElementById('chgCurrentPass').value;
+      const newPassword = document.getElementById('chgNewPass').value;
+
+      const res = await apiFetch('/api/admin/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword, newPassword })
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        showToast('رمز عبور با موفقیت بروزرسانی شد', 'success');
+        document.getElementById('changePasswordForm').reset();
+      } else {
+        showToast(data.message || 'خطا در تغییر رمز عبور', 'error');
+      }
+    });
+
+    // Load Audit Logs
+    async function loadAuditLogs() {
+      const result = document.getElementById('auditResultFilter')?.value || '';
+      const query = new URLSearchParams({ limit: 100, result });
+      const res = await apiFetch(`/api/admin/audit-logs?${query}`);
+      const data = await res.json();
+      const tbody = document.getElementById('auditTableBody');
+
+      if (!data.logs?.rows || data.logs.rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-6 text-center text-slate-500">هیچ لاگ حساسی ثبت نشده است.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.logs.rows.map(log => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="p-3 text-slate-400">${new Date(log.created_at).toLocaleString('fa-IR')}</td>
+          <td class="p-3 text-slate-200">${log.user_email || 'سیستم/ناشناس'}</td>
+          <td class="p-3 font-semibold text-white">${log.action}</td>
+          <td class="p-3 text-cyan-300">${log.resource || '-'}</td>
+          <td class="p-3 text-slate-400 max-w-[200px] truncate" title="${log.details || ''}">${log.details || '-'}</td>
+          <td class="p-3 text-slate-400" dir="ltr">${log.ip_address}</td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded-full text-[10px] ${log.result === 'SUCCESS' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">${log.result}</span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('auditResultFilter')?.addEventListener('change', loadAuditLogs);
+    document.getElementById('refreshAuditBtn')?.addEventListener('click', loadAuditLogs);
+    document.getElementById('refreshStatsBtn')?.addEventListener('click', loadDashboardStats);
+    document.getElementById('refreshFilesBtn')?.addEventListener('click', loadFilesList);
+
+    // Initial Startup
+    checkAuthStatus();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
