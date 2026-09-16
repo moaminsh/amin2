@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="admin-client-engine.js"></script>
   <style>
     :root {
       --font-vazir: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -84,17 +85,17 @@
       </div>
 
       <!-- GitHub Pages / Static Hosting Warning Banner -->
-      <div id="staticHostingNotice" class="hidden mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs leading-relaxed space-y-2">
-        <div class="flex items-center gap-2 font-bold text-amber-400">
-          <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-          <span>توجه: گیت‌هاب پیجز (GitHub Pages) هاست استاتیک است</span>
+      <div id="staticHostingNotice" class="hidden mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs leading-relaxed space-y-2">
+        <div class="flex items-center gap-2 font-bold text-emerald-400">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>حالت پردازش مستقل GitHub Pages فعال است</span>
         </div>
         <p>
-          این پنل نیازمند سرور بک‌اند (Node.js & SQLite) برای احراز هویت رمزنگاری‌شده، مدیریت نشست و ذخیره دیتابیس است. در هاست‌های استاتیک نظیر GitHub Pages کدهای سمت سرور اجرا نمی‌شوند.
+          این پنل به صورت کلاینت‌محور با پایگاه داده مرورگر (Local Storage) هماهنگ شده است. شما می‌توانید مستقیماً با رمز عبور خود وارد شوید، محتوا و تنظیمات را ویرایش و ذخیره کنید.
         </p>
-        <p class="text-[11px] text-amber-300/80">
-          💡 برای اجرای پنل با بک‌اند کامل، پروژه را روی <strong>Render, Railway, Fly.io, Cloud Run</strong> یا سرور لینوکس شخصی با دستور <code class="bg-black/40 px-1 py-0.5 rounded font-mono text-cyan-300">npm start</code> مستقر نمایید.
-        </p>
+        <div class="flex items-center gap-2 pt-1 text-[11px] text-emerald-300/80">
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">GitHub Pages Client Engine Ready</span>
+        </div>
       </div>
 
       <!-- Login Form -->
@@ -247,6 +248,10 @@
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           مشاهده وب‌سایت عمومی
         </a>
+        <button onclick="exportDatabaseJson()" class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 hover:text-cyan-200 text-xs font-medium transition-colors cursor-pointer mb-2">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          خروجی پشتیبان (JSON)
+        </button>
         <button id="logoutBtn" class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 text-xs font-medium transition-colors cursor-pointer">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
           خروج امن از حساب
@@ -805,6 +810,9 @@
 
     // Authenticated Fetch Wrapper
     async function apiFetch(url, options = {}) {
+      if (window.isStaticHosting && window.isStaticHosting()) {
+        return await window.handleStaticRequest(url, options);
+      }
       options.headers = options.headers || {};
       const token = getCsrfFromCookie();
       if (token && !options.headers['x-csrf-token'] && options.method && options.method !== 'GET') {
@@ -820,7 +828,20 @@
         if (window.location.search && !finalUrl.includes('?')) {
           finalUrl += window.location.search;
         }
-        const response = await fetch(finalUrl, options);
+        let response;
+        try {
+          response = await fetch(finalUrl, options);
+          if (response.status === 405 || response.status === 404) {
+            if (window.handleStaticRequest) {
+              return await window.handleStaticRequest(url, options);
+            }
+          }
+        } catch (fetchNetErr) {
+          if (window.handleStaticRequest) {
+            return await window.handleStaticRequest(url, options);
+          }
+          throw fetchNetErr;
+        }
         if (response.status === 401) {
           sessionStorage.removeItem('fluidmind_admin_token');
           showAuthView();
@@ -924,12 +945,33 @@
 
       try {
         const queryParams = window.location.search || '';
-        const res = await fetch('/api/admin/auth/login' + queryParams, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ email, password, mfaToken })
-        });
+        let res;
+        if (window.isStaticHosting && window.isStaticHosting()) {
+          res = await window.handleStaticRequest('/api/admin/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password, mfaToken })
+          });
+        } else {
+          try {
+            res = await fetch('/api/admin/auth/login' + queryParams, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
+              body: JSON.stringify({ email, password, mfaToken })
+            });
+            if (res.status === 405 || res.status === 404) {
+              res = await window.handleStaticRequest('/api/admin/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password, mfaToken })
+              });
+            }
+          } catch (netErr) {
+            res = await window.handleStaticRequest('/api/admin/auth/login', {
+              method: 'POST',
+              body: JSON.stringify({ email, password, mfaToken })
+            });
+          }
+        }
         
         let data = null;
         try {
@@ -1491,7 +1533,7 @@
     // Environment check (e.g. GitHub Pages static hosting detection)
     function checkHostingEnvironment() {
       const host = window.location.hostname;
-      if (host.endsWith('github.io') || window.location.protocol === 'file:') {
+      if (host.endsWith('github.io') || window.location.protocol === 'file:' || window.location.search.includes('mode=static')) {
         const notice = document.getElementById('staticHostingNotice');
         if (notice) {
           notice.classList.remove('hidden');
