@@ -84,7 +84,7 @@
       </div>
 
       <!-- Login Form -->
-      <form id="loginForm" class="space-y-5">
+      <form id="loginForm" class="space-y-5" onsubmit="return false;">
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-2">ایمیل سازمانی مدیر</label>
           <div class="relative">
@@ -802,7 +802,11 @@
       }
       options.credentials = 'include';
       try {
-        const response = await fetch(url, options);
+        let finalUrl = url;
+        if (window.location.search && !finalUrl.includes('?')) {
+          finalUrl += window.location.search;
+        }
+        const response = await fetch(finalUrl, options);
         if (response.status === 401) {
           sessionStorage.removeItem('fluidmind_admin_token');
           showAuthView();
@@ -897,10 +901,16 @@
       const password = document.getElementById('loginPassword').value;
       const mfaToken = document.getElementById('loginMfaCode').value.trim();
       const submitBtn = document.getElementById('loginSubmitBtn');
-      if (submitBtn) submitBtn.disabled = true;
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>در حال بررسی...</span>';
+        lucide.createIcons();
+      }
 
       try {
-        const res = await fetch('/api/admin/auth/login', {
+        const queryParams = window.location.search || '';
+        const res = await fetch('/api/admin/auth/login' + queryParams, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -911,6 +921,9 @@
         try {
           data = await res.json();
         } catch (parseErr) {
+          if (res.status === 405) {
+            throw new Error('مسیر درخواست توسط شبکه پشتیبانی نشد (405). لطفاً در تب جدید باز کنید.');
+          }
           throw new Error('پاسخ نامعتبر از سرور (کد ' + res.status + ')');
         }
 
@@ -936,7 +949,11 @@
         console.error('Login error:', err);
         showToast(err.message || 'خطای ارتباط با سرور', 'error');
       } finally {
-        if (submitBtn) submitBtn.disabled = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+          lucide.createIcons();
+        }
       }
     });
 
