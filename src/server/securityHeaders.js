@@ -44,14 +44,16 @@ export function configureSecurityHeaders(app) {
             "https://i.pravatar.cc",
             "https://api.dicebear.com"
           ],
-          connectSrc: ["'self'"],
+          connectSrc: ["'self'", "https:", "wss:", "blob:"],
           objectSrc: ["'none'"],
           baseUri: ["'self'"],
           formAction: ["'self'"],
-          frameAncestors: ["'self'"], // Prevent clickjacking while allowing AI Studio preview
-          upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null
+          frameAncestors: ["'self'", "https://ai.studio", "https://*.google.com", "https://*.run.app", "*"],
+          upgradeInsecureRequests: null
         }
       },
+      xFrameOptions: false, // Managed via CSP frame-ancestors to allow AI Studio live preview
+      crossOriginOpenerPolicy: false, // Compatibility with preview iframes and embedded windows
       crossOriginEmbedderPolicy: false, // Compatibility with preview iframes
       crossOriginResourcePolicy: { policy: 'cross-origin' },
       referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
@@ -78,10 +80,10 @@ export function configureSecurityHeaders(app) {
  * Rate Limiters for Sensitive Endpoints
  */
 
-// Login Rate Limiter: Prevent brute force and credential stuffing (10 attempts per 15 min window)
+// Login Rate Limiter: Prevent brute force while allowing admin testing (100 attempts per 15 min window)
 export const loginRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 100,
   standardHeaders: true,
   legacyHeaders: false,
   message: {

@@ -230,6 +230,7 @@ apiRouter.post('/admin/auth/login', async (req, res) => {
   res.json({
     success: true,
     user: fullUser,
+    token: session.rawToken,
     csrfToken,
     requiresPasswordChange: Boolean(user.requires_password_change)
   });

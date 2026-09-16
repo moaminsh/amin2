@@ -796,11 +796,22 @@
       if (token && !options.headers['x-csrf-token'] && options.method && options.method !== 'GET') {
         options.headers['x-csrf-token'] = token;
       }
-      const response = await fetch(url, options);
-      if (response.status === 401) {
-        showAuthView();
+      const authToken = sessionStorage.getItem('fluidmind_admin_token');
+      if (authToken && !options.headers['authorization']) {
+        options.headers['authorization'] = `Bearer ${authToken}`;
       }
-      return response;
+      options.credentials = 'include';
+      try {
+        const response = await fetch(url, options);
+        if (response.status === 401) {
+          sessionStorage.removeItem('fluidmind_admin_token');
+          showAuthView();
+        }
+        return response;
+      } catch (err) {
+        console.error('API Fetch network error:', err);
+        throw err;
+      }
     }
 
     // Toggle Tab
@@ -833,7 +844,7 @@
     // Check Auth on Startup
     async function checkAuthStatus() {
       try {
-        const res = await fetch('/api/admin/auth/me');
+        const res = await apiFetch('/api/admin/auth/me');
         if (res.ok) {
           const data = await res.json();
           currentUser = data.user;
@@ -882,17 +893,26 @@
     // Login Form Submit
     document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
+      const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
-      const mfaToken = document.getElementById('loginMfaCode').value;
+      const mfaToken = document.getElementById('loginMfaCode').value.trim();
+      const submitBtn = document.getElementById('loginSubmitBtn');
+      if (submitBtn) submitBtn.disabled = true;
 
       try {
         const res = await fetch('/api/admin/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ email, password, mfaToken })
         });
-        const data = await res.json();
+        
+        let data = null;
+        try {
+          data = await res.json();
+        } catch (parseErr) {
+          throw new Error('پاسخ نامعتبر از سرور (کد ' + res.status + ')');
+        }
 
         if (data.requiresMfa) {
           document.getElementById('mfaFieldContainer').classList.remove('hidden');
@@ -904,13 +924,19 @@
         if (res.ok && data.success) {
           currentUser = data.user;
           csrfToken = data.csrfToken;
+          if (data.token) {
+            sessionStorage.setItem('fluidmind_admin_token', data.token);
+          }
           showToast('ورود موفقیت‌آمیز بود', 'success');
           showDashboardView();
         } else {
-          showToast(data.message || 'ورود ناموفق بود', 'error');
+          showToast(data.message || 'ورود ناموفق بود. لطفاً مشخصات را بررسی کنید.', 'error');
         }
       } catch (err) {
-        showToast('خطای ارتباط با سرور', 'error');
+        console.error('Login error:', err);
+        showToast(err.message || 'خطای ارتباط با سرور', 'error');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
 
@@ -942,7 +968,10 @@
 
     // Logout
     document.getElementById('logoutBtn')?.addEventListener('click', async () => {
-      await apiFetch('/api/admin/auth/logout', { method: 'POST' });
+      try {
+        await apiFetch('/api/admin/auth/logout', { method: 'POST' });
+      } catch (e) {}
+      sessionStorage.removeItem('fluidmind_admin_token');
       currentUser = null;
       showAuthView();
       showToast('خروج امن انجام شد', 'info');

@@ -56,12 +56,12 @@ export function createSession(userId, req) {
  * Attaches secure session and CSRF cookies to response
  */
 export function setAuthCookies(res, rawSessionToken, req) {
-  const isSecure = process.env.NODE_ENV === 'production' || req?.secure;
+  const isSecure = process.env.NODE_ENV === 'production' || req?.secure || req?.headers?.['x-forwarded-proto'] === 'https';
 
   res.cookie(SESSION_COOKIE_NAME, rawSessionToken, {
     httpOnly: true,
     secure: isSecure,
-    sameSite: 'Lax',
+    sameSite: isSecure ? 'None' : 'Lax',
     path: '/',
     maxAge: SESSION_LIFETIME_MS
   });
@@ -71,7 +71,7 @@ export function setAuthCookies(res, rawSessionToken, req) {
   res.cookie(CSRF_COOKIE_NAME, csrfToken, {
     httpOnly: false, // Read by frontend JS to set X-CSRF-Token header
     secure: isSecure,
-    sameSite: 'Lax',
+    sameSite: isSecure ? 'None' : 'Lax',
     path: '/',
     maxAge: SESSION_LIFETIME_MS
   });
