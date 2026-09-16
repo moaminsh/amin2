@@ -1,0 +1,201 @@
+{
+  "users": [
+    {
+      "id": "usr_317fefb5aec84dd586829d4f52409b5b",
+      "email": "admin@fluidmind.internal",
+      "full_name": "System Super Administrator",
+      "is_active": 1,
+      "requires_password_change": 1,
+      "failed_attempts": 0,
+      "locked_until": null,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "usr_fa5205c6bc7544fc88d0fc88750c7699",
+      "email": "mohammadaminsh1384@gmail.com",
+      "full_name": "محمدامین شریف",
+      "is_active": 1,
+      "requires_password_change": 0,
+      "failed_attempts": 0,
+      "locked_until": null,
+      "created_at": "2026-09-16 11:57:23",
+      "updated_at": "2026-09-16 11:57:23"
+    }
+  ],
+  "roles": [
+    {
+      "id": "role_super_admin",
+      "name": "Super Admin",
+      "description": "Full system privileges and security control",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "role_admin",
+      "name": "Admin",
+      "description": "Standard administrator with content, files and user view rights",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "role_editor",
+      "name": "Editor",
+      "description": "Content authoring and publishing only",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "role_file_manager",
+      "name": "File Manager",
+      "description": "File assets and media management only",
+      "created_at": "2026-09-16 11:42:09"
+    }
+  ],
+  "permissions": [
+    {
+      "id": "perm_content_read",
+      "name": "content.read",
+      "description": "Read website content",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_content_create",
+      "name": "content.create",
+      "description": "Create new content",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_content_update",
+      "name": "content.update",
+      "description": "Modify website content",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_content_delete",
+      "name": "content.delete",
+      "description": "Delete or archive content",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_files_read",
+      "name": "files.read",
+      "description": "Access uploaded media files",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_files_upload",
+      "name": "files.upload",
+      "description": "Upload new media files",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_files_delete",
+      "name": "files.delete",
+      "description": "Delete media files",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_users_manage",
+      "name": "users.manage",
+      "description": "Manage administrators and roles",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_settings_manage",
+      "name": "settings.manage",
+      "description": "Manage global system settings",
+      "created_at": "2026-09-16 11:42:09"
+    },
+    {
+      "id": "perm_audit_read",
+      "name": "audit.read",
+      "description": "Review security audit logs",
+      "created_at": "2026-09-16 11:42:09"
+    }
+  ],
+  "content": [
+    {
+      "id": "cnt_97e101b4760f4f58",
+      "section": "identity",
+      "content_key": "author_name",
+      "value_fa": "محمدامین شریف",
+      "value_en": "Mohammadamin Sharif",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_6d877ba0538b48d0",
+      "section": "identity",
+      "content_key": "academic_title",
+      "value_fa": "دانشجوی مهندسی مکانیک • دانشگاه علم و صنعت ایران",
+      "value_en": "Mechanical Engineering Student • Iran University of Science & Technology (IUST)",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_61dd24de8f5844a8",
+      "section": "contact",
+      "content_key": "email",
+      "value_fa": "mohammadaminsh1384@gmail.com",
+      "value_en": "mohammadaminsh1384@gmail.com",
+      "content_type": "email",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_fab32b53ef1f4b41",
+      "section": "contact",
+      "content_key": "phone",
+      "value_fa": "0903 276 4840",
+      "value_en": "+98 903 276 4840",
+      "content_type": "phone",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_0636229eae034ecd",
+      "section": "contact",
+      "content_key": "telegram",
+      "value_fa": "@aminsharif_mech",
+      "value_en": "@aminsharif_mech",
+      "content_type": "link",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_321402d2170b4736",
+      "section": "seo",
+      "content_key": "meta_title",
+      "value_fa": "محمدامین شریف | مهندسی مکانیک و مکانیک سیالات دانشگاه علم و صنعت",
+      "value_en": "Mohammadamin Sharif | Mechanical Engineering & Fluid Dynamics (IUST)",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    }
+  ],
+  "files": [],
+  "audit_logs": [
+    {
+      "id": "aud_init_01",
+      "action": "AUTH_LOGIN",
+      "resource": "admin_portal",
+      "details": "ورود اولیه موفق به پرتال سازمانی",
+      "ip_address": "127.0.0.1",
+      "user_email": "mohammadaminsh1384@gmail.com",
+      "result": "SUCCESS",
+      "created_at": "2026-09-16 11:57:23"
+    }
+  ]
+}

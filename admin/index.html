@@ -83,6 +83,20 @@
         <p class="text-sm text-slate-400 mt-1">احراز هویت دومرحله‌ای و کنترل دسترسی سازمانی</p>
       </div>
 
+      <!-- GitHub Pages / Static Hosting Warning Banner -->
+      <div id="staticHostingNotice" class="hidden mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs leading-relaxed space-y-2">
+        <div class="flex items-center gap-2 font-bold text-amber-400">
+          <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+          <span>توجه: گیت‌هاب پیجز (GitHub Pages) هاست استاتیک است</span>
+        </div>
+        <p>
+          این پنل نیازمند سرور بک‌اند (Node.js & SQLite) برای احراز هویت رمزنگاری‌شده، مدیریت نشست و ذخیره دیتابیس است. در هاست‌های استاتیک نظیر GitHub Pages کدهای سمت سرور اجرا نمی‌شوند.
+        </p>
+        <p class="text-[11px] text-amber-300/80">
+          💡 برای اجرای پنل با بک‌اند کامل، پروژه را روی <strong>Render, Railway, Fly.io, Cloud Run</strong> یا سرور لینوکس شخصی با دستور <code class="bg-black/40 px-1 py-0.5 rounded font-mono text-cyan-300">npm start</code> مستقر نمایید.
+        </p>
+      </div>
+
       <!-- Login Form -->
       <form id="loginForm" class="space-y-5" onsubmit="return false;">
         <div>
@@ -947,7 +961,11 @@
         }
       } catch (err) {
         console.error('Login error:', err);
-        showToast(err.message || 'خطای ارتباط با سرور', 'error');
+        if (window.location.hostname.endsWith('github.io')) {
+          showToast('گیت‌هاب پیجز هاست استاتیک است و سرور بک‌اند ندارد.', 'error');
+        } else {
+          showToast(err.message || 'خطای ارتباط با سرور', 'error');
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -1470,7 +1488,20 @@
     document.getElementById('refreshStatsBtn')?.addEventListener('click', loadDashboardStats);
     document.getElementById('refreshFilesBtn')?.addEventListener('click', loadFilesList);
 
+    // Environment check (e.g. GitHub Pages static hosting detection)
+    function checkHostingEnvironment() {
+      const host = window.location.hostname;
+      if (host.endsWith('github.io') || window.location.protocol === 'file:') {
+        const notice = document.getElementById('staticHostingNotice');
+        if (notice) {
+          notice.classList.remove('hidden');
+          lucide.createIcons();
+        }
+      }
+    }
+
     // Initial Startup
+    checkHostingEnvironment();
     checkAuthStatus();
     lucide.createIcons();
   </script>
