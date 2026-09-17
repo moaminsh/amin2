@@ -4106,3 +4106,438 @@ html.dark-mode .project-card::after {
   color: #64748b;
 }
 
+/* ============================================================
+   EXHAUSTIVE MOBILE VIEWPORT OPTIMIZATION & RESPONSIVE ENGINE
+   Optimized specifically for mobile devices (320px - 768px)
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* 1. Global Viewport & Horizontal Overflow Prevention */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  img, svg, canvas, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 2. Container Padding & Breathing Room for Top Mechanical Dock */
+  .container {
+    padding: 44px 12px 24px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .glass-board {
+    padding: 16px 14px !important;
+    border-radius: 18px !important;
+    margin-bottom: 14px !important;
+    border-width: 1px !important;
+  }
+
+  /* 3. Single-Column Project Grids & Zero-Overflow Layouts */
+  #homeAllProjectsGrid,
+  .fm-projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .projects-glass-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .fm-home-books-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .skills-glass-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .fm-research-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .info-glass-section {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .specs-glass-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  /* 4. Touch Targets & Filter Docks */
+  .filter-glass-dock {
+    height: 44px !important;
+    padding: 4px 6px !important;
+    margin: 8px 0 14px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .filter-glass-dock::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-pill {
+    min-height: 36px !important;
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .projects-filter-bar {
+    gap: 6px !important;
+    margin-bottom: 14px !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 6px !important;
+    scrollbar-width: none !important;
+  }
+
+  .projects-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .proj-filter-btn {
+    flex-shrink: 0 !important;
+    min-height: 36px !important;
+    padding: 6px 13px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  /* 5. Section View Navigation Bar */
+  .section-view-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .section-back-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    font-size: 12px !important;
+    padding: 9px 14px !important;
+  }
+
+  .section-breadcrumbs {
+    justify-content: center !important;
+    font-size: 11px !important;
+    flex-wrap: wrap !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+  }
+
+  .section-view-bar-bottom {
+    margin-top: 18px !important;
+    padding-top: 14px !important;
+  }
+
+  .section-view-bar-bottom .section-back-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    font-size: 12px !important;
+  }
+
+  /* 6. Section Banner Hero */
+  .section-banner-hero {
+    height: auto !important;
+    min-height: 155px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    margin-bottom: 14px !important;
+    border-radius: 14px !important;
+  }
+
+  .section-banner-img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .section-banner-content {
+    position: relative !important;
+    padding: 16px 14px !important;
+    z-index: 2 !important;
+  }
+
+  .section-banner-title {
+    font-size: 17px !important;
+    line-height: 1.35 !important;
+    margin: 4px 0 6px 0 !important;
+    word-break: break-word !important;
+  }
+
+  .section-banner-subtitle {
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+    word-break: break-word !important;
+  }
+
+  .section-banner-top-tags {
+    gap: 6px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .section-banner-badge {
+    font-size: 10px !important;
+  }
+
+  .section-banner-pill {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+  }
+
+  /* 7. Home Profile Hero */
+  .fm-profile-clean-hero {
+    padding: 18px 14px !important;
+    border-radius: 18px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .fm-profile-clean-inner {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 14px !important;
+  }
+
+  .fm-profile-clean-avatar-wrap {
+    width: 82px !important;
+    height: 82px !important;
+    margin: 0 auto !important;
+  }
+
+  .fm-profile-clean-name {
+    font-size: 22px !important;
+    text-align: center !important;
+    margin-bottom: 6px !important;
+    word-break: break-word !important;
+  }
+
+  .fm-profile-clean-degree {
+    justify-content: center !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    gap: 6px !important;
+    line-height: 1.5 !important;
+    word-break: break-word !important;
+  }
+
+  .fm-profile-clean-desc {
+    font-size: 12.5px !important;
+    text-align: center !important;
+    line-height: 1.6 !important;
+    word-break: break-word !important;
+  }
+
+  /* 8. CFD Simulator Display & Colorbar */
+  .fm-sim-display-box {
+    height: 230px !important;
+    border-radius: 12px !important;
+  }
+
+  .fm-sim-tabs {
+    gap: 6px !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 12px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .fm-sim-tab-btn {
+    min-height: 34px !important;
+    padding: 5px 11px !important;
+    font-size: 10.5px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .fm-sim-colorbar {
+    bottom: 6px !important;
+    right: 6px !important;
+    left: 6px !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 4px 8px !important;
+    font-size: 8.5px !important;
+    border-radius: 6px !important;
+  }
+
+  .fm-colorbar-gradient {
+    width: 64px !important;
+    height: 7px !important;
+  }
+
+  .chip-canvas-wrapper {
+    height: 140px !important;
+  }
+
+  /* 9. Project Card Refinements */
+  .fm-project-card,
+  .project-glass-card {
+    border-radius: 14px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .fm-project-body,
+  .project-glass-body {
+    padding: 13px 12px !important;
+  }
+
+  .fm-project-title,
+  .project-title {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    word-break: break-word !important;
+  }
+
+  .fm-project-desc {
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+    word-break: break-word !important;
+  }
+
+  .fm-project-tags,
+  .project-tags {
+    gap: 5px !important;
+    margin: 8px 0 !important;
+  }
+
+  .p-tag {
+    font-size: 9.5px !important;
+    padding: 2px 7px !important;
+  }
+
+  .fm-project-view-btn {
+    min-height: 38px !important;
+    padding: 6px 12px !important;
+    font-size: 11.5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* 10. Contact & Footer */
+  .fm-cta-content {
+    padding: 22px 14px !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .fm-cta-heading {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+  }
+
+  .fm-cta-subtext {
+    font-size: 12.5px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .fm-footer {
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .fm-footer-main {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 14px !important;
+  }
+
+  .fm-footer-links {
+    justify-content: center !important;
+    gap: 12px !important;
+  }
+
+  .fm-footer-socials {
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  .fm-social-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .fm-footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 6px !important;
+  }
+
+  .glass-footer {
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center !important;
+    font-size: 10px !important;
+    padding: 12px 14px !important;
+  }
+
+  /* 11. Persian / RTL Mobile Typography */
+  html[lang="fa"] body {
+    line-height: 1.75 !important;
+  }
+
+  html[lang="fa"] .fm-profile-clean-name,
+  html[lang="fa"] .fm-profile-clean-degree,
+  html[lang="fa"] .section-banner-title,
+  html[lang="fa"] .fm-project-title,
+  html[lang="fa"] .fm-cta-heading {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+/* Extra small mobile devices (320px - 360px) */
+@media (max-width: 360px) {
+  .container {
+    padding: 40px 8px 18px !important;
+  }
+
+  .glass-board {
+    padding: 13px 9px !important;
+    border-radius: 14px !important;
+  }
+
+  .fm-profile-clean-name {
+    font-size: 20px !important;
+  }
+
+  .section-banner-title {
+    font-size: 15.5px !important;
+  }
+
+  .specs-glass-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+

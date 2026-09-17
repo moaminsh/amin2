@@ -322,7 +322,7 @@
         </div>
 
         <!-- Home Projects Grid (12 Complete Engineering Cards) -->
-        <div class="fm-projects-grid" id="homeAllProjectsGrid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        <div class="fm-projects-grid" id="homeAllProjectsGrid">
           
           <!-- Project 1: CFturbo Centrifugal Pump Design Checklist -->
           <div class="fm-project-card" data-cat="turbo" onclick="window.location.href='projects/cfturbo-pump/pump-design-checklist.html'" role="button" tabindex="0">
@@ -3187,6 +3187,14 @@
         chipMouseY = e.clientY - rect.top;
       });
 
+      function handleChipTouch(e) {
+        if (!e.touches || !e.touches[0]) return;
+        const rect = cCanvas.getBoundingClientRect();
+        chipMouseY = e.touches[0].clientY - rect.top;
+      }
+      cCanvas.addEventListener('touchstart', handleChipTouch, { passive: true });
+      cCanvas.addEventListener('touchmove', handleChipTouch, { passive: true });
+
       // yFrac: relative position of the particle within the local channel half-width (-1..1)
       const chipParticles = Array.from({ length: 60 }, () => ({
         x: Math.random() * 600,
@@ -4666,6 +4674,64 @@
       from { opacity: 0; transform: scale(0.96) translateY(8px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
+
+    /* Desktop default for home projects grid */
+    #homeAllProjectsGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    /* Mobile Responsive Overrides for index.html styled components */
+    @media (max-width: 768px) {
+      #homeAllProjectsGrid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+      }
+
+      .fm-search-modal-overlay {
+        padding-top: 24px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+      }
+
+      .fm-search-modal-box {
+        width: 100% !important;
+        border-radius: 14px !important;
+        max-height: 88vh !important;
+      }
+
+      .fm-search-input {
+        font-size: 16px !important; /* Critical for iOS Safari: prevents viewport zoom on focus */
+      }
+
+      .fm-proj-modal-backdrop {
+        padding: 8px !important;
+        align-items: flex-end !important;
+      }
+
+      .fm-proj-modal-box {
+        padding: 18px 14px !important;
+        border-radius: 16px !important;
+        max-height: 92vh !important;
+        width: 100% !important;
+      }
+
+      .mech-station {
+        top: 8px !important;
+        right: 8px !important;
+        left: auto !important;
+        height: 28px !important;
+        padding: 2px 6px !important;
+        gap: 4px !important;
+      }
+
+      [dir="rtl"] .mech-station,
+      html[lang="fa"] .mech-station {
+        right: 8px !important;
+        left: auto !important;
+      }
+    }
   </style>
 
   <script>
@@ -5223,6 +5289,17 @@
       cfdCanvas.addEventListener('mouseleave', () => {
         cfdHovered = false;
       });
+
+      function handleCfdTouch(e) {
+        if (!e.touches || !e.touches[0]) return;
+        const rect = cfdCanvas.getBoundingClientRect();
+        cfdProbeX = e.touches[0].clientX - rect.left;
+        cfdProbeY = e.touches[0].clientY - rect.top;
+        cfdHovered = true;
+      }
+      cfdCanvas.addEventListener('touchstart', handleCfdTouch, { passive: true });
+      cfdCanvas.addEventListener('touchmove', handleCfdTouch, { passive: true });
+      cfdCanvas.addEventListener('touchend', () => { cfdHovered = false; }, { passive: true });
 
       function renderCfdLab() {
         if (!cfdCtx) return;
