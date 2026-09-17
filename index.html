@@ -59,68 +59,200 @@
   <div class="custom-cursor" id="cursor"></div>
   <div class="custom-cursor-halo" id="cursorHalo"></div>
 
-  <!-- FLOATING THEME CONTROL (Top-Left, positioned slightly inward to the right) -->
-  <aside class="floating-theme-dock" id="floatingThemeDock" aria-label="Theme Control" title="حالت روز و شب / Day &amp; Night Mode">
-    <!-- Day / Night Animated Switch (User Requested Design) -->
-    <div class="theme-switch">
-      <input type="checkbox" id="themeSwitchCheckbox" class="theme-switch__checkbox" />
-      <label for="themeSwitchCheckbox" class="theme-switch__container">
-        <div class="theme-switch__circle-container">
-          <div class="theme-switch__sun-moon-container">
-            <div class="theme-switch__moon">
-              <div class="theme-switch__spot"></div>
-              <div class="theme-switch__spot"></div>
-              <div class="theme-switch__spot"></div>
-            </div>
-          </div>
-        </div>
-        <div class="theme-switch__clouds"></div>
-        <div class="theme-switch__stars-container">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none" style="width: 100%; height: auto;">
-            <path fill="currentColor" d="M13.5 1.5l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5 1.5-3zM35.5 12.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2zM22 28l1.2 2.4 2.4 1.2-2.4 1.2-1.2 2.4-1.2-2.4-2.4-1.2 2.4-1.2 1.2-2.4z"/>
-          </svg>
-        </div>
-        <div class="theme-switch__shooting-star"></div>
-        <div class="theme-switch__shooting-star-2"></div>
-        <div class="theme-switch__meteor"></div>
-        <div class="theme-switch__stars-cluster">
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-          <div class="star"></div>
-        </div>
-        <div class="theme-switch__aurora"></div>
-        <div class="theme-switch__comets">
-          <div class="comet"></div>
-          <div class="comet"></div>
-        </div>
-      </label>
-    </div>
-  </aside>
+      <!-- FULL SCREEN PERIMETER FLUID CONDUIT RAIL (Circumferential Fluid Circuit) -->
+  <div class="perimeter-fluid-conduit" id="perimeterFluidConduit" aria-hidden="true">
+    <!-- Ambient Screen Edge Glow (Illuminates the entire screen when circuit completes!) -->
+    <div class="screen-perimeter-aura" id="screenPerimeterAura"></div>
 
-  <!-- FLOATING LANGUAGE CONTROL (Top-Right) -->
-  <aside class="floating-lang-dock" id="floatingLangDock" aria-label="Language Control" title="تغییر زبان / Language (FA / EN)">
-    <!-- 3D Flip Language Toggle -->
-    <div class="checkbox-wrapper-10">
-      <input class="tgl tgl-flip" id="langCheckboxToggle" type="checkbox" />
-      <label class="tgl-btn" data-tg-off="EN" data-tg-on="فارسی" for="langCheckboxToggle"></label>
+    <!-- 4-Sided Continuous Nano-Capillary Rails (Top, Left, Bottom, Right) -->
+    <div class="perimeter-rail perimeter-rail-top">
+      <div class="rail-line-back"></div>
+      <div class="rail-line-glow" id="railGlowTop"></div>
     </div>
-  </aside>
+    <div class="perimeter-rail perimeter-rail-left">
+      <div class="rail-line-back"></div>
+      <div class="rail-line-glow" id="railGlowLeft"></div>
+    </div>
+    <div class="perimeter-rail perimeter-rail-bottom">
+      <div class="rail-line-back"></div>
+      <div class="rail-line-glow" id="railGlowBottom"></div>
+    </div>
+    <div class="perimeter-rail perimeter-rail-right">
+      <div class="rail-line-back"></div>
+      <div class="rail-line-glow" id="railGlowRight"></div>
+    </div>
 
-  <!-- SVG Filters for theme switch sketchy effect -->
-  <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
-    <defs>
-      <filter id="sketchy">
-        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
-      </filter>
-      <filter id="sketchy-sm">
-        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" />
-      </filter>
-    </defs>
-  </svg>
+    <!-- 4 Precision Hydraulic 90° Corner Turning Elbows with Status Flares -->
+    <div class="corner-junction corner-top-left" id="cornerTopLeft" title="مفصل هیدرولیک ۹۰ درجه بالا-چپ">
+      <div class="corner-elbow"></div>
+      <div class="corner-bolt"></div>
+      <div class="corner-flash"></div>
+    </div>
+    <div class="corner-junction corner-bottom-left" id="cornerBottomLeft" title="مفصل هیدرولیک ۹۰ درجه پایین-چپ">
+      <div class="corner-elbow"></div>
+      <div class="corner-bolt"></div>
+      <div class="corner-flash"></div>
+    </div>
+    <div class="corner-junction corner-bottom-right" id="cornerBottomRight" title="مفصل هیدرولیک ۹۰ درجه پایین-راست">
+      <div class="corner-elbow"></div>
+      <div class="corner-bolt"></div>
+      <div class="corner-flash"></div>
+    </div>
+    <div class="corner-junction corner-top-right" id="cornerTopRight" title="مفصل هیدرولیک ۹۰ درجه بالا-راست">
+      <div class="corner-elbow"></div>
+      <div class="corner-bolt"></div>
+      <div class="corner-flash"></div>
+    </div>
+
+    <!-- Return Receptor Manifold above Compressor (Top-Right Return Point) -->
+    <div class="compressor-return-manifold" id="compressorReturnManifold" title="مانیفولد دریافت و تکمیل مدار هیدرولیک">
+      <div class="manifold-core"></div>
+      <div class="manifold-burst-ring"></div>
+    </div>
+
+    <!-- Full-Screen High-Velocity Fluid Dynamics Canvas -->
+    <canvas id="fluidShotCanvas" class="fluid-shot-canvas"></canvas>
+  </div>
+
+  <!-- UNIFIED MECHANICAL COMPRESSOR & CONTROL STATION (Ultra-Compact) -->
+  <aside class="floating-lang-dock mech-station" id="floatingControlsDock" aria-label="Mechanical Engineering Controls" title="کنسول مکانیکی: توربو-کمپرسور سانتریفیوژ، تغییر زبان و تم روز/شب">
+    <!-- Micro Hex Bolt Left -->
+    <span class="mech-bolt mech-bolt-l" aria-hidden="true"></span>
+
+    <!-- High-Precision Industrial Centrifugal Turbo-Compressor Unit (Clickable!) -->
+    <div class="mech-compressor-unit" id="mechCompressorUnit" role="button" tabindex="0" title="توربو-کمپرسور حلزونی صنعتی: کلیک برای گردش سیال دور کل صفحه (Industrial Turbo Compressor: Click to loop fluid around screen)">
+      <div class="compressor-detailed-housing">
+        <svg class="compressor-detailed-svg" id="compressorDetailedSvg" viewBox="0 0 38 28" width="34" height="25" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="voluteGrad" x1="0" y1="0" x2="32" y2="28" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#334155" />
+              <stop offset="50%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0b1120" />
+            </linearGradient>
+            <linearGradient id="voluteGradLight" x1="0" y1="0" x2="32" y2="28" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#f1f5f9" />
+              <stop offset="50%" stop-color="#cbd5e1" />
+              <stop offset="100%" stop-color="#94a3b8" />
+            </linearGradient>
+          </defs>
+
+          <!-- 1. Rear Motor Stator & Heat-Sink Fins -->
+          <g class="compressor-heatsink">
+            <rect x="0.8" y="9" width="3.4" height="1.6" rx="0.5" class="comp-fin" fill="#475569" />
+            <rect x="0.8" y="12.5" width="3.4" height="1.6" rx="0.5" class="comp-fin" fill="#475569" />
+            <rect x="0.8" y="16" width="3.4" height="1.6" rx="0.5" class="comp-fin" fill="#475569" />
+          </g>
+
+          <!-- 2. Cast Volute Scroll Spiral Body -->
+          <path class="compressor-volute-body"
+                d="M 4 14 C 4 7 10 3 18 3 L 23 3 L 23 7 C 21 8 19 9 17 11 C 12 11 9 13 9 17 C 9 22 14 24 19 24 C 24 24 26 21 26 17 L 26 14 C 26 11 25 8 23 7 L 23 3 L 26 3 C 27 3 28 4 28 5 L 28 8 C 29 10 30 13 30 16 C 30 22 25 26 18 26 C 10 26 4 21 4 14 Z"
+                fill="url(#voluteGrad)" stroke="#475569" stroke-width="0.8" />
+
+          <!-- Discharge Flange with Studs -->
+          <rect x="21.5" y="1" width="7" height="2.5" rx="0.8" class="comp-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="23" cy="2.2" r="0.5" fill="#e2e8f0" />
+          <circle cx="27" cy="2.2" r="0.5" fill="#e2e8f0" />
+
+          <!-- High-Pressure Discharge Nozzle Tip Orifice (Facing top rail) -->
+          <rect class="compressor-nozzle-orifice" id="compressorNozzleOrifice" x="23.5" y="-0.5" width="3" height="1.6" rx="0.5" fill="#00f2fe" />
+
+          <!-- 3. Casing Perimeter Fastener Bolts -->
+          <circle cx="7" cy="10" r="0.7" fill="#94a3b8" />
+          <circle cx="7" cy="18" r="0.7" fill="#94a3b8" />
+          <circle cx="14" cy="24.5" r="0.7" fill="#94a3b8" />
+
+          <!-- 4. Impeller Shroud & Inlet Bellmouth Eye -->
+          <circle cx="16" cy="15.5" r="7.5" class="comp-eye-bg" fill="#090d16" stroke="#334155" stroke-width="0.8" />
+          <circle cx="16" cy="15.5" r="7.2" fill="none" stroke="rgba(0, 242, 254, 0.3)" stroke-width="0.6" stroke-dasharray="1.5 1" />
+
+          <!-- 5. HIGH-SPEED ROTATING MULTI-TIER IMPELLER -->
+          <g class="compressor-impeller-group" id="compressorImpellerGroup" transform="translate(16, 15.5)">
+            <!-- Impeller Hub Disc -->
+            <circle cx="0" cy="0" r="2.2" class="impeller-hub-disc" fill="#38bdf8" />
+            <!-- 8 Primary Curved Aerodynamic Blades -->
+            <path class="impeller-blades-curve"
+                  d="M 0 -2.2 C 1.2 -4, 3.2 -5.5, 6 -5.2 C 4.5 -4.2, 2.8 -3.2, 1.6 -1.8 Z
+                     M 1.5 -1.5 C 3.2 -1.8, 5.5 -1.5, 6.8 0.8 C 5.5 0.5, 3.8 0.2, 2.1 -0.5 Z
+                     M 2.2 0 C 4 1.2, 5.5 3.2, 5.2 6 C 4.2 4.5, 3.2 2.8, 1.8 1.6 Z
+                     M 1.5 1.5 C 1.8 3.2, 1.5 5.5, -0.8 6.8 C -0.5 5.5, -0.2 3.8, 0.5 2.1 Z
+                     M 0 2.2 C -1.2 4, -3.2 5.5, -6 5.2 C -4.5 4.2, -2.8 3.2, -1.6 1.8 Z
+                     M -1.5 1.5 C -3.2 1.8, -5.5 1.5, -6.8 -0.8 C -5.5 -0.5, -3.8 -0.2, -2.1 0.5 Z
+                     M -2.2 0 C -4 -1.2, -5.5 -3.2, -5.2 -6 C -4.2 -4.5, -3.2 -2.8, -1.8 -1.6 Z
+                     M -1.5 -1.5 C -1.8 -3.2, -1.5 -5.5, 0.8 -6.8 C 0.5 -5.5, 0.2 -3.8, -0.5 -2.1 Z"
+                  fill="rgba(0, 242, 254, 0.45)" stroke="#00f2fe" stroke-width="0.6" stroke-linejoin="round" />
+            <!-- Hexagonal Nose Cone / Spinner Nut -->
+            <polygon points="0,-1 0.87,-0.5 0.87,0.5 0,1 -0.87,0.5 -0.87,-0.5" fill="#ffffff" />
+          </g>
+
+          <!-- 6. HIGH-PRECISION CALIBRATED INDUSTRIAL MANOMETER -->
+          <g class="compressor-gauge-unit" transform="translate(30.5, 17)">
+            <!-- Chrome Bezel Outer Ring -->
+            <circle cx="0" cy="0" r="5.5" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.8" />
+            <circle cx="0" cy="0" r="4.6" class="gauge-dial-face" fill="#1e293b" />
+            <!-- Scale Arc Zones: Green (Normal) & Red (Overboost) -->
+            <path d="M -3 -2 A 4 4 0 0 1 1.5 -3.2" stroke="#10b981" stroke-width="0.8" fill="none" stroke-linecap="round" />
+            <path d="M 1.5 -3.2 A 4 4 0 0 1 3.5 0" stroke="#ef4444" stroke-width="0.8" fill="none" stroke-linecap="round" />
+            <!-- Dial Graduation Tick Marks -->
+            <line x1="-2.8" y1="-1.8" x2="-2" y2="-1.3" stroke="#cbd5e1" stroke-width="0.45" />
+            <line x1="0" y1="-3.6" x2="0" y2="-2.6" stroke="#cbd5e1" stroke-width="0.45" />
+            <line x1="2.8" y1="-1.8" x2="2" y2="-1.3" stroke="#ef4444" stroke-width="0.45" />
+            <!-- Needle Pivot -->
+            <circle cx="0" cy="0" r="0.9" fill="#e2e8f0" />
+            <!-- Calibrated Dynamic Red Needle -->
+            <g class="gauge-needle-rotator" id="gaugeNeedleRotator" transform="rotate(-30)">
+              <line x1="0" y1="0" x2="3.2" y2="0" stroke="#ef4444" stroke-width="0.75" stroke-linecap="round" />
+              <circle cx="0" cy="0" r="0.5" fill="#ffffff" />
+            </g>
+            <!-- Glass Cover Specular Arc -->
+            <path d="M -3.5 -1.5 A 4 4 0 0 1 1.5 -3.8" stroke="rgba(255,255,255,0.5)" stroke-width="0.55" fill="none" />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Micro Separator Pin -->
+    <div class="floating-control-divider"></div>
+
+    <!-- Day / Night Mechanical Planetary Gear Switch -->
+    <label class="mech-unit mech-theme-unit" title="حالت روز و شب (Day / Night Gear Dial)">
+      <input id="themeSwitchCheckbox" class="mech-hidden-input" type="checkbox" role="switch" name="theme" value="dark" />
+      <div class="mech-gear-dial">
+        <!-- Sun Gear (Light Mode) -->
+        <svg class="mech-svg mech-sun-svg" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4.2" class="mech-sun-core" />
+          <path class="mech-sun-rays" d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.8 1.8M17.27 17.27l1.8 1.8M4.93 19.07l1.8-1.8M17.27 6.73l1.8-1.8" />
+        </svg>
+        <!-- Moon Gear (Dark Mode) -->
+        <svg class="mech-svg mech-moon-svg" viewBox="0 0 24 24">
+          <path class="mech-moon-body" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          <circle cx="8" cy="13" r="0.9" class="mech-moon-spot" />
+          <circle cx="13" cy="17" r="0.7" class="mech-moon-spot" />
+        </svg>
+      </div>
+    </label>
+
+    <!-- Mechanical Transmission Language Shifter (FA / EN) -->
+    <label class="mech-unit mech-lang-unit" title="تغییر زبان: فارسی / انگلیسی (Language Transmission Shifter)">
+      <input id="langCheckboxToggle" class="mech-hidden-input" type="checkbox" />
+      <div class="mech-shifter-track">
+        <!-- Rotating Internal Involute Gear -->
+        <svg class="mech-shifter-gear-svg" viewBox="-12 -12 24 24" aria-hidden="true">
+          <path class="mech-shifter-teeth" d="M 9.00 0.00 L 11.77 2.34 L 11.09 4.59 L 7.48 5.00 L 6.36 6.36 L 6.67 9.98 L 4.59 11.09 L 1.76 8.83 L 0.00 9.00 L -2.34 11.77 L -4.59 11.09 L -5.00 7.48 L -6.36 6.36 L -9.98 6.67 L -11.09 4.59 L -8.83 1.76 L -9.00 0.00 L -11.77 -2.34 L -11.09 -4.59 L -7.48 -5.00 L -6.36 -6.36 L -6.67 -9.98 L -4.59 -11.09 L -1.76 -8.83 L -0.00 -9.00 L 2.34 -11.77 L 4.59 -11.09 L 5.00 -7.48 L 6.36 -6.36 L 9.98 -6.67 L 11.09 -4.59 L 8.83 -1.76 Z M 3 0 A 3 3 0 1 0 -3 0 A 3 3 0 1 0 3 0 Z" />
+        </svg>
+        <!-- Mechanical Sliding Piston Slider -->
+        <div class="mech-piston">
+          <div class="mech-piston-groove"></div>
+          <div class="mech-piston-led"></div>
+        </div>
+        <!-- Stamped Gearbox Position Labels -->
+        <span class="mech-label mech-label-fa">FA</span>
+        <span class="mech-label mech-label-en">EN</span>
+      </div>
+    </label>
+
+    <!-- Micro Hex Bolt Right -->
+    <span class="mech-bolt mech-bolt-r" aria-hidden="true"></span>
+  </aside>
 
   <main class="container">
 
@@ -2221,10 +2353,355 @@
     // Initialize Lucide Icons
     lucide.createIcons();
 
-    // --- DAY / NIGHT MODE TOGGLE (Theme Switch) ---
+    // ============================================================
+    // MECHANICAL FLUID COMPRESSOR & 360° PERIMETER CIRCUIT CONTROLLER
+    // Fluid travels full circuit around screen, returns to start, & ignites screen!
+    // ============================================================
     const themeSwitchCheckbox = document.getElementById('themeSwitchCheckbox');
+    const langCheckbox = document.getElementById('langCheckboxToggle');
+    const mechCompressorUnit = document.getElementById('mechCompressorUnit');
+    const perimeterConduit = document.getElementById('perimeterFluidConduit');
     const rootEl = document.documentElement;
 
+    // Synthesized acoustic feedback (pneumatic, corner whistles, circuit ignition)
+    function playAcousticFeedback(type) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        const now = ctx.currentTime;
+
+        if (type === 'compressor-spool') {
+          // Compressor turbine spinup + high-velocity jet release
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(120, now);
+          osc.frequency.exponentialRampToValueAtTime(780, now + 0.3);
+          osc.frequency.exponentialRampToValueAtTime(360, now + 2.4);
+
+          gain.gain.setValueAtTime(0.03, now);
+          gain.gain.linearRampToValueAtTime(0.08, now + 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 2.5);
+        } else if (type === 'corner-turn') {
+          // Sharp hydrodynamic corner whistling
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.exponentialRampToValueAtTime(950, now + 0.04);
+          osc.frequency.exponentialRampToValueAtTime(450, now + 0.12);
+
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        } else if (type === 'circuit-complete') {
+          // Deep resonance + harmonic chime when full loop returns to start!
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(440, now);
+          osc1.frequency.exponentialRampToValueAtTime(880, now + 0.1);
+          osc1.frequency.exponentialRampToValueAtTime(220, now + 0.8);
+
+          osc2.type = 'triangle';
+          osc2.frequency.setValueAtTime(554.37, now);
+          osc2.frequency.exponentialRampToValueAtTime(1108.73, now + 0.1);
+          osc2.frequency.exponentialRampToValueAtTime(277.18, now + 0.8);
+
+          gain.gain.setValueAtTime(0.14, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc1.start(now);
+          osc2.start(now);
+          osc1.stop(now + 0.8);
+          osc2.stop(now + 0.8);
+        }
+      } catch (e) {
+        // Fallback for audio restrictions
+      }
+    }
+
+    // Set Manometer Needle Rotation (-40deg idle to +85deg redline)
+    function setCompressorGauge(deg) {
+      const rotator = document.getElementById('gaugeNeedleRotator');
+      if (rotator) {
+        rotator.setAttribute('transform', 'rotate(' + deg + ')');
+      }
+    }
+
+    let fluidAnimationReq = null;
+    let fluidStartTime = null;
+    const LOOP_DURATION_MS = 2500; // Complete full-screen circuit duration
+
+    function launchFluidCompressorShot() {
+      const canvas = document.getElementById('fluidShotCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      // Determine compressor discharge nozzle coordinate accurately
+      let compX = W - 85;
+      const nozzleEl = document.getElementById('compressorNozzleOrifice') || document.getElementById('mechCompressorUnit');
+      if (nozzleEl) {
+        const rect = nozzleEl.getBoundingClientRect();
+        if (rect.width > 0) {
+          compX = rect.left + rect.width / 2;
+        }
+      }
+
+      const railPad = 2; // Inset distance from edges in pixels
+      const xL = railPad;
+      const xR = W - railPad;
+      const yT = railPad;
+      const yB = H - railPad;
+
+      // 5 Segments of the complete circuit:
+      // Leg 1: Top edge (Comp -> Top-Left)
+      const d1 = Math.max(10, compX - xL);
+      // Leg 2: Left edge (Top-Left -> Bottom-Left)
+      const d2 = Math.max(10, yB - yT);
+      // Leg 3: Bottom edge (Bottom-Left -> Bottom-Right)
+      const d3 = Math.max(10, xR - xL);
+      // Leg 4: Right edge (Bottom-Right -> Top-Right)
+      const d4 = Math.max(10, yB - yT);
+      // Leg 5: Top edge return (Top-Right -> Comp)
+      const d5 = Math.max(10, xR - compX);
+
+      const totalCircuitDist = d1 + d2 + d3 + d4 + d5;
+
+      const station = document.getElementById('floatingControlsDock');
+      const cornerTL = document.getElementById('cornerTopLeft');
+      const cornerBL = document.getElementById('cornerBottomLeft');
+      const cornerBR = document.getElementById('cornerBottomRight');
+      const cornerTR = document.getElementById('cornerTopRight');
+      const returnManifold = document.getElementById('compressorReturnManifold');
+
+      // 1. Spool compressor, slam manometer needle to redline boost!
+      if (station) station.classList.add('is-compressing');
+      setCompressorGauge(80); // Redline overboost!
+      playAcousticFeedback('compressor-spool');
+
+      // Reset corner active states
+      [cornerTL, cornerBL, cornerBR, cornerTR, returnManifold].forEach(el => {
+        if (el) el.classList.remove('corner-active', 'circuit-ignited');
+      });
+
+      if (fluidAnimationReq) cancelAnimationFrame(fluidAnimationReq);
+
+      const bubbles = [];
+      const trailHistory = [];
+      const triggeredCorners = { c1: false, c2: false, c3: false, c4: false };
+
+      fluidStartTime = performance.now();
+
+      function getCircuitPoint(progress) {
+        const currentDist = progress * totalCircuitDist;
+
+        if (currentDist <= d1) {
+          const p = currentDist / d1;
+          return { x: compX - p * d1, y: yT, leg: 1, angle: Math.PI };
+        } else if (currentDist <= d1 + d2) {
+          const p = (currentDist - d1) / d2;
+          return { x: xL, y: yT + p * d2, leg: 2, angle: Math.PI / 2 };
+        } else if (currentDist <= d1 + d2 + d3) {
+          const p = (currentDist - d1 - d2) / d3;
+          return { x: xL + p * d3, y: yB, leg: 3, angle: 0 };
+        } else if (currentDist <= d1 + d2 + d3 + d4) {
+          const p = (currentDist - d1 - d2 - d3) / d4;
+          return { x: xR, y: yB - p * d4, leg: 4, angle: -Math.PI / 2 };
+        } else {
+          const p = (currentDist - d1 - d2 - d3 - d4) / d5;
+          return { x: xR - p * d5, y: yT, leg: 5, angle: Math.PI };
+        }
+      }
+
+      function drawCircuit(now) {
+        const elapsed = now - fluidStartTime;
+        const rawProgress = Math.min(1.0, elapsed / LOOP_DURATION_MS);
+
+        // Hydrodynamic velocity profile
+        const progress = rawProgress;
+        const pt = getCircuitPoint(progress);
+
+        // Store trail history for smooth luminous wake
+        trailHistory.push({ x: pt.x, y: pt.y, time: now });
+        while (trailHistory.length > 0 && (now - trailHistory[0].time) > 400) {
+          trailHistory.shift();
+        }
+
+        // Corner Trigger Events as the fluid whips around 90-degree elbows
+        if (pt.leg === 2 && !triggeredCorners.c1) {
+          triggeredCorners.c1 = true;
+          if (cornerTL) cornerTL.classList.add('corner-active');
+          playAcousticFeedback('corner-turn');
+        }
+        if (pt.leg === 3 && !triggeredCorners.c2) {
+          triggeredCorners.c2 = true;
+          if (cornerBL) cornerBL.classList.add('corner-active');
+          playAcousticFeedback('corner-turn');
+        }
+        if (pt.leg === 4 && !triggeredCorners.c3) {
+          triggeredCorners.c3 = true;
+          if (cornerBR) cornerBR.classList.add('corner-active');
+          playAcousticFeedback('corner-turn');
+        }
+        if (pt.leg === 5 && !triggeredCorners.c4) {
+          triggeredCorners.c4 = true;
+          if (cornerTR) cornerTR.classList.add('corner-active');
+          playAcousticFeedback('corner-turn');
+        }
+
+        ctx.clearRect(0, 0, W, H);
+
+        const isDark = !rootEl.classList.contains('light-mode');
+        const primaryColor = isDark ? '#00f2fe' : '#f59e0b';
+        const secondaryColor = isDark ? '#38bdf8' : '#fbbf24';
+        const coreColor = '#ffffff';
+
+        // Spawn cavitation microbubbles
+        if (progress < 0.98 && Math.random() < 0.8) {
+          bubbles.push({
+            x: pt.x + (Math.random() * 4 - 2),
+            y: pt.y + (Math.random() * 4 - 2),
+            vx: -Math.cos(pt.angle) * (Math.random() * 2 + 1) + (Math.random() - 0.5),
+            vy: -Math.sin(pt.angle) * (Math.random() * 2 + 1) + (Math.random() - 0.5),
+            radius: Math.random() * 2.2 + 0.8,
+            alpha: 0.9,
+            decay: Math.random() * 0.035 + 0.02
+          });
+        }
+
+        // 1. Draw trailing hydrodynamic neon plasma wake
+        if (trailHistory.length > 1) {
+          for (let i = 1; i < trailHistory.length; i++) {
+            const p1 = trailHistory[i - 1];
+            const p2 = trailHistory[i];
+            const ageRatio = (now - p2.time) / 400; // 0 (new) to 1 (old)
+            const alpha = Math.max(0, 1 - ageRatio);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = isDark ? ('rgba(0, 242, 254, ' + (alpha * 0.9) + ')') : ('rgba(245, 158, 11, ' + (alpha * 0.9) + ')');
+            ctx.lineWidth = 3.5 * alpha + 1;
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+
+        // 2. Draw cavitation microbubbles
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+          const b = bubbles[i];
+          b.x += b.vx;
+          b.y += b.vy;
+          b.alpha -= b.decay;
+          if (b.alpha <= 0) {
+            bubbles.splice(i, 1);
+            continue;
+          }
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+          ctx.fillStyle = isDark ? ('rgba(56, 189, 248, ' + b.alpha + ')') : ('rgba(251, 191, 36, ' + b.alpha + ')');
+          ctx.shadowColor = primaryColor;
+          ctx.shadowBlur = 4;
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // 3. Draw Leading Fluid Slug (Teardrop plasma projectile)
+        ctx.save();
+        ctx.shadowColor = primaryColor;
+        ctx.shadowBlur = 14;
+
+        const headGrad = ctx.createRadialGradient(pt.x, pt.y, 1, pt.x, pt.y, 9);
+        headGrad.addColorStop(0, coreColor);
+        headGrad.addColorStop(0.35, secondaryColor);
+        headGrad.addColorStop(0.8, primaryColor);
+        headGrad.addColorStop(1, 'rgba(0,0,0,0)');
+
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 6.5, 0, Math.PI * 2);
+        ctx.fillStyle = headGrad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = coreColor;
+        ctx.fill();
+        ctx.restore();
+
+        if (progress < 1.0) {
+          fluidAnimationReq = requestAnimationFrame(drawCircuit);
+        } else {
+          // ============================================================
+          // RETURNED TO STARTING PLACE!
+          // "و لطفا این نواره که پرتاب میشه یه دور دور صفحه بزنه و برگرده به جای اولش تا صفحه روشن بشه"
+          // ============================================================
+          ctx.clearRect(0, 0, W, H);
+
+          // 1. Manifold absorption pulse at compressor junction
+          if (returnManifold) {
+            returnManifold.classList.add('circuit-ignited');
+          }
+
+          // 2. ILLUMINATE THE ENTIRE SCREEN & PERIMETER CONDUIT!
+          if (perimeterConduit) {
+            perimeterConduit.classList.remove('is-illuminated');
+            void perimeterConduit.offsetWidth; // force reflow
+            perimeterConduit.classList.add('is-illuminated');
+          }
+
+          // 3. Audio resonance of completed circuit
+          playAcousticFeedback('circuit-complete');
+
+          // 4. Return compressor gauge smoothly to nominal running pressure
+          setTimeout(() => {
+            if (station) station.classList.remove('is-compressing');
+            setCompressorGauge(-15); // Normal nominal pressure
+          }, 450);
+        }
+      }
+
+      fluidAnimationReq = requestAnimationFrame(drawCircuit);
+    }
+
+    // Window resize handler for full-screen fluid canvas
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('fluidShotCanvas');
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+    });
+
+    // Theme Switch
     function applyTheme(mode) {
       if (mode === 'light') {
         rootEl.classList.add('light-mode');
@@ -2245,13 +2722,12 @@
         const next = themeSwitchCheckbox.checked ? 'dark' : 'light';
         applyTheme(next);
         localStorage.setItem('site-theme', next);
+        launchFluidCompressorShot();
       });
     }
 
-    // --- FLIP LANGUAGE TOGGLE (EN / FA) ---
-    const langCheckbox = document.getElementById('langCheckboxToggle');
+    // Language Toggle
     const i18nEls = document.querySelectorAll('[data-en][data-fa]');
-
     function applyLanguage(lang) {
       i18nEls.forEach(el => {
         const val = lang === 'fa' ? el.dataset.fa : el.dataset.en;
@@ -2273,9 +2749,21 @@
         const next = langCheckbox.checked ? 'fa' : 'en';
         applyLanguage(next);
         localStorage.setItem('site-lang', next);
+        launchFluidCompressorShot();
       });
     }
 
+    // Direct Compressor Unit Click (Interactive trigger)
+    if (mechCompressorUnit) {
+      mechCompressorUnit.addEventListener('click', () => {
+        launchFluidCompressorShot();
+      });
+    }
+
+    // Launch initial showcase circuit after page load
+    setTimeout(() => {
+      launchFluidCompressorShot();
+    }, 1100);
     // Optional mobile menu handling if present
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navMenuEl = document.querySelector('.nav-menu');
@@ -3237,766 +3725,757 @@
     }
 
     /* --- USER REQUESTED FLIP LANGUAGE TOGGLE (.checkbox-wrapper-10) --- */
-    .checkbox-wrapper-10 {
-      display: inline-flex;
-      align-items: center;
-      vertical-align: middle;
-    }
-    .checkbox-wrapper-10 .tgl {
-      display: none;
-    }
-    .checkbox-wrapper-10 .tgl,
-    .checkbox-wrapper-10 .tgl:after,
-    .checkbox-wrapper-10 .tgl:before,
-    .checkbox-wrapper-10 .tgl *,
-    .checkbox-wrapper-10 .tgl *:after,
-    .checkbox-wrapper-10 .tgl *:before,
-    .checkbox-wrapper-10 .tgl + .tgl-btn {
-      box-sizing: border-box;
-    }
-    .checkbox-wrapper-10 .tgl::-moz-selection,
-    .checkbox-wrapper-10 .tgl:after::-moz-selection,
-    .checkbox-wrapper-10 .tgl:before::-moz-selection,
-    .checkbox-wrapper-10 .tgl *::-moz-selection,
-    .checkbox-wrapper-10 .tgl *:after::-moz-selection,
-    .checkbox-wrapper-10 .tgl *:before::-moz-selection,
-    .checkbox-wrapper-10 .tgl + .tgl-btn::-moz-selection,
-    .checkbox-wrapper-10 .tgl::selection,
-    .checkbox-wrapper-10 .tgl:after::selection,
-    .checkbox-wrapper-10 .tgl:before::selection,
-    .checkbox-wrapper-10 .tgl *::selection,
-    .checkbox-wrapper-10 .tgl *:after::selection,
-    .checkbox-wrapper-10 .tgl *:before::selection,
-    .checkbox-wrapper-10 .tgl + .tgl-btn::selection {
-      background: none;
-    }
-    .checkbox-wrapper-10 .tgl + .tgl-btn {
-      outline: 0;
-      display: block;
-      width: 4.8em;
-      height: 2.1em;
-      position: relative;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      margin: 0;
-      font-size: 11px;
-    }
-    .checkbox-wrapper-10 .tgl + .tgl-btn:after,
-    .checkbox-wrapper-10 .tgl + .tgl-btn:before {
-      position: relative;
-      display: block;
-      content: "";
-      width: 50%;
-      height: 100%;
-    }
-    .checkbox-wrapper-10 .tgl + .tgl-btn:after {
-      left: 0;
-    }
-    .checkbox-wrapper-10 .tgl + .tgl-btn:before {
-      display: none;
-    }
-    .checkbox-wrapper-10 .tgl:checked + .tgl-btn:after {
-      left: 50%;
-    }
-    .checkbox-wrapper-10 .tgl-flip + .tgl-btn {
-      padding: 2px;
-      transition: all 0.2s ease;
-      font-family: var(--font-sans), 'Vazirmatn', sans-serif;
-      perspective: 100px;
-    }
-    .checkbox-wrapper-10 .tgl-flip + .tgl-btn:after,
-    .checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
-      display: inline-block;
-      transition: all 0.4s ease;
-      width: 100%;
-      text-align: center;
-      position: absolute;
-      line-height: 2.1em;
-      font-weight: 700;
-      font-size: 11px;
-      color: #fff;
-      top: 0;
-      left: 0;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    }
-    .checkbox-wrapper-10 .tgl-flip + .tgl-btn:after {
-      content: attr(data-tg-on);
-      background: #02C66F;
-      transform: rotateY(-180deg);
-    }
-    .checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
-      background: #FF3A19;
-      content: attr(data-tg-off);
-    }
-    .checkbox-wrapper-10 .tgl-flip + .tgl-btn:active:before {
-      transform: rotateY(-20deg);
-    }
-    .checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:before {
-      transform: rotateY(180deg);
-    }
-    .checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:after {
-      transform: rotateY(0);
-      left: 0;
-      background: #02C66F;
-    }
-    .checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:active:after {
-      transform: rotateY(20deg);
-    }
-
-    /* --- FLOATING THEME DOCK (TOP-LEFT, SHIFTED INWARD TO THE RIGHT) --- */
-    .floating-theme-dock {
+    /* ============================================================
+       FULL SCREEN PERIMETER FLUID CIRCUIT & INDUSTRIAL COMPRESSOR
+       Fluid shot travels complete loop around the screen and ignites the perimeter
+       ============================================================ */
+    /* --- 1. FULL SCREEN PERIMETER FLUID CONDUIT CONTAINER --- */
+    .perimeter-fluid-conduit {
       position: fixed;
-      top: 14px;
-      left: 60px !important;
-      right: auto !important;
-      z-index: 9999;
-      display: inline-flex;
-      align-items: center;
-      background: rgba(14, 21, 37, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 999px;
-      padding: 4px 6px;
-      box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.1);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .light-mode .floating-theme-dock {
-      background: rgba(255, 255, 255, 0.88);
-      border-color: rgba(0, 0, 0, 0.12);
-      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.12);
-    }
-    [dir="rtl"] .floating-theme-dock,
-    html[lang="fa"] .floating-theme-dock {
-      left: 60px !important;
-      right: auto !important;
-    }
-    @media (max-width: 640px) {
-      .floating-theme-dock {
-        top: 10px;
-        left: 36px !important;
-        right: auto !important;
-        padding: 3px 5px;
-      }
-      [dir="rtl"] .floating-theme-dock,
-      html[lang="fa"] .floating-theme-dock {
-        left: 36px !important;
-        right: auto !important;
-      }
-    }
-
-    /* --- FLOATING LANGUAGE DOCK (TOP-RIGHT) --- */
-    .floating-lang-dock {
-      position: fixed;
-      top: 14px;
-      right: 24px !important;
-      left: auto !important;
-      z-index: 9999;
-      display: inline-flex;
-      align-items: center;
-      background: rgba(14, 21, 37, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 999px;
-      padding: 4px 8px;
-      box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.1);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .light-mode .floating-lang-dock {
-      background: rgba(255, 255, 255, 0.88);
-      border-color: rgba(0, 0, 0, 0.12);
-      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.12);
-    }
-    [dir="rtl"] .floating-lang-dock,
-    html[lang="fa"] .floating-lang-dock {
-      right: 24px !important;
-      left: auto !important;
-    }
-    @media (max-width: 640px) {
-      .floating-lang-dock {
-        top: 10px;
-        right: 12px !important;
-        left: auto !important;
-        padding: 3px 6px;
-      }
-      [dir="rtl"] .floating-lang-dock,
-      html[lang="fa"] .floating-lang-dock {
-        right: 12px !important;
-        left: auto !important;
-      }
-    }
-
-    /* --- USER REQUESTED SUN/MOON THEME SWITCH (.theme-switch) --- */
-    .theme-switch {
-      --toggle-size: 10px;
-      --container-width: 5.625em;
-      --container-height: 2.5em;
-      --container-radius: 0.38em;
-      --container-light-bg: #5caad4;
-      --container-night-bg: #1b1e36;
-      --circle-container-diameter: 3.375em;
-      --sun-moon-diameter: 2.125em;
-      --sun-bg: #f5c518;
-      --moon-bg: #d8d4c0;
-      --spot-color: #9b9787;
-      --circle-container-offset: calc(
-        (var(--circle-container-diameter) - var(--container-height)) / 2 * -1
-      );
-      --stars-color: #fff8e1;
-      --clouds-color: #f4f4f4;
-      --back-clouds-color: #bacfe0;
-      --transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
-      --circle-transition: 0.3s cubic-bezier(0, -0.02, 0.35, 1.17);
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    .theme-switch,
-    .theme-switch *,
-    .theme-switch *::before,
-    .theme-switch *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-size: var(--toggle-size);
-    }
-
-    .theme-switch__container {
-      width: var(--container-width);
-      height: var(--container-height);
-      background-color: var(--container-light-bg);
-      border-radius: var(--container-radius);
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-      background-image: linear-gradient(
-        to bottom,
-        var(--container-light-bg) 0%,
-        #4a92bd 100%
-      );
-      transition: all var(--transition);
-      box-shadow:
-        0 0 0 2.5px #1a1a1a,
-        3px 4px 0 2.5px rgba(26, 26, 26, 0.22);
-      transform: rotate(-0.7deg);
-      filter: url(#sketchy);
-    }
-
-    .theme-switch__container::before {
-      content: "";
-      position: absolute;
-      z-index: 1;
       inset: 0;
-      background-image: repeating-linear-gradient(
-        -50deg,
-        transparent,
-        transparent 7px,
-        rgba(255, 255, 255, 0.04) 7px,
-        rgba(255, 255, 255, 0.04) 8px
-      );
-      border-radius: inherit;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9998;
       pointer-events: none;
-    }
-
-    .theme-switch__checkbox {
-      display: none;
-    }
-
-    .theme-switch__circle-container {
-      width: var(--circle-container-diameter);
-      height: var(--circle-container-diameter);
-      background-color: rgba(255, 255, 255, 0.1);
-      position: absolute;
-      left: var(--circle-container-offset);
-      top: var(--circle-container-offset);
-      border-radius: var(--container-radius);
-      box-shadow:
-        inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
-        inset 0 0 0 3.375em rgba(255, 255, 255, 0.1),
-        0 0 0 0.625em rgba(255, 255, 255, 0.1),
-        0 0 0 1.25em rgba(255, 255, 255, 0.1);
-      display: flex;
-      transition: var(--circle-transition);
-      pointer-events: none;
-    }
-
-    .theme-switch__circle-container::before {
-      content: "";
-      position: absolute;
-      width: calc(var(--circle-container-diameter) + 1.5em);
-      height: calc(var(--circle-container-diameter) + 1.5em);
-      left: -0.75em;
-      top: -0.75em;
-      border-radius: 50%;
-      background: conic-gradient(
-        transparent 0deg,
-        transparent 8deg,
-        rgba(245, 197, 24, 0.52) 8deg,
-        rgba(245, 197, 24, 0.52) 22deg,
-        transparent 22deg,
-        transparent 53deg,
-        rgba(245, 197, 24, 0.52) 53deg,
-        rgba(245, 197, 24, 0.52) 67deg,
-        transparent 67deg,
-        transparent 98deg,
-        rgba(245, 197, 24, 0.52) 98deg,
-        rgba(245, 197, 24, 0.52) 112deg,
-        transparent 112deg,
-        transparent 143deg,
-        rgba(245, 197, 24, 0.52) 143deg,
-        rgba(245, 197, 24, 0.52) 157deg,
-        transparent 157deg,
-        transparent 188deg,
-        rgba(245, 197, 24, 0.52) 188deg,
-        rgba(245, 197, 24, 0.52) 202deg,
-        transparent 202deg,
-        transparent 233deg,
-        rgba(245, 197, 24, 0.52) 233deg,
-        rgba(245, 197, 24, 0.52) 247deg,
-        transparent 247deg,
-        transparent 278deg,
-        rgba(245, 197, 24, 0.52) 278deg,
-        rgba(245, 197, 24, 0.52) 292deg,
-        transparent 292deg,
-        transparent 323deg,
-        rgba(245, 197, 24, 0.52) 323deg,
-        rgba(245, 197, 24, 0.52) 337deg,
-        transparent 337deg,
-        transparent 360deg
-      );
-      animation: rotateSunRays 14s linear infinite;
-      opacity: 1;
-      transition: opacity var(--transition);
-      pointer-events: none;
-      filter: url(#sketchy-sm);
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__circle-container::before {
-      opacity: 0;
-    }
-
-    @keyframes rotateSunRays {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .theme-switch__sun-moon-container {
-      pointer-events: auto;
-      position: relative;
-      z-index: 2;
-      width: var(--sun-moon-diameter);
-      height: var(--sun-moon-diameter);
-      margin: auto;
-      border-radius: var(--container-radius);
-      background-color: var(--sun-bg);
-      box-shadow:
-        0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
-        0em -0.062em 0.062em 0em #a1872a inset,
-        0.1em 0.13em 0 0.04em #1a1a1a;
-      filter: url(#sketchy-sm)
-        drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25))
-        drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+      direction: ltr !important;
       overflow: hidden;
-      transition: var(--transition);
-      transform: scale(1);
     }
 
-    .theme-switch__sun-moon-container:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .theme-switch__moon {
-      transform: translateX(100%);
-      width: 100%;
-      height: 100%;
-      background-color: var(--moon-bg);
-      border-radius: inherit;
-      box-shadow:
-        0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset,
-        0em -0.062em 0.062em 0em #969696 inset;
-      transition:
-        all var(--transition),
-        transform 0.3s ease;
-      position: relative;
-    }
-
-    .theme-switch__moon:hover {
-      transform: rotate(15deg);
-    }
-
-    .theme-switch__spot {
-      position: absolute;
-      top: 0.75em;
-      left: 0.312em;
-      width: 0.75em;
-      height: 0.75em;
-      border-radius: var(--container-radius);
-      background-color: var(--spot-color);
-      box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
-      transition: background-color 0.3s ease;
-      filter: url(#sketchy-sm);
-    }
-
-    .theme-switch__spot:nth-of-type(2) {
-      width: 0.375em;
-      height: 0.375em;
-      top: 0.937em;
-      left: 1.375em;
-    }
-    .theme-switch__spot:nth-last-of-type(3) {
-      width: 0.25em;
-      height: 0.25em;
-      top: 0.312em;
-      left: 0.812em;
-    }
-    .theme-switch__moon:hover .theme-switch__spot {
-      background-color: #7a7f8c;
-    }
-
-    .theme-switch__clouds {
-      width: 1.25em;
-      height: 1.25em;
-      background-color: var(--clouds-color);
-      border-radius: var(--container-radius);
-      position: absolute;
-      bottom: -0.625em;
-      left: 0.312em;
-      box-shadow:
-        0.937em 0.312em var(--clouds-color),
-        -0.312em -0.312em var(--back-clouds-color),
-        1.437em 0.375em var(--clouds-color),
-        0.5em -0.125em var(--back-clouds-color),
-        2.187em 0 var(--clouds-color),
-        1.25em -0.062em var(--back-clouds-color),
-        2.937em 0.312em var(--clouds-color),
-        2em -0.312em var(--back-clouds-color),
-        3.625em -0.062em var(--clouds-color),
-        2.625em 0em var(--back-clouds-color),
-        4.5em -0.312em var(--clouds-color),
-        3.375em -0.437em var(--back-clouds-color),
-        4.625em -1.75em 0 0.437em var(--clouds-color),
-        4em -0.625em var(--back-clouds-color),
-        4.125em -2.125em 0 0.437em var(--back-clouds-color);
-      transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
-      filter: url(#sketchy-sm);
-    }
-
-    .theme-switch__stars-container {
-      position: absolute;
-      color: var(--stars-color);
-      top: -100%;
-      left: 0.312em;
-      width: 2.75em;
-      height: auto;
-      transition: var(--transition);
-    }
-
-    .theme-switch__checkbox:checked + .theme-switch__container {
-      background-color: var(--container-night-bg);
-      background-image: linear-gradient(
-        to bottom,
-        var(--container-night-bg) 0%,
-        #252a4a 100%
-      );
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__circle-container {
-      left: calc(
-        100% - var(--circle-container-offset) - var(--circle-container-diameter)
-      );
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__circle-container:hover {
-      left: calc(
-        100% - var(--circle-container-offset) - var(--circle-container-diameter) -
-          0.187em
-      );
-    }
-
-    .theme-switch__circle-container:hover {
-      left: calc(var(--circle-container-offset) + 0.187em);
-    }
-
-    .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
-      transform: translate(0);
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__clouds {
-      bottom: -4.062em;
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__stars-container {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .theme-switch__container:hover .theme-switch__clouds {
-      transform: translateX(15px) scale(1.02);
-    }
-
-    .theme-switch__sun-moon-container::after {
-      content: "";
-      position: absolute;
-      inset: -5px;
-      background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.2) 0%,
-        transparent 70%
-      );
-      border-radius: 50%;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .theme-switch__sun-moon-container:hover::after {
-      opacity: 1;
-    }
-
-    .theme-switch__shooting-star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      top: 20%;
-      left: -10%;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .theme-switch__shooting-star-2 {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      background: white;
-      top: 35%;
-      left: -10%;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .theme-switch__meteor {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: #ffd700;
-      border-radius: 50%;
-      top: -10%;
-      left: 50%;
-      opacity: 0;
-      filter: blur(1px);
-      transition: opacity 0.3s ease;
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__shooting-star {
-      animation: shootingStar 2s linear infinite;
-      opacity: 1;
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__shooting-star-2 {
-      animation: shootingStar 3s linear infinite 1s;
-      opacity: 1;
-    }
-
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__meteor {
-      animation: meteor 4s linear infinite 2s;
-      opacity: 1;
-    }
-
-    @keyframes shootingStar {
-      0% {
-        transform: translateX(0) translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(150px) translateY(150px) rotate(45deg);
-        opacity: 0;
-      }
-    }
-
-    @keyframes meteor {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(150px) scale(0.3);
-        opacity: 0;
-      }
-    }
-
-    .theme-switch__stars-cluster {
+    /* Ambient Screen Edge Aura (Lights up the whole screen when circuit completes!) */
+    .screen-perimeter-aura {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+      box-shadow:
+        inset 0 0 50px rgba(0, 242, 254, 0.28),
+        inset 0 0 100px rgba(0, 242, 254, 0.12);
+      z-index: 9997;
     }
 
-    .theme-switch__stars-cluster .star {
+    .light-mode .screen-perimeter-aura {
+      box-shadow:
+        inset 0 0 50px rgba(245, 158, 11, 0.22),
+        inset 0 0 100px rgba(245, 158, 11, 0.1);
+    }
+
+    .perimeter-fluid-conduit.is-illuminated .screen-perimeter-aura {
+      opacity: 1;
+      animation: ambient-screen-breathe 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambient-screen-breathe {
+      0% {
+        box-shadow: inset 0 0 45px rgba(0, 242, 254, 0.22), inset 0 0 90px rgba(0, 242, 254, 0.08);
+      }
+      100% {
+        box-shadow: inset 0 0 65px rgba(0, 242, 254, 0.35), inset 0 0 130px rgba(0, 242, 254, 0.16);
+      }
+    }
+
+    .light-mode .perimeter-fluid-conduit.is-illuminated .screen-perimeter-aura {
+      animation: ambient-screen-breathe-light 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambient-screen-breathe-light {
+      0% {
+        box-shadow: inset 0 0 45px rgba(245, 158, 11, 0.18), inset 0 0 90px rgba(245, 158, 11, 0.06);
+      }
+      100% {
+        box-shadow: inset 0 0 65px rgba(245, 158, 11, 0.28), inset 0 0 130px rgba(245, 158, 11, 0.12);
+      }
+    }
+
+    /* Continuous 4-sided capillary nano-rails */
+    .perimeter-rail {
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 0 4px 1px white;
+      pointer-events: none;
+      overflow: hidden;
     }
 
-    .theme-switch__stars-cluster .star:nth-child(1) {
-      top: 20%;
-      left: 20%;
-      animation: twinkle 1s infinite ease-in-out;
-    }
-    .theme-switch__stars-cluster .star:nth-child(2) {
-      top: 30%;
-      left: 55%;
-      animation: twinkle 1s infinite ease-in-out 0.3s;
-    }
-    .theme-switch__stars-cluster .star:nth-child(3) {
-      top: 40%;
-      left: 80%;
-      animation: twinkle 1s infinite ease-in-out 0.6s;
-    }
-    .theme-switch__stars-cluster .star:nth-child(4) {
-      top: 60%;
-      left: 30%;
-      animation: twinkle 1s infinite ease-in-out 0.9s;
-    }
-    .theme-switch__stars-cluster .star:nth-child(5) {
-      top: 70%;
-      left: 65%;
-      animation: twinkle 1s infinite ease-in-out 1.2s;
-    }
-
-    .theme-switch__aurora {
-      position: absolute;
+    .perimeter-rail-top {
       top: 0;
       left: 0;
       right: 0;
-      height: 20px;
-      background: linear-gradient(
-        90deg,
-        rgba(0, 255, 255, 0) 0%,
-        rgba(0, 255, 255, 0.2) 25%,
-        rgba(128, 0, 255, 0.2) 50%,
-        rgba(0, 255, 255, 0.2) 75%,
-        rgba(0, 255, 255, 0) 100%
-      );
-      opacity: 0;
-      filter: blur(4px);
-      transform: translateY(-100%);
-      transition: opacity 0.3s ease;
+      height: 3px;
+    }
+    .perimeter-rail-left {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+    }
+    .perimeter-rail-bottom {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+    .perimeter-rail-right {
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 3px;
     }
 
-    .theme-switch__comets {
+    .rail-line-back {
       position: absolute;
       inset: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      background: rgba(0, 242, 254, 0.08);
+      transition: background 0.3s;
+    }
+    .perimeter-rail-top .rail-line-back,
+    .perimeter-rail-bottom .rail-line-back {
+      border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+    .perimeter-rail-left .rail-line-back,
+    .perimeter-rail-right .rail-line-back {
+      border-left: 0.5px solid rgba(255, 255, 255, 0.1);
+      border-right: 0.5px solid rgba(255, 255, 255, 0.1);
     }
 
-    .theme-switch__comets .comet {
+    .light-mode .rail-line-back {
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* Glowing neon core that illuminates once fluid finishes the complete loop */
+    .rail-line-glow {
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: linear-gradient(90deg, white 0%, transparent 90%);
+      inset: 0;
+      opacity: 0.12;
+      background: linear-gradient(90deg, #00f2fe, #38bdf8, #818cf8, #00f2fe);
+      background-size: 300% 300%;
+      transition: opacity 0.6s ease, filter 0.6s ease;
+    }
+    .perimeter-rail-left .rail-line-glow,
+    .perimeter-rail-right .rail-line-glow {
+      background: linear-gradient(180deg, #00f2fe, #38bdf8, #818cf8, #00f2fe);
+      background-size: 300% 300%;
+    }
+
+    .light-mode .rail-line-glow {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24, #f97316, #f59e0b);
+      background-size: 300% 300%;
+    }
+    .light-mode .perimeter-rail-left .rail-line-glow,
+    .light-mode .perimeter-rail-right .rail-line-glow {
+      background: linear-gradient(180deg, #f59e0b, #fbbf24, #f97316, #f59e0b);
+      background-size: 300% 300%;
+    }
+
+    /* When the full loop is complete and returned to start: ILLUMINATE EVERYTHING! */
+    .perimeter-fluid-conduit.is-illuminated .rail-line-glow {
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 5px #00f2fe) drop-shadow(0 0 10px rgba(0, 242, 254, 0.6));
+      animation: perimeter-energy-flow 3.5s linear infinite;
+    }
+
+    .light-mode .perimeter-fluid-conduit.is-illuminated .rail-line-glow {
+      filter: drop-shadow(0 0 5px #f59e0b) drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+    }
+
+    @keyframes perimeter-energy-flow {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+
+    /* 4 Precision Hydraulic 90° Corner Turning Elbows */
+    .corner-junction {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      z-index: 10003;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .corner-top-left { top: 0; left: 0; }
+    .corner-bottom-left { bottom: 0; left: 0; }
+    .corner-bottom-right { bottom: 0; right: 0; }
+    .corner-top-right { top: 0; right: 0; }
+
+    .corner-elbow {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      filter: blur(1px);
+      background: #00f2fe;
+      box-shadow: 0 0 6px #00f2fe;
+      transition: all 0.3s;
+    }
+    .light-mode .corner-elbow {
+      background: #f59e0b;
+      box-shadow: 0 0 6px #f59e0b;
     }
 
-    .theme-switch__comets .comet:nth-child(1) {
-      top: 30%;
-      left: -10%;
-      animation: cometMove 4s linear infinite;
+    .corner-bolt {
+      position: absolute;
+      width: 2.5px;
+      height: 2.5px;
+      border-radius: 50%;
+      background: #ffffff;
     }
-    .theme-switch__comets .comet:nth-child(2) {
+
+    .corner-flash {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1.5px solid #00f2fe;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .corner-junction.corner-active .corner-elbow {
+      transform: scale(1.8);
+      background: #ffffff;
+      box-shadow: 0 0 12px #00f2fe, 0 0 20px #ffffff;
+    }
+
+    .corner-junction.corner-active .corner-flash {
+      animation: corner-flash-burst 0.7s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    }
+
+    @keyframes corner-flash-burst {
+      0% { transform: scale(1); opacity: 1; border-color: #ffffff; }
+      100% { transform: scale(4); opacity: 0; border-color: #00f2fe; }
+    }
+
+    /* Return Receptor Manifold above Compressor */
+    .compressor-return-manifold {
+      position: absolute;
+      top: 0;
+      right: 80px;
+      width: 12px;
+      height: 6px;
+      transform: translateY(-1px);
+      z-index: 10003;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .manifold-core {
+      width: 6px;
+      height: 4px;
+      border-radius: 2px;
+      background: #00f2fe;
+      box-shadow: 0 0 8px #00f2fe;
+      transition: all 0.3s;
+    }
+    .light-mode .manifold-core {
+      background: #f59e0b;
+      box-shadow: 0 0 8px #f59e0b;
+    }
+
+    .manifold-burst-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid #00f2fe;
+      opacity: 0;
+    }
+
+    .compressor-return-manifold.circuit-ignited .manifold-core {
+      transform: scale(2);
+      background: #ffffff;
+      box-shadow: 0 0 16px #00f2fe, 0 0 30px #ffffff;
+    }
+
+    .compressor-return-manifold.circuit-ignited .manifold-burst-ring {
+      animation: manifold-burst 0.9s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    }
+
+    @keyframes manifold-burst {
+      0% { transform: scale(1); opacity: 1; border-color: #ffffff; }
+      100% { transform: scale(5); opacity: 0; border-color: #00f2fe; }
+    }
+
+    /* Full-Screen Fluid Shot Canvas */
+    .fluid-shot-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10002;
+    }
+
+    /* --- 2. UNIFIED COMPRESSOR CONTROL STATION (.mech-station) --- */
+    .mech-station {
+      position: fixed;
+      top: 12px;
+      right: 20px !important;
+      left: auto !important;
+      z-index: 9999;
+      direction: ltr !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 7px;
+      height: 28px;
+      box-sizing: border-box;
+      background: linear-gradient(135deg, rgba(16, 24, 40, 0.94), rgba(8, 12, 22, 0.97));
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid rgba(0, 242, 254, 0.34);
+      border-top: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 999px;
+      box-shadow:
+        0 8px 24px -4px rgba(0, 0, 0, 0.75),
+        0 0 14px -2px rgba(0, 242, 254, 0.28),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .mech-station:hover {
+      border-color: rgba(0, 242, 254, 0.7);
+      box-shadow:
+        0 10px 28px -4px rgba(0, 0, 0, 0.85),
+        0 0 18px 0 rgba(0, 242, 254, 0.45),
+        inset 0 1px 1px rgba(255, 255, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .light-mode .mech-station {
+      background: linear-gradient(135deg, rgba(248, 250, 254, 0.96), rgba(228, 236, 248, 0.98));
+      border: 1px solid rgba(0, 160, 210, 0.38);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow:
+        0 8px 20px -4px rgba(50, 70, 100, 0.22),
+        0 0 12px -2px rgba(0, 160, 210, 0.18),
+        inset 0 1px 1px rgba(255, 255, 255, 0.85);
+    }
+
+    [dir="rtl"] .mech-station,
+    html[lang="fa"] .mech-station {
+      right: 20px !important;
+      left: auto !important;
+    }
+
+    @media (max-width: 640px) {
+      .mech-station {
+        top: 8px;
+        right: 8px !important;
+        left: auto !important;
+        height: 26px;
+        padding: 2px 5px;
+        gap: 4px;
+      }
+      [dir="rtl"] .mech-station,
+      html[lang="fa"] .mech-station {
+        right: 8px !important;
+        left: auto !important;
+      }
+    }
+
+    /* Micro Hex Bolts */
+    .mech-bolt {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #00f2fe 30%, #3b82f6 70%, #1e293b 100%);
+      box-shadow: 0 0 4px rgba(0, 242, 254, 0.6);
+      flex-shrink: 0;
+    }
+    .light-mode .mech-bolt {
+      background: radial-gradient(circle, #f59e0b 30%, #d97706 70%, #92400e 100%);
+      box-shadow: 0 0 4px rgba(245, 158, 11, 0.5);
+    }
+
+    /* --- 3. DETAILED INDUSTRIAL CENTRIFUGAL COMPRESSOR MODULE --- */
+    .mech-compressor-unit {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 25px;
+      cursor: pointer;
+      outline: none;
+      padding: 0 1px;
+    }
+
+    .compressor-detailed-housing {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .compressor-detailed-svg {
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+      transition: filter 0.3s;
+    }
+
+    .mech-compressor-unit:hover .compressor-detailed-housing {
+      transform: scale(1.05);
+    }
+    .mech-compressor-unit:hover .compressor-detailed-svg {
+      filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.5));
+    }
+    .light-mode .mech-compressor-unit:hover .compressor-detailed-svg {
+      filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.5));
+    }
+
+    /* Idle Impeller Rotation */
+    .compressor-impeller-group {
+      transform-origin: 16px 15.5px;
+      animation: impeller-idle-rotation 12s linear infinite;
+    }
+
+    @keyframes impeller-idle-rotation {
+      from { transform: translate(16px, 15.5px) rotate(0deg); }
+      to { transform: translate(16px, 15.5px) rotate(360deg); }
+    }
+
+    /* Light Mode Compressor Gradients & Colors */
+    .light-mode .compressor-volute-body {
+      fill: url(#voluteGradLight);
+      stroke: #94a3b8;
+    }
+    .light-mode .comp-fin {
+      fill: #94a3b8;
+    }
+    .light-mode .comp-flange {
+      fill: #cbd5e1;
+      stroke: #64748b;
+    }
+    .light-mode .comp-eye-bg {
+      fill: #e2e8f0;
+      stroke: #94a3b8;
+    }
+    .light-mode .impeller-hub-disc {
+      fill: #f59e0b;
+    }
+    .light-mode .impeller-blades-curve {
+      fill: rgba(245, 158, 11, 0.4);
+      stroke: #d97706;
+    }
+    .light-mode .compressor-nozzle-orifice {
+      fill: #f59e0b;
+    }
+    .light-mode .gauge-bezel {
+      fill: #f1f5f9;
+      stroke: #64748b;
+    }
+    .light-mode .gauge-dial-face {
+      fill: #ffffff;
+    }
+
+    /* High-Pressure Needle Rotator */
+    .gauge-needle-rotator {
+      transform-origin: 0 0;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* WHEN COMPRESSOR IS FIRING / CIRCUIT ACTIVE */
+    .mech-station.is-compressing .compressor-impeller-group {
+      animation: impeller-high-boost 0.15s linear infinite !important;
+    }
+    .mech-station.is-compressing .compressor-detailed-housing {
+      animation: compressor-boost-vibrate 0.08s infinite alternate;
+    }
+    .mech-station.is-compressing .compressor-nozzle-orifice {
+      filter: drop-shadow(0 0 6px #00f2fe);
+      animation: nozzle-plasma-burst 0.1s infinite alternate;
+    }
+
+    @keyframes impeller-high-boost {
+      from { transform: translate(16px, 15.5px) rotate(0deg); }
+      to { transform: translate(16px, 15.5px) rotate(360deg); }
+    }
+    @keyframes compressor-boost-vibrate {
+      0% { transform: translate(0, 0) scale(1.02); }
+      100% { transform: translate(-0.6px, 0.6px) scale(0.98); }
+    }
+    @keyframes nozzle-plasma-burst {
+      0% { fill: #ffffff; opacity: 1; }
+      100% { fill: #00f2fe; opacity: 0.8; }
+    }
+
+    /* Separator divider */
+    .floating-control-divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.16);
+      margin: 0 1px;
+      flex-shrink: 0;
+    }
+    .light-mode .floating-control-divider {
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    /* Common Unit & Hidden Inputs */
+    .mech-unit {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+    }
+
+    .mech-hidden-input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    /* --- 4. THEME GEAR DIAL (Day / Night) --- */
+    .mech-theme-unit {
+      width: 20px;
+      height: 20px;
+    }
+
+    .mech-gear-dial {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .mech-theme-unit:hover .mech-gear-dial {
+      border-color: #00f2fe;
+      box-shadow: 0 0 8px rgba(0, 242, 254, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .mech-svg {
+      width: 13px;
+      height: 13px;
+      position: absolute;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Sun Gear */
+    .mech-sun-svg {
+      fill: #fbbf24;
+      stroke: #fbbf24;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    /* Moon Gear */
+    .mech-moon-svg {
+      fill: #38bdf8;
+      stroke: #0284c7;
+      stroke-width: 1.2;
+      opacity: 0;
+      transform: rotate(-120deg) scale(0.4);
+    }
+    .mech-moon-spot {
+      fill: #bae6fd;
+      opacity: 0.6;
+    }
+
+    /* When Checked (Dark Mode Active) */
+    .mech-theme-unit input:checked ~ .mech-gear-dial {
+      background: rgba(6, 182, 212, 0.12);
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: rotate(180deg);
+    }
+    .mech-theme-unit input:checked ~ .mech-gear-dial .mech-sun-svg {
+      opacity: 0;
+      transform: rotate(120deg) scale(0.4);
+    }
+    .mech-theme-unit input:checked ~ .mech-gear-dial .mech-moon-svg {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+      filter: drop-shadow(0 0 3px #38bdf8);
+    }
+
+    /* --- 5. MECHANICAL TRANSMISSION SHIFTER (FA / EN) --- */
+    .mech-lang-unit {
+      position: relative;
+    }
+
+    .mech-shifter-track {
+      width: 58px;
+      height: 20px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+      box-sizing: border-box;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6), 0 1px 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .light-mode .mech-shifter-track {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.18);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .mech-lang-unit:hover .mech-shifter-track {
+      border-color: rgba(0, 242, 254, 0.5);
+    }
+
+    /* Internal rotating gear behind track */
+    .mech-shifter-gear-svg {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 50%;
       top: 50%;
-      left: -10%;
-      animation: cometMove 6s linear infinite 2s;
+      transform: translate(-50%, -50%) rotate(0deg);
+      fill: rgba(0, 242, 254, 0.08);
+      stroke: rgba(0, 242, 254, 0.35);
+      stroke-width: 0.8;
+      pointer-events: none;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .light-mode .mech-shifter-gear-svg {
+      fill: rgba(2, 132, 199, 0.08);
+      stroke: rgba(2, 132, 199, 0.3);
     }
 
-    @keyframes twinkle {
-      0%,
-      100% {
-        opacity: 0.3;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.2);
-      }
+    /* Mechanical Piston Slider (Knurled Metal Carriage) */
+    .mech-piston {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 26px;
+      height: 14px;
+      border-radius: 7px;
+      background: linear-gradient(180deg, #38bdf8, #0284c7);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6),
+        0 0 6px rgba(56, 189, 248, 0.5);
+      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      z-index: 2;
     }
 
-    @keyframes cometMove {
-      0% {
-        transform: translateX(0) translateY(0) rotate(-45deg) scale(1);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(200px) translateY(200px) rotate(-45deg) scale(0.2);
-        opacity: 0;
-      }
+    .mech-piston-groove {
+      width: 5px;
+      height: 7px;
+      border-left: 1px solid rgba(0, 0, 0, 0.3);
+      border-right: 1px solid rgba(0, 0, 0, 0.3);
+      opacity: 0.7;
     }
 
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__stars-cluster {
-      opacity: 1;
+    .mech-piston-led {
+      width: 3.5px;
+      height: 3.5px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 4px #ffffff, 0 0 6px #00f2fe;
+      animation: mech-led-pulse 2s infinite ease-in-out;
     }
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__aurora {
-      opacity: 1;
-      animation: auroraWave 8s linear infinite;
-    }
-    .theme-switch__checkbox:checked
-      + .theme-switch__container
-      .theme-switch__comets {
-      opacity: 1;
+    @keyframes mech-led-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.2); opacity: 1; }
     }
 
-    @keyframes auroraWave {
-      0% {
-        transform: translateY(-100%) translateX(-50%);
-      }
-      100% {
-        transform: translateY(-100%) translateX(50%);
-      }
+    /* Stamped Gearbox Position Labels */
+    .mech-label {
+      position: relative;
+      z-index: 3;
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-family: var(--font-sans), 'Vazirmatn', -apple-system, sans-serif;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      line-height: 1;
     }
 
-    /* Clean, Focused Master Profile Hero at top of site */
+    .mech-label-fa {
+      margin-left: 3px;
+      color: #0f172a;
+    }
+    .mech-label-en {
+      margin-right: 3px;
+      color: #94a3b8;
+    }
+    .light-mode .mech-label-en {
+      color: #64748b;
+    }
+
+    /* When Checked: Language is FA (Persian) */
+    .mech-lang-unit input:checked ~ .mech-shifter-track .mech-piston {
+      transform: translateX(0);
+      background: linear-gradient(180deg, #10b981, #059669);
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7),
+        0 0 8px rgba(16, 185, 129, 0.6);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .mech-lang-unit input:checked ~ .mech-shifter-track .mech-label-fa {
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      font-weight: 900;
+    }
+    .mech-lang-unit input:checked ~ .mech-shifter-track .mech-label-en {
+      color: #64748b;
+      opacity: 0.6;
+    }
+    .mech-lang-unit input:checked ~ .mech-shifter-track .mech-shifter-gear-svg {
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+
+    /* When Unchecked: Language is EN (English) */
+    .mech-lang-unit input:not(:checked) ~ .mech-shifter-track .mech-piston {
+      transform: translateX(28px);
+      background: linear-gradient(180deg, #38bdf8, #0284c7);
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.7),
+        0 0 8px rgba(56, 189, 248, 0.6);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .mech-lang-unit input:not(:checked) ~ .mech-shifter-track .mech-label-fa {
+      color: #64748b;
+      opacity: 0.6;
+    }
+    .mech-lang-unit input:not(:checked) ~ .mech-shifter-track .mech-label-en {
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      font-weight: 900;
+    }
+    .mech-lang-unit input:not(:checked) ~ .mech-shifter-track .mech-shifter-gear-svg {
+      transform: translate(-50%, -50%) rotate(-180deg);
+    }
+
+    .mech-lang-unit:active .mech-piston {
+      transform: scale(0.92);
+    }
+    .mech-theme-unit:active .mech-gear-dial {
+      transform: scale(0.9);
+    }
+    .mech-compressor-unit:active .compressor-detailed-housing {
+      transform: scale(0.9);
+    }
+/* Clean, Focused Master Profile Hero at top of site */
     .fm-profile-clean-hero {
       background: rgba(14, 21, 37, 0.78);
       backdrop-filter: blur(28px) saturate(175%);
