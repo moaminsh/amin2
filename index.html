@@ -2373,22 +2373,22 @@
         const now = ctx.currentTime;
 
         if (type === 'compressor-spool') {
-          // Compressor turbine spinup + high-velocity jet release
+          // Compressor turbine spinup + high-velocity jet release (Fast aerodynamic spool)
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(120, now);
-          osc.frequency.exponentialRampToValueAtTime(780, now + 0.3);
-          osc.frequency.exponentialRampToValueAtTime(360, now + 2.4);
+          osc.frequency.setValueAtTime(140, now);
+          osc.frequency.exponentialRampToValueAtTime(860, now + 0.12);
+          osc.frequency.exponentialRampToValueAtTime(360, now + 0.85);
 
-          gain.gain.setValueAtTime(0.03, now);
-          gain.gain.linearRampToValueAtTime(0.08, now + 0.15);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.linearRampToValueAtTime(0.09, now + 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
 
           osc.connect(gain);
           gain.connect(ctx.destination);
           osc.start(now);
-          osc.stop(now + 2.5);
+          osc.stop(now + 0.9);
         } else if (type === 'corner-turn') {
           // Sharp hydrodynamic corner whistling
           const osc = ctx.createOscillator();
@@ -2448,7 +2448,7 @@
 
     let fluidAnimationReq = null;
     let fluidStartTime = null;
-    const LOOP_DURATION_MS = 2500; // Complete full-screen circuit duration
+    const LOOP_DURATION_MS = 850; // Ultra-fast dynamic full-screen circuit duration (high-velocity boost)
 
     function launchFluidCompressorShot() {
       const canvas = document.getElementById('fluidShotCanvas');
@@ -2550,7 +2550,7 @@
 
         // Store trail history for smooth luminous wake
         trailHistory.push({ x: pt.x, y: pt.y, time: now });
-        while (trailHistory.length > 0 && (now - trailHistory[0].time) > 400) {
+        while (trailHistory.length > 0 && (now - trailHistory[0].time) > 150) {
           trailHistory.shift();
         }
 
@@ -2592,7 +2592,7 @@
             vy: -Math.sin(pt.angle) * (Math.random() * 2 + 1) + (Math.random() - 0.5),
             radius: Math.random() * 2.2 + 0.8,
             alpha: 0.9,
-            decay: Math.random() * 0.035 + 0.02
+            decay: Math.random() * 0.07 + 0.04
           });
         }
 
@@ -2601,7 +2601,7 @@
           for (let i = 1; i < trailHistory.length; i++) {
             const p1 = trailHistory[i - 1];
             const p2 = trailHistory[i];
-            const ageRatio = (now - p2.time) / 400; // 0 (new) to 1 (old)
+            const ageRatio = (now - p2.time) / 150; // 0 (new) to 1 (old)
             const alpha = Math.max(0, 1 - ageRatio);
 
             ctx.save();
@@ -2685,7 +2685,7 @@
           setTimeout(() => {
             if (station) station.classList.remove('is-compressing');
             setCompressorGauge(-15); // Normal nominal pressure
-          }, 450);
+          }, 220);
         }
       }
 
@@ -3877,7 +3877,7 @@
     .perimeter-fluid-conduit.is-illuminated .rail-line-glow {
       opacity: 1 !important;
       filter: drop-shadow(0 0 5px #00f2fe) drop-shadow(0 0 10px rgba(0, 242, 254, 0.6));
-      animation: perimeter-energy-flow 3.5s linear infinite;
+      animation: perimeter-energy-flow 1.2s linear infinite;
     }
 
     .light-mode .perimeter-fluid-conduit.is-illuminated .rail-line-glow {
@@ -3943,7 +3943,7 @@
     }
 
     .corner-junction.corner-active .corner-flash {
-      animation: corner-flash-burst 0.7s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+      animation: corner-flash-burst 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
     }
 
     @keyframes corner-flash-burst {
@@ -3993,7 +3993,7 @@
     }
 
     .compressor-return-manifold.circuit-ignited .manifold-burst-ring {
-      animation: manifold-burst 0.9s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+      animation: manifold-burst 0.35s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
     }
 
     @keyframes manifold-burst {
@@ -4132,10 +4132,13 @@
       filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.5));
     }
 
-    /* Idle Impeller Rotation */
+    /* Fast Continuous Impeller Rotation */
     .compressor-impeller-group {
       transform-origin: 16px 15.5px;
-      animation: impeller-idle-rotation 12s linear infinite;
+      animation: impeller-idle-rotation 0.9s linear infinite;
+    }
+    .mech-compressor-unit:hover .compressor-impeller-group {
+      animation: impeller-idle-rotation 0.28s linear infinite !important;
     }
 
     @keyframes impeller-idle-rotation {
@@ -4177,22 +4180,34 @@
       fill: #ffffff;
     }
 
-    /* High-Pressure Needle Rotator */
+    /* High-Precision Active Needle Rotator */
     .gauge-needle-rotator {
       transform-origin: 0 0;
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: needle-idle-flutter 0.75s ease-in-out infinite alternate;
+    }
+    @keyframes needle-idle-flutter {
+      0% { transform: rotate(-32deg); }
+      100% { transform: rotate(-25deg); }
+    }
+    .mech-station.is-compressing .gauge-needle-rotator {
+      animation: needle-boost-jitter 0.04s infinite alternate !important;
+    }
+    @keyframes needle-boost-jitter {
+      0% { transform: rotate(78deg); }
+      100% { transform: rotate(84deg); }
     }
 
     /* WHEN COMPRESSOR IS FIRING / CIRCUIT ACTIVE */
     .mech-station.is-compressing .compressor-impeller-group {
-      animation: impeller-high-boost 0.15s linear infinite !important;
+      animation: impeller-high-boost 0.06s linear infinite !important;
     }
     .mech-station.is-compressing .compressor-detailed-housing {
-      animation: compressor-boost-vibrate 0.08s infinite alternate;
+      animation: compressor-boost-vibrate 0.05s infinite alternate;
     }
     .mech-station.is-compressing .compressor-nozzle-orifice {
-      filter: drop-shadow(0 0 6px #00f2fe);
-      animation: nozzle-plasma-burst 0.1s infinite alternate;
+      filter: drop-shadow(0 0 8px #00f2fe);
+      animation: nozzle-plasma-burst 0.06s infinite alternate;
     }
 
     @keyframes impeller-high-boost {
@@ -4201,11 +4216,11 @@
     }
     @keyframes compressor-boost-vibrate {
       0% { transform: translate(0, 0) scale(1.02); }
-      100% { transform: translate(-0.6px, 0.6px) scale(0.98); }
+      100% { transform: translate(-0.8px, 0.8px) scale(0.98); }
     }
     @keyframes nozzle-plasma-burst {
-      0% { fill: #ffffff; opacity: 1; }
-      100% { fill: #00f2fe; opacity: 0.8; }
+      0% { fill: #ffffff; opacity: 1; filter: drop-shadow(0 0 8px #00f2fe); }
+      100% { fill: #00f2fe; opacity: 0.9; filter: drop-shadow(0 0 14px #38bdf8); }
     }
 
     /* Separator divider */
@@ -5935,7 +5950,7 @@
 
   function update(dt) {
     elapsed += dt;
-    pumpAngle += dt * 0.00035;
+    pumpAngle += dt * 0.001;
 
     mouseX += (mouseTX - mouseX) * 0.04;
     mouseY += (mouseTY - mouseY) * 0.04;
