@@ -240,6 +240,48 @@
             گزارش لاگ‌های امنیتی
           </button>
         </nav>
+
+        <!-- Quick Section Shortcuts in Sidebar -->
+        <div class="px-4 py-3 mx-3 mb-2 rounded-xl bg-white/[0.03] border border-white/5 space-y-2">
+          <div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 px-1">
+            <span>ویرایش بخش‌های سایت</span>
+            <i data-lucide="compass" class="w-3.5 h-3.5 text-cyan-400"></i>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+            <button onclick="quickFilterContent('identity')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 text-cyan-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+              پروفایل و هویت
+            </button>
+            <button onclick="quickFilterContent('contact')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-blue-500/20 text-blue-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+              اطلاعات تماس
+            </button>
+            <button onclick="quickFilterContent('projects')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 text-amber-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              پروژه‌ها
+            </button>
+            <button onclick="quickFilterContent('solidworks')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-red-500/20 text-red-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+              سالیدورکس CAD
+            </button>
+            <button onclick="quickFilterContent('simulations')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-sky-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+              شبیه‌سازی CFD
+            </button>
+            <button onclick="quickFilterContent('microfluidics')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-emerald-500/20 text-emerald-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              میکروفلوئیدیک
+            </button>
+            <button onclick="quickFilterContent('books')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-indigo-500/20 text-indigo-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+              کتابخانه و کتب
+            </button>
+            <button onclick="quickFilterContent('seo')" class="px-2 py-1.5 rounded-lg bg-white/5 hover:bg-purple-500/20 text-purple-300 text-right truncate cursor-pointer transition-colors flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+              سئو و عنوان
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Sidebar Footer (Logout & Visit Site) -->
@@ -314,6 +356,121 @@
           </div>
         </div>
 
+        <!-- Quick Section Hub & Direct Editor Cards (بخش‌های وب‌سایت) -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="layout-grid" class="w-4 h-4 text-cyan-400"></i>
+                مرکز دسترسی و ویرایش مستقیم بخش‌های وب‌سایت
+              </h3>
+              <p class="text-[11px] text-slate-400 mt-0.5">روی هر بخش کلیک کنید تا مستقیماً به ویرایش عنوان‌ها، متن‌ها و متغیرهای آن وارد شوید</p>
+            </div>
+            <button onclick="quickFilterContent('')" class="px-3 py-1.5 rounded-xl glass-card text-xs text-cyan-300 hover:text-cyan-200 hover:border-cyan-500/40 flex items-center gap-1.5 cursor-pointer transition-all">
+              <i data-lucide="list-filter" class="w-3.5 h-3.5"></i>
+              مشاهده تمامی محتوا
+            </button>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <!-- 1. هویت و پروفایل -->
+            <div onclick="quickFilterContent('identity')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-cyan-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="user" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300">Home</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">پروفایل و هویت</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">نام، عنوان دانشگاهی و بیوگرافی</p>
+            </div>
+
+            <!-- 2. اطلاعات تماس -->
+            <div onclick="quickFilterContent('contact')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-blue-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="phone-call" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-300">Info</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">اطلاعات تماس</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">ایمیل، تلگرام، تلفن و لینکدین</p>
+            </div>
+
+            <!-- 3. پروژه‌ها و کارگاه‌ها -->
+            <div onclick="quickFilterContent('projects')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-amber-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-300">Projects</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">پروژه‌ها و کارگاه‌ها</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">عنوان و متون بخش پروژه‌ها</p>
+            </div>
+
+            <!-- 4. سالیدورکس و CAD -->
+            <div onclick="quickFilterContent('solidworks')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-red-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="box" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-red-500/10 text-red-300">CAD</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-red-300 transition-colors">سالیدورکس CAD</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">طراحی صنعتی و مدل‌سازی</p>
+            </div>
+
+            <!-- 5. شبیه‌سازی سیالات CFD -->
+            <div onclick="quickFilterContent('simulations')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-sky-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="waves" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-300">CFD</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-sky-300 transition-colors">شبیه‌سازی CFD</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">فلوئنت، توربوماشین و جریان</p>
+            </div>
+
+            <!-- 6. میکروفلوئیدیک -->
+            <div onclick="quickFilterContent('microfluidics')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-emerald-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="microscope" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-300">Micro</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">میکروفلوئیدیک</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">آزمایشگاه روی تراشه (LOC)</p>
+            </div>
+
+            <!-- 7. کتابخانه و مراجع -->
+            <div onclick="quickFilterContent('books')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-indigo-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="book-open" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-300">Books</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-indigo-300 transition-colors">کتابخانه و جزوات</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">مراجع و کتب تخصصی</p>
+            </div>
+
+            <!-- 8. توانمندی‌ها و سئو -->
+            <div onclick="quickFilterContent('seo')" class="group glass-card p-4 rounded-2xl border border-white/5 hover:border-purple-500/40 hover:bg-white/[0.07] transition-all cursor-pointer relative overflow-hidden">
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i data-lucide="globe" class="w-4 h-4"></i>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300">SEO</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">سئو و متادیتا</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">عناوین سایت و تگ‌های اشتراک</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Security Status Banner -->
         <div class="glass-card p-6 rounded-2xl border border-cyan-500/20 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -375,6 +532,21 @@
           </button>
         </div>
 
+        <!-- Quick Section Chips -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none">
+          <span class="text-xs text-slate-400 shrink-0 font-medium">بخش‌های سایت:</span>
+          <button type="button" onclick="quickFilterContent('')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-cyan-500 text-slate-950 font-bold transition-colors shrink-0 cursor-pointer section-pill" data-sec="">همه موارد</button>
+          <button type="button" onclick="quickFilterContent('identity')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-cyan-300 hover:bg-cyan-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="identity">👤 هویت و پروفایل</button>
+          <button type="button" onclick="quickFilterContent('contact')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-blue-300 hover:bg-blue-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="contact">📞 اطلاعات تماس</button>
+          <button type="button" onclick="quickFilterContent('projects')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-amber-300 hover:bg-amber-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="projects">🚀 پروژه‌ها</button>
+          <button type="button" onclick="quickFilterContent('solidworks')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-red-300 hover:bg-red-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="solidworks">⚙️ سالیدورکس</button>
+          <button type="button" onclick="quickFilterContent('simulations')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-sky-300 hover:bg-sky-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="simulations">🌊 شبیه‌سازی CFD</button>
+          <button type="button" onclick="quickFilterContent('microfluidics')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-emerald-300 hover:bg-emerald-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="microfluidics">🔬 میکروفلوئیدیک</button>
+          <button type="button" onclick="quickFilterContent('books')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-indigo-300 hover:bg-indigo-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="books">📚 کتابخانه</button>
+          <button type="button" onclick="quickFilterContent('capabilities')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-yellow-300 hover:bg-yellow-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="capabilities">⚡ مهارت‌ها</button>
+          <button type="button" onclick="quickFilterContent('seo')" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-purple-300 hover:bg-purple-500/20 transition-colors shrink-0 cursor-pointer section-pill" data-sec="seo">🌐 سئو</button>
+        </div>
+
         <!-- Filters & Search -->
         <div class="glass-card p-4 rounded-2xl border border-white/5 flex flex-wrap items-center gap-3">
           <div class="relative flex-1 min-w-[200px]">
@@ -382,11 +554,17 @@
             <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-2.5"></i>
           </div>
           <select id="contentSectionFilter" class="glass-input text-xs rounded-xl py-2 px-3 text-slate-200 focus:outline-none">
-            <option value="">تمام بخش‌ها</option>
-            <option value="identity">بخش هویت (Identity)</option>
-            <option value="contact">اطلاعات تماس (Contact)</option>
-            <option value="seo">سئو و متادیتا (SEO)</option>
-            <option value="general">عمومی (General)</option>
+            <option value="">تمام بخش‌های سایت</option>
+            <option value="identity">👤 هویت و عنوان (Identity)</option>
+            <option value="contact">📞 اطلاعات تماس و شبکه‌ها (Contact)</option>
+            <option value="projects">🚀 پروژه‌ها و کارگاه‌ها (Projects)</option>
+            <option value="solidworks">⚙️ سالیدورکس و CAD (SolidWorks)</option>
+            <option value="simulations">🌊 شبیه‌سازی CFD (Simulations)</option>
+            <option value="microfluidics">🔬 میکروفلوئیدیک (Microfluidics)</option>
+            <option value="books">📚 کتابخانه و مراجع (Books)</option>
+            <option value="capabilities">⚡ مهارت‌ها و ابزارها (Skills)</option>
+            <option value="seo">🌐 سئو و متادیتا (SEO)</option>
+            <option value="general">📦 عمومی و سایر (General)</option>
           </select>
           <select id="contentStatusFilter" class="glass-input text-xs rounded-xl py-2 px-3 text-slate-200 focus:outline-none">
             <option value="">همه وضعیت‌ها</option>
@@ -660,7 +838,18 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs text-slate-300 mb-1">بخش (Section)</label>
-            <input type="text" id="modalContentSection" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white" placeholder="مثال: identity" />
+            <select id="modalContentSection" required class="w-full glass-input text-xs rounded-xl py-2 px-3 text-white focus:outline-none">
+              <option value="identity">هویت و عنوان (Identity)</option>
+              <option value="contact">اطلاعات تماس و شبکه‌ها (Contact)</option>
+              <option value="projects">پروژه‌ها و کارگاه‌ها (Projects)</option>
+              <option value="solidworks">سالیدورکس CAD (SolidWorks)</option>
+              <option value="simulations">شبیه‌سازی سیالات CFD (Simulations)</option>
+              <option value="microfluidics">میکروفلوئیدیک (Microfluidics)</option>
+              <option value="books">کتابخانه و مراجع (Books)</option>
+              <option value="capabilities">مهارت‌ها و ابزارها (Capabilities)</option>
+              <option value="seo">سئو و متادیتا (SEO)</option>
+              <option value="general">عمومی (General)</option>
+            </select>
           </div>
           <div>
             <label class="block text-xs text-slate-300 mb-1">شناسه کلید (Key)</label>
@@ -1081,6 +1270,23 @@
       } catch (err) {}
     }
 
+    // Quick Filter for sections
+    window.quickFilterContent = (sectionKey) => {
+      switchTab('tab-content');
+      const select = document.getElementById('contentSectionFilter');
+      if (select) {
+        select.value = sectionKey;
+      }
+      document.querySelectorAll('.section-pill').forEach(btn => {
+        if (btn.getAttribute('data-sec') === sectionKey) {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-cyan-500 text-slate-950 font-bold transition-colors shrink-0 cursor-pointer section-pill';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl text-xs font-medium bg-white/5 text-slate-300 hover:bg-white/10 transition-colors shrink-0 cursor-pointer section-pill';
+        }
+      });
+      loadContentList();
+    };
+
     // Load Content List
     async function loadContentList() {
       const search = document.getElementById('contentSearchInput')?.value || '';
@@ -1097,14 +1303,33 @@
         return;
       }
 
-      tbody.innerHTML = data.items.map(item => `
+      const sectionBadges = {
+        identity: { label: 'پروفایل و هویت', color: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' },
+        contact: { label: 'اطلاعات تماس', color: 'bg-blue-500/15 text-blue-300 border-blue-500/30' },
+        projects: { label: 'پروژه‌ها و کارگاه', color: 'bg-amber-500/15 text-amber-300 border-amber-500/30' },
+        solidworks: { label: 'سالیدورکس CAD', color: 'bg-red-500/15 text-red-300 border-red-500/30' },
+        simulations: { label: 'شبیه‌سازی CFD', color: 'bg-sky-500/15 text-sky-300 border-sky-500/30' },
+        microfluidics: { label: 'میکروفلوئیدیک', color: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
+        books: { label: 'کتابخانه و جزوات', color: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30' },
+        capabilities: { label: 'مهارت‌ها و ابزارها', color: 'bg-yellow-500/15 text-yellow-300 border-yellow-500/30' },
+        seo: { label: 'سئو و متادیتا', color: 'bg-purple-500/15 text-purple-300 border-purple-500/30' },
+        general: { label: 'عمومی', color: 'bg-slate-500/15 text-slate-300 border-slate-500/30' }
+      };
+
+      tbody.innerHTML = data.items.map(item => {
+        const b = sectionBadges[item.section] || { label: item.section, color: 'bg-white/10 text-white border-white/20' };
+        return `
         <tr class="hover:bg-white/5 transition-colors">
-          <td class="p-3.5 font-mono text-cyan-300">${item.section}</td>
-          <td class="p-3.5 font-mono text-white font-semibold">${item.content_key}</td>
-          <td class="p-3.5 max-w-[200px] truncate text-slate-200">${item.value_fa || '-'}</td>
-          <td class="p-3.5 max-w-[200px] truncate text-slate-400 font-mono" dir="ltr">${item.value_en || '-'}</td>
           <td class="p-3.5">
-            <span class="px-2 py-0.5 rounded-full text-[10px] ${item.status === 'published' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">${item.status}</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-medium border ${b.color} inline-flex items-center gap-1.5 whitespace-nowrap">
+              <span>${b.label}</span>
+            </span>
+          </td>
+          <td class="p-3.5 font-mono text-white font-semibold text-xs whitespace-nowrap">${item.content_key}</td>
+          <td class="p-3.5 max-w-[220px] truncate text-slate-200 text-xs" title="${(item.value_fa || '').replace(/"/g, '&quot;')}">${item.value_fa || '-'}</td>
+          <td class="p-3.5 max-w-[220px] truncate text-slate-400 font-mono text-xs" dir="ltr" title="${(item.value_en || '').replace(/"/g, '&quot;')}">${item.value_en || '-'}</td>
+          <td class="p-3.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] whitespace-nowrap ${item.status === 'published' ? 'bg-emerald-500/20 text-emerald-300 font-medium' : 'bg-amber-500/20 text-amber-300'}">${item.status === 'published' ? 'منتشر شده' : 'پیش‌نویس'}</span>
           </td>
           <td class="p-3.5 text-center">
             <div class="flex items-center justify-center gap-2">
@@ -1117,7 +1342,8 @@
             </div>
           </td>
         </tr>
-      `).join('');
+      `;
+      }).join('');
       lucide.createIcons();
     }
 

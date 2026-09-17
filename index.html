@@ -5519,5 +5519,83 @@
   applyMotionPreference();
 })();
   </script>
+  <!-- FluidMind Dynamic Content Synchronization Engine -->
+  <script>
+  (function() {
+    function applySyncedContent() {
+      try {
+        const raw = localStorage.getItem('fluidmind_ghpages_db_v1');
+        if (!raw) return;
+        const db = JSON.parse(raw);
+        if (!db || !Array.isArray(db.content)) return;
+
+        const currentLang = localStorage.getItem('site-lang') || document.documentElement.getAttribute('lang') || 'fa';
+
+        db.content.filter(c => !c.is_deleted && c.status === 'published').forEach(item => {
+          const key = item.content_key;
+          const val = (currentLang === 'fa' ? item.value_fa : item.value_en) || item.value_fa || '';
+
+          // 1. Author Name
+          if (key === 'author_name' && val) {
+            document.querySelectorAll('.fm-profile-clean-name span, .author-name-dynamic').forEach(el => {
+              el.textContent = val;
+              if (currentLang === 'fa') el.setAttribute('data-fa', item.value_fa || val);
+              else el.setAttribute('data-en', item.value_en || val);
+            });
+          }
+
+          // 2. Academic Title
+          if (key === 'academic_title' && val) {
+            document.querySelectorAll('.fm-profile-clean-degree span, .academic-title-dynamic').forEach(el => {
+              el.textContent = val;
+              if (currentLang === 'fa') el.setAttribute('data-fa', item.value_fa || val);
+              else el.setAttribute('data-en', item.value_en || val);
+            });
+          }
+
+          // 3. Contact items
+          if (key === 'email' && val) {
+            document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+              el.href = 'mailto:' + val;
+              if (el.textContent.includes('@')) el.textContent = val;
+            });
+          }
+          if (key === 'phone' && val) {
+            document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+              el.href = 'tel:' + val.replace(/\s+/g, '');
+              if (/\d/.test(el.textContent)) el.textContent = val;
+            });
+          }
+          if (key === 'telegram' && val) {
+            const cleanUser = val.replace(/^@/, '');
+            document.querySelectorAll('a[href*="t.me"]').forEach(el => {
+              el.href = 'https://t.me/' + cleanUser;
+              if (el.textContent.includes('@')) el.textContent = '@' + cleanUser;
+            });
+          }
+          if (key === 'meta_title' && val && currentLang === 'fa') {
+            document.title = val;
+          }
+        });
+      } catch (err) {
+        console.warn('Sync content error:', err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applySyncedContent);
+    } else {
+      applySyncedContent();
+    }
+
+    // Re-apply if storage changes or language switch triggers
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'fluidmind_ghpages_db_v1' || e.key === 'site-lang') {
+        applySyncedContent();
+      }
+    });
+  })();
+  </script>
+
 </body>
 </html>

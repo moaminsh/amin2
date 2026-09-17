@@ -113,7 +113,7 @@
   ],
   "content": [
     {
-      "id": "cnt_97e101b4760f4f58",
+      "id": "cnt_identity_author_name",
       "section": "identity",
       "content_key": "author_name",
       "value_fa": "محمدامین شریف",
@@ -125,7 +125,7 @@
       "updated_at": "2026-09-16 11:42:10"
     },
     {
-      "id": "cnt_6d877ba0538b48d0",
+      "id": "cnt_identity_academic_title",
       "section": "identity",
       "content_key": "academic_title",
       "value_fa": "دانشجوی مهندسی مکانیک • دانشگاه علم و صنعت ایران",
@@ -137,7 +137,19 @@
       "updated_at": "2026-09-16 11:42:10"
     },
     {
-      "id": "cnt_61dd24de8f5844a8",
+      "id": "cnt_identity_short_bio",
+      "section": "identity",
+      "content_key": "short_bio",
+      "value_fa": "پژوهشگر مکانیک سیالات، توربوماشین، شبیه‌سازی عددی CFD و مدلسازی صنعتی در سالیدورکس",
+      "value_en": "Researcher in Fluid Dynamics, Turbomachinery, CFD Simulations & SolidWorks CAD Design",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_contact_email",
       "section": "contact",
       "content_key": "email",
       "value_fa": "mohammadaminsh1384@gmail.com",
@@ -149,7 +161,7 @@
       "updated_at": "2026-09-16 11:42:10"
     },
     {
-      "id": "cnt_fab32b53ef1f4b41",
+      "id": "cnt_contact_phone",
       "section": "contact",
       "content_key": "phone",
       "value_fa": "0903 276 4840",
@@ -161,7 +173,7 @@
       "updated_at": "2026-09-16 11:42:10"
     },
     {
-      "id": "cnt_0636229eae034ecd",
+      "id": "cnt_contact_telegram",
       "section": "contact",
       "content_key": "telegram",
       "value_fa": "@aminsharif_mech",
@@ -173,12 +185,204 @@
       "updated_at": "2026-09-16 11:42:10"
     },
     {
-      "id": "cnt_321402d2170b4736",
+      "id": "cnt_contact_linkedin",
+      "section": "contact",
+      "content_key": "linkedin",
+      "value_fa": "linkedin.com/in/mohammadamin-sharif",
+      "value_en": "linkedin.com/in/mohammadamin-sharif",
+      "content_type": "link",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_contact_github",
+      "section": "contact",
+      "content_key": "github",
+      "value_fa": "github.com/mohammadaminsharif",
+      "value_en": "github.com/mohammadaminsharif",
+      "content_type": "link",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_contact_university",
+      "section": "contact",
+      "content_key": "university_address",
+      "value_fa": "تهران، میدان رسالت، خیابان هنگام، دانشگاه علم و صنعت ایران، دانشکده مهندسی مکانیک",
+      "value_en": "Iran University of Science and Technology (IUST), School of Mechanical Engineering, Tehran, Iran",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_projects_header",
+      "section": "projects",
+      "content_key": "projects_title",
+      "value_fa": "تمام پروژه‌ها و کارگاه‌های مهندسی",
+      "value_en": "All Engineering Projects & Workspaces",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_projects_sub",
+      "section": "projects",
+      "content_key": "projects_subtitle",
+      "value_fa": "مشاهده بیش از ۱۲ پروژه تخصصی: توربوماشین، شبیه‌سازی فلوئنت، سالیدورکس و دوقلوهای دیجیتال",
+      "value_en": "Explore 12+ real-world engineering projects: Turbomachinery, Fluent CFD, SolidWorks & Digital Twins",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_solidworks_title",
+      "section": "solidworks",
+      "content_key": "solidworks_title",
+      "value_fa": "طراحی صنعتی و مدل‌سازی سه‌بعدی SolidWorks",
+      "value_en": "Industrial Design & 3D Modeling in SolidWorks",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_solidworks_desc",
+      "section": "solidworks",
+      "content_key": "solidworks_description",
+      "value_fa": "طراحی قطعات پیچیده ریخته‌گری، ورق‌کاری، مکانیزم‌های حرکتی و مونتاژهای دینامیکی با تلرانس‌های استاندارد ISO",
+      "value_en": "Parametric surface modeling, sheet metal, motion analysis, and dynamic assemblies adhering to ISO standards",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_simulations_title",
+      "section": "simulations",
+      "content_key": "simulations_title",
+      "value_fa": "شبیه‌سازی دینامیک سیالات محاسباتی (CFD)",
+      "value_en": "Computational Fluid Dynamics (CFD) Simulations",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_simulations_desc",
+      "section": "simulations",
+      "content_key": "simulations_description",
+      "value_fa": "تحلیل جریان‌های تراکم‌ناپذیر، گردابه‌ای، دوفازی و انتقال حرارت با استفاده از Ansys Fluent و OpenFOAM",
+      "value_en": "Incompressible, vortex shedding, multiphase flow and thermal analysis using Ansys Fluent & OpenFOAM",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_microfluidics_title",
+      "section": "microfluidics",
+      "content_key": "microfluidics_title",
+      "value_fa": "میکروفلوئیدیک و آزمایشگاه روی تراشه (Lab-on-a-Chip)",
+      "value_en": "Microfluidics & Lab-on-a-Chip Systems",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_microfluidics_desc",
+      "section": "microfluidics",
+      "content_key": "microfluidics_description",
+      "value_fa": "طراحی میکروکانال‌های مخلوط‌کننده قطره‌ای، جریان لایه‌ای و جداسازی ذرات در مقیاس میکرومتر",
+      "value_en": "Design of droplet-based mixing microchannels, laminar flow manipulation and particulate sorting",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_books_title",
+      "section": "books",
+      "content_key": "books_title",
+      "value_fa": "کتابخانه تخصصی، مراجع و جزوات آموزشی",
+      "value_en": "Specialized Engineering Library, References & Handbooks",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_books_desc",
+      "section": "books",
+      "content_key": "books_description",
+      "value_fa": "مجموعه دسته‌بندی‌شده کتب مرجع مکانیک سیالات، ترمودینامیک، توربوماشین و راهنماهای صنعتی",
+      "value_en": "Curated collection of reference books on fluid mechanics, thermodynamics, turbomachinery & design guides",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_capabilities_title",
+      "section": "capabilities",
+      "content_key": "capabilities_title",
+      "value_fa": "مهارت‌ها، نرم‌افزارها و توانمندی‌های مهندسی",
+      "value_en": "Engineering Software, Skills & Capabilities",
+      "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_capabilities_desc",
+      "section": "capabilities",
+      "content_key": "capabilities_description",
+      "value_fa": "تسلط بر نرم‌افزارهای شبیه‌سازی صنعتی (ANSYS Fluent, CFturbo)، کدنویسی پایتون و متلب و مدل‌سازی سه‌بعدی",
+      "value_en": "Proficiency in industrial simulation suites (ANSYS Fluent, CFturbo), Python/MATLAB scientific computing and 3D CAD",
+      "content_type": "textarea",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_seo_title",
       "section": "seo",
       "content_key": "meta_title",
       "value_fa": "محمدامین شریف | مهندسی مکانیک و مکانیک سیالات دانشگاه علم و صنعت",
       "value_en": "Mohammadamin Sharif | Mechanical Engineering & Fluid Dynamics (IUST)",
       "content_type": "text",
+      "status": "published",
+      "is_deleted": 0,
+      "created_at": "2026-09-16 11:42:10",
+      "updated_at": "2026-09-16 11:42:10"
+    },
+    {
+      "id": "cnt_seo_desc",
+      "section": "seo",
+      "content_key": "meta_description",
+      "value_fa": "وب‌سایت شخصی و پورتفولیوی مهندسی محمدامین شریف؛ پروژه‌های توربوماشین، شبیه‌سازی سیالات و طراحی سالیدورکس",
+      "value_en": "Personal portfolio of Mohammadamin Sharif; mechanical engineering projects, CFD simulations, and SolidWorks CAD",
+      "content_type": "textarea",
       "status": "published",
       "is_deleted": 0,
       "created_at": "2026-09-16 11:42:10",
