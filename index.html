@@ -104,111 +104,125 @@
       <div class="corner-flash"></div>
     </div>
 
-    <!-- Return Receptor Manifold above Compressor (Top-Right Return Point) -->
-    <div class="compressor-return-manifold" id="compressorReturnManifold" title="مانیفولد دریافت و تکمیل مدار هیدرولیک">
-      <div class="manifold-core"></div>
-      <div class="manifold-burst-ring"></div>
+    <!-- In-Line Industrial Horizontal Centrifugal Turbo-Compressor Unit (Directly in top conduit path) -->
+    <div class="inline-perimeter-pump" id="mechCompressorUnit" role="button" tabindex="0" title="توربو-کمپرسور حلزونی خطی صنعتی: کلیک برای شلیک سیال دور مدار کامل صفحه (Industrial In-Line Turbo Compressor: Click to loop fluid around screen)">
+      <div class="compressor-detailed-housing">
+        <svg class="compressor-detailed-svg" id="compressorDetailedSvg" viewBox="0 0 58 24" width="58" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- High-Strength Volute Alloy Gradients -->
+            <linearGradient id="voluteGradH" x1="0" y1="0" x2="58" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#334155" />
+              <stop offset="40%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0b1120" />
+            </linearGradient>
+            <linearGradient id="voluteGradHLight" x1="0" y1="0" x2="58" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#f8fafc" />
+              <stop offset="40%" stop-color="#cbd5e1" />
+              <stop offset="100%" stop-color="#94a3b8" />
+            </linearGradient>
+            <!-- In-Line Conduit Pipe Gradients -->
+            <linearGradient id="pipeConduitGrad" x1="0" y1="8" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#64748b" />
+              <stop offset="50%" stop-color="#334155" />
+              <stop offset="100%" stop-color="#1e293b" />
+            </linearGradient>
+            <linearGradient id="pipeConduitGradLight" x1="0" y1="8" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#e2e8f0" />
+              <stop offset="50%" stop-color="#cbd5e1" />
+              <stop offset="100%" stop-color="#94a3b8" />
+            </linearGradient>
+          </defs>
+
+          <!-- 1. Motor Stator Casing & Heat-Sink Cooling Fins -->
+          <g class="compressor-heatsink">
+            <rect x="23" y="1" width="12" height="1.8" rx="0.5" class="comp-fin" fill="#475569" />
+            <rect x="24.5" y="3" width="9" height="1.5" rx="0.4" class="comp-fin" fill="#334155" />
+            <rect x="25" y="21.5" width="8" height="1.8" rx="0.5" class="comp-fin" fill="#475569" />
+          </g>
+
+          <!-- 2. Horizontal In-Line Pipeline Conduit Body (Through-Flow Pipe) -->
+          <path class="comp-pipe-left" d="M 1 9.5 L 18 8.5 L 18 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <path class="comp-pipe-right" d="M 40 8.5 L 57 9.5 L 57 14.5 L 40 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+
+          <!-- 3. Cast Volute Scroll Body (Surrounding Impeller) -->
+          <path class="compressor-volute-body"
+                d="M 18 8.5 C 22 5 36 5 40 8.5 C 44 11 44 15 40 17.5 C 36 21 22 21 18 17.5 C 15 15 15 11 18 8.5 Z"
+                fill="url(#voluteGradH)" stroke="#64748b" stroke-width="0.8" />
+
+          <!-- 4. Pipeline Mounting Flanges with Hex Studs -->
+          <!-- Left Discharge Flange (Direct inline coupling to top rail) -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="comp-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" />
+          <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" />
+          <!-- Left Discharge Orifice (Facing left into top rail) -->
+          <rect class="compressor-nozzle-orifice" id="compressorNozzleOrifice" x="-0.5" y="10.5" width="2" height="3" rx="0.6" fill="#00f2fe" />
+
+          <!-- Right Suction Flange (Direct inline coupling to top rail) -->
+          <rect x="54.2" y="7" width="2.8" height="10" rx="0.8" class="comp-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="55.6" cy="8.6" r="0.45" fill="#e2e8f0" />
+          <circle cx="55.6" cy="15.4" r="0.45" fill="#e2e8f0" />
+          <!-- Right Suction Orifice (Receiving fluid from top rail) -->
+          <rect class="compressor-suction-orifice" id="compressorSuctionOrifice" x="56.5" y="10.5" width="2" height="3" rx="0.6" fill="#00f2fe" />
+
+          <!-- 5. Volute Fastener Bolts -->
+          <circle cx="21" cy="9" r="0.6" fill="#94a3b8" />
+          <circle cx="37" cy="9" r="0.6" fill="#94a3b8" />
+          <circle cx="21" cy="15" r="0.6" fill="#94a3b8" />
+          <circle cx="37" cy="15" r="0.6" fill="#94a3b8" />
+
+          <!-- 6. Impeller Inspection Chamber Eye (Transparent Viewport) -->
+          <circle cx="29" cy="12" r="6.8" class="comp-eye-bg" fill="#090d16" stroke="#334155" stroke-width="0.8" />
+          <circle cx="29" cy="12" r="6.4" fill="none" stroke="rgba(0, 242, 254, 0.35)" stroke-width="0.5" stroke-dasharray="1.5 1" />
+
+          <!-- 7. HIGH-SPEED ROTATING CENTRIFUGAL IMPELLER -->
+          <g class="compressor-impeller-group" id="compressorImpellerGroup" transform="translate(29, 12)">
+            <circle cx="0" cy="0" r="1.8" class="impeller-hub-disc" fill="#38bdf8" />
+            <!-- 8 Aerodynamic Backward-Curved Blades -->
+            <path class="impeller-blades-curve"
+                  d="M 0 -1.8 C 1 -3.2, 2.5 -4.5, 4.8 -4.2 C 3.6 -3.4, 2.2 -2.6, 1.3 -1.4 Z
+                     M 1.2 -1.2 C 2.6 -1.4, 4.5 -1.2, 5.5 0.6 C 4.5 0.4, 3.1 0.2, 1.7 -0.4 Z
+                     M 1.8 0 C 3.2 1, 4.5 2.5, 4.2 4.8 C 3.4 3.6, 2.6 2.2, 1.4 1.3 Z
+                     M 1.2 1.2 C 1.4 2.6, 1.2 4.5, -0.6 5.5 C -0.4 4.5, -0.2 3.1, 0.4 1.7 Z
+                     M 0 1.8 C -1 3.2, -2.5 4.5, -4.8 4.2 C -3.6 3.4, -2.2 2.6, -1.3 1.4 Z
+                     M -1.2 1.2 C -2.6 1.4, -4.5 1.2, -5.5 -0.6 C -4.5 -0.4, -3.1 -0.2, -1.7 0.4 Z
+                     M -1.8 0 C -3.2 -1, -4.5 -2.5, -4.2 -4.8 C -3.4 -3.6, -2.6 -2.2, -1.4 -1.3 Z
+                     M -1.2 -1.2 C -1.4 -2.6, -1.2 -4.5, 0.6 -5.5 C 0.4 -4.5, 0.2 -3.1, -0.4 -1.7 Z"
+                  fill="rgba(0, 242, 254, 0.45)" stroke="#00f2fe" stroke-width="0.5" stroke-linejoin="round" />
+            <!-- Hexagonal Nose Cone / Spinner Nut -->
+            <polygon points="0,-0.8 0.7,-0.4 0.7,0.4 0,0.8 -0.7,0.4 -0.7,-0.4" fill="#ffffff" />
+          </g>
+
+          <!-- 8. HIGH-PRECISION CALIBRATED INDUSTRIAL MANOMETER -->
+          <g class="compressor-gauge-unit" transform="translate(43, 6.5)">
+            <circle cx="0" cy="0" r="4.5" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.7" />
+            <circle cx="0" cy="0" r="3.7" class="gauge-dial-face" fill="#1e293b" />
+            <!-- Scale Arc Zones: Green (Normal) & Red (Overboost) -->
+            <path d="M -2.4 -1.6 A 3.2 3.2 0 0 1 1.2 -2.5" stroke="#10b981" stroke-width="0.7" fill="none" stroke-linecap="round" />
+            <path d="M 1.2 -2.5 A 3.2 3.2 0 0 1 2.8 0" stroke="#ef4444" stroke-width="0.7" fill="none" stroke-linecap="round" />
+            <!-- Dial Graduation Tick Marks -->
+            <line x1="-2.2" y1="-1.4" x2="-1.6" y2="-1.0" stroke="#cbd5e1" stroke-width="0.4" />
+            <line x1="0" y1="-2.8" x2="0" y2="-2.0" stroke="#cbd5e1" stroke-width="0.4" />
+            <line x1="2.2" y1="-1.4" x2="1.6" y2="-1.0" stroke="#ef4444" stroke-width="0.4" />
+            <!-- Needle Pivot -->
+            <circle cx="0" cy="0" r="0.7" fill="#e2e8f0" />
+            <!-- Calibrated Dynamic Red Needle -->
+            <g class="gauge-needle-rotator" id="gaugeNeedleRotator" transform="rotate(-30)">
+              <line x1="0" y1="0" x2="2.6" y2="0" stroke="#ef4444" stroke-width="0.65" stroke-linecap="round" />
+              <circle cx="0" cy="0" r="0.4" fill="#ffffff" />
+            </g>
+          </g>
+        </svg>
+      </div>
     </div>
 
     <!-- Full-Screen High-Velocity Fluid Dynamics Canvas -->
     <canvas id="fluidShotCanvas" class="fluid-shot-canvas"></canvas>
   </div>
 
-  <!-- UNIFIED MECHANICAL COMPRESSOR & CONTROL STATION (Ultra-Compact) -->
-  <aside class="floating-lang-dock mech-station" id="floatingControlsDock" aria-label="Mechanical Engineering Controls" title="کنسول مکانیکی: توربو-کمپرسور سانتریفیوژ، تغییر زبان و تم روز/شب">
+  <!-- UNIFIED MECHANICAL CONTROLS STATION (Theme & Language) -->
+  <aside class="floating-lang-dock mech-station" id="floatingControlsDock" aria-label="Mechanical Engineering Controls" title="کنسول مکانیکی: تغییر زبان و تم روز/شب">
     <!-- Micro Hex Bolt Left -->
     <span class="mech-bolt mech-bolt-l" aria-hidden="true"></span>
-
-    <!-- High-Precision Industrial Centrifugal Turbo-Compressor Unit (Clickable!) -->
-    <div class="mech-compressor-unit" id="mechCompressorUnit" role="button" tabindex="0" title="توربو-کمپرسور حلزونی صنعتی: کلیک برای گردش سیال دور کل صفحه (Industrial Turbo Compressor: Click to loop fluid around screen)">
-      <div class="compressor-detailed-housing">
-        <svg class="compressor-detailed-svg" id="compressorDetailedSvg" viewBox="0 0 38 28" width="34" height="25" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="voluteGrad" x1="0" y1="0" x2="32" y2="28" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#334155" />
-              <stop offset="50%" stop-color="#1e293b" />
-              <stop offset="100%" stop-color="#0b1120" />
-            </linearGradient>
-            <linearGradient id="voluteGradLight" x1="0" y1="0" x2="32" y2="28" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#f1f5f9" />
-              <stop offset="50%" stop-color="#cbd5e1" />
-              <stop offset="100%" stop-color="#94a3b8" />
-            </linearGradient>
-          </defs>
-
-          <!-- 1. Rear Motor Stator & Heat-Sink Fins -->
-          <g class="compressor-heatsink">
-            <rect x="0.8" y="9" width="3.4" height="1.6" rx="0.5" class="comp-fin" fill="#475569" />
-            <rect x="0.8" y="12.5" width="3.4" height="1.6" rx="0.5" class="comp-fin" fill="#475569" />
-            <rect x="0.8" y="16" width="3.4" height="1.6" rx="0.5" class="comp-fin" fill="#475569" />
-          </g>
-
-          <!-- 2. Cast Volute Scroll Spiral Body -->
-          <path class="compressor-volute-body"
-                d="M 4 14 C 4 7 10 3 18 3 L 23 3 L 23 7 C 21 8 19 9 17 11 C 12 11 9 13 9 17 C 9 22 14 24 19 24 C 24 24 26 21 26 17 L 26 14 C 26 11 25 8 23 7 L 23 3 L 26 3 C 27 3 28 4 28 5 L 28 8 C 29 10 30 13 30 16 C 30 22 25 26 18 26 C 10 26 4 21 4 14 Z"
-                fill="url(#voluteGrad)" stroke="#475569" stroke-width="0.8" />
-
-          <!-- Discharge Flange with Studs -->
-          <rect x="21.5" y="1" width="7" height="2.5" rx="0.8" class="comp-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
-          <circle cx="23" cy="2.2" r="0.5" fill="#e2e8f0" />
-          <circle cx="27" cy="2.2" r="0.5" fill="#e2e8f0" />
-
-          <!-- High-Pressure Discharge Nozzle Tip Orifice (Facing top rail) -->
-          <rect class="compressor-nozzle-orifice" id="compressorNozzleOrifice" x="23.5" y="-0.5" width="3" height="1.6" rx="0.5" fill="#00f2fe" />
-
-          <!-- 3. Casing Perimeter Fastener Bolts -->
-          <circle cx="7" cy="10" r="0.7" fill="#94a3b8" />
-          <circle cx="7" cy="18" r="0.7" fill="#94a3b8" />
-          <circle cx="14" cy="24.5" r="0.7" fill="#94a3b8" />
-
-          <!-- 4. Impeller Shroud & Inlet Bellmouth Eye -->
-          <circle cx="16" cy="15.5" r="7.5" class="comp-eye-bg" fill="#090d16" stroke="#334155" stroke-width="0.8" />
-          <circle cx="16" cy="15.5" r="7.2" fill="none" stroke="rgba(0, 242, 254, 0.3)" stroke-width="0.6" stroke-dasharray="1.5 1" />
-
-          <!-- 5. HIGH-SPEED ROTATING MULTI-TIER IMPELLER -->
-          <g class="compressor-impeller-group" id="compressorImpellerGroup" transform="translate(16, 15.5)">
-            <!-- Impeller Hub Disc -->
-            <circle cx="0" cy="0" r="2.2" class="impeller-hub-disc" fill="#38bdf8" />
-            <!-- 8 Primary Curved Aerodynamic Blades -->
-            <path class="impeller-blades-curve"
-                  d="M 0 -2.2 C 1.2 -4, 3.2 -5.5, 6 -5.2 C 4.5 -4.2, 2.8 -3.2, 1.6 -1.8 Z
-                     M 1.5 -1.5 C 3.2 -1.8, 5.5 -1.5, 6.8 0.8 C 5.5 0.5, 3.8 0.2, 2.1 -0.5 Z
-                     M 2.2 0 C 4 1.2, 5.5 3.2, 5.2 6 C 4.2 4.5, 3.2 2.8, 1.8 1.6 Z
-                     M 1.5 1.5 C 1.8 3.2, 1.5 5.5, -0.8 6.8 C -0.5 5.5, -0.2 3.8, 0.5 2.1 Z
-                     M 0 2.2 C -1.2 4, -3.2 5.5, -6 5.2 C -4.5 4.2, -2.8 3.2, -1.6 1.8 Z
-                     M -1.5 1.5 C -3.2 1.8, -5.5 1.5, -6.8 -0.8 C -5.5 -0.5, -3.8 -0.2, -2.1 0.5 Z
-                     M -2.2 0 C -4 -1.2, -5.5 -3.2, -5.2 -6 C -4.2 -4.5, -3.2 -2.8, -1.8 -1.6 Z
-                     M -1.5 -1.5 C -1.8 -3.2, -1.5 -5.5, 0.8 -6.8 C 0.5 -5.5, 0.2 -3.8, -0.5 -2.1 Z"
-                  fill="rgba(0, 242, 254, 0.45)" stroke="#00f2fe" stroke-width="0.6" stroke-linejoin="round" />
-            <!-- Hexagonal Nose Cone / Spinner Nut -->
-            <polygon points="0,-1 0.87,-0.5 0.87,0.5 0,1 -0.87,0.5 -0.87,-0.5" fill="#ffffff" />
-          </g>
-
-          <!-- 6. HIGH-PRECISION CALIBRATED INDUSTRIAL MANOMETER -->
-          <g class="compressor-gauge-unit" transform="translate(30.5, 17)">
-            <!-- Chrome Bezel Outer Ring -->
-            <circle cx="0" cy="0" r="5.5" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.8" />
-            <circle cx="0" cy="0" r="4.6" class="gauge-dial-face" fill="#1e293b" />
-            <!-- Scale Arc Zones: Green (Normal) & Red (Overboost) -->
-            <path d="M -3 -2 A 4 4 0 0 1 1.5 -3.2" stroke="#10b981" stroke-width="0.8" fill="none" stroke-linecap="round" />
-            <path d="M 1.5 -3.2 A 4 4 0 0 1 3.5 0" stroke="#ef4444" stroke-width="0.8" fill="none" stroke-linecap="round" />
-            <!-- Dial Graduation Tick Marks -->
-            <line x1="-2.8" y1="-1.8" x2="-2" y2="-1.3" stroke="#cbd5e1" stroke-width="0.45" />
-            <line x1="0" y1="-3.6" x2="0" y2="-2.6" stroke="#cbd5e1" stroke-width="0.45" />
-            <line x1="2.8" y1="-1.8" x2="2" y2="-1.3" stroke="#ef4444" stroke-width="0.45" />
-            <!-- Needle Pivot -->
-            <circle cx="0" cy="0" r="0.9" fill="#e2e8f0" />
-            <!-- Calibrated Dynamic Red Needle -->
-            <g class="gauge-needle-rotator" id="gaugeNeedleRotator" transform="rotate(-30)">
-              <line x1="0" y1="0" x2="3.2" y2="0" stroke="#ef4444" stroke-width="0.75" stroke-linecap="round" />
-              <circle cx="0" cy="0" r="0.5" fill="#ffffff" />
-            </g>
-            <!-- Glass Cover Specular Arc -->
-            <path d="M -3.5 -1.5 A 4 4 0 0 1 1.5 -3.8" stroke="rgba(255,255,255,0.5)" stroke-width="0.55" fill="none" />
-          </g>
-        </svg>
-      </div>
-    </div>
 
     <!-- Micro Separator Pin -->
     <div class="floating-control-divider"></div>
@@ -2438,76 +2452,134 @@
       }
     }
 
-    // Set Manometer Needle Rotation (-40deg idle to +85deg redline)
-    function setCompressorGauge(deg) {
-      const rotator = document.getElementById('gaugeNeedleRotator');
-      if (rotator) {
-        rotator.setAttribute('transform', 'rotate(' + deg + ')');
+    // =========================================================================
+    // HIGH-PRECISION IN-LINE INDUSTRIAL COMPRESSOR & CLOSED-LOOP FLUID CIRCUIT
+    // =========================================================================
+    const fluidCanvas = document.getElementById('fluidShotCanvas');
+    let fluidCtx = null;
+
+    function initAndResizeFluidCanvas() {
+      if (!fluidCanvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      fluidCanvas.width = window.innerWidth * dpr;
+      fluidCanvas.height = window.innerHeight * dpr;
+      fluidCtx = fluidCanvas.getContext('2d');
+      if (fluidCtx) {
+        fluidCtx.setTransform(1, 0, 0, 1, 0, 0);
+        fluidCtx.scale(dpr, dpr);
       }
+    }
+    window.addEventListener('resize', initAndResizeFluidCanvas);
+    initAndResizeFluidCanvas();
+
+    // Rotational & Manometer Physics State (Zero CSS @keyframe conflicts, 100% butter-smooth)
+    let pumpImpellerAngle = 0;
+    let pumpImpellerSpeed = 0.038; // Idle cruising speed (rad/frame)
+    let pumpTargetSpeed = 0.038;
+    let pumpNeedleAngle = -26;
+    let pumpNeedleTarget = -26;
+    let pumpNeedleVel = 0;
+    let pumpIsCompressing = false;
+
+    const impellerEl = document.getElementById('compressorImpellerGroup');
+    const needleEl = document.getElementById('gaugeNeedleRotator');
+    const compStation = document.getElementById('floatingControlsDock');
+    const compUnit = document.getElementById('mechCompressorUnit');
+
+    // Continuous 60fps/120fps mechanical animation loop
+    function runPumpMechanicalLoop(now) {
+      // 1. Smooth Rotational Inertia
+      pumpImpellerSpeed += (pumpTargetSpeed - pumpImpellerSpeed) * 0.085;
+      pumpImpellerAngle += pumpImpellerSpeed;
+      if (impellerEl) {
+        const deg = ((pumpImpellerAngle * 180) / Math.PI) % 360;
+        impellerEl.setAttribute('transform', 'translate(29, 12) rotate(' + deg.toFixed(2) + ')');
+      }
+
+      // 2. Damped Spring Physics for Manometer Needle
+      const springK = 0.16;
+      const damping = 0.78;
+      const delta = pumpNeedleTarget - pumpNeedleAngle;
+      pumpNeedleVel = (pumpNeedleVel + delta * springK) * damping;
+      pumpNeedleAngle += pumpNeedleVel;
+
+      if (needleEl) {
+        const quiver = pumpIsCompressing ? (Math.random() - 0.5) * 1.6 : Math.sin(now * 0.005) * 0.45;
+        const needleFinal = pumpNeedleAngle + quiver;
+        needleEl.setAttribute('transform', 'rotate(' + needleFinal.toFixed(2) + ')');
+      }
+
+      requestAnimationFrame(runPumpMechanicalLoop);
+    }
+    requestAnimationFrame(runPumpMechanicalLoop);
+
+    // Smooth hover reaction
+    if (compUnit) {
+      compUnit.addEventListener('mouseenter', () => {
+        if (!pumpIsCompressing) pumpTargetSpeed = 0.09;
+      });
+      compUnit.addEventListener('mouseleave', () => {
+        if (!pumpIsCompressing) pumpTargetSpeed = 0.038;
+      });
     }
 
     let fluidAnimationReq = null;
     let fluidStartTime = null;
-    const LOOP_DURATION_MS = 850; // Ultra-fast dynamic full-screen circuit duration (high-velocity boost)
+    const LOOP_DURATION_MS = 1400; // Optimal velocity: aerodynamic, distinct, perfectly observable
 
     function launchFluidCompressorShot() {
-      const canvas = document.getElementById('fluidShotCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      if (!fluidCanvas) return;
+      if (!fluidCtx) initAndResizeFluidCanvas();
+      if (!fluidCtx) return;
 
-      const dpr = window.devicePixelRatio || 1;
       const W = window.innerWidth;
       const H = window.innerHeight;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
+      const railPad = 2; // Inset from screen edge
+      const xL = railPad;
+      const xR = W - railPad;
+      const yT = 12; // EXACT HORIZONTAL LINE OF FLOW
+      const yB = H - railPad;
 
-      // Determine compressor discharge nozzle coordinate accurately
-      let compX = W - 85;
-      const nozzleEl = document.getElementById('compressorNozzleOrifice') || document.getElementById('mechCompressorUnit');
-      if (nozzleEl) {
-        const rect = nozzleEl.getBoundingClientRect();
-        if (rect.width > 0) {
-          compX = rect.left + rect.width / 2;
+      // Locate compressor discharge nozzle and suction port in screen coordinates
+      let disX = W - 198;
+      let sucX = W - 142;
+
+      if (compUnit) {
+        const r = compUnit.getBoundingClientRect();
+        if (r.width > 0) {
+          disX = r.left + 2;  // Discharge nozzle on left (facing left)
+          sucX = r.right - 2; // Suction intake on right (facing right)
         }
       }
 
-      const railPad = 2; // Inset distance from edges in pixels
-      const xL = railPad;
-      const xR = W - railPad;
-      const yT = railPad;
-      const yB = H - railPad;
-
-      // 5 Segments of the complete circuit:
-      // Leg 1: Top edge (Comp -> Top-Left)
-      const d1 = Math.max(10, compX - xL);
-      // Leg 2: Left edge (Top-Left -> Bottom-Left)
+      // 5 Pure Orthogonal Closed-Loop Legs:
+      // Leg 1: Top rail leftward from pump discharge nozzle to Top-Left corner (xL, yT)
+      const d1 = Math.max(10, disX - xL);
+      // Leg 2: Left rail downward from Top-Left to Bottom-Left corner (xL, yB)
       const d2 = Math.max(10, yB - yT);
-      // Leg 3: Bottom edge (Bottom-Left -> Bottom-Right)
+      // Leg 3: Bottom rail rightward from Bottom-Left to Bottom-Right corner (xR, yB)
       const d3 = Math.max(10, xR - xL);
-      // Leg 4: Right edge (Bottom-Right -> Top-Right)
+      // Leg 4: Right rail upward from Bottom-Right to Top-Right corner (xR, yT)
       const d4 = Math.max(10, yB - yT);
-      // Leg 5: Top edge return (Top-Right -> Comp)
-      const d5 = Math.max(10, xR - compX);
+      // Leg 5: Top rail leftward from Top-Right corner straight into pump suction intake (sucX, yT)
+      const d5 = Math.max(10, xR - sucX);
 
       const totalCircuitDist = d1 + d2 + d3 + d4 + d5;
 
-      const station = document.getElementById('floatingControlsDock');
       const cornerTL = document.getElementById('cornerTopLeft');
       const cornerBL = document.getElementById('cornerBottomLeft');
       const cornerBR = document.getElementById('cornerBottomRight');
       const cornerTR = document.getElementById('cornerTopRight');
-      const returnManifold = document.getElementById('compressorReturnManifold');
 
-      // 1. Spool compressor, slam manometer needle to redline boost!
-      if (station) station.classList.add('is-compressing');
-      setCompressorGauge(80); // Redline overboost!
+      // 1. Spool compressor into full turbo boost, drive gauge needle to redline!
+      pumpIsCompressing = true;
+      pumpTargetSpeed = 0.32; // turbo RPM!
+      pumpNeedleTarget = 80; // redline boost!
+      if (compUnit) compUnit.classList.add('is-compressing');
       playAcousticFeedback('compressor-spool');
 
       // Reset corner active states
-      [cornerTL, cornerBL, cornerBR, cornerTR, returnManifold].forEach(el => {
+      [cornerTL, cornerBL, cornerBR, cornerTR].forEach(el => {
         if (el) el.classList.remove('corner-active', 'circuit-ignited');
       });
 
@@ -2520,37 +2592,38 @@
       fluidStartTime = performance.now();
 
       function getCircuitPoint(progress) {
-        const currentDist = progress * totalCircuitDist;
+        const cur = progress * totalCircuitDist;
 
-        if (currentDist <= d1) {
-          const p = currentDist / d1;
-          return { x: compX - p * d1, y: yT, leg: 1, angle: Math.PI };
-        } else if (currentDist <= d1 + d2) {
-          const p = (currentDist - d1) / d2;
+        if (cur <= d1) {
+          // Leg 1: Pure horizontal left from disX to xL along top rail at y = yT
+          const p = cur / d1;
+          return { x: disX - p * d1, y: yT, leg: 1, angle: Math.PI };
+        } else if (cur <= d1 + d2) {
+          // Leg 2: Pure vertical down from yT to yB along left rail at x = xL
+          const p = (cur - d1) / d2;
           return { x: xL, y: yT + p * d2, leg: 2, angle: Math.PI / 2 };
-        } else if (currentDist <= d1 + d2 + d3) {
-          const p = (currentDist - d1 - d2) / d3;
+        } else if (cur <= d1 + d2 + d3) {
+          // Leg 3: Pure horizontal right from xL to xR along bottom rail at y = yB
+          const p = (cur - d1 - d2) / d3;
           return { x: xL + p * d3, y: yB, leg: 3, angle: 0 };
-        } else if (currentDist <= d1 + d2 + d3 + d4) {
-          const p = (currentDist - d1 - d2 - d3) / d4;
+        } else if (cur <= d1 + d2 + d3 + d4) {
+          // Leg 4: Pure vertical up from yB to yT along right rail at x = xR
+          const p = (cur - d1 - d2 - d3) / d4;
           return { x: xR, y: yB - p * d4, leg: 4, angle: -Math.PI / 2 };
         } else {
-          const p = (currentDist - d1 - d2 - d3 - d4) / d5;
+          // Leg 5: Pure horizontal left from xR into pump suction port at sucX at y = yT
+          const p = (cur - d1 - d2 - d3 - d4) / d5;
           return { x: xR - p * d5, y: yT, leg: 5, angle: Math.PI };
         }
       }
 
       function drawCircuit(now) {
         const elapsed = now - fluidStartTime;
-        const rawProgress = Math.min(1.0, elapsed / LOOP_DURATION_MS);
-
-        // Hydrodynamic velocity profile
-        const progress = rawProgress;
+        const progress = Math.min(1.0, elapsed / LOOP_DURATION_MS);
         const pt = getCircuitPoint(progress);
 
-        // Store trail history for smooth luminous wake
         trailHistory.push({ x: pt.x, y: pt.y, time: now });
-        while (trailHistory.length > 0 && (now - trailHistory[0].time) > 150) {
+        while (trailHistory.length > 0 && (now - trailHistory[0].time) > 170) {
           trailHistory.shift();
         }
 
@@ -2576,7 +2649,7 @@
           playAcousticFeedback('corner-turn');
         }
 
-        ctx.clearRect(0, 0, W, H);
+        fluidCtx.clearRect(0, 0, W, H);
 
         const isDark = !rootEl.classList.contains('light-mode');
         const primaryColor = isDark ? '#00f2fe' : '#f59e0b';
@@ -2584,15 +2657,15 @@
         const coreColor = '#ffffff';
 
         // Spawn cavitation microbubbles
-        if (progress < 0.98 && Math.random() < 0.8) {
+        if (progress < 0.98 && Math.random() < 0.75) {
           bubbles.push({
             x: pt.x + (Math.random() * 4 - 2),
             y: pt.y + (Math.random() * 4 - 2),
-            vx: -Math.cos(pt.angle) * (Math.random() * 2 + 1) + (Math.random() - 0.5),
-            vy: -Math.sin(pt.angle) * (Math.random() * 2 + 1) + (Math.random() - 0.5),
-            radius: Math.random() * 2.2 + 0.8,
+            vx: -Math.cos(pt.angle) * (Math.random() * 1.6 + 0.8) + (Math.random() - 0.5),
+            vy: -Math.sin(pt.angle) * (Math.random() * 1.6 + 0.8) + (Math.random() - 0.5),
+            radius: Math.random() * 2 + 0.8,
             alpha: 0.9,
-            decay: Math.random() * 0.07 + 0.04
+            decay: Math.random() * 0.05 + 0.03
           });
         }
 
@@ -2601,17 +2674,17 @@
           for (let i = 1; i < trailHistory.length; i++) {
             const p1 = trailHistory[i - 1];
             const p2 = trailHistory[i];
-            const ageRatio = (now - p2.time) / 150; // 0 (new) to 1 (old)
+            const ageRatio = (now - p2.time) / 170;
             const alpha = Math.max(0, 1 - ageRatio);
 
-            ctx.save();
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = isDark ? ('rgba(0, 242, 254, ' + (alpha * 0.9) + ')') : ('rgba(245, 158, 11, ' + (alpha * 0.9) + ')');
-            ctx.lineWidth = 3.5 * alpha + 1;
-            ctx.stroke();
-            ctx.restore();
+            fluidCtx.save();
+            fluidCtx.beginPath();
+            fluidCtx.moveTo(p1.x, p1.y);
+            fluidCtx.lineTo(p2.x, p2.y);
+            fluidCtx.strokeStyle = isDark ? ('rgba(0, 242, 254, ' + (alpha * 0.9) + ')') : ('rgba(245, 158, 11, ' + (alpha * 0.9) + ')');
+            fluidCtx.lineWidth = 3.5 * alpha + 1;
+            fluidCtx.stroke();
+            fluidCtx.restore();
           }
         }
 
@@ -2625,81 +2698,72 @@
             bubbles.splice(i, 1);
             continue;
           }
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-          ctx.fillStyle = isDark ? ('rgba(56, 189, 248, ' + b.alpha + ')') : ('rgba(251, 191, 36, ' + b.alpha + ')');
-          ctx.shadowColor = primaryColor;
-          ctx.shadowBlur = 4;
-          ctx.fill();
-          ctx.restore();
+          fluidCtx.save();
+          fluidCtx.beginPath();
+          fluidCtx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+          fluidCtx.fillStyle = isDark ? ('rgba(56, 189, 248, ' + b.alpha + ')') : ('rgba(251, 191, 36, ' + b.alpha + ')');
+          fluidCtx.shadowColor = primaryColor;
+          fluidCtx.shadowBlur = 4;
+          fluidCtx.fill();
+          fluidCtx.restore();
         }
 
         // 3. Draw Leading Fluid Slug (Teardrop plasma projectile)
-        ctx.save();
-        ctx.shadowColor = primaryColor;
-        ctx.shadowBlur = 14;
+        fluidCtx.save();
+        fluidCtx.shadowColor = primaryColor;
+        fluidCtx.shadowBlur = 14;
 
-        const headGrad = ctx.createRadialGradient(pt.x, pt.y, 1, pt.x, pt.y, 9);
+        const headGrad = fluidCtx.createRadialGradient(pt.x, pt.y, 1, pt.x, pt.y, 8);
         headGrad.addColorStop(0, coreColor);
         headGrad.addColorStop(0.35, secondaryColor);
         headGrad.addColorStop(0.8, primaryColor);
         headGrad.addColorStop(1, 'rgba(0,0,0,0)');
 
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 6.5, 0, Math.PI * 2);
-        ctx.fillStyle = headGrad;
-        ctx.fill();
+        fluidCtx.beginPath();
+        fluidCtx.arc(pt.x, pt.y, 6, 0, Math.PI * 2);
+        fluidCtx.fillStyle = headGrad;
+        fluidCtx.fill();
 
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 2.4, 0, Math.PI * 2);
-        ctx.fillStyle = coreColor;
-        ctx.fill();
-        ctx.restore();
+        fluidCtx.beginPath();
+        fluidCtx.arc(pt.x, pt.y, 2.2, 0, Math.PI * 2);
+        fluidCtx.fillStyle = coreColor;
+        fluidCtx.fill();
+        fluidCtx.restore();
 
         if (progress < 1.0) {
           fluidAnimationReq = requestAnimationFrame(drawCircuit);
         } else {
           // ============================================================
-          // RETURNED TO STARTING PLACE!
-          // "و لطفا این نواره که پرتاب میشه یه دور دور صفحه بزنه و برگرده به جای اولش تا صفحه روشن بشه"
+          // FLUID ARRIVED DIRECTLY INTO THE PUMP HORIZONTAL SUCTION INTAKE!
           // ============================================================
-          ctx.clearRect(0, 0, W, H);
+          fluidCtx.clearRect(0, 0, W, H);
 
-          // 1. Manifold absorption pulse at compressor junction
-          if (returnManifold) {
-            returnManifold.classList.add('circuit-ignited');
+          // 1. Spool down compressor with realistic rotational inertia
+          pumpIsCompressing = false;
+          pumpTargetSpeed = 0.038;
+          pumpNeedleTarget = -26;
+          if (compUnit) compUnit.classList.remove('is-compressing');
+
+          // 2. Pulse pump with fluid absorption shockwave
+          if (compUnit) {
+            compUnit.classList.add('fluid-absorbed');
+            setTimeout(() => compUnit.classList.remove('fluid-absorbed'), 450);
           }
 
-          // 2. ILLUMINATE THE ENTIRE SCREEN & PERIMETER CONDUIT!
+          // 3. ILLUMINATE THE ENTIRE SCREEN & PERIMETER CONDUIT!
           if (perimeterConduit) {
             perimeterConduit.classList.remove('is-illuminated');
             void perimeterConduit.offsetWidth; // force reflow
             perimeterConduit.classList.add('is-illuminated');
           }
 
-          // 3. Audio resonance of completed circuit
+          // 4. Audio resonance of completed circuit
           playAcousticFeedback('circuit-complete');
-
-          // 4. Return compressor gauge smoothly to nominal running pressure
-          setTimeout(() => {
-            if (station) station.classList.remove('is-compressing');
-            setCompressorGauge(-15); // Normal nominal pressure
-          }, 220);
         }
       }
 
       fluidAnimationReq = requestAnimationFrame(drawCircuit);
     }
-
-    // Window resize handler for full-screen fluid canvas
-    window.addEventListener('resize', () => {
-      const canvas = document.getElementById('fluidShotCanvas');
-      if (!canvas) return;
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-    });
 
     // Theme Switch
     function applyTheme(mode) {
@@ -3803,28 +3867,28 @@
     }
 
     .perimeter-rail-top {
-      top: 0;
+      top: 10px;
       left: 0;
       right: 0;
-      height: 3px;
+      height: 4px;
     }
     .perimeter-rail-left {
-      top: 0;
+      top: 10px;
       bottom: 0;
       left: 0;
-      width: 3px;
+      width: 4px;
     }
     .perimeter-rail-bottom {
       bottom: 0;
       left: 0;
       right: 0;
-      height: 3px;
+      height: 4px;
     }
     .perimeter-rail-right {
-      top: 0;
+      top: 10px;
       bottom: 0;
       right: 0;
-      width: 3px;
+      width: 4px;
     }
 
     .rail-line-back {
@@ -3901,10 +3965,10 @@
       justify-content: center;
     }
 
-    .corner-top-left { top: 0; left: 0; }
+    .corner-top-left { top: 7px; left: 0; }
     .corner-bottom-left { bottom: 0; left: 0; }
     .corner-bottom-right { bottom: 0; right: 0; }
-    .corner-top-right { top: 0; right: 0; }
+    .corner-top-right { top: 7px; right: 0; }
 
     .corner-elbow {
       width: 6px;
@@ -3951,56 +4015,6 @@
       100% { transform: scale(4); opacity: 0; border-color: #00f2fe; }
     }
 
-    /* Return Receptor Manifold above Compressor */
-    .compressor-return-manifold {
-      position: absolute;
-      top: 0;
-      right: 80px;
-      width: 12px;
-      height: 6px;
-      transform: translateY(-1px);
-      z-index: 10003;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .manifold-core {
-      width: 6px;
-      height: 4px;
-      border-radius: 2px;
-      background: #00f2fe;
-      box-shadow: 0 0 8px #00f2fe;
-      transition: all 0.3s;
-    }
-    .light-mode .manifold-core {
-      background: #f59e0b;
-      box-shadow: 0 0 8px #f59e0b;
-    }
-
-    .manifold-burst-ring {
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 1.5px solid #00f2fe;
-      opacity: 0;
-    }
-
-    .compressor-return-manifold.circuit-ignited .manifold-core {
-      transform: scale(2);
-      background: #ffffff;
-      box-shadow: 0 0 16px #00f2fe, 0 0 30px #ffffff;
-    }
-
-    .compressor-return-manifold.circuit-ignited .manifold-burst-ring {
-      animation: manifold-burst 0.35s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
-    }
-
-    @keyframes manifold-burst {
-      0% { transform: scale(1); opacity: 1; border-color: #ffffff; }
-      100% { transform: scale(5); opacity: 0; border-color: #00f2fe; }
-    }
-
     /* Full-Screen Fluid Shot Canvas */
     .fluid-shot-canvas {
       position: fixed;
@@ -4008,21 +4022,138 @@
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 10002;
+      z-index: 10001;
     }
 
-    /* --- 2. UNIFIED COMPRESSOR CONTROL STATION (.mech-station) --- */
+    /* --- HORIZONTAL IN-LINE TURBO-COMPRESSOR ON TOP RAIL --- */
+    .inline-perimeter-pump {
+      position: fixed;
+      top: 0;
+      right: 140px;
+      width: 58px;
+      height: 24px;
+      z-index: 10003;
+      cursor: pointer;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: auto;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .inline-perimeter-pump:hover {
+      transform: scale(1.06);
+    }
+
+    .inline-perimeter-pump .compressor-detailed-housing {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .inline-perimeter-pump .compressor-detailed-svg {
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+      transition: filter 0.25s ease-out;
+    }
+
+    .inline-perimeter-pump:hover .compressor-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.8));
+    }
+    .light-mode .inline-perimeter-pump:hover .compressor-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
+    }
+
+    /* Impeller Group & Needle (Rotation is driven 100% smoothly by continuous JS physics loop) */
+    .compressor-impeller-group {
+      transform-origin: 29px 12px;
+      will-change: transform;
+    }
+    .gauge-needle-rotator {
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    /* Light Mode Compressor Gradients & Colors */
+    .light-mode .compressor-volute-body {
+      fill: url(#voluteGradHLight);
+      stroke: #94a3b8;
+    }
+    .light-mode .comp-pipe-left,
+    .light-mode .comp-pipe-right {
+      fill: url(#pipeConduitGradLight);
+      stroke: #94a3b8;
+    }
+    .light-mode .comp-fin {
+      fill: #94a3b8;
+    }
+    .light-mode .comp-flange {
+      fill: #cbd5e1;
+      stroke: #64748b;
+    }
+    .light-mode .comp-eye-bg {
+      fill: #e2e8f0;
+      stroke: #94a3b8;
+    }
+    .light-mode .impeller-hub-disc {
+      fill: #f59e0b;
+    }
+    .light-mode .impeller-blades-curve {
+      fill: rgba(245, 158, 11, 0.4);
+      stroke: #d97706;
+    }
+    .light-mode .compressor-nozzle-orifice,
+    .light-mode .compressor-suction-orifice {
+      fill: #f59e0b;
+    }
+    .light-mode .gauge-bezel {
+      fill: #f1f5f9;
+      stroke: #64748b;
+    }
+    .light-mode .gauge-dial-face {
+      fill: #ffffff;
+    }
+
+    /* WHEN COMPRESSOR IS ACTIVATED / FIRING FLUID SHOT */
+    .inline-perimeter-pump.is-compressing .compressor-detailed-svg {
+      filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.95)) drop-shadow(0 0 20px rgba(0, 242, 254, 0.4));
+    }
+    .light-mode .inline-perimeter-pump.is-compressing .compressor-detailed-svg {
+      filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 20px rgba(245, 158, 11, 0.4));
+    }
+    .inline-perimeter-pump.is-compressing .compressor-nozzle-orifice {
+      filter: drop-shadow(0 0 8px #00f2fe);
+    }
+
+    /* WHEN FLUID COMPLETES LOOP AND IS ABSORBED BACK INTO THE PUMP HORIZONTAL EYE */
+    .inline-perimeter-pump.fluid-absorbed .compressor-detailed-svg {
+      filter: drop-shadow(0 0 16px #00f2fe) drop-shadow(0 0 28px #ffffff) !important;
+      transform: scale(1.08);
+      transition: all 0.12s ease-out;
+    }
+    .light-mode .inline-perimeter-pump.fluid-absorbed .compressor-detailed-svg {
+      filter: drop-shadow(0 0 16px #f59e0b) drop-shadow(0 0 28px #ffffff) !important;
+      transform: scale(1.08);
+      transition: all 0.12s ease-out;
+    }
+
+    /* --- 2. UNIFIED CONTROLS STATION (.mech-station) --- */
     .mech-station {
       position: fixed;
-      top: 12px;
+      top: 22px;
       right: 20px !important;
       left: auto !important;
       z-index: 9999;
       direction: ltr !important;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 2px 7px;
+      gap: 6px;
+      padding: 2px 8px;
       height: 28px;
       box-sizing: border-box;
       background: linear-gradient(135deg, rgba(16, 24, 40, 0.94), rgba(8, 12, 22, 0.97));
@@ -4066,12 +4197,15 @@
     }
 
     @media (max-width: 640px) {
+      .inline-perimeter-pump {
+        right: 110px;
+      }
       .mech-station {
-        top: 8px;
+        top: 20px;
         right: 8px !important;
         left: auto !important;
         height: 26px;
-        padding: 2px 5px;
+        padding: 2px 6px;
         gap: 4px;
       }
       [dir="rtl"] .mech-station,
@@ -4093,134 +4227,6 @@
     .light-mode .mech-bolt {
       background: radial-gradient(circle, #f59e0b 30%, #d97706 70%, #92400e 100%);
       box-shadow: 0 0 4px rgba(245, 158, 11, 0.5);
-    }
-
-    /* --- 3. DETAILED INDUSTRIAL CENTRIFUGAL COMPRESSOR MODULE --- */
-    .mech-compressor-unit {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 25px;
-      cursor: pointer;
-      outline: none;
-      padding: 0 1px;
-    }
-
-    .compressor-detailed-housing {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .compressor-detailed-svg {
-      display: block;
-      overflow: visible;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-      transition: filter 0.3s;
-    }
-
-    .mech-compressor-unit:hover .compressor-detailed-housing {
-      transform: scale(1.05);
-    }
-    .mech-compressor-unit:hover .compressor-detailed-svg {
-      filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.5));
-    }
-    .light-mode .mech-compressor-unit:hover .compressor-detailed-svg {
-      filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.5));
-    }
-
-    /* Fast Continuous Impeller Rotation */
-    .compressor-impeller-group {
-      transform-origin: 16px 15.5px;
-      animation: impeller-idle-rotation 0.9s linear infinite;
-    }
-    .mech-compressor-unit:hover .compressor-impeller-group {
-      animation: impeller-idle-rotation 0.28s linear infinite !important;
-    }
-
-    @keyframes impeller-idle-rotation {
-      from { transform: translate(16px, 15.5px) rotate(0deg); }
-      to { transform: translate(16px, 15.5px) rotate(360deg); }
-    }
-
-    /* Light Mode Compressor Gradients & Colors */
-    .light-mode .compressor-volute-body {
-      fill: url(#voluteGradLight);
-      stroke: #94a3b8;
-    }
-    .light-mode .comp-fin {
-      fill: #94a3b8;
-    }
-    .light-mode .comp-flange {
-      fill: #cbd5e1;
-      stroke: #64748b;
-    }
-    .light-mode .comp-eye-bg {
-      fill: #e2e8f0;
-      stroke: #94a3b8;
-    }
-    .light-mode .impeller-hub-disc {
-      fill: #f59e0b;
-    }
-    .light-mode .impeller-blades-curve {
-      fill: rgba(245, 158, 11, 0.4);
-      stroke: #d97706;
-    }
-    .light-mode .compressor-nozzle-orifice {
-      fill: #f59e0b;
-    }
-    .light-mode .gauge-bezel {
-      fill: #f1f5f9;
-      stroke: #64748b;
-    }
-    .light-mode .gauge-dial-face {
-      fill: #ffffff;
-    }
-
-    /* High-Precision Active Needle Rotator */
-    .gauge-needle-rotator {
-      transform-origin: 0 0;
-      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
-      animation: needle-idle-flutter 0.75s ease-in-out infinite alternate;
-    }
-    @keyframes needle-idle-flutter {
-      0% { transform: rotate(-32deg); }
-      100% { transform: rotate(-25deg); }
-    }
-    .mech-station.is-compressing .gauge-needle-rotator {
-      animation: needle-boost-jitter 0.04s infinite alternate !important;
-    }
-    @keyframes needle-boost-jitter {
-      0% { transform: rotate(78deg); }
-      100% { transform: rotate(84deg); }
-    }
-
-    /* WHEN COMPRESSOR IS FIRING / CIRCUIT ACTIVE */
-    .mech-station.is-compressing .compressor-impeller-group {
-      animation: impeller-high-boost 0.06s linear infinite !important;
-    }
-    .mech-station.is-compressing .compressor-detailed-housing {
-      animation: compressor-boost-vibrate 0.05s infinite alternate;
-    }
-    .mech-station.is-compressing .compressor-nozzle-orifice {
-      filter: drop-shadow(0 0 8px #00f2fe);
-      animation: nozzle-plasma-burst 0.06s infinite alternate;
-    }
-
-    @keyframes impeller-high-boost {
-      from { transform: translate(16px, 15.5px) rotate(0deg); }
-      to { transform: translate(16px, 15.5px) rotate(360deg); }
-    }
-    @keyframes compressor-boost-vibrate {
-      0% { transform: translate(0, 0) scale(1.02); }
-      100% { transform: translate(-0.8px, 0.8px) scale(0.98); }
-    }
-    @keyframes nozzle-plasma-burst {
-      0% { fill: #ffffff; opacity: 1; filter: drop-shadow(0 0 8px #00f2fe); }
-      100% { fill: #00f2fe; opacity: 0.9; filter: drop-shadow(0 0 14px #38bdf8); }
     }
 
     /* Separator divider */
