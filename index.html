@@ -20,34 +20,11 @@
   <link rel="stylesheet" href="assets/css/liquid-glass.css">
 
   <!-- Core styles are loaded from assets/css/liquid-glass.css -->
-
-  <!-- ================================================================
-       ENGINEERING BACKGROUND SYSTEM (self-contained, prefixed "engineering-bg-")
-       A very subtle animated thermodynamic/fluid schematic that lives
-       behind all site content. Safe to copy into any other page: it
-       only touches elements with the engineering-bg- prefix and reads
-       (never writes) the site's existing --accent-cyan / light-mode
-       state to stay in sync with the current theme.
-       ================================================================ -->
-  <style>
-    .engineering-bg-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;           /* always behind .bg-grid (0) and .container (1) */
-      pointer-events: none;  /* never intercepts clicks/scroll/hover */
-      display: block;
-    }
-
-    /* Reduced motion: JS also freezes the animation loop, but this
-       guarantees no CSS-driven motion sneaks in even before JS runs. */
-    @media (prefers-reduced-motion: reduce) {
-      .engineering-bg-canvas { opacity: 0.5; }
-    }
-  </style>
 </head>
 <body>
+
+  <!-- Comprehensive Mechanical Engineering Blueprint & Schematic Background Canvas -->
+  <canvas id="engineeringBgCanvas" class="engineering-bg-canvas" aria-hidden="true"></canvas>
 
   <div class="spatial-ambient-glow" aria-hidden="true">
     <div class="ambient-orb ambient-orb-1"></div>
@@ -55,7 +32,6 @@
     <div class="ambient-orb ambient-orb-3"></div>
   </div>
   <div class="spatial-texture" aria-hidden="true"></div>
-  <canvas class="engineering-bg-canvas" id="engineeringBgCanvas" aria-hidden="true"></canvas>
   <div class="custom-cursor" id="cursor"></div>
   <div class="custom-cursor-halo" id="cursorHalo"></div>
 
@@ -104,8 +80,11 @@
       <div class="corner-flash"></div>
     </div>
 
-    <!-- In-Line Industrial Horizontal Centrifugal Turbo-Compressor Unit (Directly in top conduit path) -->
-    <div class="inline-perimeter-pump" id="mechCompressorUnit" role="button" tabindex="0" title="توربو-کمپرسور حلزونی خطی صنعتی: کلیک برای شلیک سیال دور مدار کامل صفحه (Industrial In-Line Turbo Compressor: Click to loop fluid around screen)">
+    <!-- UNIFIED TOP RAIL ENGINEERING SUITE (All 12 In-Line Mechanical Systems Side-By-Side Along Top Rail) -->
+    <div class="inline-top-mechanisms-rack" id="inlineTopMechanismsRack" aria-label="مجموعه ۱۲ گانه مکانیزم‌های مهندسی مکانیک ریل بالا">
+
+    <!-- In-Line Industrial Boiler Feedwater Pump Unit (BFP - High Pressure Multistage/Centrifugal Feed Pump) -->
+    <div class="inline-perimeter-pump inline-top-unit" id="mechCompressorUnit" role="button" tabindex="0" title="پمپ آب تغذیه بویلر نیروگاهی (Boiler Feedwater Pump - BFP): الکتروموتور محرک پرقدرت، پوسته فشار قوی با پره‌های راهنما (Diffuser)، سیل مکانیکی و گیج فشار">
       <div class="compressor-detailed-housing">
         <svg class="compressor-detailed-svg" id="compressorDetailedSvg" viewBox="0 0 58 24" width="58" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -137,9 +116,15 @@
               <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.6" />
               <stop offset="100%" stop-color="#020617" stop-opacity="0.8" />
             </linearGradient>
+            <!-- Heavy Induction Motor Drive Gradient -->
+            <linearGradient id="motorShellGrad" x1="42" y1="7" x2="54" y2="17" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#475569" />
+              <stop offset="50%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
           </defs>
 
-          <!-- 1. Motor Stator Casing & Heat-Sink Cooling Fins -->
+          <!-- 1. Heavy Induction Drive Motor & Longitudinal Cooling Ribs (Right side of pump) -->
           <g class="compressor-heatsink">
             <rect x="23" y="1" width="12" height="1.6" rx="0.5" class="comp-fin" fill="#475569" stroke="#334155" stroke-width="0.3" />
             <rect x="24.5" y="2.8" width="9" height="1.4" rx="0.4" class="comp-fin" fill="#334155" />
@@ -149,11 +134,11 @@
 
           <!-- 2. Horizontal In-Line Pipeline Conduit Body (Through-Flow Pipe) -->
           <path class="comp-pipe-left" d="M 1 9.5 L 18 8.5 L 18 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="1" y1="10.8" x2="18" y2="10.2" stroke="#94a3b8" stroke-width="0.4" opacity="0.75" />
+          <line x1="1" y1="10.8" x2="18" y2="10.2" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
           <path class="comp-pipe-right" d="M 40 8.5 L 57 9.5 L 57 14.5 L 40 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="40" y1="10.2" x2="57" y2="10.8" stroke="#94a3b8" stroke-width="0.4" opacity="0.75" />
+          <line x1="40" y1="10.2" x2="57" y2="10.8" stroke="#38bdf8" stroke-width="0.4" opacity="0.85" />
 
-          <!-- 3. Cast Volute Scroll Body with Outer Chamfer Rim -->
+          <!-- 3. Cast Heavy-Wall Volute Casing with Internal Diffuser Vanes -->
           <path class="compressor-volute-rim"
                 d="M 17.5 8.2 C 21.5 4.5 36.5 4.5 40.5 8.2 C 44.5 10.8 44.5 15.2 40.5 17.8 C 36.5 21.5 21.5 21.5 17.5 17.8 C 14.5 15.2 14.5 10.8 17.5 8.2 Z"
                 fill="none" stroke="url(#voluteBevelGrad)" stroke-width="0.9" />
@@ -162,20 +147,20 @@
                 fill="url(#voluteGradH)" stroke="#64748b" stroke-width="0.8" />
           <path d="M 20 9 C 23.5 6.2 34.5 6.2 38 9" stroke="#94a3b8" stroke-width="0.5" fill="none" opacity="0.6" />
 
-          <!-- 4. Pipeline Mounting Flanges with Hex Studs -->
-          <!-- Left Discharge Flange -->
+          <!-- 4. Pipeline Mounting Flanges with Hex Studs (Class 600 High-Pressure Standard) -->
+          <!-- Left Discharge Flange (To Boiler Economizer) -->
           <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="comp-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
           <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="compressor-nozzle-orifice" id="compressorNozzleOrifice" x="-0.5" y="10.5" width="2" height="3" rx="0.6" fill="#00f2fe" />
 
-          <!-- Right Suction Flange -->
+          <!-- Right Suction Flange (From Condenser Hotwell / Deaerator) -->
           <rect x="54.2" y="7" width="2.8" height="10" rx="0.8" class="comp-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
           <circle cx="55.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <circle cx="55.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="compressor-suction-orifice" id="compressorSuctionOrifice" x="56.5" y="10.5" width="2" height="3" rx="0.6" fill="#00f2fe" />
 
-          <!-- 5. Volute Peripheral Fastener Bolts (Hex style) -->
+          <!-- 5. Volute Peripheral Fastener Studs & Mechanical Packing Gland -->
           <circle cx="21" cy="9" r="0.65" fill="#cbd5e1" stroke="#334155" stroke-width="0.25" />
           <circle cx="37" cy="9" r="0.65" fill="#cbd5e1" stroke="#334155" stroke-width="0.25" />
           <circle cx="21" cy="15" r="0.65" fill="#cbd5e1" stroke="#334155" stroke-width="0.25" />
@@ -183,16 +168,21 @@
           <circle cx="29" cy="4.5" r="0.5" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="29" cy="19.5" r="0.5" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
 
-          <!-- 6. Impeller Inspection Chamber Eye (Transparent Viewport with Beveled Ring) -->
+          <!-- Mechanical Shaft Seal Housing & Flush Water Line -->
+          <line x1="39" y1="10" x2="41" y2="10" stroke="#94a3b8" stroke-width="0.5" />
+          <line x1="39" y1="14" x2="41" y2="14" stroke="#94a3b8" stroke-width="0.5" />
+
+          <!-- 6. Impeller Inspection Chamber Eye & Stationary Diffuser Guide Ring -->
           <circle cx="29" cy="12" r="7.2" class="comp-eye-outer" fill="#1e293b" stroke="#64748b" stroke-width="0.6" />
           <circle cx="29" cy="12" r="6.8" class="comp-eye-bg" fill="#090d16" stroke="#334155" stroke-width="0.8" />
+          <!-- Stationary Diffuser Vane Ring -->
           <circle cx="29" cy="12" r="6.3" fill="none" stroke="rgba(0, 242, 254, 0.4)" stroke-width="0.5" stroke-dasharray="1.5 1" />
           <path d="M 24.5 9.5 A 6 6 0 0 1 33.5 9.5" stroke="#ffffff" stroke-width="0.4" fill="none" opacity="0.35" />
 
-          <!-- 7. HIGH-SPEED ROTATING CENTRIFUGAL IMPELLER -->
+          <!-- 7. HIGH-PRESSURE FEEDWATER CENTRIFUGAL IMPELLER (Enclosed Shrouded Impeller) -->
           <g class="compressor-impeller-group" id="compressorImpellerGroup" transform="translate(29, 12)">
             <circle cx="0" cy="0" r="1.8" class="impeller-hub-disc" fill="#38bdf8" stroke="#0284c7" stroke-width="0.3" />
-            <!-- 8 Aerodynamic Backward-Curved Blades with leading-edge bevel -->
+            <!-- 8 Hydrodynamic Backward-Curved High-Head Blades -->
             <path class="impeller-blades-curve"
                   d="M 0 -1.8 C 1 -3.2, 2.5 -4.5, 4.8 -4.2 C 3.6 -3.4, 2.2 -2.6, 1.3 -1.4 Z
                      M 1.2 -1.2 C 2.6 -1.4, 4.5 -1.2, 5.5 0.6 C 4.5 0.4, 3.1 0.2, 1.7 -0.4 Z
@@ -203,17 +193,17 @@
                      M -1.8 0 C -3.2 -1, -4.5 -2.5, -4.2 -4.8 C -3.4 -3.6, -2.6 -2.2, -1.4 -1.3 Z
                      M -1.2 -1.2 C -1.4 -2.6, -1.2 -4.5, 0.6 -5.5 C 0.4 -4.5, 0.2 -3.1, -0.4 -1.7 Z"
                   fill="rgba(0, 242, 254, 0.45)" stroke="#00f2fe" stroke-width="0.55" stroke-linejoin="round" />
-            <!-- Hexagonal Nose Cone / Spinner Nut -->
+            <!-- Heavy Drive Shaft Hub Nut -->
             <polygon points="0,-0.9 0.8,-0.45 0.8,0.45 0,0.9 -0.8,0.45 -0.8,-0.45" fill="#ffffff" stroke="#94a3b8" stroke-width="0.2" />
             <circle cx="0" cy="0" r="0.3" fill="#0284c7" />
           </g>
 
-          <!-- 8. HIGH-PRECISION CALIBRATED INDUSTRIAL MANOMETER -->
+          <!-- 8. HIGH-PRESSURE FEEDWATER DISCHARGE MANOMETER (0 to 160 bar) -->
           <g class="compressor-gauge-unit" transform="translate(43, 6.5)">
             <circle cx="0" cy="0" r="4.7" class="gauge-bezel-outer" fill="#334155" />
             <circle cx="0" cy="0" r="4.5" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.7" />
             <circle cx="0" cy="0" r="3.7" class="gauge-dial-face" fill="#1e293b" />
-            <!-- Scale Arc Zones: Green (Normal) & Red (Overboost) -->
+            <!-- Scale Arc Zones: Green Nominal Head (0-100 bar) & Amber/Red Overpressure (100-160 bar) -->
             <path d="M -2.4 -1.6 A 3.2 3.2 0 0 1 1.2 -2.5" stroke="#10b981" stroke-width="0.75" fill="none" stroke-linecap="round" />
             <path d="M 1.2 -2.5 A 3.2 3.2 0 0 1 2.8 0" stroke="#ef4444" stroke-width="0.75" fill="none" stroke-linecap="round" />
             <!-- Dial Graduation Tick Marks -->
@@ -235,15 +225,15 @@
             </g>
           </g>
 
-          <!-- 9. Stamped Cast Iron Serial/Type Plate -->
+          <!-- 9. Stamped Cast Iron BFP Nameplate -->
           <rect x="23" y="19" width="12" height="1.8" rx="0.3" class="comp-nameplate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
           <text x="29" y="20.3" font-family="monospace" font-size="1.3" font-weight="bold" fill="#94a3b8" text-anchor="middle">PUMP</text>
         </svg>
       </div>
     </div>
 
-    <!-- In-Line Industrial Schematic Steam Boiler & Superheater Unit (Downstream in top conduit path) -->
-    <div class="inline-perimeter-boiler" id="mechBoilerUnit" role="button" tabindex="0" title="دیگ بخار و سوپرهیتر صنعتی شماتیک: تبدیل آب پمپ به بخار داغ سوپرهیت (Industrial In-Line Steam Boiler: Superheats fluid from pump)">
+    <!-- In-Line Industrial Utility Boiler & Superheater Unit (Downstream in top conduit path) -->
+    <div class="inline-perimeter-boiler inline-top-unit" id="mechBoilerUnit" role="button" tabindex="0" title="بویلر واترتیوب نیروگاهی (Utility Water-Tube Boiler & Superheater): درام بخار، لوله‌های پایین‌آورنده، دیواره‌های آبی، سوپرهیتر و مشعل احتراق">
       <div class="boiler-detailed-housing">
         <svg class="boiler-detailed-svg" id="boilerDetailedSvg" viewBox="0 0 78 28" width="78" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -263,74 +253,73 @@
               <stop offset="100%" stop-color="#94a3b8" />
             </linearGradient>
             <!-- Furnace Fire Glow Radial Gradient -->
-            <radialGradient id="furnaceFireGrad" cx="39" cy="12.5" r="14" gradientUnits="userSpaceOnUse">
+            <radialGradient id="furnaceFireGrad" cx="39" cy="13" r="14" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#ffffff" />
               <stop offset="25%" stop-color="#ffea00" />
               <stop offset="55%" stop-color="#ff5500" />
               <stop offset="85%" stop-color="#b91c1c" />
               <stop offset="100%" stop-color="#000000" stop-opacity="0.85" />
             </radialGradient>
-            <!-- Steam Dome Gradient -->
-            <linearGradient id="boilerDomeGrad" x1="33" y1="1" x2="45" y2="5" gradientUnits="userSpaceOnUse">
+            <!-- Utility Steam Drum Gradient -->
+            <linearGradient id="steamDrumGrad" x1="28" y1="1" x2="50" y2="5.5" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#64748b" />
-              <stop offset="50%" stop-color="#334155" />
+              <stop offset="35%" stop-color="#94a3b8" />
+              <stop offset="70%" stop-color="#334155" />
               <stop offset="100%" stop-color="#1e293b" />
-            </linearGradient>
-            <linearGradient id="boilerDomeGradLight" x1="33" y1="1" x2="45" y2="5" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="50%" stop-color="#e2e8f0" />
-              <stop offset="100%" stop-color="#94a3b8" />
             </linearGradient>
           </defs>
 
           <!-- 1. Horizontal In-Line Conduit Pipes (centerline y = 12, matching top rail) -->
-          <!-- Left Outlet Pipe (Superheated steam to turbine) -->
+          <!-- Left Main Steam Outlet Pipe (Superheated steam to HP turbine) -->
           <path class="boiler-pipe-left" d="M 1 9.5 L 16 8.5 L 16 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="1" y1="10.8" x2="16" y2="10.2" stroke="#ff8c00" stroke-width="0.5" opacity="0.75" />
-          <!-- Right Inlet Pipe (from compressor pump) -->
+          <line x1="1" y1="10.8" x2="16" y2="10.2" stroke="#ff8c00" stroke-width="0.5" opacity="0.85" />
+          <!-- Right Economizer Inlet Pipe (from feedwater pump) -->
           <path class="boiler-pipe-right" d="M 62 8.5 L 77 9.5 L 77 14.5 L 62 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="62" y1="10.2" x2="77" y2="10.8" stroke="#00f2fe" stroke-width="0.5" opacity="0.75" />
+          <line x1="62" y1="10.2" x2="77" y2="10.8" stroke="#00f2fe" stroke-width="0.5" opacity="0.85" />
 
-          <!-- 2. Left Outlet Flange (Superheated Steam Exit Port) -->
+          <!-- 2. Left Main Steam Outlet Flange (Superheated Steam Exit) -->
           <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="boiler-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
           <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="boiler-outlet-orifice" id="boilerOutletOrifice" x="-0.5" y="10.5" width="2" height="3" rx="0.6" fill="#ff6a00" />
 
-          <!-- 3. Right Inlet Flange (Receives pressurized water from pump) -->
+          <!-- 3. Right Economizer Inlet Flange (Receives pressurized water from pump) -->
           <rect x="74.2" y="7" width="2.8" height="10" rx="0.8" class="boiler-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
           <circle cx="75.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <circle cx="75.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="boiler-inlet-orifice" id="boilerInletOrifice" x="76.5" y="10.5" width="2" height="3" rx="0.6" fill="#00f2fe" />
 
-          <!-- 4. Exhaust Flue Chimney Stack with Heavy Lip -->
-          <rect x="19" y="1.2" width="5.5" height="4.5" rx="0.5" class="boiler-chimney" fill="#1e293b" stroke="#64748b" stroke-width="0.5" />
-          <line x1="20.5" y1="1.5" x2="20.5" y2="5" stroke="#475569" stroke-width="0.4" />
-          <rect x="18" y="0.5" width="7.5" height="1.2" rx="0.4" class="boiler-chimney-lip" fill="#475569" stroke="#64748b" stroke-width="0.3" />
+          <!-- 4. Exhaust Flue Stack / Chimney with Stiffener Ribs -->
+          <rect x="18.5" y="1" width="5.5" height="4.5" rx="0.4" class="boiler-chimney" fill="#1e293b" stroke="#64748b" stroke-width="0.5" />
+          <line x1="18.5" y1="2.5" x2="24" y2="2.5" stroke="#475569" stroke-width="0.4" />
+          <rect x="17.5" y="0.3" width="7.5" height="1.1" rx="0.3" class="boiler-chimney-lip" fill="#475569" stroke="#64748b" stroke-width="0.3" />
           <!-- Chimney Heat Shimmer Plume -->
           <g class="chimney-steam-plume">
-            <path class="boiler-plume-path" d="M 21.7 -0.5 Q 20.5 -2.5 22 -4 Q 23.5 -5.5 22 -7" stroke="rgba(255,180,100,0.6)" stroke-width="0.8" fill="none" stroke-linecap="round" />
+            <path class="boiler-plume-path" d="M 21.2 -0.5 Q 20 -2.5 21.5 -4 Q 23 -5.5 21.5 -7" stroke="rgba(255,180,100,0.6)" stroke-width="0.8" fill="none" stroke-linecap="round" />
           </g>
 
-          <!-- 5. Top Steam Drum / Dome -->
-          <path class="boiler-steam-dome" d="M 33 5 C 33 1.6 45 1.6 45 5 Z" fill="url(#boilerDomeGrad)" stroke="#64748b" stroke-width="0.6" />
-          <line x1="35" y1="3" x2="43" y2="3" stroke="#94a3b8" stroke-width="0.35" opacity="0.6" />
-          <!-- Safety Pressure Relief Valve (Brass assembly with spring) -->
-          <rect x="37.8" y="1.2" width="2.4" height="2" rx="0.3" class="boiler-safety-brass" fill="#d97706" stroke="#b45309" stroke-width="0.2" />
-          <line x1="39" y1="1.2" x2="39" y2="-1.2" stroke="#f59e0b" stroke-width="0.8" />
-          <line x1="39" y1="-1.2" x2="42.5" y2="-1.2" stroke="#fbbf24" stroke-width="0.6" />
-          <circle cx="39" cy="-1.2" r="0.6" fill="#ffffff" stroke="#d97706" stroke-width="0.2" />
-          <circle class="boiler-safety-steam-puff" id="boilerSafetySteamPuff" cx="42.8" cy="-1.2" r="1.2" fill="rgba(255,255,255,0)" />
+          <!-- 5. Utility Power-Plant Steam Drum (Separates Saturated Steam from Saturated Liquid) -->
+          <rect x="29" y="1.2" width="20" height="4.2" rx="2.1" fill="url(#steamDrumGrad)" stroke="#64748b" stroke-width="0.6" />
+          <line x1="31" y1="2.2" x2="47" y2="2.2" stroke="#ffffff" stroke-width="0.35" opacity="0.45" />
+          <!-- Downcomer Heavy Circulation Pipes (Drum to Lower Waterwall Headers) -->
+          <line x1="31.5" y1="5.4" x2="31.5" y2="8" stroke="#38bdf8" stroke-width="0.8" />
+          <line x1="46.5" y1="5.4" x2="46.5" y2="8" stroke="#38bdf8" stroke-width="0.8" />
+          <!-- Spring-Loaded Safety Relief Valve on Drum Top -->
+          <rect x="38" y="0.2" width="2" height="1.2" rx="0.2" class="boiler-safety-brass" fill="#d97706" stroke="#b45309" stroke-width="0.2" />
+          <line x1="39" y1="0.2" x2="39" y2="-1.4" stroke="#f59e0b" stroke-width="0.7" />
+          <line x1="39" y1="-1.4" x2="42.5" y2="-1.4" stroke="#fbbf24" stroke-width="0.5" />
+          <circle cx="39" cy="-1.4" r="0.5" fill="#ffffff" stroke="#d97706" stroke-width="0.2" />
+          <circle class="boiler-safety-steam-puff" id="boilerSafetySteamPuff" cx="42.8" cy="-1.4" r="1.2" fill="rgba(255,255,255,0)" />
 
-          <!-- 6. Main Cylindrical Boiler Drum Shell with Welded Bands -->
-          <rect x="16" y="5" width="46" height="15" rx="5" class="boiler-drum-shell" fill="url(#boilerDrumGrad)" stroke="#64748b" stroke-width="0.8" />
+          <!-- 6. Water-Cooled Furnace Enclosure & Structural Buckstays -->
+          <rect x="16" y="5" width="46" height="15" rx="4" class="boiler-drum-shell" fill="url(#boilerDrumGrad)" stroke="#64748b" stroke-width="0.8" />
           <!-- Specular Cylindrical Shell Highlight -->
           <line x1="18" y1="6.8" x2="60" y2="6.8" stroke="#ffffff" stroke-width="0.5" opacity="0.4" />
-          <!-- Reinforced Girth Straps / Barrel Rings -->
+          <!-- Reinforced Girth Buckstay Columns -->
           <line x1="24" y1="5" x2="24" y2="20" stroke="#334155" stroke-width="0.8" />
           <line x1="54" y1="5" x2="54" y2="20" stroke="#334155" stroke-width="0.8" />
 
-          <!-- Seam Fastener Hex Rivets -->
+          <!-- Casing Assembly Hex Stud Bolts -->
           <circle cx="18" cy="8" r="0.55" class="boiler-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="18" cy="12.5" r="0.55" class="boiler-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="18" cy="17" r="0.55" class="boiler-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
@@ -338,32 +327,37 @@
           <circle cx="60" cy="12.5" r="0.55" class="boiler-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="60" cy="17" r="0.55" class="boiler-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
 
-          <!-- 7. Central Firebox & Water-Tube Chamber Viewport -->
-          <rect x="25" y="8" width="28" height="9" rx="2.5" class="boiler-firebox" fill="#090a12" stroke="#334155" stroke-width="0.7" />
-          <rect x="25.5" y="8.5" width="27" height="8" rx="2" fill="none" stroke="#1e293b" stroke-width="0.4" />
+          <!-- 7. Furnace Combustion Chamber (Waterwall Tubes + Superheater Serpentine Coils) -->
+          <rect x="25" y="8" width="28" height="9" rx="2" class="boiler-firebox" fill="#090a12" stroke="#334155" stroke-width="0.7" />
+          <rect x="25.5" y="8.5" width="27" height="8" rx="1.5" fill="none" stroke="#1e293b" stroke-width="0.4" />
 
-          <!-- Internal Fire-Tubes Grid -->
-          <line x1="26.5" y1="10" x2="51.5" y2="10" stroke="#475569" stroke-width="0.45" stroke-dasharray="2 1" />
-          <line x1="26.5" y1="12.5" x2="51.5" y2="12.5" stroke="#475569" stroke-width="0.45" stroke-dasharray="2 1" />
-          <line x1="26.5" y1="15" x2="51.5" y2="15" stroke="#475569" stroke-width="0.45" stroke-dasharray="2 1" />
+          <!-- Superheater Coils (Left Side - High Temp Steam Passage) -->
+          <path d="M 26.5 9.5 L 32 9.5 Q 33 10.5 32 11.5 L 26.5 11.5 Q 25.5 12.5 26.5 13.5 L 32 13.5"
+                fill="none" stroke="#f59e0b" stroke-width="0.5" stroke-linecap="round" />
 
-          <!-- High-Intensity Combustion Flames -->
+          <!-- Economizer / Waterwall Evaporator Vertical Tubes (Right Side) -->
+          <line x1="46" y1="9" x2="46" y2="16" stroke="#00f2fe" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
+          <line x1="48" y1="9" x2="48" y2="16" stroke="#00f2fe" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
+          <line x1="50" y1="9" x2="50" y2="16" stroke="#38bdf8" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
+
+          <!-- High-Intensity Burner Nozzle & Combustion Flames -->
+          <circle cx="39" cy="15.5" r="1.1" fill="#334155" stroke="#64748b" stroke-width="0.3" />
           <g class="boiler-furnace-flames" id="boilerFurnaceFlames">
             <!-- Background Thermal Aura -->
-            <ellipse cx="39" cy="12.5" rx="11.5" ry="3.8" fill="url(#furnaceFireGrad)" opacity="0.95" />
+            <ellipse cx="39" cy="13" rx="11" ry="3.8" fill="url(#furnaceFireGrad)" opacity="0.95" />
             <!-- Dynamic Flame Tongues -->
             <path class="flame-tongue flame-t1"
-                  d="M 28 15.5 Q 31 9.5 33 13.5 Q 35 8 39 12.5 Q 43 8 45 13.5 Q 47 9.5 50 15.5 Z"
+                  d="M 29 15.5 Q 32 9.5 34 13.5 Q 36 8 39 12.5 Q 42 8 44 13.5 Q 46 9.5 49 15.5 Z"
                   fill="#ffea00" />
             <path class="flame-tongue flame-t2"
-                  d="M 31 15.5 Q 34 11 36 13.5 Q 39 9 41 13.5 Q 44 11 47 15.5 Z"
+                  d="M 32 15.5 Q 35 11 37 13.5 Q 39 9 41 13.5 Q 43 11 46 15.5 Z"
                   fill="#ff4500" />
             <path class="flame-tongue flame-t3"
-                  d="M 34 15.5 Q 37 12 39 12.5 Q 41 12 44 15.5 Z"
+                  d="M 35 15.5 Q 37 12 39 12.5 Q 41 12 43 15.5 Z"
                   fill="#ffffff" />
           </g>
 
-          <!-- 8. Vertical Sight Glass / Water-Level Tube with Brass Couplings -->
+          <!-- 8. Drum Water-Level Column / Sight Glass with Isolation Valves -->
           <rect x="20.5" y="7.5" width="2.5" height="10" rx="1.2" class="boiler-sight-glass" fill="#0f172a" stroke="#64748b" stroke-width="0.5" />
           <rect x="20.2" y="7.2" width="3.1" height="1" rx="0.2" fill="#d97706" />
           <rect x="20.2" y="16.8" width="3.1" height="1" rx="0.2" fill="#d97706" />
@@ -371,7 +365,7 @@
           <circle cx="21.7" cy="13" r="0.35" class="boiler-sight-bubble" fill="#ffffff" />
           <circle cx="21.7" cy="15" r="0.3" class="boiler-sight-bubble" fill="#ffffff" />
 
-          <!-- 9. Calibrated Industrial Pyrometer (Temperature Dial 0 to 400°C) -->
+          <!-- 9. Calibrated Industrial Pyrometer (Temperature Dial 0 to 600°C) -->
           <g class="boiler-temp-gauge-group" transform="translate(56, 6.5)">
             <circle cx="0" cy="0" r="4.7" class="gauge-bezel-outer" fill="#334155" />
             <circle cx="0" cy="0" r="4.5" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.7" />
@@ -400,14 +394,14 @@
           </g>
 
           <!-- 10. Stamped Boiler Rating Plate -->
-          <rect x="33" y="19" width="12" height="2" rx="0.4" class="boiler-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.3" />
-          <text x="39" y="20.5" font-family="monospace" font-size="1.4" font-weight="bold" fill="#94a3b8" text-anchor="middle">BOILER</text>
+          <rect x="31" y="19" width="16" height="2" rx="0.4" class="boiler-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.3" />
+          <text x="39" y="20.5" font-family="monospace" font-size="1.3" font-weight="bold" fill="#94a3b8" text-anchor="middle">BOILER</text>
         </svg>
       </div>
     </div>
 
-    <!-- In-Line Industrial Schematic Steam Turbine & Generator Unit (Downstream from boiler to top-left corner) -->
-    <div class="inline-perimeter-turbine" id="mechTurbineUnit" role="button" tabindex="0" title="توربین و ژنراتور بخار صنعتی شماتیک: تبدیل انرژی جنبشی و حرارتی بخار به چرخش و برق (Industrial Steam Turbine & Generator)">
+    <!-- In-Line Industrial Utility Multi-Stage Steam Turbine & Turbogenerator (Downstream from boiler to top-left corner) -->
+    <div class="inline-perimeter-turbine inline-top-unit" id="mechTurbineUnit" role="button" tabindex="0" title="توربین بخار چندمرحله‌ای و ژنراتور سنکرون نیروگاهی (Utility Multi-Stage Steam Turbine & Turbogenerator): شیر کنترل گاورنر، نازل‌های ورودی، روتور HP/IP/LP، دیافراگم‌های استاتور، سیلینگ‌های لابیرنت و یاتاقان‌های ژورنال">
       <div class="turbine-detailed-housing">
         <svg class="turbine-detailed-svg" id="turbineDetailedSvg" viewBox="0 0 74 28" width="74" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -451,12 +445,12 @@
           </defs>
 
           <!-- 1. Horizontal Conduit Pipes (centerline y = 12, perfectly aligned with top rail) -->
-          <!-- Left Outlet Pipe (exhaust vapor to condenser) -->
+          <!-- Left LP Exhaust Outlet Pipe (exhaust vapor to surface condenser) -->
           <path class="turbine-pipe-left" d="M 1 9.5 L 10 8.5 L 10 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="1" y1="10.8" x2="10" y2="10.2" stroke="#38bdf8" stroke-width="0.5" opacity="0.75" />
-          <!-- Right High-Pressure Steam Inlet Pipe (from Boiler outlet) -->
+          <line x1="1" y1="10.8" x2="10" y2="10.2" stroke="#38bdf8" stroke-width="0.5" opacity="0.85" />
+          <!-- Right HP Steam Inlet Pipe (from Boiler superheater outlet) -->
           <path class="turbine-pipe-right" d="M 58 8.5 L 73 9.5 L 73 14.5 L 58 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="58" y1="10.2" x2="73" y2="10.8" stroke="#ff8c00" stroke-width="0.5" opacity="0.75" />
+          <line x1="58" y1="10.2" x2="73" y2="10.8" stroke="#ff8c00" stroke-width="0.5" opacity="0.85" />
 
           <!-- 2. Left Exhaust Outlet Flange -->
           <rect x="1" y="7" width="2.6" height="10" rx="0.8" class="turbine-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
@@ -464,38 +458,48 @@
           <circle cx="2.3" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="turbine-outlet-orifice" id="turbineOutletOrifice" x="-0.5" y="10.5" width="2" height="3" rx="0.6" fill="#38bdf8" />
 
-          <!-- 3. Right HP Superheated Steam Inlet Flange -->
+          <!-- 3. Right HP Superheated Steam Inlet Flange with Steam Strainer -->
           <rect x="70.4" y="7" width="2.6" height="10" rx="0.8" class="turbine-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
           <circle cx="71.7" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <circle cx="71.7" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="turbine-inlet-orifice" id="turbineInletOrifice" x="72.5" y="10.5" width="2" height="3" rx="0.6" fill="#ff6a00" />
 
-          <!-- 4. Generator / Alternator Housing (Left Side - Coupled to shaft) -->
-          <rect x="7" y="6" width="16" height="14" rx="2.5" class="gen-stator-shell" fill="url(#genStatorGrad)" stroke="#64748b" stroke-width="0.7" />
-          <!-- Generator Copper Stator Slot Bars -->
-          <line x1="9" y1="8" x2="9" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.8" />
-          <line x1="11.5" y1="8" x2="11.5" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.8" />
-          <line x1="14" y1="8" x2="14" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.8" />
-          <line x1="16.5" y1="8" x2="16.5" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.8" />
+          <!-- 4. Governor Control Valve Actuator & HP Nozzle Chest on top of HP inlet -->
+          <rect x="54" y="2.5" width="4.5" height="4.5" rx="0.6" fill="#334155" stroke="#64748b" stroke-width="0.4" />
+          <line x1="56.2" y1="0.8" x2="56.2" y2="2.5" stroke="#f59e0b" stroke-width="0.8" />
+          <circle cx="56.2" cy="0.8" r="0.9" fill="#d97706" stroke="#b45309" stroke-width="0.2" />
+          <!-- High-Pressure Steam Nozzle Box -->
+          <path d="M 55 7 L 57 7.5 L 57 10 L 55 9 Z" fill="#f59e0b" opacity="0.8" />
 
-          <!-- Generator Output Voltage Micro-LED and Terminal Block -->
+          <!-- 5. Turbogenerator Housing (Synchronous 3-Phase Alternator - Left Side) -->
+          <rect x="7" y="6" width="16" height="14" rx="2.5" class="gen-stator-shell" fill="url(#genStatorGrad)" stroke="#64748b" stroke-width="0.7" />
+          <!-- Generator Copper Stator Slot Windings -->
+          <line x1="9" y1="8" x2="9" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.85" />
+          <line x1="11.5" y1="8" x2="11.5" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.85" />
+          <line x1="14" y1="8" x2="14" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.85" />
+          <line x1="16.5" y1="8" x2="16.5" y2="18" stroke="#d97706" stroke-width="0.6" opacity="0.85" />
+
+          <!-- Generator Output Voltage Micro-LED and Exciter Terminal Block -->
           <circle cx="20" cy="8.5" r="1.3" fill="#0f172a" stroke="#334155" stroke-width="0.4" />
           <circle class="gen-power-led" id="genPowerLed" cx="20" cy="8.5" r="0.85" fill="#10b981" />
           <!-- Stamped Generator Rating Plate -->
           <rect x="9" y="14" width="8" height="2" rx="0.3" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
           <text x="13" y="15.5" font-family="monospace" font-size="1.3" font-weight="bold" fill="#94a3b8" text-anchor="middle">GEN</text>
 
-          <!-- 5. Flexible Shaft Coupling & Bearing Pedestal with Oil Sump Sight -->
+          <!-- 6. Heavy Shaft Flexible Coupling & Journal Bearing Pedestal with Oil Sump Sight -->
           <rect x="23" y="9.5" width="4" height="6.5" rx="0.8" class="turbine-coupling" fill="#1e293b" stroke="#475569" stroke-width="0.6" />
           <line x1="25" y1="9.5" x2="25" y2="16" stroke="#00f2fe" stroke-width="0.6" opacity="0.65" />
           <circle cx="25" cy="14" r="0.5" fill="#f59e0b" opacity="0.8" />
+          <!-- Labyrinth Gland Steam Seal Rings -->
+          <line x1="27" y1="10" x2="27" y2="14" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="0.8 0.6" />
+          <line x1="56.5" y1="10" x2="56.5" y2="14" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="0.8 0.6" />
 
-          <!-- 6. Conical Stepped Turbine Expansion Casing (Expanding right-to-left: HP to LP stage) -->
+          <!-- 7. Conical Stepped Turbine Expansion Casing (Expanding right-to-left: HP to LP stage) -->
           <polygon points="27,4 57,6.5 57,17.5 27,20" class="turbine-casing-shell" fill="url(#turbineCasingGrad)" stroke="#64748b" stroke-width="0.8" />
           <!-- Specular Conical Highlight -->
           <line x1="28" y1="5.5" x2="56" y2="7.5" stroke="#ffffff" stroke-width="0.4" opacity="0.4" />
 
-          <!-- Horizontal Split-Joint Flange Line -->
+          <!-- Horizontal Split-Joint Flange Line (for casing maintenance access) -->
           <line x1="27" y1="12" x2="57" y2="12" stroke="#64748b" stroke-width="0.6" stroke-dasharray="1.5 1" opacity="0.75" />
           <!-- Heavy Casing Assembly Stud Hex Bolts -->
           <circle cx="29" cy="5.6" r="0.5" class="turbine-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
@@ -507,16 +511,22 @@
           <circle cx="44" cy="17.2" r="0.5" class="turbine-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="52" cy="16.8" r="0.5" class="turbine-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
 
-          <!-- 7. Inspection Viewport & Multi-Stage Rotor Blading Chamber -->
+          <!-- 8. Inspection Viewport & Multi-Stage Rotor Blading Chamber -->
           <rect x="30" y="7.5" width="23" height="9" rx="2.5" class="turbine-rotor-chamber" fill="#090d16" stroke="#334155" stroke-width="0.7" />
           <rect x="30.5" y="8" width="22" height="8" rx="2" fill="none" stroke="#1e293b" stroke-width="0.4" />
+
+          <!-- Stationary Stator Diaphragm Guide Nozzles between stages -->
+          <line x1="47" y1="8" x2="47" y2="10.5" stroke="#64748b" stroke-width="0.5" />
+          <line x1="47" y1="13.5" x2="47" y2="16" stroke="#64748b" stroke-width="0.5" />
+          <line x1="38.5" y1="8" x2="38.5" y2="10.5" stroke="#64748b" stroke-width="0.5" />
+          <line x1="38.5" y1="13.5" x2="38.5" y2="16" stroke="#64748b" stroke-width="0.5" />
 
           <!-- Multi-Stage Turbine Rotor Blades Assembly (High-speed dynamic spinning group) -->
           <g class="turbine-rotor-group" id="turbineRotorGroup">
             <!-- Central Driven Shaft Axis -->
             <line x1="29" y1="12" x2="54" y2="12" stroke="#e2e8f0" stroke-width="0.9" />
 
-            <!-- Stage 1 Rotor Disc (High Pressure - Right side, smaller diameter) -->
+            <!-- Stage 1 Rotor Disc (High Pressure - Right side, small diameter short impulse blades) -->
             <g class="stage-disc stage-1" transform="translate(51, 12)">
               <line x1="0" y1="-2.8" x2="0" y2="2.8" stroke="#38bdf8" stroke-width="0.9" stroke-linecap="round" />
               <line x1="-2" y1="-2" x2="2" y2="2" stroke="#38bdf8" stroke-width="0.7" stroke-linecap="round" />
@@ -524,7 +534,7 @@
               <circle cx="0" cy="0" r="0.8" fill="#ffffff" stroke="#0284c7" stroke-width="0.25" />
             </g>
 
-            <!-- Stage 2 Rotor Disc (Intermediate Pressure - Middle) -->
+            <!-- Stage 2 Rotor Disc (Intermediate Pressure - Middle reaction blades) -->
             <g class="stage-disc stage-2" transform="translate(43, 12)">
               <line x1="0" y1="-3.4" x2="0" y2="3.4" stroke="#00f2fe" stroke-width="1.0" stroke-linecap="round" />
               <line x1="-2.4" y1="-2.4" x2="2.4" y2="2.4" stroke="#00f2fe" stroke-width="0.8" stroke-linecap="round" />
@@ -532,7 +542,7 @@
               <circle cx="0" cy="0" r="0.9" fill="#ffffff" stroke="#0284c7" stroke-width="0.25" />
             </g>
 
-            <!-- Stage 3 Rotor Disc (Low Pressure - Left, largest expansion diameter) -->
+            <!-- Stage 3 Rotor Disc (Low Pressure - Left, largest expansion diameter twisted reaction blades) -->
             <g class="stage-disc stage-3" transform="translate(34, 12)">
               <line x1="0" y1="-4.0" x2="0" y2="4.0" stroke="#38bdf8" stroke-width="1.1" stroke-linecap="round" />
               <line x1="-2.8" y1="-2.8" x2="2.8" y2="2.8" stroke="#38bdf8" stroke-width="0.85" stroke-linecap="round" />
@@ -541,12 +551,12 @@
             </g>
           </g>
 
-          <!-- Dynamic Plasma Arc Vortex across blading (activated when steam expands) -->
+          <!-- Dynamic Steam Vortex across blading (activated when steam expands) -->
           <g class="turbine-steam-glow" id="turbineSteamGlow" opacity="0.25">
             <ellipse cx="42" cy="12" rx="10" ry="3.5" fill="url(#steamExpansionGrad)" />
           </g>
 
-          <!-- 8. Precision High-RPM Tachometer / Shaft Speed Indicator (0 to 12,000 RPM) -->
+          <!-- 9. Precision High-RPM Tachometer / Shaft Speed Indicator (0 to 12,000 RPM) -->
           <g class="turbine-tacho-group" transform="translate(62, 5.5)">
             <circle cx="0" cy="0" r="4.6" class="gauge-bezel-outer" fill="#334155" />
             <circle cx="0" cy="0" r="4.3" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.7" />
@@ -574,15 +584,15 @@
             </g>
           </g>
 
-          <!-- 9. Stamped Industrial Turbine Rating Plate -->
+          <!-- 10. Stamped Industrial Turbine Rating Plate -->
           <rect x="33" y="19" width="15" height="2" rx="0.4" class="turbine-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.3" />
           <text x="40.5" y="20.5" font-family="monospace" font-size="1.4" font-weight="bold" fill="#94a3b8" text-anchor="middle">TURBINE</text>
         </svg>
       </div>
     </div>
 
-    <!-- In-Line Industrial Schematic Surface Condenser & Hotwell Unit (Downstream from turbine to top-left corner) -->
-    <div class="inline-perimeter-condenser" id="mechCondenserUnit" role="button" tabindex="0" title="کندانسور و هات‌ول صنعتی شماتیک: تقطیر و خنک‌کاری بخار توربین به آب مایع فوق‌سرد (Industrial Surface Condenser & Hotwell)">
+    <!-- In-Line Industrial Utility Power-Plant Surface Condenser & Hotwell Unit (Downstream from turbine to top-left corner) -->
+    <div class="inline-perimeter-condenser inline-top-unit" id="mechCondenserUnit" role="button" tabindex="0" title="کندانسور سطحی نیروگاهی (Power Plant Surface Condenser & Hotwell): تیوب شیت، دسته لوله‌های خنک‌کننده (Tube Bundle)، بافل‌های ضربه‌گیر بخار، محفظه تجمع میعانات (Hotwell) و وکیوم مانومتر">
       <div class="condenser-detailed-housing">
         <svg class="condenser-detailed-svg" id="condenserDetailedSvg" viewBox="0 0 74 28" width="74" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -616,15 +626,22 @@
               <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
               <stop offset="100%" stop-color="#0284c7" stop-opacity="0.95" />
             </linearGradient>
+
+            <!-- Circulating Water Box Gradient -->
+            <linearGradient id="waterBoxGrad" x1="9" y1="5" x2="15" y2="20" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#64748b" />
+              <stop offset="50%" stop-color="#334155" />
+              <stop offset="100%" stop-color="#1e293b" />
+            </linearGradient>
           </defs>
 
           <!-- 1. Horizontal Conduit Pipes (centerline y = 12, perfectly aligned with top rail) -->
-          <!-- Left Subcooled Liquid Condensate Outlet Pipe (to top-left corner / loop back to pump) -->
+          <!-- Left Subcooled Liquid Condensate Outlet Pipe (to condensate extraction pump / deaerator) -->
           <path class="condenser-pipe-left" d="M 1 9.5 L 9 9.5 L 9 14.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="1" y1="10.8" x2="9" y2="10.8" stroke="#00f2fe" stroke-width="0.5" opacity="0.8" />
-          <!-- Right Expanded Vapor Inlet Pipe (from Turbine exhaust) -->
+          <line x1="1" y1="10.8" x2="9" y2="10.8" stroke="#00f2fe" stroke-width="0.5" opacity="0.85" />
+          <!-- Right Expanded LP Vapor Inlet Pipe (from Turbine exhaust neck) -->
           <path class="condenser-pipe-right" d="M 64 9.5 L 73 9.5 L 73 14.5 L 64 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
-          <line x1="64" y1="10.8" x2="73" y2="10.8" stroke="#38bdf8" stroke-width="0.5" opacity="0.8" />
+          <line x1="64" y1="10.8" x2="73" y2="10.8" stroke="#38bdf8" stroke-width="0.5" opacity="0.85" />
 
           <!-- 2. Left Condensate Outlet Flange -->
           <rect x="1" y="7" width="2.6" height="10" rx="0.8" class="condenser-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
@@ -632,28 +649,37 @@
           <circle cx="2.3" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="condenser-outlet-orifice" id="condenserOutletOrifice" x="-0.5" y="10.5" width="2" height="3" rx="0.6" fill="#00f2fe" />
 
-          <!-- 3. Right Vapor Inlet Flange -->
+          <!-- 3. Right Vapor Inlet Flange (Exhaust Steam Neck) -->
           <rect x="70.4" y="7" width="2.6" height="10" rx="0.8" class="condenser-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
           <circle cx="71.7" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <circle cx="71.7" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
           <rect class="condenser-inlet-orifice" id="condenserInletOrifice" x="72.5" y="10.5" width="2" height="3" rx="0.6" fill="#38bdf8" />
 
-          <!-- 4. Heavy Cylindrical Condenser Shell Body with Welded Reinforcing Straps -->
+          <!-- 4. Water Box Ends & Heavy Cylindrical Condenser Shell Body -->
+          <!-- Circulating Cooling Water Inlet/Outlet Water-Box End Cover -->
+          <path d="M 9 6.5 Q 6.5 12.5 9 18.5 Z" fill="url(#waterBoxGrad)" stroke="#64748b" stroke-width="0.7" />
+          <!-- Heavy Cylindrical Shell Body -->
           <rect x="9" y="5" width="55" height="15" rx="3.5" class="condenser-shell" fill="url(#condenserShellGrad)" stroke="#64748b" stroke-width="0.8" />
           <!-- Specular Shell Cylindrical Highlight -->
           <line x1="11" y1="6.8" x2="62" y2="6.8" stroke="#ffffff" stroke-width="0.45" opacity="0.4" />
-          <!-- Shell Vertical Welded Stiffener Ribs -->
-          <line x1="17" y1="5" x2="17" y2="20" stroke="#334155" stroke-width="0.7" />
-          <line x1="57" y1="5" x2="57" y2="20" stroke="#334155" stroke-width="0.7" />
+          <!-- Tube Sheet Flanges (Fixed Tube Sheet Division Walls) -->
+          <line x1="15" y1="5" x2="15" y2="20" stroke="#94a3b8" stroke-width="0.8" />
+          <line x1="57" y1="5" x2="57" y2="20" stroke="#94a3b8" stroke-width="0.8" />
 
-          <!-- Casing Assembly Hex Stud Bolts -->
+          <!-- Casing Assembly Hex Stud Bolts & Tube Sheet Bolting -->
           <circle cx="12" cy="7" r="0.5" class="condenser-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
+          <circle cx="15" cy="8.5" r="0.4" fill="#e2e8f0" stroke="#334155" stroke-width="0.2" />
+          <circle cx="15" cy="12.5" r="0.4" fill="#e2e8f0" stroke="#334155" stroke-width="0.2" />
+          <circle cx="15" cy="16.5" r="0.4" fill="#e2e8f0" stroke="#334155" stroke-width="0.2" />
           <circle cx="23" cy="7" r="0.5" class="condenser-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="37" cy="7" r="0.5" class="condenser-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
           <circle cx="51" cy="7" r="0.5" class="condenser-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
+          <circle cx="57" cy="8.5" r="0.4" fill="#e2e8f0" stroke="#334155" stroke-width="0.2" />
+          <circle cx="57" cy="12.5" r="0.4" fill="#e2e8f0" stroke="#334155" stroke-width="0.2" />
+          <circle cx="57" cy="16.5" r="0.4" fill="#e2e8f0" stroke="#334155" stroke-width="0.2" />
           <circle cx="61" cy="7" r="0.5" class="condenser-rivet" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
 
-          <!-- 5. Dual Top Cooling Towers / Draft Exhaust Fans with Vent Louvers -->
+          <!-- 5. Dual Top Cooling Draft Vent Stacks with Impeller Fans -->
           <!-- Left Cooling Fan Hood & Impeller -->
           <rect x="18" y="1.5" width="10" height="4" rx="1" class="condenser-fan-hood" fill="#1e293b" stroke="#475569" stroke-width="0.6" />
           <line x1="19.5" y1="2.2" x2="26.5" y2="2.2" stroke="#334155" stroke-width="0.4" />
@@ -671,24 +697,27 @@
             <circle cx="0" cy="0" r="0.6" fill="#ffffff" stroke="#0284c7" stroke-width="0.2" />
           </g>
 
-          <!-- 6. Internal Tube-Bundle Matrix Chamber (Observation Grid) -->
-          <rect x="12" y="7.5" width="49" height="9" rx="2" class="condenser-tube-chamber" fill="#030712" stroke="#1e293b" stroke-width="0.7" />
+          <!-- 6. Internal Tube-Bundle Matrix Chamber (Two-Pass Shell and Tube Design) -->
+          <rect x="15" y="7.5" width="42" height="9" rx="1.5" class="condenser-tube-chamber" fill="#030712" stroke="#1e293b" stroke-width="0.7" />
 
-          <!-- Internal Chilled Tube Bundle Rows with Baffles -->
-          <g class="condenser-tube-matrix" opacity="0.65">
-            <!-- Horizontal cooling water tubes -->
-            <line x1="14" y1="9" x2="59" y2="9" stroke="#06b6d4" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
-            <line x1="14" y1="11" x2="59" y2="11" stroke="#00f2fe" stroke-width="0.55" stroke-dasharray="1.5 0.8" />
-            <line x1="14" y1="13" x2="59" y2="13" stroke="#38bdf8" stroke-width="0.55" stroke-dasharray="1.5 0.8" />
-            <line x1="14" y1="15" x2="59" y2="15" stroke="#0284c7" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
-            <!-- Vertical baffle partition plates -->
+          <!-- Steam Impingement Baffle Plate (Protects upper tubes from direct steam erosion) -->
+          <line x1="48" y1="8" x2="55" y2="8" stroke="#f59e0b" stroke-width="0.7" stroke-linecap="round" />
+
+          <!-- Internal Chilled Tube Bundle Rows with Support Plates -->
+          <g class="condenser-tube-matrix" opacity="0.7">
+            <!-- Multipass cooling water titanium/brass tubes -->
+            <line x1="16" y1="9" x2="55" y2="9" stroke="#06b6d4" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
+            <line x1="16" y1="11" x2="55" y2="11" stroke="#00f2fe" stroke-width="0.55" stroke-dasharray="1.5 0.8" />
+            <line x1="16" y1="13" x2="55" y2="13" stroke="#38bdf8" stroke-width="0.55" stroke-dasharray="1.5 0.8" />
+            <line x1="16" y1="15" x2="55" y2="15" stroke="#0284c7" stroke-width="0.45" stroke-dasharray="1.2 0.8" />
+            <!-- Vertical Tube Support Plates (Prevents tube vibration) -->
             <line x1="28" y1="7.8" x2="28" y2="16.2" stroke="#475569" stroke-width="0.6" />
-            <line x1="44" y1="7.8" x2="44" y2="16.2" stroke="#475569" stroke-width="0.6" />
+            <line x1="42" y1="7.8" x2="42" y2="16.2" stroke="#475569" stroke-width="0.6" />
           </g>
 
           <!-- Condenser Active Phase-Change Chill Glow -->
           <g class="condenser-chill-glow" id="condenserChillGlow" opacity="0.25">
-            <ellipse cx="36" cy="12" rx="22" ry="4" fill="url(#condenserChillGrad)" />
+            <ellipse cx="36" cy="12" rx="20" ry="4" fill="url(#condenserChillGrad)" />
           </g>
 
           <!-- 7. Sump / Hotwell Chamber with Liquid Condensate Level at Bottom -->
@@ -697,7 +726,7 @@
           <rect x="23" y="21.5" width="26" height="2.5" rx="0.8" fill="url(#hotwellWaterGrad)" />
           <line x1="23" y1="21.5" x2="49" y2="21.5" stroke="#a5f3fc" stroke-width="0.5" />
 
-          <!-- Dynamic Hotwell Condensate Bubbles -->
+          <!-- Dynamic Hotwell Condensate Bubbles & Droplets -->
           <circle cx="28" cy="22.5" r="0.4" fill="#ffffff" opacity="0.8" />
           <circle cx="36" cy="23.0" r="0.3" fill="#ffffff" opacity="0.9" />
           <circle cx="43" cy="22.3" r="0.35" fill="#ffffff" opacity="0.75" />
@@ -734,6 +763,488 @@
           <text x="37" y="19.4" font-family="monospace" font-size="1.4" font-weight="bold" fill="#94a3b8" text-anchor="middle">CONDENSER</text>
         </svg>
       </div>
+    </div>
+
+    <!-- ============================================================
+         BOTTOM RAIL: MECHANICAL MECHANISMS & POWERTRAIN SUITE
+         ============================================================ -->
+
+    <!-- Unit 5: Epicyclic Planetary Gearset (گیربکس خورشیدی سیاره‌ای) -->
+    <div class="inline-perimeter-gearbox inline-top-unit" id="mechGearboxUnit" role="button" tabindex="0" title="گیربکس سیاره‌ای خورشیدی (Epicyclic Planetary Gearset): دنده خورشیدی محرک، ۳ دنده سیاره‌ای هرزگرد، قفسه حامل بازویی، رینگ‌دنده داخلی، نسبت تبدیل i=3.55">
+      <div class="gearbox-detailed-housing">
+        <svg class="gearbox-detailed-svg" id="gearboxDetailedSvg" viewBox="0 0 76 28" width="76" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gearboxShellGrad" x1="16" y1="4" x2="60" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#475569" />
+              <stop offset="35%" stop-color="#334155" />
+              <stop offset="70%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
+            <linearGradient id="gearSteelGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#94a3b8" />
+              <stop offset="50%" stop-color="#64748b" />
+              <stop offset="100%" stop-color="#334155" />
+            </linearGradient>
+          </defs>
+
+          <!-- Conduit pipes left & right at y=12 -->
+          <path class="gearbox-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="gearbox-pipe-right" d="M 62 8.5 L 75 9.5 L 75 14.5 L 62 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="62" y1="12" x2="75" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="gearbox-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <rect x="72.2" y="7" width="2.8" height="10" rx="0.8" class="gearbox-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="73.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="73.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+
+          <!-- Main Gearbox Outer Housing -->
+          <rect x="14" y="4" width="48" height="20" rx="4" class="gearbox-shell" fill="url(#gearboxShellGrad)" stroke="#64748b" stroke-width="0.8" />
+          <circle cx="16" cy="6.5" r="0.5" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
+          <circle cx="16" cy="21.5" r="0.5" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
+          <circle cx="60" cy="6.5" r="0.5" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
+          <circle cx="60" cy="21.5" r="0.5" fill="#cbd5e1" stroke="#334155" stroke-width="0.2" />
+
+          <!-- Internal Gearset Inspection Chamber (Circular Window) -->
+          <circle cx="34" cy="14" r="9" class="gearbox-chamber-bg" fill="#090d16" stroke="#334155" stroke-width="0.7" />
+          <circle cx="34" cy="14" r="8.2" fill="none" stroke="rgba(0, 242, 254, 0.3)" stroke-width="0.5" stroke-dasharray="1 0.8" />
+
+          <!-- Epicyclic Gear Assembly (Center at 34, 14) -->
+          <g id="gearboxCarrierGroup" transform="translate(34, 14)">
+            <!-- Carrier Spider Arms -->
+            <line x1="0" y1="0" x2="0" y2="-5.2" stroke="#64748b" stroke-width="0.8" />
+            <line x1="0" y1="0" x2="4.5" y2="2.6" stroke="#64748b" stroke-width="0.8" />
+            <line x1="0" y1="0" x2="-4.5" y2="2.6" stroke="#64748b" stroke-width="0.8" />
+
+            <!-- 3 Planet Gears orbiting carrier -->
+            <g class="gearbox-planet" id="gearboxPlanet1" transform="translate(0, -5.2)">
+              <circle cx="0" cy="0" r="2.8" fill="url(#gearSteelGrad)" stroke="#94a3b8" stroke-width="0.35" />
+              <circle cx="0" cy="0" r="0.8" fill="#f59e0b" stroke="#d97706" stroke-width="0.2" />
+              <line x1="0" y1="-2.8" x2="0" y2="-3.4" stroke="#00f2fe" stroke-width="0.4" />
+              <line x1="2.4" y1="1.4" x2="2.9" y2="1.7" stroke="#00f2fe" stroke-width="0.4" />
+              <line x1="-2.4" y1="1.4" x2="-2.9" y2="1.7" stroke="#00f2fe" stroke-width="0.4" />
+            </g>
+            <g class="gearbox-planet" id="gearboxPlanet2" transform="translate(4.5, 2.6)">
+              <circle cx="0" cy="0" r="2.8" fill="url(#gearSteelGrad)" stroke="#94a3b8" stroke-width="0.35" />
+              <circle cx="0" cy="0" r="0.8" fill="#f59e0b" stroke="#d97706" stroke-width="0.2" />
+              <line x1="0" y1="-2.8" x2="0" y2="-3.4" stroke="#00f2fe" stroke-width="0.4" />
+              <line x1="2.4" y1="1.4" x2="2.9" y2="1.7" stroke="#00f2fe" stroke-width="0.4" />
+              <line x1="-2.4" y1="1.4" x2="-2.9" y2="1.7" stroke="#00f2fe" stroke-width="0.4" />
+            </g>
+            <g class="gearbox-planet" id="gearboxPlanet3" transform="translate(-4.5, 2.6)">
+              <circle cx="0" cy="0" r="2.8" fill="url(#gearSteelGrad)" stroke="#94a3b8" stroke-width="0.35" />
+              <circle cx="0" cy="0" r="0.8" fill="#f59e0b" stroke="#d97706" stroke-width="0.2" />
+              <line x1="0" y1="-2.8" x2="0" y2="-3.4" stroke="#00f2fe" stroke-width="0.4" />
+              <line x1="2.4" y1="1.4" x2="2.9" y2="1.7" stroke="#00f2fe" stroke-width="0.4" />
+              <line x1="-2.4" y1="1.4" x2="-2.9" y2="1.7" stroke="#00f2fe" stroke-width="0.4" />
+            </g>
+
+            <!-- Central Sun Gear -->
+            <g id="gearboxSunGroup">
+              <circle cx="0" cy="0" r="2.2" fill="#38bdf8" stroke="#0284c7" stroke-width="0.4" />
+              <circle cx="0" cy="0" r="0.7" fill="#ffffff" />
+              <line x1="0" y1="-2.2" x2="0" y2="2.2" stroke="#ffffff" stroke-width="0.3" />
+              <line x1="-2.2" y1="0" x2="2.2" y2="0" stroke="#ffffff" stroke-width="0.3" />
+            </g>
+          </g>
+
+          <!-- Industrial Torque Dial Gauge -->
+          <g class="gearbox-torque-gauge" transform="translate(52, 10.5)">
+            <circle cx="0" cy="0" r="4.2" class="gauge-bezel-outer" fill="#334155" />
+            <circle cx="0" cy="0" r="3.9" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.6" />
+            <circle cx="0" cy="0" r="3.2" class="gauge-dial-face" fill="#1e293b" />
+            <path d="M -1.8 -1.2 A 2.4 2.4 0 0 1 1.8 -1.2" stroke="#f59e0b" stroke-width="0.6" fill="none" stroke-linecap="round" />
+            <g class="gauge-needle-rotator" id="gearboxTorqueRotator" transform="rotate(-30)">
+              <line x1="-0.6" y1="0" x2="0" y2="0" stroke="#1e293b" stroke-width="0.6" />
+              <line x1="0" y1="0" x2="2.2" y2="0" stroke="#00f2fe" stroke-width="0.6" stroke-linecap="round" />
+              <circle cx="0" cy="0" r="0.3" fill="#ffffff" />
+            </g>
+          </g>
+
+          <!-- Stamped Rating Plate -->
+          <rect x="23" y="24" width="22" height="2" rx="0.4" class="gearbox-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="34" y="25.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">GEARBOX i=3.55</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 6: Reciprocating Piston-Crank Mechanism (موتور لنگ و پیستون) -->
+    <div class="inline-perimeter-piston inline-top-unit" id="mechPistonUnit" role="button" tabindex="0" title="مکانیزم لنگ و پیستون موتور ۴ زمانه (Reciprocating Piston-Crank Mechanism): سیلندر خنک‌شونده با هوا، پیستون رینگ‌دار، شاتون مفصلی، میل‌لنگ دوار، شمع جرقه‌زن">
+      <div class="piston-detailed-housing">
+        <svg class="piston-detailed-svg" id="pistonDetailedSvg" viewBox="0 0 78 28" width="78" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pistonBlockGrad" x1="14" y1="4" x2="64" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#475569" />
+              <stop offset="40%" stop-color="#334155" />
+              <stop offset="80%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
+          </defs>
+
+          <!-- Conduit pipes -->
+          <path class="piston-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#ff8c00" stroke-width="0.4" opacity="0.85" />
+          <path class="piston-pipe-right" d="M 64 8.5 L 77 9.5 L 77 14.5 L 64 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="64" y1="12" x2="77" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="piston-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <rect x="74.2" y="7" width="2.8" height="10" rx="0.8" class="piston-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+
+          <!-- Engine Block Casing -->
+          <rect x="14" y="4" width="50" height="20" rx="3.5" class="piston-block" fill="url(#pistonBlockGrad)" stroke="#64748b" stroke-width="0.8" />
+          <!-- Heat Cooling Ribs on cylinder top and bottom -->
+          <line x1="18" y1="2.5" x2="36" y2="2.5" stroke="#475569" stroke-width="0.8" />
+          <line x1="20" y1="1.2" x2="34" y2="1.2" stroke="#64748b" stroke-width="0.6" />
+          <line x1="18" y1="25.5" x2="36" y2="25.5" stroke="#475569" stroke-width="0.8" />
+
+          <!-- Cylinder Bore Window -->
+          <rect x="17" y="7" width="44" height="14" rx="2" class="piston-bore-bg" fill="#090d16" stroke="#334155" stroke-width="0.7" />
+
+          <!-- Spark Plug at Left Cylinder Head (x=16) -->
+          <rect x="14.5" y="11" width="2.5" height="6" rx="0.4" fill="#cbd5e1" stroke="#475569" stroke-width="0.3" />
+          <circle class="piston-spark-flash" id="pistonSparkFlash" cx="17.5" cy="14" r="1.4" fill="#ffea00" opacity="0" />
+
+          <!-- Crankshaft Rotating Wheel in Crankcase at center (51, 14) -->
+          <circle cx="51" cy="14" r="5.5" fill="#1e293b" stroke="#64748b" stroke-width="0.5" />
+          <circle cx="51" cy="14" r="1.2" fill="#ffffff" />
+          <g id="pistonCrankGroup" transform="translate(51, 14)">
+            <path d="M 0 0 L -3.5 -3 A 4.5 4.5 0 0 0 -3.5 3 Z" fill="#475569" />
+            <circle id="pistonCrankPin" cx="3.2" cy="0" r="0.9" fill="#f59e0b" stroke="#b45309" stroke-width="0.25" />
+          </g>
+
+          <!-- Connecting Rod & Piston Assembly -->
+          <g id="pistonAssemblyGroup">
+            <line id="pistonConRod" x1="31" y1="14" x2="54.2" y2="14" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round" />
+            <g id="pistonSliderGroup" transform="translate(26, 8.5)">
+              <rect x="0" y="0" width="7" height="11" rx="0.8" fill="#64748b" stroke="#cbd5e1" stroke-width="0.4" />
+              <line x1="2" y1="1" x2="2" y2="10" stroke="#1e293b" stroke-width="0.6" />
+              <line x1="3.8" y1="1" x2="3.8" y2="10" stroke="#1e293b" stroke-width="0.6" />
+              <circle cx="4.5" cy="5.5" r="0.8" fill="#f59e0b" />
+            </g>
+          </g>
+
+          <!-- Stamped Rating Plate -->
+          <rect x="25" y="24" width="22" height="2" rx="0.4" class="piston-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="36" y="25.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">PISTON (4-STR)</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 7: Double-Acting Hydraulic Cylinder (جک و سیلندر هیدرولیک) -->
+    <div class="inline-perimeter-hydraulic inline-top-unit" id="mechHydraulicUnit" role="button" tabindex="0" title="جک هیدرولیک دوطرفه و شیر هیدرولیک صنعتی (Double-Acting Hydraulic Ram & 4/3 Spool Valve): پیستون فشار قوی، شفت کرومیک سخت، پورت‌های A و B، مانومتر ۶۰۰ بار">
+      <div class="hydraulic-detailed-housing">
+        <svg class="hydraulic-detailed-svg" id="hydraulicDetailedSvg" viewBox="0 0 78 28" width="78" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="hydCylGrad" x1="14" y1="4" x2="64" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#475569" />
+              <stop offset="35%" stop-color="#334155" />
+              <stop offset="70%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
+            <linearGradient id="chromeRodGrad" x1="0" y1="12" x2="0" y2="16" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="40%" stop-color="#e2e8f0" />
+              <stop offset="70%" stop-color="#94a3b8" />
+              <stop offset="100%" stop-color="#64748b" />
+            </linearGradient>
+          </defs>
+
+          <!-- Conduit pipes -->
+          <path class="hyd-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="hyd-pipe-right" d="M 64 8.5 L 77 9.5 L 77 14.5 L 64 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="64" y1="12" x2="77" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="hyd-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <rect x="74.2" y="7" width="2.8" height="10" rx="0.8" class="hyd-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+
+          <!-- Cylinder Barrel Body -->
+          <rect x="14" y="5" width="34" height="18" rx="3" class="hyd-barrel" fill="url(#hydCylGrad)" stroke="#64748b" stroke-width="0.8" />
+          <line x1="14" y1="6.8" x2="48" y2="6.8" stroke="#cbd5e1" stroke-width="0.6" />
+          <line x1="14" y1="21.2" x2="48" y2="21.2" stroke="#cbd5e1" stroke-width="0.6" />
+          <circle cx="19" cy="5" r="1.2" fill="#00f2fe" stroke="#334155" stroke-width="0.3" />
+          <circle cx="43" cy="5" r="1.2" fill="#38bdf8" stroke="#334155" stroke-width="0.3" />
+
+          <!-- Hydraulic Ram Chrome Rod & Piston Head -->
+          <g id="hydraulicRamGroup">
+            <rect id="hydraulicRamRod" x="42" y="12" width="18" height="4" rx="0.8" fill="url(#chromeRodGrad)" stroke="#94a3b8" stroke-width="0.4" />
+            <circle id="hydraulicRodEye" cx="60" cy="14" r="2.2" fill="#475569" stroke="#cbd5e1" stroke-width="0.5" />
+            <circle cx="60" cy="14" r="0.9" fill="#090d16" />
+            <rect id="hydraulicPistonHead" x="30" y="8" width="5" height="12" rx="0.6" fill="#f59e0b" stroke="#d97706" stroke-width="0.4" />
+          </g>
+
+          <!-- 600-BAR Hydraulic Bourdon Manometer -->
+          <g class="hyd-pressure-gauge" transform="translate(67, 7.5)">
+            <circle cx="0" cy="0" r="4.2" class="gauge-bezel-outer" fill="#334155" />
+            <circle cx="0" cy="0" r="3.9" class="gauge-bezel" fill="#0f172a" stroke="#94a3b8" stroke-width="0.6" />
+            <circle cx="0" cy="0" r="3.2" class="gauge-dial-face" fill="#1e293b" />
+            <path d="M -1.8 -1.2 A 2.4 2.4 0 0 1 1.8 -1.2" stroke="#ef4444" stroke-width="0.6" fill="none" stroke-linecap="round" />
+            <g class="gauge-needle-rotator" id="hydraulicGaugeRotator" transform="rotate(-25)">
+              <line x1="-0.6" y1="0" x2="0" y2="0" stroke="#1e293b" stroke-width="0.6" />
+              <line x1="0" y1="0" x2="2.2" y2="0" stroke="#ef4444" stroke-width="0.6" stroke-linecap="round" />
+              <circle cx="0" cy="0" r="0.3" fill="#ffffff" />
+            </g>
+          </g>
+
+          <!-- Stamped Rating Plate -->
+          <rect x="18" y="24" width="24" height="2" rx="0.4" class="hyd-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="30" y="25.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">HYDRAULIC (600 BAR)</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 8: Centrifugal Flyball Governor (گاورنر گریز از مرکز وات) -->
+    <div class="inline-perimeter-governor inline-top-unit" id="mechGovernorUnit" role="button" tabindex="0" title="گاورنر گریز از مرکز وات (Watt Centrifugal Flyball Governor): گوی‌های فلزی دوار، اهرم‌های مفصلی، طوقه لغزان، کنترل دور و تعادل سرعت مکانیکی">
+      <div class="governor-detailed-housing">
+        <svg class="governor-detailed-svg" id="governorDetailedSvg" viewBox="0 0 72 28" width="72" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="govShellGrad" x1="14" y1="4" x2="58" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#475569" />
+              <stop offset="40%" stop-color="#334155" />
+              <stop offset="80%" stop-color="#1e293b" />
+              <stop offset="100%" stop-color="#0f172a" />
+            </linearGradient>
+          </defs>
+
+          <!-- Conduit pipes -->
+          <path class="gov-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="gov-pipe-right" d="M 58 8.5 L 71 9.5 L 71 14.5 L 58 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="58" y1="12" x2="71" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="gov-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <rect x="68.2" y="7" width="2.8" height="10" rx="0.8" class="gov-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+
+          <!-- Cast Iron Frame Support Cage -->
+          <rect x="14" y="4" width="44" height="20" rx="3.5" class="gov-casing" fill="url(#govShellGrad)" stroke="#64748b" stroke-width="0.8" />
+          <rect x="17" y="6" width="38" height="16" rx="2" class="gov-chamber" fill="#090d16" stroke="#334155" stroke-width="0.6" />
+
+          <!-- Vertical Spindle Shaft at x=36 -->
+          <line x1="36" y1="6" x2="36" y2="22" stroke="#e2e8f0" stroke-width="1.1" />
+
+          <!-- Flyball Mechanism Group -->
+          <g id="governorMechanismGroup">
+            <rect x="34.5" y="7" width="3" height="1.5" rx="0.3" fill="#cbd5e1" />
+            <!-- Left Flyball -->
+            <g id="govFlyballLeft">
+              <line id="govArmUpperL" x1="36" y1="8" x2="28" y2="13" stroke="#94a3b8" stroke-width="0.9" />
+              <circle id="govBallL" cx="28" cy="13" r="2.4" fill="#f59e0b" stroke="#b45309" stroke-width="0.4" />
+              <line id="govArmLowerL" x1="28" y1="13" x2="36" y2="18" stroke="#94a3b8" stroke-width="0.9" />
+            </g>
+            <!-- Right Flyball -->
+            <g id="govFlyballRight">
+              <line id="govArmUpperR" x1="36" y1="8" x2="44" y2="13" stroke="#94a3b8" stroke-width="0.9" />
+              <circle id="govBallR" cx="44" cy="13" r="2.4" fill="#f59e0b" stroke="#b45309" stroke-width="0.4" />
+              <line id="govArmLowerR" x1="44" y1="13" x2="36" y2="18" stroke="#94a3b8" stroke-width="0.9" />
+            </g>
+            <!-- Sliding Collar Sleeve -->
+            <rect id="govSlidingCollar" x="34.2" y="17" width="3.6" height="2" rx="0.4" fill="#38bdf8" stroke="#0284c7" stroke-width="0.3" />
+            <!-- Linkage Arm -->
+            <line id="govValveLink" x1="37.8" y1="18" x2="48" y2="12" stroke="#cbd5e1" stroke-width="0.7" />
+            <circle cx="48" cy="12" r="1.1" fill="#f59e0b" />
+          </g>
+
+          <!-- Stamped Rating Plate -->
+          <rect x="21" y="24" width="22" height="2" rx="0.4" class="gov-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="32" y="25.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">GOVERNOR (WATTS)</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 9: Venturi Flowmeter & Differential Manometer (Horizontal) -->
+    <div class="inline-perimeter-venturi inline-top-unit" id="mechVenturiUnit" role="button" tabindex="0" title="ونتوری‌متر و مانومتر تفاضلی برنولی (Venturi Tube Flowmeter & Bernoulli Manometer): مقطع همگرا-واگرا، گلوگاه، ستون‌های پیزومتری، اندازه‌گیری دبی جریان">
+      <div class="venturi-detailed-housing">
+        <svg class="venturi-detailed-svg" id="venturiDetailedSvg" viewBox="0 0 76 28" width="76" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="venturiWallGrad" x1="16" y1="4" x2="60" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#475569" />
+              <stop offset="50%" stop-color="#334155" />
+              <stop offset="100%" stop-color="#1e293b" />
+            </linearGradient>
+          </defs>
+
+          <!-- Conduit Pipes left & right at y=12 -->
+          <path class="venturi-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="venturi-pipe-right" d="M 62 8.5 L 75 9.5 L 75 14.5 L 62 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="62" y1="12" x2="75" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="venturi-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <rect x="72.2" y="7" width="2.8" height="10" rx="0.8" class="venturi-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="73.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="73.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+
+          <!-- Outer Casing -->
+          <rect x="14" y="5" width="48" height="18" rx="3.5" class="venturi-shell" fill="url(#venturiWallGrad)" stroke="#64748b" stroke-width="0.8" />
+          <!-- Convergent-Divergent Internal Venturi Duct -->
+          <path d="M 60 7 L 46 9.5 L 38 10 L 30 9.5 L 16 8 L 16 16 L 30 14.5 L 38 14 L 46 14.5 L 60 17 Z" fill="#090d16" stroke="#334155" stroke-width="0.5" />
+          <line x1="16" y1="12" x2="60" y2="12" stroke="#00f2fe" stroke-width="0.6" stroke-dasharray="2 1.5" opacity="0.85" />
+
+          <!-- Dual Piezometer Glass Columns (Inlet vs Throat) -->
+          <rect x="50.5" y="1" width="3.2" height="6.5" rx="0.6" fill="#0f172a" stroke="#64748b" stroke-width="0.35" />
+          <rect id="venturiLiquidCol1" x="51" y="2.2" width="2.2" height="4.5" rx="0.4" fill="#38bdf8" opacity="0.9" />
+          <rect x="36.5" y="1" width="3.2" height="6.5" rx="0.6" fill="#0f172a" stroke="#64748b" stroke-width="0.35" />
+          <rect id="venturiLiquidCol2" x="37" y="4.2" width="2.2" height="2.5" rx="0.4" fill="#00f2fe" opacity="0.9" />
+          <line x1="39.7" y1="2.2" x2="51" y2="2.2" stroke="#ef4444" stroke-width="0.4" stroke-dasharray="0.8 0.8" />
+
+          <!-- Stamped Rating Plate -->
+          <rect x="29" y="19" width="18" height="2" rx="0.4" class="venturi-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="38" y="20.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">VENTURI</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 10: Supersonic De Laval Nozzle (Horizontal) -->
+    <div class="inline-perimeter-nozzle inline-top-unit" id="mechNozzleUnit" role="button" tabindex="0" title="نازل همگرا-واگرا لاوال ماخ (De Laval Supersonic Nozzle): مخزن پرفشار، گلویی صوتی (Mach 1.0)، شیپوره انبساط سوپرسونیک، امواج شوک ماخ و لوله پیتوت">
+      <div class="nozzle-detailed-housing">
+        <svg class="nozzle-detailed-svg" id="nozzleDetailedSvg" viewBox="0 0 76 28" width="76" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Conduit pipes left & right at y=12 -->
+          <path class="nozzle-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="nozzle-pipe-right" d="M 62 8.5 L 75 9.5 L 75 14.5 L 62 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="62" y1="12" x2="75" y2="12" stroke="#ff8c00" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="nozzle-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <rect x="72.2" y="7" width="2.8" height="10" rx="0.8" class="nozzle-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="73.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="73.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+
+          <!-- Nozzle Shell -->
+          <rect x="14" y="5" width="48" height="18" rx="3.5" class="nozzle-shell" fill="url(#venturiWallGrad)" stroke="#64748b" stroke-width="0.8" />
+          <!-- De Laval Contour: Subsonic Converging inlet, sonic throat at x=48, Supersonic Bell toward left -->
+          <path d="M 60 8 L 48 10.5 Q 36 10 16 6.5 L 16 17.5 Q 36 14 48 13.5 L 60 16 Z" fill="#090d16" stroke="#334155" stroke-width="0.5" />
+          <!-- Supersonic Mach Shock Diamonds -->
+          <g id="machDiamondsGroup">
+            <polygon points="40,12 43,10 46,12 43,14" fill="#00f2fe" opacity="0.85" />
+            <polygon points="31,12 35,9.2 39,12 35,14.8" fill="#38bdf8" opacity="0.8" />
+            <polygon points="21,12 26,8.5 30,12 26,15.5" fill="#0284c7" opacity="0.75" />
+          </g>
+          <!-- Pitot Tube Sensor probe -->
+          <line x1="18" y1="12" x2="22" y2="12" stroke="#ff4500" stroke-width="0.7" />
+          <circle cx="18" cy="12" r="1" fill="#ff4500" />
+
+          <!-- Stamped Rating Plate -->
+          <rect x="28" y="19" width="20" height="2" rx="0.4" class="nozzle-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="38" y="20.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">DE LAVAL</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 11: Finned Shell & Tube Heat Exchanger (Horizontal) -->
+    <div class="inline-perimeter-exchanger inline-top-unit" id="mechExchangerUnit" role="button" tabindex="0" title="مبدل حرارتی پوسته و لوله فین‌دار (Finned Shell & Tube Heat Exchanger): دسته لوله‌های عبور سیال، فین‌های دفع حرارت، جریان متقاطع و حسگرهای گرادیان دما">
+      <div class="exchanger-detailed-housing">
+        <svg class="exchanger-detailed-svg" id="exchangerDetailedSvg" viewBox="0 0 76 28" width="76" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Conduit pipes left & right at y=12 -->
+          <path class="exchanger-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="exchanger-pipe-right" d="M 62 8.5 L 75 9.5 L 75 14.5 L 62 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="62" y1="12" x2="75" y2="12" stroke="#ff8c00" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="exchanger-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <rect x="72.2" y="7" width="2.8" height="10" rx="0.8" class="exchanger-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="73.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="73.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+
+          <!-- Exchanger Shell Body -->
+          <rect x="14" y="5" width="48" height="18" rx="3.5" class="exchanger-shell" fill="url(#venturiWallGrad)" stroke="#64748b" stroke-width="0.8" />
+          <rect x="16" y="7" width="44" height="14" rx="2" fill="#090d16" stroke="#334155" stroke-width="0.5" />
+
+          <!-- Vertical Heat Dissipation Fins -->
+          <g id="exchangerFinsGroup">
+            <line x1="20" y1="5.5" x2="20" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="24" y1="5.5" x2="24" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="28" y1="5.5" x2="28" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="32" y1="5.5" x2="32" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="36" y1="5.5" x2="36" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="40" y1="5.5" x2="40" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="44" y1="5.5" x2="44" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="48" y1="5.5" x2="48" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="52" y1="5.5" x2="52" y2="22.5" stroke="#475569" stroke-width="0.7" />
+            <line x1="56" y1="5.5" x2="56" y2="22.5" stroke="#475569" stroke-width="0.7" />
+          </g>
+
+          <!-- Multi-Pass Serpentine Internal Fluid Tube -->
+          <path d="M 60 10 L 18 10 Q 16 12 18 14 L 60 14" fill="none" stroke="#f59e0b" stroke-width="0.9" />
+          <circle cx="58" cy="8" r="1.1" fill="#ef4444" />
+          <circle cx="18" cy="16" r="1.1" fill="#38bdf8" />
+
+          <!-- Stamped Rating Plate -->
+          <rect x="27" y="19" width="22" height="2" rx="0.4" class="exchanger-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="38" y="20.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">HEAT EXCH</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Unit 12: Oldham Flexible Coupling & Flywheel (Horizontal) -->
+    <div class="inline-perimeter-coupling inline-top-unit" id="mechCouplingUnit" role="button" tabindex="0" title="کوپلینگ انعطاف‌پذیر اولدهام و فلایویل اینرسی سنگین (Oldham Flexible Coupling & Heavy Flywheel): دیسک واسط شیاردار، جبران ناهمراستایی شفت، فلایویل تعادل دور">
+      <div class="coupling-detailed-housing">
+        <svg class="coupling-detailed-svg" id="couplingDetailedSvg" viewBox="0 0 74 28" width="74" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Conduit pipes left & right at y=12 -->
+          <path class="coupling-pipe-left" d="M 1 9.5 L 14 8.5 L 14 15.5 L 1 14.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="1" y1="12" x2="14" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+          <path class="coupling-pipe-right" d="M 60 8.5 L 73 9.5 L 73 14.5 L 60 15.5 Z" fill="url(#pipeConduitGrad)" stroke="#475569" stroke-width="0.6" />
+          <line x1="60" y1="12" x2="73" y2="12" stroke="#00f2fe" stroke-width="0.4" opacity="0.85" />
+
+          <!-- Flanges -->
+          <rect x="1" y="7" width="2.8" height="10" rx="0.8" class="coupling-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="2.4" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="2.4" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <rect x="70.2" y="7" width="2.8" height="10" rx="0.8" class="coupling-flange" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+          <circle cx="71.6" cy="8.6" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+          <circle cx="71.6" cy="15.4" r="0.45" fill="#e2e8f0" stroke="#475569" stroke-width="0.2" />
+
+          <!-- Frame -->
+          <rect x="14" y="5" width="46" height="18" rx="3.5" class="coupling-shell" fill="url(#venturiWallGrad)" stroke="#64748b" stroke-width="0.8" />
+          <rect x="16" y="7" width="42" height="14" rx="2" fill="#090d16" stroke="#334155" stroke-width="0.5" />
+
+          <!-- Rotating Flywheel & Oldham Disc Assembly (Centered at x=37, y=14) -->
+          <g id="couplingFlywheelGroup" transform="translate(37, 14)">
+            <circle cx="0" cy="0" r="7.8" fill="#334155" stroke="#94a3b8" stroke-width="0.6" />
+            <circle cx="0" cy="0" r="6.2" fill="#1e293b" stroke="#64748b" stroke-width="0.4" />
+            <circle cx="0" cy="-4.2" r="1.1" fill="#090d16" stroke="#475569" stroke-width="0.3" />
+            <circle cx="0" cy="4.2" r="1.1" fill="#090d16" stroke="#475569" stroke-width="0.3" />
+            <circle cx="-4.2" cy="0" r="1.1" fill="#090d16" stroke="#475569" stroke-width="0.3" />
+            <circle cx="4.2" cy="0" r="1.1" fill="#090d16" stroke="#475569" stroke-width="0.3" />
+            <rect x="-1.8" y="-1.8" width="3.6" height="3.6" rx="0.5" fill="#cbd5e1" stroke="#475569" stroke-width="0.3" />
+            <circle cx="0" cy="0" r="0.8" fill="#f59e0b" />
+          </g>
+          <rect x="17" y="9" width="5" height="10" rx="1" fill="#334155" stroke="#64748b" stroke-width="0.4" />
+          <rect x="52" y="9" width="5" height="10" rx="1" fill="#334155" stroke="#64748b" stroke-width="0.4" />
+          <line x1="14" y1="14" x2="60" y2="14" stroke="#00f2fe" stroke-width="0.6" stroke-dasharray="1.5 1" opacity="0.6" />
+
+          <!-- Stamped Rating Plate -->
+          <rect x="27" y="19" width="20" height="2" rx="0.4" class="coupling-rating-plate" fill="#1e293b" stroke="#475569" stroke-width="0.25" />
+          <text x="37" y="20.5" font-family="monospace" font-size="1.2" font-weight="bold" fill="#94a3b8" text-anchor="middle">COUPLING</text>
+        </svg>
+      </div>
+    </div>
+
+    </div><!-- End of #inlineTopMechanismsRack -->
+
+    <!-- Liquid-Glass Mechanical Parameters HUD Badge -->
+    <div class="mech-hud-badge" id="mechHudBadge" aria-live="polite">
+      <div class="hud-badge-header">
+        <span class="hud-badge-dot"></span>
+        <span class="hud-badge-title" id="hudBadgeTitle">مجموعه مهندسی مکانیک</span>
+        <span class="hud-badge-status" id="hudBadgeStatus">NOMINAL</span>
+      </div>
+      <div class="hud-badge-body" id="hudBadgeBody">سیستم با راندمان اسمی در مدار قرار دارد.</div>
+      <div class="hud-badge-formula" id="hudBadgeFormula">η = 1 - (Q_out / Q_in)</div>
     </div>
 
     <!-- Full-Screen High-Velocity Fluid Dynamics Canvas -->
@@ -3137,6 +3648,7 @@
     let condenserVacVel = 0;
     let condenserIsCondensing = false;
 
+    // --- Mechanical Sets Elements ---
     const impellerEl = document.getElementById('compressorImpellerGroup');
     const needleEl = document.getElementById('gaugeNeedleRotator');
     const compStation = document.getElementById('floatingControlsDock');
@@ -3150,6 +3662,104 @@
     const condenserFanLeftEl = document.getElementById('condenserFanLeft');
     const condenserFanRightEl = document.getElementById('condenserFanRight');
     const condenserVacNeedleEl = document.getElementById('condenserVacuumRotator');
+
+    // Bottom Rail Sets Elements
+    const gearboxUnit = document.getElementById('mechGearboxUnit');
+    const gearboxCarrierEl = document.getElementById('gearboxCarrierGroup');
+    const gearboxTorqueEl = document.getElementById('gearboxTorqueRotator');
+
+    const pistonUnit = document.getElementById('mechPistonUnit');
+    const pistonCrankEl = document.getElementById('pistonCrankGroup');
+    const pistonConRodEl = document.getElementById('pistonConRod');
+    const pistonSliderEl = document.getElementById('pistonSliderGroup');
+    const pistonSparkEl = document.getElementById('pistonSparkFlash');
+
+    const hydraulicUnit = document.getElementById('mechHydraulicUnit');
+    const hydraulicRamRodEl = document.getElementById('hydraulicRamRod');
+    const hydraulicRodEyeEl = document.getElementById('hydraulicRodEye');
+    const hydraulicPistonHeadEl = document.getElementById('hydraulicPistonHead');
+    const hydraulicGaugeRotatorEl = document.getElementById('hydraulicGaugeRotator');
+
+    const governorUnit = document.getElementById('mechGovernorUnit');
+    const govArmUpperLEl = document.getElementById('govArmUpperL');
+    const govBallLEl = document.getElementById('govBallL');
+    const govArmLowerLEl = document.getElementById('govArmLowerL');
+    const govArmUpperREl = document.getElementById('govArmUpperR');
+    const govBallREl = document.getElementById('govBallR');
+    const govArmLowerREl = document.getElementById('govArmLowerR');
+    const govSlidingCollarEl = document.getElementById('govSlidingCollar');
+    const govValveLinkEl = document.getElementById('govValveLink');
+
+    // Vertical Rail Sets Elements
+    const venturiUnit = document.getElementById('mechVenturiUnit');
+    const venturiCol1El = document.getElementById('venturiLiquidCol1');
+    const venturiCol2El = document.getElementById('venturiLiquidCol2');
+
+    const nozzleUnit = document.getElementById('mechNozzleUnit');
+    const machDiamondsEl = document.getElementById('machDiamondsGroup');
+
+    const exchangerUnit = document.getElementById('mechExchangerUnit');
+    const exchangerFinsEl = document.getElementById('exchangerFinsGroup');
+
+    const couplingUnit = document.getElementById('mechCouplingUnit');
+    const couplingFlywheelEl = document.getElementById('couplingFlywheelGroup');
+
+    // HUD Badge Elements
+    const mechHudBadge = document.getElementById('mechHudBadge');
+    const hudBadgeTitle = document.getElementById('hudBadgeTitle');
+    const hudBadgeStatus = document.getElementById('hudBadgeStatus');
+    const hudBadgeBody = document.getElementById('hudBadgeBody');
+    const hudBadgeFormula = document.getElementById('hudBadgeFormula');
+    let hudHideTimeout = null;
+
+    function showMechHud(title, status, body, formula) {
+      if (!mechHudBadge) return;
+      if (hudHideTimeout) clearTimeout(hudHideTimeout);
+      if (hudBadgeTitle) hudBadgeTitle.textContent = title;
+      if (hudBadgeStatus) hudBadgeStatus.textContent = status;
+      if (hudBadgeBody) hudBadgeBody.textContent = body;
+      if (hudBadgeFormula) hudBadgeFormula.textContent = formula;
+      mechHudBadge.classList.add('is-visible');
+    }
+
+    function hideMechHud(delay = 1800) {
+      if (!mechHudBadge) return;
+      if (hudHideTimeout) clearTimeout(hudHideTimeout);
+      hudHideTimeout = setTimeout(() => {
+        mechHudBadge.classList.remove('is-visible');
+      }, delay);
+    }
+
+    // Kinematics and Dynamics Variables for New Mechanical Sets
+    let gearboxSunAngle = 0;
+    let gearboxSpeed = 0.04;
+    let gearboxTargetSpeed = 0.04;
+    let gearboxTorqueAngle = -30;
+    let gearboxTorqueTarget = -30;
+    let gearboxTorqueVel = 0;
+    let gearboxIsAccelerating = false;
+
+    let pistonCrankAngle = 0;
+    let pistonSpeed = 0.048;
+    let pistonTargetSpeed = 0.048;
+    let pistonIsAccelerating = false;
+
+    let hydStrokePos = 0;
+    let hydStrokeDir = 1;
+    let hydPressureAngle = -25;
+    let hydPressureTarget = -25;
+    let hydPressureVel = 0;
+    let hydIsStroking = false;
+
+    let govAngle = 0;
+    let govSpeed = 0.04;
+    let govTargetSpeed = 0.04;
+    let govSpread = 0;
+    let govIsSpinning = false;
+
+    let flywheelAngle = 0;
+    let flywheelSpeed = 0.035;
+    let flywheelTargetSpeed = 0.035;
 
     // Continuous 60fps/120fps mechanical animation loop
     function runPumpMechanicalLoop(now) {
@@ -3237,25 +3847,157 @@
         condenserVacNeedleEl.setAttribute('transform', 'rotate(' + vacFinal.toFixed(2) + ')');
       }
 
+      // 8. Epicyclic Planetary Gearset Kinematics
+      gearboxSpeed += (gearboxTargetSpeed - gearboxSpeed) * 0.08;
+      gearboxSunAngle += gearboxSpeed;
+      const carrierAngle = gearboxSunAngle / 3.55;
+      if (gearboxCarrierEl) {
+        const cDeg = ((carrierAngle * 180) / Math.PI) % 360;
+        gearboxCarrierEl.setAttribute('transform', 'translate(34, 14) rotate(' + cDeg.toFixed(2) + ')');
+      }
+      const gbDelta = gearboxTorqueTarget - gearboxTorqueAngle;
+      gearboxTorqueVel = (gearboxTorqueVel + gbDelta * 0.16) * 0.78;
+      gearboxTorqueAngle += gearboxTorqueVel;
+      if (gearboxTorqueEl) {
+        const gbQuiver = gearboxIsAccelerating ? (Math.random() - 0.5) * 2.2 : Math.sin(now * 0.005 + 1.8) * 0.4;
+        gearboxTorqueEl.setAttribute('transform', 'rotate(' + (gearboxTorqueAngle + gbQuiver).toFixed(2) + ')');
+      }
+
+      // 9. Slider-Crank Piston Engine Exact Kinematics
+      pistonSpeed += (pistonTargetSpeed - pistonSpeed) * 0.085;
+      pistonCrankAngle += pistonSpeed;
+      const crankR = 3.2;
+      const rodL = 23.2;
+      const cX = 51;
+      const cY = 14;
+      const pPinX = cX + Math.cos(pistonCrankAngle) * crankR;
+      const pPinY = cY + Math.sin(pistonCrankAngle) * crankR;
+      const dY = pPinY - cY;
+      const sliderHeadX = pPinX - Math.sqrt(Math.max(1, rodL * rodL - dY * dY));
+      if (pistonSliderEl) {
+        pistonSliderEl.setAttribute('transform', 'translate(' + (sliderHeadX - 4).toFixed(2) + ', 8.5)');
+      }
+      if (pistonConRodEl) {
+        pistonConRodEl.setAttribute('x1', sliderHeadX.toFixed(2));
+        pistonConRodEl.setAttribute('y1', '14');
+        pistonConRodEl.setAttribute('x2', pPinX.toFixed(2));
+        pistonConRodEl.setAttribute('y2', pPinY.toFixed(2));
+      }
+      if (pistonCrankEl) {
+        const crankDeg = ((pistonCrankAngle * 180) / Math.PI) % 360;
+        pistonCrankEl.setAttribute('transform', 'translate(51, 14) rotate(' + crankDeg.toFixed(2) + ')');
+      }
+      if (pistonSparkEl) {
+        const cyclePhase = (pistonCrankAngle % (Math.PI * 4));
+        const nearTDC = (cyclePhase < 0.28 || Math.abs(cyclePhase - Math.PI * 2) < 0.28);
+        if (nearTDC && (pistonIsAccelerating || Math.random() < 0.06)) {
+          pistonSparkEl.classList.add('is-firing');
+        } else {
+          pistonSparkEl.classList.remove('is-firing');
+        }
+      }
+
+      // 10. Hydraulic Cylinder Reciprocation & 600-bar Manometer
+      const strokeSpeed = hydIsStroking ? 0.35 : 0.06;
+      hydStrokePos += strokeSpeed * hydStrokeDir;
+      if (hydStrokePos > 8.5) { hydStrokePos = 8.5; hydStrokeDir = -1; }
+      if (hydStrokePos < 0) { hydStrokePos = 0; hydStrokeDir = 1; }
+      if (hydraulicRamRodEl) {
+        hydraulicRamRodEl.setAttribute('width', (18 + hydStrokePos).toFixed(2));
+      }
+      if (hydraulicRodEyeEl) {
+        hydraulicRodEyeEl.setAttribute('cx', (60 + hydStrokePos).toFixed(2));
+      }
+      if (hydraulicPistonHeadEl) {
+        hydraulicPistonHeadEl.setAttribute('x', (30 + hydStrokePos * 0.7).toFixed(2));
+      }
+      const hDelta = hydPressureTarget - hydPressureAngle;
+      hydPressureVel = (hydPressureVel + hDelta * 0.16) * 0.78;
+      hydPressureAngle += hydPressureVel;
+      if (hydraulicGaugeRotatorEl) {
+        const hQuiver = hydIsStroking ? (Math.random() - 0.5) * 2.5 : Math.sin(now * 0.004 + 0.8) * 0.35;
+        hydraulicGaugeRotatorEl.setAttribute('transform', 'rotate(' + (hydPressureAngle + hQuiver).toFixed(2) + ')');
+      }
+
+      // 11. Watt Centrifugal Flyball Governor Kinematics
+      govSpeed += (govTargetSpeed - govSpeed) * 0.08;
+      govAngle += govSpeed;
+      const targetSpread = Math.min(5.5, (govSpeed / 0.04) * 2.2);
+      govSpread += (targetSpread - govSpread) * 0.1;
+      const ballLeftX = 28 - govSpread;
+      const ballRightX = 44 + govSpread;
+      const collarY = 17 - govSpread * 0.75;
+      if (govBallLEl) {
+        govBallLEl.setAttribute('cx', ballLeftX.toFixed(2));
+        if (govArmUpperLEl) govArmUpperLEl.setAttribute('x2', ballLeftX.toFixed(2));
+        if (govArmLowerLEl) {
+          govArmLowerLEl.setAttribute('x1', ballLeftX.toFixed(2));
+          govArmLowerLEl.setAttribute('y2', (collarY + 1).toFixed(2));
+        }
+      }
+      if (govBallREl) {
+        govBallREl.setAttribute('cx', ballRightX.toFixed(2));
+        if (govArmUpperREl) govArmUpperREl.setAttribute('x2', ballRightX.toFixed(2));
+        if (govArmLowerREl) {
+          govArmLowerREl.setAttribute('x1', ballRightX.toFixed(2));
+          govArmLowerREl.setAttribute('y2', (collarY + 1).toFixed(2));
+        }
+      }
+      if (govSlidingCollarEl) {
+        govSlidingCollarEl.setAttribute('y', collarY.toFixed(2));
+      }
+      if (govValveLinkEl) {
+        govValveLinkEl.setAttribute('y1', (collarY + 1).toFixed(2));
+      }
+
+      // 12. Venturi Piezometric Columns Oscillation
+      if (venturiCol1El && venturiCol2El) {
+        const wave = Math.sin(now * 0.004) * 2.2;
+        const h1 = 15 + wave;
+        const h2 = 9 - wave * 0.6;
+        venturiCol1El.setAttribute('height', h1.toFixed(1));
+        venturiCol1El.setAttribute('y', (39 - h1).toFixed(1));
+        venturiCol2El.setAttribute('height', h2.toFixed(1));
+        venturiCol2El.setAttribute('y', (53 - h2).toFixed(1));
+      }
+
+      // 13. Supersonic De Laval Mach Shock Pulse
+      if (machDiamondsEl) {
+        const diamondScale = 1 + Math.sin(now * 0.01) * 0.15;
+        machDiamondsEl.setAttribute('transform', 'scale(1, ' + diamondScale.toFixed(2) + ')');
+      }
+
+      // 14. Oldham Coupling Flywheel Rotation
+      flywheelSpeed += (flywheelTargetSpeed - flywheelSpeed) * 0.08;
+      flywheelAngle += flywheelSpeed;
+      if (couplingFlywheelEl) {
+        const fwDeg = ((flywheelAngle * 180) / Math.PI) % 360;
+        couplingFlywheelEl.setAttribute('transform', 'translate(14, 38) rotate(' + fwDeg.toFixed(2) + ')');
+      }
+
       requestAnimationFrame(runPumpMechanicalLoop);
     }
     requestAnimationFrame(runPumpMechanicalLoop);
 
-    // Smooth hover reactions
+    // Interactive Hover & Click Reactions for Rankine Suite
     if (compUnit) {
       compUnit.addEventListener('mouseenter', () => {
         if (!pumpIsCompressing) pumpTargetSpeed = 0.09;
+        showMechHud('پمپ هیدرولیکی بویلر (Boiler Feed Pump)', 'ACTIVE', 'پمپ تغذیه سانتریفیوژ فشار قوی برای افزایش فشار آب سابکول به بویلر', 'W_pump = v × (P2 - P1) | η_isen = 84% | H = 125m');
       });
       compUnit.addEventListener('mouseleave', () => {
         if (!pumpIsCompressing) pumpTargetSpeed = 0.038;
+        hideMechHud();
       });
     }
     if (boilerUnit) {
       boilerUnit.addEventListener('mouseenter', () => {
-        if (!boilerIsSuperheating) boilerTempTarget = -15; // warms up
+        if (!boilerIsSuperheating) boilerTempTarget = -15;
+        showMechHud('بویلر بخار سوپرهیت (Superheated Steam Boiler)', 'HEATING', 'تولید بخار سوپرهیت دما و فشار بالا با سوزاندن سوخت و انتقال حرارت تابشی', 'Q_in = ṁ × (h3 - h2) | T_steam = 380°C | P = 65 bar');
       });
       boilerUnit.addEventListener('mouseleave', () => {
-        if (!boilerIsSuperheating) boilerTempTarget = -35; // cools to idle
+        if (!boilerIsSuperheating) boilerTempTarget = -35;
+        hideMechHud();
       });
       boilerUnit.addEventListener('click', () => {
         launchFluidCompressorShot();
@@ -3265,14 +4007,16 @@
       turbineUnit.addEventListener('mouseenter', () => {
         if (!turbineIsExpanding) {
           turbineTargetSpeed = 0.12;
-          turbineTachoTarget = -10; // ~4,000 RPM nominal
+          turbineTachoTarget = -10;
         }
+        showMechHud('توربین بخار چندمرحله‌ای (Multi-Stage Steam Turbine)', 'EXPANDING', 'انبساط بخار و استخراج توان مکانیکی دورانی از طریق پره‌های آیرودینامیک', 'W_turbine = ṁ × (h3 - h4) | N = 12,000 RPM | η_th = 41.2%');
       });
       turbineUnit.addEventListener('mouseleave', () => {
         if (!turbineIsExpanding) {
           turbineTargetSpeed = 0.045;
-          turbineTachoTarget = -40; // idle
+          turbineTachoTarget = -40;
         }
+        hideMechHud();
       });
       turbineUnit.addEventListener('click', () => {
         launchFluidCompressorShot();
@@ -3281,19 +4025,123 @@
     if (condenserUnit) {
       condenserUnit.addEventListener('mouseenter', () => {
         if (!condenserIsCondensing) {
-          condenserTargetSpeed = 0.14; // fans speed up
-          condenserVacTarget = -50; // vacuum deepens
+          condenserTargetSpeed = 0.14;
+          condenserVacTarget = -50;
         }
+        showMechHud('کندانسور سطحی خلاء (Surface Vacuum Condenser)', 'CONDENSING', 'دفع گرمای نهان تبخیر و تبدیل بخار خروجی توربین به آب مایع در خلاء عمیق', 'Q_out = ṁ × (h4 - h1) | P_vac = -0.98 bar | T_sat = 42°C');
       });
       condenserUnit.addEventListener('mouseleave', () => {
         if (!condenserIsCondensing) {
           condenserTargetSpeed = 0.04;
-          condenserVacTarget = -30; // nominal vacuum
+          condenserVacTarget = -30;
         }
+        hideMechHud();
       });
       condenserUnit.addEventListener('click', () => {
         launchFluidCompressorShot();
       });
+    }
+
+    // Interactive Hover & Click Reactions for Bottom Rail (Powertrain Suite)
+    if (gearboxUnit) {
+      gearboxUnit.addEventListener('mouseenter', () => {
+        if (!gearboxIsAccelerating) {
+          gearboxTargetSpeed = 0.12;
+          gearboxTorqueTarget = 15;
+        }
+        showMechHud('گیربکس خورشیدی سیاره‌ای (Epicyclic Planetary Gearset)', 'TRANSMITTING', 'انتقال گشتاور و کاهش دور با دنده خورشیدی محرک، ۳ دنده سیاره‌ای و رینگ‌دنده', 'i = 1 + (Z_ring / Z_sun) = 3.55 | τ = 420 N·m | η = 97.8%');
+      });
+      gearboxUnit.addEventListener('mouseleave', () => {
+        if (!gearboxIsAccelerating) {
+          gearboxTargetSpeed = 0.04;
+          gearboxTorqueTarget = -30;
+        }
+        hideMechHud();
+      });
+      gearboxUnit.addEventListener('click', () => {
+        launchFluidCompressorShot();
+      });
+    }
+
+    if (pistonUnit) {
+      pistonUnit.addEventListener('mouseenter', () => {
+        if (!pistonIsAccelerating) pistonTargetSpeed = 0.14;
+        showMechHud('موتور لنگ و پیستون چهارزمانه (Slider-Crank Engine)', 'COMBUSTION', 'تبدیل حرکت خطی رفت و برگشتی پیستون به چرخش دورانی میل‌لنگ و شاتون', 'x = r(1 - cosθ) + (λ/2)sin²θ | CR = 10.5:1 | P_ind = 68 kW');
+      });
+      pistonUnit.addEventListener('mouseleave', () => {
+        if (!pistonIsAccelerating) pistonTargetSpeed = 0.048;
+        hideMechHud();
+      });
+      pistonUnit.addEventListener('click', () => {
+        launchFluidCompressorShot();
+      });
+    }
+
+    if (hydraulicUnit) {
+      hydraulicUnit.addEventListener('mouseenter', () => {
+        if (!hydIsStroking) {
+          hydPressureTarget = 20;
+        }
+        showMechHud('جک هیدرولیک دوطرفه (Double-Acting Hydraulic Ram)', 'PRESSURIZED', 'سیلندر هیدرولیک فشار قوی با شفت هاردکروم و مانومتر ۶۰۰ بار برای اعمال نیروی سنگین', 'F = P × A_piston = 188 kN | P_max = 600 bar | v_ram = 0.25 m/s');
+      });
+      hydraulicUnit.addEventListener('mouseleave', () => {
+        if (!hydIsStroking) hydPressureTarget = -25;
+        hideMechHud();
+      });
+      hydraulicUnit.addEventListener('click', () => {
+        launchFluidCompressorShot();
+      });
+    }
+
+    if (governorUnit) {
+      governorUnit.addEventListener('mouseenter', () => {
+        if (!govIsSpinning) govTargetSpeed = 0.13;
+        showMechHud('گاورنر گریز از مرکز وات (Watt Centrifugal Governor)', 'REGULATING', 'کنترل خودکار دور موتور از طریق نیروی گریز از مرکز گوی‌ها و جابجایی طوقه لغزان', 'h = g / ω² | F_c = m × ω² × r | N_nom = 360 RPM');
+      });
+      governorUnit.addEventListener('mouseleave', () => {
+        if (!govIsSpinning) govTargetSpeed = 0.04;
+        hideMechHud();
+      });
+      governorUnit.addEventListener('click', () => {
+        launchFluidCompressorShot();
+      });
+    }
+
+    // Interactive Hover & Click Reactions for Vertical Rails (Fluid & Thermal Suites)
+    if (venturiUnit) {
+      venturiUnit.addEventListener('mouseenter', () => {
+        showMechHud('ونتوری‌متر و مانومتر تفاضلی (Venturi Tube & Manometer)', 'FLOW METERING', 'اندازه‌گیری دقیق دبی حجمی سیال بر اساس افت فشار در گلوگاه طبق اصل برنولی', 'Q = Cd × A1 × A2 × √(2ΔP / [ρ(A1² - A2²)]) | Re = 4.5×10⁵');
+      });
+      venturiUnit.addEventListener('mouseleave', () => hideMechHud());
+      venturiUnit.addEventListener('click', () => launchFluidCompressorShot());
+    }
+
+    if (nozzleUnit) {
+      nozzleUnit.addEventListener('mouseenter', () => {
+        showMechHud('نازل سوپرسونیک دی‌لاوال (De Laval Supersonic Nozzle)', 'SUPERSONIC', 'شتاب‌دهی جریان گاز فشرده از مادون صوت در گلوگاه (Mach 1) به مافوق‌صوت با امواج شوک', 'A / A* = (1/M) × [(2/(γ+1))(1 + (γ-1)M²/2)]^((γ+1)/(2(γ-1)))');
+      });
+      nozzleUnit.addEventListener('mouseleave', () => hideMechHud());
+      nozzleUnit.addEventListener('click', () => launchFluidCompressorShot());
+    }
+
+    if (exchangerUnit) {
+      exchangerUnit.addEventListener('mouseenter', () => {
+        showMechHud('مبدل حرارتی پوسته و لوله فین‌دار (Finned Heat Exchanger)', 'HEAT TRANSFER', 'انتقال حرارت جریان متقاطع سیال داغ و سرد با فین‌های آلومینیومی ضریب انتقال بالا', 'LMTD = (ΔT1 - ΔT2) / ln(ΔT1 / ΔT2) | q = U × A × LMTD | ε = 88.5%');
+      });
+      exchangerUnit.addEventListener('mouseleave', () => hideMechHud());
+      exchangerUnit.addEventListener('click', () => launchFluidCompressorShot());
+    }
+
+    if (couplingUnit) {
+      couplingUnit.addEventListener('mouseenter', () => {
+        flywheelTargetSpeed = 0.12;
+        showMechHud('کوپلینگ انعطاف‌پذیر اولدهام و فلایویل (Oldham Coupling & Flywheel)', 'COUPLED', 'جبران ناهمراستایی شفت‌های موازی و یکنواخت‌سازی گشتاور دورانی با فلایویل اینرسی بالا', 'E_k = ½ × I × ω² | I = ½ × M × R² | ω = 314 rad/s');
+      });
+      couplingUnit.addEventListener('mouseleave', () => {
+        flywheelTargetSpeed = 0.035;
+        hideMechHud();
+      });
+      couplingUnit.addEventListener('click', () => launchFluidCompressorShot());
     }
 
     let fluidAnimationReq = null;
@@ -3398,13 +4246,13 @@
       if (compUnit) compUnit.classList.add('is-compressing');
       playAcousticFeedback('compressor-spool');
 
-      // Reset corner, boiler, turbine, and condenser active states
+      // Reset corner and all mechanical sets active states
       [cornerTL, cornerBL, cornerBR, cornerTR].forEach(el => {
         if (el) el.classList.remove('corner-active', 'circuit-ignited');
       });
-      if (boilerUnit) boilerUnit.classList.remove('is-heating', 'fluid-absorbed');
-      if (turbineUnit) turbineUnit.classList.remove('is-spinning', 'fluid-absorbed');
-      if (condenserUnit) condenserUnit.classList.remove('is-condensing', 'fluid-absorbed');
+      [boilerUnit, turbineUnit, condenserUnit, gearboxUnit, pistonUnit, hydraulicUnit, governorUnit, venturiUnit, nozzleUnit, exchangerUnit, couplingUnit].forEach(el => {
+        if (el) el.classList.remove('is-heating', 'is-spinning', 'is-condensing', 'fluid-absorbed');
+      });
 
       if (fluidAnimationReq) cancelAnimationFrame(fluidAnimationReq);
 
@@ -3413,6 +4261,14 @@
       let triggeredBoiler = false;
       let triggeredTurbine = false;
       let triggeredCondenser = false;
+      let triggeredVenturi = false;
+      let triggeredNozzle = false;
+      let triggeredGovernor = false;
+      let triggeredHydraulic = false;
+      let triggeredPiston = false;
+      let triggeredGearbox = false;
+      let triggeredCoupling = false;
+      let triggeredExchanger = false;
       const triggeredCorners = { c1: false, c2: false, c3: false, c4: false };
 
       fluidStartTime = performance.now();
@@ -3546,22 +4402,101 @@
           playAcousticFeedback('condenser-condensation');
         }
 
+        // Top Rail Units 5 to 12 Trigger Events (Fluid traversing unified top rail mechanisms)
+        if (!triggeredGearbox && gearboxUnit) {
+          const rg = gearboxUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rg.right + 10) && pt.x >= (rg.left - 15)) {
+            triggeredGearbox = true;
+            gearboxIsAccelerating = true;
+            gearboxTargetSpeed = 0.28;
+            gearboxTorqueTarget = 65;
+            gearboxUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('compressor-spool');
+          }
+        }
+        if (!triggeredPiston && pistonUnit) {
+          const rp = pistonUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rp.right + 10) && pt.x >= (rp.left - 15)) {
+            triggeredPiston = true;
+            pistonIsAccelerating = true;
+            pistonTargetSpeed = 0.32;
+            pistonUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('turbine-expansion');
+          }
+        }
+        if (!triggeredHydraulic && hydraulicUnit) {
+          const rh = hydraulicUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rh.right + 10) && pt.x >= (rh.left - 15)) {
+            triggeredHydraulic = true;
+            hydIsStroking = true;
+            hydPressureTarget = 75;
+            hydraulicUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('corner-turn');
+          }
+        }
+        if (!triggeredGovernor && governorUnit) {
+          const rgov = governorUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rgov.right + 10) && pt.x >= (rgov.left - 15)) {
+            triggeredGovernor = true;
+            govIsSpinning = true;
+            govTargetSpeed = 0.28;
+            governorUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('corner-turn');
+          }
+        }
+        if (!triggeredVenturi && venturiUnit) {
+          const rv = venturiUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rv.right + 10) && pt.x >= (rv.left - 15)) {
+            triggeredVenturi = true;
+            venturiUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('corner-turn');
+          }
+        }
+        if (!triggeredNozzle && nozzleUnit) {
+          const rn = nozzleUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rn.right + 10) && pt.x >= (rn.left - 15)) {
+            triggeredNozzle = true;
+            nozzleUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('corner-turn');
+          }
+        }
+        if (!triggeredExchanger && exchangerUnit) {
+          const re = exchangerUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (re.right + 10) && pt.x >= (re.left - 15)) {
+            triggeredExchanger = true;
+            exchangerUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('corner-turn');
+          }
+        }
+        if (!triggeredCoupling && couplingUnit) {
+          const rc = couplingUnit.getBoundingClientRect();
+          if (pt.y <= 40 && pt.x <= (rc.right + 10) && pt.x >= (rc.left - 15)) {
+            triggeredCoupling = true;
+            flywheelTargetSpeed = 0.32;
+            couplingUnit.classList.add('fluid-absorbed');
+            playAcousticFeedback('corner-turn');
+          }
+        }
+
         // Corner Trigger Events as fluid whips around 90-degree elbows
         if (pt.leg === 2 && !triggeredCorners.c1) {
           triggeredCorners.c1 = true;
           if (cornerTL) cornerTL.classList.add('corner-active');
           playAcousticFeedback('corner-turn');
         }
+
         if (pt.leg === 3 && !triggeredCorners.c2) {
           triggeredCorners.c2 = true;
           if (cornerBL) cornerBL.classList.add('corner-active');
           playAcousticFeedback('corner-turn');
         }
+
         if (pt.leg === 4 && !triggeredCorners.c3) {
           triggeredCorners.c3 = true;
           if (cornerBR) cornerBR.classList.add('corner-active');
           playAcousticFeedback('corner-turn');
         }
+
         if (pt.leg === 5 && !triggeredCorners.c4) {
           triggeredCorners.c4 = true;
           if (cornerTR) cornerTR.classList.add('corner-active');
@@ -3660,7 +4595,7 @@
           // ============================================================
           fluidCtx.clearRect(0, 0, W, H);
 
-          // 1. Spool down compressor, boiler, turbine & condenser with realistic rotational and thermal inertia
+          // 1. Spool down all mechanical units with realistic rotational and thermal inertia
           pumpIsCompressing = false;
           pumpTargetSpeed = 0.038;
           pumpNeedleTarget = -26;
@@ -3672,28 +4607,35 @@
           condenserIsCondensing = false;
           condenserTargetSpeed = 0.04;
           condenserVacTarget = -30;
+
+          gearboxIsAccelerating = false;
+          gearboxTargetSpeed = 0.04;
+          gearboxTorqueTarget = -30;
+          pistonIsAccelerating = false;
+          pistonTargetSpeed = 0.048;
+          hydIsStroking = false;
+          hydPressureTarget = -25;
+          govIsSpinning = false;
+          govTargetSpeed = 0.04;
+          flywheelTargetSpeed = 0.035;
+
           if (compUnit) compUnit.classList.remove('is-compressing');
           if (boilerUnit) boilerUnit.classList.remove('is-heating');
           if (turbineUnit) turbineUnit.classList.remove('is-spinning');
           if (condenserUnit) condenserUnit.classList.remove('is-condensing');
 
-          // 2. Pulse pump, boiler, turbine & condenser with synchronized absorption shockwave
-          if (compUnit) {
-            compUnit.classList.add('fluid-absorbed');
-            setTimeout(() => compUnit.classList.remove('fluid-absorbed'), 450);
-          }
-          if (boilerUnit) {
-            boilerUnit.classList.add('fluid-absorbed');
-            setTimeout(() => boilerUnit.classList.remove('fluid-absorbed'), 450);
-          }
-          if (turbineUnit) {
-            turbineUnit.classList.add('fluid-absorbed');
-            setTimeout(() => turbineUnit.classList.remove('fluid-absorbed'), 450);
-          }
-          if (condenserUnit) {
-            condenserUnit.classList.add('fluid-absorbed');
-            setTimeout(() => condenserUnit.classList.remove('fluid-absorbed'), 450);
-          }
+          // 2. Pulse all mechanical sets with synchronized absorption shockwave
+          const allUnits = [
+            compUnit, boilerUnit, turbineUnit, condenserUnit,
+            gearboxUnit, pistonUnit, hydraulicUnit, governorUnit,
+            venturiUnit, nozzleUnit, exchangerUnit, couplingUnit
+          ];
+          allUnits.forEach(u => {
+            if (u) {
+              u.classList.add('fluid-absorbed');
+              setTimeout(() => u.classList.remove('fluid-absorbed'), 500);
+            }
+          });
 
           // 3. ILLUMINATE THE ENTIRE SCREEN & PERIMETER CONDUIT!
           if (perimeterConduit) {
@@ -4972,11 +5914,8 @@
 
     /* --- HORIZONTAL IN-LINE TURBO-COMPRESSOR ON TOP RAIL --- */
     .inline-perimeter-pump {
-      position: fixed;
-      top: 0;
-      right: 140px;
-      width: 58px;
-      height: 24px;
+      width: 38px;
+      height: 16px;
       z-index: 10003;
       cursor: pointer;
       outline: none;
@@ -4990,7 +5929,7 @@
     }
 
     .inline-perimeter-pump:hover {
-      transform: scale(1.06);
+      transform: scale(1.08);
     }
 
     .inline-perimeter-pump .compressor-detailed-housing {
@@ -5003,15 +5942,15 @@
     .inline-perimeter-pump .compressor-detailed-svg {
       display: block;
       overflow: visible;
-      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
       transition: filter 0.25s ease-out;
     }
 
     .inline-perimeter-pump:hover .compressor-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.8));
+      filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.7));
     }
     .light-mode .inline-perimeter-pump:hover .compressor-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
+      filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.7));
     }
 
     /* Impeller Group & Needle (Rotation is driven 100% smoothly by continuous JS physics loop) */
@@ -5089,11 +6028,8 @@
 
     /* --- HORIZONTAL IN-LINE SCHEMATIC STEAM BOILER & SUPERHEATER ON TOP RAIL --- */
     .inline-perimeter-boiler {
-      position: fixed;
-      top: -2px;
-      right: 240px;
-      width: 78px;
-      height: 28px;
+      width: 44px;
+      height: 16px;
       z-index: 10003;
       cursor: pointer;
       outline: none;
@@ -5107,7 +6043,7 @@
     }
 
     .inline-perimeter-boiler:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .inline-perimeter-boiler .boiler-detailed-housing {
@@ -5120,15 +6056,15 @@
     .inline-perimeter-boiler .boiler-detailed-svg {
       display: block;
       overflow: visible;
-      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
       transition: filter 0.25s ease-out;
     }
 
     .inline-perimeter-boiler:hover .boiler-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.8));
+      filter: drop-shadow(0 0 5px rgba(255, 106, 0, 0.7));
     }
     .light-mode .inline-perimeter-boiler:hover .boiler-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(234, 88, 12, 0.8));
+      filter: drop-shadow(0 0 5px rgba(234, 88, 12, 0.7));
     }
 
     /* Dynamic Combustion Flame Animation */
@@ -5249,11 +6185,8 @@
 
     /* --- HORIZONTAL IN-LINE SCHEMATIC STEAM TURBINE & GENERATOR ON TOP RAIL --- */
     .inline-perimeter-turbine {
-      position: fixed;
-      top: -2px;
-      right: 360px;
-      width: 74px;
-      height: 28px;
+      width: 42px;
+      height: 16px;
       z-index: 10004;
       cursor: pointer;
       outline: none;
@@ -5267,7 +6200,7 @@
     }
 
     .inline-perimeter-turbine:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .inline-perimeter-turbine .turbine-detailed-housing {
@@ -5280,15 +6213,15 @@
     .inline-perimeter-turbine .turbine-detailed-svg {
       display: block;
       overflow: visible;
-      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
       transition: filter 0.25s ease-out;
     }
 
     .inline-perimeter-turbine:hover .turbine-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.85));
+      filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.7));
     }
     .light-mode .inline-perimeter-turbine:hover .turbine-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(2, 132, 199, 0.85));
+      filter: drop-shadow(0 0 5px rgba(2, 132, 199, 0.7));
     }
 
     /* Multi-stage Rotor Blading Inertial Rotator */
@@ -5376,11 +6309,8 @@
 
     /* --- HORIZONTAL IN-LINE SCHEMATIC SURFACE CONDENSER ON TOP RAIL --- */
     .inline-perimeter-condenser {
-      position: fixed;
-      top: -2px;
-      right: 476px;
-      width: 74px;
-      height: 28px;
+      width: 42px;
+      height: 16px;
       z-index: 10005;
       cursor: pointer;
       outline: none;
@@ -5394,7 +6324,7 @@
     }
 
     .inline-perimeter-condenser:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     .inline-perimeter-condenser .condenser-detailed-housing {
@@ -5407,15 +6337,15 @@
     .inline-perimeter-condenser .condenser-detailed-svg {
       display: block;
       overflow: visible;
-      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
       transition: filter 0.25s ease-out;
     }
 
     .inline-perimeter-condenser:hover .condenser-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.85));
+      filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.7));
     }
     .light-mode .inline-perimeter-condenser:hover .condenser-detailed-svg {
-      filter: drop-shadow(0 0 8px rgba(2, 132, 199, 0.85));
+      filter: drop-shadow(0 0 5px rgba(2, 132, 199, 0.7));
     }
 
     /* Dual Draft Cooling Fans Rotators */
@@ -5491,6 +6421,272 @@
       filter: drop-shadow(0 0 14px #0284c7) drop-shadow(0 0 24px #ffffff) !important;
       transform: scale(1.06);
       transition: all 0.12s ease-out;
+    }
+
+    /* --- UNIFIED TOP RAIL ENGINEERING SUITE RACK --- */
+    .inline-top-mechanisms-rack {
+      position: fixed;
+      top: -2px;
+      right: 130px;
+      height: 32px;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      z-index: 10003;
+      pointer-events: none;
+      max-width: calc(100vw - 160px);
+      overflow-x: auto;
+      overflow-y: visible;
+      scrollbar-width: none;
+      padding: 0 4px;
+    }
+    .inline-top-mechanisms-rack::-webkit-scrollbar {
+      display: none;
+    }
+
+    .inline-top-unit {
+      position: relative !important;
+      top: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      height: 28px !important;
+      flex-shrink: 0;
+      pointer-events: auto !important;
+      cursor: pointer;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease-out;
+    }
+    .inline-top-unit:hover {
+      transform: scale(1.08) translateY(1px);
+    }
+
+    .inline-perimeter-pump {
+      width: 58px;
+    }
+    .inline-perimeter-boiler {
+      width: 78px;
+    }
+    .inline-perimeter-turbine {
+      width: 74px;
+    }
+    .inline-perimeter-condenser {
+      width: 74px;
+    }
+    .inline-perimeter-gearbox {
+      width: 76px;
+    }
+    .inline-perimeter-piston {
+      width: 78px;
+    }
+    .inline-perimeter-hydraulic {
+      width: 78px;
+    }
+    .inline-perimeter-governor {
+      width: 72px;
+    }
+    .inline-perimeter-venturi {
+      width: 76px;
+    }
+    .inline-perimeter-nozzle {
+      width: 76px;
+    }
+    .inline-perimeter-exchanger {
+      width: 76px;
+    }
+    .inline-perimeter-coupling {
+      width: 74px;
+    }
+
+    /* SVG Base & Hover Glow */
+    .gearbox-detailed-svg,
+    .piston-detailed-svg,
+    .hydraulic-detailed-svg,
+    .governor-detailed-svg,
+    .venturi-detailed-svg,
+    .nozzle-detailed-svg,
+    .exchanger-detailed-svg,
+    .coupling-detailed-svg {
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.7));
+      transition: filter 0.25s ease-out;
+    }
+
+    .inline-perimeter-gearbox:hover .gearbox-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.85));
+    }
+    .inline-perimeter-piston:hover .piston-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.85));
+    }
+    .inline-perimeter-hydraulic:hover .hydraulic-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.85));
+    }
+    .inline-perimeter-governor:hover .governor-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.85));
+    }
+    .inline-perimeter-venturi:hover .venturi-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.85));
+    }
+    .inline-perimeter-nozzle:hover .nozzle-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(255, 69, 0, 0.85));
+    }
+    .inline-perimeter-exchanger:hover .exchanger-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.85));
+    }
+    .inline-perimeter-coupling:hover .coupling-detailed-svg {
+      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.85));
+    }
+
+    /* Fluid Absorption Flash Effect */
+    .inline-top-unit.fluid-absorbed svg,
+    .inline-perimeter-bottom-unit.fluid-absorbed svg,
+    .inline-perimeter-vertical-unit.fluid-absorbed svg {
+      filter: drop-shadow(0 0 12px #00f2fe) drop-shadow(0 0 20px #ffffff) !important;
+      transform: scale(1.08);
+      transition: all 0.12s ease-out;
+    }
+    .light-mode .inline-top-unit.fluid-absorbed svg,
+    .light-mode .inline-perimeter-bottom-unit.fluid-absorbed svg,
+    .light-mode .inline-perimeter-vertical-unit.fluid-absorbed svg {
+      filter: drop-shadow(0 0 12px #f59e0b) drop-shadow(0 0 20px #ffffff) !important;
+      transform: scale(1.08);
+      transition: all 0.12s ease-out;
+    }
+
+    /* Light Mode Overrides */
+    .light-mode .gearbox-shell { fill: url(#gearboxShellGradLight); stroke: #94a3b8; }
+    .light-mode .gearbox-flange { fill: #cbd5e1; stroke: #64748b; }
+    .light-mode .piston-block { fill: url(#pistonBlockGradLight); stroke: #94a3b8; }
+    .light-mode .piston-flange { fill: #cbd5e1; stroke: #64748b; }
+    .light-mode .hyd-barrel { fill: url(#hydCylGradLight); stroke: #94a3b8; }
+    .light-mode .hyd-flange { fill: #cbd5e1; stroke: #64748b; }
+    .light-mode .gov-casing { fill: url(#govShellGradLight); stroke: #94a3b8; }
+    .light-mode .gov-flange { fill: #cbd5e1; stroke: #64748b; }
+    .light-mode .gearbox-pipe-left, .light-mode .gearbox-pipe-right,
+    .light-mode .piston-pipe-left, .light-mode .piston-pipe-right,
+    .light-mode .hyd-pipe-left, .light-mode .hyd-pipe-right,
+    .light-mode .gov-pipe-left, .light-mode .gov-pipe-right {
+      fill: url(#pipeConduitGradLight);
+      stroke: #94a3b8;
+    }
+
+    /* Micro Piston Combustion Spark Flash */
+    .piston-spark-flash.is-firing {
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 6px #ffea00) drop-shadow(0 0 10px #ff4500);
+      transform: scale(1.8);
+    }
+
+    /* Liquid-Glass Mechanical Parameters HUD Badge */
+    .mech-hud-badge {
+      position: fixed;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10006;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.92));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
+      padding: 8px 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 242, 254, 0.25);
+      font-family: var(--font-sans, system-ui, sans-serif);
+      color: #e2e8f0;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 90vw;
+      direction: rtl;
+      text-align: right;
+    }
+    .mech-hud-badge.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    .hud-badge-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .hud-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00f2fe;
+      box-shadow: 0 0 8px #00f2fe;
+      flex-shrink: 0;
+    }
+    .hud-badge-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: -0.2px;
+    }
+    .hud-badge-status {
+      font-family: monospace;
+      font-size: 9px;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-right: auto;
+      direction: ltr;
+    }
+    .hud-badge-body {
+      font-size: 11px;
+      line-height: 1.4;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+    }
+    .hud-badge-formula {
+      font-family: monospace;
+      font-size: 10px;
+      direction: ltr;
+      text-align: left;
+      color: #f59e0b;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+    .light-mode .mech-hud-badge {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.94));
+      border: 1px solid rgba(0, 160, 210, 0.35);
+      border-top: 1px solid rgba(255, 255, 255, 0.95);
+      color: #1e293b;
+      box-shadow: 0 12px 32px rgba(50, 70, 100, 0.18), 0 0 16px rgba(0, 160, 210, 0.15);
+    }
+    .light-mode .hud-badge-title { color: #0284c7; }
+    .light-mode .hud-badge-body { color: #475569; }
+    .light-mode .hud-badge-formula {
+      background: rgba(245, 158, 11, 0.08);
+      color: #b45309;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 640px) {
+      .inline-perimeter-gearbox { right: 86px; width: 44px; }
+      .inline-perimeter-piston { right: 136px; width: 48px; }
+      .inline-perimeter-hydraulic { right: 190px; width: 48px; }
+      .inline-perimeter-governor { right: 244px; width: 48px; }
+      .inline-perimeter-vertical-unit { display: none !important; }
+    }
+    @media (max-height: 540px) {
+      .inline-perimeter-vertical-unit { display: none !important; }
     }
 
     /* --- 2. UNIFIED CONTROLS STATION (.mech-station) --- */
@@ -6949,517 +8145,6 @@
       renderCfdLab();
     }
   </script>
-  <script>
-(function () {
-  'use strict';
-
-  var canvas = document.getElementById('engineeringBgCanvas');
-  if (!canvas || !canvas.getContext) return;
-  var ctx = canvas.getContext('2d');
-  var rootEl = document.documentElement;
-
-  var reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var coarsePointerMQ = window.matchMedia('(pointer: coarse)');
-
-  var W = 0, H = 0, DPR = 1;
-  var tier = 'desktop';
-  var layout = null;
-  var rafId = null;
-  var running = false;
-  var lastTime = 0;
-  var elapsed = 0;
-
-  var mouseTX = 0, mouseTY = 0, mouseX = 0, mouseY = 0;
-  var parallaxEnabled = false;
-
-  var pumpAngle = 0;
-  var bubbles = [];
-
-  var PALETTES = {
-    dark: {
-      pipe: 'rgba(120,150,180,0.16)',
-      pipeSteam: 'rgba(150,220,230,0.18)',
-      component: 'rgba(150,180,205,0.22)',
-      water: 'rgba(80,155,255,0.55)',
-      waterGlow: 'rgba(80,155,255,0.20)',
-      steam: 'rgba(215,247,250,0.60)',
-      steamGlow: 'rgba(0,242,254,0.22)',
-      heatGlow: 'rgba(0,242,254,0.10)',
-      valve: 'rgba(150,180,205,0.24)'
-    },
-    light: {
-      pipe: 'rgba(60,85,115,0.11)',
-      pipeSteam: 'rgba(0,137,173,0.13)',
-      component: 'rgba(60,85,115,0.18)',
-      water: 'rgba(0,114,255,0.32)',
-      waterGlow: 'rgba(0,114,255,0.12)',
-      steam: 'rgba(0,137,173,0.38)',
-      steamGlow: 'rgba(0,137,173,0.14)',
-      heatGlow: 'rgba(0,137,173,0.08)',
-      valve: 'rgba(60,85,115,0.20)'
-    }
-  };
-  var pal = PALETTES.dark;
-
-  var MASTER_OPACITY = 0.62;
-
-  function computeTier() {
-    if (W < 640) return 'mobile';
-    if (W < 1024) return 'tablet';
-    return 'desktop';
-  }
-
-  function buildPathSampler(points) {
-    var lens = [0];
-    var total = 0;
-    var i;
-    for (i = 1; i < points.length; i++) {
-      var dx = points[i].x - points[i - 1].x;
-      var dy = points[i].y - points[i - 1].y;
-      total += Math.sqrt(dx * dx + dy * dy);
-      lens.push(total);
-    }
-    return {
-      points: points,
-      total: total || 1,
-      at: function (t) {
-        var target = t * this.total;
-        var idx = 1;
-        while (idx < lens.length && lens[idx] < target) idx++;
-        if (idx >= points.length) idx = points.length - 1;
-        var segLen = (lens[idx] - lens[idx - 1]) || 1;
-        var segT = (target - lens[idx - 1]) / segLen;
-        var p0 = points[idx - 1], p1 = points[idx];
-        var x = p0.x + (p1.x - p0.x) * segT;
-        var y = p0.y + (p1.y - p0.y) * segT;
-        var ddx = p1.x - p0.x, ddy = p1.y - p0.y;
-        var len = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
-        return { x: x, y: y, nx: -ddy / len, ny: ddx / len };
-      }
-    };
-  }
-
-  function makeParticles(count, speedMin, speedMax, sizeMin, sizeMax) {
-    var list = [];
-    var i;
-    for (i = 0; i < count; i++) {
-      list.push({
-        t: Math.random(),
-        speed: speedMin + Math.random() * (speedMax - speedMin),
-        size: sizeMin + Math.random() * (sizeMax - sizeMin),
-        phase: Math.random() * Math.PI * 2
-      });
-    }
-    return list;
-  }
-
-  function buildLayout() {
-    tier = computeTier();
-
-    var mx = Math.max(26, W * 0.045);
-    var my = Math.max(38, H * 0.08);
-
-    var pumpR = tier === 'mobile' ? 13 : tier === 'tablet' ? 16 : 19;
-    var boilerW = tier === 'mobile' ? 26 : 34;
-    var boilerH = tier === 'mobile' ? 54 : 74;
-    var condW = tier === 'mobile' ? 54 : 78;
-    var condH = tier === 'mobile' ? 26 : 34;
-    var tankR = tier === 'mobile' ? 11 : 15;
-
-    var pump = { x: mx, y: H - my, r: pumpR };
-    var boiler = { x: mx, y: my + boilerH / 2, w: boilerW, h: boilerH };
-    var condenser = { x: W - mx, y: my + condH / 2, w: condW, h: condH };
-    var tank = { x: W - mx, y: H - my, r: tankR };
-
-    var water1 = buildPathSampler([
-      { x: pump.x, y: pump.y - pump.r - 4 },
-      { x: pump.x, y: boiler.y + boiler.h / 2 + 6 }
-    ]);
-    var steam = buildPathSampler([
-      { x: boiler.x, y: boiler.y - boiler.h / 2 - 6 },
-      { x: boiler.x, y: Math.max(18, my * 0.32) },
-      { x: condenser.x - condenser.w / 2 - 6, y: Math.max(18, my * 0.32) },
-      { x: condenser.x - condenser.w / 2 - 6, y: condenser.y }
-    ]);
-    var water2 = buildPathSampler([
-      { x: condenser.x, y: condenser.y + condenser.h / 2 + 6 },
-      { x: condenser.x, y: tank.y - tank.r - 4 }
-    ]);
-    var water3 = buildPathSampler([
-      { x: tank.x - tank.r - 4, y: tank.y },
-      { x: pump.x + pump.r + 4, y: pump.y }
-    ]);
-
-    layout = {
-      mx: mx, my: my,
-      pump: pump, boiler: boiler, condenser: condenser, tank: tank,
-      segs: { water1: water1, steam: steam, water2: water2, water3: water3 },
-      valves: [
-        { seg: 'water1', t: 0.5 },
-        { seg: 'water3', t: 0.5 }
-      ]
-    };
-
-    var counts = tier === 'mobile'
-      ? { water: 2, steam: 2, bubbles: 3 }
-      : tier === 'tablet'
-        ? { water: 3, steam: 3, bubbles: 4 }
-        : { water: 4, steam: 4, bubbles: 6 };
-
-    layout.particles = {
-      water1: makeParticles(counts.water, 0.00009, 0.00014, 1.1, 1.8),
-      water2: makeParticles(counts.water, 0.00009, 0.00014, 1.1, 1.8),
-      water3: makeParticles(counts.water, 0.00009, 0.00014, 1.1, 1.8),
-      steam: makeParticles(counts.steam, 0.00016, 0.00022, 0.9, 1.5)
-    };
-
-    bubbles = [];
-    var i;
-    for (i = 0; i < counts.bubbles; i++) {
-      bubbles.push({
-        x: (Math.random() - 0.5) * boiler.w * 0.55,
-        y: Math.random(),
-        speed: 0.00006 + Math.random() * 0.00006,
-        size: 0.8 + Math.random() * 1.2
-      });
-    }
-
-    parallaxEnabled = tier !== 'mobile' && !coarsePointerMQ.matches && !reduceMotionMQ.matches;
-  }
-
-  function setupCanvas() {
-    W = window.innerWidth;
-    H = window.innerHeight;
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(W * DPR);
-    canvas.height = Math.round(H * DPR);
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    buildLayout();
-  }
-
-  function drawPipeSegment(sampler, color, lineWidth) {
-    var pts = sampler.points;
-    ctx.beginPath();
-    ctx.moveTo(pts[0].x, pts[0].y);
-    var i;
-    for (i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineWidth;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    ctx.stroke();
-  }
-
-  function drawParticlesOnSegment(sampler, list, color, glowColor, jitter) {
-    var i, p, pos, jx, jy;
-    ctx.fillStyle = color;
-    for (i = 0; i < list.length; i++) {
-      p = list[i];
-      pos = sampler.at(p.t);
-      jx = 0; jy = 0;
-      if (jitter) {
-        var w = Math.sin(elapsed * 0.0016 + p.phase) * jitter;
-        jx = pos.nx * w;
-        jy = pos.ny * w;
-      }
-      ctx.save();
-      ctx.shadowBlur = 4;
-      ctx.shadowColor = glowColor;
-      ctx.beginPath();
-      ctx.arc(pos.x + jx, pos.y + jy, p.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  function drawValve(seg, t, color) {
-    var pos = seg.at(t);
-    var size = tier === 'mobile' ? 4 : 5.5;
-    ctx.save();
-    ctx.translate(pos.x, pos.y);
-    ctx.rotate(Math.atan2(pos.ny, pos.nx) + Math.PI / 2);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(-size, -size); ctx.lineTo(size, size);
-    ctx.moveTo(-size, size); ctx.lineTo(size, -size);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(0, 0, size * 1.4, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawPump() {
-    var p = layout.pump;
-    ctx.save();
-    ctx.strokeStyle = pal.component;
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.stroke();
-
-    ctx.translate(p.x, p.y);
-    ctx.rotate(pumpAngle);
-    var i;
-    for (i = 0; i < 6; i++) {
-      ctx.rotate((Math.PI * 2) / 6);
-      ctx.beginPath();
-      ctx.moveTo(p.r * 0.25, 0);
-      ctx.lineTo(p.r * 0.85, 0);
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  function drawBoiler() {
-    var b = layout.boiler;
-    var x = b.x - b.w / 2, y = b.y - b.h / 2;
-    var r = 6;
-
-    var glowR = b.w * (1.1 + Math.sin(elapsed * 0.0009) * 0.15);
-    var grad = ctx.createRadialGradient(b.x, y + b.h, 2, b.x, y + b.h, glowR);
-    grad.addColorStop(0, pal.heatGlow);
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(b.x, y + b.h, glowR, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.strokeStyle = pal.component;
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + b.w - r, y);
-    ctx.quadraticCurveTo(x + b.w, y, x + b.w, y + r);
-    ctx.lineTo(x + b.w, y + b.h - r);
-    ctx.quadraticCurveTo(x + b.w, y + b.h, x + b.w - r, y + b.h);
-    ctx.lineTo(x + r, y + b.h);
-    ctx.quadraticCurveTo(x, y + b.h, x, y + b.h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-    ctx.stroke();
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(x, y, b.w, b.h);
-    ctx.clip();
-    ctx.fillStyle = pal.water;
-    var i, bub;
-    for (i = 0; i < bubbles.length; i++) {
-      bub = bubbles[i];
-      bub.y -= bub.speed * 16;
-      if (bub.y < 0) bub.y = 1;
-      var alpha = 1 - bub.y;
-      ctx.globalAlpha = alpha * 0.5;
-      ctx.beginPath();
-      ctx.arc(b.x + bub.x, y + bub.y * b.h, bub.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    ctx.restore();
-  }
-
-  function drawCondenser() {
-    var c = layout.condenser;
-    var x = c.x - c.w / 2, y = c.y - c.h / 2;
-    var r = 6;
-
-    ctx.strokeStyle = pal.component;
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + c.w - r, y);
-    ctx.quadraticCurveTo(x + c.w, y, x + c.w, y + r);
-    ctx.lineTo(x + c.w, y + c.h - r);
-    ctx.quadraticCurveTo(x + c.w, y + c.h, x + c.w - r, y + c.h);
-    ctx.lineTo(x + r, y + c.h);
-    ctx.quadraticCurveTo(x, y + c.h, x, y + c.h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-    ctx.stroke();
-
-    if (tier !== 'mobile') {
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(x, y, c.w, c.h);
-      ctx.clip();
-      ctx.strokeStyle = pal.pipeSteam;
-      ctx.lineWidth = 1;
-      var coils = 5, i;
-      var step = c.w / coils;
-      ctx.beginPath();
-      for (i = 0; i <= coils; i++) {
-        var cx = x + i * step;
-        if (i % 2 === 0) ctx.moveTo(cx, y + 4);
-        ctx.lineTo(cx, y + c.h - 4);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  function drawTank() {
-    var t = layout.tank;
-    ctx.strokeStyle = pal.component;
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
-    ctx.stroke();
-
-    var lvl = t.y + Math.sin(elapsed * 0.0007) * 1.2;
-    ctx.strokeStyle = pal.pipe;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(t.x - t.r * 0.6, lvl);
-    ctx.lineTo(t.x + t.r * 0.6, lvl);
-    ctx.stroke();
-  }
-
-  function update(dt) {
-    elapsed += dt;
-    pumpAngle += dt * 0.001;
-
-    mouseX += (mouseTX - mouseX) * 0.04;
-    mouseY += (mouseTY - mouseY) * 0.04;
-
-    if (!layout) return;
-    var segs = layout.particles;
-    var advance = function (list) {
-      var i, p;
-      for (i = 0; i < list.length; i++) {
-        p = list[i];
-        p.t += p.speed * dt;
-        if (p.t > 1) p.t -= 1;
-      }
-    };
-    advance(segs.water1);
-    advance(segs.water2);
-    advance(segs.water3);
-    advance(segs.steam);
-  }
-
-  function render() {
-    if (!layout) return;
-    var isLight = rootEl.classList.contains('light-mode');
-    pal = isLight ? PALETTES.light : PALETTES.dark;
-
-    ctx.clearRect(0, 0, W, H);
-    ctx.save();
-    ctx.globalAlpha = MASTER_OPACITY;
-    if (parallaxEnabled) ctx.translate(mouseX, mouseY);
-
-    var segs = layout.segs;
-    drawPipeSegment(segs.water1, pal.pipe, 1.2);
-    drawPipeSegment(segs.water2, pal.pipe, 1.2);
-    drawPipeSegment(segs.water3, pal.pipe, 1.2);
-    drawPipeSegment(segs.steam, pal.pipeSteam, 1.2);
-
-    drawBoiler();
-    drawCondenser();
-    drawPump();
-    drawTank();
-
-    var i;
-    for (i = 0; i < layout.valves.length; i++) {
-      var v = layout.valves[i];
-      drawValve(segs[v.seg], v.t, pal.valve);
-    }
-
-    var p = layout.particles;
-    drawParticlesOnSegment(segs.water1, p.water1, pal.water, pal.waterGlow, 0);
-    drawParticlesOnSegment(segs.water2, p.water2, pal.water, pal.waterGlow, 0);
-    drawParticlesOnSegment(segs.water3, p.water3, pal.water, pal.waterGlow, 0);
-    drawParticlesOnSegment(segs.steam, p.steam, pal.steam, pal.steamGlow, 1.6);
-
-    ctx.restore();
-  }
-
-  function renderStatic() {
-    if (!layout) return;
-    var isLight = rootEl.classList.contains('light-mode');
-    pal = isLight ? PALETTES.light : PALETTES.dark;
-    ctx.clearRect(0, 0, W, H);
-    ctx.save();
-    ctx.globalAlpha = MASTER_OPACITY * 0.7;
-    var segs = layout.segs;
-    drawPipeSegment(segs.water1, pal.pipe, 1.2);
-    drawPipeSegment(segs.water2, pal.pipe, 1.2);
-    drawPipeSegment(segs.water3, pal.pipe, 1.2);
-    drawPipeSegment(segs.steam, pal.pipeSteam, 1.2);
-    drawBoiler();
-    drawCondenser();
-    drawPump();
-    drawTank();
-    ctx.restore();
-  }
-
-  function frame(now) {
-    var dt = Math.min(now - lastTime, 50);
-    lastTime = now;
-    update(dt);
-    render();
-    rafId = window.requestAnimationFrame(frame);
-  }
-
-  function start() {
-    if (running) return;
-    running = true;
-    lastTime = performance.now();
-    rafId = window.requestAnimationFrame(frame);
-  }
-
-  function stop() {
-    running = false;
-    if (rafId) window.cancelAnimationFrame(rafId);
-    rafId = null;
-  }
-
-  function applyMotionPreference() {
-    stop();
-    setupCanvas();
-    if (reduceMotionMQ.matches) {
-      renderStatic();
-    } else {
-      start();
-    }
-  }
-
-  var resizeTimer = null;
-  window.addEventListener('resize', function () {
-    if (resizeTimer) clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      setupCanvas();
-      if (reduceMotionMQ.matches) renderStatic();
-    }, 150);
-  }, { passive: true });
-
-  window.addEventListener('mousemove', function (e) {
-    if (!parallaxEnabled) return;
-    var nx = (e.clientX / W) * 2 - 1;
-    var ny = (e.clientY / H) * 2 - 1;
-    mouseTX = nx * 8;
-    mouseTY = ny * 6;
-  }, { passive: true });
-
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) {
-      stop();
-    } else if (!reduceMotionMQ.matches) {
-      lastTime = performance.now();
-      start();
-    }
-  });
-
-  if (typeof reduceMotionMQ.addEventListener === 'function') {
-    reduceMotionMQ.addEventListener('change', applyMotionPreference);
-  }
-
-  applyMotionPreference();
-})();
-  </script>
   <!-- FluidMind Dynamic Content Synchronization Engine -->
   <script>
   (function() {
@@ -7537,5 +8222,8 @@
     });
   })();
   </script>
+
+  <!-- Mechanical Engineering Blueprint Background Engine -->
+  <script src="assets/js/engineering-bg.js"></script>
 </body>
 </html>
