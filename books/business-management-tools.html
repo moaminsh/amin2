@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جعبه‌ابزار تعاملی مدیریت کسب‌وکار برای مهندسان | محمدامین شریف</title>
+  <meta name="description" content="مجموعه کامل ۸ ابزار تعاملی و برخط مدیریت کسب‌وکار و استراتژی مهندسی: ماتریس پیو، SWOT، آیزنهاور، BCG، ۵ نیروی پورتر، بوم BMC، PESTEL و نمودار گانت - محمدامین شریف (دانشگاه علم و صنعت ایران)">
+
+  <!-- Google Fonts: Vazirmatn & JetBrains Mono & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg-base: #030712;
+      --bg-surface: #0b1329;
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --bg-card-hover: rgba(22, 34, 61, 0.95);
+      --border: rgba(30, 58, 95, 0.65);
+      --border-accent: rgba(20, 184, 166, 0.5);
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --accent-cyan: #00f2fe;
+      --accent-teal: #14b8a6;
+      --accent-teal-dark: #0d9488;
+      --accent-gold: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-green: #10b981;
+      --accent-purple: #a855f7;
+      --accent-blue: #3b82f6;
+
+      --font-fa: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    html.light-mode {
+      --bg-base: #f8fafc;
+      --bg-surface: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --border: #cbd5e1;
+      --border-accent: #0d9488;
+
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-dim: #64748b;
+
+      --accent-cyan: #0284c7;
+      --accent-teal: #0d9488;
+      --accent-teal-dark: #0f766e;
+      --accent-gold: #d97706;
+      --accent-rose: #e11d48;
+      --accent-green: #059669;
+      --accent-purple: #9333ea;
+      --accent-blue: #2563eb;
+
+      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-fa);
+      line-height: 1.75;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    html[lang="en"] body {
+      font-family: var(--font-en);
+      direction: ltr;
+    }
+
+    /* Ambient background glowing orbs */
+    .bg-ambient-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-glow-teal {
+      position: absolute;
+      top: -100px;
+      right: -150px;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, rgba(20, 184, 166, 0) 70%);
+      filter: blur(80px);
+    }
+    .ambient-glow-cyan {
+      position: absolute;
+      bottom: 15%;
+      left: -150px;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(0, 242, 254, 0) 70%);
+      filter: blur(80px);
+    }
+
+    /* Container */
+    .tools-container {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header Nav */
+    .tools-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(3, 7, 18, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      transition: all 0.25s ease;
+    }
+    .light-mode .tools-navbar {
+      background: rgba(255, 255, 255, 0.92);
+    }
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 14.5px;
+      transition: color 0.2s ease;
+    }
+    .nav-brand:hover {
+      color: var(--accent-cyan);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-nav-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-nav-action:hover {
+      border-color: var(--accent-teal);
+      background: rgba(20, 184, 166, 0.15);
+      color: var(--text-main);
+    }
+    .btn-nav-primary {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.4), rgba(2, 132, 199, 0.4));
+      border-color: rgba(20, 184, 166, 0.6);
+      color: #ffffff;
+    }
+    .light-mode .btn-nav-primary {
+      background: #0d9488;
+      border-color: #0f766e;
+      color: #ffffff;
+    }
+    .btn-nav-primary:hover {
+      background: #0d9488;
+      color: #ffffff;
+    }
+
+    /* Page Hero Header */
+    .tools-hero {
+      padding: 30px 0 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .hero-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .tools-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(20, 184, 166, 0.15);
+      border: 1px solid rgba(20, 184, 166, 0.4);
+      color: #2dd4bf;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .light-mode .tools-badge {
+      background: #ccfbf1;
+      border-color: #5eead4;
+      color: #0f766e;
+    }
+    .tools-author-tag {
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+    .tools-main-title {
+      font-size: clamp(22px, 3.2vw, 34px);
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .tools-subtitle {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      max-width: 900px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* Tab Switcher Navigation */
+    .tools-tab-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .tools-tab-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .tools-tab-bar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 10px;
+    }
+    .tool-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .tool-tab-btn:hover {
+      background: rgba(20, 184, 166, 0.12);
+      border-color: rgba(20, 184, 166, 0.4);
+      color: var(--text-main);
+    }
+    .tool-tab-btn.active {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.35), rgba(2, 132, 199, 0.35));
+      border-color: var(--accent-teal);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+    }
+    .light-mode .tool-tab-btn.active {
+      background: #0d9488;
+      border-color: #0f766e;
+      color: #ffffff;
+    }
+
+    /* Tool Workspace Panels */
+    .tool-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .tool-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Card Styling */
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-md);
+    }
+    .tool-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .tool-card-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tool-card-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      max-width: 760px;
+      line-height: 1.7;
+    }
+
+    /* Common Buttons & Inputs */
+    .pdm-btn-act {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pdm-btn-act:hover {
+      background: rgba(20, 184, 166, 0.15);
+      border-color: rgba(20, 184, 166, 0.4);
+      color: var(--text-main);
+    }
+    .pdm-btn-copy {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+    .pdm-btn-copy:hover {
+      background: #10b981;
+      color: #ffffff;
+    }
+    .light-mode .pdm-btn-copy {
+      background: #d1fae5;
+      border-color: #86efac;
+      color: #065f46;
+    }
+    .common-input {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13px;
+    }
+    .common-input:focus {
+      border-color: var(--accent-cyan);
+      outline: none;
+    }
+    .task-del-btn {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      opacity: 0.65;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+    .task-del-btn:hover {
+      opacity: 1;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    /* ============================================================
+       TOOL 2: SWOT
+       ============================================================ */
+    .swot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .swot-quadrant {
+      background: var(--bg-surface);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+    .swot-s { border-top: 4px solid #10b981; }
+    .swot-w { border-top: 4px solid #f43f5e; }
+    .swot-o { border-top: 4px solid #00f2fe; }
+    .swot-t { border-top: 4px solid #f59e0b; }
+    .swot-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 12px 0;
+      flex-grow: 1;
+    }
+    .swot-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    /* ============================================================
+       TOOL 3: EISENHOWER MATRIX
+       ============================================================ */
+    .eisen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .eisen-quadrant {
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid;
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      min-height: 270px;
+    }
+    .quadrant-q1 {
+      border-color: rgba(244, 63, 94, 0.4);
+      background: rgba(244, 63, 94, 0.05);
+    }
+    .quadrant-q2 {
+      border-color: rgba(20, 184, 166, 0.4);
+      background: rgba(20, 184, 166, 0.05);
+    }
+    .quadrant-q3 {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.05);
+    }
+    .quadrant-q4 {
+      border-color: rgba(100, 116, 139, 0.4);
+      background: rgba(100, 116, 139, 0.05);
+    }
+    .quadrant-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .quadrant-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .q1-color { color: #f43f5e; }
+    .q2-color { color: #14b8a6; }
+    .q3-color { color: #f59e0b; }
+    .q4-color { color: #94a3b8; }
+    .quadrant-count {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+    }
+    .quadrant-tasks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .task-item:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    /* ============================================================
+       TOOL 4: BCG MATRIX
+       ============================================================ */
+    .bcg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .bcg-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .bcg-quadrant {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
+      position: relative;
+    }
+    .bcg-stars { border-top: 4px solid #f59e0b; background: rgba(245, 158, 11, 0.04); }
+    .bcg-question { border-top: 4px solid #3b82f6; background: rgba(59, 130, 246, 0.04); }
+    .bcg-cows { border-top: 4px solid #10b981; background: rgba(16, 185, 129, 0.04); }
+    .bcg-dogs { border-top: 4px solid #64748b; background: rgba(100, 116, 139, 0.04); }
+
+    .bcg-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .bcg-title {
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bcg-strat-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid;
+    }
+    .bcg-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+    .bcg-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    /* ============================================================
+       TOOL 5: PORTER'S 5 FORCES
+       ============================================================ */
+    .porter-forces-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .porter-force-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .porter-force-info {
+      flex: 1;
+      min-width: 250px;
+    }
+    .porter-force-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .porter-force-desc {
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+    .porter-force-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .porter-level-badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      min-width: 80px;
+      text-align: center;
+    }
+    .porter-summary-box {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(13, 148, 136, 0.15));
+      border: 1px solid rgba(20, 184, 166, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .light-mode .porter-summary-box {
+      background: #f0fdfa;
+      border-color: #5eead4;
+    }
+    .porter-gauge-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 3px solid #14b8a6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       TOOL 6: BMC
+       ============================================================ */
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    @media (max-width: 992px) {
+      .bmc-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .bmc-grid { grid-template-columns: 1fr; }
+    }
+    .bmc-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bmc-block-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .bmc-block-notes {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .bmc-cost { grid-column: span 2; }
+    .bmc-rev { grid-column: span 3; }
+    @media (max-width: 992px) {
+      .bmc-cost, .bmc-rev { grid-column: span 1; }
+    }
+
+    /* ============================================================
+       TOOL 7: PESTEL
+       ============================================================ */
+    .pestel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .pestel-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pestel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pestel-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+      color: #ffffff;
+    }
+    .p-pol { background: #ef4444; }
+    .p-eco { background: #f59e0b; }
+    .p-soc { background: #10b981; }
+    .p-tec { background: #00f2fe; color: #030712; }
+    .p-env { background: #059669; }
+    .p-leg { background: #8b5cf6; }
+
+    /* ============================================================
+       TOOL 8: GANTT CHART
+       ============================================================ */
+    .gantt-wrapper {
+      margin-top: 20px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-surface);
+      padding: 16px;
+    }
+    .gantt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      min-width: 800px;
+    }
+    .gantt-table th, .gantt-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .gantt-table th:first-child, .gantt-table td:first-child {
+      text-align: right;
+      font-weight: 700;
+      width: 220px;
+      white-space: nowrap;
+    }
+    .gantt-bar-cell {
+      position: relative;
+      height: 38px;
+      padding: 4px 0 !important;
+    }
+    .gantt-timeline-bar {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #0d9488, #0284c7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    .gantt-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(16, 185, 129, 0.7);
+      z-index: 1;
+    }
+    .gantt-bar-label {
+      position: relative;
+      z-index: 2;
+      padding: 0 6px;
+      white-space: nowrap;
+    }
+
+    /* Floating Toast */
+    .pdm-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(20, 184, 166, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 999999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+    .pdm-toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Background Glows -->
+  <div class="bg-ambient-layer" aria-hidden="true">
+    <div class="ambient-glow-teal"></div>
+    <div class="ambient-glow-cyan"></div>
+  </div>
+
+  <!-- Top Navigation -->
+  <header class="tools-navbar">
+    <div class="tools-container nav-content">
+      <a href="../index.html" class="nav-brand">
+        <i data-lucide="arrow-right" style="width: 18px; height: 18px; color: var(--accent-cyan);"></i>
+        <span>بازگشت به پورتفولیو مهندسی</span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="business-management-for-engineers.html" class="btn-nav-action btn-nav-primary">
+          <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
+          <span>مطالعه متن کامل جزوه</span>
+        </a>
+
+        <button class="btn-nav-action" onclick="window.print()" title="چاپ یا خروجی PDF">
+          <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
+          <span>چاپ / PDF</span>
+        </button>
+
+        <button class="btn-nav-action" onclick="toggleLocalTheme()" title="تغییر تم روز و شب">
+          <i data-lucide="sun" style="width: 14px; height: 14px;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="tools-container" style="flex: 1; padding-top: 10px; padding-bottom: 60px;">
+
+    <!-- Hero Header -->
+    <section class="tools-hero">
+      <div class="hero-badge-row">
+        <span class="tools-badge">
+          <i data-lucide="calculator" style="width: 13px; height: 13px;"></i>
+          <span>جعبه‌ابزار تعاملی و یکپارچه مدیریت کسب‌وکار (۸ ابزار کاربردی)</span>
+        </span>
+        <span class="tools-author-tag">برگرفته از جزوه اختصاصی مهندس محمدامین شریف • دانشکده مهندسی مکانیک دانشگاه علم و صنعت ایران</span>
+      </div>
+
+      <h1 class="tools-main-title">جعبه‌ابزار تحلیلی و استراتژیک مدیریت مهندسی</h1>
+      <p class="tools-subtitle">
+        مجموعه کامل و تعاملی ابزارهای مدیریت کسب‌وکار برای مهندسان. با انتخاب هر ابزار می‌توانید فرضیات و داده‌های واقعی پروژه خود را وارد کنید، گزینه‌ها را بسنجید و خروجی تحلیلی مستند دریافت کنید.
+      </p>
+
+      <!-- All 8 Tool Switcher Tabs -->
+      <nav class="tools-tab-bar" aria-label="انتخاب ابزار">
+        <button type="button" class="tool-tab-btn active" data-tab="tabPugh" onclick="switchToolTab('tabPugh', this)">
+          <i data-lucide="scale" style="width: 15px; height: 15px;"></i>
+          <span>۱. ماتریس تصمیم‌گیری وزنی (Pugh)</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabSwot" onclick="switchToolTab('tabSwot', this)">
+          <i data-lucide="compass" style="width: 15px; height: 15px;"></i>
+          <span>۲. تحلیل استراتژیک SWOT</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabEisenhower" onclick="switchToolTab('tabEisenhower', this)">
+          <i data-lucide="check-square" style="width: 15px; height: 15px;"></i>
+          <span>۳. ماتریس اولویت‌بندی آیزنهاور</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabBcg" onclick="switchToolTab('tabBcg', this)">
+          <i data-lucide="pie-chart" style="width: 15px; height: 15px;"></i>
+          <span>۴. ماتریس رشد-سهم BCG</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabPorter" onclick="switchToolTab('tabPorter', this)">
+          <i data-lucide="shield" style="width: 15px; height: 15px;"></i>
+          <span>۵. مدل ۵ نیروی پورتر</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabBmc" onclick="switchToolTab('tabBmc', this)">
+          <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+          <span>۶. بوم مدل کسب‌وکار (BMC)</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabPestel" onclick="switchToolTab('tabPestel', this)">
+          <i data-lucide="globe" style="width: 15px; height: 15px;"></i>
+          <span>۷. تحلیل محیط کلان PESTEL</span>
+        </button>
+        <button type="button" class="tool-tab-btn" data-tab="tabGantt" onclick="switchToolTab('tabGantt', this)">
+          <i data-lucide="calendar" style="width: 15px; height: 15px;"></i>
+          <span>۸. نمودار گانت زمان‌بندی</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- ==================== TAB 1: PUGH DECISION MATRIX ==================== -->
+    <section id="tabPugh" class="tool-panel active">
+      <div id="businessDecisionToolWorkbench"></div>
+    </section>
+
+    <!-- ==================== TAB 2: SWOT ANALYSIS ==================== -->
+    <section id="tabSwot" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="compass" style="width: 20px; height: 20px; color: var(--accent-cyan);"></i>
+              <span>تحلیل استراتژیک SWOT تعاملی</span>
+            </h2>
+            <p class="tool-card-desc">
+              ارزیابی ماتریسی نقاط قوت و ضعف درونی پروژه در کنار فرصت‌ها و تهدیدهای محیط بیرونی برای جهت‌دهی به تصمیم‌های استراتژیک مهندسی.
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copySwotReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی ماتریس SWOT</span>
+          </button>
+        </div>
+
+        <div class="swot-grid">
+          <!-- Strengths -->
+          <div class="swot-quadrant swot-s">
+            <h3 style="color: #10b981; font-size: 15.5px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="shield-check" style="width: 18px; height: 18px;"></i>
+              <span>نقاط قوت (Strengths)</span>
+            </h3>
+            <p style="font-size: 12px; color: var(--text-dim);">عوامل مثبت و مزیت‌های درونی تیم</p>
+            <ul id="swotSList" class="swot-list">
+              <li class="swot-item"><span>تسلط به مدلسازی CAD و شبیه‌سازی عددی CFD</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+              <li class="swot-item"><span>تیم چابک مهندسی با دسترسی به کارگاه‌های ساخت</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+            </ul>
+            <div style="display: flex; gap: 6px; margin-top: auto;">
+              <input type="text" id="swotSInput" class="common-input" style="flex: 1;" placeholder="نقطه قوت جدید...">
+              <button type="button" class="pdm-btn-act" onclick="addSwotItem('swotSList', 'swotSInput')">+</button>
+            </div>
+          </div>
+
+          <!-- Weaknesses -->
+          <div class="swot-quadrant swot-w">
+            <h3 style="color: #f43f5e; font-size: 15.5px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i>
+              <span>نقاط ضعف (Weaknesses)</span>
+            </h3>
+            <p style="font-size: 12px; color: var(--text-dim);">تنگناها و محدودیت‌های درونی پروژه</p>
+            <ul id="swotWList" class="swot-list">
+              <li class="swot-item"><span>سرمایه نقدینگی اولیه محدود برای سفارش عمده</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+              <li class="swot-item"><span>عدم سابقه شناخته‌شده برند در بازار صنعتی</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+            </ul>
+            <div style="display: flex; gap: 6px; margin-top: auto;">
+              <input type="text" id="swotWInput" class="common-input" style="flex: 1;" placeholder="نقطه ضعف جدید...">
+              <button type="button" class="pdm-btn-act" onclick="addSwotItem('swotWList', 'swotWInput')">+</button>
+            </div>
+          </div>
+
+          <!-- Opportunities -->
+          <div class="swot-quadrant swot-o">
+            <h3 style="color: #00f2fe; font-size: 15.5px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="trending-up" style="width: 18px; height: 18px;"></i>
+              <span>فرصت‌ها (Opportunities)</span>
+            </h3>
+            <p style="font-size: 12px; color: var(--text-dim);">روندهای مثبت بازار و فضای صنعت</p>
+            <ul id="swotOList" class="swot-list">
+              <li class="swot-item"><span>رشد تمایل صنایع به قطعات سفارشی و تحویل ۴۸ ساعته</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+              <li class="swot-item"><span>افزایش برون‌سپاری پروژه‌های مهندسی در شرکت‌ها</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+            </ul>
+            <div style="display: flex; gap: 6px; margin-top: auto;">
+              <input type="text" id="swotOInput" class="common-input" style="flex: 1;" placeholder="فرصت جدید...">
+              <button type="button" class="pdm-btn-act" onclick="addSwotItem('swotOList', 'swotOInput')">+</button>
+            </div>
+          </div>
+
+          <!-- Threats -->
+          <div class="swot-quadrant swot-t">
+            <h3 style="color: #f59e0b; font-size: 15.5px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="shield-alert" style="width: 18px; height: 18px;"></i>
+              <span>تهدیدها (Threats)</span>
+            </h3>
+            <p style="font-size: 12px; color: var(--text-dim);">ریسک‌ها و فشارهای محیط بیرونی</p>
+            <ul id="swotTList" class="swot-list">
+              <li class="swot-item"><span>نوسانات شدید قیمت مواد اولیه، فیلامنت و فلزات</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+              <li class="swot-item"><span>ورود رقبای با سرمایه بالا و تجهیزات مدرن‌تر</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button></li>
+            </ul>
+            <div style="display: flex; gap: 6px; margin-top: auto;">
+              <input type="text" id="swotTInput" class="common-input" style="flex: 1;" placeholder="تهدید جدید...">
+              <button type="button" class="pdm-btn-act" onclick="addSwotItem('swotTList', 'swotTInput')">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: EISENHOWER MATRIX ==================== -->
+    <section id="tabEisenhower" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="check-square" style="width: 20px; height: 20px; color: #14b8a6;"></i>
+              <span>ماتریس اولویت‌بندی آیزنهاور (Eisenhower Matrix)</span>
+            </h2>
+            <p class="tool-card-desc">
+              دسته‌بندی وظایف و کارهای روزانه بر اساس دو مؤلفه <strong>«فوریت»</strong> و <strong>«اهمیت»</strong> برای رهایی از تله کارهای فوری ولی کم‌اثر.
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copyEisenhowerReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی لیست وظایف</span>
+          </button>
+        </div>
+
+        <!-- Task Input -->
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+          <input type="text" id="eisenTaskInput" class="common-input" style="flex: 1; min-width: 240px;" placeholder="عنوان وظیفه جدید را بنویسید (مثلاً: تست ارتعاش پروانه پمپ...)">
+          <select id="eisenQuadrantSelect" class="common-input">
+            <option value="q1">🔴 ۱. فوری و مهم (انجام فوری)</option>
+            <option value="q2" selected>🟢 ۲. غیرفوری اما مهم (برنامه‌ریزی و رشد)</option>
+            <option value="q3">🟡 ۳. فوری اما غیرمهم (واگذاری و اتوماسیون)</option>
+            <option value="q4">⚪ ۴. غیرفوری و غیرمهم (حذف یا به حداقل رساندن)</option>
+          </select>
+          <button type="button" class="btn-nav-action btn-nav-primary" onclick="addEisenhowerTask()">
+            <i data-lucide="plus" style="width: 15px; height: 15px;"></i>
+            <span>افزودن وظیفه</span>
+          </button>
+        </div>
+
+        <!-- 4 Quadrants -->
+        <div class="eisen-grid">
+          <div class="eisen-quadrant quadrant-q1">
+            <div class="quadrant-header">
+              <div class="quadrant-title q1-color">
+                <i data-lucide="flame" style="width: 16px; height: 16px;"></i>
+                <span>فوری و مهم (Do First)</span>
+              </div>
+              <span id="q1Count" class="quadrant-count">۲ مورد</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 8px;">بحران‌ها و تحویل‌های فوری فردا</p>
+            <ul id="q1List" class="quadrant-tasks"></ul>
+          </div>
+
+          <div class="eisen-quadrant quadrant-q2">
+            <div class="quadrant-header">
+              <div class="quadrant-title q2-color">
+                <i data-lucide="target" style="width: 16px; height: 16px;"></i>
+                <span>غیرفوری اما مهم (Schedule)</span>
+              </div>
+              <span id="q2Count" class="quadrant-count">۲ مورد</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 8px;">یادگیری نرم‌افزار، مقاله‌نویسی، ورزش و رشد</p>
+            <ul id="q2List" class="quadrant-tasks"></ul>
+          </div>
+
+          <div class="eisen-quadrant quadrant-q3">
+            <div class="quadrant-header">
+              <div class="quadrant-title q3-color">
+                <i data-lucide="share-2" style="width: 16px; height: 16px;"></i>
+                <span>فوری اما غیرمهم (Delegate)</span>
+              </div>
+              <span id="q3Count" class="quadrant-count">۱ مورد</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 8px;">وقفه‌ها و جلسات تکراری بی‌حاصل</p>
+            <ul id="q3List" class="quadrant-tasks"></ul>
+          </div>
+
+          <div class="eisen-quadrant quadrant-q4">
+            <div class="quadrant-header">
+              <div class="quadrant-title q4-color">
+                <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+                <span>غیرفوری و غیرمهم (Eliminate)</span>
+              </div>
+              <span id="q4Count" class="quadrant-count">۱ مورد</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 8px;">اسکرول بی‌هدف در شبکه‌های اجتماعی</p>
+            <ul id="q4List" class="quadrant-tasks"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: BCG MATRIX ==================== -->
+    <section id="tabBcg" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="pie-chart" style="width: 20px; height: 20px; color: #f59e0b;"></i>
+              <span>ماتریس رشد-سهم بوستون (BCG Growth-Share Matrix)</span>
+            </h2>
+            <p class="tool-card-desc">
+              تحلیل سبد محصولات و خدمات مهندسی بر اساس دو متغیر <strong>«نرخ رشد بازار»</strong> و <strong>«سهم نسبی بازار»</strong> برای تخصیص بهینه منابع مالی.
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copyBcgReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی سبد BCG</span>
+          </button>
+        </div>
+
+        <!-- Add Item Bar -->
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+          <input type="text" id="bcgItemInput" class="common-input" style="flex: 1; min-width: 240px;" placeholder="نام محصول، خدمت یا قطعه (مثلاً: خدمات تست ارتعاشات...)">
+          <select id="bcgQuadSelect" class="common-input">
+            <option value="stars">⭐ ستاره‌ها (رشد بالا، سهم بالا)</option>
+            <option value="question">❓ علامت‌های سؤال (رشد بالا، سهم پایین)</option>
+            <option value="cows">🐄 گاوهای شیرده (رشد پایین، سهم بالا)</option>
+            <option value="dogs">🐕 سگ‌ها (رشد پایین، سهم پایین)</option>
+          </select>
+          <button type="button" class="btn-nav-action btn-nav-primary" onclick="addBcgItem()">
+            <i data-lucide="plus" style="width: 15px; height: 15px;"></i>
+            <span>افزودن به سبد</span>
+          </button>
+        </div>
+
+        <div class="bcg-grid">
+          <!-- Stars -->
+          <div class="bcg-quadrant bcg-stars">
+            <div class="bcg-head">
+              <div class="bcg-title" style="color: #f59e0b;">
+                <i data-lucide="star" style="width: 18px; height: 18px;"></i>
+                <span>ستاره‌ها (Stars)</span>
+              </div>
+              <span class="bcg-strat-pill" style="border-color: #f59e0b; color: #f59e0b;">سرمایه‌گذاری برای حفظ رهبری</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 10px;">رشد بازار: زیاد | سهم بازار: زیاد</p>
+            <ul id="bcgStarsList" class="bcg-list">
+              <li class="bcg-item"><span>پرینت سه‌بعدی قطعات کامپوزیت صنعتی</span><button class="task-del-btn" onclick="removeBcgItem(this)">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Question Marks -->
+          <div class="bcg-quadrant bcg-question">
+            <div class="bcg-head">
+              <div class="bcg-title" style="color: #3b82f6;">
+                <i data-lucide="help-circle" style="width: 18px; height: 18px;"></i>
+                <span>علامت‌های سؤال (Question Marks)</span>
+              </div>
+              <span class="bcg-strat-pill" style="border-color: #3b82f6; color: #3b82f6;">ارزیابی دقیق یا خروج هوشمند</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 10px;">رشد بازار: زیاد | سهم بازار: کم</p>
+            <ul id="bcgQuestionList" class="bcg-list">
+              <li class="bcg-item"><span>هوش مصنوعی بازرسی چشمی جوشکاری</span><button class="task-del-btn" onclick="removeBcgItem(this)">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Cash Cows -->
+          <div class="bcg-quadrant bcg-cows">
+            <div class="bcg-head">
+              <div class="bcg-title" style="color: #10b981;">
+                <i data-lucide="coins" style="width: 18px; height: 18px;"></i>
+                <span>گاوهای شیرده (Cash Cows)</span>
+              </div>
+              <span class="bcg-strat-pill" style="border-color: #10b981; color: #10b981;">دوشیدن نقدینگی پایدار</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 10px;">رشد بازار: کم | سهم بازار: زیاد</p>
+            <ul id="bcgCowsList" class="bcg-list">
+              <li class="bcg-item"><span>خدمات مدلسازی CAD و نقشه ساخت CNC</span><button class="task-del-btn" onclick="removeBcgItem(this)">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Dogs -->
+          <div class="bcg-quadrant bcg-dogs">
+            <div class="bcg-head">
+              <div class="bcg-title" style="color: #94a3b8;">
+                <i data-lucide="slash" style="width: 18px; height: 18px;"></i>
+                <span>سگ‌ها (Dogs)</span>
+              </div>
+              <span class="bcg-strat-pill" style="border-color: #64748b; color: #94a3b8;">توقف خط یا واگذاری</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 10px;">رشد بازار: کم | سهم بازار: کم</p>
+            <ul id="bcgDogsList" class="bcg-list">
+              <li class="bcg-item"><span>تولید چرخ‌دنده‌های پلاستیکی استاندارد</span><button class="task-del-btn" onclick="removeBcgItem(this)">✕</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: PORTER'S 5 FORCES ==================== -->
+    <section id="tabPorter" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="shield" style="width: 20px; height: 20px; color: #00f2fe;"></i>
+              <span>مدل ۵ نیروی رقابتی مایکل پورتر (Porter's 5 Forces)</span>
+            </h2>
+            <p class="tool-card-desc">
+              سنجش شدت نیروهای ساختاری صنعت برای محاسبه <strong>«شاخص جذابیت و سودآوری بازار»</strong>. شدت هر نیرو را از ۱ (خیلی ضعیف) تا ۵ (بسیار شدید) تنظیم کنید.
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copyPorterReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی تحلیل پورتر</span>
+          </button>
+        </div>
+
+        <div class="porter-forces-list">
+          <!-- Force 1 -->
+          <div class="porter-force-item">
+            <div class="porter-force-info">
+              <div class="porter-force-name">
+                <i data-lucide="swords" style="width: 16px; height: 16px; color: #f43f5e;"></i>
+                <span>۱. شدت رقابت میان رقبای موجود (Competitive Rivalry)</span>
+              </div>
+              <div class="porter-force-desc">تعداد کارگاه‌های فعال و رقابت منفی بر سر کاهش قیمت</div>
+            </div>
+            <div class="porter-force-ctrl">
+              <input type="range" id="pForce1" min="1" max="5" value="4" oninput="updatePorterScore()" style="width: 120px; accent-color: #14b8a6;">
+              <span id="pForce1Val" class="porter-level-badge" style="background: rgba(244, 63, 94, 0.2); color: #f43f5e;">شدید (۴)</span>
+            </div>
+          </div>
+
+          <!-- Force 2 -->
+          <div class="porter-force-item">
+            <div class="porter-force-info">
+              <div class="porter-force-name">
+                <i data-lucide="user-plus" style="width: 16px; height: 16px; color: #f59e0b;"></i>
+                <span>۲. تهدید ورود تازه‌واردها (Threat of New Entrants)</span>
+              </div>
+              <div class="porter-force-desc">سادگی خرید دستگاه فرز رومیزی و ورود فارغ‌التحصیلان جدید</div>
+            </div>
+            <div class="porter-force-ctrl">
+              <input type="range" id="pForce2" min="1" max="5" value="3" oninput="updatePorterScore()" style="width: 120px; accent-color: #14b8a6;">
+              <span id="pForce2Val" class="porter-level-badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">متوسط (۳)</span>
+            </div>
+          </div>
+
+          <!-- Force 3 -->
+          <div class="porter-force-item">
+            <div class="porter-force-info">
+              <div class="porter-force-name">
+                <i data-lucide="users" style="width: 16px; height: 16px; color: #3b82f6;"></i>
+                <span>۳. قدرت چانه‌زنی خریداران (Bargaining Power of Buyers)</span>
+              </div>
+              <div class="porter-force-desc">امکان استعلام قیمت همزمان کارفرمایان از چند کارگاه ساخت</div>
+            </div>
+            <div class="porter-force-ctrl">
+              <input type="range" id="pForce3" min="1" max="5" value="4" oninput="updatePorterScore()" style="width: 120px; accent-color: #14b8a6;">
+              <span id="pForce3Val" class="porter-level-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">زیاد (۴)</span>
+            </div>
+          </div>
+
+          <!-- Force 4 -->
+          <div class="porter-force-item">
+            <div class="porter-force-info">
+              <div class="porter-force-name">
+                <i data-lucide="truck" style="width: 16px; height: 16px; color: #a855f7;"></i>
+                <span>۴. قدرت چانه‌زنی تأمین‌کنندگان (Bargaining Power of Suppliers)</span>
+              </div>
+              <div class="porter-force-desc">انحصار در فروش آلیاژهای خاص و ابزارهای برش خارجی</div>
+            </div>
+            <div class="porter-force-ctrl">
+              <input type="range" id="pForce4" min="1" max="5" value="3" oninput="updatePorterScore()" style="width: 120px; accent-color: #14b8a6;">
+              <span id="pForce4Val" class="porter-level-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">متوسط (۳)</span>
+            </div>
+          </div>
+
+          <!-- Force 5 -->
+          <div class="porter-force-item">
+            <div class="porter-force-info">
+              <div class="porter-force-name">
+                <i data-lucide="repeat" style="width: 16px; height: 16px; color: #10b981;"></i>
+                <span>۵. تهدید خدمات و محصولات جایگزین (Threat of Substitutes)</span>
+              </div>
+              <div class="porter-force-desc">جایگزینی روش‌های ساخت سریع و پرینت فلزی به جای براده‌برداری</div>
+            </div>
+            <div class="porter-force-ctrl">
+              <input type="range" id="pForce5" min="1" max="5" value="2" oninput="updatePorterScore()" style="width: 120px; accent-color: #14b8a6;">
+              <span id="pForce5Val" class="porter-level-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">کم (۲)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculated Gauge & Verdict -->
+        <div class="porter-summary-box">
+          <div class="porter-gauge-circle" id="porterTotalScore">۱۶</div>
+          <div style="flex: 1; min-width: 260px;">
+            <div style="font-size: 11.5px; font-weight: 700; color: #2dd4bf; margin-bottom: 2px;">شاخص کلی فشار رقابتی صنعت (از ۲۵):</div>
+            <div id="porterVerdictTitle" style="font-size: 16px; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">
+              فشار رقابتی متوسط به بالا (نیازمند تمایز فنی و کیفیت تحویل)
+            </div>
+            <p id="porterVerdictDesc" style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+              صنعت سودآور است اما به دلیل قدرت بالای کارفرمایان و رقابت قیمتی، بقا تنها از طریق دقت تلرانسی بالا، زمان تحویل سریع و ایجاد ارزش افزوده مهندسی ممکن است.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: BUSINESS MODEL CANVAS ==================== -->
+    <section id="tabBmc" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="layout-grid" style="width: 20px; height: 20px; color: #00f2fe;"></i>
+              <span>بوم مدل کسب‌وکار تعاملی (Business Model Canvas)</span>
+            </h2>
+            <p class="tool-card-desc">
+              چارچوب جامع ۹ بخشی برای تحلیل خلق ارزش، ارتباط با مشتری و توازن مالی در پروژه‌ها. روی هر جعبه می‌توانید مستقیماً تایپ و ویرایش کنید.
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copyBmcReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی بوم مدل کسب‌وکار</span>
+          </button>
+        </div>
+
+        <div class="bmc-grid">
+          <!-- 1. Key Partners -->
+          <div class="bmc-block">
+            <div class="bmc-block-header">
+              <i data-lucide="handshake" style="width: 15px; height: 15px;"></i>
+              <span>شرکای کلیدی</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • کارگاه‌های فرز و تراش CNC همکار<br>
+              • تأمین‌کنندگان فیلامنت و اینسرت‌های برش<br>
+              • اساتید و آزمایشگاه‌های دانشگاه علم و صنعت
+            </div>
+          </div>
+
+          <!-- 2. Key Activities -->
+          <div class="bmc-block">
+            <div class="bmc-block-header">
+              <i data-lucide="cog" style="width: 15px; height: 15px;"></i>
+              <span>فعالیت‌های کلیدی</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • طراحی CAD و شبیه‌سازی عددی CFD/FEA<br>
+              • کنترل کیفی ابعادی با CMM<br>
+              • ساخت نمونه اولیه و تست میدانی
+            </div>
+          </div>
+
+          <!-- 3. Value Proposition -->
+          <div class="bmc-block" style="border: 1.5px solid var(--accent-cyan);">
+            <div class="bmc-block-header" style="color: var(--accent-cyan);">
+              <i data-lucide="gift" style="width: 15px; height: 15px;"></i>
+              <span>ارزش پیشنهادی</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • تحویل قطعه اولیه ظرف ۴۸ ساعت<br>
+              • گزارش اعتبارسنجی مهندسی همراه با قطعه<br>
+              • بهینه‌سازی توپولوژی و کاهش وزن قطعات
+            </div>
+          </div>
+
+          <!-- 4. Customer Relationships -->
+          <div class="bmc-block">
+            <div class="bmc-block-header">
+              <i data-lucide="heart" style="width: 15px; height: 15px;"></i>
+              <span>ارتباط با مشتریان</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • مشاوره مهندسی تخصصی پیش از ساخت<br>
+              • اطلاع‌رسانی تصویری مراحل ماشین‌کاری<br>
+              • ضمانت تعویض در صورت عدم تطابق با نقشه
+            </div>
+          </div>
+
+          <!-- 5. Customer Segments -->
+          <div class="bmc-block">
+            <div class="bmc-block-header">
+              <i data-lucide="users" style="width: 15px; height: 15px;"></i>
+              <span>بخش‌های مشتریان</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • استارتاپ‌های سخت‌افزاری و رباتیک<br>
+              • دانشجویان ارشد و دکتری مکانیک<br>
+              • کارخانجات صنعتی با نیاز به قطعات یدکی سفارشی
+            </div>
+          </div>
+
+          <!-- 6. Cost Structure -->
+          <div class="bmc-block bmc-cost">
+            <div class="bmc-block-header">
+              <i data-lucide="credit-card" style="width: 15px; height: 15px;"></i>
+              <span>ساختار هزینه‌ها (Cost Structure)</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • استهلاک ابزار برش و دستگاه‌های فرز<br>
+              • خرید مواد اولیه فلزی و فیلامنت‌های نسوز<br>
+              • لایسنس نرم‌افزارهای شبیه‌سازی و فضای ابری
+            </div>
+          </div>
+
+          <!-- 7. Revenue Streams -->
+          <div class="bmc-block bmc-rev">
+            <div class="bmc-block-header">
+              <i data-lucide="dollar-sign" style="width: 15px; height: 15px; color: #10b981;"></i>
+              <span style="color: #10b981;">جریان‌های درآمدی (Revenue Streams)</span>
+            </div>
+            <div class="bmc-block-notes" contenteditable="true">
+              • کارمزد ساعتی تحلیل‌های شبیه‌سازی و طراحی CAD<br>
+              • فروش قطعات ساخته‌شده بر اساس پیچیدگی هندسی و زمان دستگاه<br>
+              • قراردادهای نگهداری و بازطراحی قطعات فرسوده صنعتی
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 7: PESTEL MACRO ANALYSIS ==================== -->
+    <section id="tabPestel" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="globe" style="width: 20px; height: 20px; color: #a855f7;"></i>
+              <span>تحلیل محیط کلان PESTEL (شش بعد استراتژیک)</span>
+            </h2>
+            <p class="tool-card-desc">
+              شناسایی فرصت‌ها و تهدیدهای کلان در ۶ حوزه: سیاسی (Political)، اقتصادی (Economic)، اجتماعی (Social)، فناوری (Technological)، محیط زیست (Environmental) و حقوقی (Legal).
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copyPestelReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی گزارش PESTEL</span>
+          </button>
+        </div>
+
+        <div class="pestel-grid">
+          <!-- Political -->
+          <div class="pestel-card">
+            <div class="pestel-header">
+              <span class="pestel-letter p-pol">P</span>
+              <span>عوامل سیاسی (Political)</span>
+            </div>
+            <ul class="swot-list" id="pestelPList">
+              <li class="swot-item"><span>تعرفه‌های واردات قطعات صنعتی و حمایت از تولید داخل</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+              <li class="swot-item"><span>حمایت‌های پارک‌های علم و فناوری از شرکت‌های دانش‌بنیان</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Economic -->
+          <div class="pestel-card">
+            <div class="pestel-header">
+              <span class="pestel-letter p-eco">E</span>
+              <span>عوامل اقتصادی (Economic)</span>
+            </div>
+            <ul class="swot-list" id="pestelEList">
+              <li class="swot-item"><span>نوسانات نرخ ارز و تأثیر آن بر قیمت آلیاژهای وارداتی</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+              <li class="swot-item"><span>تسهیلات بانکی کم‌بهره برای خرید ماشین‌آلات CNC</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Social -->
+          <div class="pestel-card">
+            <div class="pestel-header">
+              <span class="pestel-letter p-soc">S</span>
+              <span>عوامل اجتماعی و فرهنگی (Social)</span>
+            </div>
+            <ul class="swot-list" id="pestelSList">
+              <li class="swot-item"><span>رشد تمایل مهندسان جوان به فریلنسری و پروژه‌محوری</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+              <li class="swot-item"><span>اعتماد فزاینده صنایع به توان تیم‌های دانشگاهی نخبه</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Technological -->
+          <div class="pestel-card">
+            <div class="pestel-header">
+              <span class="pestel-letter p-tec">T</span>
+              <span>عوامل فناوری (Technological)</span>
+            </div>
+            <ul class="swot-list" id="pestelTList">
+              <li class="swot-item"><span>ظهور پرینترهای سه‌بعدی فلزی با دقت زیر ۱۰ میکرون</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+              <li class="swot-item"><span>ادغام هوش مصنوعی در تولید مسیر ابزار (CAM Optimization)</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Environmental -->
+          <div class="pestel-card">
+            <div class="pestel-header">
+              <span class="pestel-letter p-env">E</span>
+              <span>عوامل زیست‌محیطی (Environmental)</span>
+            </div>
+            <ul class="swot-list" id="pestelEnvList">
+              <li class="swot-item"><span>استانداردهای بازیافت براده‌های فلزی و آب صابون خنک‌کار</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+              <li class="swot-item"><span>بهینه‌سازی مصرف برق کارگاه و کاهش ردپای کربن</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div class="pestel-card">
+            <div class="pestel-header">
+              <span class="pestel-letter p-leg">L</span>
+              <span>عوامل قانونی و حقوقی (Legal)</span>
+            </div>
+            <ul class="swot-list" id="pestelLList">
+              <li class="swot-item"><span>ثبت اختراع طرح‌های صنعتی و مالکیت فکری (Patent)</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+              <li class="swot-item"><span>قراردادهای محرمانگی فنی (NDA) با کارخانجات همکار</span><button class="task-del-btn" onclick="this.closest('li').remove()">✕</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 8: GANTT CHART ==================== -->
+    <section id="tabGantt" class="tool-panel">
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div>
+            <h2 class="tool-card-title">
+              <i data-lucide="calendar" style="width: 20px; height: 20px; color: #10b981;"></i>
+              <span>نمودار گانت زمان‌بندی پروژه مهندسی (Gantt Chart Timeline)</span>
+            </h2>
+            <p class="tool-card-desc">
+              برنامه‌ریزی فازهای اجرایی، تخصیص زمان‌بندی هفتگی و پایش درصد پیشرفت فعالیت‌های پروژه مکانیک طی یک بازه ۱۲ هفته‌ای.
+            </p>
+          </div>
+          <button type="button" class="pdm-btn-act pdm-btn-copy" onclick="copyGanttReport()">
+            <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+            <span>کپی جدول زمان‌بندی</span>
+          </button>
+        </div>
+
+        <!-- Add Gantt Task Bar -->
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+          <input type="text" id="ganttTaskName" class="common-input" style="flex: 1; min-width: 220px;" placeholder="نام فاز یا فعالیت (مثلاً: تست ارتعاش در تونل باد...)">
+          <input type="number" id="ganttStartWeek" class="common-input" min="1" max="12" value="1" style="width: 90px;" placeholder="هفته شروع">
+          <input type="number" id="ganttDuration" class="common-input" min="1" max="8" value="3" style="width: 90px;" placeholder="مدت (هفته)">
+          <input type="number" id="ganttProgress" class="common-input" min="0" max="100" value="0" style="width: 90px;" placeholder="پیشرفت %">
+          <button type="button" class="btn-nav-action btn-nav-primary" onclick="addGanttTask()">
+            <i data-lucide="plus" style="width: 15px; height: 15px;"></i>
+            <span>افزودن فعالیت</span>
+          </button>
+        </div>
+
+        <!-- Visual Gantt Table -->
+        <div class="gantt-wrapper">
+          <table class="gantt-table">
+            <thead>
+              <tr>
+                <th>عنوان فعالیت مهندسی</th>
+                <th>هفته ۱</th>
+                <th>هفته ۲</th>
+                <th>هفته ۳</th>
+                <th>هفته ۴</th>
+                <th>هفته ۵</th>
+                <th>هفته ۶</th>
+                <th>هفته ۷</th>
+                <th>هفته ۸</th>
+                <th>هفته ۹</th>
+                <th>هفته ۱۰</th>
+                <th>هفته ۱۱</th>
+                <th>هفته ۱۲</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="ganttTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Toast -->
+  <div id="pdmGlobalToast" class="pdm-toast" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="tools-container">
+      <p style="margin-bottom: 6px;">© ۲۰۲۶ محمدامین شریف • دانشکده مهندسی مکانیک دانشگاه علم و صنعت ایران (IUST)</p>
+      <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);">Interactive Strategic & Analytical Management Tools for Engineers</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/business-decision-matrix.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // Theme Toggle
+    function toggleLocalTheme() {
+      const isLight = document.documentElement.classList.toggle('light-mode');
+      localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
+    }
+    const savedTheme = localStorage.getItem('site-theme') || 'dark';
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+
+    // Tab Switching
+    function switchToolTab(tabId, btnElement) {
+      document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tool-tab-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+
+      if (!btnElement) {
+        btnElement = document.querySelector(`.tool-tab-btn[data-tab="${tabId}"]`);
+      }
+      if (btnElement) btnElement.classList.add('active');
+
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    // Hash direct router
+    function handleHashRoute() {
+      const hash = window.location.hash.toLowerCase().replace('#', '');
+      const hashTabMap = {
+        'pugh': 'tabPugh',
+        'swot': 'tabSwot',
+        'eisenhower': 'tabEisenhower',
+        'bcg': 'tabBcg',
+        'porter': 'tabPorter',
+        'bmc': 'tabBmc',
+        'pestel': 'tabPestel',
+        'gantt': 'tabGantt'
+      };
+      if (hash && hashTabMap[hash]) {
+        switchToolTab(hashTabMap[hash]);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', handleHashRoute);
+    window.addEventListener('hashchange', handleHashRoute);
+
+    // Global Toast
+    function showGlobalToast(msg) {
+      const toast = document.getElementById('pdmGlobalToast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 2500);
+    }
+
+    // ==========================================
+    // TOOL 3: EISENHOWER
+    // ==========================================
+    const eisenState = {
+      q1: ['تحویل پروژه دینامیک گازها به استاد', 'تعمیر فوری قطعه کارگاه CNC مشتری'],
+      q2: ['مطالعه کتاب مدیریت کسب‌وکار مهندسی', 'یادگیری ماژول توربوماشین Ansys TurboGrid'],
+      q3: ['پاسخ به استعلام‌های غیرتخصصی در پیام‌رسان'],
+      q4: ['مرور بی‌هدف اکسپلورر اینستاگرام']
+    };
+
+    function renderEisenhower() {
+      ['q1', 'q2', 'q3', 'q4'].forEach(qKey => {
+        const list = document.getElementById(qKey + 'List');
+        const count = document.getElementById(qKey + 'Count');
+        if (!list) return;
+        list.innerHTML = '';
+        if (count) count.textContent = eisenState[qKey].length + ' مورد';
+
+        eisenState[qKey].forEach((task, idx) => {
+          const li = document.createElement('li');
+          li.className = 'task-item';
+          li.innerHTML = `
+            <span>${task}</span>
+            <button class="task-del-btn" onclick="deleteEisenTask('${qKey}', ${idx})" title="حذف وظیفه">✕</button>
+          `;
+          list.appendChild(li);
+        });
+      });
+    }
+
+    function addEisenhowerTask() {
+      const input = document.getElementById('eisenTaskInput');
+      const select = document.getElementById('eisenQuadrantSelect');
+      if (!input || !input.value.trim()) return;
+      const text = input.value.trim();
+      const q = select.value;
+      if (eisenState[q]) {
+        eisenState[q].push(text);
+        input.value = '';
+        renderEisenhower();
+        showGlobalToast('وظیفه جدید با موفقیت اضافه شد');
+      }
+    }
+
+    function deleteEisenTask(qKey, idx) {
+      if (eisenState[qKey]) {
+        eisenState[qKey].splice(idx, 1);
+        renderEisenhower();
+      }
+    }
+
+    function copyEisenhowerReport() {
+      const text = `📋 اولویت‌بندی وظایف بر اساس ماتریس آیزنهاور (مهندس محمدامین شریف)
+🔴 ۱. فوری و مهم:
+${eisenState.q1.map(t => '  - ' + t).join('\n')}
+
+🟢 ۲. غیرفوری اما مهم (برنامه‌ریزی راهبردی):
+${eisenState.q2.map(t => '  - ' + t).join('\n')}
+
+🟡 ۳. فوری اما غیرمهم (واگذاری):
+${eisenState.q3.map(t => '  - ' + t).join('\n')}
+
+⚪ ۴. غیرفوری و غیرمهم (حذف):
+${eisenState.q4.map(t => '  - ' + t).join('\n')}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('گزارش ماتریس آیزنهاور در کلیپ‌بورد کپی شد');
+      });
+    }
+
+    // ==========================================
+    // TOOL 2: SWOT
+    // ==========================================
+    function addSwotItem(listId, inputId) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      if (!input || !input.value.trim() || !list) return;
+      const val = input.value.trim();
+      const li = document.createElement('li');
+      li.className = 'swot-item';
+      li.innerHTML = `<span>${val}</span><button class="task-del-btn" onclick="removeSwotItem(this)">✕</button>`;
+      list.appendChild(li);
+      input.value = '';
+      showGlobalToast('مورد جدید به ماتریس SWOT افزوده شد');
+    }
+
+    function removeSwotItem(btn) {
+      const li = btn.closest('.swot-item');
+      if (li) li.remove();
+    }
+
+    function copySwotReport() {
+      const getItems = (id) => Array.from(document.querySelectorAll(`#${id} span`)).map(s => '  • ' + s.textContent).join('\n');
+      const text = `🧭 تحلیل استراتژیک SWOT (محمدامین شریف)
+💪 نقاط قوت (Strengths):
+${getItems('swotSList')}
+
+⚠️ نقاط ضعف (Weaknesses):
+${getItems('swotWList')}
+
+🚀 فرصت‌ها (Opportunities):
+${getItems('swotOList')}
+
+🛡️ تهدیدها (Threats):
+${getItems('swotTList')}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('گزارش SWOT در کلیپ‌بورد کپی شد');
+      });
+    }
+
+    // ==========================================
+    // TOOL 4: BCG MATRIX
+    // ==========================================
+    function addBcgItem() {
+      const input = document.getElementById('bcgItemInput');
+      const select = document.getElementById('bcgQuadSelect');
+      if (!input || !input.value.trim()) return;
+      const val = input.value.trim();
+      const quad = select.value;
+      const listMap = {
+        'stars': 'bcgStarsList',
+        'question': 'bcgQuestionList',
+        'cows': 'bcgCowsList',
+        'dogs': 'bcgDogsList'
+      };
+      const list = document.getElementById(listMap[quad]);
+      if (list) {
+        const li = document.createElement('li');
+        li.className = 'bcg-item';
+        li.innerHTML = `<span>${val}</span><button class="task-del-btn" onclick="removeBcgItem(this)">✕</button>`;
+        list.appendChild(li);
+        input.value = '';
+        showGlobalToast('مورد جدید به ماتریس BCG اضافه شد');
+      }
+    }
+
+    function removeBcgItem(btn) {
+      const li = btn.closest('.bcg-item');
+      if (li) li.remove();
+    }
+
+    function copyBcgReport() {
+      const getItems = (id) => Array.from(document.querySelectorAll(`#${id} span`)).map(s => '  • ' + s.textContent).join('\n');
+      const text = `📊 تحلیل سبد محصولات ماتریس BCG (محمدامین شریف)
+⭐ ستاره‌ها (Stars):
+${getItems('bcgStarsList')}
+
+❓ علامت‌های سؤال (Question Marks):
+${getItems('bcgQuestionList')}
+
+🐄 گاوهای شیرده (Cash Cows):
+${getItems('bcgCowsList')}
+
+🐕 سگ‌ها (Dogs):
+${getItems('bcgDogsList')}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('گزارش ماتریس BCG در کلیپ‌بورد کپی شد');
+      });
+    }
+
+    // ==========================================
+    // TOOL 5: PORTER'S 5 FORCES
+    // ==========================================
+    function updatePorterScore() {
+      const f1 = parseInt(document.getElementById('pForce1').value, 10);
+      const f2 = parseInt(document.getElementById('pForce2').value, 10);
+      const f3 = parseInt(document.getElementById('pForce3').value, 10);
+      const f4 = parseInt(document.getElementById('pForce4').value, 10);
+      const f5 = parseInt(document.getElementById('pForce5').value, 10);
+
+      const labels = ['', 'خیلی کم (۱)', 'کم (۲)', 'متوسط (۳)', 'شدید (۴)', 'بسیار شدید (۵)'];
+      document.getElementById('pForce1Val').textContent = labels[f1];
+      document.getElementById('pForce2Val').textContent = labels[f2];
+      document.getElementById('pForce3Val').textContent = labels[f3];
+      document.getElementById('pForce4Val').textContent = labels[f4];
+      document.getElementById('pForce5Val').textContent = labels[f5];
+
+      const total = f1 + f2 + f3 + f4 + f5;
+      document.getElementById('porterTotalScore').textContent = total;
+
+      const titleEl = document.getElementById('porterVerdictTitle');
+      const descEl = document.getElementById('porterVerdictDesc');
+
+      if (total <= 11) {
+        titleEl.textContent = 'صنعت بسیار جذاب و پربازده (فشار رقابتی ضعیف)';
+        descEl.textContent = 'موانع ورود بالاست و رقبای اندکی وجود دارند. حاشیه سود امن است و موقعیت فوق‌العاده‌ای برای سودآوری فراهم است.';
+      } else if (total <= 17) {
+        titleEl.textContent = 'فشار رقابتی متوسط (نیازمند تمایز کیفی و دقت مهندسی)';
+        descEl.textContent = 'صنعت دارای سودآوری پایدار است اما موفقیت وابسته به سرعت تحویل، ارائه گارانتی و تمایز در خدمات مهندسی است.';
+      } else {
+        titleEl.textContent = 'صنعت پرفشار و رقابت قیمتی فرسایشی (فشار سنگین)';
+        descEl.textContent = 'حاشیه سود شکننده است و جنگ قیمت وجود دارد. ورود به این بخش نیازمند نوآوری رادیکال و کاهش هزینه‌های ساخت است.';
+      }
+    }
+
+    function copyPorterReport() {
+      const f1 = document.getElementById('pForce1Val').textContent;
+      const f2 = document.getElementById('pForce2Val').textContent;
+      const f3 = document.getElementById('pForce3Val').textContent;
+      const f4 = document.getElementById('pForce4Val').textContent;
+      const f5 = document.getElementById('pForce5Val').textContent;
+      const total = document.getElementById('porterTotalScore').textContent;
+      const verdict = document.getElementById('porterVerdictTitle').textContent;
+
+      const text = `🛡️ تحلیل ۵ نیروی رقابتی پورتر (محمدامین شریف)
+۱. شدت رقابت میان رقبای فعلی: ${f1}
+۲. تهدید تازه‌واردها: ${f2}
+۳. قدرت چانه‌زنی خریداران: ${f3}
+۴. قدرت چانه‌زنی تأمین‌کنندگان: ${f4}
+۵. تهدید خدمات جایگزین: ${f5}
+-----------------------
+مجموع شاخص فشار صنعت: ${total} از ۲۵
+ارزیابی نهایی: ${verdict}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('گزارش مدل ۵ نیروی پورتر کپی شد');
+      });
+    }
+
+    // ==========================================
+    // TOOL 6: BMC
+    // ==========================================
+    function copyBmcReport() {
+      const blocks = Array.from(document.querySelectorAll('.bmc-block')).map(b => {
+        const title = b.querySelector('.bmc-block-header span').textContent.trim();
+        const content = b.querySelector('.bmc-block-notes').innerText.trim();
+        return `📌 ${title}:\n${content}`;
+      }).join('\n\n');
+
+      const text = `📋 بوم مدل کسب‌وکار (Business Model Canvas) - محمدامین شریف\n\n` + blocks;
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('خلاصه بوم مدل کسب‌وکار در کلیپ‌بورد کپی شد');
+      });
+    }
+
+    // ==========================================
+    // TOOL 7: PESTEL
+    // ==========================================
+    function copyPestelReport() {
+      const getItems = (id) => Array.from(document.querySelectorAll(`#${id} span`)).map(s => '  • ' + s.textContent).join('\n');
+      const text = `🌐 تحلیل محیط کلان PESTEL (مهندس محمدامین شریف)
+🏛️ عوامل سیاسی (Political):
+${getItems('pestelPList')}
+
+📈 عوامل اقتصادی (Economic):
+${getItems('pestelEList')}
+
+👥 عوامل اجتماعی (Social):
+${getItems('pestelSList')}
+
+💻 عوامل فناوری (Technological):
+${getItems('pestelTList')}
+
+🌿 عوامل زیست‌محیطی (Environmental):
+${getItems('pestelEnvList')}
+
+⚖️ عوامل حقوقی و قانونی (Legal):
+${getItems('pestelLList')}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('گزارش تحلیل PESTEL در کلیپ‌بورد کپی شد');
+      });
+    }
+
+    // ==========================================
+    // TOOL 8: GANTT CHART
+    // ==========================================
+    const ganttTasks = [
+      { name: '۱. تعریف مسئله و جستجوی مقالات علمی', start: 1, duration: 2, progress: 100 },
+      { name: '۲. مدلسازی سه‌بعدی پروانه در سالیدورکس', start: 2, duration: 3, progress: 85 },
+      { name: '۳. مش‌بندی و شبیه‌سازی عددی با Ansys Fluent', start: 4, duration: 4, progress: 50 },
+      { name: '۴. ساخت نمونه اولیه با فرز ۴ محوره CNC', start: 7, duration: 3, progress: 20 },
+      { name: '۵. تست تجربی هد و دبی در بستر آزمایشگاهی', start: 9, duration: 2, progress: 0 },
+      { name: '۶. نگارش پایان‌نامه و دفاع مهندسی مکانیک', start: 10, duration: 3, progress: 0 }
+    ];
+
+    function renderGantt() {
+      const tbody = document.getElementById('ganttTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      ganttTasks.forEach((t, idx) => {
+        const tr = document.createElement('tr');
+
+        let cellsHtml = `<td>${t.name}</td>`;
+        for (let w = 1; w <= 12; w++) {
+          if (w >= t.start && w < t.start + t.duration) {
+            if (w === t.start) {
+              const spanWeeks = t.duration;
+              cellsHtml += `
+                <td colspan="${spanWeeks}" class="gantt-bar-cell">
+                  <div class="gantt-timeline-bar" style="left: 4px; right: 4px;">
+                    <div class="gantt-progress-fill" style="width: ${t.progress}%;"></div>
+                    <span class="gantt-bar-label">${t.progress}% پیشرفت</span>
+                  </div>
+                </td>
+              `;
+              w += spanWeeks - 1; // skip spanned weeks
+            }
+          } else {
+            cellsHtml += `<td style="color: var(--text-dim); opacity: 0.25;">•</td>`;
+          }
+        }
+
+        cellsHtml += `<td><button class="task-del-btn" onclick="deleteGanttTask(${idx})" title="حذف فعالیت">✕</button></td>`;
+        tr.innerHTML = cellsHtml;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addGanttTask() {
+      const nameInput = document.getElementById('ganttTaskName');
+      const startInput = document.getElementById('ganttStartWeek');
+      const durInput = document.getElementById('ganttDuration');
+      const progInput = document.getElementById('ganttProgress');
+
+      if (!nameInput || !nameInput.value.trim()) return;
+      const name = nameInput.value.trim();
+      const start = Math.max(1, Math.min(12, parseInt(startInput.value, 10) || 1));
+      const duration = Math.max(1, Math.min(13 - start, parseInt(durInput.value, 10) || 2));
+      const progress = Math.max(0, Math.min(100, parseInt(progInput.value, 10) || 0));
+
+      ganttTasks.push({ name, start, duration, progress });
+      nameInput.value = '';
+      renderGantt();
+      showGlobalToast('فعالیت جدید به جدول گانت اضافه شد');
+    }
+
+    function deleteGanttTask(idx) {
+      ganttTasks.splice(idx, 1);
+      renderGantt();
+    }
+
+    function copyGanttReport() {
+      const rows = ganttTasks.map(t => `  - ${t.name}: هفته ${t.start} تا ${t.start + t.duration - 1} (${t.progress}% تکمیل)`).join('\n');
+      const text = `📅 جدول زمان‌بندی پروژه (گانت چارت مهندسی مکانیک - محمدامین شریف):\n${rows}`;
+      navigator.clipboard.writeText(text).then(() => {
+        showGlobalToast('گزارش زمان‌بندی گانت در کلیپ‌بورد کپی شد');
+      });
+    }
+
+    // Initialize all tool states on load
+    renderEisenhower();
+    renderGantt();
+  </script>
+</body>
+</html>
