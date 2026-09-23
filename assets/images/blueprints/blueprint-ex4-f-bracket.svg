@@ -1,17 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="100%" height="100%">
   <defs>
+    <!-- CAD Grid Patterns -->
     <pattern id="cadGrid4" width="20" height="20" patternUnits="userSpaceOnUse">
       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.75"/>
     </pattern>
     <pattern id="cadGridMajor4" width="100" height="100" patternUnits="userSpaceOnUse">
       <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
     </pattern>
+    <!-- Section Hatching Pattern -->
+    <pattern id="hatch4" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
+    </pattern>
+    <!-- Dimension Arrowheads -->
     <marker id="arrEnd4" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
     </marker>
     <marker id="arrStart4" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 10 2 L 0 5 L 10 8 Z" fill="#38bdf8"/>
     </marker>
+    <marker id="arrEndSec4" viewBox="0 0 12 12" refX="12" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1 L 12 6 L 0 11 Z" fill="#f43f5e"/>
+    </marker>
+    <!-- Glow Filter -->
     <filter id="glow4" x="-10%" y="-10%" width="120%" height="120%">
       <feGaussianBlur stdDeviation="1.2" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
@@ -23,10 +33,11 @@
   <rect width="840" height="580" fill="url(#cadGrid4)" class="cad-grid"/>
   <rect width="840" height="580" fill="url(#cadGridMajor4)" class="cad-grid-major"/>
 
-  <!-- ISO Border & Zone Grid -->
+  <!-- ISO 5457 Border & Grid -->
   <rect x="18" y="16" width="804" height="548" fill="none" stroke="#0284c7" stroke-width="1.6"/>
   <rect x="23" y="21" width="794" height="538" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.8"/>
 
+  <!-- Zone References -->
   <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle">
     <text x="73" y="14">1</text><text x="73" y="570">1</text>
     <text x="173" y="14">2</text><text x="173" y="570">2</text>
@@ -44,7 +55,7 @@
     <text x="10" y="490">D</text><text x="830" y="490">D</text>
   </g>
 
-  <!-- Title Block (ISO 7200) -->
+  <!-- ==================== ISO 7200 TITLE BLOCK ==================== -->
   <g transform="translate(480, 440)">
     <rect width="337" height="119" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.5"/>
     <line x1="0" y1="28" x2="337" y2="28" stroke="#0284c7" stroke-width="1"/>
@@ -59,7 +70,7 @@
     <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
     <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
     <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
-    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX04-REV.A</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX04-REV.B</text>
 
     <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
     <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">ANGLED F-BRACKET</text>
@@ -94,10 +105,10 @@
   <g transform="translate(35, 472)">
     <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
     <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
-    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. BASE PROFILE SKETCH EXTRUDED 90.00 MM.</text>
-    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. COMPOUND CHAMFER CUT AT 35.0° ANGLE.</text>
-    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. 10x24 MM SLOTTED HOLE ON BASE FLANGE.</text>
-    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. EXTRUDED CUT NORMAL TO PROFILE.</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. SOLID PROFILE EXTRUDED L = 90.00 MM (FRONT PLANE).</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. COMPOUND 35.0° ANGLE CHAMFER CUT FROM REAR EDGE.</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. 10x24 MM SLOTTED PUNCH THRU BASE FLANGE.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. ALL INTERNAL CORNER FILLETS R4.00 (DETAIL C).</text>
   </g>
 
   <!-- 3D Isometric Preview Inset -->
@@ -114,14 +125,16 @@
       <polygon points="-40,-45 0,-65 25,-65 -15,-45" fill="#2d5b88" stroke="#00f2fe" stroke-width="1.8"/>
       <polygon points="15,-20 55,-40 55,-25 15,-5" fill="#0f2b48" stroke="#00f2fe" stroke-width="1.8"/>
       <polygon points="25,15 65,-5 65,20 25,40" fill="#0f2b48" stroke="#00f2fe" stroke-width="1.8"/>
+      <!-- 35° Chamfer Cut Face -->
+      <polygon points="0,-65 25,-65 15,-45 -10,-45" fill="#f59e0b" opacity="0.3" stroke="#f59e0b" stroke-width="1.2"/>
     </g>
     <text x="10" y="142" fill="#f59e0b" font-family="monospace" font-size="8">EXTRUSION LENGTH: 90.00 MM</text>
   </g>
 
-  <!-- ==================== FRONT VIEW: F-SHAPED SKETCH ==================== -->
-  <g transform="translate(200, 240)">
-    <text x="-140" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // پروفیل اصلی قطعه F</text>
-    <text x="-140" y="-182" fill="#64748b" font-family="monospace" font-size="9">SKETCH ON FRONT PLANE // EXTRUDED BOSS/BASE</text>
+  <!-- ==================== VIEW 1: FRONT ELEVATION ==================== -->
+  <g transform="translate(170, 240)">
+    <text x="-120" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // نمای روبرو و مقطع F</text>
+    <text x="-120" y="-182" fill="#64748b" font-family="monospace" font-size="9">PLANE: FRONT (Z=0) // PRIMARY SKETCH</text>
 
     <!-- F-Profile Closed Loop -->
     <polygon points="-50,70 -50,-100 -18,-100 -18,-50 25,-50 25,-25 -18,-25 -18,15 35,15 35,70" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow4)"/>
@@ -130,7 +143,7 @@
     <line x1="-50" y1="-120" x2="-50" y2="90" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="10,3,2,3"/>
 
     <!-- Dimensions -->
-    <!-- Total Height 93.00 (from -100 to 70 is 170 in svg units -> scaled) -->
+    <!-- Total Height 93.00 -->
     <line x1="-75" y1="-100" x2="-75" y2="70" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
     <line x1="-50" y1="-100" x2="-80" y2="-100" stroke="#38bdf8" stroke-width="0.8"/>
     <line x1="-50" y1="70" x2="-80" y2="70" stroke="#38bdf8" stroke-width="0.8"/>
@@ -140,7 +153,7 @@
     <line x1="-50" y1="88" x2="35" y2="88" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
     <line x1="-50" y1="70" x2="-50" y2="92" stroke="#38bdf8" stroke-width="0.8"/>
     <line x1="35" y1="70" x2="35" y2="92" stroke="#38bdf8" stroke-width="0.8"/>
-    <text x="-7" y="102" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold" text-anchor="middle">50.00</text>
+    <text x="-7" y="102" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold" text-anchor="middle">50.00 ±0.1</text>
 
     <!-- Top Arm Width 32.00 -->
     <line x1="-18" y1="-115" x2="25" y2="-115" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
@@ -151,39 +164,82 @@
     <text x="-34" y="-80" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">18.00</text>
 
     <!-- Middle Step Height 28.00 -->
-    <line x1="45" y1="-50" x2="45" y2="-25" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
-    <text x="50" y="-35" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">28.00</text>
+    <line x1="38" y1="-50" x2="38" y2="-25" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
+    <text x="44" y="-35" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">28.00</text>
 
     <!-- Bottom Leg Height 55.00 -->
-    <line x1="50" y1="15" x2="50" y2="70" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
-    <text x="55" y="45" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">55.00</text>
+    <line x1="45" y1="15" x2="45" y2="70" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
+    <text x="52" y="45" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">55.00</text>
+
+    <!-- Datum Target A on Base -->
+    <g transform="translate(-7, 70)">
+      <polygon points="0,0 -6,10 6,10" fill="#f8fafc"/>
+      <line x1="0" y1="10" x2="0" y2="25" stroke="#f8fafc" stroke-width="1.2"/>
+      <rect x="-9" y="25" width="18" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#f8fafc" stroke-width="1.2"/>
+      <text x="0" y="38" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">A</text>
+    </g>
+
+    <!-- Detail C Circle Callout -->
+    <circle cx="-18" cy="15" r="14" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <line x1="-10" y1="8" x2="25" y2="-2" stroke="#f59e0b" stroke-width="1"/>
+    <text x="28" y="-4" fill="#f59e0b" font-family="monospace" font-size="9" font-weight="bold">DETAIL C</text>
   </g>
 
-  <!-- ==================== SIDE VIEW: EXTRUSION & CUT VIEW ==================== -->
-  <g transform="translate(450, 240)">
-    <text x="-40" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">RIGHT VIEW // نمای جانبی با حجم ۹۰ میلی‌متر</text>
-    <text x="-40" y="-182" fill="#64748b" font-family="monospace" font-size="9">PLANE: RIGHT PLANE // EXTRUSION DEPTH 90.00</text>
+  <!-- ==================== VIEW 2: RIGHT SIDE ELEVATION ==================== -->
+  <g transform="translate(380, 240)">
+    <text x="-30" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">RIGHT VIEW // نمای راست و زاویه ۳۵ درجه</text>
+    <text x="-30" y="-182" fill="#64748b" font-family="monospace" font-size="9">EXTRUSION DEPTH 90.00 &amp; BEVEL CUT</text>
 
-    <!-- Side View Block with Angled Cut at Top -->
-    <polygon points="-30,70 -30,-60 20,-100 80,-100 80,70" fill="none" stroke="#00f2fe" stroke-width="2.2"/>
-    <!-- Hidden Lines for Internal Steps -->
+    <!-- Side View Block with Angled 35° Cut at Top -->
+    <polygon points="-30,70 -30,-60 20,-100 80,-100 80,70" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.2"/>
+    
+    <!-- Hidden Lines for Internal Step Faces -->
     <line x1="-30" y1="-25" x2="80" y2="-25" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="4,2"/>
     <line x1="-30" y1="15" x2="80" y2="15" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="4,2"/>
 
+    <!-- Slotted Hole Hidden Lines (10x24 slot seen from side) -->
+    <line x1="10" y1="50" x2="40" y2="50" stroke="#f43f5e" stroke-width="1" stroke-dasharray="4,2"/>
+    <line x1="25" y1="35" x2="25" y2="70" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="8,2,2,2"/>
+
     <!-- Total Extrusion Depth Dimension: 90.00 -->
     <line x1="-30" y1="88" x2="80" y2="88" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart4)" marker-end="url(#arrEnd4)"/>
-    <text x="25" y="102" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold" text-anchor="middle">90.00</text>
+    <line x1="-30" y1="70" x2="-30" y2="92" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="80" y1="70" x2="80" y2="92" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="25" y="102" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold" text-anchor="middle">90.00 ±0.1</text>
 
-    <!-- Angle Dimension 35.0° -->
-    <path d="M 0 -80 A 30 30 0 0 1 18 -68" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
-    <text x="-10" y="-85" fill="#f59e0b" font-family="monospace" font-size="9.5" font-weight="bold">35.0° CUT</text>
+    <!-- Angle Dimension 35.0° Callout -->
+    <path d="M 0 -85 A 30 30 0 0 1 18 -72" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+    <line x1="-30" y1="-60" x2="35" y2="-60" stroke="#64748b" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <text x="-12" y="-70" fill="#f59e0b" font-family="monospace" font-size="9.5" font-weight="bold">35.0°</text>
 
-    <!-- Flatness GD&T -->
-    <g transform="translate(0, 115)">
-      <rect width="65" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#38bdf8" stroke-width="1"/>
+    <!-- GD&T Perpendicularity Frame -->
+    <g transform="translate(10, 115)">
+      <rect width="80" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#38bdf8" stroke-width="1"/>
       <line x1="22" y1="0" x2="22" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
-      <text x="11" y="13" fill="#f59e0b" font-family="monospace" font-size="12" text-anchor="middle">⏥</text>
-      <text x="43" y="12.5" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">0.05</text>
+      <line x1="58" y1="0" x2="58" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <text x="11" y="13" fill="#f59e0b" font-family="monospace" font-size="12" text-anchor="middle">⟂</text>
+      <text x="40" y="12.5" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">0.02</text>
+      <text x="69" y="12.5" fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">A</text>
     </g>
+
+    <!-- Datum Target B on Rear Face -->
+    <g transform="translate(-30, 0)">
+      <polygon points="0,0 -10,-6 -10,6" fill="#f8fafc"/>
+      <line x1="-10" y1="0" x2="-22" y2="0" stroke="#f8fafc" stroke-width="1.2"/>
+      <rect x="-40" y="-9" width="18" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#f8fafc" stroke-width="1.2"/>
+      <text x="-31" y="4" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">B</text>
+    </g>
+  </g>
+
+  <!-- ==================== VIEW 3: DETAIL C (ENLARGEMENT 2:1) ==================== -->
+  <g transform="translate(565, 280)">
+    <circle cx="0" cy="0" r="42" fill="rgba(15, 23, 42, 0.95)" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="0" y="-48" fill="#f59e0b" font-family="monospace" font-size="9.5" font-weight="bold" text-anchor="middle">DETAIL C (SCALE 2:1)</text>
+
+    <!-- Enlarged Fillet R4.00 -->
+    <path d="M -25,25 L -5,25 A 15 15 0 0 0 10,10 L 10,-25" fill="none" stroke="#00f2fe" stroke-width="2.8"/>
+    <line x1="10" y1="10" x2="-10" y2="-10" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart4)"/>
+    <text x="-12" y="-14" fill="#f59e0b" font-family="monospace" font-size="9" font-weight="bold">R4.00 FILLET</text>
+    <text x="0" y="38" fill="#94a3b8" font-family="monospace" font-size="8" text-anchor="middle">STRESS RELIEF BLEND</text>
   </g>
 </svg>

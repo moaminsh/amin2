@@ -6,6 +6,9 @@
     <pattern id="cadGridMajor6" width="100" height="100" patternUnits="userSpaceOnUse">
       <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
     </pattern>
+    <pattern id="hatch6" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
+    </pattern>
     <marker id="arrEnd6" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
     </marker>
@@ -57,10 +60,10 @@
     <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
     <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
     <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
-    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX06-REV.A</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX06-REV.B</text>
 
     <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
-    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">PRECISION MACHINED V-BLOCK</text>
+    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">PRECISION 90° V-BLOCK</text>
     <text x="168" y="41" fill="#64748b" font-family="monospace" font-size="8">PROJECTION</text>
     <g transform="translate(185, 48)">
       <polygon points="0,4 0,-4 14,-7 14,7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
@@ -69,14 +72,14 @@
       <circle cx="24" cy="0" r="7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
     </g>
     <text x="252" y="41" fill="#64748b" font-family="monospace" font-size="8">MATERIAL</text>
-    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">TOOL STEEL O1</text>
+    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">AISI 4340 / 60 HRC</text>
 
     <text x="8" y="69" fill="#64748b" font-family="monospace" font-size="8">GENERAL TOLERANCE</text>
-    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-f (±0.05 mm)</text>
+    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-f (±0.03 mm)</text>
     <text x="168" y="69" fill="#64748b" font-family="monospace" font-size="8">SURFACE FINISH</text>
-    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">Ra 0.8 µm ▽▽▽</text>
+    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">Ra 0.4 µm ▽▽▽</text>
     <text x="252" y="69" fill="#64748b" font-family="monospace" font-size="8">WEIGHT (CALC)</text>
-    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">0.960 kg</text>
+    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">0.920 kg</text>
 
     <text x="8" y="97" fill="#64748b" font-family="monospace" font-size="7.5">DESIGNED BY</text>
     <text x="8" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">M. SHARIF</text>
@@ -92,10 +95,10 @@
   <g transform="translate(35, 472)">
     <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
     <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
-    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. 90.0° PRECISION V-GROOVE FOR CYLINDRICAL WORK.</text>
-    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. CENTRAL U-SLOT: 18.00 MM WIDE x 22.00 MM DEEP.</text>
-    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. DUAL COMPOUND CHAMFERS 15x18 AND 12x15 MM.</text>
-    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. HARDEN AND GROUND SURFACES TO 58-62 HRC.</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. BASE 68.00 MM, DEPTH 48.00 MM, HEIGHT 42.00 MM.</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. 90.0° PRECISION VEE-WAY WITH ROOT RELIEF CHANNEL 4x3 MM.</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. 2X LATERAL CLAMPING STEPS 15x18 MM &amp; 12x15 MM.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. HEAT TREATMENT: CASE HARDEN 58-62 HRC &amp; PRECISION GROUND.</text>
   </g>
 
   <!-- 3D Isometric Preview Inset -->
@@ -104,40 +107,42 @@
     <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">ISOMETRIC VIEW (3D)</text>
     <text x="10" y="27" fill="#64748b" font-family="monospace" font-size="7.5">SOLIDWORKS SOLID BODY</text>
 
-    <g transform="translate(90, 85) scale(0.65)">
-      <!-- V-Block 3D Isometric Outline -->
-      <polygon points="-45,30 -45,-15 -25,-30 0,-10 25,-30 45,-15 45,30" fill="#1e3a5f" stroke="#00f2fe" stroke-width="2"/>
+    <g transform="translate(90, 85) scale(0.6)">
+      <!-- V-Block 3D Body -->
+      <polygon points="-40,15 0,38 40,15 40,-15 0,-38 -40,-15" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.8"/>
       <!-- Top V-Slope Faces -->
       <polygon points="-25,-30 0,-10 35,-30 10,-50" fill="#2d5b88" stroke="#00f2fe" stroke-width="1.6"/>
       <polygon points="0,-10 25,-30 60,-50 35,-30" fill="#0f2b48" stroke="#00f2fe" stroke-width="1.6"/>
+      <!-- Side Step In 3D -->
+      <polygon points="-40,5 -30,0 -30,-15 -40,-10" fill="#0b1e33" stroke="#00f2fe" stroke-width="1.2"/>
     </g>
     <text x="10" y="142" fill="#f59e0b" font-family="monospace" font-size="8">GROUND 90° VEE-GROOVE</text>
   </g>
 
-  <!-- ==================== MAIN VIEW: FRONT ELEVATION V-BLOCK ==================== -->
-  <g transform="translate(250, 240)">
-    <text x="-195" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // نمای روبرو با شیار V و پخ‌های زاویه‌دار</text>
-    <text x="-195" y="-182" fill="#64748b" font-family="monospace" font-size="9">PLANE: FRONT PLANE // 90° VEE-SLOT &amp; U-CHANNEL</text>
+  <!-- ==================== VIEW 1: FRONT ELEVATION ==================== -->
+  <g transform="translate(180, 240)">
+    <text x="-130" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // نمای روبرو و شیار V دقیق</text>
+    <text x="-130" y="-182" fill="#64748b" font-family="monospace" font-size="9">PLANE: FRONT PLANE // 90.0° VEE &amp; RELIEF SLOT</text>
 
     <!-- Centerline -->
-    <line x1="0" y1="-140" x2="0" y2="120" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="12,4,2,4"/>
+    <line x1="0" y1="-130" x2="0" y2="100" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="12,4,2,4"/>
 
     <!-- V-Block Closed Contour -->
-    <!-- Base 68mm width (±68), Height 42mm, V-Slot in top center -->
-    <polygon points="-75,60 -75,20 -50,-30 -22,-30 0,-6 22,-30 50,-30 75,20 75,60 20,60 20,38 -20,38 -20,60" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow6)"/>
+    <!-- Base 68mm width, Height 42mm, V-Slot in top center with 4x3 mm root relief -->
+    <polygon points="-75,60 -75,20 -50,-30 -22,-30 -3,-8 -3,-2 3,-2 3,-8 22,-30 50,-30 75,20 75,60 20,60 20,38 -20,38 -20,60" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow6)"/>
 
     <!-- 90° Angle Arc & Indicator in V-Groove -->
-    <line x1="-22" y1="-30" x2="0" y2="-6" stroke="#f59e0b" stroke-width="1.8"/>
-    <line x1="22" y1="-30" x2="0" y2="-6" stroke="#f59e0b" stroke-width="1.8"/>
+    <line x1="-22" y1="-30" x2="-3" y2="-8" stroke="#f59e0b" stroke-width="1.8"/>
+    <line x1="22" y1="-30" x2="3" y2="-8" stroke="#f59e0b" stroke-width="1.8"/>
     <path d="M -8 -16 A 12 12 0 0 1 8 -16" fill="none" stroke="#f59e0b" stroke-width="1.4"/>
-    <text x="0" y="-22" fill="#f59e0b" font-family="monospace" font-size="10.5" font-weight="bold" text-anchor="middle">90.0°</text>
+    <text x="0" y="-22" fill="#f59e0b" font-family="monospace" font-size="10.5" font-weight="bold" text-anchor="middle">90.0° ±0.05°</text>
 
     <!-- Dimensions -->
     <!-- Base Width 68.00 -->
     <line x1="-75" y1="80" x2="75" y2="80" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart6)" marker-end="url(#arrEnd6)"/>
     <line x1="-75" y1="60" x2="-75" y2="84" stroke="#38bdf8" stroke-width="0.8"/>
     <line x1="75" y1="60" x2="75" y2="84" stroke="#38bdf8" stroke-width="0.8"/>
-    <text x="0" y="94" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">68.00 ±0.05</text>
+    <text x="0" y="94" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">68.00 ±0.03</text>
 
     <!-- Total Height 42.00 -->
     <line x1="95" y1="-30" x2="95" y2="60" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart6)" marker-end="url(#arrEnd6)"/>
@@ -145,13 +150,55 @@
     <line x1="75" y1="60" x2="98" y2="60" stroke="#38bdf8" stroke-width="0.8"/>
     <text x="105" y="18" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">42.00</text>
 
-    <!-- Bottom Relief Slot Width 40.00 & Height 22.00 -->
+    <!-- Bottom Relief Slot Width 18.00 -->
     <line x1="-20" y1="48" x2="20" y2="48" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart6)" marker-end="url(#arrEnd6)"/>
     <text x="0" y="44" fill="#f59e0b" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">18.00 U-SLOT</text>
 
     <!-- Side Chamfer 15x18 Callout -->
-    <line x1="-62" y1="-5" x2="-115" y2="-40" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart6)"/>
-    <line x1="-115" y1="-40" x2="-180" y2="-40" stroke="#38bdf8" stroke-width="1"/>
-    <text x="-178" y="-45" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">CHAMFER 15.00 x 18.00</text>
+    <line x1="-62" y1="-5" x2="-105" y2="-40" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart6)"/>
+    <line x1="-105" y1="-40" x2="-165" y2="-40" stroke="#38bdf8" stroke-width="1"/>
+    <text x="-162" y="-45" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">CHAMFER 15.00 x 18.00</text>
+
+    <!-- Datum A on Base -->
+    <g transform="translate(0, 60)">
+      <polygon points="0,0 -6,10 6,10" fill="#f8fafc"/>
+      <line x1="0" y1="10" x2="0" y2="25" stroke="#f8fafc" stroke-width="1.2"/>
+      <rect x="-9" y="25" width="18" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#f8fafc" stroke-width="1.2"/>
+      <text x="0" y="38" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">A</text>
+    </g>
+  </g>
+
+  <!-- ==================== VIEW 2: TOP PLAN VIEW ==================== -->
+  <g transform="translate(420, 240)">
+    <text x="-40" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">TOP VIEW // نمای بالا و شیارهای روبند کلمپ</text>
+    <text x="-40" y="-182" fill="#64748b" font-family="monospace" font-size="9">DEPTH 48.00 MM &amp; TRANSVERSE SLOTS</text>
+
+    <!-- Top Rectangle 68 x 48 (drawn 100 x 70) -->
+    <rect x="-50" y="-35" width="100" height="70" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.2"/>
+    
+    <!-- Central V-Groove Projection Lines (running full width) -->
+    <line x1="-50" y1="-15" x2="50" y2="-15" stroke="#38bdf8" stroke-width="1.4"/>
+    <line x1="-50" y1="0" x2="50" y2="0" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="10,3,2,3"/>
+    <line x1="-50" y1="15" x2="50" y2="15" stroke="#38bdf8" stroke-width="1.4"/>
+
+    <!-- Transverse Clamp Slots across top (2x side notches) -->
+    <rect x="-12" y="-35" width="24" height="12" fill="#060b13" stroke="#f59e0b" stroke-width="1.4"/>
+    <rect x="-12" y="23" width="24" height="12" fill="#060b13" stroke="#f59e0b" stroke-width="1.4"/>
+
+    <!-- Depth Dimension 48.00 -->
+    <line x1="62" y1="-35" x2="62" y2="35" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart6)" marker-end="url(#arrEnd6)"/>
+    <line x1="50" y1="-35" x2="65" y2="-35" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="50" y1="35" x2="65" y2="35" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="72" y="4" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">48.00</text>
+
+    <!-- GD&T Symmetry of V-Slot to Datum A -->
+    <g transform="translate(-30, 60)">
+      <rect width="85" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#38bdf8" stroke-width="1"/>
+      <line x1="22" y1="0" x2="22" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <line x1="58" y1="0" x2="58" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <text x="11" y="13" fill="#f59e0b" font-family="monospace" font-size="12" text-anchor="middle">⌯</text>
+      <text x="40" y="12.5" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">0.01</text>
+      <text x="72" y="12.5" fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">A</text>
+    </g>
   </g>
 </svg>

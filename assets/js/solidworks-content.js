@@ -980,10 +980,18 @@ window.addEventListener('storage', (e) => {
   }
 });
 
-// Blueprint Lightbox Modal Handlers with Interactive CAD Viewer
+// Blueprint Lightbox Modal Handlers with Master CAD Interactive Viewer
+let currentBlueprintIndex = 0;
 let currentBlueprintZoom = 1;
+let currentPanX = 0;
+let currentPanY = 0;
+let isBlueprintDragging = false;
+let blueprintDragStartX = 0;
+let blueprintDragStartY = 0;
+let isBlueprintPaperMode = false;
+let isBlueprintDrawerOpen = false;
 
-window.openBlueprintModal = function(imageSrc, title, dims) {
+window.openBlueprintModal = function(identifier, fallbackTitle, fallbackDims) {
   let modal = document.getElementById('swBlueprintModal');
   if (!modal) {
     modal = document.createElement('div');
@@ -992,27 +1000,107 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
     document.body.appendChild(modal);
   }
 
+  // Resolve exercise index
+  const exercises = (window.solidworksData && window.solidworksData.exercises) ? window.solidworksData.exercises : [];
+  let foundIdx = -1;
+
+  if (typeof identifier === 'number') {
+    foundIdx = identifier;
+  } else if (typeof identifier === 'string') {
+    foundIdx = exercises.findIndex(e => e.id === identifier || e.image === identifier || e.title === identifier || e.titleEn === identifier);
+  }
+
+  if (foundIdx >= 0) {
+    currentBlueprintIndex = foundIdx;
+  } else {
+    currentBlueprintIndex = 0;
+  }
+
   currentBlueprintZoom = 1;
+  currentPanX = 0;
+  currentPanY = 0;
+  isBlueprintDrawerOpen = false;
+
+  renderBlueprintModalView();
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Attach keydown listener for arrows and escape
+  window.removeEventListener('keydown', handleBlueprintKeyNav);
+  window.addEventListener('keydown', handleBlueprintKeyNav);
+};
+
+function renderBlueprintModalView() {
+  const modal = document.getElementById('swBlueprintModal');
+  if (!modal) return;
+
+  const exercises = (window.solidworksData && window.solidworksData.exercises) ? window.solidworksData.exercises : [];
+  const ex = exercises[currentBlueprintIndex] || {
+    id: 'ex1',
+    type: 'CAD Drawing',
+    title: 'نقشه صنعتی مهندسی',
+    titleEn: 'Engineering Blueprint',
+    image: 'assets/images/blueprints/blueprint-ex1-spider-flange.svg',
+    dims: 'ابعاد استاندارد ISO / ASME',
+    desc: 'ترسیم و مدلسازی صنعتی',
+    steps: []
+  };
+
   const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
+  const displayTitle = isFa ? ex.title : ex.titleEn;
+  const isFirst = currentBlueprintIndex === 0;
+  const isLast = currentBlueprintIndex === exercises.length - 1;
 
   modal.innerHTML = `
     <div class="sw-bp-backdrop" onclick="closeBlueprintModal()"></div>
-    <div class="sw-bp-dialog" role="dialog" aria-modal="true">
+    <div class="sw-bp-dialog" id="swBpModalDialog" role="dialog" aria-modal="true">
+      
+      <!-- Top CAD Header -->
       <div class="sw-bp-header">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="sw-bp-icon-badge"><i data-lucide="compass" style="width: 20px; height: 20px;"></i></div>
-          <div>
-            <h4 class="sw-bp-title">${title}</h4>
-            <div class="sw-bp-subtitle">${dims || ''}</div>
+        <div class="sw-bp-header-left">
+          <div class="sw-bp-icon-badge">
+            <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
           </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <span style="background: rgba(0, 242, 254, 0.15); border: 1px solid rgba(0, 242, 254, 0.35); color: #00f2fe; padding: 2px 7px; border-radius: 4px; font-family: var(--font-mono); font-size: 10px; font-weight: 700;">${ex.type}</span>
+              <h4 class="sw-bp-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">${currentBlueprintIndex + 1}. ${displayTitle}</h4>
+            </div>
+            <div class="sw-bp-subtitle" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 440px;">${ex.dims || ''}</div>
+          </div>
+        </div>
+
+        <!-- Quick Switcher Selector between Blueprints -->
+        <div class="sw-bp-nav-strip">
+          <button type="button" class="sw-bp-nav-btn" onclick="navigateBlueprint(-1)" ${isFirst ? 'disabled' : ''} title="${isFa ? 'نقشه قبلی (کلید جهت چپ)' : 'Previous Blueprint (Left Arrow)'}">
+            <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
+          </button>
+          
+          <select class="sw-bp-nav-select" onchange="navigateBlueprintTo(this.value)" aria-label="Select Blueprint">
+            ${exercises.map((item, idx) => `
+              <option value="${idx}" ${idx === currentBlueprintIndex ? 'selected' : ''}>
+                ${idx + 1}. ${isFa ? item.title : item.titleEn}
+              </option>
+            `).join('')}
+          </select>
+
+          <button type="button" class="sw-bp-nav-btn" onclick="navigateBlueprint(1)" ${isLast ? 'disabled' : ''} title="${isFa ? 'نقشه بعدی (کلید جهت راست)' : 'Next Blueprint (Right Arrow)'}">
+            <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+          </button>
         </div>
         
         <!-- Interactive Controls Toolbar -->
         <div class="sw-bp-toolbar">
           <!-- Toggle CAD Blueprint / ISO White Paper Mode -->
-          <button type="button" class="sw-bp-tool-btn" id="swBpThemeToggle" onclick="toggleBlueprintPaperMode()" title="${isFa ? 'تغییر به کاغذ سفید نقشه‌کشی کارگاهی' : 'Toggle ISO White Paper Sheet Mode'}">
+          <button type="button" class="sw-bp-tool-btn ${isBlueprintPaperMode ? 'active' : ''}" id="swBpThemeToggle" onclick="toggleBlueprintPaperMode()" title="${isFa ? 'تغییر پوسته (کاغذ سفید کارگاهی / بلوپرینت تیره)' : 'Toggle White Plotter Paper / Dark CAD'}">
             <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
-            <span id="swBpThemeLabel">${isFa ? 'حالت کاغذ سفید' : 'Paper Mode'}</span>
+            <span id="swBpThemeLabel">${isBlueprintPaperMode ? (isFa ? 'کاغذ پلاتر' : 'Paper') : (isFa ? 'بلوپرینت تیره' : 'Dark CAD')}</span>
+          </button>
+
+          <!-- Toggle Modeling Steps & Specs Drawer -->
+          <button type="button" class="sw-bp-tool-btn ${isBlueprintDrawerOpen ? 'active' : ''}" id="swBpDrawerBtn" onclick="toggleBlueprintDrawer()" title="${isFa ? 'مشاهده مراحل مدلسازی و مشخصات فنی' : 'View Modeling Steps & Specs'}">
+            <i data-lucide="list-checks" style="width: 14px; height: 14px;"></i>
+            <span>${isFa ? 'راهنمای مدل‌سازی' : 'Specs & Guide'}</span>
           </button>
 
           <!-- Zoom Controls -->
@@ -1022,15 +1110,26 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
           <button type="button" class="sw-bp-tool-btn" onclick="zoomBlueprint(-0.25)" title="${isFa ? 'کوچک‌نمایی (-)' : 'Zoom Out (-)'}">
             <i data-lucide="zoom-out" style="width: 14px; height: 14px;"></i>
           </button>
-          <button type="button" class="sw-bp-tool-btn" onclick="resetBlueprintZoom()" title="${isFa ? 'اندازه اصلی ۱۰۰٪' : 'Reset 100%'}">
+          <button type="button" class="sw-bp-tool-btn" onclick="resetBlueprintZoom()" title="${isFa ? 'اندازه پیش‌فرض ۱۰۰٪ (دوبار کلیک)' : 'Reset 100%'}">
             <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
-            <span id="swBpZoomValue">100%</span>
+            <span id="swBpZoomValue">${Math.round(currentBlueprintZoom * 100)}%</span>
+          </button>
+
+          <!-- Fullscreen Toggle -->
+          <button type="button" class="sw-bp-tool-btn" onclick="toggleBlueprintFullscreen()" title="${isFa ? 'تمام‌صفحه' : 'Toggle Fullscreen'}">
+            <i data-lucide="maximize" style="width: 14px; height: 14px;"></i>
+          </button>
+
+          <!-- Print High-Res Vector Blueprint -->
+          <button type="button" class="sw-bp-tool-btn" onclick="printCurrentBlueprint()" title="${isFa ? 'چاپ نقشه استاندارد مهندسی' : 'Print High-Res Blueprint'}">
+            <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
           </button>
 
           <!-- Download Vector SVG -->
-          <a href="${imageSrc}" download class="sw-bp-download-btn" title="${isFa ? 'دانلود مستقیم فایل برداری SVG' : 'Download Vector SVG'}">
+          <a href="${ex.image}" download="${ex.id}-blueprint.svg" class="sw-bp-download-btn" title="${isFa ? 'دانلود مستقیم فایل وکتور SVG' : 'Download Vector SVG'}">
             <i data-lucide="download" style="width: 16px; height: 16px;"></i>
           </a>
+
           <!-- Close Button -->
           <button type="button" class="sw-bp-close-btn" onclick="closeBlueprintModal()" aria-label="Close">
             <i data-lucide="x" style="width: 18px; height: 18px;"></i>
@@ -1038,21 +1137,81 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
         </div>
       </div>
 
-      <div class="sw-bp-view-container" id="swBpContainer">
-        <img src="${imageSrc}" alt="${title}" class="sw-bp-modal-img" id="swBpImg" />
+      <!-- Main CAD Viewport with Pan & Zoom -->
+      <div class="sw-bp-view-container ${isBlueprintPaperMode ? 'paper-mode' : ''}" id="swBpContainer">
+        <img 
+          src="${ex.image}" 
+          alt="${displayTitle}" 
+          class="sw-bp-modal-img" 
+          id="swBpImg"
+          ondragstart="return false;"
+        />
       </div>
 
+      <!-- Collapsible Modeling Guide & Technical Specs Drawer -->
+      <div class="sw-bp-drawer ${isBlueprintDrawerOpen ? 'open' : ''}" id="swBpDrawer">
+        <div class="sw-bp-drawer-grid">
+          <div>
+            <div class="sw-bp-drawer-title">
+              <i data-lucide="layers" style="width: 16px; height: 16px;"></i>
+              <span>${isFa ? 'شناسنامه و مشخصات قطعه' : 'Part Specifications'}</span>
+            </div>
+            <div class="sw-bp-info-box">
+              <div class="sw-bp-info-row">
+                <span class="sw-bp-info-label">${isFa ? 'کد نقشه:' : 'Drawing No:'}</span>
+                <span class="sw-bp-info-value">MAS-SW-EX0${currentBlueprintIndex + 1}-REV.B</span>
+              </div>
+              <div class="sw-bp-info-row">
+                <span class="sw-bp-info-label">${isFa ? 'محیط کاری سالیدورکز:' : 'SolidWorks Module:'}</span>
+                <span class="sw-bp-info-value" style="color: #00f2fe;">${ex.type}</span>
+              </div>
+              <div class="sw-bp-info-row">
+                <span class="sw-bp-info-label">${isFa ? 'سیستم استاندارد:' : 'Standard:'}</span>
+                <span class="sw-bp-info-value">ISO 7200 / ASME Y14.5M</span>
+              </div>
+              <div class="sw-bp-info-row">
+                <span class="sw-bp-info-label">${isFa ? 'تلرانس عمومی:' : 'General Tolerance:'}</span>
+                <span class="sw-bp-info-value">ISO 2768-m (±0.1 mm)</span>
+              </div>
+              <div class="sw-bp-info-row">
+                <span class="sw-bp-info-label">${isFa ? 'زاویه دید:' : 'Projection:'}</span>
+                <span class="sw-bp-info-value">${isFa ? 'فرجه سوم (Third Angle)' : 'Third Angle (USA/CAD)'}</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="sw-bp-drawer-title">
+              <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
+              <span>${isFa ? 'مراحل گام‌به‌گام مدلسازی در سالیدورکز' : 'SolidWorks Step-by-Step Instructions'}</span>
+            </div>
+            <ul class="sw-bp-steps-list">
+              ${(ex.steps && ex.steps.length > 0) 
+                ? ex.steps.map(step => `<li>${step}</li>`).join('') 
+                : `<li>${isFa ? 'نقشه را با قیدهای هندسی کامل (Fully Defined) ترسیم کنید.' : 'Create fully constrained 2D sketch/3D model.'}</li>`
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Status & Hints Footer -->
       <div class="sw-bp-footer">
         <div class="sw-bp-watermark">
           <span class="sw-bp-watermark-tag">ISO 7200 / ASME Y14.5M</span>
-          <span>CERTIFIED BY MOHAMMADAMIN SHARIF // SOLIDWORKS CAD ACADEMY</span>
+          <span style="display: inline-block;">${isFa ? 'گردآوری و تدوین: محمدامین شریف | آکادمی تخصصی سالیدورکز' : 'Curated by Mohammadamin Sharif | SolidWorks CAD Academy'}</span>
         </div>
-        <button type="button" class="sw-bp-action-btn" onclick="closeBlueprintModal()">${isFa ? 'بستن پنجره' : 'Close'}</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-family: var(--font-mono); font-size: 11px; color: #64748b; display: none; @media(min-width: 600px){display: inline;}">
+            ${isFa ? 'راهنما: درگ برای جابجایی | اسکرول برای زوم | دو کلیک برای بازنشانی' : 'Drag to pan | Scroll to zoom | Double click to reset'}
+          </span>
+          <button type="button" class="sw-bp-action-btn" onclick="closeBlueprintModal()">${isFa ? 'بستن پنجره' : 'Close'}</button>
+        </div>
       </div>
     </div>
   `;
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+
+  // Attach interactive pan & zoom events
+  initBlueprintPanAndZoom();
 
   try {
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -1061,43 +1220,206 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
   } catch (e) {
     console.warn(e);
   }
+}
+
+function handleBlueprintKeyNav(e) {
+  const modal = document.getElementById('swBlueprintModal');
+  if (!modal || !modal.classList.contains('active')) return;
+
+  if (e.key === 'Escape') {
+    closeBlueprintModal();
+  } else if (e.key === 'ArrowRight') {
+    navigateBlueprint(1);
+  } else if (e.key === 'ArrowLeft') {
+    navigateBlueprint(-1);
+  }
+}
+
+window.navigateBlueprint = function(dir) {
+  const exercises = (window.solidworksData && window.solidworksData.exercises) ? window.solidworksData.exercises : [];
+  const nextIdx = currentBlueprintIndex + dir;
+  if (nextIdx >= 0 && nextIdx < exercises.length) {
+    currentBlueprintIndex = nextIdx;
+    currentBlueprintZoom = 1;
+    currentPanX = 0;
+    currentPanY = 0;
+    renderBlueprintModalView();
+  }
+};
+
+window.navigateBlueprintTo = function(idx) {
+  const target = parseInt(idx, 10);
+  if (!isNaN(target)) {
+    currentBlueprintIndex = target;
+    currentBlueprintZoom = 1;
+    currentPanX = 0;
+    currentPanY = 0;
+    renderBlueprintModalView();
+  }
 };
 
 window.toggleBlueprintPaperMode = function() {
+  isBlueprintPaperMode = !isBlueprintPaperMode;
   const container = document.getElementById('swBpContainer');
   const btn = document.getElementById('swBpThemeToggle');
   const label = document.getElementById('swBpThemeLabel');
   const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
-  if (!container) return;
-
-  const isPaper = container.classList.toggle('paper-mode');
-  if (btn) btn.classList.toggle('active', isPaper);
+  
+  if (container) {
+    container.classList.toggle('paper-mode', isBlueprintPaperMode);
+  }
+  if (btn) {
+    btn.classList.toggle('active', isBlueprintPaperMode);
+  }
   if (label) {
-    label.textContent = isPaper 
-      ? (isFa ? 'حالت بلوپرینت تیره' : 'Dark CAD Mode') 
-      : (isFa ? 'حالت کاغذ سفید' : 'Paper Mode');
+    label.textContent = isBlueprintPaperMode 
+      ? (isFa ? 'کاغذ پلاتر' : 'Paper') 
+      : (isFa ? 'بلوپرینت تیره' : 'Dark CAD');
   }
 };
 
+window.toggleBlueprintDrawer = function() {
+  isBlueprintDrawerOpen = !isBlueprintDrawerOpen;
+  const drawer = document.getElementById('swBpDrawer');
+  const btn = document.getElementById('swBpDrawerBtn');
+  if (drawer) {
+    drawer.classList.toggle('open', isBlueprintDrawerOpen);
+  }
+  if (btn) {
+    btn.classList.toggle('active', isBlueprintDrawerOpen);
+  }
+};
+
+window.toggleBlueprintFullscreen = function() {
+  const dialog = document.getElementById('swBpModalDialog');
+  if (!dialog) return;
+
+  if (!document.fullscreenElement) {
+    if (dialog.requestFullscreen) {
+      dialog.requestFullscreen().catch(() => {
+        dialog.classList.toggle('fullscreen');
+      });
+    } else {
+      dialog.classList.toggle('fullscreen');
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+    dialog.classList.remove('fullscreen');
+  }
+};
+
+window.printCurrentBlueprint = function() {
+  window.print();
+};
+
 window.zoomBlueprint = function(delta) {
-  currentBlueprintZoom = Math.min(Math.max(0.5, currentBlueprintZoom + delta), 2.5);
-  applyBlueprintZoom();
+  currentBlueprintZoom = Math.min(Math.max(0.5, currentBlueprintZoom + delta), 3.5);
+  applyBlueprintTransform();
 };
 
 window.resetBlueprintZoom = function() {
   currentBlueprintZoom = 1;
-  applyBlueprintZoom();
+  currentPanX = 0;
+  currentPanY = 0;
+  applyBlueprintTransform();
 };
 
-function applyBlueprintZoom() {
+function applyBlueprintTransform() {
   const img = document.getElementById('swBpImg');
   const val = document.getElementById('swBpZoomValue');
   if (img) {
-    img.style.transform = `scale(${currentBlueprintZoom})`;
+    img.style.transform = `translate(${currentPanX}px, ${currentPanY}px) scale(${currentBlueprintZoom})`;
   }
   if (val) {
     val.textContent = `${Math.round(currentBlueprintZoom * 100)}%`;
   }
+}
+
+function initBlueprintPanAndZoom() {
+  const container = document.getElementById('swBpContainer');
+  const img = document.getElementById('swBpImg');
+  if (!container || !img) return;
+
+  // Mouse Wheel Zoom
+  container.onwheel = function(e) {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.2 : -0.2;
+    currentBlueprintZoom = Math.min(Math.max(0.5, currentBlueprintZoom + delta), 3.5);
+    applyBlueprintTransform();
+  };
+
+  // Double click to reset
+  container.ondblclick = function() {
+    resetBlueprintZoom();
+  };
+
+  // Mouse Drag to Pan
+  container.onmousedown = function(e) {
+    // Only drag with primary mouse button
+    if (e.button !== 0) return;
+    isBlueprintDragging = true;
+    blueprintDragStartX = e.clientX - currentPanX;
+    blueprintDragStartY = e.clientY - currentPanY;
+    img.style.cursor = 'grabbing';
+  };
+
+  window.onmousemove = function(e) {
+    if (!isBlueprintDragging) return;
+    currentPanX = e.clientX - blueprintDragStartX;
+    currentPanY = e.clientY - blueprintDragStartY;
+    applyBlueprintTransform();
+  };
+
+  window.onmouseup = function() {
+    if (isBlueprintDragging) {
+      isBlueprintDragging = false;
+      if (img) img.style.cursor = 'grab';
+    }
+  };
+
+  // Touch Support (Mobile / Tablet)
+  let initialTouchDist = 0;
+  container.ontouchstart = function(e) {
+    if (e.touches.length === 1) {
+      isBlueprintDragging = true;
+      blueprintDragStartX = e.touches[0].clientX - currentPanX;
+      blueprintDragStartY = e.touches[0].clientY - currentPanY;
+    } else if (e.touches.length === 2) {
+      isBlueprintDragging = false;
+      initialTouchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    }
+  };
+
+  container.ontouchmove = function(e) {
+    if (isBlueprintDragging && e.touches.length === 1) {
+      e.preventDefault();
+      currentPanX = e.touches[0].clientX - blueprintDragStartX;
+      currentPanY = e.touches[0].clientY - blueprintDragStartY;
+      applyBlueprintTransform();
+    } else if (e.touches.length === 2) {
+      e.preventDefault();
+      const currentDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      if (initialTouchDist > 0) {
+        const factor = currentDist / initialTouchDist;
+        currentBlueprintZoom = Math.min(Math.max(0.5, currentBlueprintZoom * factor), 3.5);
+        applyBlueprintTransform();
+        initialTouchDist = currentDist;
+      }
+    }
+  };
+
+  container.ontouchend = function() {
+    isBlueprintDragging = false;
+    initialTouchDist = 0;
+  };
 }
 
 window.closeBlueprintModal = function() {
@@ -1106,12 +1428,6 @@ window.closeBlueprintModal = function() {
     modal.classList.remove('active');
   }
   document.body.style.overflow = '';
+  window.removeEventListener('keydown', handleBlueprintKeyNav);
 };
-
-// Keyboard escape to close modal
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    window.closeBlueprintModal();
-  }
-});
 
