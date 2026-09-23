@@ -18,6 +18,7 @@
 
   <!-- Liquid Glass Design System -->
   <link rel="stylesheet" href="assets/css/liquid-glass.css">
+  <link rel="stylesheet" href="assets/css/solidworks-course.css">
 
   <!-- Core styles are loaded from assets/css/liquid-glass.css -->
 </head>
@@ -184,31 +185,98 @@
       </div>
 
       <!-- ============================================================
+           FEATURED SOLIDWORKS ACADEMY SPOTLIGHT
+           آموزش و کارگاه تخصصی سالیدورکس (SolidWorks Academy & Blueprint Lab)
+           گردآوری، تدوین و تنظیم ساختار یافته: محمدامین شریف
+           ============================================================ -->
+      <div class="fm-featured-publication-card" id="featuredSolidworksCard" style="margin-bottom: 28px; border-color: rgba(0, 242, 254, 0.35); background: linear-gradient(135deg, rgba(14, 21, 37, 0.85) 0%, rgba(10, 16, 28, 0.95) 100%);">
+        <div class="fm-pub-cover-col" style="position: relative; overflow: hidden; border-radius: 14px; min-height: 220px;">
+          <img src="assets/images/cad-banner.jpg" alt="دوره آموزش تخصصی سالیدورکس" class="fm-pub-cover-img" style="height: 100%; object-fit: cover;" loading="lazy">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 16, 28, 0.9) 0%, rgba(10, 16, 28, 0.2) 60%);"></div>
+          <div style="position: absolute; bottom: 12px; right: 12px; left: 12px; background: rgba(7, 14, 20, 0.88); backdrop-filter: blur(8px); padding: 8px 12px; border-radius: 10px; font-size: 11px; text-align: center; border: 1px solid rgba(0, 242, 254, 0.4); color: #38bdf8; font-weight: 700;">
+            <i data-lucide="award" style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-left: 4px;"></i>
+            <span data-en="Curated &amp; Compiled by Mohammadamin Sharif" data-fa="گردآوری و تدوین: محمدامین شریف">گردآوری و تدوین: محمدامین شریف</span>
+          </div>
+        </div>
+
+        <div class="fm-pub-info-col">
+          <div class="fm-pub-badge" style="background: rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.3); color: #00f2fe;">
+            <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i>
+            <span data-en="SOLIDWORKS CAD ACADEMY &bull; 42 CHAPTERS &bull; 10 BLUEPRINTS" data-fa="دوره جامع آموزش سالیدورکس &bull; ۴۲ سرفصل کامل &bull; ۱۰ نقشه ساخت">دوره جامع آموزش سالیدورکس &bull; ۴۲ سرفصل کامل &bull; ۱۰ نقشه ساخت</span>
+          </div>
+
+          <h2 class="fm-pub-title" data-en="SolidWorks Engineering Academy & Industrial Blueprint Lab" data-fa="دوره جامع و کارگاه تخصصی سالیدورکس مقدماتی تا پیشرفته" style="color: #ffffff;">
+            دوره جامع و کارگاه تخصصی سالیدورکس مقدماتی تا پیشرفته
+          </h2>
+
+          <p class="fm-pub-desc" data-en="Comprehensive CAD curriculum curated and structured by Mohammadamin Sharif — covering 2D sketching, geometric relations, fully defined states, 3D features, assemblies, mechanisms, engineering drawings, GD&T, 10 exact industrial blueprints, and interactive quiz." data-fa="دوره جامع و کاربردی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) — شامل محیط‌های دو بعدی و سه‌بعدی، قیود و فولی، نماها، کلیدهای میانبر، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.">
+            دوره جامع و کاربردی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) — شامل محیط‌های دو بعدی و سه‌بعدی، قیود و فولی، نماها، کلیدهای میانبر، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.
+          </p>
+
+          <div class="fm-pub-tools-row">
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch1');"><i data-lucide="pen-tool" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 1: 2D Sketch" data-fa="فصل ۱: ترسیم ۲ بعدی">فصل ۱: ترسیم ۲ بعدی</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch2');"><i data-lucide="link-2" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 2: Relations" data-fa="فصل ۲: قیود و فولی">فصل ۲: قیود و فولی</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch3');"><i data-lucide="sliders" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 3: Views & Keys" data-fa="فصل ۳: نماها و میانبرها">فصل ۳: نماها و میانبرها</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch4');"><i data-lucide="box" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 4: 3D Features" data-fa="فصل ۴: مدل‌سازی ۳ بعدی">فصل ۴: مدل‌سازی ۳ بعدی</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch5');"><i data-lucide="cpu" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 5: Assembly" data-fa="فصل ۵: مونتاژ اسمبلی">فصل ۵: مونتاژ اسمبلی</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch6');"><i data-lucide="file-text" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 6: Drawing & BOM" data-fa="فصل ۶: نقشه‌کشی و BOM">فصل ۶: نقشه‌کشی و BOM</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('exercises');"><i data-lucide="ruler" style="width: 12px; height: 12px; color: #10b981;"></i> <span data-en="10 Industrial Blueprints" data-fa="کارگاه ۱۰ نقشه ساخت صنعتی">کارگاه ۱۰ نقشه ساخت صنعتی</span></span>
+            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('quiz');"><i data-lucide="award" style="width: 12px; height: 12px; color: #facc15;"></i> <span data-en="Knowledge Quiz" data-fa="آزمون آنلاین سنجش تسلط">آزمون آنلاین سنجش تسلط</span></span>
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+            <button onclick="navigateToSection('solidworks'); return false;" class="fm-pub-btn-primary" style="background: linear-gradient(135deg, #00f2fe 0%, #0284c7 100%); border: none; cursor: pointer;">
+              <i data-lucide="layers" style="width: 16px; height: 16px;"></i>
+              <span data-en="Enter SolidWorks Academy" data-fa="ورود به دوره و کارگاه آموزش سالیدورکس">ورود به دوره و کارگاه آموزش سالیدورکس</span>
+              <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            </button>
+
+            <button onclick="navigateToSection('solidworks'); setTimeout(() => filterSwChapter('exercises'), 100); return false;" class="fm-pub-btn-secondary" style="cursor: pointer;">
+              <i data-lucide="ruler" style="width: 15px; height: 15px; color: #10b981;"></i>
+              <span data-en="10 Industrial Blueprints" data-fa="کارگاه ۱۰ نقشه ساخت با ابعاد دقیق">کارگاه ۱۰ نقشه ساخت با ابعاد دقیق</span>
+            </button>
+
+            <button onclick="navigateToSection('solidworks'); setTimeout(() => filterSwChapter('quiz'), 100); return false;" class="fm-pub-btn-secondary" style="cursor: pointer;">
+              <i data-lucide="award" style="width: 15px; height: 15px; color: #facc15;"></i>
+              <span data-en="Take Online Quiz" data-fa="آزمون آنلاین و سنجش تسلط">آزمون آنلاین و سنجش تسلط</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
            01 ALL ENGINEERING PROJECTS & DIGITAL LABS (12+ PROJECTS)
            نمایش جامع تمامی پروژه‌های مهندسی، سالیدورکس، شبیه‌سازی و توربوماشین
            ============================================================ -->
       <div class="fm-section-panel" style="margin-bottom: 28px;" id="homeAllProjectsPanel">
-        <div class="fm-panel-header" style="flex-wrap: wrap; gap: 14px;">
+        <div class="fm-panel-header" style="flex-wrap: wrap; gap: 14px; align-items: center;">
           <div class="fm-panel-num-title">
             <span class="fm-panel-num">01</span>
             <div>
-              <h2 class="fm-panel-title" data-en="All Engineering Projects & Workspaces" data-fa="تمام پروژه‌ها و کارگاه‌های مهندسی">All Engineering Projects &amp; Workspaces</h2>
-              <p style="font-size: 11.5px; color: #94a3b8; margin: 2px 0 0 0;" data-en="Explore 12+ real-world engineering projects: Turbomachinery, CFD, SolidWorks CAD, and Digital Twins" data-fa="مشاهده بیش از ۱۲ پروژه تخصصی: توربوماشین، مکانیک محاسباتی CFD، سالیدورکس و دوقلوهای دیجیتال">Explore 12+ real-world engineering projects: Turbomachinery, CFD, SolidWorks CAD, and Digital Twins</p>
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 3px; flex-wrap: wrap;">
+                <h2 class="fm-panel-title" data-en="All Engineering Projects & Workspaces" data-fa="تمام پروژه‌ها و کارگاه‌های مهندسی" style="margin: 0;">All Engineering Projects &amp; Workspaces</h2>
+                <span class="fm-live-status-pill" style="font-size: 10px; font-family: var(--font-mono); padding: 3px 9px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 20px; color: #00f2fe; display: inline-flex; align-items: center; gap: 6px;">
+                  <span class="pulse-dot" style="width: 6px; height: 6px; background: #00f2fe; border-radius: 50%; box-shadow: 0 0 6px #00f2fe;"></span>
+                  <span data-en="12 Active Engineering Projects" data-fa="۱۲ پروژه فعال مهندسی">12 Active Engineering Projects</span>
+                </span>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; margin: 0; line-height: 1.5;" data-en="Applied portfolio: Turbomachinery, computational fluid dynamics (CFD), SolidWorks CAD assemblies, and interactive digital twins." data-fa="مجموعه پروژه‌های کاربردی: توربوماشین، مکانیک محاسباتی (CFD)، مدل‌های سالیدورکس و دوقلوهای دیجیتال تعاملی.">Applied portfolio: Turbomachinery, computational fluid dynamics (CFD), SolidWorks CAD assemblies, and interactive digital twins.</p>
             </div>
           </div>
           <a href="#projects" class="fm-panel-action-link" onclick="navigateToSection('projects'); return false;">
-            <span data-en="Pump Design Section" data-fa="بخش طراحی پمپ">Pump Design Section</span>
+            <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
+            <span data-en="Explore All Workspaces" data-fa="نمایش گالری تخصصی کارگاه‌ها">Explore All Workspaces</span>
             <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
           </a>
         </div>
 
         <!-- Filter Bar -->
-        <div class="projects-filter-bar" style="margin-bottom: 18px;">
-          <button class="proj-filter-btn home-filter-btn active" onclick="filterHomeProjects('all', this)" data-en="All Projects (12+)" data-fa="همه پروژه‌ها (۱۲+)">All Projects (12+)</button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('turbo', this)" data-en="Turbomachinery & Pumps" data-fa="توربوماشین و پمپ">Turbomachinery &amp; Pumps</button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('cfd', this)" data-en="CFD Simulations" data-fa="شبیه‌سازی CFD">CFD Simulations</button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('cad', this)" data-en="SolidWorks CAD" data-fa="سالیدورکس CAD">SolidWorks CAD</button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('twin', this)" data-en="Digital Twins" data-fa="دوقلوهای دیجیتال">Digital Twins</button>
+        <div class="projects-filter-bar" style="margin-bottom: 20px;">
+          <button class="proj-filter-btn home-filter-btn active" onclick="filterHomeProjects('all', this)"><i data-lucide="layers" style="width: 13px; height: 13px;"></i> <span data-en="All Projects (12)" data-fa="همه پروژه‌ها (۱۲)">All Projects (12)</span></button>
+          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('turbo', this)"><i data-lucide="disc" style="width: 13px; height: 13px;"></i> <span data-en="Turbomachinery & Pumps (2)" data-fa="توربوماشین و پمپ‌ها (۲)">Turbomachinery &amp; Pumps (2)</span></button>
+          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('cfd', this)"><i data-lucide="wind" style="width: 13px; height: 13px;"></i> <span data-en="CFD Simulations (3)" data-fa="شبیه‌سازی CFD (۳)">CFD Simulations (3)</span></button>
+          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('cad', this)"><i data-lucide="box" style="width: 13px; height: 13px;"></i> <span data-en="SolidWorks CAD &amp; Academy (4)" data-fa="آموزش و سالیدورکس CAD (۴)">SolidWorks CAD &amp; Academy (4)</span></button>
+          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('twin', this)"><i data-lucide="activity" style="width: 13px; height: 13px;"></i> <span data-en="Digital Twins (4)" data-fa="دوقلوهای دیجیتال (۴)">Digital Twins (4)</span></button>
         </div>
 
         <!-- Home Projects Grid (12 Complete Engineering Cards) -->
@@ -331,7 +399,7 @@
           </div>
 
           <!-- Project 5: SolidWorks Model Rocket Aerospace Assembly -->
-          <div class="fm-project-card" data-cat="cad" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
+          <div class="fm-project-card" data-cat="cad" onclick="openProjectModal('rocket')" role="button" tabindex="0">
             <div class="fm-project-img-wrap">
               <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="SolidWorks Model Rocket Assembly" class="fm-project-img">
               <span class="fm-project-badge" style="border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
@@ -349,10 +417,10 @@
                   <span>12 Parts</span>
                 </div>
                 <div class="fm-project-meta-item">
-                  <i data-lucide="download" style="width: 12px; height: 12px;"></i>
-                  <span>STEP / ZIP</span>
+                  <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
+                  <span>SLDASM &amp; STEP</span>
                 </div>
-                <div class="fm-project-arrow-btn" title="Open SolidWorks Page">
+                <div class="fm-project-arrow-btn" title="View Assembly Specs">
                   <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                 </div>
               </div>
@@ -360,7 +428,7 @@
           </div>
 
           <!-- Project 6: SolidWorks Coilover Shock Suspension Assembly -->
-          <div class="fm-project-card" data-cat="cad" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
+          <div class="fm-project-card" data-cat="cad" onclick="openProjectModal('shock')" role="button" tabindex="0">
             <div class="fm-project-img-wrap">
               <img src="assets/images/solidworks/shock-assembly.jpg" alt="SolidWorks Coilover Shock Suspension Assembly" class="fm-project-img">
               <span class="fm-project-badge" style="border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
@@ -378,10 +446,10 @@
                   <span>14 Parts</span>
                 </div>
                 <div class="fm-project-meta-item">
-                  <i data-lucide="download" style="width: 12px; height: 12px;"></i>
-                  <span>STEP / ZIP</span>
+                  <i data-lucide="cpu" style="width: 12px; height: 12px;"></i>
+                  <span>Kinematics</span>
                 </div>
-                <div class="fm-project-arrow-btn" title="Open SolidWorks Page">
+                <div class="fm-project-arrow-btn" title="View Assembly Specs">
                   <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
                 </div>
               </div>
@@ -389,7 +457,7 @@
           </div>
 
           <!-- Project 7: SolidWorks Bench Clamp Toggle Mechanism -->
-          <div class="fm-project-card" data-cat="cad" onclick="navigateToSection('solidworks')" role="button" tabindex="0">
+          <div class="fm-project-card" data-cat="cad" onclick="openProjectModal('clamp')" role="button" tabindex="0">
             <div class="fm-project-img-wrap">
               <img src="assets/images/cad-banner.jpg" alt="SolidWorks Bench Clamp Toggle Mechanism" class="fm-project-img">
               <span class="fm-project-badge" style="border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
@@ -407,11 +475,36 @@
                   <span>SLDASM</span>
                 </div>
                 <div class="fm-project-meta-item">
-                  <i data-lucide="download" style="width: 12px; height: 12px;"></i>
-                  <span>ZIP / STEP</span>
+                  <i data-lucide="sliders" style="width: 12px; height: 12px;"></i>
+                  <span>Fixtures</span>
                 </div>
-                <div class="fm-project-arrow-btn" title="Open SolidWorks Page">
+                <div class="fm-project-arrow-btn" title="View Mechanism Specs">
                   <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 7B: SolidWorks Engineering Academy & Blueprint Lab -->
+          <div class="fm-project-card" data-cat="cad" onclick="navigateToSection('solidworks')" role="button" tabindex="0" style="border: 1px solid rgba(0, 242, 254, 0.45); background: linear-gradient(135deg, rgba(14, 21, 37, 0.9) 0%, rgba(6, 78, 59, 0.2) 100%);">
+            <div class="fm-project-img-wrap">
+              <img src="assets/images/cad-banner.jpg" alt="دوره آموزش سالیدورکس" class="fm-project-img">
+              <span class="fm-project-badge" style="border-color: rgba(0, 242, 254, 0.7); color: #00f2fe; background: rgba(0, 242, 254, 0.15);">ACADEMY // ۴۲ سرفصل</span>
+            </div>
+            <div class="fm-project-body">
+              <div>
+                <div class="fm-project-title" data-en="SolidWorks Academy &amp; Blueprint Lab" data-fa="دوره جامع سالیدورکس و کارگاه نقشه‌ها">SolidWorks Academy &amp; Blueprint Lab</div>
+                <div class="fm-project-desc" data-en="Complete engineering course syllabus curated by Mohammadamin Sharif: 2D sketching, fully defined relations, 3D features, assembly mates, drawing GD&T, 10 exact blueprints, and quiz." data-fa="سرفصل کامل دوره جامع مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف): محیط ۲ بعدی، قیود، فیچرهای ۳ بعدی، مونتاژ، نقشه‌کشی، ۱۰ نقشه ساخت با ابعاد و آزمون آنلاین.">
+                  سرفصل کامل دوره جامع مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف): محیط ۲ بعدی، قیود، فیچرهای ۳ بعدی، مونتاژ، نقشه‌کشی، ۱۰ نقشه ساخت با ابعاد و آزمون آنلاین.
+                </div>
+              </div>
+              <div class="fm-project-footer">
+                <div class="fm-project-meta-item">
+                  <i data-lucide="book-open" style="width: 12px; height: 12px; color: #00f2fe;"></i>
+                  <span data-en="42 Topics &bull; 10 Blueprints" data-fa="۴۲ مبحث &bull; ۱۰ نقشه ساخت">۴۲ مبحث &bull; ۱۰ نقشه ساخت</span>
+                </div>
+                <div class="fm-project-arrow-btn" title="Open SolidWorks Academy" style="background: rgba(0, 242, 254, 0.2); border-color: rgba(0, 242, 254, 0.5);">
+                  <i data-lucide="arrow-left" style="width: 12px; height: 12px; color: #00f2fe;"></i>
                 </div>
               </div>
             </div>
@@ -449,7 +542,7 @@
           <!-- Project 9: Interactive Pump Anatomy & Hydraulic Loop -->
           <div class="fm-project-card" data-cat="twin" onclick="window.location.href='simulations/Interactive_Pump_Anatomy.html'" role="button" tabindex="0">
             <div class="fm-project-img-wrap">
-              <img src="assets/images/turbine-blade-cfd.jpg" alt="Interactive pump 3D anatomy" class="fm-project-img">
+              <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="Interactive pump 3D anatomy" class="fm-project-img">
               <span class="fm-project-badge" style="border-color: rgba(16, 185, 129, 0.6); color: #10b981;">TWIN // 3D PUMP</span>
             </div>
             <div class="fm-project-body">
@@ -880,7 +973,7 @@
             <li><a href="#courses" onclick="navigateToSection('books'); return false;">Courses</a></li>
             <li><a href="#projects" onclick="navigateToSection('projects'); return false;">Projects</a></li>
             <li><a href="#research" onclick="document.getElementById('researchInterestsSection')?.scrollIntoView({behavior:'smooth'}); return false;">Research</a></li>
-            <li><a href="#resources" onclick="navigateToSection('solidworks'); return false;">Resources</a></li>
+            <li><a href="#solidworks" onclick="navigateToSection('solidworks'); return false;"><span data-en="SolidWorks Academy" data-fa="آموزش سالیدورکس">SolidWorks Academy</span></a></li>
             <li><a href="#blog" onclick="navigateToSection('simulations'); return false;">Blog</a></li>
             <li><a href="#contact" onclick="document.getElementById('contactCtaBanner')?.scrollIntoView({behavior:'smooth'}); return false;">Contact</a></li>
           </ul>
@@ -913,8 +1006,8 @@
       </button>
       <button class="filter-pill" data-filter="solidworks">
         <i data-lucide="box" style="width: 14px;"></i>
-        <span data-en="SOLIDWORKS CAD" data-fa="سالیدورکس">SOLIDWORKS CAD</span>
-        <span class="filter-pill-count">05</span>
+        <span data-en="SOLIDWORKS ACADEMY" data-fa="آموزش و کارگاه سالیدورکس">SOLIDWORKS ACADEMY</span>
+        <span class="filter-pill-count">PRO</span>
       </button>
       <button class="filter-pill" data-filter="simulations">
         <i data-lucide="activity" style="width: 14px;"></i>
@@ -983,12 +1076,12 @@
       </div>
 
       <!-- Category Filter Bar -->
-      <div class="projects-filter-bar">
-        <button class="proj-filter-btn active" onclick="filterProjectsByCategory('all', this)">[All Projects (12)]</button>
-        <button class="proj-filter-btn" onclick="filterProjectsByCategory('turbo', this)">[Turbomachinery &amp; Pumps]</button>
-        <button class="proj-filter-btn" onclick="filterProjectsByCategory('cfd', this)">[CFD &amp; Aerodynamics]</button>
-        <button class="proj-filter-btn" onclick="filterProjectsByCategory('cad', this)">[SolidWorks CAD]</button>
-        <button class="proj-filter-btn" onclick="filterProjectsByCategory('twin', this)">[Digital Twins]</button>
+      <div class="projects-filter-bar" id="projectsGalleryFilterBar">
+        <button class="proj-filter-btn active" onclick="filterProjectsByCategory('all', this)"><i data-lucide="layers" style="width: 14px; height: 14px;"></i> <span data-en="All Projects (12)" data-fa="همه پروژه‌ها (۱۲)">All Projects (12)</span></button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('turbo', this)"><i data-lucide="disc" style="width: 14px; height: 14px;"></i> <span data-en="Turbomachinery &amp; Pumps (2)" data-fa="توربوماشین و پمپ‌ها (۲)">Turbomachinery &amp; Pumps (2)</span></button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('cfd', this)"><i data-lucide="wind" style="width: 14px; height: 14px;"></i> <span data-en="CFD Simulations (3)" data-fa="شبیه‌سازی‌های CFD (۳)">CFD Simulations (3)</span></button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('cad', this)"><i data-lucide="box" style="width: 14px; height: 14px;"></i> <span data-en="SolidWorks CAD (3)" data-fa="سالیدورکس CAD (۳)">SolidWorks CAD (3)</span></button>
+        <button class="proj-filter-btn" onclick="filterProjectsByCategory('twin', this)"><i data-lucide="activity" style="width: 14px; height: 14px;"></i> <span data-en="Digital Twins (4)" data-fa="دوقلوهای دیجیتال (۴)">Digital Twins (4)</span></button>
       </div>
 
       <div class="projects-glass-grid" id="projectsGalleryGrid">
@@ -1135,7 +1228,7 @@
         </div>
 
         <!-- PROJECT 05: SOLIDWORKS MODEL ROCKET ASSEMBLY -->
-        <a href="assets/downloads/solidworks/rocket-assembly.zip" download class="project-glass-card card-jewel-blue" data-cat="cad">
+        <div class="project-glass-card card-jewel-blue" data-cat="cad" style="cursor: pointer;" onclick="openProjectModal('rocket')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
             <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="SolidWorks Model Rocket CAD Assembly" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
@@ -1145,8 +1238,8 @@
               <div class="project-header-row">
                 <h3 class="project-title" data-en="Model Rocket Multi-Stage Assembly" data-fa="مونتاژ سه‌بعدی راکت مدل چندمرحله‌ای">Model Rocket Multi-Stage Assembly</h3>
               </div>
-              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay. Available for download." data-fa="مجموعه مونتاژی آیرودینامیکی با پره‌ها، دماغه و بخش‌های جدایش چندمرحله‌ای به همراه دانلود مستقیم.">
-                Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay. Available for download.
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay." data-fa="مجموعه مونتاژی آیرودینامیکی با پره‌ها، دماغه فون‌کارمن و بخش‌های جدایش چندمرحله‌ای.">
+                Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay.
               </p>
             </div>
 
@@ -1157,20 +1250,20 @@
               </div>
               <div class="p-metric-item">
                 <span class="p-metric-lbl">FORMAT</span>
-                <span class="p-metric-val">SLDASM &amp; STEP ZIP</span>
+                <span class="p-metric-val">SLDASM &amp; STEP</span>
               </div>
             </div>
 
             <div class="project-tags">
               <span class="p-tag">SolidWorks</span>
               <span class="p-tag">Aerospace</span>
-              <span class="p-tag">Download ZIP</span>
+              <span class="p-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> مشاهده مشخصات</span>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- PROJECT 06: SOLIDWORKS SHOCK SUSPENSION -->
-        <a href="assets/downloads/solidworks/shock-assembly.zip" download class="project-glass-card card-jewel-amber" data-cat="cad">
+        <div class="project-glass-card card-jewel-amber" data-cat="cad" style="cursor: pointer;" onclick="openProjectModal('shock')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
             <img src="assets/images/solidworks/shock-assembly.jpg" alt="SolidWorks Coilover Shock Assembly" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
@@ -1199,10 +1292,10 @@
             <div class="project-tags">
               <span class="p-tag">SolidWorks</span>
               <span class="p-tag">Suspension</span>
-              <span class="p-tag">Download ZIP</span>
+              <span class="p-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> مشاهده مشخصات</span>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- PROJECT 07: RANKINE POWER PLANT DIGITAL TWIN ENGINE -->
         <a href="simulations/Power_Plant_Digital_Twin_Engine.html" target="_blank" class="project-glass-card card-jewel-cyan" data-cat="twin">
@@ -1242,7 +1335,7 @@
         <!-- PROJECT 08: MICROFLUIDIC CHIP LAB -->
         <div class="project-glass-card card-jewel-emerald" data-cat="cfd" style="cursor: pointer;" onclick="navigateToSection('microfluidics')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/two_phase_flow_1789395385404.jpg" alt="Microfluidic chip diverging nozzle lab" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/hero-f1-cfd.jpg" alt="Microfluidic chip diverging nozzle lab" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">Interactive Lab</span>
           </div>
           <div class="project-glass-body">
@@ -1275,7 +1368,7 @@
         </div>
 
         <!-- PROJECT 09: SOLIDWORKS BENCH CLAMP TOGGLE MECHANISM -->
-        <div class="project-glass-card card-jewel-amber" data-cat="cad" style="cursor: pointer;" onclick="navigateToSection('solidworks')">
+        <div class="project-glass-card card-jewel-amber" data-cat="cad" style="cursor: pointer;" onclick="openProjectModal('clamp')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
             <img src="assets/images/cad-banner.jpg" alt="SolidWorks Bench Clamp Toggle Mechanism" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
@@ -1304,7 +1397,7 @@
             <div class="project-tags">
               <span class="p-tag">SolidWorks</span>
               <span class="p-tag">Fixtures</span>
-              <span class="p-tag">Kinematics</span>
+              <span class="p-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> مشاهده مشخصات</span>
             </div>
           </div>
         </div>
@@ -1312,7 +1405,7 @@
         <!-- PROJECT 10: INTERACTIVE 3D PUMP ANATOMY -->
         <a href="simulations/Interactive_Pump_Anatomy.html" target="_blank" class="project-glass-card card-jewel-cyan" data-cat="twin">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/turbine-blade-cfd.jpg" alt="Interactive 3D Centrifugal Pump Anatomy" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="Interactive 3D Centrifugal Pump Anatomy" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">3D WebGL</span>
           </div>
           <div class="project-glass-body">
@@ -1453,148 +1546,153 @@
           <div class="section-banner-top-tags">
             <span class="section-banner-badge">
               <span class="pulse-dot"></span>
-              <span data-en="// MECHANICAL CAD LAB" data-fa="// آزمایشگاه CAD مکانیک">// MECHANICAL CAD LAB</span>
+              <span data-en="// SOLIDWORKS MASTERCLASS & BLUEPRINTS" data-fa="// دوره جامع آموزش و کارگاه سالیدورکس">// SOLIDWORKS MASTERCLASS & BLUEPRINTS</span>
             </span>
-            <span class="section-banner-pill">[05 CAD MODELS &bull; SLDPRT / SLDASM / STEP]</span>
+            <span class="section-banner-pill">[42 TOPICS &bull; 10 BLUEPRINTS &bull; 35+ TOOLS &bull; QUIZ]</span>
           </div>
-          <h2 class="section-banner-title" data-en="SOLIDWORKS 3D CAD &amp; MECHANICAL ASSEMBLIES" data-fa="مدل‌سازی سه‌بعدی سالیدورکس و مجموعه‌های مکانیکی">
-            SOLIDWORKS 3D CAD &amp; MECHANICAL ASSEMBLIES
+          <h2 class="section-banner-title" data-en="SOLIDWORKS ENGINEERING ACADEMY &amp; CAD LAB" data-fa="دوره جامع و کارگاه تخصصی سالیدورکس مقدماتی تا پیشرفته">
+            SOLIDWORKS ENGINEERING ACADEMY &amp; CAD LAB
           </h2>
-          <p class="section-banner-subtitle" data-en="Precision part engineering, multi-body kinematics, aerospace rocket staging, and suspension shock linkages." data-fa="طراحی و مدل‌سازی دقیق قطعات، سینماتیک مکانیزم‌ها، راکت‌های هوافضا و سیستم تعلیق خودرو.">
-            Precision part engineering, multi-body kinematics, aerospace rocket staging, and suspension shock linkages.
+          <p class="section-banner-subtitle" data-en="Comprehensive SolidWorks engineering masterclass curated, structured, and presented by Mohammadamin Sharif — featuring 2D sketching, geometric relations, fully defined states, 3D features, assemblies, drawings, GD&T, 10 exact blueprints, and interactive quiz." data-fa="دوره جامع و تخصصی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) همراه با تمامی ابزارها، قیود، میانبرها، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.">
+            دوره جامع و تخصصی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) همراه با تمامی ابزارها، قیود، میانبرها، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.
           </p>
         </div>
       </div>
 
-      <div class="section-glass-header">
+      <!-- Quick Metrics Statistics Row -->
+      <div class="sw-stats-row" style="margin: 16px 0 20px 0;">
+        <div class="sw-stat-pill"><i data-lucide="book-open"></i> <span data-en="42 Comprehensive Topics" data-fa="۴۲ مبحث آموزشی جامع">۴۲ مبحث آموزشی جامع</span></div>
+        <div class="sw-stat-pill"><i data-lucide="wrench"></i> <span data-en="35+ Specialized CAD Tools" data-fa="۳۵+ ابزار دو و سه‌بعدی">۳۵+ ابزار دو و سه‌بعدی</span></div>
+        <div class="sw-stat-pill"><i data-lucide="link"></i> <span data-en="14 Standard & Mechanical Mates" data-fa="۱۴ قید هندسی و مکانیکی">۱۴ قید هندسی و مکانیکی</span></div>
+        <div class="sw-stat-pill"><i data-lucide="ruler"></i> <span data-en="10 Exact Industrial Blueprints" data-fa="۱۰ نقشه ساخت با ابعاد دقیق">۱۰ نقشه ساخت با ابعاد دقیق</span></div>
+        <div class="sw-stat-pill"><i data-lucide="check-circle-2"></i> <span data-en="3 Core Environments (Part, Assem, Draw)" data-fa="۳ محیط استاندارد: پارت، اسمبلی، دراوینگ">۳ محیط استاندارد: پارت، اسمبلی، دراوینگ</span></div>
+      </div>
+
+      <!-- Main Course Interactive Container -->
+      <div id="solidworksCourseContainer" class="sw-academy-container" style="margin-bottom: 36px;"></div>
+
+      <div class="section-glass-header" style="margin-top: 36px;">
         <div>
-          <div class="section-eyebrow" data-en="// CAD MODELING" data-fa="// مدل‌سازی CAD">
+          <div class="section-eyebrow" data-en="// 3D CAD SHOWCASE" data-fa="// نمونه طرح‌ها و مونتاژهای کامل سه‌بعدی">
             <i data-lucide="box" style="width: 14px;"></i>
-            <span>// CAD MODELING</span>
+            <span>// 3D CAD SHOWCASE</span>
           </div>
-          <div class="section-main-heading" data-en="SOLIDWORKS" data-fa="سالیدورکس">SOLIDWORKS</div>
+          <div class="section-main-heading" data-en="CAD ASSEMBLIES" data-fa="پروژه‌های مونتاژ سه‌بعدی">CAD ASSEMBLIES</div>
         </div>
         <div class="section-pill-indicator">
-          [05 MODELS]
+          [03 MODELS]
         </div>
       </div>
 
-      <!-- SUBSECTION: 3D SAMPLE -->
+      <!-- SUBSECTION: 3D MECHANICAL ASSEMBLIES -->
       <div class="subsection-glass-header">
         <i data-lucide="box" style="width: 16px;"></i>
-        <span data-en="3D SAMPLE" data-fa="نمونه سه‌بعدی">3D SAMPLE</span>
+        <span data-en="3D MECHANICAL ASSEMBLIES" data-fa="مجموعه‌های مونتاژی سه‌بعدی مکانیک">3D MECHANICAL ASSEMBLIES</span>
       </div>
       <div class="projects-glass-grid">
 
         <!-- 3D 01: MODEL ROCKET ASSEMBLY -->
-        <a href="assets/downloads/solidworks/rocket-assembly.zip" download class="project-glass-card card-jewel-blue">
-          <div class="project-glass-preview">
-            <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="Model Rocket Assembly render">
+        <div class="project-glass-card card-jewel-blue" style="cursor: pointer;" onclick="openProjectModal('rocket')">
+          <div class="project-glass-preview" style="height: 180px; overflow: hidden; position: relative;">
+            <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="Model Rocket Assembly render" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
           </div>
           <div class="project-glass-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title" data-en="Model Rocket Assembly" data-fa="مونتاژ راکت مدل">Model Rocket Assembly</h3>
-                <span class="project-year-badge">CAD</span>
+                <h3 class="project-title" data-en="Model Rocket Multi-Stage Assembly" data-fa="مونتاژ سه‌بعدی راکت مدل چندمرحله‌ای">Model Rocket Multi-Stage Assembly</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay." data-fa="مجموعه مونتاژی آیرودینامیکی با پره‌ها، دماغه فون‌کارمن و بخش‌های جدایش چندمرحله‌ای.">
+                Multi-part aerospace aerodynamic rocket assembly with fins, nosecone, and staging bay.
+              </p>
+            </div>
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">PARTS</span>
+                <span class="p-metric-val">12 Custom Mates</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">FORMAT</span>
+                <span class="p-metric-val">SLDASM &amp; STEP</span>
               </div>
             </div>
             <div class="project-tags">
               <span class="p-tag">SolidWorks</span>
-              <span class="p-tag" data-en="Assembly" data-fa="مونتاژ">Assembly</span>
+              <span class="p-tag" data-en="Aerospace" data-fa="هوافضا">Aerospace</span>
               <span class="p-tag" data-en="Multi-Stage" data-fa="چند مرحله‌ای">Multi-Stage</span>
-              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
+              <span class="p-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> مشاهده جزئیات</span>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- 3D 02: SHOCK ASSEMBLY -->
-        <a href="assets/downloads/solidworks/shock-assembly.zip" download class="project-glass-card card-jewel-violet">
-          <div class="project-glass-preview">
-            <i data-lucide="disc" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
+        <div class="project-glass-card card-jewel-amber" style="cursor: pointer;" onclick="openProjectModal('shock')">
+          <div class="project-glass-preview" style="height: 180px; overflow: hidden; position: relative;">
+            <img src="assets/images/solidworks/shock-assembly.jpg" alt="SolidWorks Coilover Shock Assembly" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
           </div>
           <div class="project-glass-body">
             <div>
               <div class="project-header-row">
-                <h3 class="project-title" data-en="Shock Assembly" data-fa="مجموعه ضربه‌گیر">Shock Assembly</h3>
-                <span class="project-year-badge">CAD</span>
+                <h3 class="project-title" data-en="Coilover Shock &amp; Suspension Linkage" data-fa="مجموعه فنر-کمک‌فنر و اتصالات تعلیق">Coilover Shock &amp; Suspension Linkage</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Kinematic suspension mechanism with machined damper body, coil spring mates, and spherical bushings." data-fa="مکانیزم سینماتیکی تعلیق با سیلندر دمپر ماشین‌کاری‌شده، جفت‌بندی فنر لول و بوش‌های مفصلی.">
+                Kinematic suspension mechanism with machined damper body, coil spring mates, and spherical bushings.
+              </p>
+            </div>
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">COMPONENTS</span>
+                <span class="p-metric-val">14 Precision Parts</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">KINEMATICS</span>
+                <span class="p-metric-val">Dynamic Stroke</span>
               </div>
             </div>
             <div class="project-tags">
               <span class="p-tag">SolidWorks</span>
               <span class="p-tag" data-en="Suspension Linkage" data-fa="لینک تعلیق">Suspension Linkage</span>
-              <span class="p-tag" data-en="Fasteners" data-fa="پیچ و مهره">Fasteners</span>
-              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- 3D 03: CLAMP MECHANISM -->
-        <a href="assets/downloads/solidworks/clamp-assembly.zip" download class="project-glass-card card-jewel-cyan">
-          <div class="project-glass-preview">
-            <i data-lucide="wrench" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
-          </div>
-          <div class="project-glass-body">
-            <div>
-              <div class="project-header-row">
-                <h3 class="project-title" data-en="Bench Clamp Mechanism" data-fa="مکانیزم گیره رومیزی">Bench Clamp Mechanism</h3>
-                <span class="project-year-badge">CAD</span>
-              </div>
-            </div>
-            <div class="project-tags">
-              <span class="p-tag">SolidWorks</span>
-              <span class="p-tag" data-en="Toggle Clamp" data-fa="گیره اهرمی">Toggle Clamp</span>
-              <span class="p-tag" data-en="Mechanism" data-fa="مکانیزم">Mechanism</span>
-              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- 3D 04: MECHANICAL ASSEMBLY 04 -->
-        <a href="assets/downloads/solidworks/mechanical-assembly-04.zip" download class="project-glass-card card-jewel-blue">
-          <div class="project-glass-preview">
-            <i data-lucide="cog" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
-          </div>
-          <div class="project-glass-body">
-            <div>
-              <div class="project-header-row">
-                <h3 class="project-title" data-en="Mechanical Assembly 04" data-fa="مجموعه مکانیکی ۰۴">Mechanical Assembly 04</h3>
-                <span class="project-year-badge">CAD</span>
-              </div>
-            </div>
-            <div class="project-tags">
-              <span class="p-tag">SolidWorks</span>
-              <span class="p-tag" data-en="10 Parts" data-fa="۱۰ قطعه">10 Parts</span>
-              <span class="p-tag" data-en="Assembly" data-fa="مونتاژ">Assembly</span>
-              <span class="p-tag" data-en="Download ZIP" data-fa="دانلود ZIP">Download ZIP</span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-
-      <!-- SUBSECTION: 2D DESIGN -->
-      <div class="subsection-glass-header">
-        <i data-lucide="ruler" style="width: 16px;"></i>
-        <span data-en="2D DESIGN" data-fa="طرح دوبعدی">2D DESIGN</span>
-      </div>
-      <div class="projects-glass-grid">
-        <div class="project-glass-card card-jewel-emerald" style="cursor: default;">
-          <div class="project-glass-preview">
-            <i data-lucide="ruler" class="project-preview-icon" style="width: 64px; height: 64px;"></i>
-          </div>
-          <div class="project-glass-body">
-            <div>
-              <div class="project-header-row">
-                <h3 class="project-title" data-en="2D Technical Drawings" data-fa="طرح‌های دوبعدی فنی">2D Technical Drawings</h3>
-                <span class="project-year-badge">WIP</span>
-              </div>
-            </div>
-            <div class="project-tags">
-              <span class="p-tag">SolidWorks 2D</span>
-              <span class="p-tag" data-en="Tolerancing & Drafting" data-fa="تلرانس‌گذاری و نقشه‌کشی">Tolerancing &amp; Drafting</span>
+              <span class="p-tag" data-en="Kinematics" data-fa="سینماتیک">Kinematics</span>
+              <span class="p-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> مشاهده جزئیات</span>
             </div>
           </div>
         </div>
+
+        <!-- 3D 03: CLAMP MECHANISM -->
+        <div class="project-glass-card card-jewel-cyan" style="cursor: pointer;" onclick="openProjectModal('clamp')">
+          <div class="project-glass-preview" style="height: 180px; overflow: hidden; position: relative;">
+            <img src="assets/images/cad-banner.jpg" alt="SolidWorks Bench Clamp Toggle Mechanism" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95);" referrerPolicy="no-referrer">
+            <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
+          </div>
+          <div class="project-glass-body">
+            <div>
+              <div class="project-header-row">
+                <h3 class="project-title" data-en="Bench Clamp Toggle Mechanism" data-fa="مکانیزم گیره ضامنی رومیزی">Bench Clamp Toggle Mechanism</h3>
+              </div>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.45; margin: 4px 0 10px 0;" data-en="Toggle linkage mechanism with high mechanical advantage for industrial workholding and fixtures." data-fa="مکانیزم ضامنی با مزیت مکانیکی بالا جهت فیکسچرهای صنعتی و مهار قطعه‌کار در ماشین‌کاری.">
+                Toggle linkage mechanism with high mechanical advantage for industrial workholding and fixtures.
+              </p>
+            </div>
+            <div class="project-metrics-glass">
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">MECHANISM</span>
+                <span class="p-metric-val">Toggle Linkage</span>
+              </div>
+              <div class="p-metric-item">
+                <span class="p-metric-lbl">FORMAT</span>
+                <span class="p-metric-val">SLDASM / STEP</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="p-tag">SolidWorks</span>
+              <span class="p-tag" data-en="Fixtures" data-fa="فیکسچر صنعتی">Fixtures</span>
+              <span class="p-tag" data-en="Kinematics" data-fa="سینماتیک">Kinematics</span>
+              <span class="p-tag" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);"><i data-lucide="eye" style="width: 10px; height: 10px;"></i> مشاهده جزئیات</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Section Navigation Bottom Bar -->
@@ -2414,9 +2512,17 @@
       setTimeout(() => {
         if (typeof resizeHeroCanvas === 'function') resizeHeroCanvas();
         if (typeof resizeChipCanvas === 'function') resizeChipCanvas();
-        if (window.lucide) {
-          lucide.createIcons();
+        if (targetId === 'solidworks' && typeof renderSolidWorksAcademy === 'function') {
+          const swCont = document.getElementById('solidworksCourseContainer');
+          if (swCont && (!swCont.innerHTML || swCont.innerHTML.trim() === '')) {
+            renderSolidWorksAcademy('solidworksCourseContainer');
+          }
         }
+        try {
+          if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+          }
+        } catch (e) {}
       }, 60);
     }
 
@@ -3275,37 +3381,104 @@
     .projects-filter-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     .proj-filter-btn {
-      background: rgba(14, 21, 37, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
       color: #94a3b8;
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       font-size: 11.5px;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 8px;
+      padding: 7px 15px;
+      border-radius: 9999px;
       cursor: pointer;
-      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      user-select: none;
     }
-    .proj-filter-btn:hover, .proj-filter-btn.active {
-      background: rgba(0, 242, 254, 0.12);
-      border-color: rgba(0, 242, 254, 0.4);
+    .proj-filter-btn i, .proj-filter-btn svg {
+      transition: transform 0.25s ease;
+    }
+    .proj-filter-btn:hover {
+      background: rgba(22, 36, 64, 0.85);
+      border-color: rgba(0, 242, 254, 0.45);
+      color: #e2e8f0;
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 18px rgba(0, 242, 254, 0.15);
+    }
+    .proj-filter-btn:hover i, .proj-filter-btn:hover svg {
+      transform: scale(1.1);
+    }
+    .proj-filter-btn.active {
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(14, 165, 233, 0.15) 100%);
+      border-color: rgba(0, 242, 254, 0.65);
       color: #00f2fe;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(0, 242, 254, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      transform: translateY(-1.5px);
     }
     .light-mode .proj-filter-btn {
-      background: rgba(255, 255, 255, 0.8);
-      border-color: rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(15, 23, 42, 0.1);
       color: #475569;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
-    .light-mode .proj-filter-btn:hover, .light-mode .proj-filter-btn.active {
-      background: #e0f2fe;
+    .light-mode .proj-filter-btn:hover {
+      background: #f0f9ff;
       border-color: #0284c7;
       color: #0284c7;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
+    }
+    .light-mode .proj-filter-btn.active {
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      border-color: #0284c7;
+      color: #0369a1;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.2);
+    }
+
+    /* Light mode support for fm-project-card */
+    .light-mode .fm-project-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-top: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+    .light-mode .fm-project-card:hover {
+      background: #ffffff;
+      border-color: rgba(2, 132, 199, 0.4);
+      box-shadow: 0 16px 36px rgba(2, 132, 199, 0.12);
+    }
+    .light-mode .fm-project-title {
+      color: #0f172a;
+    }
+    .light-mode .fm-project-desc {
+      color: #64748b;
+    }
+    .light-mode .fm-project-footer {
+      border-top-color: rgba(15, 23, 42, 0.08);
+      color: #475569;
+    }
+    .light-mode .fm-project-arrow-btn {
+      background: rgba(2, 132, 199, 0.1);
+      border-color: rgba(2, 132, 199, 0.25);
+      color: #0284c7;
+    }
+    .light-mode .fm-project-card:hover .fm-project-arrow-btn {
+      background: #0284c7;
+      color: #ffffff;
+    }
+    [dir="rtl"] .fm-project-card:hover .fm-project-arrow-btn {
+      transform: translateX(-2px);
     }
 
     /* --- USER REQUESTED FLIP LANGUAGE TOGGLE (.checkbox-wrapper-10) --- */
@@ -4106,13 +4279,14 @@
 
   <script>
     function filterHomeProjects(category, btn) {
-      document.querySelectorAll('.home-filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#homeAllProjectsPanel .home-filter-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
       const cards = document.querySelectorAll('#homeAllProjectsGrid .fm-project-card');
       cards.forEach(card => {
         const cat = card.getAttribute('data-cat');
         if (category === 'all' || cat === category) {
           card.style.display = 'flex';
+          card.style.animation = 'fadeInUp 0.3s ease forwards';
         } else {
           card.style.display = 'none';
         }
@@ -4120,13 +4294,14 @@
       if (window.lucide) lucide.createIcons();
     }
     function filterProjectsByCategory(category, btn) {
-      document.querySelectorAll('.proj-filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#projectsGalleryFilterBar .proj-filter-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
       const cards = document.querySelectorAll('#projectsGalleryGrid .project-glass-card');
       cards.forEach(card => {
         const cat = card.getAttribute('data-cat');
         if (category === 'all' || cat === category) {
           card.style.display = 'flex';
+          card.style.animation = 'fadeInUp 0.3s ease forwards';
         } else {
           card.style.display = 'none';
         }
@@ -4248,33 +4423,37 @@
           title: 'Model Rocket Aerospace Multi-Stage CAD Assembly',
           titleFa: 'مجموعه مونتاژ راکت مدل هوافضایی چندمرحله‌ای (SolidWorks)',
           img: 'assets/images/solidworks/rocket-assembly/assembled-sky.jpg',
-          meta: 'SolidWorks SLDASM &bull; 12 Parts &bull; Aerodynamic Fins &bull; STEP Download',
+          meta: 'SolidWorks SLDASM &bull; 12 Parts &bull; Aerodynamic Fins &bull; Parametric Mates',
           desc: 'Full parametric CAD assembly of high-altitude model rocket: von Kármán ogive nose cone, payload section, coupler tube, solid motor mount, and aerodynamically swept fins.',
           descFa: 'طراحی مونتاژی کامل راکت مدل در سالیدورکس: دماغه آیرودینامیک فون‌کارمن، محفظه محموله، بدنه فیبرکربن، هولدر موتور سوخت جامد و بالچه‌های پایدارکننده آیرودینامیک.',
           specs: [
             { label: 'COMPONENTS', val: '12 Unique Parts' },
             { label: 'MATES', val: '24 Parametric Mates' },
             { label: 'NOSECONE', val: 'von Kármán Ogive' },
-            { label: 'FORMAT', val: 'SLDASM + STEP ZIP' }
+            { label: 'FORMAT', val: 'SLDASM / STEP' }
           ],
-          actionText: 'Download CAD ZIP (3.3 MB)',
-          actionUrl: 'assets/downloads/solidworks/model-rocket-assembly.zip'
+          notice: 'CAD models, technical drawings and assembly packages are ready for upload by the engineer.',
+          noticeFa: 'فایل‌های سه‌بعدی و نقشه‌های فنی این پروژه به زودی توسط مهندس در سامانه بارگذاری می‌شوند.',
+          actionText: 'Open SolidWorks Workspace',
+          actionFn: "navigateToSection('solidworks');"
         },
         rocketCad: {
           title: 'Model Rocket Aerospace Multi-Stage CAD Assembly',
           titleFa: 'مجموعه مونتاژ راکت مدل هوافضایی چندمرحله‌ای (SolidWorks)',
           img: 'assets/images/solidworks/rocket-assembly/assembled-sky.jpg',
-          meta: 'SolidWorks SLDASM &bull; 12 Parts &bull; Aerodynamic Fins &bull; STEP Download',
+          meta: 'SolidWorks SLDASM &bull; 12 Parts &bull; Aerodynamic Fins &bull; Parametric Mates',
           desc: 'Full parametric CAD assembly of high-altitude model rocket: von Kármán ogive nose cone, payload section, coupler tube, solid motor mount, and aerodynamically swept fins.',
           descFa: 'طراحی مونتاژی کامل راکت مدل در سالیدورکس: دماغه آیرودینامیک فون‌کارمن، محفظه محموله، بدنه فیبرکربن، هولدر موتور سوخت جامد و بالچه‌های پایدارکننده آیرودینامیک.',
           specs: [
             { label: 'COMPONENTS', val: '12 Unique Parts' },
             { label: 'MATES', val: '24 Parametric Mates' },
             { label: 'NOSECONE', val: 'von Kármán Ogive' },
-            { label: 'FORMAT', val: 'SLDASM + STEP ZIP' }
+            { label: 'FORMAT', val: 'SLDASM / STEP' }
           ],
-          actionText: 'Download CAD ZIP (3.3 MB)',
-          actionUrl: 'assets/downloads/solidworks/model-rocket-assembly.zip'
+          notice: 'CAD models, technical drawings and assembly packages are ready for upload by the engineer.',
+          noticeFa: 'فایل‌های سه‌بعدی و نقشه‌های فنی این پروژه به زودی توسط مهندس در سامانه بارگذاری می‌شوند.',
+          actionText: 'Open SolidWorks Workspace',
+          actionFn: "navigateToSection('solidworks');"
         },
         shock: {
           title: 'Coilover Shock Absorber & Suspension Mechanism',
@@ -4289,8 +4468,10 @@
             { label: 'SPRING', val: 'Variable Pitch Helical' },
             { label: 'FORMAT', val: 'SLDASM + STEP' }
           ],
-          actionText: 'Download CAD ZIP (1.8 MB)',
-          actionUrl: 'assets/downloads/solidworks/shock-assembly.zip'
+          notice: 'CAD models, technical drawings and assembly packages are ready for upload by the engineer.',
+          noticeFa: 'فایل‌های سه‌بعدی و نقشه‌های فنی این پروژه به زودی توسط مهندس در سامانه بارگذاری می‌شوند.',
+          actionText: 'Open SolidWorks Workspace',
+          actionFn: "navigateToSection('solidworks');"
         },
         shockCad: {
           title: 'Coilover Shock Absorber & Suspension Mechanism',
@@ -4305,8 +4486,10 @@
             { label: 'SPRING', val: 'Variable Pitch Helical' },
             { label: 'FORMAT', val: 'SLDASM + STEP' }
           ],
-          actionText: 'Download CAD ZIP (1.8 MB)',
-          actionUrl: 'assets/downloads/solidworks/shock-assembly.zip'
+          notice: 'CAD models, technical drawings and assembly packages are ready for upload by the engineer.',
+          noticeFa: 'فایل‌های سه‌بعدی و نقشه‌های فنی این پروژه به زودی توسط مهندس در سامانه بارگذاری می‌شوند.',
+          actionText: 'Open SolidWorks Workspace',
+          actionFn: "navigateToSection('solidworks');"
         },
         clamp: {
           title: 'Bench Clamp Toggle Linkage Mechanism',
@@ -4321,7 +4504,9 @@
             { label: 'MATES', val: 'Revolute & Limit Angle' },
             { label: 'FORMAT', val: 'SLDASM / STEP' }
           ],
-          actionText: 'Open SolidWorks Gallery',
+          notice: 'CAD models, technical drawings and assembly packages are ready for upload by the engineer.',
+          noticeFa: 'فایل‌های سه‌بعدی و نقشه‌های فنی این پروژه به زودی توسط مهندس در سامانه بارگذاری می‌شوند.',
+          actionText: 'Open SolidWorks Workspace',
           actionFn: "navigateToSection('solidworks');"
         },
         clampCad: {
@@ -4337,7 +4522,9 @@
             { label: 'MATES', val: 'Revolute & Limit Angle' },
             { label: 'FORMAT', val: 'SLDASM / STEP' }
           ],
-          actionText: 'Open SolidWorks Gallery',
+          notice: 'CAD models, technical drawings and assembly packages are ready for upload by the engineer.',
+          noticeFa: 'فایل‌های سه‌بعدی و نقشه‌های فنی این پروژه به زودی توسط مهندس در سامانه بارگذاری می‌شوند.',
+          actionText: 'Open SolidWorks Workspace',
           actionFn: "navigateToSection('solidworks');"
         },
         rankine: {
@@ -4540,6 +4727,16 @@
             <p style="font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 0 0 8px 0;">${item.desc}</p>
             ${item.descFa ? `<p style="font-size: 12.5px; color: #94a3b8; line-height: 1.65; margin: 0;" dir="rtl">${item.descFa}</p>` : ''}
           </div>
+
+          ${item.notice ? `
+            <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 10px; padding: 10px 14px; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 10px;">
+              <i data-lucide="info" style="width: 16px; height: 16px; color: #38bdf8; flex-shrink: 0; margin-top: 2px;"></i>
+              <div style="font-size: 12px; line-height: 1.5; color: #e0f2fe;">
+                <div>${item.notice}</div>
+                ${item.noticeFa ? `<div style="color: #93c5fd; font-size: 11.5px; margin-top: 3px;" dir="rtl">${item.noticeFa}</div>` : ''}
+              </div>
+            </div>
+          ` : ''}
 
           <div style="display: flex; gap: 10px; justify-content: flex-end; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;">
             <button onclick="document.getElementById('projectDetailModal').style.display='none'" class="fm-clean-btn fm-clean-btn-secondary" style="font-size: 12px; padding: 8px 16px;">Close</button>
@@ -5011,6 +5208,10 @@
     });
   })();
   </script>
+
+  <!-- SolidWorks Course Interactive Engine & Content Data -->
+  <script src="assets/js/solidworks-content.js"></script>
+  <script src="assets/js/solidworks-course.js"></script>
 
   <!-- Mechanical Engineering Blueprint Background Engine -->
   <script src="assets/js/engineering-bg.js"></script>
