@@ -12,7 +12,7 @@ window.solidworksAcademyData = {
       title: 'محیط طراحی دو بعدی (2D Sketching)',
       titleEn: '2D Sketching Environment',
       icon: 'pen-tool',
-      badge: 'صفحات ۲ تا ۴ جزوه',
+      badge: 'محیط ترسیم دو بعدی Sketch',
       summary: 'مراحل ورود به محیط طراحی، انتخاب صفحه، تنظیم استانداردهای یکا و اندازه‌گذاری، و جعبه‌ابزار کامل ترسیمات دوبعدی.',
       summaryEn: 'Entry workflow, plane selection, drafting standards, units setup, and complete 2D sketch toolset.',
       content: {
@@ -90,7 +90,7 @@ window.solidworksAcademyData = {
       title: 'قیود هندسی و مفهوم طرح کاملاً مقید (Fully Defined)',
       titleEn: 'Geometric Relations & Fully Defined Status',
       icon: 'link-2',
-      badge: 'صفحات ۴ و ۵ جزوه',
+      badge: 'قیود هندسی و درجات آزادی',
       summary: 'ابزار Smart Dimension، درجات آزادی، کدهای رنگی ترسیمات در سالیدورکس، و فهرست کامل قیود هندسی Add Relations.',
       summaryEn: 'Smart Dimension, degrees of freedom, sketch color coding matrix, and complete Add Relations list.',
       content: {
@@ -132,8 +132,8 @@ window.solidworksAcademyData = {
             <i data-lucide="zap" class="sw-callout-icon"></i>
             <div class="sw-callout-content">
               <div class="sw-callout-title" data-en="Multi-Select Shortcut (Ctrl Key)" data-fa="تکنیک کلیدی قیدگذاری چند المان با کلید Ctrl">تکنیک کلیدی قیدگذاری چند المان با کلید Ctrl</div>
-              <div data-en="To apply geometric relations between two or more sketch entities, hold down the CTRL key on your keyboard before selecting the items. The PropertyManager window will instantly open with eligible 'Add Relations' buttons." data-fa="<strong>نکته جزوه:</strong> برای قیدگذاری بین چند موضوع، می‌بایست کلید <strong>Ctrl</strong> کیبورد را قبل از انتخاب ترسیمات نگه داشته، موضوعات را انتخاب کرده و سپس قید مورد نظر را از پنجره Add Relations اعمال کنیم.">
-                <strong>نکته جزوه:</strong> برای قیدگذاری بین چند موضوع می‌بایست کلید <strong>Ctrl</strong> کیبورد را قبل از انتخاب ترسیمات نگه داشته و سپس قید مورد نظر را اعمال کنیم.
+              <div data-en="To apply geometric relations between two or more sketch entities, hold down the CTRL key on your keyboard before selecting the items. The PropertyManager window will instantly open with eligible 'Add Relations' buttons." data-fa="<strong>نکته کلیدی:</strong> برای قیدگذاری بین چند موضوع، می‌بایست کلید <strong>Ctrl</strong> کیبورد را قبل از انتخاب ترسیمات نگه داشته، موضوعات را انتخاب کرده و سپس قید مورد نظر را از پنجره Add Relations اعمال کنیم.">
+                <strong>نکته کلیدی:</strong> برای قیدگذاری بین چند موضوع می‌بایست کلید <strong>Ctrl</strong> کیبورد را قبل از انتخاب ترسیمات نگه داشته و سپس قید مورد نظر را اعمال کنیم.
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@ window.solidworksAcademyData = {
       title: 'تنظیمات سیستمی، جعبه ابزار View و کلیدهای میانبر',
       titleEn: 'System Options, View Toolbar & Shortcut Matrix',
       icon: 'sliders',
-      badge: 'صفحات ۶ تا ۸ و ۱۱ جزوه',
+      badge: 'کنترل دید و ماتریس میانبرها',
       summary: 'پنجره تنظیمات Options، ابزار Snap/Grid، جعبه ابزار کنترل دید View، سفارشی‌سازی Customize و جدول کامل کلیدهای میانبر استاندارد.',
       summaryEn: 'Options dialog architecture, Snap/Grid activation, View HUD toolbar, Customize window, and standard keyboard shortcut cheatsheet.',
       content: {
@@ -190,7 +190,7 @@ window.solidworksAcademyData = {
       title: 'ماژول مدل‌سازی سه‌بعدی قطعه (Features)',
       titleEn: '3D Part Modeling & Features Module',
       icon: 'box',
-      badge: 'صفحات ۱۰ تا ۲۱ جزوه',
+      badge: 'مدل‌سازی احجام و فیچرهای ۳ بعدی',
       summary: 'روش‌های حجم‌دهی Extrude Boss/Base، شرط‌های پایانی Blind تا Up to Body، برش Extrude Cut، فیلت و چمفر، Revolve، Sweep، Loft، ساخت فنر با Helix، ابزار Rib، Shell، Draft، سوراخ‌کاری Hole Wizard و متریال.',
       summaryEn: 'Extruded Boss/Base end conditions, Extrude Cut, Fillet/Chamfer, Revolve, Sweep, Loft, Helix springs, Rib, Shell, Draft, Hole Wizard, and Materials.',
       content: {
@@ -199,8 +199,8 @@ window.solidworksAcademyData = {
             <i data-lucide="compass" class="sw-callout-icon"></i>
             <div class="sw-callout-content">
               <div class="sw-callout-title" data-en="Golden Rule of 3D Modeling" data-fa="نکته استراتژیک شروع در مدل‌سازی سه‌بعدی">نکته استراتژیک شروع در مدل‌سازی سه‌بعدی</div>
-              <div data-en="In 3D part modeling, unlike 2D sketching, the crucial first step is selecting the optimal coordinate plane (Front, Top, or Right) for starting the base feature. Choosing the right plane minimizes required operations and enables clean subsequent extrusions and cuts." data-fa="<strong>نکته جزوه:</strong> در زمان کار در محیط طراحی سه‌بعدی برخلاف محیط دو بعدی، اولین گام انتخاب بهترین صفحه از صفحات طراحی برای شروع کار است. انتخاب صفحه مناسب به ما جهت ترسیم راحت‌تر ترسیمات سه‌بعدی کمک شایانی خواهد کرد.">
-                <strong>نکته جزوه:</strong> در زمان کار در محیط طراحی سه‌بعدی برخلاف محیط دو بعدی، اولین گام انتخاب بهترین صفحه از صفحات طراحی برای شروع کار است که در تسریع ترسیمات سه‌بعدی بسیار موثر است.
+              <div data-en="In 3D part modeling, unlike 2D sketching, the crucial first step is selecting the optimal coordinate plane (Front, Top, or Right) for starting the base feature. Choosing the right plane minimizes required operations and enables clean subsequent extrusions and cuts." data-fa="<strong>نکته کلیدی:</strong> در زمان کار در محیط طراحی سه‌بعدی برخلاف محیط دو بعدی، اولین گام انتخاب بهترین صفحه از صفحات طراحی برای شروع کار است. انتخاب صفحه مناسب به ما جهت ترسیم راحت‌تر ترسیمات سه‌بعدی کمک شایانی خواهد کرد.">
+                <strong>نکته کلیدی:</strong> در زمان کار در محیط طراحی سه‌بعدی برخلاف محیط دو بعدی، اولین گام انتخاب بهترین صفحه از صفحات طراحی برای شروع کار است که در تسریع ترسیمات سه‌بعدی بسیار موثر است.
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@ window.solidworksAcademyData = {
       title: 'محیط مونتاژ قطعات و مکانیزم‌ها (Assembly)',
       titleEn: 'Assembly Environment & Mechanisms',
       icon: 'layers',
-      badge: 'صفحات ۲۳ تا ۲۷ جزوه',
+      badge: 'مونتاژ، قیود و مکانیزم‌ها',
       summary: 'فرمت‌های sldasm، روش‌های Bottom-Up و Top-Down، قطعه پایه Fixed، قیود استاندارد، پیشرفته و مکانیکی (Gear, Cam, Screw, Rack & Pinion, Hinge)، بررسی برخورد و ذخیره‌سازی.',
       summaryEn: 'Assembly file formats, Bottom-Up vs Top-Down workflows, Fixed base component, Standard/Advanced/Mechanical Mates, and Interference Detection.',
       content: {
@@ -248,8 +248,8 @@ window.solidworksAcademyData = {
             <i data-lucide="anchor" class="sw-callout-icon"></i>
             <div class="sw-callout-content">
               <div class="sw-callout-title" data-en="Assembly Workflows & Base Component Rule" data-fa="متدولوژی‌های مونتاژ و قانون قطعه ثابت (Fixed)">متدولوژی‌های مونتاژ و قانون قطعه ثابت (Fixed)</div>
-              <div data-en="Assemblies (.sldasm) can be designed via two methods: 1. Bottom-Up (designing parts separately and inserting via Insert Component) & 2. Top-Down (designing parts in-place via New Part). CRITICAL NOTE: The first component inserted into the assembly is automatically locked in place, fixed, and displays an '(f)' tag in the FeatureManager tree. Subsequent parts show a '(-)' symbol indicating free degrees of freedom." data-fa="برای مونتاژ قطعات از محیط Assembly استفاده می‌شود (.sldasm و .asm).<br><strong>روش اول:</strong> طراحی جداگانه قطعات در فایل‌های مجزا و وارد کردن با Insert Component.<br><strong>قانون طلایی جزوه:</strong> اولین قطعه‌ای که وارد محیط مونتاژ می‌شود دارای موقعیت ثابت می‌باشد و نمی‌توان آن را حرکت یا دوران داد و با علامت <code>(f)</code> در کنار نام قطعه در نمودار درختی نمایش داده می‌شود. بهتر است ابتدا با <code>View -> Origins</code> مرکز صفحه را فعال کرده و قطعه اصلی را روی مرکز قرار دهید. قطعات بعدی با علامت <code>(-)</code> نمایش داده می‌شوند که نشان‌دهنده نامشخص بودن موقعیت و امکان جابجایی آن‌هاست.<br><strong>روش دوم:</strong> طراحی درجا در زیرمجموعه محیط Assembly با دستور <code>Insert Component -> New Part</code> و انتخاب یک وجه مسطح قطعه موجود.">
-                <strong>قانون طلایی جزوه:</strong> اولین قطعه‌ای که وارد محیط Assembly می‌شود دارای موقعیت ثابت <code>(f)</code> است. قطعات بعدی شناور بوده و با علامت <code>(-)</code> مشخص می‌شوند.
+              <div data-en="Assemblies (.sldasm) can be designed via two methods: 1. Bottom-Up (designing parts separately and inserting via Insert Component) & 2. Top-Down (designing parts in-place via New Part). CRITICAL NOTE: The first component inserted into the assembly is automatically locked in place, fixed, and displays an '(f)' tag in the FeatureManager tree. Subsequent parts show a '(-)' symbol indicating free degrees of freedom." data-fa="برای مونتاژ قطعات از محیط Assembly استفاده می‌شود (.sldasm و .asm).<br><strong>روش اول:</strong> طراحی جداگانه قطعات در فایل‌های مجزا و وارد کردن با Insert Component.<br><strong>قانون طلایی مونتاژ:</strong> اولین قطعه‌ای که وارد محیط مونتاژ می‌شود دارای موقعیت ثابت می‌باشد و نمی‌توان آن را حرکت یا دوران داد و با علامت <code>(f)</code> در کنار نام قطعه در نمودار درختی نمایش داده می‌شود. بهتر است ابتدا با <code>View -> Origins</code> مرکز صفحه را فعال کرده و قطعه اصلی را روی مرکز قرار دهید. قطعات بعدی با علامت <code>(-)</code> نمایش داده می‌شوند که نشان‌دهنده نامشخص بودن موقعیت و امکان جابجایی آن‌هاست.<br><strong>روش دوم:</strong> طراحی درجا در زیرمجموعه محیط Assembly با دستور <code>Insert Component -> New Part</code> و انتخاب یک وجه مسطح قطعه موجود.">
+                <strong>قانون طلایی مونتاژ:</strong> اولین قطعه‌ای که وارد محیط Assembly می‌شود دارای موقعیت ثابت <code>(f)</code> است. قطعات بعدی شناور بوده و با علامت <code>(-)</code> مشخص می‌شوند.
               </div>
             </div>
           </div>
@@ -274,7 +274,7 @@ window.solidworksAcademyData = {
       title: 'محیط تهیه نقشه‌های اجرایی و نقشه‌خوانی (Drawing)',
       titleEn: 'Engineering Drawing & Detailing',
       icon: 'file-text',
-      badge: 'صفحات ۲۸ تا ۴۲ جزوه',
+      badge: 'نقشه‌کشی، برش‌ها و جدول BOM',
       summary: 'تنظیم شیت، استخراج نماهای ارتوگرافیک، برش طولی و موضعی Broken-out، بزرگ‌نمایی جزئیات Detail View، تلرانس‌های GD&T، جدول قطعات BOM با فرمول هزینه و بالن‌گذاری خودکار.',
       summaryEn: 'Sheet format customization, orthographic projections, Section/Broken-out views, GD&T geometric tolerancing, BOM cost equation, and Auto Ballooning.',
       content: {
@@ -315,7 +315,7 @@ window.solidworksAcademyData = {
       type: '2D Sketch',
       title: 'بازوی سه پره اسپایدر (Three-Lobe Spider Flange)',
       titleEn: 'Three-Lobe Spider Flange',
-      page: 'صفحه ۶ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex1-spider-flange.svg',
       dims: 'سوراخ‌های سه‌گانه Ø20 &bull; شعاع پره‌ها R30 &bull; دایره توزیع Ø200 &bull; فواصل طولی 120 و 80 و 60',
       desc: 'ترسیم دو بعدی متقارن بازوی سه‌گانه با استفاده از قیدهای شعاعی و تکثیر دایروی.',
       steps: [
@@ -331,7 +331,7 @@ window.solidworksAcademyData = {
       type: '2D Sketch',
       title: 'فلانژ چهارگوش صنعتی (4-Hole Industrial Flange)',
       titleEn: '4-Hole Industrial Mounting Flange',
-      page: 'صفحه ۹ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex2-industrial-flange.svg',
       dims: '۴ سوراخ Ø20 &bull; شعاع گوشه‌ها R18 &bull; زوایای ۳۰ درجه &bull; دایره‌های مرکزی Ø90 و Ø55 &bull; فواصل 60 و 8',
       desc: 'ترسیم فلانژ رابط زاویه‌دار با خطوط تقارن و شیارهای زاویه ۳۰ درجه.',
       steps: [
@@ -347,7 +347,7 @@ window.solidworksAcademyData = {
       type: '2D Sketch',
       title: 'شاتون موتور خودرو (Automotive Connecting Rod)',
       titleEn: 'Automotive Engine Connecting Rod',
-      page: 'صفحه ۹ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex3-connecting-rod.svg',
       dims: 'فاصله مراکز 250 و 150 &bull; سوراخ بزرگ Ø52 با بدنه Ø63 &bull; سوراخ کوچک Ø24 با بدنه R35 &bull; ۴ سوراخ یاتاقان Ø10 &bull; قوس‌های R72 و R6 &bull; ضخامت مقطع 26 و 18',
       desc: 'ترسیم مهندسی شاتون با مقطع H شکل، یاتاقان‌های دو طرف و قوس‌های تنش‌زدایی بدنه.',
       steps: [
@@ -363,7 +363,7 @@ window.solidworksAcademyData = {
       type: '3D Part',
       title: 'قطعه شیب‌دار F-شکل زاویه‌دار (F-Bracket with Angled Extrusion)',
       titleEn: 'Angled F-Bracket',
-      page: 'صفحه ۱۲ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex4-f-bracket.svg',
       dims: 'ارتفاع کل 93 &bull; کفی 50 &bull; ضخامت پله‌ها 18 &bull; لبه‌های 28 و 22 و 45 &bull; شیار 10 میلی‌متری در طول 90 با زاویه شیب',
       desc: 'مدل‌سازی سه‌بعدی قطعه F-شکل با اکسترود پایه و ایجاد حجم شیب‌دار زاویه‌دار به طول ۹۰.',
       steps: [
@@ -378,7 +378,7 @@ window.solidworksAcademyData = {
       type: '3D Part',
       title: 'بلوک متقارن H شکل با برش‌های استوانه‌ای (Symmetric H-Block with Cylinder Cutaways)',
       titleEn: 'Symmetric H-Block',
-      page: 'صفحه ۱۲ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex5-h-block.svg',
       dims: 'ابعاد مکعب 62 در 50 در 44 &bull; سوراخ مرکزی سرتاسری Ø20 &bull; دو برش نیم‌سیلندری جانبی R15 &bull; شیارهای مکعبی داخلی 14×18 با دیواره‌های 12، 15 و 16',
       desc: 'مدل‌سازی بلوک ماشین‌کاری شده با سوراخ مرکزی و شیارهای دقیق.',
       steps: [
@@ -393,7 +393,7 @@ window.solidworksAcademyData = {
       type: '3D Part',
       title: 'بلوک ذوزنقه‌ای با شیار مرکزی U و پخ‌های مرکب (Chamfered V-Block)',
       titleEn: 'Chamfered V-Block with Center Channel',
-      page: 'صفحه ۱۳ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex6-v-block.svg',
       dims: 'کفی 68 در 48 &bull; ارتفاع 42 &bull; شیار مرکزی U با عرض 18 &bull; پخ‌های مرکب دوطرفه 15×18 و 12×15 و پخ پایه 5×68',
       desc: 'مدل‌سازی بلوک ذوزنقه‌ای صلب با شیار میانی و آموزش اعمال دستورات Fillet و Chamfer.',
       steps: [
@@ -408,7 +408,7 @@ window.solidworksAcademyData = {
       type: '3D Part',
       title: 'پایه نگهدارنده شیب‌دار با لچکی‌های تقویتی و مقاطع برشی G-G و F-F',
       titleEn: 'Angled Mounting Bracket with Gussets',
-      page: 'صفحه ۲۱ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex7-mounting-bracket.svg',
       dims: 'طول پایه 81 &bull; ارتفاع 26 &bull; زاویه 114° و 24° &bull; شیب دیواره 52° &bull; ضخامت 4 میلی‌متر &bull; لچکی‌های تقویتی R3 &bull; سوراخ‌های زبانه',
       desc: 'مدل‌سازی پایه ریخته‌گری زاویه‌دار با دیواره‌های جدارنازک و تیغه‌های تقویتی Rib.',
       steps: [
@@ -423,7 +423,7 @@ window.solidworksAcademyData = {
       type: '3D Part',
       title: 'لوله زانودار خمیده فضایی با دستور Sweep',
       titleEn: '3D Curved Pipe Sweep',
-      page: 'صفحه ۱۹ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex8-pipe-sweep.svg',
       dims: 'مسیر منحنی چند زانویی متوالی فضایی &bull; قطر خارجی و قطر داخلی لوله',
       desc: 'مدل‌سازی لوله هیدرولیکی خمیده با ابزار Sweep Boss/Base و مقطع دایره‌ای روی مسیر سه بعدی.',
       steps: [
@@ -438,7 +438,7 @@ window.solidworksAcademyData = {
       type: 'Assembly',
       title: 'مکانیزم لنگ و لغزنده (Slider-Crank Mechanism)',
       titleEn: 'Slider-Crank Assembly Mechanism',
-      page: 'صفحه ۲۴ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex9-slider-crank.svg',
       dims: 'ریل راهنما 100 با مقطع 10×10 &bull; لغزنده مکعبی 10×10×10 &bull; بازوی بلند 58 با ضخامت 2.5 و پین‌های R2.5 و R3.5 &bull; بازوی کوتاه 28 با پین R2.5',
       desc: 'مونتاژ مکانیزم تبدیل حرکت دورانی به رفت و برگشتی با قیود هم‌محوری، انطباق و حرکت دینامیکی.',
       steps: [
@@ -454,7 +454,7 @@ window.solidworksAcademyData = {
       type: 'Drawing & BOM',
       title: 'پروژه جامع نقشه‌کشی بدنه غذاساز صنعتی (Food Processor Blueprint)',
       titleEn: 'Food Processor Comprehensive 4-Sheet Engineering Drawing',
-      page: 'صفحات ۳۲ تا ۴۲ جزوه',
+      image: 'assets/images/blueprints/blueprint-ex10-food-processor.svg',
       dims: 'ابعاد 90.20 و 70 و 37 &bull; شعاع‌های R59.16 و R12.50 &bull; برش Section Q-Q &bull; دیتوم A &bull; برش موضعی Broken-out با مقیاس هاشور 4 &bull; جدول قطعات BOM با فرمول QTY*Price و بالن‌گذاری Auto Balloon',
       desc: 'پروژه پایانی جامع ۴ شیته شامل تمام استانداردهای نقشه کشی صنعتی، برش‌ها، تلرانس‌های GD&T، جدول BOM و فرمول هزینه.',
       steps: [
@@ -483,8 +483,8 @@ window.solidworksAcademyData = {
         'Blue: Ready / Black: Raw / Yellow: Assembly / Red: Incomplete'
       ],
       correct: 1,
-      expFa: 'طبق صفحه ۴ جزوه: آبی یعنی ترسیماتی که به اندازه کافی قیدگذاری نشده‌اند؛ مشکی یعنی کاملاً تعریف شده (Fully Define)؛ زرد یعنی دارای قید تکراری؛ و قرمز یعنی دارای خطا و قیود متناقض.',
-      expEn: 'According to page 4: Blue is under-defined, Black is fully defined, Yellow has redundant relations, and Red indicates mathematical conflicts.'
+      expFa: 'در سالیدورکس: آبی یعنی ترسیماتی که به اندازه کافی قیدگذاری نشده‌اند (Under-defined)؛ مشکی یعنی کاملاً تعریف شده (Fully Defined)؛ زرد یعنی دارای قید تکراری؛ و قرمز یعنی دارای خطا و قیود متناقض.',
+      expEn: 'In SolidWorks: Blue is under-defined, Black is fully defined, Yellow has redundant relations, and Red indicates mathematical conflicts.'
     },
     {
       id: 2,
@@ -503,8 +503,8 @@ window.solidworksAcademyData = {
         'Red cross toggles isometric orientation.'
       ],
       correct: 2,
-      expFa: 'طبق صفحه ۸ جزوه: ضربدر در بالای صفحه ترسیمات کلیه ترسیمات شما را در همان Sketch پاک کرده و از Sketch خارج می‌شود.',
-      expEn: 'Page 8: The red cross in the top confirmation area discards all changes, clears your sketch geometry, and exits.'
+      expFa: 'علامت ضربدر قرمز در گوشه بالای صفحه، کلیه تغییرات اخیر همان Sketch را لغو کرده و بدون ذخیره خارج می‌شود؛ در حالی که آیکون سمت چپ (تایید) تغییرات را ذخیره می‌کند.',
+      expEn: 'The red cross in the top confirmation area discards all changes, clears recent sketch geometry, and exits without saving.'
     },
     {
       id: 3,
@@ -523,8 +523,8 @@ window.solidworksAcademyData = {
         'Space bar'
       ],
       correct: 2,
-      expFa: 'طبق صفحات ۷ و ۱۱ جزوه: کلید ترکیبی Ctrl + 8 ابزاری برای نمایش نمای مستقیم عمود به صفحه (Normal To) است.',
-      expEn: 'Pages 7 & 11: Ctrl + 8 is the universal shortcut for Normal To view in SolidWorks.'
+      expFa: 'کلید ترکیبی استاندارد Ctrl + 8 ابزاری برای نمایش نمای مستقیم عمود به صفحه یا سطح انتخابی (Normal To) است.',
+      expEn: 'Ctrl + 8 is the universal shortcut for Normal To view in SolidWorks.'
     },
     {
       id: 4,
@@ -543,8 +543,8 @@ window.solidworksAcademyData = {
         'Automatically mirrored across origin.'
       ],
       correct: 1,
-      expFa: 'طبق صفحه ۲۳ جزوه: اولین قطعه‌ای که وارد محیط Assembly می‌شود دارای موقعیت ثابت می‌باشد و نمی‌توان آن را حرکت داد و به صورت (f) کنار نام قطعه نمایش داده می‌شود.',
-      expEn: 'Page 23: The first component inserted into the assembly is fixed, locked in place, and indicated with (f) in the tree.'
+      expFa: 'قانون استاندارد مونتاژ: اولین قطعه‌ای که وارد محیط Assembly می‌شود دارای موقعیت ثابت (Fixed) است و با علامت (f) کنار نام قطعه نمایش داده می‌شود.',
+      expEn: 'The first component inserted into an assembly is fixed, locked in place, and indicated with (f) in the tree.'
     },
     {
       id: 5,
@@ -563,8 +563,8 @@ window.solidworksAcademyData = {
         'Sketch two rectangles and apply Revolve Cut.'
       ],
       correct: 1,
-      expFa: 'طبق صفحه ۱۶ جزوه: ابتدا Helix رسم شده، سپس با ابزار Plane صفحه‌ای در نقطه ابتدای Helix ساخته می‌شود؛ در آن صفحه دایره مقطع مفتول رسم شده و با ابزار Swept به فنر حجم داده می‌شود.',
-      expEn: 'Page 16: Helix defines trajectory, a plane is created at its start point, the wire circle profile is sketched, and Swept Boss generates the 3D spring coil.'
+      expFa: 'برای مدل‌سازی فنر استاندارد: ابتدا با Curve -> Helix منحنی مارپیچ رسم شده، سپس در ابتدای آن صفحه‌ای عمود ایجاد و دایره مقطع مفتول با Swept Boss/Base در طول مسیر امتداد داده می‌شود.',
+      expEn: 'Helix defines trajectory, a plane is created at its start point, the wire circle profile is sketched, and Swept Boss generates the 3D spring coil.'
     },
     {
       id: 6,
@@ -583,8 +583,8 @@ window.solidworksAcademyData = {
         'Analyzes tooth meshing interference.'
       ],
       correct: 1,
-      expFa: 'طبق صفحه ۲۷ جزوه: قید Gear از زیرمجموعه قیود مکانیکی (Mechanical Mate) جهت مقید کردن حرکت چرخشی دو قطعه با یکدیگر به کار می‌رود.',
-      expEn: 'Page 27: Gear mechanical mate couples the rotational degrees of freedom between two rotating bodies according to their pitch diameters or tooth counts.'
+      expFa: 'قید Gear از زیرمجموعه قیود مکانیکی (Mechanical Mate) جهت مقید کردن نسبت حرکت چرخشی دو قطعه، پولی یا چرخدنده با یکدیگر به کار می‌رود.',
+      expEn: 'Gear mechanical mate couples the rotational degrees of freedom between two rotating bodies according to their pitch diameters or tooth counts.'
     },
     {
       id: 7,
@@ -603,8 +603,8 @@ window.solidworksAcademyData = {
         'Using Auto Balloon tool.'
       ],
       correct: 1,
-      expFa: 'طبق صفحه ۴۱ جزوه: با کلیک روی ستون Cost و انتخاب Equation، از Columns گزینه QTY را انتخاب و در ضربدر علامت * و از Custom properties گزینه Price را برای فرمول هزینه کل درج می‌کنیم.',
-      expEn: 'Page 41: Click Cost column header, choose Equation, select QTY column, enter multiplication symbol *, and select Price custom property.'
+      expFa: 'در جدول استانداردهای BOM: با انتخاب ستون Cost و زدن دکمه Equation، فرمول حاصل‌ضرب تعداد قطعه در قیمت واحد (QTY * Price) درج می‌گردد.',
+      expEn: 'Click Cost column header, choose Equation, select QTY column, enter multiplication symbol *, and select Price custom property.'
     }
   ]
 };
@@ -723,7 +723,7 @@ function renderSolidWorksAcademy(containerId) {
           ${chap.content.shortcuts ? `
             <div style="font-size: 13px; font-weight: 700; color: #00f2fe; margin: 20px 0 10px 0; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="command" style="width: 14px; height: 14px;"></i>
-              <span>${isFa ? 'جدول کامل کلیدهای میانبر استاندارد سالیدورکس (صفحات ۷ و ۱۱ جزوه):' : 'Standard Keyboard Shortcuts Cheatsheet:'}</span>
+              <span>${isFa ? 'جدول کامل کلیدهای میانبر استاندارد سالیدورکس:' : 'Standard Keyboard Shortcuts Cheatsheet:'}</span>
             </div>
             <div style="overflow-x: auto;">
               <table class="sw-shortcuts-table">
@@ -749,7 +749,7 @@ function renderSolidWorksAcademy(containerId) {
           ${chap.content.endConditions ? `
             <div style="font-size: 13px; font-weight: 700; color: #38bdf8; margin: 20px 0 10px 0; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
-              <span>${isFa ? 'روش‌های حجم‌دهی و شرایط پایانی Extruded Boss/Base (صفحه ۱۰ جزوه):' : 'Extruded Boss/Base End Conditions:'}</span>
+              <span>${isFa ? 'روش‌های حجم‌دهی و شرایط پایانی Extruded Boss/Base:' : 'Extruded Boss/Base End Conditions:'}</span>
             </div>
             <div class="sw-tools-grid">
               ${chap.content.endConditions.map(ec => `
@@ -793,7 +793,7 @@ function renderSolidWorksAcademy(containerId) {
           ${chap.content.mates ? `
             <div style="font-size: 13px; font-weight: 700; color: #38bdf8; margin: 20px 0 10px 0; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i>
-              <span>${isFa ? 'دسته‌بندی جامع قیود مونتاژ (Mate Options - صفحات ۲۶ و ۲۷ جزوه):' : 'Assembly Mates Directory:'}</span>
+              <span>${isFa ? 'دسته‌بندی جامع قیود مونتاژ (Mate Options):' : 'Assembly Mates Directory:'}</span>
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
               ${chap.content.mates.map(m => `
@@ -809,7 +809,7 @@ function renderSolidWorksAcademy(containerId) {
           ${chap.content.viewsList ? `
             <div style="font-size: 13px; font-weight: 700; color: #38bdf8; margin: 20px 0 10px 0; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
-              <span>${isFa ? 'انواع نماهای استاندارد مهندسی در محیط Drawing (صفحات ۲۸ تا ۳۰ جزوه):' : 'Standard Drawing Views Directory:'}</span>
+              <span>${isFa ? 'انواع نماهای استاندارد مهندسی در محیط Drawing:' : 'Standard Drawing Views Directory:'}</span>
             </div>
             <div class="sw-tools-grid">
               ${chap.content.viewsList.map(v => `
@@ -831,7 +831,7 @@ function renderSolidWorksAcademy(containerId) {
           ${chap.content.detailingTools ? `
             <div style="font-size: 13px; font-weight: 700; color: #00f2fe; margin: 22px 0 10px 0; display: flex; align-items: center; gap: 8px;">
               <i data-lucide="bookmark" style="width: 14px; height: 14px;"></i>
-              <span>${isFa ? 'ابزارهای اندازه‌گذاری، تلرانس‌های GD&T و جدول BOM (صفحات ۳۱ و ۴۱):' : 'Dimensioning, GD&T, and BOM Tables:'}</span>
+              <span>${isFa ? 'ابزارهای اندازه‌گذاری، تلرانس‌های GD&T و جدول BOM:' : 'Dimensioning, GD&T, and BOM Tables:'}</span>
             </div>
             <div class="sw-tools-grid">
               ${chap.content.detailingTools.map(dt => `
@@ -854,7 +854,7 @@ function renderSolidWorksAcademy(containerId) {
     `;
   });
 
-  // Render Section 7: Blueprints & Exercises Workshop (۱۰ تمرین کامل جزوه)
+  // Render Section 7: Blueprints & Exercises Workshop (۱۰ نقشه صنعتی کارگاهی)
   html += `
     <div class="sw-chapter-section sw-module-card" data-chapter="exercises" id="sw-sec-exercises">
       <div class="sw-module-header">
@@ -872,12 +872,14 @@ function renderSolidWorksAcademy(containerId) {
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
           ${data.exercises.map((ex, idx) => `
             <div class="sw-exercise-card">
-              <div class="sw-exercise-preview">
-                <span class="sw-exercise-badge">${ex.page}</span>
-                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 20px;">
-                  <i data-lucide="${ex.type.includes('3D') ? 'box' : (ex.type.includes('Assembly') ? 'cpu' : (ex.type.includes('Drawing') ? 'file-text' : 'pen-tool'))}" style="width: 42px; height: 42px; color: #00f2fe; stroke-width: 1.5;"></i>
-                  <span style="font-family: var(--font-mono); font-size: 11.5px; color: #38bdf8; font-weight: 700;">${ex.type}</span>
-                  <span style="font-size: 12px; color: #94a3b8;">${isFa ? ex.title : ex.titleEn}</span>
+              <div class="sw-exercise-preview" onclick="openBlueprintModal('${ex.image}', '${(isFa ? ex.title : ex.titleEn).replace(/'/g, "\\'")}', '${ex.dims.replace(/'/g, "\\'")}')" style="cursor: pointer;">
+                <span class="sw-exercise-badge">${ex.type}</span>
+                <img src="${ex.image}" alt="${isFa ? ex.title : ex.titleEn}" class="sw-blueprint-thumb" loading="lazy" />
+                <div class="sw-blueprint-hover-overlay">
+                  <span class="sw-blueprint-zoom-tag">
+                    <i data-lucide="maximize-2" style="width: 14px; height: 14px;"></i>
+                    <span>${isFa ? 'بزرگ‌نمایی نقشه' : 'Enlarge Blueprint'}</span>
+                  </span>
                 </div>
               </div>
               <div class="sw-exercise-body">
@@ -897,7 +899,10 @@ function renderSolidWorksAcademy(containerId) {
                 </div>
                 <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between;">
                   <span style="font-family: var(--font-mono); font-size: 10px; color: #64748b;">SOLIDWORKS CERTIFIED</span>
-                  <span style="font-family: var(--font-mono); font-size: 10.5px; color: #00f2fe; display: flex; align-items: center; gap: 4px;"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> ${isFa ? 'نقشه کامل' : 'Verified'}</span>
+                  <button type="button" onclick="openBlueprintModal('${ex.image}', '${(isFa ? ex.title : ex.titleEn).replace(/'/g, "\\'")}', '${ex.dims.replace(/'/g, "\\'")}')" style="background: rgba(0, 242, 254, 0.1); border: 1px solid rgba(0, 242, 254, 0.35); color: #00f2fe; padding: 4px 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;">
+                    <i data-lucide="eye" style="width: 12px; height: 12px;"></i>
+                    <span>${isFa ? 'مشاهده نقشه کامل' : 'View Blueprint'}</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -974,3 +979,72 @@ window.addEventListener('storage', (e) => {
     renderSolidWorksAcademy('solidworksCourseContainer');
   }
 });
+
+// Blueprint Lightbox Modal Handlers
+window.openBlueprintModal = function(imageSrc, title, dims) {
+  let modal = document.getElementById('swBlueprintModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'swBlueprintModal';
+    modal.className = 'sw-blueprint-modal';
+    document.body.appendChild(modal);
+  }
+
+  const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
+
+  modal.innerHTML = `
+    <div class="sw-bp-backdrop" onclick="closeBlueprintModal()"></div>
+    <div class="sw-bp-dialog" role="dialog" aria-modal="true">
+      <div class="sw-bp-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="sw-bp-icon-badge"><i data-lucide="compass" style="width: 18px; height: 18px;"></i></div>
+          <div>
+            <h4 class="sw-bp-title">${title}</h4>
+            <div class="sw-bp-subtitle">${dims || ''}</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <a href="${imageSrc}" download class="sw-bp-download-btn" title="${isFa ? 'دانلود نقشه با فرمت برداری SVG' : 'Download Vector SVG'}">
+            <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+          </a>
+          <button type="button" class="sw-bp-close-btn" onclick="closeBlueprintModal()" aria-label="Close">
+            <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+          </button>
+        </div>
+      </div>
+      <div class="sw-bp-view-container">
+        <img src="${imageSrc}" alt="${title}" class="sw-bp-modal-img" />
+      </div>
+      <div class="sw-bp-footer">
+        <span class="sw-bp-watermark">MOHAMMADAMIN SHARIF // SOLIDWORKS ACADEMY BLUEPRINTS</span>
+        <button type="button" class="sw-bp-action-btn" onclick="closeBlueprintModal()">${isFa ? 'بستن پنجره' : 'Close'}</button>
+      </div>
+    </div>
+  `;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  try {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+window.closeBlueprintModal = function() {
+  const modal = document.getElementById('swBlueprintModal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+  document.body.style.overflow = '';
+};
+
+// Keyboard escape to close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    window.closeBlueprintModal();
+  }
+});
+

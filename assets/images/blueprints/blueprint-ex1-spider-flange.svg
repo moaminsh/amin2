@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+  <defs>
+    <!-- Background Grid -->
+    <pattern id="grid1" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    </pattern>
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-start" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 8 1.5 L 0 5 L 8 8.5 z" fill="#38bdf8"/>
+    </marker>
+    <!-- Glow Filter -->
+    <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="600" height="420" fill="#080e18"/>
+  <rect width="600" height="420" fill="url(#grid1)"/>
+  
+  <!-- Outer Technical Border -->
+  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5"/>
+  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.8"/>
+
+  <!-- Title Block (ISO Header) -->
+  <g transform="translate(370, 340)">
+    <rect width="210" height="60" fill="rgba(15, 23, 42, 0.9)" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="20" x2="210" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="0" y1="40" x2="210" y2="40" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="105" y1="0" x2="105" y2="60" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <text x="8" y="14" fill="#94a3b8" font-family="monospace" font-size="9">EX-01 // 2D SKETCH</text>
+    <text x="112" y="14" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">SCALE 1:1</text>
+    <text x="8" y="34" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">SPIDER FLANGE</text>
+    <text x="112" y="34" fill="#38bdf8" font-family="monospace" font-size="9">UNITS: MM</text>
+    <text x="8" y="54" fill="#38bdf8" font-family="monospace" font-size="9">3-LOBE SYMMETRIC</text>
+    <text x="112" y="54" fill="#10b981" font-family="monospace" font-size="9">FULLY DEFINED</text>
+  </g>
+
+  <!-- Technical Watermark / Coordinate Origin -->
+  <g transform="translate(260, 200)">
+    <!-- Center Axes -->
+    <line x1="-190" y1="0" x2="190" y2="0" stroke="#f43f5e" stroke-width="0.9" stroke-dasharray="10,4,2,4"/>
+    <line x1="0" y1="-170" x2="0" y2="170" stroke="#f43f5e" stroke-width="0.9" stroke-dasharray="10,4,2,4"/>
+
+    <!-- 120 deg and 240 deg centerlines -->
+    <line x1="0" y1="0" x2="-120" y2="70" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="8,4,2,4"/>
+    <line x1="0" y1="0" x2="120" y2="70" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="8,4,2,4"/>
+
+    <!-- Construction Pitch Circle PCD Ø200 -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6,4"/>
+
+    <!-- Center Hub Bore -->
+    <circle cx="0" cy="0" r="28" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2" filter="url(#cyanGlow)"/>
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#00f2fe" stroke-width="1.8"/>
+
+    <!-- 3 Lobes Profile (Symmetric at 0, 120, 240 deg) -->
+    <!-- Top Lobe (0, -100) -->
+    <g>
+      <circle cx="0" cy="-100" r="16" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2"/>
+      <circle cx="0" cy="-100" r="8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+    </g>
+
+    <!-- Bottom Left Lobe (-86.6, 50) -->
+    <g>
+      <circle cx="-86.6" cy="50" r="16" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2"/>
+      <circle cx="-86.6" cy="50" r="8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+    </g>
+
+    <!-- Bottom Right Lobe (86.6, 50) -->
+    <g>
+      <circle cx="86.6" cy="50" r="16" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2"/>
+      <circle cx="86.6" cy="50" r="8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+    </g>
+
+    <!-- Connecting Tangent Outer Arcs R30 -->
+    <path d="M 0 -84 
+             C 25 -84 45 -40 45 0 
+             C 45 25 60 40 73 40 
+             A 16 16 0 0 1 86.6 66
+             C 70 80 50 45 0 45
+             C -50 45 -70 80 -86.6 66
+             A 16 16 0 0 1 -73 40
+             C -60 40 -45 25 -45 0
+             C -45 -40 -25 -84 0 -84" 
+          fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+
+    <!-- Tangent Fillet Connecting Ribs (Smooth Blends) -->
+    <path d="M 14 -94 C 28 -70 34 -45 35 0 C 35 25 55 42 74 44" fill="none" stroke="#00f2fe" stroke-width="2"/>
+    <path d="M -14 -94 C -28 -70 -34 -45 -35 0 C -35 25 -55 42 -74 44" fill="none" stroke="#00f2fe" stroke-width="2"/>
+    <path d="M -75 60 C -45 70 -20 60 0 60 C 20 60 45 70 75 60" fill="none" stroke="#00f2fe" stroke-width="2"/>
+
+    <!-- Center Origin Marker -->
+    <circle cx="0" cy="0" r="3" fill="#ef4444"/>
+    <text x="6" y="-6" fill="#ef4444" font-family="monospace" font-size="9" font-weight="bold">(0,0)</text>
+
+    <!-- Dimensions & Leader Lines -->
+    <!-- PCD Ø200 -->
+    <line x1="70.7" y1="-70.7" x2="135" y2="-120" stroke="#38bdf8" stroke-width="1"/>
+    <line x1="135" y1="-120" x2="185" y2="-120" stroke="#38bdf8" stroke-width="1"/>
+    <text x="138" y="-125" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">P.C.D. Ø200</text>
+
+    <!-- 3x Hole Ø20 -->
+    <line x1="0" y1="-100" x2="-60" y2="-135" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrow)"/>
+    <line x1="-60" y1="-135" x2="-140" y2="-135" stroke="#38bdf8" stroke-width="1"/>
+    <text x="-135" y="-140" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">3X Ø20 THRU</text>
+
+    <!-- 3x Outer Radius R30 -->
+    <line x1="14" y1="-106" x2="60" y2="-145" stroke="#38bdf8" stroke-width="1"/>
+    <line x1="60" y1="-145" x2="115" y2="-145" stroke="#38bdf8" stroke-width="1"/>
+    <text x="64" y="-150" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">3X R30</text>
+
+    <!-- Angular Dimension 120 DEG -->
+    <path d="M 0 -45 A 45 45 0 0 1 38.9 22.5" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="24" y="-18" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">120° TYP</text>
+
+    <!-- Center Bore Ø56 / Ø28 -->
+    <line x1="0" y1="0" x2="-75" y2="-40" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrow)"/>
+    <line x1="-75" y1="-40" x2="-140" y2="-40" stroke="#38bdf8" stroke-width="1"/>
+    <text x="-138" y="-45" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">CENTER Ø56 / Ø28</text>
+
+    <!-- Fillet R30 Tag -->
+    <text x="-120" y="20" fill="#10b981" font-family="monospace" font-size="10">R30 FILLET (TANGENT)</text>
+  </g>
+</svg>

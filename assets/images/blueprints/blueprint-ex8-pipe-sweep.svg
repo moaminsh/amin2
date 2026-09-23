@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+  <defs>
+    <pattern id="grid8" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    </pattern>
+    <filter id="glow8" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="420" fill="#080e18"/>
+  <rect width="600" height="420" fill="url(#grid8)"/>
+  
+  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5"/>
+  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.8"/>
+
+  <!-- Title Block -->
+  <g transform="translate(370, 340)">
+    <rect width="210" height="60" fill="rgba(15, 23, 42, 0.9)" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="20" x2="210" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="0" y1="40" x2="210" y2="40" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="105" y1="0" x2="105" y2="60" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <text x="8" y="14" fill="#94a3b8" font-family="monospace" font-size="9">EX-08 // 3D PART</text>
+    <text x="112" y="14" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">SCALE 1:1</text>
+    <text x="8" y="34" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">3D CURVED PIPE</text>
+    <text x="112" y="34" fill="#38bdf8" font-family="monospace" font-size="9">UNITS: MM</text>
+    <text x="8" y="54" fill="#38bdf8" font-family="monospace" font-size="9">SWEPT BOSS/BASE</text>
+    <text x="112" y="54" fill="#10b981" font-family="monospace" font-size="9">SPATIAL PATH</text>
+  </g>
+
+  <!-- Left: Trajectory & Auxiliary Plane Construction -->
+  <g transform="translate(40, 45)">
+    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// STEP 1 &amp; 2: PATH &amp; NORMAL PLANE</text>
+
+    <!-- Normal Reference Plane Construction at Origin -->
+    <g transform="translate(60, 200)">
+      <polygon points="-25,-25 25,-40 25,25 -25,40" fill="rgba(14, 165, 233, 0.15)" stroke="#00f2fe" stroke-width="1.4" stroke-dasharray="4,2"/>
+      <text x="-40" y="55" fill="#00f2fe" font-family="monospace" font-size="9">PLANE 1 (NORMAL)</text>
+
+      <!-- Profile Circles on Plane 1 (ID & OD) -->
+      <ellipse cx="0" cy="0" rx="16" ry="24" fill="none" stroke="#f59e0b" stroke-width="2"/>
+      <ellipse cx="0" cy="0" rx="10" ry="15" fill="#080e18" stroke="#f59e0b" stroke-width="1.6"/>
+      <text x="15" y="-20" fill="#f59e0b" font-family="monospace" font-size="9">PROFILE: OD/ID</text>
+    </g>
+
+    <!-- 3D Sweep Centerline Path (Red dashed with radii) -->
+    <path d="M 60 200 
+             L 120 200 
+             Q 160 200 160 160 
+             L 160 100 
+             Q 160 60 200 60 
+             L 260 60" 
+          fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-dasharray="8,3"/>
+    
+    <!-- Path Tangent Fillet Callouts -->
+    <text x="170" y="170" fill="#f43f5e" font-family="monospace" font-size="10">R40 BEND</text>
+    <text x="130" y="50" fill="#f43f5e" font-family="monospace" font-size="10">R40 BEND</text>
+  </g>
+
+  <!-- Right: 3D Rendered Swept Pipe Solid -->
+  <g transform="translate(310, 45)">
+    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// STEP 3 &amp; 4: 3D SWEPT SOLID TUBE</text>
+
+    <!-- 3D Pipe Solid Envelope with Shading & Highlights -->
+    <!-- Start Flange/Face -->
+    <g transform="translate(30, 200)">
+      <ellipse cx="0" cy="0" rx="14" ry="22" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2.2"/>
+      <ellipse cx="0" cy="0" rx="8" ry="13" fill="#040810" stroke="#38bdf8" stroke-width="1.8"/>
+    </g>
+
+    <!-- Pipe Body Sweep Curves -->
+    <!-- Outer upper border -->
+    <path d="M 30 178 
+             L 90 178 
+             Q 146 178 146 122 
+             L 146 80 
+             Q 146 38 188 38 
+             L 230 38" 
+          fill="none" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow8)"/>
+    <!-- Outer lower border -->
+    <path d="M 30 222 
+             L 90 222 
+             Q 174 222 174 138 
+             L 174 80 
+             Q 174 66 188 66 
+             L 230 66" 
+          fill="none" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow8)"/>
+
+    <!-- Specular Highlight Strip -->
+    <path d="M 30 188 
+             L 90 188 
+             Q 154 188 154 130 
+             L 154 80 
+             Q 154 48 188 48 
+             L 230 48" 
+          fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.6"/>
+
+    <!-- Fill Gradient simulation -->
+    <path d="M 30 178 L 90 178 Q 146 178 146 122 L 146 80 Q 146 38 188 38 L 230 38
+             L 230 66 L 188 66 Q 174 66 174 80 L 174 138 Q 174 222 90 222 L 30 222 Z"
+          fill="rgba(14, 165, 233, 0.15)"/>
+
+    <!-- End Face of Pipe -->
+    <ellipse cx="230" cy="52" rx="7" ry="14" fill="#040810" stroke="#00f2fe" stroke-width="2"/>
+    <ellipse cx="230" cy="52" rx="4" ry="8" fill="#000000" stroke="#38bdf8" stroke-width="1.5"/>
+
+    <!-- Technical Annotations -->
+    <text x="30" y="245" fill="#38bdf8" font-family="monospace" font-size="10">PROFILE: D_EXT 32MM // D_INT 24MM</text>
+    <text x="30" y="260" fill="#10b981" font-family="monospace" font-size="10">COMMAND: SWEPT BOSS/BASE (PATH + PROFILE)</text>
+  </g>
+</svg>
