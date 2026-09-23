@@ -1,0 +1,1097 @@
+/* ==========================================================================
+   Weighted Decision Matrix (Pugh Matrix) - Elite Engineering UI Theme
+   طراحی پیشرفته و زیبا برای ماتریس تصمیم‌گیری وزنی مهندسی
+   Author: Mohammadamin Sharif • IUST
+   ========================================================================== */
+
+.pdm-wrapper {
+  background: var(--bg-card, rgba(15, 23, 42, 0.9));
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.65));
+  border-radius: 20px;
+  padding: 28px 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+  margin: 24px 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.light-mode .pdm-wrapper {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Subtle decorative glowing corner aura */
+.pdm-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(20, 184, 166, 0) 70%);
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(30px);
+}
+
+/* ==================== HEADER & PRESETS ==================== */
+.pdm-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.pdm-tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #34d399;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+}
+
+.light-mode .pdm-tool-badge {
+  background: #ecfdf5;
+  border-color: #86efac;
+  color: #047857;
+}
+
+.pdm-title {
+  font-size: clamp(19px, 2.2vw, 24px);
+  font-weight: 900;
+  color: var(--text-main, #f8fafc);
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pdm-desc {
+  font-size: 13.5px;
+  color: var(--text-muted, #94a3b8);
+  margin: 0;
+  line-height: 1.7;
+  max-width: 680px;
+}
+
+.pdm-presets-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: var(--bg-surface, rgba(11, 19, 41, 0.8));
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.6));
+}
+
+.light-mode .pdm-presets-nav {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.pdm-presets-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text-dim, #64748b);
+  padding: 0 8px;
+}
+
+.pdm-preset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted, #94a3b8);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pdm-preset-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main, #f8fafc);
+}
+
+.light-mode .pdm-preset-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #0f172a;
+}
+
+.pdm-preset-btn.active {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.4), rgba(2, 132, 199, 0.45));
+  border-color: rgba(20, 184, 166, 0.6);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+}
+
+.light-mode .pdm-preset-btn.active {
+  background: #0d9488;
+  border-color: #0f766e;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+}
+
+/* ==================== WINNER SPOTLIGHT BANNER ==================== */
+.pdm-winner-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(2, 132, 199, 0.14) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.12);
+}
+
+.light-mode .pdm-winner-banner {
+  background: linear-gradient(135deg, #ecfdf5 0%, #e0f2fe 100%);
+  border-color: #86efac;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.1);
+}
+
+.pdm-winner-icon {
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1.5px solid rgba(16, 185, 129, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+}
+
+.light-mode .pdm-winner-icon {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.pdm-winner-content {
+  flex: 1;
+}
+
+.pdm-winner-tag {
+  font-size: 12px;
+  font-weight: 800;
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.light-mode .pdm-winner-tag {
+  color: #047857;
+}
+
+.pdm-winner-name {
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--text-main, #f8fafc);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.light-mode .pdm-winner-name {
+  color: #064e3b;
+}
+
+.pdm-winner-score-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #10b981, #0d9488);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 900;
+  box-shadow: 0 3px 10px rgba(16, 185, 129, 0.4);
+}
+
+.pdm-winner-analysis {
+  font-size: 13.5px;
+  color: var(--text-muted, #94a3b8);
+  line-height: 1.6;
+}
+
+.light-mode .pdm-winner-analysis {
+  color: #334155;
+}
+
+/* ==================== COMPARATIVE RANKING BARS ==================== */
+.pdm-ranking-panel {
+  margin-bottom: 24px;
+  background: var(--bg-surface, rgba(11, 19, 41, 0.7));
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.5));
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.light-mode .pdm-ranking-panel {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.pdm-panel-subhead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent-cyan, #00f2fe);
+  margin-bottom: 14px;
+}
+
+.pdm-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pdm-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.light-mode .pdm-bar-item {
+  background: #ffffff;
+  border-color: #f1f5f9;
+}
+
+.pdm-bar-item.is-winner {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.light-mode .pdm-bar-item.is-winner {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.pdm-bar-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  flex-wrap: wrap;
+}
+
+.pdm-rank-badge {
+  font-weight: 900;
+  color: var(--text-dim, #64748b);
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--bg-surface, rgba(11, 19, 41, 0.8));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.5));
+}
+
+.light-mode .pdm-rank-badge {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+.is-winner .pdm-rank-badge {
+  background: #10b981;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.pdm-bar-name {
+  font-weight: 800;
+  color: var(--text-main, #f8fafc);
+}
+
+.light-mode .pdm-bar-name {
+  color: #0f172a;
+}
+
+.pdm-bar-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid;
+  font-weight: 700;
+}
+
+.pdm-bar-score {
+  margin-right: auto;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-muted, #cbd5e1);
+  font-family: var(--font-mono, monospace);
+  direction: ltr;
+}
+
+.light-mode .pdm-bar-score {
+  color: #334155;
+}
+
+.pdm-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.light-mode .pdm-bar-track {
+  background: #e2e8f0;
+}
+
+.pdm-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+}
+
+/* ==================== THE MATRIX TABLE ==================== */
+.pdm-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 22px;
+  border-radius: 16px;
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.65));
+  background: var(--bg-surface, rgba(11, 19, 41, 0.6));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .pdm-table-wrapper {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+.pdm-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13.5px;
+  text-align: right;
+  min-width: 780px;
+}
+
+.pdm-table th,
+.pdm-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border, rgba(30, 58, 95, 0.4));
+  vertical-align: middle;
+}
+
+.light-mode .pdm-table th,
+.light-mode .pdm-table td {
+  border-bottom-color: #e2e8f0;
+}
+
+.pdm-table thead th {
+  background: var(--bg-surface, rgba(11, 19, 41, 0.95));
+  color: var(--text-main, #f8fafc);
+  font-weight: 800;
+  font-size: 13px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.light-mode .pdm-table thead th {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.col-crit {
+  width: 260px;
+}
+
+.col-weight {
+  width: 130px;
+  text-align: center;
+}
+
+.col-opt {
+  min-width: 180px;
+  text-align: center;
+  transition: background 0.25s ease;
+}
+
+.col-actions {
+  width: 50px;
+  text-align: center;
+}
+
+/* Winner Column Highlights */
+.col-winner {
+  background: rgba(16, 185, 129, 0.14) !important;
+  border-left: 2px solid rgba(16, 185, 129, 0.5) !important;
+  border-right: 2px solid rgba(16, 185, 129, 0.5) !important;
+}
+
+.light-mode .col-winner {
+  background: #ecfdf5 !important;
+  border-left-color: #34d399 !important;
+  border-right-color: #34d399 !important;
+}
+
+.cell-winner {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 2px solid rgba(16, 185, 129, 0.35);
+  border-right: 2px solid rgba(16, 185, 129, 0.35);
+}
+
+.light-mode .cell-winner {
+  background: #f0fdf4;
+  border-left-color: #86efac;
+  border-right-color: #86efac;
+}
+
+/* Header Option Card */
+.pdm-th-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.5));
+}
+
+.light-mode .pdm-th-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.pdm-th-card.is-winner {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+}
+
+.light-mode .pdm-th-card.is-winner {
+  background: #d1fae5;
+  border-color: #10b981;
+}
+
+.pdm-th-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.pdm-opt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pdm-opt-type {
+  font-weight: 700;
+  color: var(--text-dim, #64748b);
+}
+
+.pdm-win-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #10b981;
+  color: #ffffff;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.pdm-th-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text-main, #f8fafc);
+  text-align: center;
+}
+
+.light-mode .pdm-th-title {
+  color: #0f172a;
+}
+
+/* Criteria Name Cell */
+.pdm-crit-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdm-crit-num {
+  font-size: 11.5px;
+  font-weight: 900;
+  color: var(--accent-teal, #14b8a6);
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pdm-crit-input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-main, #f8fafc);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 6px 10px;
+  transition: all 0.2s ease;
+}
+
+.light-mode .pdm-crit-input {
+  color: #0f172a;
+}
+
+.pdm-crit-input:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.light-mode .pdm-crit-input:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.pdm-crit-input:focus {
+  border-color: var(--accent-cyan, #00f2fe);
+  background: var(--bg-surface, #0b1329);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
+}
+
+.light-mode .pdm-crit-input:focus {
+  background: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+}
+
+/* Weight Stepper Card */
+.pdm-weight-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg-card, rgba(15, 23, 42, 0.9));
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.6));
+  border-radius: 10px;
+  padding: 4px 8px;
+}
+
+.light-mode .pdm-weight-card {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.pdm-weight-badge {
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--accent-gold, #fbbf24);
+  min-width: 22px;
+  text-align: center;
+  font-family: var(--font-mono, monospace);
+}
+
+.light-mode .pdm-weight-badge {
+  color: #d97706;
+}
+
+/* Score Cell Card */
+.pdm-cell-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 4px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.pdm-stepper-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Reusable Step Buttons */
+.pdm-step-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.65));
+  background: var(--bg-surface, rgba(11, 19, 41, 0.9));
+  color: var(--text-main, #f8fafc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.light-mode .pdm-step-btn {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.pdm-step-btn:hover {
+  background: var(--accent-teal, #14b8a6);
+  border-color: var(--accent-teal, #14b8a6);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.pdm-step-btn:active {
+  transform: translateY(1px);
+}
+
+/* Score Chip Display */
+.pdm-score-chip {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  min-width: 44px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.6));
+  background: var(--bg-card, rgba(15, 23, 42, 0.85));
+  font-family: var(--font-mono, monospace);
+  font-weight: 900;
+  line-height: 26px;
+}
+
+.pdm-score-num {
+  font-size: 14px;
+}
+
+.pdm-score-max {
+  font-size: 10px;
+  color: var(--text-dim, #64748b);
+}
+
+/* Color Coding for Scores 1 to 5 */
+.score-lvl-5 {
+  border-color: rgba(16, 185, 129, 0.7);
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+}
+.light-mode .score-lvl-5 {
+  background: #ecfdf5;
+  color: #059669;
+  border-color: #86efac;
+}
+
+.score-lvl-4 {
+  border-color: rgba(0, 242, 254, 0.6);
+  background: rgba(0, 242, 254, 0.14);
+  color: #00f2fe;
+}
+.light-mode .score-lvl-4 {
+  background: #e0f2fe;
+  color: #0284c7;
+  border-color: #7dd3fc;
+}
+
+.score-lvl-3 {
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+}
+.light-mode .score-lvl-3 {
+  background: #eff6ff;
+  color: #2563eb;
+  border-color: #93c5fd;
+}
+
+.score-lvl-2 {
+  border-color: rgba(245, 158, 11, 0.6);
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+}
+.light-mode .score-lvl-2 {
+  background: #fffbeb;
+  color: #d97706;
+  border-color: #fde68a;
+}
+
+.score-lvl-1 {
+  border-color: rgba(244, 63, 94, 0.6);
+  background: rgba(244, 63, 94, 0.14);
+  color: #fb7185;
+}
+.light-mode .score-lvl-1 {
+  background: #fff1f2;
+  color: #e11d48;
+  border-color: #fecdd3;
+}
+
+/* Product Weighted Score Badge */
+.pdm-product-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-dim, #94a3b8);
+}
+
+.light-mode .pdm-product-badge {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+.pdm-prod-label {
+  font-size: 10px;
+}
+
+.pdm-prod-val {
+  font-weight: 800;
+  color: var(--text-main, #f8fafc);
+  font-family: var(--font-mono, monospace);
+}
+
+.light-mode .pdm-prod-val {
+  color: #0f172a;
+}
+
+/* Delete Row Button */
+.pdm-del-crit-btn {
+  background: transparent;
+  border: none;
+  color: #f43f5e;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  opacity: 0.65;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdm-del-crit-btn:hover {
+  opacity: 1;
+  background: rgba(244, 63, 94, 0.15);
+  transform: scale(1.05);
+}
+
+/* ==================== FOOTER TOTAL ROW ==================== */
+.pdm-total-row {
+  background: var(--bg-surface, rgba(11, 19, 41, 0.95));
+  border-top: 2px solid var(--accent-cyan, #00f2fe);
+}
+
+.light-mode .pdm-total-row {
+  background: #f8fafc;
+  border-top-color: #0284c7;
+}
+
+.pdm-total-lbl-cell {
+  padding: 16px 20px;
+}
+
+.pdm-total-lbl-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pdm-total-main-lbl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 900;
+  color: var(--text-main, #f8fafc);
+}
+
+.light-mode .pdm-total-main-lbl {
+  color: #0f172a;
+}
+
+.pdm-formula-pill {
+  font-size: 11.5px;
+  font-family: var(--font-mono, monospace);
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0, 242, 254, 0.12);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  color: var(--accent-cyan, #00f2fe);
+  direction: ltr;
+}
+
+.light-mode .pdm-formula-pill {
+  background: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0284c7;
+}
+
+.pdm-total-val-cell {
+  text-align: center;
+  padding: 16px 12px;
+  transition: all 0.25s ease;
+}
+
+.pdm-total-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.pdm-total-score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-mono, monospace);
+}
+
+.pdm-total-number {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-main, #f8fafc);
+}
+
+.light-mode .pdm-total-number {
+  color: #0f172a;
+}
+
+.pdm-total-max {
+  font-size: 12px;
+  color: var(--text-dim, #64748b);
+}
+
+.is-winner-total .pdm-total-number {
+  color: #10b981;
+}
+
+.pdm-total-pct-bar {
+  width: 90px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.light-mode .pdm-total-pct-bar {
+  background: #e2e8f0;
+}
+
+.pdm-total-pct-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.pdm-winner-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.pdm-rank-stamp {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim, #64748b);
+}
+
+/* ==================== ACTION TOOLBAR ==================== */
+.pdm-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.pdm-action-group-left,
+.pdm-action-group-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pdm-btn-act {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  background: var(--bg-surface, rgba(11, 19, 41, 0.85));
+  border: 1px solid var(--border, rgba(30, 58, 95, 0.65));
+  color: var(--text-muted, #94a3b8);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.light-mode .pdm-btn-act {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.05);
+}
+
+.pdm-btn-act:hover {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: rgba(20, 184, 166, 0.5);
+  color: var(--text-main, #f8fafc);
+  transform: translateY(-1px);
+}
+
+.light-mode .pdm-btn-act:hover {
+  background: #f0fdfa;
+  border-color: #0d9488;
+  color: #0f766e;
+}
+
+.pdm-btn-copy {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(2, 132, 199, 0.22));
+  border-color: rgba(16, 185, 129, 0.55);
+  color: #34d399;
+}
+
+.light-mode .pdm-btn-copy {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #047857;
+}
+
+.pdm-btn-copy:hover {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+}
+
+.light-mode .pdm-btn-copy:hover {
+  background: #059669;
+  color: #ffffff;
+}
+
+/* ==================== TOAST FEEDBACK ==================== */
+.pdm-toast {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #10b981;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+.pdm-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 768px) {
+  .pdm-wrapper {
+    padding: 18px 14px;
+  }
+  .pdm-header-row {
+    flex-direction: column;
+  }
+  .pdm-presets-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .pdm-preset-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+  .pdm-actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pdm-action-group-left,
+  .pdm-action-group-right {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .pdm-btn-act {
+    flex: 1;
+    justify-content: center;
+  }
+}

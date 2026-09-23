@@ -219,18 +219,23 @@
             <table class="pdm-table">
               <thead>
                 <tr>
-                  <th class="col-crit">${isFa ? 'معیار ارزیابی' : 'Criterion'}</th>
-                  <th class="col-weight">${isFa ? 'وزن (۱ تا ۵)' : 'Weight (1-5)'}</th>
-                  ${currentPreset.options.map(opt => `
-                    <th class="col-opt ${results.winner.id === opt.id ? 'col-winner' : ''}">
-                      <div class="pdm-th-opt-wrap">
-                        <span class="pdm-opt-pill" style="background: ${opt.color}25; color: ${opt.color}; border: 1px solid ${opt.color}50;">
-                          ${isFa ? opt.nameFa : opt.nameEn}
-                        </span>
-                        ${results.winner.id === opt.id ? `<span class="pdm-win-chip">${isFa ? 'برنده' : 'Winner'}</span>` : ''}
-                      </div>
-                    </th>
-                  `).join('')}
+                  <th class="col-crit">${isFa ? 'معیار ارزیابی مهندسی' : 'Engineering Criterion'}</th>
+                  <th class="col-weight">${isFa ? 'وزن اهمیت (۱ تا ۵)' : 'Weight (1-5)'}</th>
+                  ${currentPreset.options.map(opt => {
+                    const isWin = results.winner.id === opt.id;
+                    return `
+                      <th class="col-opt ${isWin ? 'col-winner' : ''}">
+                        <div class="pdm-th-card ${isWin ? 'is-winner' : ''}">
+                          <div class="pdm-th-top">
+                            <span class="pdm-opt-dot" style="background: ${opt.color};"></span>
+                            <span class="pdm-opt-type">${isFa ? opt.badgeFa : opt.badgeEn}</span>
+                            ${isWin ? `<span class="pdm-win-ribbon"><i data-lucide="crown" style="width: 11px; height: 11px;"></i> ${isFa ? 'برنده' : 'Winner'}</span>` : ''}
+                          </div>
+                          <div class="pdm-th-title">${isFa ? opt.nameFa : opt.nameEn}</div>
+                        </div>
+                      </th>
+                    `;
+                  }).join('')}
                   <th class="col-actions"></th>
                 </tr>
               </thead>
@@ -238,13 +243,20 @@
                 ${currentPreset.criteria.map((crit, cIdx) => `
                   <tr data-crit-id="${crit.id}">
                     <td class="crit-title-cell">
-                      <input type="text" class="pdm-crit-input" data-crit-idx="${cIdx}" value="${isFa ? crit.nameFa : crit.nameEn}">
+                      <div class="pdm-crit-name-wrap">
+                        <span class="pdm-crit-num">${cIdx + 1}</span>
+                        <input type="text" class="pdm-crit-input" data-crit-idx="${cIdx}" value="${isFa ? crit.nameFa : crit.nameEn}" placeholder="${isFa ? 'عنوان معیار...' : 'Criterion name...'}">
+                      </div>
                     </td>
                     <td class="crit-weight-cell">
-                      <div class="pdm-weight-stepper">
-                        <button type="button" class="pdm-step-btn btn-weight-down" data-crit-idx="${cIdx}">-</button>
-                        <span class="pdm-weight-val">${crit.weight}</span>
-                        <button type="button" class="pdm-step-btn btn-weight-up" data-crit-idx="${cIdx}">+</button>
+                      <div class="pdm-weight-card">
+                        <button type="button" class="pdm-step-btn btn-weight-down" data-crit-idx="${cIdx}" title="${isFa ? 'کاهش وزن' : 'Decrease weight'}">
+                          <i data-lucide="minus" style="width: 12px; height: 12px;"></i>
+                        </button>
+                        <span class="pdm-weight-badge" title="${isFa ? 'وزن معیار از ۵' : 'Weight out of 5'}">${crit.weight}</span>
+                        <button type="button" class="pdm-step-btn btn-weight-up" data-crit-idx="${cIdx}" title="${isFa ? 'افزایش وزن' : 'Increase weight'}">
+                          <i data-lucide="plus" style="width: 12px; height: 12px;"></i>
+                        </button>
                       </div>
                     </td>
                     ${currentPreset.options.map(opt => {
@@ -253,11 +265,23 @@
                       const isWinCol = results.winner.id === opt.id;
                       return `
                         <td class="score-cell ${isWinCol ? 'cell-winner' : ''}">
-                          <div class="pdm-score-stepper">
-                            <button type="button" class="pdm-step-btn btn-score-down" data-crit-idx="${cIdx}" data-opt-id="${opt.id}">-</button>
-                            <span class="pdm-score-val pdm-score-lvl-${score}">${score}</span>
-                            <button type="button" class="pdm-step-btn btn-score-up" data-crit-idx="${cIdx}" data-opt-id="${opt.id}">+</button>
-                            <span class="pdm-sub-calc">(${crit.weight}×${score}=<strong>${product}</strong>)</span>
+                          <div class="pdm-cell-card">
+                            <div class="pdm-stepper-wrap">
+                              <button type="button" class="pdm-step-btn btn-score-down" data-crit-idx="${cIdx}" data-opt-id="${opt.id}" title="${isFa ? 'کاهش نمره' : 'Decrease score'}">
+                                <i data-lucide="minus" style="width: 12px; height: 12px;"></i>
+                              </button>
+                              <div class="pdm-score-chip score-lvl-${score}">
+                                <span class="pdm-score-num">${score}</span>
+                                <span class="pdm-score-max">/۵</span>
+                              </div>
+                              <button type="button" class="pdm-step-btn btn-score-up" data-crit-idx="${cIdx}" data-opt-id="${opt.id}" title="${isFa ? 'افزایش نمره' : 'Increase score'}">
+                                <i data-lucide="plus" style="width: 12px; height: 12px;"></i>
+                              </button>
+                            </div>
+                            <div class="pdm-product-badge" title="${crit.weight} × ${score} = ${product}">
+                              <span class="pdm-prod-label">${isFa ? 'امتیاز وزنی' : 'Score'}:</span>
+                              <span class="pdm-prod-val">${product}</span>
+                            </div>
                           </div>
                         </td>
                       `;
@@ -265,7 +289,7 @@
                     <td class="action-cell">
                       ${currentPreset.criteria.length > 2 ? `
                         <button type="button" class="pdm-del-crit-btn" data-crit-idx="${cIdx}" title="${isFa ? 'حذف این معیار' : 'Delete criterion'}">
-                          <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                          <i data-lucide="trash-2" style="width: 15px; height: 15px;"></i>
                         </button>
                       ` : ''}
                     </td>
@@ -274,17 +298,33 @@
               </tbody>
               <tfoot>
                 <tr class="pdm-total-row">
-                  <td colspan="2" class="pdm-total-lbl">
-                    <strong>${isFa ? 'جمع کل وزنی \\( \\sum W \\times S \\):' : 'Total Weighted Score:'}</strong>
+                  <td colspan="2" class="pdm-total-lbl-cell">
+                    <div class="pdm-total-lbl-wrap">
+                      <div class="pdm-total-main-lbl">
+                        <i data-lucide="calculator" style="width: 17px; height: 17px; color: var(--accent-cyan);"></i>
+                        <span>${isFa ? 'مجموع امتیاز وزنی نهایی' : 'Final Total Score'}</span>
+                      </div>
+                      <span class="pdm-formula-pill">\\( \\sum W_i \\times S_{ij} \\)</span>
+                    </div>
                   </td>
                   ${currentPreset.options.map(opt => {
                     const isWin = results.winner.id === opt.id;
                     const val = results.totals[opt.id];
+                    const pct = results.maxPossible > 0 ? Math.round((val / results.maxPossible) * 100) : 0;
                     return `
-                      <td class="pdm-total-val ${isWin ? 'total-winner' : ''}">
+                      <td class="pdm-total-val-cell ${isWin ? 'is-winner-total' : ''}">
                         <div class="pdm-total-box">
-                          <span class="pdm-total-number">${val}</span>
-                          ${isWin ? `<span class="pdm-crown">★ ${isFa ? 'رتبه اول' : 'Rank 1'}</span>` : ''}
+                          <div class="pdm-total-score-row">
+                            <span class="pdm-total-number">${val}</span>
+                            <span class="pdm-total-max">/ ${results.maxPossible}</span>
+                          </div>
+                          <div class="pdm-total-pct-bar">
+                            <div class="pdm-total-pct-fill" style="width: ${pct}%; background: ${isWin ? 'linear-gradient(90deg, #10b981, #00f2fe)' : opt.color};"></div>
+                          </div>
+                          ${isWin 
+                            ? `<span class="pdm-winner-stamp"><i data-lucide="check-circle" style="width: 13px; height: 13px;"></i> ${isFa ? 'بهترین گزینه' : 'Optimal'}</span>` 
+                            : `<span class="pdm-rank-stamp">${pct}٪</span>`
+                          }
                         </div>
                       </td>
                     `;
