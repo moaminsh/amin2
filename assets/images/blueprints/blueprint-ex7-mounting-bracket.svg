@@ -1,94 +1,159 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="100%" height="100%">
   <defs>
-    <pattern id="grid7" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    <pattern id="cadGrid7" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.75"/>
     </pattern>
-    <!-- Hatching for Section Cut -->
+    <pattern id="cadGridMajor7" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
+    </pattern>
     <pattern id="hatch7" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(0, 242, 254, 0.4)" stroke-width="1.2"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
     </pattern>
-    <filter id="glow7" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur" />
+    <marker id="arrEnd7" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrStart7" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 10 2 L 0 5 L 10 8 Z" fill="#38bdf8"/>
+    </marker>
+    <filter id="glow7" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <rect width="600" height="420" fill="#080e18"/>
-  <rect width="600" height="420" fill="url(#grid7)"/>
-  
-  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5"/>
-  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.8"/>
+  <rect width="840" height="580" fill="#060b13" class="cad-bg"/>
+  <rect width="840" height="580" fill="url(#cadGrid7)" class="cad-grid"/>
+  <rect width="840" height="580" fill="url(#cadGridMajor7)" class="cad-grid-major"/>
 
-  <!-- Title Block -->
-  <g transform="translate(370, 340)">
-    <rect width="210" height="60" fill="rgba(15, 23, 42, 0.9)" stroke="#0284c7" stroke-width="1"/>
-    <line x1="0" y1="20" x2="210" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="0" y1="40" x2="210" y2="40" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="105" y1="0" x2="105" y2="60" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <text x="8" y="14" fill="#94a3b8" font-family="monospace" font-size="9">EX-07 // 3D PART</text>
-    <text x="112" y="14" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">SCALE 1:1</text>
-    <text x="8" y="34" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">ANGLED BRACKET</text>
-    <text x="112" y="34" fill="#38bdf8" font-family="monospace" font-size="9">UNITS: MM</text>
-    <text x="8" y="54" fill="#38bdf8" font-family="monospace" font-size="9">RIB GUSSETS R3</text>
-    <text x="112" y="54" fill="#10b981" font-family="monospace" font-size="9">THK: 4MM</text>
+  <rect x="18" y="16" width="804" height="548" fill="none" stroke="#0284c7" stroke-width="1.6"/>
+  <rect x="23" y="21" width="794" height="538" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.8"/>
+
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle">
+    <text x="73" y="14">1</text><text x="73" y="570">1</text>
+    <text x="173" y="14">2</text><text x="173" y="570">2</text>
+    <text x="273" y="14">3</text><text x="273" y="570">3</text>
+    <text x="373" y="14">4</text><text x="373" y="570">4</text>
+    <text x="473" y="14">5</text><text x="473" y="570">5</text>
+    <text x="573" y="14">6</text><text x="573" y="570">6</text>
+    <text x="673" y="14">7</text><text x="673" y="570">7</text>
+    <text x="773" y="14">8</text><text x="773" y="570">8</text>
+  </g>
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle" dominant-baseline="central">
+    <text x="10" y="85">A</text><text x="830" y="85">A</text>
+    <text x="10" y="220">B</text><text x="830" y="220">B</text>
+    <text x="10" y="355">C</text><text x="830" y="355">C</text>
+    <text x="10" y="490">D</text><text x="830" y="490">D</text>
   </g>
 
-  <!-- Left: Section View with Ribs and Hatching -->
-  <g transform="translate(40, 45)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// SECTION G-G &amp; ANGLES</text>
+  <!-- Title Block (ISO 7200) -->
+  <g transform="translate(480, 440)">
+    <rect width="337" height="119" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.5"/>
+    <line x1="0" y1="28" x2="337" y2="28" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="56" x2="337" y2="56" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="84" x2="337" y2="84" stroke="#0284c7" stroke-width="1"/>
+    <line x1="160" y1="0" x2="160" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="28" x2="245" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="75" y1="84" x2="75" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="160" y1="84" x2="160" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="84" x2="245" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
 
-    <!-- Base Plate 81mm long, 4mm thick -->
-    <rect x="30" y="190" width="190" height="15" fill="url(#hatch7)" stroke="#00f2fe" stroke-width="2" filter="url(#glow7)"/>
-    <!-- Slotted Hole in Base -->
-    <rect x="70" y="192" width="40" height="11" rx="5" fill="#080e18" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
+    <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
+    <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX07-REV.B</text>
 
-    <!-- Slanted Wall at 52° Angle (length 110px) -->
-    <!-- Cos(52) = 0.615, Sin(52) = 0.788 -->
-    <path d="M 180 190 L 115 80 L 105 85 L 170 190 Z" fill="url(#hatch7)" stroke="#00f2fe" stroke-width="2"/>
+    <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
+    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">GUSSETED MOUNTING BRACKET</text>
+    <text x="168" y="41" fill="#64748b" font-family="monospace" font-size="8">PROJECTION</text>
+    <g transform="translate(185, 48)">
+      <polygon points="0,4 0,-4 14,-7 14,7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <line x1="-4" y1="0" x2="30" y2="0" stroke="#f59e0b" stroke-width="0.6" stroke-dasharray="3,1.5"/>
+      <circle cx="24" cy="0" r="4" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <circle cx="24" cy="0" r="7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+    </g>
+    <text x="252" y="41" fill="#64748b" font-family="monospace" font-size="8">MATERIAL</text>
+    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">AL 7075-T6</text>
 
-    <!-- Triangular Stiffening Rib (Gusset with R3) -->
-    <path d="M 140 190 L 170 190 L 135 110 Z" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1.8"/>
-    <text x="145" y="160" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">RIB 4</text>
+    <text x="8" y="69" fill="#64748b" font-family="monospace" font-size="8">GENERAL TOLERANCE</text>
+    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-m (±0.1 mm)</text>
+    <text x="168" y="69" fill="#64748b" font-family="monospace" font-size="8">SURFACE FINISH</text>
+    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">Ra 1.6 µm ▽▽</text>
+    <text x="252" y="69" fill="#64748b" font-family="monospace" font-size="8">WEIGHT (CALC)</text>
+    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">0.420 kg</text>
 
-    <!-- Angle 52° Dimension Arc -->
-    <path d="M 195 190 A 25 25 0 0 1 180 170" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="200" y="178" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">52°</text>
-
-    <!-- Base 81 Dimension -->
-    <line x1="30" y1="220" x2="220" y2="220" stroke="#38bdf8" stroke-width="1"/>
-    <polygon points="30,220 38,217 38,223" fill="#38bdf8"/>
-    <polygon points="220,220 212,217 212,223" fill="#38bdf8"/>
-    <text x="110" y="235" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">L: 81</text>
-
-    <!-- Height 26 Dimension -->
-    <line x1="15" y1="80" x2="15" y2="190" stroke="#38bdf8" stroke-width="1"/>
-    <polygon points="15,80 12,88 18,88" fill="#38bdf8"/>
-    <polygon points="15,190 12,182 18,182" fill="#38bdf8"/>
-    <text x="0" y="140" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">26</text>
-
-    <!-- Slanted Wall Holes Ø10 -->
-    <circle cx="125" cy="100" r="5" fill="#080e18" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="70" y="95" fill="#38bdf8" font-family="monospace" font-size="9">Ø10</text>
+    <text x="8" y="97" fill="#64748b" font-family="monospace" font-size="7.5">DESIGNED BY</text>
+    <text x="8" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">M. SHARIF</text>
+    <text x="82" y="97" fill="#64748b" font-family="monospace" font-size="7.5">APPROVED</text>
+    <text x="82" y="112" fill="#38bdf8" font-family="monospace" font-size="9">ENG. QA</text>
+    <text x="168" y="97" fill="#64748b" font-family="monospace" font-size="7.5">SCALE</text>
+    <text x="168" y="112" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">1:1 (A3)</text>
+    <text x="252" y="97" fill="#64748b" font-family="monospace" font-size="7.5">STATUS</text>
+    <text x="252" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">RELEASED</text>
   </g>
 
-  <!-- Right: 3D Isometric View -->
-  <g transform="translate(330, 45)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// 3D ISOMETRIC CAST BRACKET</text>
+  <!-- Technical Notes -->
+  <g transform="translate(35, 472)">
+    <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. BASE PLATE 81.00 x 50.00 MM WITH 2X SLOTS 14x24 MM.</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. WALL INCLINATION 52.0° // THICKNESS 4.00 MM.</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. 2X REINFORCING GUSSET RIBS WITH R3.00 ROOT FILLET.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. ALL BEND RADII AND SECTIONS FULLY DEFINED.</text>
+  </g>
 
-    <!-- Isometric Cast Bracket with Dual Ribs -->
-    <!-- Base Plate in Iso -->
-    <polygon points="30,175 140,120 180,140 70,195" fill="rgba(14, 165, 233, 0.2)" stroke="#00f2fe" stroke-width="1.8"/>
-    <polygon points="30,175 70,195 70,205 30,185" fill="rgba(2, 132, 199, 0.3)" stroke="#00f2fe" stroke-width="1.8"/>
-    <polygon points="70,195 180,140 180,150 70,205" fill="rgba(2, 132, 199, 0.3)" stroke="#00f2fe" stroke-width="1.8"/>
+  <!-- 3D Isometric Preview Inset -->
+  <g transform="translate(635, 45)">
+    <rect width="180" height="150" fill="rgba(8, 14, 24, 0.9)" stroke="#0284c7" stroke-width="1.2"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">ISOMETRIC VIEW (3D)</text>
+    <text x="10" y="27" fill="#64748b" font-family="monospace" font-size="7.5">SOLIDWORKS SOLID BODY</text>
 
-    <!-- Slanted Upright Wall in Iso -->
-    <polygon points="100,140 140,120 100,60 60,80" fill="rgba(56, 189, 248, 0.35)" stroke="#38bdf8" stroke-width="1.8"/>
-    <!-- Two Rib Gussets -->
-    <polygon points="85,150 75,100 80,100 90,150" fill="rgba(16, 185, 129, 0.35)" stroke="#10b981" stroke-width="1.6"/>
-    <polygon points="120,132 110,82 115,82 125,132" fill="rgba(16, 185, 129, 0.35)" stroke="#10b981" stroke-width="1.6"/>
+    <g transform="translate(90, 85) scale(0.65)">
+      <!-- Base Plate 3D -->
+      <polygon points="-45,20 0,-5 45,20 0,45" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.8"/>
+      <!-- Slanted Back Wall 3D -->
+      <polygon points="0,-5 45,20 45,-25 0,-50" fill="#2d5b88" stroke="#00f2fe" stroke-width="1.8"/>
+      <!-- Triangular Gusset Rib 3D -->
+      <polygon points="15,10 30,-5 15,28" fill="#0f2b48" stroke="#00f2fe" stroke-width="1.5"/>
+    </g>
+    <text x="10" y="142" fill="#f59e0b" font-family="monospace" font-size="8">52° SLANTED WALL + RIBS</text>
+  </g>
 
-    <!-- Technical Annotations -->
-    <text x="20" y="240" fill="#10b981" font-family="monospace" font-size="10">2X REINFORCED RIBS R3 // THK 4MM</text>
-    <text x="20" y="256" fill="#94a3b8" font-family="monospace" font-size="10">ANGLES: 114° &amp; 24° // SECTION F-F</text>
+  <!-- ==================== MAIN VIEW: SECTION G-G ELEVATION ==================== -->
+  <g transform="translate(260, 240)">
+    <text x="-210" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // نمای روبرو و برش لچکی‌های تقویتی</text>
+    <text x="-210" y="-182" fill="#64748b" font-family="monospace" font-size="9">SECTION G-G // 52° ANGLED UPRIGHT WALL WITH GUSSETS</text>
+
+    <!-- Base Plate Profile -->
+    <rect x="-90" y="30" width="180" height="18" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.2" filter="url(#glow7)"/>
+    <!-- 2x Mounting Slots -->
+    <rect x="-70" y="30" width="28" height="18" rx="5" fill="#060b13" stroke="#38bdf8" stroke-width="1.6"/>
+    <rect x="42" y="30" width="28" height="18" rx="5" fill="#060b13" stroke="#38bdf8" stroke-width="1.6"/>
+
+    <!-- Slanted Upright Wall at 52° (from right side 35, 30 towards top 85, -60) -->
+    <polygon points="35,30 25,30 65,-65 75,-65" fill="rgba(14, 165, 233, 0.12)" stroke="#00f2fe" stroke-width="2.2"/>
+    <!-- Triangular Stiffener Gusset Rib -->
+    <polygon points="0,30 25,30 45,-20" fill="url(#hatch7)" stroke="#f59e0b" stroke-width="1.8"/>
+
+    <!-- Dimensions -->
+    <!-- Base Length 81.00 -->
+    <line x1="-90" y1="62" x2="90" y2="62" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart7)" marker-end="url(#arrEnd7)"/>
+    <line x1="-90" y1="48" x2="-90" y2="66" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="90" y1="48" x2="90" y2="66" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="0" y="76" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">81.00 ±0.1</text>
+
+    <!-- Base Thickness 6.00 -->
+    <line x1="-105" y1="30" x2="-105" y2="48" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart7)" marker-end="url(#arrEnd7)"/>
+    <text x="-128" y="42" fill="#38bdf8" font-family="monospace" font-size="9.5" font-weight="bold">6.00</text>
+
+    <!-- Wall Height 26.00 -->
+    <line x1="95" y1="-65" x2="95" y2="30" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart7)" marker-end="url(#arrEnd7)"/>
+    <text x="105" y="-12" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold">26.00</text>
+
+    <!-- Angle 52.0° Callout -->
+    <path d="M 45 30 A 25 25 0 0 1 35 12" fill="none" stroke="#f59e0b" stroke-width="1.4"/>
+    <text x="10" y="16" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">52.0°</text>
+
+    <!-- Gusset Rib Callout -->
+    <text x="-65" y="-10" fill="#f59e0b" font-family="monospace" font-size="9.5" font-weight="bold">2X GUSSET RIBS (t=4.00)</text>
   </g>
 </svg>

@@ -1,156 +1,250 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="100%" height="100%">
   <defs>
-    <pattern id="grid10" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    <pattern id="cadGrid10" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.75"/>
     </pattern>
-    <pattern id="hatch10" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0, 242, 254, 0.45)" stroke-width="1"/>
+    <pattern id="cadGridMajor10" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
     </pattern>
-    <filter id="glow10" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur" />
+    <pattern id="hatch10" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
+    </pattern>
+    <marker id="arrEnd10" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrStart10" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 10 2 L 0 5 L 10 8 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrSec10" viewBox="0 0 12 12" refX="12" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1 L 12 6 L 0 11 Z" fill="#f43f5e"/>
+    </marker>
+    <filter id="glow10" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <rect width="600" height="420" fill="#080e18"/>
-  <rect width="600" height="420" fill="url(#grid10)"/>
-  
-  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.6"/>
-  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
+  <rect width="840" height="580" fill="#060b13" class="cad-bg"/>
+  <rect width="840" height="580" fill="url(#cadGrid10)" class="cad-grid"/>
+  <rect width="840" height="580" fill="url(#cadGridMajor10)" class="cad-grid-major"/>
 
-  <!-- ISO Engineering Title Block -->
-  <g transform="translate(350, 335)">
-    <rect width="230" height="65" fill="rgba(15, 23, 42, 0.95)" stroke="#0284c7" stroke-width="1.2"/>
-    <line x1="0" y1="22" x2="230" y2="22" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="0" y1="44" x2="230" y2="44" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="115" y1="0" x2="115" y2="65" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <text x="8" y="15" fill="#94a3b8" font-family="monospace" font-size="9">FOOD PROCESSOR</text>
-    <text x="122" y="15" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">DWG NO: FP-402</text>
-    <text x="8" y="36" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">SHEET 4 OF 4</text>
-    <text x="122" y="36" fill="#38bdf8" font-family="monospace" font-size="9">SCALE 1:2 // MM</text>
-    <text x="8" y="58" fill="#10b981" font-family="monospace" font-size="9">GD&amp;T PER ASME Y14.5</text>
-    <text x="122" y="58" fill="#f59e0b" font-family="monospace" font-size="9">BOM INCLUDED</text>
+  <rect x="18" y="16" width="804" height="548" fill="none" stroke="#0284c7" stroke-width="1.6"/>
+  <rect x="23" y="21" width="794" height="538" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.8"/>
+
+  <!-- Zone Ticks -->
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle">
+    <text x="73" y="14">1</text><text x="73" y="570">1</text>
+    <text x="173" y="14">2</text><text x="173" y="570">2</text>
+    <text x="273" y="14">3</text><text x="273" y="570">3</text>
+    <text x="373" y="14">4</text><text x="373" y="570">4</text>
+    <text x="473" y="14">5</text><text x="473" y="570">5</text>
+    <text x="573" y="14">6</text><text x="573" y="570">6</text>
+    <text x="673" y="14">7</text><text x="673" y="570">7</text>
+    <text x="773" y="14">8</text><text x="773" y="570">8</text>
+  </g>
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle" dominant-baseline="central">
+    <text x="10" y="85">A</text><text x="830" y="85">A</text>
+    <text x="10" y="220">B</text><text x="830" y="220">B</text>
+    <text x="10" y="355">C</text><text x="830" y="355">C</text>
+    <text x="10" y="490">D</text><text x="830" y="490">D</text>
   </g>
 
-  <!-- Left: Main Orthographic & Section Q-Q View -->
-  <g transform="translate(35, 35)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// SECTION Q-Q &amp; GD&amp;T CONTROLS</text>
+  <!-- ==================== ISO TITLE BLOCK (LOWER RIGHT) ==================== -->
+  <g transform="translate(480, 440)">
+    <rect width="337" height="119" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.5"/>
+    <line x1="0" y1="28" x2="337" y2="28" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="56" x2="337" y2="56" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="84" x2="337" y2="84" stroke="#0284c7" stroke-width="1"/>
+    <line x1="160" y1="0" x2="160" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="28" x2="245" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="75" y1="84" x2="75" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="160" y1="84" x2="160" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="84" x2="245" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
 
-    <!-- Main Food Processor Housing Body Outline -->
-    <!-- Dimensions: Width 90.20, Height 70, base step 37, arcs R59.16 & R12.50 -->
-    <path d="M 30 180 
-             L 165 180 
-             L 165 130 
-             Q 155 100 135 60 
-             A 25 25 0 0 0 100 45 
-             L 50 45 
-             Q 30 70 30 110 Z" 
-          fill="none" stroke="#00f2fe" stroke-width="2.2" filter="url(#glow10)"/>
+    <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
+    <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
+    <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX10-SHT4</text>
 
-    <!-- Section Cut Q-Q Hatching -->
-    <path d="M 30 180 L 165 180 L 165 155 L 75 155 L 75 110 L 30 110 Z" fill="url(#hatch10)" stroke="#00f2fe" stroke-width="1.8"/>
-
-    <!-- Section Cutting Plane Line Q-Q (Thick chain line) -->
-    <line x1="15" y1="110" x2="185" y2="110" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="12,4,3,4"/>
-    <!-- Arrows for Section Q-Q -->
-    <polygon points="15,110 25,104 25,116" fill="#f43f5e"/>
-    <polygon points="185,110 175,104 175,116" fill="#f43f5e"/>
-    <text x="5" y="105" fill="#f43f5e" font-family="monospace" font-size="11" font-weight="bold">Q</text>
-    <text x="190" y="105" fill="#f43f5e" font-family="monospace" font-size="11" font-weight="bold">Q</text>
-
-    <!-- GD&T Feature Control Frame: Perpendicularity 0.5 to Datum A -->
-    <g transform="translate(30, 205)">
-      <rect width="80" height="20" fill="rgba(15, 23, 42, 0.9)" stroke="#38bdf8" stroke-width="1.2"/>
-      <line x1="26" y1="0" x2="26" y2="20" stroke="#38bdf8" stroke-width="1"/>
-      <line x1="56" y1="0" x2="56" y2="20" stroke="#38bdf8" stroke-width="1"/>
-      <!-- Perpendicular symbol ⟂ -->
-      <line x1="13" y1="5" x2="13" y2="15" stroke="#f59e0b" stroke-width="1.6"/>
-      <line x1="7" y1="15" x2="19" y2="15" stroke="#f59e0b" stroke-width="1.6"/>
-      <!-- Tolerance 0.5 -->
-      <text x="30" y="14" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">0.5</text>
-      <!-- Datum Reference A -->
-      <text x="64" y="14" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">A</text>
+    <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
+    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">FOOD PROCESSOR HOUSING</text>
+    <text x="168" y="41" fill="#64748b" font-family="monospace" font-size="8">PROJECTION</text>
+    <g transform="translate(185, 48)">
+      <polygon points="0,4 0,-4 14,-7 14,7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <line x1="-4" y1="0" x2="30" y2="0" stroke="#f59e0b" stroke-width="0.6" stroke-dasharray="3,1.5"/>
+      <circle cx="24" cy="0" r="4" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <circle cx="24" cy="0" r="7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
     </g>
+    <text x="252" y="41" fill="#64748b" font-family="monospace" font-size="8">MATERIAL</text>
+    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">ABS / INJECTION</text>
 
-    <!-- Datum Feature A Marker -->
-    <g transform="translate(145, 180)">
-      <polygon points="0,0 8,12 -8,12" fill="#38bdf8"/>
-      <line x1="0" y1="12" x2="0" y2="22" stroke="#38bdf8" stroke-width="1.4"/>
-      <rect x="-10" y="22" width="20" height="18" fill="rgba(15, 23, 42, 0.9)" stroke="#38bdf8" stroke-width="1.2"/>
-      <text x="-4" y="35" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">A</text>
-    </g>
+    <text x="8" y="69" fill="#64748b" font-family="monospace" font-size="8">GENERAL TOLERANCE</text>
+    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-m (±0.1 mm)</text>
+    <text x="168" y="69" fill="#64748b" font-family="monospace" font-size="8">DRAWING TYPE</text>
+    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">DETAILED + BOM</text>
+    <text x="252" y="69" fill="#64748b" font-family="monospace" font-size="8">SHEET</text>
+    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">4 OF 4</text>
 
-    <!-- Dimensions: 90.20, 70, R59.16 -->
-    <text x="80" y="196" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">90.20</text>
-    <text x="175" y="150" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">H: 70</text>
-    <text x="85" y="40" fill="#94a3b8" font-family="monospace" font-size="9">R59.16 / R12.50</text>
+    <text x="8" y="97" fill="#64748b" font-family="monospace" font-size="7.5">DESIGNED BY</text>
+    <text x="8" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">M. SHARIF</text>
+    <text x="82" y="97" fill="#64748b" font-family="monospace" font-size="7.5">APPROVED</text>
+    <text x="82" y="112" fill="#38bdf8" font-family="monospace" font-size="9">ENG. QA</text>
+    <text x="168" y="97" fill="#64748b" font-family="monospace" font-size="7.5">SCALE</text>
+    <text x="168" y="112" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">1:1 (A3)</text>
+    <text x="252" y="97" fill="#64748b" font-family="monospace" font-size="7.5">STATUS</text>
+    <text x="252" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">RELEASED</text>
   </g>
 
-  <!-- Right: Bill of Materials (BOM) Table + Auto Balloons -->
-  <g transform="translate(285, 35)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// BILL OF MATERIALS (BOM) TABLE</text>
+  <!-- ==================== BILL OF MATERIALS (BOM) TABLE (TOP RIGHT) ==================== -->
+  <g transform="translate(435, 45)">
+    <!-- BOM Table Frame -->
+    <rect width="380" height="135" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.2"/>
+    <rect width="380" height="22" fill="rgba(14, 165, 233, 0.2)" stroke="#0284c7" stroke-width="1"/>
+    <text x="10" y="15" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">BILL OF MATERIALS (BOM) // جدول استاندارد لیست قطعات:</text>
 
-    <!-- Table Header -->
-    <g transform="translate(0, 25)">
-      <rect width="280" height="22" fill="rgba(14, 165, 233, 0.25)" stroke="#0284c7" stroke-width="1"/>
-      <text x="6" y="15" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">ITEM</text>
-      <text x="40" y="15" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">PART NAME</text>
-      <text x="130" y="15" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">QTY</text>
-      <text x="165" y="15" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">PRICE ($)</text>
-      <text x="225" y="15" fill="#f59e0b" font-family="monospace" font-size="9" font-weight="bold">COST ($)</text>
-    </g>
-    <!-- Row 1 -->
-    <g transform="translate(0, 47)">
-      <rect width="280" height="20" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
-      <text x="12" y="14" fill="#f8fafc" font-family="monospace" font-size="9">1</text>
-      <text x="40" y="14" fill="#f8fafc" font-family="monospace" font-size="9">Main Housing</text>
-      <text x="138" y="14" fill="#38bdf8" font-family="monospace" font-size="9">1</text>
-      <text x="175" y="14" fill="#94a3b8" font-family="monospace" font-size="9">45.00</text>
-      <text x="235" y="14" fill="#f59e0b" font-family="monospace" font-size="9">45.00</text>
-    </g>
-    <!-- Row 2 -->
-    <g transform="translate(0, 67)">
-      <rect width="280" height="20" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
-      <text x="12" y="14" fill="#f8fafc" font-family="monospace" font-size="9">2</text>
-      <text x="40" y="14" fill="#f8fafc" font-family="monospace" font-size="9">Drive Motor</text>
-      <text x="138" y="14" fill="#38bdf8" font-family="monospace" font-size="9">1</text>
-      <text x="175" y="14" fill="#94a3b8" font-family="monospace" font-size="9">85.00</text>
-      <text x="235" y="14" fill="#f59e0b" font-family="monospace" font-size="9">85.00</text>
-    </g>
-    <!-- Row 3 -->
-    <g transform="translate(0, 87)">
-      <rect width="280" height="20" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
-      <text x="12" y="14" fill="#f8fafc" font-family="monospace" font-size="9">3</text>
-      <text x="40" y="14" fill="#f8fafc" font-family="monospace" font-size="9">Stainless Blade</text>
-      <text x="138" y="14" fill="#38bdf8" font-family="monospace" font-size="9">2</text>
-      <text x="175" y="14" fill="#94a3b8" font-family="monospace" font-size="9">12.50</text>
-      <text x="235" y="14" fill="#f59e0b" font-family="monospace" font-size="9">25.00</text>
-    </g>
-    <!-- Total Cost Equation Row -->
-    <g transform="translate(0, 107)">
-      <rect width="280" height="22" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1"/>
-      <text x="40" y="15" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">EQUATION: `QTY` * `Price`</text>
-      <text x="225" y="15" fill="#10b981" font-family="monospace" font-size="10" font-weight="bold">$155.00</text>
+    <!-- Table Header Line -->
+    <line x1="0" y1="40" x2="380" y2="40" stroke="#0284c7" stroke-width="1"/>
+    <line x1="30" y1="22" x2="30" y2="135" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="160" y1="22" x2="160" y2="135" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="195" y1="22" x2="195" y2="135" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="285" y1="22" x2="285" y2="135" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+    <line x1="330" y1="22" x2="330" y2="135" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
+
+    <!-- Header Column Titles -->
+    <text x="8" y="34" fill="#38bdf8" font-family="monospace" font-size="8.5" font-weight="bold">ITEM</text>
+    <text x="36" y="34" fill="#38bdf8" font-family="monospace" font-size="8.5" font-weight="bold">PART DESCRIPTION</text>
+    <text x="166" y="34" fill="#38bdf8" font-family="monospace" font-size="8.5" font-weight="bold">QTY</text>
+    <text x="202" y="34" fill="#38bdf8" font-family="monospace" font-size="8.5" font-weight="bold">MATERIAL</text>
+    <text x="290" y="34" fill="#38bdf8" font-family="monospace" font-size="8.5" font-weight="bold">PRICE</text>
+    <text x="336" y="34" fill="#10b981" font-family="monospace" font-size="8.5" font-weight="bold">COST</text>
+
+    <!-- Row 1: Upper Housing -->
+    <line x1="0" y1="64" x2="380" y2="64" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
+    <text x="14" y="55" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">1</text>
+    <text x="36" y="55" fill="#f8fafc" font-family="monospace" font-size="9">Upper Main Housing</text>
+    <text x="178" y="55" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">1</text>
+    <text x="202" y="55" fill="#94a3b8" font-family="monospace" font-size="8.5">ABS Polymer</text>
+    <text x="292" y="55" fill="#94a3b8" font-family="monospace" font-size="8.5">$14.50</text>
+    <text x="340" y="55" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">$14.50</text>
+
+    <!-- Row 2: Drive Shaft Bushing -->
+    <line x1="0" y1="88" x2="380" y2="88" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
+    <text x="14" y="79" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">2</text>
+    <text x="36" y="79" fill="#f8fafc" font-family="monospace" font-size="9">Shaft Sleeve Bushing</text>
+    <text x="178" y="79" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">2</text>
+    <text x="202" y="79" fill="#94a3b8" font-family="monospace" font-size="8.5">Bronze SAE 660</text>
+    <text x="292" y="79" fill="#94a3b8" font-family="monospace" font-size="8.5">$3.20</text>
+    <text x="340" y="79" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">$6.40</text>
+
+    <!-- Row 3: Motor Mount Bracket -->
+    <line x1="0" y1="112" x2="380" y2="112" stroke="rgba(56, 189, 248, 0.2)" stroke-width="0.8"/>
+    <text x="14" y="103" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">3</text>
+    <text x="36" y="103" fill="#f8fafc" font-family="monospace" font-size="9">Motor Mount Flange</text>
+    <text x="178" y="103" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">1</text>
+    <text x="202" y="103" fill="#94a3b8" font-family="monospace" font-size="8.5">AL 6061-T6</text>
+    <text x="292" y="103" fill="#94a3b8" font-family="monospace" font-size="8.5">$8.00</text>
+    <text x="340" y="103" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">$8.00</text>
+
+    <!-- Equation footer callout -->
+    <text x="10" y="126" fill="#f59e0b" font-family="monospace" font-size="8.5" font-weight="bold">SOLIDWORKS EQUATION: COST = `QTY` * `Price`</text>
+    <text x="280" y="126" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">TOTAL: $28.90</text>
+  </g>
+
+  <!-- Technical Notes -->
+  <g transform="translate(35, 472)">
+    <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. HOUSING PROFILE WIDTH 90.20 MM, HEIGHT 70.00 MM.</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. COMPOUND CONVEX BLEND R59.16 MM &amp; R12.50 MM.</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. SECTION Q-Q SHOWS DRIVE SHAFT BUSHING POCKET.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. GD&amp;T PERPENDICULARITY 0.05 MM TO DATUM A.</text>
+  </g>
+
+  <!-- ==================== MAIN DRAWING VIEW: FOOD PROCESSOR HOUSING ==================== -->
+  <g transform="translate(200, 260)">
+    <text x="-140" y="-215" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // نمای روبرو و بدنه غذاساز با بالُن‌های BOM</text>
+    <text x="-140" y="-202" fill="#64748b" font-family="monospace" font-size="9">SECTION Q-Q CUT &amp; GD&amp;T TRUE POSITION FRAME</text>
+
+    <!-- Cutting Plane Q-Q Line -->
+    <line x1="-120" y1="-50" x2="-80" y2="-50" stroke="#f43f5e" stroke-width="2.5"/>
+    <line x1="-80" y1="-50" x2="80" y2="-50" stroke="#f43f5e" stroke-width="1" stroke-dasharray="14,4,3,4"/>
+    <line x1="80" y1="-50" x2="120" y2="-50" stroke="#f43f5e" stroke-width="2.5"/>
+    <line x1="-115" y1="-50" x2="-115" y2="-68" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrSec10)"/>
+    <text x="-118" y="-72" fill="#f43f5e" font-family="monospace" font-size="12" font-weight="bold">Q</text>
+    <line x1="115" y1="-50" x2="115" y2="-68" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrSec10)"/>
+    <text x="112" y="-72" fill="#f43f5e" font-family="monospace" font-size="12" font-weight="bold">Q</text>
+
+    <!-- Complex Organic Housing Profile -->
+    <!-- Base step 37mm, overall 90.20, height 70, R59.16 curve -->
+    <path d="M -70,50 
+             L 60,50 
+             L 60,0 
+             A 20 20 0 0 0 45,-18 
+             C 30,-50 10,-95 -30,-95 
+             C -60,-95 -70,-60 -70,50 Z" 
+          fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow10)"/>
+
+    <!-- Drive Shaft Pocket Bore -->
+    <circle cx="0" cy="0" r="16" fill="url(#hatch10)" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="0" cy="0" r="8" fill="#060b13" stroke="#00f2fe" stroke-width="1.8"/>
+
+    <!-- Broken-out Section Spline Contour (مقطع موضعی) -->
+    <path d="M -25,-20 Q -35,-5 -20,15 T 0,22 T 22,10 T 20,-15 Z" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,2"/>
+
+    <!-- ==================== AUTO-BALLOONS (شماره‌گذاری بالُن) ==================== -->
+    <!-- Balloon 1: Upper Housing -->
+    <g transform="translate(-85, -50)">
+      <line x1="0" y1="0" x2="35" y2="15" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart10)"/>
+      <circle cx="-12" cy="-12" r="12" fill="rgba(15, 23, 42, 0.95)" stroke="#00f2fe" stroke-width="1.5"/>
+      <text x="-12" y="-8" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">1</text>
     </g>
 
-    <!-- Auto Balloon Indicators: (1), (2), (3) with Leader Lines -->
-    <g transform="translate(30, 150)">
-      <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="10" font-weight="bold">// AUTO-BALLOON CALLOUTS</text>
+    <!-- Balloon 2: Drive Bushing -->
+    <g transform="translate(-15, 50)">
+      <line x1="0" y1="0" x2="10" y2="-35" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart10)"/>
+      <circle cx="-12" cy="12" r="12" fill="rgba(15, 23, 42, 0.95)" stroke="#00f2fe" stroke-width="1.5"/>
+      <text x="-12" y="16" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">2</text>
+    </g>
 
-      <!-- Balloon 1 -->
-      <line x1="20" y1="40" x2="-80" y2="40" stroke="#f59e0b" stroke-width="1.2"/>
-      <circle cx="20" cy="40" r="12" fill="rgba(8, 14, 24, 0.95)" stroke="#f59e0b" stroke-width="1.8"/>
-      <text x="16" y="44" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">1</text>
+    <!-- Balloon 3: Motor Mount -->
+    <g transform="translate(85, 20)">
+      <line x1="0" y1="0" x2="-25" y2="15" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart10)"/>
+      <circle cx="14" cy="-10" r="12" fill="rgba(15, 23, 42, 0.95)" stroke="#00f2fe" stroke-width="1.5"/>
+      <text x="14" y="-6" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">3</text>
+    </g>
 
-      <!-- Balloon 2 -->
-      <line x1="80" y1="70" x2="-20" y2="70" stroke="#f59e0b" stroke-width="1.2"/>
-      <circle cx="80" cy="70" r="12" fill="rgba(8, 14, 24, 0.95)" stroke="#f59e0b" stroke-width="1.8"/>
-      <text x="76" y="74" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">2</text>
+    <!-- ==================== DIMENSIONS ==================== -->
+    <!-- Total Width 90.20 -->
+    <line x1="-70" y1="72" x2="60" y2="72" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart10)" marker-end="url(#arrEnd10)"/>
+    <line x1="-70" y1="50" x2="-70" y2="76" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="60" y1="50" x2="60" y2="76" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="-5" y="86" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">90.20 ±0.1</text>
 
-      <!-- Balloon 3 -->
-      <line x1="140" y1="100" x2="20" y2="100" stroke="#f59e0b" stroke-width="1.2"/>
-      <circle cx="140" cy="100" r="12" fill="rgba(8, 14, 24, 0.95)" stroke="#f59e0b" stroke-width="1.8"/>
-      <text x="136" y="104" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">3</text>
+    <!-- Total Height 70.00 -->
+    <line x1="-95" y1="-95" x2="-95" y2="50" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart10)" marker-end="url(#arrEnd10)"/>
+    <line x1="-70" y1="-95" x2="-98" y2="-95" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="-70" y1="50" x2="-98" y2="50" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="-105" y="-18" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="end">70.00</text>
+
+    <!-- Base Step 37.00 -->
+    <line x1="75" y1="0" x2="75" y2="50" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart10)" marker-end="url(#arrEnd10)"/>
+    <text x="82" y="28" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">37.00</text>
+
+    <!-- Radius R59.16 Callout -->
+    <line x1="-10" y1="-65" x2="40" y2="-90" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart10)"/>
+    <line x1="40" y1="-90" x2="110" y2="-90" stroke="#38bdf8" stroke-width="1"/>
+    <text x="42" y="-95" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold">R59.16 CONVEX ARC</text>
+
+    <!-- GD&T Position & Perpendicularity Frame -->
+    <g transform="translate(140, -45)">
+      <rect width="112" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#38bdf8" stroke-width="1"/>
+      <line x1="22" y1="0" x2="22" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <line x1="68" y1="0" x2="68" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <line x1="90" y1="0" x2="90" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <text x="11" y="13" fill="#f59e0b" font-family="monospace" font-size="12" text-anchor="middle">⌖</text>
+      <text x="45" y="12.5" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">Ø 0.1 Ⓜ</text>
+      <text x="79" y="12.5" fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">A</text>
+      <text x="101" y="12.5" fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">B</text>
     </g>
   </g>
 </svg>

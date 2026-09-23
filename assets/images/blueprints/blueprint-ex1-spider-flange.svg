@@ -1,128 +1,315 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="100%" height="100%">
   <defs>
-    <!-- Background Grid -->
-    <pattern id="grid1" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    <!-- Dark Mode CAD Grid Pattern -->
+    <pattern id="cadGrid1" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.75"/>
     </pattern>
-    <!-- Arrow Marker -->
-    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8"/>
+    <pattern id="cadGridMajor1" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
+    </pattern>
+    <!-- Section Hatching Pattern -->
+    <pattern id="hatch1" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
+    </pattern>
+    <!-- Dimension Arrowheads -->
+    <marker id="arrEnd1" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
     </marker>
-    <marker id="arrow-start" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 8 1.5 L 0 5 L 8 8.5 z" fill="#38bdf8"/>
+    <marker id="arrStart1" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 10 2 L 0 5 L 10 8 Z" fill="#38bdf8"/>
     </marker>
-    <!-- Glow Filter -->
-    <filter id="cyanGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur" />
+    <marker id="arrEndSec1" viewBox="0 0 12 12" refX="12" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1 L 12 6 L 0 11 Z" fill="#f43f5e"/>
+    </marker>
+    <!-- Subtle Glow Filter for CAD aesthetic -->
+    <filter id="glow1" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <!-- Canvas Background -->
-  <rect width="600" height="420" fill="#080e18"/>
-  <rect width="600" height="420" fill="url(#grid1)"/>
-  
-  <!-- Outer Technical Border -->
-  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5"/>
-  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.8"/>
+  <!-- Sheet Background -->
+  <rect width="840" height="580" fill="#060b13" class="cad-bg"/>
+  <rect width="840" height="580" fill="url(#cadGrid1)" class="cad-grid"/>
+  <rect width="840" height="580" fill="url(#cadGridMajor1)" class="cad-grid-major"/>
 
-  <!-- Title Block (ISO Header) -->
-  <g transform="translate(370, 340)">
-    <rect width="210" height="60" fill="rgba(15, 23, 42, 0.9)" stroke="#0284c7" stroke-width="1"/>
-    <line x1="0" y1="20" x2="210" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="0" y1="40" x2="210" y2="40" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="105" y1="0" x2="105" y2="60" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <text x="8" y="14" fill="#94a3b8" font-family="monospace" font-size="9">EX-01 // 2D SKETCH</text>
-    <text x="112" y="14" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">SCALE 1:1</text>
-    <text x="8" y="34" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">SPIDER FLANGE</text>
-    <text x="112" y="34" fill="#38bdf8" font-family="monospace" font-size="9">UNITS: MM</text>
-    <text x="8" y="54" fill="#38bdf8" font-family="monospace" font-size="9">3-LOBE SYMMETRIC</text>
-    <text x="112" y="54" fill="#10b981" font-family="monospace" font-size="9">FULLY DEFINED</text>
+  <!-- ==================== ISO DRAWING BORDER & ZONE COORDINATES ==================== -->
+  <rect x="18" y="16" width="804" height="548" fill="none" stroke="#0284c7" stroke-width="1.6"/>
+  <rect x="23" y="21" width="794" height="538" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.8"/>
+
+  <!-- Zone Ticks and Labels: Horizontal (1 to 8) -->
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle">
+    <!-- Top & Bottom Zones -->
+    <text x="73" y="14">1</text><text x="73" y="570">1</text>
+    <text x="173" y="14">2</text><text x="173" y="570">2</text>
+    <text x="273" y="14">3</text><text x="273" y="570">3</text>
+    <text x="373" y="14">4</text><text x="373" y="570">4</text>
+    <text x="473" y="14">5</text><text x="473" y="570">5</text>
+    <text x="573" y="14">6</text><text x="573" y="570">6</text>
+    <text x="673" y="14">7</text><text x="673" y="570">7</text>
+    <text x="773" y="14">8</text><text x="773" y="570">8</text>
+  </g>
+  <!-- Vertical Zones (A to D) -->
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle" dominant-baseline="central">
+    <text x="10" y="85">A</text><text x="830" y="85">A</text>
+    <text x="10" y="220">B</text><text x="830" y="220">B</text>
+    <text x="10" y="355">C</text><text x="830" y="355">C</text>
+    <text x="10" y="490">D</text><text x="830" y="490">D</text>
   </g>
 
-  <!-- Technical Watermark / Coordinate Origin -->
-  <g transform="translate(260, 200)">
-    <!-- Center Axes -->
-    <line x1="-190" y1="0" x2="190" y2="0" stroke="#f43f5e" stroke-width="0.9" stroke-dasharray="10,4,2,4"/>
-    <line x1="0" y1="-170" x2="0" y2="170" stroke="#f43f5e" stroke-width="0.9" stroke-dasharray="10,4,2,4"/>
+  <!-- ==================== ISO TITLE BLOCK (LOWER RIGHT) ==================== -->
+  <g transform="translate(480, 440)">
+    <!-- Title Box Frame -->
+    <rect width="337" height="119" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.5"/>
+    <line x1="0" y1="28" x2="337" y2="28" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="56" x2="337" y2="56" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="84" x2="337" y2="84" stroke="#0284c7" stroke-width="1"/>
+    <!-- Vertical dividers -->
+    <line x1="160" y1="0" x2="160" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="28" x2="245" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="75" y1="84" x2="75" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="160" y1="84" x2="160" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="84" x2="245" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
 
-    <!-- 120 deg and 240 deg centerlines -->
-    <line x1="0" y1="0" x2="-120" y2="70" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="8,4,2,4"/>
-    <line x1="0" y1="0" x2="120" y2="70" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="8,4,2,4"/>
+    <!-- Row 1: Company & Drawing Number -->
+    <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
+    <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
+    <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX01-REV.B</text>
 
-    <!-- Construction Pitch Circle PCD Ø200 -->
-    <circle cx="0" cy="0" r="100" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6,4"/>
-
-    <!-- Center Hub Bore -->
-    <circle cx="0" cy="0" r="28" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2" filter="url(#cyanGlow)"/>
-    <circle cx="0" cy="0" r="14" fill="none" stroke="#00f2fe" stroke-width="1.8"/>
-
-    <!-- 3 Lobes Profile (Symmetric at 0, 120, 240 deg) -->
-    <!-- Top Lobe (0, -100) -->
-    <g>
-      <circle cx="0" cy="-100" r="16" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2"/>
-      <circle cx="0" cy="-100" r="8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+    <!-- Row 2: Part Name & Projection Symbol -->
+    <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
+    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">THREE-LOBE SPIDER FLANGE</text>
+    <text x="168" y="41" fill="#64748b" font-family="monospace" font-size="8">PROJECTION</text>
+    <!-- 3rd Angle Projection Cone & Target -->
+    <g transform="translate(185, 48)">
+      <polygon points="0,4 0,-4 14,-7 14,7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <line x1="-4" y1="0" x2="30" y2="0" stroke="#f59e0b" stroke-width="0.6" stroke-dasharray="3,1.5"/>
+      <circle cx="24" cy="0" r="4" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <circle cx="24" cy="0" r="7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
     </g>
+    <text x="252" y="41" fill="#64748b" font-family="monospace" font-size="8">MATERIAL</text>
+    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">AL 6061-T6</text>
+
+    <!-- Row 3: Tolerances & Surface Finish -->
+    <text x="8" y="69" fill="#64748b" font-family="monospace" font-size="8">GENERAL TOLERANCE</text>
+    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-mK (±0.1)</text>
+    <text x="168" y="69" fill="#64748b" font-family="monospace" font-size="8">SURFACE FINISH</text>
+    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">Ra 1.6 µm ▽▽</text>
+    <text x="252" y="69" fill="#64748b" font-family="monospace" font-size="8">WEIGHT (CALC)</text>
+    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">0.842 kg</text>
+
+    <!-- Row 4: Sign-offs, Scale, Sheet -->
+    <text x="8" y="97" fill="#64748b" font-family="monospace" font-size="7.5">DESIGNED BY</text>
+    <text x="8" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">M. SHARIF</text>
+    <text x="82" y="97" fill="#64748b" font-family="monospace" font-size="7.5">APPROVED</text>
+    <text x="82" y="112" fill="#38bdf8" font-family="monospace" font-size="9">ENG. QA</text>
+    <text x="168" y="97" fill="#64748b" font-family="monospace" font-size="7.5">SCALE</text>
+    <text x="168" y="112" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">1:1 (A3)</text>
+    <text x="252" y="97" fill="#64748b" font-family="monospace" font-size="7.5">STATUS</text>
+    <text x="252" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">RELEASED</text>
+  </g>
+
+  <!-- ==================== ENGINEERING NOTES (LOWER LEFT) ==================== -->
+  <g transform="translate(35, 472)">
+    <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. ALL DIMENSIONS ARE IN MILLIMETERS (MM).</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. BREAK ALL SHARP EDGES 0.5 x 45° MIN.</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. 3X LOBES ARE ANGULARLY EQUISPACED AT 120.0°.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. FULLY CONSTRAINED 2D SKETCH IN SOLIDWORKS.</text>
+  </g>
+
+  <!-- ==================== 3D ISOMETRIC PREVIEW THUMBNAIL (TOP RIGHT) ==================== -->
+  <g transform="translate(635, 45)">
+    <!-- Frame -->
+    <rect width="180" height="150" fill="rgba(8, 14, 24, 0.9)" stroke="#0284c7" stroke-width="1.2"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">ISOMETRIC VIEW (3D)</text>
+    <text x="10" y="27" fill="#64748b" font-family="monospace" font-size="7.5">SOLIDWORKS SOLID BODY</text>
+
+    <!-- 3D Iso Render of Spider Flange -->
+    <g transform="translate(90, 85) scale(0.48)">
+      <!-- Base 3-Lobe Extruded 3D Silhouette -->
+      <!-- Center Boss 3D -->
+      <ellipse cx="0" cy="18" rx="42" ry="24" fill="#0f2b48" stroke="#00f2fe" stroke-width="2"/>
+      <ellipse cx="0" cy="0" rx="42" ry="24" fill="#1e3a5f" stroke="#00f2fe" stroke-width="2"/>
+      <ellipse cx="0" cy="0" rx="22" ry="12" fill="#060b13" stroke="#38bdf8" stroke-width="1.8"/>
+
+      <!-- Lobe Top (0, -75) -->
+      <ellipse cx="0" cy="-65" rx="28" ry="16" fill="#1e3a5f" stroke="#00f2fe" stroke-width="2"/>
+      <ellipse cx="0" cy="-65" rx="14" ry="8" fill="#060b13" stroke="#38bdf8" stroke-width="1.5"/>
+
+      <!-- Lobe Bottom-Left (-65, 40) -->
+      <ellipse cx="-65" cy="48" rx="28" ry="16" fill="#1e3a5f" stroke="#00f2fe" stroke-width="2"/>
+      <ellipse cx="-65" cy="48" rx="14" ry="8" fill="#060b13" stroke="#38bdf8" stroke-width="1.5"/>
+
+      <!-- Lobe Bottom-Right (65, 40) -->
+      <ellipse cx="65" cy="48" rx="28" ry="16" fill="#1e3a5f" stroke="#00f2fe" stroke-width="2"/>
+      <ellipse cx="65" cy="48" rx="14" ry="8" fill="#060b13" stroke="#38bdf8" stroke-width="1.5"/>
+
+      <!-- Tangent Blending Ribs (Iso) -->
+      <path d="M -18 -45 C -35 -20 -45 10 -40 38" fill="none" stroke="#00f2fe" stroke-width="2"/>
+      <path d="M 18 -45 C 35 -20 45 10 40 38" fill="none" stroke="#00f2fe" stroke-width="2"/>
+      <path d="M -45 56 C -10 68 10 68 45 56" fill="none" stroke="#00f2fe" stroke-width="2"/>
+    </g>
+    <!-- Shading & Lighting callout -->
+    <text x="10" y="142" fill="#f59e0b" font-family="monospace" font-size="8">EXTRUSION DEPTH: 18.00 MM</text>
+  </g>
+
+  <!-- ==================== MAIN VIEW: FRONT ELEVATION / SKETCH ==================== -->
+  <g transform="translate(260, 230)">
+    <!-- View Title -->
+    <text x="-210" y="-185" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // ترسیم دو بعدی و اندازه گذاری اصلی</text>
+    <text x="-210" y="-172" fill="#64748b" font-family="monospace" font-size="9">PLANE: FRONT PLANE (Z=0) // FULLY DEFINED SKETCH</text>
+
+    <!-- Cutting Plane Line A-A across horizontal center -->
+    <line x1="-200" y1="0" x2="-145" y2="0" stroke="#f43f5e" stroke-width="2.5"/>
+    <line x1="-145" y1="0" x2="145" y2="0" stroke="#f43f5e" stroke-width="1" stroke-dasharray="14,4,3,4"/>
+    <line x1="145" y1="0" x2="200" y2="0" stroke="#f43f5e" stroke-width="2.5"/>
+    <!-- Cutting Direction Arrows A-A (Pointing Upwards) -->
+    <line x1="-195" y1="0" x2="-195" y2="-18" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrEndSec1)"/>
+    <text x="-198" y="-22" fill="#f43f5e" font-family="monospace" font-size="12" font-weight="bold">A</text>
+    <line x1="195" y1="0" x2="195" y2="-18" stroke="#f43f5e" stroke-width="2" marker-end="url(#arrEndSec1)"/>
+    <text x="192" y="-22" fill="#f43f5e" font-family="monospace" font-size="12" font-weight="bold">A</text>
+
+    <!-- Center Axes (Red Dash-Dot-Dash) -->
+    <line x1="-165" y1="0" x2="165" y2="0" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="12,4,2,4" opacity="0.6"/>
+    <line x1="0" y1="-165" x2="0" y2="165" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="12,4,2,4" opacity="0.6"/>
+
+    <!-- 120° and 240° Radial Centerlines -->
+    <line x1="0" y1="0" x2="-120" y2="69.28" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="10,3,2,3" opacity="0.7"/>
+    <line x1="0" y1="0" x2="120" y2="69.28" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="10,3,2,3" opacity="0.7"/>
+
+    <!-- PCD Pitch Circle (Ø200, Construction Line, dashed) -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5,4"/>
+    <text x="68" y="-80" fill="#94a3b8" font-family="monospace" font-size="9" font-weight="bold">PCD Ø200.00</text>
+
+    <!-- Main Solid Geometry Outline (Spider Profile) -->
+    <!-- Center Hub Outer Boss (Ø56) -->
+    <circle cx="0" cy="0" r="28" fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.2" filter="url(#glow1)"/>
+    <!-- Center Bore Hole (Ø28 H7) -->
+    <circle cx="0" cy="0" r="14" fill="#060b13" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Center Point Cross -->
+    <line x1="-4" y1="0" x2="4" y2="0" stroke="#f43f5e" stroke-width="1.5"/>
+    <line x1="0" y1="-4" x2="0" y2="4" stroke="#f43f5e" stroke-width="1.5"/>
+
+    <!-- Top Lobe (0, -100) -->
+    <circle cx="0" cy="-100" r="30" fill="rgba(14, 165, 233, 0.12)" stroke="#00f2fe" stroke-width="2.2"/>
+    <circle cx="0" cy="-100" r="10" fill="#060b13" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Center Mark + -->
+    <line x1="-5" y1="-100" x2="5" y2="-100" stroke="#f43f5e" stroke-width="1.2"/>
+    <line x1="0" y1="-105" x2="0" y2="-95" stroke="#f43f5e" stroke-width="1.2"/>
 
     <!-- Bottom Left Lobe (-86.6, 50) -->
-    <g>
-      <circle cx="-86.6" cy="50" r="16" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2"/>
-      <circle cx="-86.6" cy="50" r="8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
-    </g>
+    <circle cx="-86.6" cy="50" r="30" fill="rgba(14, 165, 233, 0.12)" stroke="#00f2fe" stroke-width="2.2"/>
+    <circle cx="-86.6" cy="50" r="10" fill="#060b13" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Center Mark + -->
+    <line x1="-91.6" y1="50" x2="-81.6" y2="50" stroke="#f43f5e" stroke-width="1.2"/>
+    <line x1="-86.6" y1="45" x2="-86.6" y2="55" stroke="#f43f5e" stroke-width="1.2"/>
 
     <!-- Bottom Right Lobe (86.6, 50) -->
-    <g>
-      <circle cx="86.6" cy="50" r="16" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2"/>
-      <circle cx="86.6" cy="50" r="8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+    <circle cx="86.6" cy="50" r="30" fill="rgba(14, 165, 233, 0.12)" stroke="#00f2fe" stroke-width="2.2"/>
+    <circle cx="86.6" cy="50" r="10" fill="#060b13" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Center Mark + -->
+    <line x1="81.6" y1="50" x2="91.6" y2="50" stroke="#f43f5e" stroke-width="1.2"/>
+    <line x1="86.6" y1="45" x2="86.6" y2="55" stroke="#f43f5e" stroke-width="1.2"/>
+
+    <!-- Tangent Connecting Arcs R30 (Internal Fillet Blends) -->
+    <path d="M -26 -85 C -45 -50 -55 -15 -62 25" fill="none" stroke="#00f2fe" stroke-width="2.2"/>
+    <path d="M 26 -85 C 45 -50 55 -15 62 25" fill="none" stroke="#00f2fe" stroke-width="2.2"/>
+    <path d="M -60 68 C -30 88 30 88 60 68" fill="none" stroke="#00f2fe" stroke-width="2.2"/>
+
+    <!-- ==================== CAD DIMENSIONING & CALLOUTS ==================== -->
+    <!-- 1. Center Bore Callout: Ø28 H7 + Center Boss Ø56 -->
+    <line x1="0" y1="0" x2="-80" y2="-55" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart1)"/>
+    <line x1="-80" y1="-55" x2="-160" y2="-55" stroke="#38bdf8" stroke-width="1"/>
+    <text x="-158" y="-68" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">Ø28 H7 ( +0.021 / 0 ) THRU</text>
+    <text x="-158" y="-58" fill="#94a3b8" font-family="monospace" font-size="8.5">BOSS Ø56.00 ±0.1</text>
+
+    <!-- 2. Top Hole 3X Callout with GD&T Frame -->
+    <line x1="0" y1="-100" x2="45" y2="-145" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart1)"/>
+    <line x1="45" y1="-145" x2="165" y2="-145" stroke="#38bdf8" stroke-width="1"/>
+    <text x="48" y="-150" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold">3X Ø20 H8 THRU EQ SP</text>
+    <!-- GD&T Frame -->
+    <g transform="translate(48, -140)">
+      <rect width="112" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#38bdf8" stroke-width="1"/>
+      <line x1="22" y1="0" x2="22" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <line x1="68" y1="0" x2="68" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <line x1="90" y1="0" x2="90" y2="18" stroke="#38bdf8" stroke-width="0.8"/>
+      <!-- True Position Symbol ⌖ -->
+      <text x="11" y="13" fill="#f59e0b" font-family="monospace" font-size="12" text-anchor="middle">⌖</text>
+      <text x="45" y="12.5" fill="#f8fafc" font-family="monospace" font-size="9" text-anchor="middle">Ø 0.05 Ⓜ</text>
+      <text x="79" y="12.5" fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">A</text>
+      <text x="101" y="12.5" fill="#38bdf8" font-family="monospace" font-size="9" text-anchor="middle" font-weight="bold">B</text>
     </g>
 
-    <!-- Connecting Tangent Outer Arcs R30 -->
-    <path d="M 0 -84 
-             C 25 -84 45 -40 45 0 
-             C 45 25 60 40 73 40 
-             A 16 16 0 0 1 86.6 66
-             C 70 80 50 45 0 45
-             C -50 45 -70 80 -86.6 66
-             A 16 16 0 0 1 -73 40
-             C -60 40 -45 25 -45 0
-             C -45 -40 -25 -84 0 -84" 
-          fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- 3. Outer Radius 3X R30 -->
+    <line x1="28" y1="-110" x2="90" y2="-110" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart1)"/>
+    <text x="94" y="-106" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">3X R30.00</text>
 
-    <!-- Tangent Fillet Connecting Ribs (Smooth Blends) -->
-    <path d="M 14 -94 C 28 -70 34 -45 35 0 C 35 25 55 42 74 44" fill="none" stroke="#00f2fe" stroke-width="2"/>
-    <path d="M -14 -94 C -28 -70 -34 -45 -35 0 C -35 25 -55 42 -74 44" fill="none" stroke="#00f2fe" stroke-width="2"/>
-    <path d="M -75 60 C -45 70 -20 60 0 60 C 20 60 45 70 75 60" fill="none" stroke="#00f2fe" stroke-width="2"/>
+    <!-- 4. Angular 120° Dimension Arc -->
+    <path d="M 0 -40 A 40 40 0 0 1 34.64 20" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <polygon points="0,-40 2,-47 -3,-47" fill="#f59e0b"/>
+    <polygon points="34.64,20 40,24 41,18" fill="#f59e0b"/>
+    <text x="26" y="-15" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">120.0° TYP</text>
 
-    <!-- Center Origin Marker -->
-    <circle cx="0" cy="0" r="3" fill="#ef4444"/>
-    <text x="6" y="-6" fill="#ef4444" font-family="monospace" font-size="9" font-weight="bold">(0,0)</text>
+    <!-- 5. Tangent Fillet R30 Callout -->
+    <line x1="38" y1="-50" x2="80" y2="-30" stroke="#10b981" stroke-width="1" marker-start="url(#arrStart1)"/>
+    <line x1="80" y1="-30" x2="135" y2="-30" stroke="#10b981" stroke-width="1"/>
+    <text x="82" y="-35" fill="#10b981" font-family="monospace" font-size="9.5" font-weight="bold">3X R30 TANGENT</text>
 
-    <!-- Dimensions & Leader Lines -->
-    <!-- PCD Ø200 -->
-    <line x1="70.7" y1="-70.7" x2="135" y2="-120" stroke="#38bdf8" stroke-width="1"/>
-    <line x1="135" y1="-120" x2="185" y2="-120" stroke="#38bdf8" stroke-width="1"/>
-    <text x="138" y="-125" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">P.C.D. Ø200</text>
+    <!-- 6. Datum Target [-A-] for Face & [-B-] for Bore -->
+    <!-- Datum B on Center Bore -->
+    <g transform="translate(14, 0)">
+      <polygon points="0,0 10,-6 10,6" fill="#f8fafc"/>
+      <line x1="10" y1="0" x2="25" y2="0" stroke="#f8fafc" stroke-width="1.2"/>
+      <rect x="25" y="-9" width="18" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#f8fafc" stroke-width="1.2"/>
+      <text x="34" y="4" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">B</text>
+    </g>
+  </g>
 
-    <!-- 3x Hole Ø20 -->
-    <line x1="0" y1="-100" x2="-60" y2="-135" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrow)"/>
-    <line x1="-60" y1="-135" x2="-140" y2="-135" stroke="#38bdf8" stroke-width="1"/>
-    <text x="-135" y="-140" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">3X Ø20 THRU</text>
+  <!-- ==================== SECTION A-A ELEVATION VIEW (MID-RIGHT) ==================== -->
+  <g transform="translate(560, 240)">
+    <text x="-40" y="-35" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">SECTION A-A // برش مقطع</text>
+    <text x="-40" y="-22" fill="#64748b" font-family="monospace" font-size="8">SCALE 1:1 // SHOWING THICKNESS &amp; BORE</text>
 
-    <!-- 3x Outer Radius R30 -->
-    <line x1="14" y1="-106" x2="60" y2="-145" stroke="#38bdf8" stroke-width="1"/>
-    <line x1="60" y1="-145" x2="115" y2="-145" stroke="#38bdf8" stroke-width="1"/>
-    <text x="64" y="-150" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">3X R30</text>
+    <!-- Section Centerline -->
+    <line x1="0" y1="-15" x2="0" y2="135" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="10,3,2,3"/>
 
-    <!-- Angular Dimension 120 DEG -->
-    <path d="M 0 -45 A 45 45 0 0 1 38.9 22.5" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="24" y="-18" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">120° TYP</text>
+    <!-- Left Flange Section Cut with Hatching -->
+    <rect x="-85" y="10" width="60" height="20" fill="url(#hatch1)" stroke="#00f2fe" stroke-width="1.8"/>
+    <!-- Left Hole Thru -->
+    <rect x="-85" y="10" width="20" height="20" fill="none" stroke="#38bdf8" stroke-width="1.4" stroke-dasharray="4,2"/>
+    <!-- Left Hub Step -->
+    <rect x="-25" y="0" width="15" height="30" fill="url(#hatch1)" stroke="#00f2fe" stroke-width="1.8"/>
 
-    <!-- Center Bore Ø56 / Ø28 -->
-    <line x1="0" y1="0" x2="-75" y2="-40" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrow)"/>
-    <line x1="-75" y1="-40" x2="-140" y2="-40" stroke="#38bdf8" stroke-width="1"/>
-    <text x="-138" y="-45" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">CENTER Ø56 / Ø28</text>
+    <!-- Center Bore Hole Void (Empty between -10 and 10) -->
 
-    <!-- Fillet R30 Tag -->
-    <text x="-120" y="20" fill="#10b981" font-family="monospace" font-size="10">R30 FILLET (TANGENT)</text>
+    <!-- Right Hub Step -->
+    <rect x="10" y="0" width="15" height="30" fill="url(#hatch1)" stroke="#00f2fe" stroke-width="1.8"/>
+    <!-- Right Flange Section Cut with Hatching -->
+    <rect x="25" y="10" width="60" height="20" fill="url(#hatch1)" stroke="#00f2fe" stroke-width="1.8"/>
+    <!-- Right Hole Thru -->
+    <rect x="65" y="10" width="20" height="20" fill="none" stroke="#38bdf8" stroke-width="1.4" stroke-dasharray="4,2"/>
+
+    <!-- Thickness Dimensions -->
+    <!-- Flange Thickness 18.00 -->
+    <line x1="-95" y1="10" x2="-95" y2="30" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart1)" marker-end="url(#arrEnd1)"/>
+    <text x="-135" y="24" fill="#38bdf8" font-family="monospace" font-size="9.5" font-weight="bold">18.00</text>
+
+    <!-- Total Hub Height 30.00 -->
+    <line x1="95" y1="0" x2="95" y2="30" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart1)" marker-end="url(#arrEnd1)"/>
+    <text x="102" y="19" fill="#38bdf8" font-family="monospace" font-size="9.5" font-weight="bold">30.00</text>
+
+    <!-- Datum A Indicator on Primary Bottom Face -->
+    <g transform="translate(0, 30)">
+      <polygon points="0,0 -6,10 6,10" fill="#f8fafc"/>
+      <line x1="0" y1="10" x2="0" y2="25" stroke="#f8fafc" stroke-width="1.2"/>
+      <rect x="-9" y="25" width="18" height="18" fill="rgba(15, 23, 42, 0.95)" stroke="#f8fafc" stroke-width="1.2"/>
+      <text x="0" y="38" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">A</text>
+    </g>
+
+    <!-- Chamfer Note -->
+    <text x="-70" y="58" fill="#94a3b8" font-family="monospace" font-size="8.5">CHAMFER 1.5 x 45° BOTH ENDS</text>
   </g>
 </svg>

@@ -1,112 +1,156 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="100%" height="100%">
   <defs>
-    <pattern id="grid8" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    <pattern id="cadGrid8" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.75"/>
     </pattern>
-    <filter id="glow8" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur" />
+    <pattern id="cadGridMajor8" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
+    </pattern>
+    <marker id="arrEnd8" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrStart8" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 10 2 L 0 5 L 10 8 Z" fill="#38bdf8"/>
+    </marker>
+    <filter id="glow8" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <rect width="600" height="420" fill="#080e18"/>
-  <rect width="600" height="420" fill="url(#grid8)"/>
-  
-  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5"/>
-  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.8"/>
+  <rect width="840" height="580" fill="#060b13" class="cad-bg"/>
+  <rect width="840" height="580" fill="url(#cadGrid8)" class="cad-grid"/>
+  <rect width="840" height="580" fill="url(#cadGridMajor8)" class="cad-grid-major"/>
 
-  <!-- Title Block -->
-  <g transform="translate(370, 340)">
-    <rect width="210" height="60" fill="rgba(15, 23, 42, 0.9)" stroke="#0284c7" stroke-width="1"/>
-    <line x1="0" y1="20" x2="210" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="0" y1="40" x2="210" y2="40" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="105" y1="0" x2="105" y2="60" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <text x="8" y="14" fill="#94a3b8" font-family="monospace" font-size="9">EX-08 // 3D PART</text>
-    <text x="112" y="14" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">SCALE 1:1</text>
-    <text x="8" y="34" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">3D CURVED PIPE</text>
-    <text x="112" y="34" fill="#38bdf8" font-family="monospace" font-size="9">UNITS: MM</text>
-    <text x="8" y="54" fill="#38bdf8" font-family="monospace" font-size="9">SWEPT BOSS/BASE</text>
-    <text x="112" y="54" fill="#10b981" font-family="monospace" font-size="9">SPATIAL PATH</text>
+  <rect x="18" y="16" width="804" height="548" fill="none" stroke="#0284c7" stroke-width="1.6"/>
+  <rect x="23" y="21" width="794" height="538" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.8"/>
+
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle">
+    <text x="73" y="14">1</text><text x="73" y="570">1</text>
+    <text x="173" y="14">2</text><text x="173" y="570">2</text>
+    <text x="273" y="14">3</text><text x="273" y="570">3</text>
+    <text x="373" y="14">4</text><text x="373" y="570">4</text>
+    <text x="473" y="14">5</text><text x="473" y="570">5</text>
+    <text x="573" y="14">6</text><text x="573" y="570">6</text>
+    <text x="673" y="14">7</text><text x="673" y="570">7</text>
+    <text x="773" y="14">8</text><text x="773" y="570">8</text>
+  </g>
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle" dominant-baseline="central">
+    <text x="10" y="85">A</text><text x="830" y="85">A</text>
+    <text x="10" y="220">B</text><text x="830" y="220">B</text>
+    <text x="10" y="355">C</text><text x="830" y="355">C</text>
+    <text x="10" y="490">D</text><text x="830" y="490">D</text>
   </g>
 
-  <!-- Left: Trajectory & Auxiliary Plane Construction -->
-  <g transform="translate(40, 45)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// STEP 1 &amp; 2: PATH &amp; NORMAL PLANE</text>
+  <!-- Title Block (ISO 7200) -->
+  <g transform="translate(480, 440)">
+    <rect width="337" height="119" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.5"/>
+    <line x1="0" y1="28" x2="337" y2="28" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="56" x2="337" y2="56" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="84" x2="337" y2="84" stroke="#0284c7" stroke-width="1"/>
+    <line x1="160" y1="0" x2="160" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="28" x2="245" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="75" y1="84" x2="75" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="160" y1="84" x2="160" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="84" x2="245" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
 
-    <!-- Normal Reference Plane Construction at Origin -->
-    <g transform="translate(60, 200)">
-      <polygon points="-25,-25 25,-40 25,25 -25,40" fill="rgba(14, 165, 233, 0.15)" stroke="#00f2fe" stroke-width="1.4" stroke-dasharray="4,2"/>
-      <text x="-40" y="55" fill="#00f2fe" font-family="monospace" font-size="9">PLANE 1 (NORMAL)</text>
+    <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
+    <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
+    <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX08-REV.A</text>
 
-      <!-- Profile Circles on Plane 1 (ID & OD) -->
-      <ellipse cx="0" cy="0" rx="16" ry="24" fill="none" stroke="#f59e0b" stroke-width="2"/>
-      <ellipse cx="0" cy="0" rx="10" ry="15" fill="#080e18" stroke="#f59e0b" stroke-width="1.6"/>
-      <text x="15" y="-20" fill="#f59e0b" font-family="monospace" font-size="9">PROFILE: OD/ID</text>
+    <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
+    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">SWEPT BEND FLUID TUBE</text>
+    <text x="168" y="41" fill="#64748b" font-family="monospace" font-size="8">PROJECTION</text>
+    <g transform="translate(185, 48)">
+      <polygon points="0,4 0,-4 14,-7 14,7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <line x1="-4" y1="0" x2="30" y2="0" stroke="#f59e0b" stroke-width="0.6" stroke-dasharray="3,1.5"/>
+      <circle cx="24" cy="0" r="4" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <circle cx="24" cy="0" r="7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
     </g>
+    <text x="252" y="41" fill="#64748b" font-family="monospace" font-size="8">MATERIAL</text>
+    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">AISI 316L SS</text>
 
-    <!-- 3D Sweep Centerline Path (Red dashed with radii) -->
-    <path d="M 60 200 
-             L 120 200 
-             Q 160 200 160 160 
-             L 160 100 
-             Q 160 60 200 60 
-             L 260 60" 
-          fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-dasharray="8,3"/>
-    
-    <!-- Path Tangent Fillet Callouts -->
-    <text x="170" y="170" fill="#f43f5e" font-family="monospace" font-size="10">R40 BEND</text>
-    <text x="130" y="50" fill="#f43f5e" font-family="monospace" font-size="10">R40 BEND</text>
+    <text x="8" y="69" fill="#64748b" font-family="monospace" font-size="8">GENERAL TOLERANCE</text>
+    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-m (±0.1 mm)</text>
+    <text x="168" y="69" fill="#64748b" font-family="monospace" font-size="8">SURFACE FINISH</text>
+    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">Ra 0.8 µm ▽▽▽</text>
+    <text x="252" y="69" fill="#64748b" font-family="monospace" font-size="8">WEIGHT (CALC)</text>
+    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">0.615 kg</text>
+
+    <text x="8" y="97" fill="#64748b" font-family="monospace" font-size="7.5">DESIGNED BY</text>
+    <text x="8" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">M. SHARIF</text>
+    <text x="82" y="97" fill="#64748b" font-family="monospace" font-size="7.5">APPROVED</text>
+    <text x="82" y="112" fill="#38bdf8" font-family="monospace" font-size="9">ENG. QA</text>
+    <text x="168" y="97" fill="#64748b" font-family="monospace" font-size="7.5">SCALE</text>
+    <text x="168" y="112" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">1:1 (A3)</text>
+    <text x="252" y="97" fill="#64748b" font-family="monospace" font-size="7.5">STATUS</text>
+    <text x="252" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">RELEASED</text>
   </g>
 
-  <!-- Right: 3D Rendered Swept Pipe Solid -->
-  <g transform="translate(310, 45)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// STEP 3 &amp; 4: 3D SWEPT SOLID TUBE</text>
+  <!-- Technical Notes -->
+  <g transform="translate(35, 472)">
+    <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. 3D SWEEP TRAJECTORY WITH 2X 90° BENDS (R40.00).</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. PIPE PROFILE OD Ø32.00 MM, ID Ø24.00 MM (t=4.00).</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. REFERENCE PLANE CREATED NORMAL TO TRAJECTORY END.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. HYDROSTATIC TEST PRESSURE: 25.0 BAR NO LEAKAGE.</text>
+  </g>
 
-    <!-- 3D Pipe Solid Envelope with Shading & Highlights -->
-    <!-- Start Flange/Face -->
-    <g transform="translate(30, 200)">
-      <ellipse cx="0" cy="0" rx="14" ry="22" fill="rgba(8, 14, 24, 0.9)" stroke="#00f2fe" stroke-width="2.2"/>
-      <ellipse cx="0" cy="0" rx="8" ry="13" fill="#040810" stroke="#38bdf8" stroke-width="1.8"/>
+  <!-- 3D Isometric Preview Inset -->
+  <g transform="translate(635, 45)">
+    <rect width="180" height="150" fill="rgba(8, 14, 24, 0.9)" stroke="#0284c7" stroke-width="1.2"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">ISOMETRIC VIEW (3D)</text>
+    <text x="10" y="27" fill="#64748b" font-family="monospace" font-size="7.5">SOLIDWORKS SOLID BODY</text>
+
+    <g transform="translate(90, 85) scale(0.65)">
+      <!-- 3D Pipe Sweep Path Rendering -->
+      <path d="M -45,-30 L -15,-30 Q 15,-30 15,0 L 15,20 Q 15,45 40,45 L 60,45" fill="none" stroke="#00f2fe" stroke-width="12" stroke-linecap="round"/>
+      <path d="M -45,-30 L -15,-30 Q 15,-30 15,0 L 15,20 Q 15,45 40,45 L 60,45" fill="none" stroke="#060b13" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <text x="10" y="142" fill="#f59e0b" font-family="monospace" font-size="8">SWEPT BOSS/BASE FEATURE</text>
+  </g>
+
+  <!-- ==================== SWEEP PATH & PROFILE DEFINITION ==================== -->
+  <g transform="translate(250, 240)">
+    <text x="-195" y="-195" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">PATH VIEW // مسیر سه‌بعدی و صفحه عمود بر منحنی</text>
+    <text x="-195" y="-182" fill="#64748b" font-family="monospace" font-size="9">SWEPT TRAJECTORY &amp; NORMAL SKETCH PLANE 1</text>
+
+    <!-- Pipe Trajectory (Thick Red Centerline) -->
+    <path d="M -130,-70 L -40,-70 A 40 40 0 0 1 0,-30 L 0,40 A 40 40 0 0 0 40,80 L 130,80" fill="none" stroke="#f43f5e" stroke-width="1.6" stroke-dasharray="12,4,2,4"/>
+
+    <!-- Solid Pipe Wall Outer Contour (OD 32 -> radius 16) -->
+    <path d="M -130,-86 L -40,-86 A 56 56 0 0 1 16,-30 L 16,40 A 24 24 0 0 0 40,64 L 130,64" fill="none" stroke="#00f2fe" stroke-width="2.2" filter="url(#glow8)"/>
+    <path d="M -130,-54 L -40,-54 A 24 24 0 0 1 -16,-30 L -16,40 A 56 56 0 0 0 40,96 L 130,96" fill="none" stroke="#00f2fe" stroke-width="2.2" filter="url(#glow8)"/>
+
+    <!-- Reference Construction Normal Plane at Path Start (Plane 1) -->
+    <g transform="translate(-130, -70)">
+      <polygon points="-8,-40 8,-20 8,40 -8,20" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+      <ellipse cx="0" cy="0" rx="8" ry="16" fill="none" stroke="#00f2fe" stroke-width="1.8"/>
+      <ellipse cx="0" cy="0" rx="5" ry="10" fill="#060b13" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="-18" y="-45" fill="#f59e0b" font-family="monospace" font-size="9" font-weight="bold">PLANE 1 (NORMAL)</text>
     </g>
 
-    <!-- Pipe Body Sweep Curves -->
-    <!-- Outer upper border -->
-    <path d="M 30 178 
-             L 90 178 
-             Q 146 178 146 122 
-             L 146 80 
-             Q 146 38 188 38 
-             L 230 38" 
-          fill="none" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow8)"/>
-    <!-- Outer lower border -->
-    <path d="M 30 222 
-             L 90 222 
-             Q 174 222 174 138 
-             L 174 80 
-             Q 174 66 188 66 
-             L 230 66" 
-          fill="none" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow8)"/>
+    <!-- Dimensions -->
+    <!-- Bend Radius R40.00 -->
+    <line x1="-15" y1="-55" x2="35" y2="-90" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart8)"/>
+    <line x1="35" y1="-90" x2="95" y2="-90" stroke="#f59e0b" stroke-width="1"/>
+    <text x="38" y="-95" fill="#f59e0b" font-family="monospace" font-size="10.5" font-weight="bold">2X BEND RADIUS R40.00</text>
 
-    <!-- Specular Highlight Strip -->
-    <path d="M 30 188 
-             L 90 188 
-             Q 154 188 154 130 
-             L 154 80 
-             Q 154 48 188 48 
-             L 230 48" 
-          fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.6"/>
+    <!-- Linear Segment 1: 90.00 -->
+    <line x1="-130" y1="-105" x2="-40" y2="-105" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart8)" marker-end="url(#arrEnd8)"/>
+    <text x="-85" y="-110" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">90.00</text>
 
-    <!-- Fill Gradient simulation -->
-    <path d="M 30 178 L 90 178 Q 146 178 146 122 L 146 80 Q 146 38 188 38 L 230 38
-             L 230 66 L 188 66 Q 174 66 174 80 L 174 138 Q 174 222 90 222 L 30 222 Z"
-          fill="rgba(14, 165, 233, 0.15)"/>
+    <!-- Vertical Drop 70.00 -->
+    <line x1="35" y1="-30" x2="35" y2="40" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart8)" marker-end="url(#arrEnd8)"/>
+    <text x="42" y="8" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">70.00</text>
 
-    <!-- End Face of Pipe -->
-    <ellipse cx="230" cy="52" rx="7" ry="14" fill="#040810" stroke="#00f2fe" stroke-width="2"/>
-    <ellipse cx="230" cy="52" rx="4" ry="8" fill="#000000" stroke="#38bdf8" stroke-width="1.5"/>
-
-    <!-- Technical Annotations -->
-    <text x="30" y="245" fill="#38bdf8" font-family="monospace" font-size="10">PROFILE: D_EXT 32MM // D_INT 24MM</text>
-    <text x="30" y="260" fill="#10b981" font-family="monospace" font-size="10">COMMAND: SWEPT BOSS/BASE (PATH + PROFILE)</text>
+    <!-- Cross Section OD Ø32 & ID Ø24 Callout -->
+    <line x1="-130" y1="-70" x2="-180" y2="-20" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart8)"/>
+    <line x1="-180" y1="-20" x2="-230" y2="-20" stroke="#38bdf8" stroke-width="1"/>
+    <text x="-230" y="-32" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold">PIPE PROFILE:</text>
+    <text x="-230" y="-22" fill="#94a3b8" font-family="monospace" font-size="9">OD Ø32.00 / ID Ø24.00</text>
+    <text x="-230" y="-12" fill="#10b981" font-family="monospace" font-size="8.5">WALL THICKNESS t=4.00</text>
   </g>
 </svg>

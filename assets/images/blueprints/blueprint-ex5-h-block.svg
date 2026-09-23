@@ -1,104 +1,179 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 580" width="100%" height="100%">
   <defs>
-    <pattern id="grid5" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.06)" stroke-width="0.8"/>
+    <pattern id="cadGrid5" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.75"/>
     </pattern>
-    <filter id="glow5" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur" />
+    <pattern id="cadGridMajor5" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1"/>
+    </pattern>
+    <marker id="arrEnd5" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 2 L 10 5 L 0 8 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrStart5" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 10 2 L 0 5 L 10 8 Z" fill="#38bdf8"/>
+    </marker>
+    <filter id="glow5" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <rect width="600" height="420" fill="#080e18"/>
-  <rect width="600" height="420" fill="url(#grid5)"/>
-  
-  <rect x="12" y="12" width="576" height="396" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5"/>
-  <rect x="16" y="16" width="568" height="388" fill="none" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.8"/>
+  <rect width="840" height="580" fill="#060b13" class="cad-bg"/>
+  <rect width="840" height="580" fill="url(#cadGrid5)" class="cad-grid"/>
+  <rect width="840" height="580" fill="url(#cadGridMajor5)" class="cad-grid-major"/>
 
-  <!-- Title Block -->
-  <g transform="translate(370, 340)">
-    <rect width="210" height="60" fill="rgba(15, 23, 42, 0.9)" stroke="#0284c7" stroke-width="1"/>
-    <line x1="0" y1="20" x2="210" y2="20" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="0" y1="40" x2="210" y2="40" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <line x1="105" y1="0" x2="105" y2="60" stroke="rgba(56, 189, 248, 0.3)" stroke-width="0.8"/>
-    <text x="8" y="14" fill="#94a3b8" font-family="monospace" font-size="9">EX-05 // 3D PART</text>
-    <text x="112" y="14" fill="#38bdf8" font-family="monospace" font-size="9" font-weight="bold">SCALE 1:1</text>
-    <text x="8" y="34" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">SYMMETRIC H-BLOCK</text>
-    <text x="112" y="34" fill="#38bdf8" font-family="monospace" font-size="9">UNITS: MM</text>
-    <text x="8" y="54" fill="#38bdf8" font-family="monospace" font-size="9">62 × 50 × 44 SOLID</text>
-    <text x="112" y="54" fill="#10b981" font-family="monospace" font-size="9">MID-PLANE</text>
+  <rect x="18" y="16" width="804" height="548" fill="none" stroke="#0284c7" stroke-width="1.6"/>
+  <rect x="23" y="21" width="794" height="538" fill="none" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.8"/>
+
+  <!-- Zone Ticks -->
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle">
+    <text x="73" y="14">1</text><text x="73" y="570">1</text>
+    <text x="173" y="14">2</text><text x="173" y="570">2</text>
+    <text x="273" y="14">3</text><text x="273" y="570">3</text>
+    <text x="373" y="14">4</text><text x="373" y="570">4</text>
+    <text x="473" y="14">5</text><text x="473" y="570">5</text>
+    <text x="573" y="14">6</text><text x="573" y="570">6</text>
+    <text x="673" y="14">7</text><text x="673" y="570">7</text>
+    <text x="773" y="14">8</text><text x="773" y="570">8</text>
+  </g>
+  <g fill="#64748b" font-family="monospace" font-size="9" text-anchor="middle" dominant-baseline="central">
+    <text x="10" y="85">A</text><text x="830" y="85">A</text>
+    <text x="10" y="220">B</text><text x="830" y="220">B</text>
+    <text x="10" y="355">C</text><text x="830" y="355">C</text>
+    <text x="10" y="490">D</text><text x="830" y="490">D</text>
   </g>
 
-  <!-- Left: Top View Orthographic (H-Shape Profile & Cylinders) -->
-  <g transform="translate(40, 50)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// TOP VIEW (ORTHOGRAPHIC)</text>
-    
-    <!-- Outer Block 62 x 50 (Scaled: 62mm -> 155px, 50mm -> 125px) -->
-    <!-- Two Semi-cylinders R15 on sides (r=37.5px) -->
-    <path d="M 30 50 
-             L 80 50 
-             A 30 30 0 0 1 140 50 
-             L 190 50 
-             L 190 175 
-             L 140 175 
-             A 30 30 0 0 1 80 175 
-             L 30 175 Z" 
-          fill="rgba(14, 165, 233, 0.1)" stroke="#00f2fe" stroke-width="2.2" filter="url(#glow5)"/>
+  <!-- Title Block (ISO 7200) -->
+  <g transform="translate(480, 440)">
+    <rect width="337" height="119" fill="rgba(10, 18, 30, 0.95)" stroke="#0284c7" stroke-width="1.5"/>
+    <line x1="0" y1="28" x2="337" y2="28" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="56" x2="337" y2="56" stroke="#0284c7" stroke-width="1"/>
+    <line x1="0" y1="84" x2="337" y2="84" stroke="#0284c7" stroke-width="1"/>
+    <line x1="160" y1="0" x2="160" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="28" x2="245" y2="84" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="75" y1="84" x2="75" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="160" y1="84" x2="160" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
+    <line x1="245" y1="84" x2="245" y2="119" stroke="rgba(56, 189, 248, 0.35)" stroke-width="0.8"/>
 
-    <!-- Central Through Hole Ø20 (r=25px) -->
-    <circle cx="110" cy="112.5" r="25" fill="#080e18" stroke="#38bdf8" stroke-width="2"/>
+    <text x="8" y="13" fill="#64748b" font-family="monospace" font-size="8">ORGANIZATION / LAB</text>
+    <text x="8" y="23" fill="#00f2fe" font-family="monospace" font-size="10.5" font-weight="bold">M. SHARIF CAD ACADEMY</text>
+    <text x="168" y="13" fill="#64748b" font-family="monospace" font-size="8">DRAWING NUMBER</text>
+    <text x="168" y="24" fill="#f8fafc" font-family="monospace" font-size="11" font-weight="bold">MAS-SW-EX05-REV.A</text>
+
+    <text x="8" y="41" fill="#64748b" font-family="monospace" font-size="8">TITLE / PART DESCRIPTION</text>
+    <text x="8" y="52" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">SYMMETRIC H-BLOCK</text>
+    <text x="168" y="41" fill="#64748b" font-family="monospace" font-size="8">PROJECTION</text>
+    <g transform="translate(185, 48)">
+      <polygon points="0,4 0,-4 14,-7 14,7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <line x1="-4" y1="0" x2="30" y2="0" stroke="#f59e0b" stroke-width="0.6" stroke-dasharray="3,1.5"/>
+      <circle cx="24" cy="0" r="4" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+      <circle cx="24" cy="0" r="7" fill="none" stroke="#f59e0b" stroke-width="0.9"/>
+    </g>
+    <text x="252" y="41" fill="#64748b" font-family="monospace" font-size="8">MATERIAL</text>
+    <text x="252" y="52" fill="#f8fafc" font-family="monospace" font-size="9" font-weight="bold">AISI 1020 C.S.</text>
+
+    <text x="8" y="69" fill="#64748b" font-family="monospace" font-size="8">GENERAL TOLERANCE</text>
+    <text x="8" y="80" fill="#94a3b8" font-family="monospace" font-size="9">ISO 2768-m (±0.1 mm)</text>
+    <text x="168" y="69" fill="#64748b" font-family="monospace" font-size="8">SURFACE FINISH</text>
+    <text x="168" y="80" fill="#f8fafc" font-family="monospace" font-size="9">Ra 1.6 µm ▽▽</text>
+    <text x="252" y="69" fill="#64748b" font-family="monospace" font-size="8">WEIGHT (CALC)</text>
+    <text x="252" y="80" fill="#94a3b8" font-family="monospace" font-size="9">0.740 kg</text>
+
+    <text x="8" y="97" fill="#64748b" font-family="monospace" font-size="7.5">DESIGNED BY</text>
+    <text x="8" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">M. SHARIF</text>
+    <text x="82" y="97" fill="#64748b" font-family="monospace" font-size="7.5">APPROVED</text>
+    <text x="82" y="112" fill="#38bdf8" font-family="monospace" font-size="9">ENG. QA</text>
+    <text x="168" y="97" fill="#64748b" font-family="monospace" font-size="7.5">SCALE</text>
+    <text x="168" y="112" fill="#f8fafc" font-family="monospace" font-size="10" font-weight="bold">1:1 (A3)</text>
+    <text x="252" y="97" fill="#64748b" font-family="monospace" font-size="7.5">STATUS</text>
+    <text x="252" y="112" fill="#10b981" font-family="monospace" font-size="9" font-weight="bold">RELEASED</text>
+  </g>
+
+  <!-- Technical Notes -->
+  <g transform="translate(35, 472)">
+    <rect width="270" height="85" fill="rgba(10, 18, 30, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9.5" font-weight="bold">TECHNICAL NOTES // مـلاحظـات فـنـی:</text>
+    <text x="10" y="32" fill="#94a3b8" font-family="monospace" font-size="8.5">1. OVERALL ENVELOPE: 62.00 x 50.00 x 44.00 MM.</text>
+    <text x="10" y="46" fill="#94a3b8" font-family="monospace" font-size="8.5">2. CENTRAL BORE Ø20 H7 THRU CENTERLINE.</text>
+    <text x="10" y="60" fill="#94a3b8" font-family="monospace" font-size="8.5">3. 2X LATERAL CYLINDRICAL CUTS R15.00 SYMMETRIC.</text>
+    <text x="10" y="74" fill="#10b981" font-family="monospace" font-size="8.5">4. ALL WALL THICKNESSES FULLY CONSTRAINED.</text>
+  </g>
+
+  <!-- 3D Isometric Preview Inset -->
+  <g transform="translate(635, 45)">
+    <rect width="180" height="150" fill="rgba(8, 14, 24, 0.9)" stroke="#0284c7" stroke-width="1.2"/>
+    <text x="10" y="16" fill="#00f2fe" font-family="monospace" font-size="9" font-weight="bold">ISOMETRIC VIEW (3D)</text>
+    <text x="10" y="27" fill="#64748b" font-family="monospace" font-size="7.5">SOLIDWORKS SOLID BODY</text>
+
+    <!-- 3D Iso Render of H-Block -->
+    <g transform="translate(90, 85) scale(0.6)">
+      <!-- Isometric H-Block -->
+      <polygon points="-40,-15 0,-38 40,-15 0,8" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.8"/>
+      <polygon points="-40,-15 0,8 0,38 -40,15" fill="#0f2b48" stroke="#00f2fe" stroke-width="1.8"/>
+      <polygon points="0,8 40,-15 40,15 0,38" fill="#0b1e33" stroke="#00f2fe" stroke-width="1.8"/>
+      <!-- Cutout Grooves in 3D -->
+      <ellipse cx="0" cy="-15" rx="14" ry="7" fill="#060b13" stroke="#38bdf8" stroke-width="1.5"/>
+    </g>
+    <text x="10" y="142" fill="#f59e0b" font-family="monospace" font-size="8">SYMMETRIC H-PROFILE</text>
+  </g>
+
+  <!-- ==================== FRONT & TOP ORTHOGRAPHIC VIEWS ==================== -->
+  <g transform="translate(250, 230)">
+    <text x="-195" y="-185" fill="#00f2fe" font-family="monospace" font-size="12" font-weight="bold">FRONT VIEW // نمای روبرو با برش‌های متقارن</text>
+    <text x="-195" y="-172" fill="#64748b" font-family="monospace" font-size="9">PLANE: FRONT PLANE // DUAL CENTERLINES</text>
+
     <!-- Center Axes -->
-    <line x1="20" y1="112.5" x2="200" y2="112.5" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="6,3"/>
-    <line x1="110" y1="35" x2="110" y2="190" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="6,3"/>
+    <line x1="-150" y1="0" x2="150" y2="0" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="12,4,2,4"/>
+    <line x1="0" y1="-140" x2="0" y2="140" stroke="#f43f5e" stroke-width="0.8" stroke-dasharray="12,4,2,4"/>
 
-    <!-- Internal Rectangular Cutout 14 x 18 -->
-    <rect x="92" y="94.5" width="36" height="36" fill="none" stroke="#f59e0b" stroke-width="1.6" stroke-dasharray="3,2"/>
+    <!-- Outer H Profile with Side Recesses R15 -->
+    <!-- Base Rectangle 124 width x 88 height in SVG units (representing 62x44) -->
+    <path d="M -62 -44 
+             L -20 -44 
+             L -20 -15 
+             L 20 -15 
+             L 20 -44 
+             L 62 -44 
+             L 62 44 
+             L 20 44 
+             L 20 15 
+             L -20 15 
+             L -20 44 
+             L -62 44 Z" 
+          fill="rgba(14, 165, 233, 0.08)" stroke="#00f2fe" stroke-width="2.4" filter="url(#glow5)"/>
+
+    <!-- Center Bore Hole Ø20 -->
+    <circle cx="0" cy="0" r="14" fill="#060b13" stroke="#38bdf8" stroke-width="2"/>
+
+    <!-- Left & Right Cutaways (R15) -->
+    <path d="M -62 -15 A 15 15 0 0 1 -62 15" fill="none" stroke="#f59e0b" stroke-width="2"/>
+    <path d="M 62 -15 A 15 15 0 0 1 62 15" fill="none" stroke="#f59e0b" stroke-width="2"/>
 
     <!-- Dimensions -->
-    <!-- Length 62 -->
-    <line x1="30" y1="35" x2="190" y2="35" stroke="#38bdf8" stroke-width="1"/>
-    <polygon points="30,35 38,32 38,38" fill="#38bdf8"/>
-    <polygon points="190,35 182,32 182,38" fill="#38bdf8"/>
-    <text x="100" y="28" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">62</text>
+    <!-- Overall Width 62.00 -->
+    <line x1="-62" y1="-65" x2="62" y2="-65" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart5)" marker-end="url(#arrEnd5)"/>
+    <line x1="-62" y1="-44" x2="-62" y2="-68" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="62" y1="-44" x2="62" y2="-68" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="0" y="-70" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">62.00 ±0.1</text>
 
-    <!-- Width 50 -->
-    <line x1="15" y1="50" x2="15" y2="175" stroke="#38bdf8" stroke-width="1"/>
-    <polygon points="15,50 12,58 18,58" fill="#38bdf8"/>
-    <polygon points="15,175 12,167 18,167" fill="#38bdf8"/>
-    <text x="0" y="116" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">50</text>
+    <!-- Overall Height 44.00 -->
+    <line x1="85" y1="-44" x2="85" y2="44" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arrStart5)" marker-end="url(#arrEnd5)"/>
+    <line x1="62" y1="-44" x2="88" y2="-44" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="62" y1="44" x2="88" y2="44" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="95" y="4" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">44.00</text>
 
-    <!-- Ø20 Callout -->
-    <text x="138" y="110" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">Ø20 THRU</text>
-    <!-- R15 Cutout Callout -->
-    <text x="75" y="195" fill="#f59e0b" font-family="monospace" font-size="10">2X R15 CYL CUT</text>
-  </g>
+    <!-- Center Bore Ø20 H7 -->
+    <line x1="0" y1="0" x2="-55" y2="-90" stroke="#38bdf8" stroke-width="1" marker-start="url(#arrStart5)"/>
+    <line x1="-55" y1="-90" x2="-125" y2="-90" stroke="#38bdf8" stroke-width="1"/>
+    <text x="-122" y="-95" fill="#38bdf8" font-family="monospace" font-size="10.5" font-weight="bold">BORE Ø20 H7 THRU</text>
 
-  <!-- Right: 3D Isometric View -->
-  <g transform="translate(320, 60)">
-    <text x="0" y="14" fill="#00f2fe" font-family="monospace" font-size="11" font-weight="bold">// 3D ISOMETRIC SOLID</text>
+    <!-- Side Arc R15 Callout -->
+    <line x1="62" y1="0" x2="115" y2="-20" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart5)"/>
+    <line x1="115" y1="-20" x2="165" y2="-20" stroke="#f59e0b" stroke-width="1"/>
+    <text x="118" y="-25" fill="#f59e0b" font-family="monospace" font-size="9.5" font-weight="bold">2X R15.00 CUT</text>
 
-    <!-- Isometric Rendering of H-Block with Height 44 -->
-    <!-- Top Face -->
-    <polygon points="40,110 110,70 170,105 100,145" fill="rgba(56, 189, 248, 0.4)" stroke="#38bdf8" stroke-width="1.8"/>
-    <!-- Left Front Face -->
-    <polygon points="40,110 100,145 100,210 40,175" fill="rgba(14, 165, 233, 0.2)" stroke="#00f2fe" stroke-width="2"/>
-    <!-- Right Front Face -->
-    <polygon points="100,145 170,105 170,170 100,210" fill="rgba(2, 132, 199, 0.3)" stroke="#00f2fe" stroke-width="2"/>
-
-    <!-- Cylinder Bore on Top Face (Ellipse in Iso) -->
-    <ellipse cx="105" cy="107" rx="18" ry="10" fill="#080e18" stroke="#00f2fe" stroke-width="1.8"/>
-    
-    <!-- Side Cutouts (H-Block channels) -->
-    <path d="M 65 95 Q 75 102 85 90" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
-    <path d="M 125 125 Q 135 132 145 120" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
-
-    <!-- Height 44 Dimension -->
-    <line x1="185" y1="105" x2="185" y2="170" stroke="#38bdf8" stroke-width="1"/>
-    <polygon points="185,105 182,113 188,113" fill="#38bdf8"/>
-    <polygon points="185,170 182,162 188,162" fill="#38bdf8"/>
-    <text x="192" y="142" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">H: 44</text>
-
-    <!-- Wall thickness notes -->
-    <text x="20" y="240" fill="#94a3b8" font-family="monospace" font-size="10">WALLS: 12, 15, 16 MM // SLOTS: 14×18</text>
+    <!-- Top Channel Width 40.00 -->
+    <line x1="-20" y1="-30" x2="20" y2="-30" stroke="#f59e0b" stroke-width="1" marker-start="url(#arrStart5)" marker-end="url(#arrEnd5)"/>
+    <text x="0" y="-35" fill="#f59e0b" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">40.00</text>
   </g>
 </svg>

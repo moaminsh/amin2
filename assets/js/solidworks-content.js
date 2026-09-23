@@ -980,7 +980,9 @@ window.addEventListener('storage', (e) => {
   }
 });
 
-// Blueprint Lightbox Modal Handlers
+// Blueprint Lightbox Modal Handlers with Interactive CAD Viewer
+let currentBlueprintZoom = 1;
+
 window.openBlueprintModal = function(imageSrc, title, dims) {
   let modal = document.getElementById('swBlueprintModal');
   if (!modal) {
@@ -990,6 +992,7 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
     document.body.appendChild(modal);
   }
 
+  currentBlueprintZoom = 1;
   const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
 
   modal.innerHTML = `
@@ -997,26 +1000,53 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
     <div class="sw-bp-dialog" role="dialog" aria-modal="true">
       <div class="sw-bp-header">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="sw-bp-icon-badge"><i data-lucide="compass" style="width: 18px; height: 18px;"></i></div>
+          <div class="sw-bp-icon-badge"><i data-lucide="compass" style="width: 20px; height: 20px;"></i></div>
           <div>
             <h4 class="sw-bp-title">${title}</h4>
             <div class="sw-bp-subtitle">${dims || ''}</div>
           </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <a href="${imageSrc}" download class="sw-bp-download-btn" title="${isFa ? 'دانلود نقشه با فرمت برداری SVG' : 'Download Vector SVG'}">
+        
+        <!-- Interactive Controls Toolbar -->
+        <div class="sw-bp-toolbar">
+          <!-- Toggle CAD Blueprint / ISO White Paper Mode -->
+          <button type="button" class="sw-bp-tool-btn" id="swBpThemeToggle" onclick="toggleBlueprintPaperMode()" title="${isFa ? 'تغییر به کاغذ سفید نقشه‌کشی کارگاهی' : 'Toggle ISO White Paper Sheet Mode'}">
+            <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
+            <span id="swBpThemeLabel">${isFa ? 'حالت کاغذ سفید' : 'Paper Mode'}</span>
+          </button>
+
+          <!-- Zoom Controls -->
+          <button type="button" class="sw-bp-tool-btn" onclick="zoomBlueprint(0.25)" title="${isFa ? 'بزرگ‌نمایی (+)' : 'Zoom In (+)'}">
+            <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i>
+          </button>
+          <button type="button" class="sw-bp-tool-btn" onclick="zoomBlueprint(-0.25)" title="${isFa ? 'کوچک‌نمایی (-)' : 'Zoom Out (-)'}">
+            <i data-lucide="zoom-out" style="width: 14px; height: 14px;"></i>
+          </button>
+          <button type="button" class="sw-bp-tool-btn" onclick="resetBlueprintZoom()" title="${isFa ? 'اندازه اصلی ۱۰۰٪' : 'Reset 100%'}">
+            <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+            <span id="swBpZoomValue">100%</span>
+          </button>
+
+          <!-- Download Vector SVG -->
+          <a href="${imageSrc}" download class="sw-bp-download-btn" title="${isFa ? 'دانلود مستقیم فایل برداری SVG' : 'Download Vector SVG'}">
             <i data-lucide="download" style="width: 16px; height: 16px;"></i>
           </a>
+          <!-- Close Button -->
           <button type="button" class="sw-bp-close-btn" onclick="closeBlueprintModal()" aria-label="Close">
             <i data-lucide="x" style="width: 18px; height: 18px;"></i>
           </button>
         </div>
       </div>
-      <div class="sw-bp-view-container">
-        <img src="${imageSrc}" alt="${title}" class="sw-bp-modal-img" />
+
+      <div class="sw-bp-view-container" id="swBpContainer">
+        <img src="${imageSrc}" alt="${title}" class="sw-bp-modal-img" id="swBpImg" />
       </div>
+
       <div class="sw-bp-footer">
-        <span class="sw-bp-watermark">MOHAMMADAMIN SHARIF // SOLIDWORKS ACADEMY BLUEPRINTS</span>
+        <div class="sw-bp-watermark">
+          <span class="sw-bp-watermark-tag">ISO 7200 / ASME Y14.5M</span>
+          <span>CERTIFIED BY MOHAMMADAMIN SHARIF // SOLIDWORKS CAD ACADEMY</span>
+        </div>
         <button type="button" class="sw-bp-action-btn" onclick="closeBlueprintModal()">${isFa ? 'بستن پنجره' : 'Close'}</button>
       </div>
     </div>
@@ -1032,6 +1062,43 @@ window.openBlueprintModal = function(imageSrc, title, dims) {
     console.warn(e);
   }
 };
+
+window.toggleBlueprintPaperMode = function() {
+  const container = document.getElementById('swBpContainer');
+  const btn = document.getElementById('swBpThemeToggle');
+  const label = document.getElementById('swBpThemeLabel');
+  const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
+  if (!container) return;
+
+  const isPaper = container.classList.toggle('paper-mode');
+  if (btn) btn.classList.toggle('active', isPaper);
+  if (label) {
+    label.textContent = isPaper 
+      ? (isFa ? 'حالت بلوپرینت تیره' : 'Dark CAD Mode') 
+      : (isFa ? 'حالت کاغذ سفید' : 'Paper Mode');
+  }
+};
+
+window.zoomBlueprint = function(delta) {
+  currentBlueprintZoom = Math.min(Math.max(0.5, currentBlueprintZoom + delta), 2.5);
+  applyBlueprintZoom();
+};
+
+window.resetBlueprintZoom = function() {
+  currentBlueprintZoom = 1;
+  applyBlueprintZoom();
+};
+
+function applyBlueprintZoom() {
+  const img = document.getElementById('swBpImg');
+  const val = document.getElementById('swBpZoomValue');
+  if (img) {
+    img.style.transform = `scale(${currentBlueprintZoom})`;
+  }
+  if (val) {
+    val.textContent = `${Math.round(currentBlueprintZoom * 100)}%`;
+  }
+}
 
 window.closeBlueprintModal = function() {
   const modal = document.getElementById('swBlueprintModal');
