@@ -650,7 +650,7 @@ function renderSolidWorksAcademy(containerId) {
           <span style="font-family: var(--font-mono); font-size: 11px; color: #00f2fe; background: rgba(0, 242, 254, 0.08); padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(0, 242, 254, 0.2);">${chap.badge}</span>
         </div>
         <div class="sw-module-body">
-          <p style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 16px;">${isFa ? chap.summary : chap.summaryEn}</p>
+          <p class="sw-chapter-summary-text" style="font-size: 13px; line-height: 1.6; margin-bottom: 16px;">${isFa ? chap.summary : chap.summaryEn}</p>
           ${chap.content.intro || ''}
           ${chap.content.warning || ''}
 
@@ -690,7 +690,7 @@ function renderSolidWorksAcademy(containerId) {
               ${chap.content.colorMatrix.map(c => `
                 <div class="sw-color-badge-card sw-color-${c.color}">
                   <span class="sw-color-pill">${isFa ? c.fa : c.en}</span>
-                  <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.5; margin-top: 4px;">${c.desc}</div>
+                  <div class="sw-color-desc-text" style="font-size: 11.5px; line-height: 1.5; margin-top: 4px;">${c.desc}</div>
                 </div>
               `).join('')}
             </div>
@@ -797,9 +797,9 @@ function renderSolidWorksAcademy(containerId) {
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
               ${chap.content.mates.map(m => `
-                <div style="background: rgba(14, 21, 37, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px;">
+                <div class="sw-callout" style="padding: 12px 16px;">
                   <div style="font-family: var(--font-mono); font-size: 12.5px; font-weight: 700; color: #00f2fe; margin-bottom: 6px;">${m.group}</div>
-                  <div style="font-size: 12px; color: #cbd5e1; line-height: 1.6;">${m.list}</div>
+                  <div class="sw-shortcut-desc-text" style="font-size: 12px; line-height: 1.6;">${m.list}</div>
                 </div>
               `).join('')}
             </div>
@@ -865,7 +865,7 @@ function renderSolidWorksAcademy(containerId) {
         <span style="font-family: var(--font-mono); font-size: 11px; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(16, 185, 129, 0.3);">۱۰ نقشه ساخت دقیق</span>
       </div>
       <div class="sw-module-body">
-        <p style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px;">
+        <p class="sw-exercise-intro-text" style="font-size: 13px; line-height: 1.6; margin-bottom: 20px;">
           ${isFa ? 'کلیه تمرین‌ها و نقشه‌های ساخت صنعتی با مشخصات فنی کامل، ابعاد میلی‌متری و گام‌های اجرایی مدلسازی در سالیدورکس (گردآوری و تدوین: محمدامین شریف) در این کارگاه تجمیع شده‌اند.' : 'Complete engineering blueprints with exact millimeter dimensions, technical tolerances, and step-by-step CAD modeling workflows curated by Mohammadamin Sharif.'}
         </p>
 
@@ -884,15 +884,15 @@ function renderSolidWorksAcademy(containerId) {
               </div>
               <div class="sw-exercise-body">
                 <div>
-                  <div style="font-size: 14.5px; font-weight: 800; color: #ffffff; margin-bottom: 4px;">${idx + 1}. ${isFa ? ex.title : ex.titleEn}</div>
-                  <div style="font-size: 11.5px; color: #94a3b8; line-height: 1.5;">${ex.desc}</div>
+                  <div class="sw-exercise-item-title" style="font-size: 14.5px; font-weight: 800; margin-bottom: 4px;">${idx + 1}. ${isFa ? ex.title : ex.titleEn}</div>
+                  <div class="sw-exercise-item-desc" style="font-size: 11.5px; line-height: 1.5;">${ex.desc}</div>
                   <div class="sw-step-instruction">
                     <div style="font-weight: 700; color: #38bdf8; margin-bottom: 4px; font-size: 11.5px;">${isFa ? 'ابعاد و مشخصات هندسی:' : 'Key Dimensions:'}</div>
                     <div>${ex.dims}</div>
                   </div>
                   <div style="margin-top: 10px;">
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px;">${isFa ? 'مراحل گام‌به‌گام ترسیم:' : 'Step-by-Step Procedure:'}</div>
-                    <ul style="font-size: 11px; color: #94a3b8; padding-right: 18px; margin: 0; line-height: 1.6;">
+                    <div class="sw-exercise-steps-header" style="font-size: 11.5px; font-weight: 700; margin-bottom: 6px;">${isFa ? 'مراحل گام‌به‌گام ترسیم:' : 'Step-by-Step Procedure:'}</div>
+                    <ul class="sw-exercise-steps-list" style="font-size: 11px; padding-inline-start: 18px; margin: 0; line-height: 1.6;">
                       ${ex.steps.map(s => `<li>${s}</li>`).join('')}
                     </ul>
                   </div>
@@ -928,7 +928,7 @@ function renderSolidWorksAcademy(containerId) {
         </div>
       </div>
       <div class="sw-module-body">
-        <p style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 20px;">
+        <p class="sw-quiz-intro-text" style="font-size: 13px; line-height: 1.6; margin-bottom: 20px;">
           ${isFa ? 'این آزمون بر اساس مهم‌ترین نکات تحلیلی و صنعتی دوره آموزش سالیدورکس توسط محمدامین شریف طراحی شده است. به سوالات پاسخ دهید و بازخورد تحلیلی دریافت کنید.' : 'Test your mastery of SolidWorks sketches, constraints, 3D features, mates, and drawing detailing curated by Mohammadamin Sharif.'}
         </p>
 
@@ -937,7 +937,7 @@ function renderSolidWorksAcademy(containerId) {
             <div class="sw-quiz-card" id="sw-q-${q.id}">
               <div class="sw-quiz-question-box">
                 <div style="font-family: var(--font-mono); font-size: 11px; color: #00f2fe; margin-bottom: 6px;">QUESTION 0${qIdx + 1}</div>
-                <div style="font-size: 14px; font-weight: 700; color: #ffffff; line-height: 1.5;">${isFa ? q.qFa : q.qEn}</div>
+                <div class="sw-quiz-question-text" style="font-size: 14px; font-weight: 700; line-height: 1.5;">${isFa ? q.qFa : q.qEn}</div>
               </div>
               <div class="sw-quiz-options-list">
                 ${(isFa ? q.optionsFa : q.optionsEn).map((opt, optIdx) => `
@@ -988,8 +988,10 @@ let currentPanY = 0;
 let isBlueprintDragging = false;
 let blueprintDragStartX = 0;
 let blueprintDragStartY = 0;
-let isBlueprintPaperMode = false;
+let blueprintPaperTheme = 'cad'; // 'cad' | 'paper' | 'cyanotype'
 let isBlueprintDrawerOpen = false;
+let isBlueprintMeasureActive = false;
+let caliperPoints = [];
 
 window.openBlueprintModal = function(identifier, fallbackTitle, fallbackDims) {
   let modal = document.getElementById('swBlueprintModal');
@@ -1020,6 +1022,8 @@ window.openBlueprintModal = function(identifier, fallbackTitle, fallbackDims) {
   currentPanX = 0;
   currentPanY = 0;
   isBlueprintDrawerOpen = false;
+  isBlueprintMeasureActive = false;
+  caliperPoints = [];
 
   renderBlueprintModalView();
   modal.classList.add('active');
@@ -1050,6 +1054,13 @@ function renderBlueprintModalView() {
   const displayTitle = isFa ? ex.title : ex.titleEn;
   const isFirst = currentBlueprintIndex === 0;
   const isLast = currentBlueprintIndex === exercises.length - 1;
+
+  const themeClass = blueprintPaperTheme === 'paper' ? 'paper-mode' : (blueprintPaperTheme === 'cyanotype' ? 'cyanotype-mode' : '');
+  const themeLabels = {
+    cad: isFa ? 'بلوپرینت تیره' : 'Dark CAD',
+    paper: isFa ? 'کاغذ پلاتر سفید' : 'White Plotter',
+    cyanotype: isFa ? 'سیانوتیپ کلاسیک' : 'Cyanotype'
+  };
 
   modal.innerHTML = `
     <div class="sw-bp-backdrop" onclick="closeBlueprintModal()"></div>
@@ -1091,10 +1102,16 @@ function renderBlueprintModalView() {
         
         <!-- Interactive Controls Toolbar -->
         <div class="sw-bp-toolbar">
-          <!-- Toggle CAD Blueprint / ISO White Paper Mode -->
-          <button type="button" class="sw-bp-tool-btn ${isBlueprintPaperMode ? 'active' : ''}" id="swBpThemeToggle" onclick="toggleBlueprintPaperMode()" title="${isFa ? 'تغییر پوسته (کاغذ سفید کارگاهی / بلوپرینت تیره)' : 'Toggle White Plotter Paper / Dark CAD'}">
-            <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
-            <span id="swBpThemeLabel">${isBlueprintPaperMode ? (isFa ? 'کاغذ پلاتر' : 'Paper') : (isFa ? 'بلوپرینت تیره' : 'Dark CAD')}</span>
+          <!-- Cycle 3 CAD Paper Themes (Dark / White Plotter / Cyanotype) -->
+          <button type="button" class="sw-bp-tool-btn" id="swBpThemeCycle" onclick="cycleBlueprintPaperTheme()" title="${isFa ? 'تغییر پوسته نقشه (بلوپرینت تیره / پلاتر سفید / سیانوتیپ)' : 'Cycle CAD Paper Modes'}">
+            <i data-lucide="palette" style="width: 14px; height: 14px;"></i>
+            <span id="swBpThemeLabel">${themeLabels[blueprintPaperTheme]}</span>
+          </button>
+
+          <!-- Interactive Caliper Measurement Tool -->
+          <button type="button" class="sw-bp-tool-btn ${isBlueprintMeasureActive ? 'active' : ''}" id="swBpMeasureBtn" onclick="toggleBlueprintMeasure()" title="${isFa ? 'کولیس اندازه‌گیری دقیق ابعاد (کلیک روی دو نقطه)' : 'Precision Caliper Ruler'}">
+            <i data-lucide="ruler" style="width: 14px; height: 14px;"></i>
+            <span>${isFa ? 'کولیس مهندسی' : 'Caliper'}</span>
           </button>
 
           <!-- Toggle Modeling Steps & Specs Drawer -->
@@ -1137,8 +1154,16 @@ function renderBlueprintModalView() {
         </div>
       </div>
 
-      <!-- Main CAD Viewport with Pan & Zoom -->
-      <div class="sw-bp-view-container ${isBlueprintPaperMode ? 'paper-mode' : ''}" id="swBpContainer">
+      <!-- Main CAD Viewport with Pan, Zoom & Real-time Coordinate HUD -->
+      <div class="sw-bp-view-container ${themeClass}" id="swBpContainer">
+        <!-- Live Coordinate & Scale HUD -->
+        <div class="sw-bp-hud" id="swBpHud">
+          <div class="sw-bp-hud-item"><span class="sw-bp-hud-label">CAD</span> <span class="sw-bp-hud-val" id="swBpHudCoord">X: 0.0 mm | Y: 0.0 mm</span></div>
+          <div class="sw-bp-hud-item"><span class="sw-bp-hud-label">SCALE</span> <span class="sw-bp-hud-val" id="swBpHudScale">${Math.round(currentBlueprintZoom * 100)}% (1:1)</span></div>
+          <div class="sw-bp-hud-item" id="swBpHudMeasureItem" style="display: ${isBlueprintMeasureActive ? 'flex' : 'none'};"><span class="sw-bp-hud-label" style="color: #f59e0b;">MEASURE</span> <span class="sw-bp-hud-val" id="swBpHudMeasureVal" style="color: #f59e0b;">${isFa ? 'روی ۲ نقطه کلیک کنید' : 'Click 2 points'}</span></div>
+        </div>
+
+        <canvas class="sw-bp-caliper-canvas" id="swBpCaliperCanvas"></canvas>
         <img 
           src="${ex.image}" 
           alt="${displayTitle}" 
@@ -1243,6 +1268,7 @@ window.navigateBlueprint = function(dir) {
     currentBlueprintZoom = 1;
     currentPanX = 0;
     currentPanY = 0;
+    caliperPoints = [];
     renderBlueprintModalView();
   }
 };
@@ -1254,29 +1280,59 @@ window.navigateBlueprintTo = function(idx) {
     currentBlueprintZoom = 1;
     currentPanX = 0;
     currentPanY = 0;
+    caliperPoints = [];
     renderBlueprintModalView();
   }
 };
 
-window.toggleBlueprintPaperMode = function() {
-  isBlueprintPaperMode = !isBlueprintPaperMode;
+window.cycleBlueprintPaperTheme = function() {
+  const themes = ['cad', 'paper', 'cyanotype'];
+  const curIdx = themes.indexOf(blueprintPaperTheme);
+  blueprintPaperTheme = themes[(curIdx + 1) % themes.length];
+  
   const container = document.getElementById('swBpContainer');
-  const btn = document.getElementById('swBpThemeToggle');
   const label = document.getElementById('swBpThemeLabel');
   const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
   
+  const themeLabels = {
+    cad: isFa ? 'بلوپرینت تیره' : 'Dark CAD',
+    paper: isFa ? 'کاغذ پلاتر سفید' : 'White Plotter',
+    cyanotype: isFa ? 'سیانوتیپ کلاسیک' : 'Cyanotype'
+  };
+
   if (container) {
-    container.classList.toggle('paper-mode', isBlueprintPaperMode);
-  }
-  if (btn) {
-    btn.classList.toggle('active', isBlueprintPaperMode);
+    container.classList.remove('paper-mode', 'cyanotype-mode');
+    if (blueprintPaperTheme === 'paper') container.classList.add('paper-mode');
+    if (blueprintPaperTheme === 'cyanotype') container.classList.add('cyanotype-mode');
   }
   if (label) {
-    label.textContent = isBlueprintPaperMode 
-      ? (isFa ? 'کاغذ پلاتر' : 'Paper') 
-      : (isFa ? 'بلوپرینت تیره' : 'Dark CAD');
+    label.textContent = themeLabels[blueprintPaperTheme];
   }
 };
+
+window.toggleBlueprintMeasure = function() {
+  isBlueprintMeasureActive = !isBlueprintMeasureActive;
+  caliperPoints = [];
+  const btn = document.getElementById('swBpMeasureBtn');
+  const item = document.getElementById('swBpHudMeasureItem');
+  const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
+  
+  if (btn) btn.classList.toggle('active', isBlueprintMeasureActive);
+  if (item) item.style.display = isBlueprintMeasureActive ? 'flex' : 'none';
+  
+  const val = document.getElementById('swBpHudMeasureVal');
+  if (val) val.textContent = isFa ? 'روی ۲ نقطه کلیک کنید' : 'Click 2 points';
+  
+  clearCaliperCanvas();
+};
+
+function clearCaliperCanvas() {
+  const canvas = document.getElementById('swBpCaliperCanvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
 
 window.toggleBlueprintDrawer = function() {
   isBlueprintDrawerOpen = !isBlueprintDrawerOpen;
@@ -1329,18 +1385,50 @@ window.resetBlueprintZoom = function() {
 function applyBlueprintTransform() {
   const img = document.getElementById('swBpImg');
   const val = document.getElementById('swBpZoomValue');
+  const hudScale = document.getElementById('swBpHudScale');
   if (img) {
     img.style.transform = `translate(${currentPanX}px, ${currentPanY}px) scale(${currentBlueprintZoom})`;
   }
   if (val) {
     val.textContent = `${Math.round(currentBlueprintZoom * 100)}%`;
   }
+  if (hudScale) {
+    hudScale.textContent = `${Math.round(currentBlueprintZoom * 100)}% (1:1)`;
+  }
 }
 
 function initBlueprintPanAndZoom() {
   const container = document.getElementById('swBpContainer');
   const img = document.getElementById('swBpImg');
+  const hudCoord = document.getElementById('swBpHudCoord');
+  const canvas = document.getElementById('swBpCaliperCanvas');
   if (!container || !img) return;
+
+  if (canvas) {
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
+  }
+
+  // Track cursor position for millimeter CAD readout
+  container.onmousemove = function(e) {
+    const rect = img.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      const relX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      const relY = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+      // Standard ISO sheet 840 x 580 mm
+      const mmX = ((relX / rect.width) * 840).toFixed(1);
+      const mmY = ((relY / rect.height) * 580).toFixed(1);
+      if (hudCoord) {
+        hudCoord.textContent = `X: ${mmX} mm | Y: ${mmY} mm`;
+      }
+    }
+
+    if (isBlueprintDragging) {
+      currentPanX = e.clientX - blueprintDragStartX;
+      currentPanY = e.clientY - blueprintDragStartY;
+      applyBlueprintTransform();
+    }
+  };
 
   // Mouse Wheel Zoom
   container.onwheel = function(e) {
@@ -1355,9 +1443,69 @@ function initBlueprintPanAndZoom() {
     resetBlueprintZoom();
   };
 
+  // Click handler for caliper measurement tool
+  container.onclick = function(e) {
+    if (!isBlueprintMeasureActive) return;
+    const rect = img.getBoundingClientRect();
+    const isFa = (localStorage.getItem('site-lang') || 'fa') === 'fa';
+    if (rect.width > 0 && rect.height > 0) {
+      const relX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      const relY = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+      const mmX = (relX / rect.width) * 840;
+      const mmY = (relY / rect.height) * 580;
+
+      caliperPoints.push({ x: e.clientX, y: e.clientY, mmX, mmY });
+
+      if (caliperPoints.length === 1) {
+        const val = document.getElementById('swBpHudMeasureVal');
+        if (val) val.textContent = isFa ? 'نقطه دوم را کلیک کنید' : 'Click second point';
+      } else if (caliperPoints.length >= 2) {
+        const p1 = caliperPoints[0];
+        const p2 = caliperPoints[1];
+        const distMm = Math.hypot(p2.mmX - p1.mmX, p2.mmY - p1.mmY).toFixed(1);
+        const val = document.getElementById('swBpHudMeasureVal');
+        if (val) val.textContent = `Δ: ${distMm} mm (ΔX: ${Math.abs(p2.mmX - p1.mmX).toFixed(1)}, ΔY: ${Math.abs(p2.mmY - p1.mmY).toFixed(1)})`;
+        
+        // Draw dimension line on canvas
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          const cRect = canvas.getBoundingClientRect();
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.strokeStyle = '#f59e0b';
+          ctx.fillStyle = '#f59e0b';
+          ctx.lineWidth = 2;
+          ctx.setLineDash([4, 4]);
+
+          const x1 = p1.x - cRect.left;
+          const y1 = p1.y - cRect.top;
+          const x2 = p2.x - cRect.left;
+          const y2 = p2.y - cRect.top;
+
+          ctx.beginPath();
+          ctx.arc(x1, y1, 5, 0, Math.PI * 2);
+          ctx.arc(x2, y2, 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+
+          ctx.setLineDash([]);
+          ctx.font = 'bold 12px monospace';
+          const midX = (x1 + x2) / 2;
+          const midY = (y1 + y2) / 2 - 8;
+          ctx.fillText(`${distMm} mm`, midX, midY);
+        }
+
+        caliperPoints = []; // reset for next measurement
+      }
+    }
+  };
+
   // Mouse Drag to Pan
   container.onmousedown = function(e) {
-    // Only drag with primary mouse button
+    if (isBlueprintMeasureActive) return;
     if (e.button !== 0) return;
     isBlueprintDragging = true;
     blueprintDragStartX = e.clientX - currentPanX;
@@ -1365,17 +1513,10 @@ function initBlueprintPanAndZoom() {
     img.style.cursor = 'grabbing';
   };
 
-  window.onmousemove = function(e) {
-    if (!isBlueprintDragging) return;
-    currentPanX = e.clientX - blueprintDragStartX;
-    currentPanY = e.clientY - blueprintDragStartY;
-    applyBlueprintTransform();
-  };
-
   window.onmouseup = function() {
     if (isBlueprintDragging) {
       isBlueprintDragging = false;
-      if (img) img.style.cursor = 'grab';
+      if (img) img.style.cursor = isBlueprintMeasureActive ? 'crosshair' : 'grab';
     }
   };
 

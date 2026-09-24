@@ -94,904 +94,353 @@
          Only basic info, photo, and modular portal cards to enter sections
          ============================================================ -->
     <section id="home" class="site-section active glass-board home-glass-board">
+      <!-- 4 Corner Glass Registration Screws -->
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
 
       <!-- ============================================================
-           MASTER PROFILE IDENTITY (MOHAMMADAMIN SHARIF)
-           Purely: Photo, Name, and Mechanical Engineering Student at IUST
+           PHONE DECK CANVAS (Exact aesthetic inspired by user mockup)
            ============================================================ -->
-      <div class="fm-profile-clean-hero">
-        <div class="fm-profile-clean-inner">
-          <!-- User Portrait Avatar with active status dot -->
-          <div class="fm-profile-clean-avatar-wrap">
-            <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif portrait" class="fm-profile-clean-avatar-img">
-            <span class="fm-profile-clean-status" title="Active Student at IUST"></span>
-          </div>
+      <div class="deck-canvas">
+        <div class="deck-phone-chassis">
 
-          <!-- Academic & Identity Details: ONLY Name and Student at IUST -->
-          <div class="fm-profile-clean-info">
-            <h1 class="fm-profile-clean-name">
-              <span data-en="Mohammadamin Sharif" data-fa="محمدامین شریف">محمدامین شریف</span>
-            </h1>
-
-            <div class="fm-profile-clean-degree" style="margin-bottom: 0;">
-              <i data-lucide="graduation-cap" style="width: 18px; height: 18px; color: #38bdf8;"></i>
-              <span data-en="Mechanical Engineering Student &bull; Iran University of Science & Technology (IUST)" data-fa="دانشجوی مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران">دانشجوی مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران</span>
+          <!-- TOP STATUS BAR -->
+          <div class="deck-status-bar">
+            <span class="deck-status-pill" id="deckLiveClock">14:02</span>
+            <span class="deck-status-greeting" data-en="Welcome, Mohammadamin" data-fa="درود، محمدامین شریف">درود، محمدامین شریف</span>
+            <div class="deck-status-icons">
+              <i data-lucide="wifi" style="width: 12px; height: 12px;"></i>
+              <span style="font-size: 10px; font-weight: 700; color: #38bdf8;">CSWP 100%</span>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- ============================================================
-           FEATURED PUBLICATION SPOTLIGHT
-           اثر و جزوه اختصاصی: اصول مدیریت کسب‌وکار برای ذهن مهندسی
-           ============================================================ -->
-      <div class="fm-featured-publication-card" id="featuredBusinessPublication">
-        <div class="fm-pub-cover-col">
-          <img src="assets/images/business-management-guide.jpg" alt="جلد جزوه اصول مدیریت کسب‌وکار برای ذهن مهندسی" class="fm-pub-cover-img" loading="lazy">
-          <div style="position: absolute; bottom: 8px; right: 8px; left: 8px; background: rgba(7, 14, 20, 0.88); backdrop-filter: blur(8px); padding: 5px 8px; border-radius: 8px; font-size: 11px; text-align: center; border: 1px solid rgba(20, 184, 166, 0.35); color: #5eead4; font-weight: 700;">
-            <i data-lucide="award" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-left: 4px;"></i>
-            <span data-en="Authored by Mohammadamin Sharif" data-fa="تألیف: محمدامین شریف">تألیف: محمدامین شریف</span>
-          </div>
-        </div>
+          <!-- SCENIC ARTWORK BANNER (Night Sky, Stars, Mountains, Engineering Rover & Turbine) -->
+          <div class="deck-scenic-art" onclick="openToolInspector('quick_overview')" role="button" title="معرفی کارگاه مهندسی">
+            <svg class="deck-scenic-svg" viewBox="0 0 500 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="deckSkyGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0e172a"/>
+                  <stop offset="50%" stop-color="#1e293b"/>
+                  <stop offset="100%" stop-color="#334155"/>
+                </linearGradient>
+                <linearGradient id="deckHills1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1e293b" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+                <linearGradient id="deckHills2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0f172a"/>
+                  <stop offset="100%" stop-color="#090d16"/>
+                </linearGradient>
+              </defs>
 
-        <div class="fm-pub-info-col">
-          <div class="fm-pub-badge">
-            <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i>
-            <span data-en="AUTHOR'S MONOGRAPH &bull; ENGINEERING MANAGEMENT" data-fa="اثر اختصاصی مؤلف &bull; راهنمای مدیریت کسب‌وکار">اثر اختصاصی مؤلف &bull; راهنمای مدیریت کسب‌وکار</span>
-          </div>
+              <!-- Sky Background -->
+              <rect width="500" height="170" fill="url(#deckSkyGrad)"/>
 
-          <h2 class="fm-pub-title" data-en="Business Management Principles for the Engineering Mind" data-fa="اصول مدیریت کسب‌وکار برای ذهن مهندسی">
-            اصول مدیریت کسب‌وکار برای ذهن مهندسی
-          </h2>
+              <!-- Stars -->
+              <circle cx="45" cy="25" r="1" fill="#ffffff" opacity="0.8"/>
+              <circle cx="110" cy="18" r="1.2" fill="#ffffff" opacity="0.9"/>
+              <circle cx="175" cy="35" r="0.9" fill="#ffffff" opacity="0.6"/>
+              <circle cx="240" cy="22" r="1.1" fill="#ffffff" opacity="0.85"/>
+              <circle cx="320" cy="15" r="1.3" fill="#ffffff" opacity="0.9"/>
+              <circle cx="410" cy="30" r="1" fill="#ffffff" opacity="0.7"/>
+              <circle cx="465" cy="20" r="1.2" fill="#ffffff" opacity="0.8"/>
+              <circle cx="80" cy="48" r="0.8" fill="#ffffff" opacity="0.5"/>
+              <circle cx="285" cy="42" r="1" fill="#ffffff" opacity="0.7"/>
+              <circle cx="370" cy="48" r="0.9" fill="#ffffff" opacity="0.6"/>
 
-          <p class="fm-pub-desc" data-en="A practical study guide specially written for engineering students — transforming logical and numerical engineering thinking into superior business decisions using 10 strategic analytical tools." data-fa="راهنمای مطالعاتی کاربردی ویژه‌ی دانشجویان مهندسی — از ماتریس تصمیم‌گیری تا مدل بوم کسب‌وکار؛ ابزارهایی که تحلیل عددی و منطقی مهندسان را به تصمیم‌های تجاری بهتر تبدیل می‌کند.">
-            راهنمای مطالعاتی کاربردی ویژه‌ی دانشجویان مهندسی — از ماتریس تصمیم‌گیری تا مدل بوم کسب‌وکار؛ ابزارهایی که تحلیل عددی و منطقی مهندسان را به تصمیم‌های تجاری بهتر تبدیل می‌کند.
-          </p>
+              <!-- Crescent Moon -->
+              <path d="M 425 22 A 12 12 0 0 0 437 34 A 10 10 0 1 1 425 22 Z" fill="#f8fafc" opacity="0.95"/>
 
-          <div class="fm-pub-tools-row">
-            <a href="books/business-management-tools.html#pugh" class="fm-pub-tool-chip" title="ورود به ابزار ماتریس تصمیم‌گیری وزنی"><i data-lucide="scale" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="Pugh Decision Matrix" data-fa="ماتریس تصمیم‌گیری وزنی">ماتریس تصمیم‌گیری وزنی</span></a>
-            <a href="books/business-management-tools.html#swot" class="fm-pub-tool-chip" title="ورود به ابزار تحلیل SWOT"><i data-lucide="compass" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="SWOT Analysis" data-fa="تحلیل SWOT">تحلیل SWOT</span></a>
-            <a href="books/business-management-tools.html#eisenhower" class="fm-pub-tool-chip" title="ورود به ابزار ماتریس آیزنهاور"><i data-lucide="check-square" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="Eisenhower Matrix" data-fa="ماتریس آیزنهاور">ماتریس آیزنهاور</span></a>
-            <a href="books/business-management-tools.html#bcg" class="fm-pub-tool-chip" title="ورود به ابزار ماتریس BCG"><i data-lucide="pie-chart" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="BCG Matrix" data-fa="ماتریس BCG">ماتریس BCG</span></a>
-            <a href="books/business-management-tools.html#porter" class="fm-pub-tool-chip" title="ورود به ابزار مدل ۵ نیروی پورتر"><i data-lucide="shield" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="Porter's 5 Forces" data-fa="مدل ۵ نیروی پورتر">مدل ۵ نیروی پورتر</span></a>
-            <a href="books/business-management-tools.html#bmc" class="fm-pub-tool-chip" title="ورود به ابزار بوم مدل کسب‌وکار"><i data-lucide="layout-grid" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="Business Model Canvas" data-fa="بوم کسب‌وکار (BMC)">بوم کسب‌وکار (BMC)</span></a>
-            <a href="books/business-management-tools.html#pestel" class="fm-pub-tool-chip" title="ورود به ابزار تحلیل PESTEL"><i data-lucide="globe" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="PESTEL Analysis" data-fa="تحلیل PESTEL">تحلیل PESTEL</span></a>
-            <a href="books/business-management-tools.html#gantt" class="fm-pub-tool-chip" title="ورود به ابزار نمودار گانت زمان‌بندی"><i data-lucide="calendar" style="width: 12px; height: 12px; color: #14b8a6;"></i> <span data-en="Gantt Chart Timeline" data-fa="نمودار گانت زمان‌بندی">نمودار گانت زمان‌بندی</span></a>
-          </div>
+              <!-- Distant Mountains Layer 1 -->
+              <path d="M 0 120 Q 80 80, 160 105 T 320 90 T 500 115 L 500 170 L 0 170 Z" fill="url(#deckHills1)"/>
 
-          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-            <a href="books/business-management-for-engineers.html" class="fm-pub-btn-primary">
-              <i data-lucide="book-open" style="width: 16px; height: 16px;"></i>
-              <span data-en="Read Full Monograph Online" data-fa="مطالعه و ورق زدن آنلاین جزوه">مطالعه و ورق زدن آنلاین جزوه</span>
-              <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
-            </a>
+              <!-- Power Transmission Line Poles -->
+              <line x1="280" y1="75" x2="280" y2="125" stroke="#475569" stroke-width="1.5"/>
+              <line x1="270" y1="85" x2="290" y2="85" stroke="#475569" stroke-width="1.5"/>
+              <line x1="272" y1="95" x2="288" y2="95" stroke="#475569" stroke-width="1.5"/>
+              <!-- Power Wires -->
+              <path d="M 0 95 Q 140 108, 270 85" stroke="#334155" stroke-width="0.8" fill="none"/>
+              <path d="M 290 85 Q 395 105, 500 90" stroke="#334155" stroke-width="0.8" fill="none"/>
 
-            <a href="books/business-management-tools.html" class="fm-pub-btn-secondary fm-pub-btn-tools" id="btnOpenBusinessTools">
-              <i data-lucide="wrench" style="width: 15px; height: 15px; color: #00f2fe;"></i>
-              <span data-en="Business Management Tools" data-fa="ابزارهای مدیریت کسب‌وکار">ابزارهای مدیریت کسب‌وکار</span>
-              <span class="live-tool-tag" data-en="TOOLS" data-fa="ابزارها">ابزارها</span>
-            </a>
+              <!-- Wind Turbine Silhouette -->
+              <line x1="110" y1="65" x2="110" y2="120" stroke="#64748b" stroke-width="1.2"/>
+              <circle cx="110" cy="65" r="2" fill="#94a3b8"/>
+              <line x1="110" y1="65" x2="110" y2="45" stroke="#94a3b8" stroke-width="1" opacity="0.8"/>
+              <line x1="110" y1="65" x2="127" y2="75" stroke="#94a3b8" stroke-width="1" opacity="0.8"/>
+              <line x1="110" y1="65" x2="93" y2="75" stroke="#94a3b8" stroke-width="1" opacity="0.8"/>
 
-            <a href="books/business-management-for-engineers.html" onclick="window.open('books/business-management-for-engineers.html', '_blank'); return false;" class="fm-pub-btn-secondary" title="نسخه چاپی و دانلود PDF">
-              <i data-lucide="printer" style="width: 15px; height: 15px; color: #f59e0b;"></i>
-              <span data-en="Print / Save PDF" data-fa="چاپ / ذخیره PDF">چاپ / ذخیره PDF</span>
-            </a>
-          </div>
-        </div>
-      </div>
+              <!-- Near Hills Layer 2 -->
+              <path d="M 0 135 Q 120 120, 240 132 T 500 128 L 500 170 L 0 170 Z" fill="url(#deckHills2)"/>
 
-      <!-- ============================================================
-           FEATURED SOLIDWORKS ACADEMY SPOTLIGHT
-           آموزش و کارگاه تخصصی سالیدورکس (SolidWorks Academy & Blueprint Lab)
-           گردآوری، تدوین و تنظیم ساختار یافته: محمدامین شریف
-           ============================================================ -->
-      <div class="fm-featured-publication-card" id="featuredSolidworksCard" style="margin-bottom: 28px; border-color: rgba(0, 242, 254, 0.35); background: linear-gradient(135deg, rgba(14, 21, 37, 0.85) 0%, rgba(10, 16, 28, 0.95) 100%);">
-        <div class="fm-pub-cover-col" style="position: relative; overflow: hidden; border-radius: 14px; min-height: 220px;">
-          <img src="assets/images/cad-banner.jpg" alt="دوره آموزش تخصصی سالیدورکس" class="fm-pub-cover-img" style="height: 100%; object-fit: cover;" loading="lazy">
-          <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 16, 28, 0.9) 0%, rgba(10, 16, 28, 0.2) 60%);"></div>
-          <div style="position: absolute; bottom: 12px; right: 12px; left: 12px; background: rgba(7, 14, 20, 0.88); backdrop-filter: blur(8px); padding: 8px 12px; border-radius: 10px; font-size: 11px; text-align: center; border: 1px solid rgba(0, 242, 254, 0.4); color: #38bdf8; font-weight: 700;">
-            <i data-lucide="award" style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-left: 4px;"></i>
-            <span data-en="Curated &amp; Compiled by Mohammadamin Sharif" data-fa="گردآوری و تدوین: محمدامین شریف">گردآوری و تدوین: محمدامین شریف</span>
-          </div>
-        </div>
-
-        <div class="fm-pub-info-col">
-          <div class="fm-pub-badge" style="background: rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.3); color: #00f2fe;">
-            <i data-lucide="sparkles" style="width: 13px; height: 13px;"></i>
-            <span data-en="SOLIDWORKS CAD ACADEMY &bull; 42 CHAPTERS &bull; 10 BLUEPRINTS" data-fa="دوره جامع آموزش سالیدورکس &bull; ۴۲ سرفصل کامل &bull; ۱۰ نقشه ساخت">دوره جامع آموزش سالیدورکس &bull; ۴۲ سرفصل کامل &bull; ۱۰ نقشه ساخت</span>
+              <!-- Engineering Lab Camper Van with glowing lights -->
+              <g transform="translate(55, 115)">
+                <!-- Vehicle Body -->
+                <rect x="0" y="0" width="62" height="28" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="0.8"/>
+                <rect x="44" y="4" width="14" height="12" rx="2" fill="#f59e0b" opacity="0.85"/>
+                <rect x="8" y="4" width="12" height="10" rx="1.5" fill="#0284c7" opacity="0.7"/>
+                <rect x="24" y="4" width="12" height="10" rx="1.5" fill="#0284c7" opacity="0.7"/>
+                <!-- Wheels -->
+                <circle cx="14" cy="28" r="6" fill="#090d16" stroke="#475569" stroke-width="1.5"/>
+                <circle cx="48" cy="28" r="6" fill="#090d16" stroke="#475569" stroke-width="1.5"/>
+                <circle cx="14" cy="28" r="2.5" fill="#94a3b8"/>
+                <circle cx="48" cy="28" r="2.5" fill="#94a3b8"/>
+                <!-- Headlight Beam -->
+                <polygon points="62,18 105,10 105,32 62,26" fill="#fef08a" opacity="0.15"/>
+                <!-- Tail light -->
+                <circle cx="2" cy="20" r="2" fill="#ef4444" opacity="0.9"/>
+              </g>
+            </svg>
           </div>
 
-          <h2 class="fm-pub-title" data-en="SolidWorks Engineering Academy & Industrial Blueprint Lab" data-fa="دوره جامع و کارگاه تخصصی سالیدورکس مقدماتی تا پیشرفته" style="color: #ffffff;">
-            دوره جامع و کارگاه تخصصی سالیدورکس مقدماتی تا پیشرفته
-          </h2>
-
-          <p class="fm-pub-desc" data-en="Comprehensive CAD curriculum curated and structured by Mohammadamin Sharif — covering 2D sketching, geometric relations, fully defined states, 3D features, assemblies, mechanisms, engineering drawings, GD&T, 10 exact industrial blueprints, and interactive quiz." data-fa="دوره جامع و کاربردی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) — شامل محیط‌های دو بعدی و سه‌بعدی، قیود و فولی، نماها، کلیدهای میانبر، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.">
-            دوره جامع و کاربردی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) — شامل محیط‌های دو بعدی و سه‌بعدی، قیود و فولی، نماها، کلیدهای میانبر، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.
-          </p>
-
-          <div class="fm-pub-tools-row">
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch1');"><i data-lucide="pen-tool" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 1: 2D Sketch" data-fa="فصل ۱: ترسیم ۲ بعدی">فصل ۱: ترسیم ۲ بعدی</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch2');"><i data-lucide="link-2" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 2: Relations" data-fa="فصل ۲: قیود و فولی">فصل ۲: قیود و فولی</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch3');"><i data-lucide="sliders" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 3: Views & Keys" data-fa="فصل ۳: نماها و میانبرها">فصل ۳: نماها و میانبرها</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch4');"><i data-lucide="box" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 4: 3D Features" data-fa="فصل ۴: مدل‌سازی ۳ بعدی">فصل ۴: مدل‌سازی ۳ بعدی</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch5');"><i data-lucide="cpu" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 5: Assembly" data-fa="فصل ۵: مونتاژ اسمبلی">فصل ۵: مونتاژ اسمبلی</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('ch6');"><i data-lucide="file-text" style="width: 12px; height: 12px; color: #00f2fe;"></i> <span data-en="CH 6: Drawing & BOM" data-fa="فصل ۶: نقشه‌کشی و BOM">فصل ۶: نقشه‌کشی و BOM</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('exercises');"><i data-lucide="ruler" style="width: 12px; height: 12px; color: #10b981;"></i> <span data-en="10 Industrial Blueprints" data-fa="کارگاه ۱۰ نقشه ساخت صنعتی">کارگاه ۱۰ نقشه ساخت صنعتی</span></span>
-            <span class="fm-pub-tool-chip" style="cursor: pointer;" onclick="navigateToSection('solidworks'); filterSwChapter('quiz');"><i data-lucide="award" style="width: 12px; height: 12px; color: #facc15;"></i> <span data-en="Knowledge Quiz" data-fa="آزمون آنلاین سنجش تسلط">آزمون آنلاین سنجش تسلط</span></span>
+          <!-- MINIMAL PROFILE BANNER & BIGGER SPECS (کاربر: عکس مینی‌مال، مشخصات بزرگتر) -->
+          <div class="deck-profile-banner">
+            <div class="deck-profile-avatar-wrap" onclick="openToolInspector('profile')" role="button" title="مشاهده بیوگرافی و رزومه">
+              <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="deck-profile-avatar-img">
+              <span class="deck-avatar-online-dot" title="Active at IUST"></span>
+            </div>
+            <div class="deck-profile-info" onclick="openToolInspector('profile')" style="cursor: pointer;">
+              <h2 class="deck-profile-name" data-en="Mohammadamin Sharif" data-fa="محمدامین شریف">محمدامین شریف</h2>
+              <div class="deck-profile-university" data-en="Mechanical Engineering &bull; IUST" data-fa="مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران">
+                <i data-lucide="graduation-cap" style="width: 14px; height: 14px; color: #38bdf8;"></i>
+                <span data-en="Mechanical Engineering &bull; IUST" data-fa="دانشگاه علم و صنعت ایران (IUST)">دانشگاه علم و صنعت ایران (IUST)</span>
+              </div>
+              <div class="deck-specs-chips">
+                <span class="deck-spec-chip highlight"><i data-lucide="award" style="width: 11px; height: 11px;"></i> CSWP Certified</span>
+                <span class="deck-spec-chip"><i data-lucide="disc" style="width: 11px; height: 11px;"></i> CFturbo Pump</span>
+                <span class="deck-spec-chip"><i data-lucide="wind" style="width: 11px; height: 11px;"></i> Fluent CFD</span>
+                <span class="deck-spec-chip"><i data-lucide="book-open" style="width: 11px; height: 11px;"></i> مؤلف کتاب</span>
+              </div>
+            </div>
           </div>
 
-          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-            <button onclick="navigateToSection('solidworks'); return false;" class="fm-pub-btn-primary" style="background: linear-gradient(135deg, #00f2fe 0%, #0284c7 100%); border: none; cursor: pointer;">
-              <i data-lucide="layers" style="width: 16px; height: 16px;"></i>
-              <span data-en="Enter SolidWorks Academy" data-fa="ورود به دوره و کارگاه آموزش سالیدورکس">ورود به دوره و کارگاه آموزش سالیدورکس</span>
-              <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+          <!-- TYPOGRAPHY WIDGET & DYNAMIC TICKER (Matching Friday / February 14th & Music Strip in mockup) -->
+          <div class="deck-typo-widget">
+            <h1 class="deck-typo-main" data-en="Mechanical Engineering" data-fa="طراحی و مهندسی مکانیک">طراحی و مهندسی مکانیک</h1>
+            <div class="deck-typo-sub">
+              <span data-en="Iran University of Science &amp; Technology" data-fa="علم و صنعت ایران &bull; ورودی">علم و صنعت ایران &bull; ورودی</span>
+              <span class="deck-typo-accent">۱۴۰۲</span>
+            </div>
+
+            <!-- Dynamic Track Strip (SolidWorks & Turbomachinery Suite) -->
+            <div class="deck-track-strip">
+              <div class="deck-track-info">
+                <p class="deck-track-title" data-en="Hydraulic Pump, Digital Twins &amp; SolidWorks" data-fa="طراحی هیدرولیکی، دوقلوهای دیجیتال و سالیدورکس">طراحی هیدرولیکی، دوقلوهای دیجیتال و سالیدورکس</p>
+                <p class="deck-track-artist" data-en="SolidWorks CAD &bull; CFturbo &bull; Ansys Fluent" data-fa="دوره جامع سالیدورکس &bull; طراحی پمپ &bull; تحلیل فلوئنت">دوره جامع سالیدورکس &bull; طراحی پمپ &bull; تحلیل فلوئنت</p>
+              </div>
+              <div class="deck-track-controls">
+                <button class="deck-track-btn" onclick="openToolInspector('quick_overview')" title="راهنمای میز کار"><i data-lucide="pause" style="width: 15px; height: 15px;"></i></button>
+                <button class="deck-track-btn" onclick="openToolInspector('solidworks')" title="ورود به سالیدورکس"><i data-lucide="play" style="width: 15px; height: 15px;"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5-COLUMN SQUIRCLE APP SPRINGBOARD (Exact match to the app grid in image.png) -->
+          <div class="deck-springboard" id="homeSyncedShowcase">
+
+            <!-- ROW 1 -->
+            <!-- 1: SolidWorks -->
+            <button class="deck-app-tile" onclick="openToolInspector('solidworks')" title="دوره جامع سالیدورکس (۴۲ درس)" data-category="cad">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); --glow-color: rgba(2, 132, 199, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="box" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="SolidWorks" data-fa="سالیدورکس">سالیدورکس</span>
             </button>
 
-            <button onclick="navigateToSection('solidworks'); setTimeout(() => filterSwChapter('exercises'), 100); return false;" class="fm-pub-btn-secondary" style="cursor: pointer;">
-              <i data-lucide="ruler" style="width: 15px; height: 15px; color: #10b981;"></i>
-              <span data-en="10 Industrial Blueprints" data-fa="کارگاه ۱۰ نقشه ساخت با ابعاد دقیق">کارگاه ۱۰ نقشه ساخت با ابعاد دقیق</span>
+            <!-- 2: CFturbo Pump -->
+            <button class="deck-app-tile" onclick="openToolInspector('pump')" title="طراحی پمپ در CFturbo و CFD" data-category="cfd">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); --glow-color: rgba(6, 182, 212, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="disc" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="CFturbo" data-fa="طراحی پمپ">طراحی پمپ</span>
             </button>
 
-            <button onclick="navigateToSection('solidworks'); setTimeout(() => filterSwChapter('quiz'), 100); return false;" class="fm-pub-btn-secondary" style="cursor: pointer;">
-              <i data-lucide="award" style="width: 15px; height: 15px; color: #facc15;"></i>
-              <span data-en="Take Online Quiz" data-fa="آزمون آنلاین و سنجش تسلط">آزمون آنلاین و سنجش تسلط</span>
+            <!-- 3: ISO Blueprints & Caliper -->
+            <button class="deck-app-tile" onclick="openBlueprintModal(0)" title="استودیوی نقشه‌های ساخت با کولیس دیجیتال" data-category="cad">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); --glow-color: rgba(16, 185, 129, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="ruler" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Blueprints" data-fa="نقشه‌کشی">نقشه‌کشی</span>
             </button>
+
+            <!-- 4: Business Book -->
+            <button class="deck-app-tile" onclick="openToolInspector('business')" title="کتاب اصول مدیریت کسب‌وکار (اثر تألیفی)" data-category="books">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); --glow-color: rgba(245, 158, 11, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="book-open" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Monograph" data-fa="کتاب مدیریت">کتاب مدیریت</span>
+            </button>
+
+            <!-- 5: NACA 0012 Aerodynamics -->
+            <button class="deck-app-tile" onclick="openToolInspector('aerodynamics')" title="شبیه‌سازی آیرودینامیک ایرفویل ناسا" data-category="cfd">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); --glow-color: rgba(99, 102, 241, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="wind" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Airfoil" data-fa="ایرفویل ناسا">ایرفویل ناسا</span>
+            </button>
+
+            <!-- ROW 2 -->
+            <!-- 6: Karman Vortex -->
+            <button class="deck-app-tile" onclick="openToolInspector('cylinder')" title="ریزش گردابه‌های فون کارمن (FFT)" data-category="cfd">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); --glow-color: rgba(139, 92, 246, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="activity" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Vortex" data-fa="گردابه کارمن">گردابه کارمن</span>
+            </button>
+
+            <!-- 7: Microfluidic Twin -->
+            <button class="deck-app-tile" onclick="openToolInspector('microfluidics')" title="دوقلوی دیجیتال میکروفلوئیدیک دوفازی" data-category="cfd">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); --glow-color: rgba(20, 184, 166, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="git-commit" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Microfluidics" data-fa="میکروفلوئیدیک">میکروفلوئیدیک</span>
+            </button>
+
+            <!-- 8: Shock Absorber Motion -->
+            <button class="deck-app-tile" onclick="openToolInspector('shock')" title="مونتاژ مکانیزم کمک‌فنر در سالیدورکس" data-category="cad">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); --glow-color: rgba(249, 115, 22, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="sliders" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Shock Damper" data-fa="کمک‌فنر">کمک‌فنر</span>
+            </button>
+
+            <!-- 9: Rocket Surfacing -->
+            <button class="deck-app-tile" onclick="openToolInspector('rocket')" title="مدل‌سازی سطوح سه‌بعدی بدنه راکت" data-category="cad">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); --glow-color: rgba(236, 72, 153, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="rocket" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Rocket CAD" data-fa="بدنه راکت">بدنه راکت</span>
+            </button>
+
+            <!-- 10: Engineering Calculator -->
+            <button class="deck-app-tile" onclick="openToolInspector('calc')" title="ماشین‌حساب و حلگرهای مهندسی مکانیک" data-category="cad">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #475569 0%, #334155 100%); --glow-color: rgba(71, 85, 105, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="calculator" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Calculator" data-fa="ماشین‌حساب">ماشین‌حساب</span>
+            </button>
+
+            <!-- ROW 3 -->
+            <!-- 11: SolidWorks Quiz -->
+            <button class="deck-app-tile" onclick="openToolInspector('quiz')" title="آزمون آنلاین سنجش تسلط سالیدورکس CSWP" data-category="cad">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); --glow-color: rgba(234, 179, 8, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="award" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="CAD Quiz" data-fa="آزمون تسلط">آزمون تسلط</span>
+            </button>
+
+            <!-- 12: 10 Strategic Tools -->
+            <button class="deck-app-tile" onclick="openToolInspector('tools10')" title="۱۰ ابزار استراتژیک تصمیم‌گیری (پوگ، SWOT و ...)" data-category="books">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #fb923c 0%, #f97316 100%); --glow-color: rgba(251, 146, 60, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="wrench" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="10 Tools" data-fa="۱۰ ابزار تصمیم">۱۰ ابزار تصمیم</span>
+            </button>
+
+            <!-- 13: Digital Twins & Fluids Lab -->
+            <button class="deck-app-tile" onclick="openToolInspector('twins')" title="مرکز دوقلوهای دیجیتال و شبیه‌سازها" data-category="cfd">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); --glow-color: rgba(14, 165, 233, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="cpu" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Simulations" data-fa="دوقلوی سیالات">دوقلوی سیالات</span>
+            </button>
+
+            <!-- 14: Resume & Background -->
+            <button class="deck-app-tile" onclick="openToolInspector('resume')" title="سوابق تحصیلی و رزومه محمدامین شریف" data-category="profile">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); --glow-color: rgba(59, 130, 246, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="file-text" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Resume" data-fa="رزومه و مهارت">رزومه و مهارت</span>
+            </button>
+
+            <!-- 15: Contact Desk -->
+            <button class="deck-app-tile" onclick="openToolInspector('contact')" title="ارتباط مستقیم و همکاری مهندسی" data-category="contact">
+              <div class="deck-squircle" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); --glow-color: rgba(34, 197, 94, 0.5);">
+                <div class="deck-squircle-icon"><i data-lucide="send" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
+              </div>
+              <span class="deck-app-label" data-en="Contact" data-fa="همکاری و تماس">همکاری و تماس</span>
+            </button>
+
           </div>
+
+          <!-- FLOATING DOCK SHELF (Row of 4 primary apps like iOS Dock) -->
+          <div class="deck-dock-shelf">
+            <button class="deck-app-tile" onclick="navigateToSection('solidworks')" title="آکادمی سالیدورکس">
+              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                <div class="deck-squircle-icon"><i data-lucide="box" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+              </div>
+            </button>
+            <button class="deck-app-tile" onclick="navigateToSection('projects')" title="پروژه‌ها و CFD">
+              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">
+                <div class="deck-squircle-icon"><i data-lucide="layers" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+              </div>
+            </button>
+            <button class="deck-app-tile" onclick="navigateToSection('books')" title="کتاب و ابزارها">
+              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                <div class="deck-squircle-icon"><i data-lucide="book-open" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+              </div>
+            </button>
+            <button class="deck-app-tile" onclick="navigateToSection('profile')" title="درباره محمدامین شریف">
+              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
+                <div class="deck-squircle-icon"><i data-lucide="user" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+              </div>
+            </button>
+            <span class="deck-dock-indicator"></span>
+          </div>
+
+        </div>
+
+        <!-- SIGNATURE HANDLE (Matching u/kennyroo in mockup) -->
+        <div class="deck-signature-handle" onclick="openToolInspector('profile')" role="button">
+          Mohammadamin Sharif
+        </div>
+        <div class="deck-signature-sub">
+          Iran University of Science &amp; Technology &bull; Dept. of Mechanical Engineering
         </div>
       </div>
-
-      <!-- ============================================================
-           01 ALL ENGINEERING PROJECTS & DIGITAL LABS (12+ PROJECTS)
-           نمایش جامع تمامی پروژه‌های مهندسی، سالیدورکس، شبیه‌سازی و توربوماشین
-           ============================================================ -->
-      <div class="fm-section-panel" style="margin-bottom: 28px;" id="homeAllProjectsPanel">
-        <div class="fm-panel-header" style="flex-wrap: wrap; gap: 14px; align-items: center;">
-          <div class="fm-panel-num-title">
-            <span class="fm-panel-num">01</span>
-            <div>
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 3px; flex-wrap: wrap;">
-                <h2 class="fm-panel-title" data-en="All Engineering Projects & Workspaces" data-fa="تمام پروژه‌ها و کارگاه‌های مهندسی" style="margin: 0;">All Engineering Projects &amp; Workspaces</h2>
-                <span class="fm-live-status-pill" style="font-size: 10px; font-family: var(--font-mono); padding: 3px 9px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 20px; color: #00f2fe; display: inline-flex; align-items: center; gap: 6px;">
-                  <span class="pulse-dot" style="width: 6px; height: 6px; background: #00f2fe; border-radius: 50%; box-shadow: 0 0 6px #00f2fe;"></span>
-                  <span data-en="12 Active Engineering Projects" data-fa="۱۲ پروژه فعال مهندسی">12 Active Engineering Projects</span>
-                </span>
-              </div>
-              <p style="font-size: 12px; color: #94a3b8; margin: 0; line-height: 1.5;" data-en="Applied portfolio: Turbomachinery, computational fluid dynamics (CFD), SolidWorks CAD assemblies, and interactive digital twins." data-fa="مجموعه پروژه‌های کاربردی: توربوماشین، مکانیک محاسباتی (CFD)، مدل‌های سالیدورکس و دوقلوهای دیجیتال تعاملی.">Applied portfolio: Turbomachinery, computational fluid dynamics (CFD), SolidWorks CAD assemblies, and interactive digital twins.</p>
-            </div>
-          </div>
-          <a href="#projects" class="fm-panel-action-link" onclick="navigateToSection('projects'); return false;">
-            <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
-            <span data-en="Explore All Workspaces" data-fa="نمایش گالری تخصصی کارگاه‌ها">Explore All Workspaces</span>
-            <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
-          </a>
-        </div>
-
-        <!-- Filter Bar -->
-        <div class="projects-filter-bar" style="margin-bottom: 20px;">
-          <button class="proj-filter-btn home-filter-btn active" onclick="filterHomeProjects('all', this)"><i data-lucide="layers" style="width: 13px; height: 13px;"></i> <span data-en="All Projects (12)" data-fa="همه پروژه‌ها (۱۲)">All Projects (12)</span></button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('turbo', this)"><i data-lucide="disc" style="width: 13px; height: 13px;"></i> <span data-en="Turbomachinery & Pumps (2)" data-fa="توربوماشین و پمپ‌ها (۲)">Turbomachinery &amp; Pumps (2)</span></button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('cfd', this)"><i data-lucide="wind" style="width: 13px; height: 13px;"></i> <span data-en="CFD Simulations (3)" data-fa="شبیه‌سازی CFD (۳)">CFD Simulations (3)</span></button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('cad', this)"><i data-lucide="box" style="width: 13px; height: 13px;"></i> <span data-en="SolidWorks CAD &amp; Academy (4)" data-fa="آموزش و سالیدورکس CAD (۴)">SolidWorks CAD &amp; Academy (4)</span></button>
-          <button class="proj-filter-btn home-filter-btn" onclick="filterHomeProjects('twin', this)"><i data-lucide="activity" style="width: 13px; height: 13px;"></i> <span data-en="Digital Twins (4)" data-fa="دوقلوهای دیجیتال (۴)">Digital Twins (4)</span></button>
-        </div>
-
-        <!-- Home Projects Grid (12 Complete Engineering Cards) -->
-        <div class="fm-projects-grid" id="homeAllProjectsGrid">
-          
-          <!-- Project 1: CFturbo Centrifugal Pump Design Checklist -->
-          <div class="fm-project-card" data-cat="turbo" onclick="window.location.href='projects/cfturbo-pump/pump-design-checklist.html'" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal pump impeller blade in CFturbo" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(0, 242, 254, 0.6); color: #00f2fe;">TURBO // CFTURBO</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Pump Design Checklist in CFturbo" data-fa="چک‌لیست طراحی پمپ در CFturbo">Pump Design Checklist in CFturbo</div>
-                <div class="fm-project-desc" data-en="Comprehensive 6-stage impeller and 5-stage volute design checklist from 1D sizing to 3D blades." data-fa="چک‌لیست جامع ۶ مرحله‌ای پروانه و ۵ مرحله‌ای حلزونی از سایزبندی یک‌بعدی تا تیغه‌های سه‌بعدی.">
-                  Comprehensive 6-stage impeller and 5-stage volute design checklist from 1D sizing to 3D blades.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="disc" style="width: 12px; height: 12px; color: #00f2fe;"></i>
-                  <span>CFturbo 2026</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
-                  <span>11 Stages</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Open Checklist">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2: Flow Around Cylinder - Karman Vortex Shedding (ANSYS Fluent) -->
-          <div class="fm-project-card" data-cat="cfd" onclick="openProjectModal('cylinderFlow')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/cylinder-flow-cfd.jpg" alt="Karman vortex street CFD simulation" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(14, 165, 233, 0.6); color: #38bdf8;">CFD // FLUENT</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Cylinder Vortex Shedding (Fluent)" data-fa="ریزش گردابه‌های فون کارمن (Fluent)">Cylinder Vortex Shedding (Fluent)</div>
-                <div class="fm-project-desc" data-en="Transient laminar & turbulent vortex shedding with Strouhal number validation, lift and drag oscillation." data-fa="تحلیل ناپایا و پریودیک ریزش گردابه، محاسبه عدد استروهال و نوسانات ضرایب برآ و پسا.">
-                  Transient laminar &amp; turbulent vortex shedding with Strouhal number validation, lift and drag oscillation.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="activity" style="width: 12px; height: 12px; color: #38bdf8;"></i>
-                  <span>Re = 1,850</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="zap" style="width: 12px; height: 12px;"></i>
-                  <span>St = 0.198</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="View CFD Briefing">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3: Centrifugal Impeller Blade & Volute Parametric Optimization -->
-          <div class="fm-project-card" data-cat="turbo" onclick="openProjectModal('bladeOpt')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal impeller blade pressure distribution" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(0, 242, 254, 0.6); color: #00f2fe;">TURBO // CFD</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Impeller & Volute Optimization" data-fa="بهینه‌سازی پروانه و حلزونی پمپ">Impeller &amp; Volute Optimization</div>
-                <div class="fm-project-desc" data-en="Blade inlet/outlet angle optimization, wrap angle tuning, and volute tongue clearance to boost efficiency." data-fa="بهینه‌سازی زوایای ورود و خروج پره، زاویه پیچش و فاصله لبه حلزونی جهت افزایش راندمان هیدرولیکی.">
-                  Blade inlet/outlet angle optimization, wrap angle tuning, and volute tongue clearance to boost efficiency.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="trending-up" style="width: 12px; height: 12px; color: #00f2fe;"></i>
-                  <span>η = 87.4%</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="disc" style="width: 12px; height: 12px;"></i>
-                  <span>2,950 RPM</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="View Optimization">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 4: Two-Phase Gas-Liquid Multiphase Flow (VOF) -->
-          <div class="fm-project-card" data-cat="cfd" onclick="openProjectModal('twoPhaseFlow')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/two-phase-flow-cfd.jpg" alt="Two phase liquid gas multiphase flow in horizontal pipe" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(99, 102, 241, 0.6); color: #818cf8;">CFD // MULTIPHASE</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Two-Phase Gas-Liquid Pipe Flow" data-fa="جریان دوفازی گاز-مایع در لوله">Two-Phase Gas-Liquid Pipe Flow</div>
-                <div class="fm-project-desc" data-en="VOF surface tracking in horizontal pipelines: slug flow, stratified regimes, and pressure drop analysis." data-fa="شبیه‌سازی ردیابی فصل‌مشترک به روش VOF در خطوط لوله: بررسی جریان لخته‌ای، لایه‌ای و افت فشار.">
-                  VOF surface tracking in horizontal pipelines: slug flow, stratified regimes, and pressure drop analysis.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="waves" style="width: 12px; height: 12px; color: #818cf8;"></i>
-                  <span>VOF Method</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="gauge" style="width: 12px; height: 12px;"></i>
-                  <span>Slugging</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="View Multiphase CFD">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 5: SolidWorks Model Rocket Aerospace Assembly -->
-          <div class="fm-project-card" data-cat="cad" onclick="openProjectModal('rocket')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/solidworks/rocket-assembly/assembled-sky.jpg" alt="SolidWorks Model Rocket Assembly" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Model Rocket Multi-Stage Assembly" data-fa="مونتاژ راکت مدل چندمرحله‌ای">Model Rocket Multi-Stage Assembly</div>
-                <div class="fm-project-desc" data-en="12-part aerospace CAD assembly: nose cone, payload fairing, fins, motor mount, and technical drawings." data-fa="مجموعه مونتاژی ۱۲ قطعه‌ای هوافضا: دماغه آیرودینامیک، بالچه‌های پایدارکننده و نقشه‌های ساخت.">
-                  12-part aerospace CAD assembly: nose cone, payload fairing, fins, motor mount, and technical drawings.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="box" style="width: 12px; height: 12px; color: #38bdf8;"></i>
-                  <span>12 Parts</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
-                  <span>SLDASM &amp; STEP</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="View Assembly Specs">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 6: SolidWorks Coilover Shock Suspension Assembly -->
-          <div class="fm-project-card" data-cat="cad" onclick="openProjectModal('shock')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/solidworks/shock-assembly.jpg" alt="SolidWorks Coilover Shock Suspension Assembly" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Shock Absorber & Suspension Linkage" data-fa="کمک‌فنر کویل‌اوور و مکانیزم تعلیق">Shock Absorber &amp; Suspension Linkage</div>
-                <div class="fm-project-desc" data-en="Precision 14-part automotive suspension assembly with helical spring, piston shaft, and eyelets." data-fa="مجموعه مونتاژی ۱۴ قطعه‌ای تعلیق خودرو: فنر مارپیچ، شفت پیستون، واشرها و اتصالات انتهایی.">
-                  Precision 14-part automotive suspension assembly with helical spring, piston shaft, and eyelets.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="box" style="width: 12px; height: 12px; color: #38bdf8;"></i>
-                  <span>14 Parts</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="cpu" style="width: 12px; height: 12px;"></i>
-                  <span>Kinematics</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="View Assembly Specs">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 7: SolidWorks Bench Clamp Toggle Mechanism -->
-          <div class="fm-project-card" data-cat="cad" onclick="openProjectModal('clamp')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/cad-banner.jpg" alt="SolidWorks Bench Clamp Toggle Mechanism" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(56, 189, 248, 0.6); color: #38bdf8;">CAD // SOLIDWORKS</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Bench Clamp Toggle Mechanism" data-fa="مکانیزم گیره ضامنی رومیزی">Bench Clamp Toggle Mechanism</div>
-                <div class="fm-project-desc" data-en="Toggle linkage mechanism with mechanical advantage for industrial workholding and fixtures." data-fa="مکانیزم ضامنی با مزیت مکانیکی بالا جهت فیکسچرهای صنعتی و مهار قطعه‌کار.">
-                  Toggle linkage mechanism with mechanical advantage for industrial workholding and fixtures.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="box" style="width: 12px; height: 12px; color: #38bdf8;"></i>
-                  <span>SLDASM</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="sliders" style="width: 12px; height: 12px;"></i>
-                  <span>Fixtures</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="View Mechanism Specs">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 7B: SolidWorks Engineering Academy & Blueprint Lab -->
-          <div class="fm-project-card" data-cat="cad" onclick="navigateToSection('solidworks')" role="button" tabindex="0" style="border: 1px solid rgba(0, 242, 254, 0.45); background: linear-gradient(135deg, rgba(14, 21, 37, 0.9) 0%, rgba(6, 78, 59, 0.2) 100%);">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/cad-banner.jpg" alt="دوره آموزش سالیدورکس" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(0, 242, 254, 0.7); color: #00f2fe; background: rgba(0, 242, 254, 0.15);">ACADEMY // ۴۲ سرفصل</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="SolidWorks Academy &amp; Blueprint Lab" data-fa="دوره جامع سالیدورکس و کارگاه نقشه‌ها">SolidWorks Academy &amp; Blueprint Lab</div>
-                <div class="fm-project-desc" data-en="Complete engineering course syllabus curated by Mohammadamin Sharif: 2D sketching, fully defined relations, 3D features, assembly mates, drawing GD&T, 10 exact blueprints, and quiz." data-fa="سرفصل کامل دوره جامع مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف): محیط ۲ بعدی، قیود، فیچرهای ۳ بعدی، مونتاژ، نقشه‌کشی، ۱۰ نقشه ساخت با ابعاد و آزمون آنلاین.">
-                  سرفصل کامل دوره جامع مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف): محیط ۲ بعدی، قیود، فیچرهای ۳ بعدی، مونتاژ، نقشه‌کشی، ۱۰ نقشه ساخت با ابعاد و آزمون آنلاین.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="book-open" style="width: 12px; height: 12px; color: #00f2fe;"></i>
-                  <span data-en="42 Topics &bull; 10 Blueprints" data-fa="۴۲ مبحث &bull; ۱۰ نقشه ساخت">۴۲ مبحث &bull; ۱۰ نقشه ساخت</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Open SolidWorks Academy" style="background: rgba(0, 242, 254, 0.2); border-color: rgba(0, 242, 254, 0.5);">
-                  <i data-lucide="arrow-left" style="width: 12px; height: 12px; color: #00f2fe;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 8: Power Plant Digital Twin Engine (Rankine Cycle) -->
-          <div class="fm-project-card" data-cat="twin" onclick="window.location.href='simulations/Power_Plant_Digital_Twin_Engine.html'" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/twin-banner.jpg" alt="Thermal steam power plant Rankine cycle simulation" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(16, 185, 129, 0.6); color: #10b981;">TWIN // SIMULATION</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Rankine Cycle Digital Twin" data-fa="دوقلوی دیجیتال سیکل بخار رانکین">Rankine Cycle Digital Twin</div>
-                <div class="fm-project-desc" data-en="Live thermodynamic engine with real-time T-s & P-h state diagrams, boiler expansion, and condenser." data-fa="موتور ترمودینامیکی زنده همراه با نمودارهای T-s و P-h، توربین انبساط، بویلر و کندانسور.">
-                  Live thermodynamic engine with real-time T-s &amp; P-h state diagrams, boiler expansion, and condenser.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="activity" style="width: 12px; height: 12px; color: #10b981;"></i>
-                  <span>Live WebGL</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="play-circle" style="width: 12px; height: 12px;"></i>
-                  <span>Interactive</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Launch Simulator">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 9: Interactive Pump Anatomy & Hydraulic Loop -->
-          <div class="fm-project-card" data-cat="twin" onclick="window.location.href='simulations/Interactive_Pump_Anatomy.html'" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="Interactive pump 3D anatomy" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(16, 185, 129, 0.6); color: #10b981;">TWIN // 3D PUMP</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Interactive 3D Pump Anatomy" data-fa="آناتومی ۳ بعدی تعاملی پمپ">Interactive 3D Pump Anatomy</div>
-                <div class="fm-project-desc" data-en="Interactive 3D cutaway of centrifugal pump: volute casing, impeller eye, wear rings, and seal chamber." data-fa="نمای برش‌خورده سه‌بعدی و تعاملی پمپ: محفظه حلزونی، چشم پروانه، رینگ‌های سایشی و آب‌بندی.">
-                  Interactive 3D cutaway of centrifugal pump: volute casing, impeller eye, wear rings, and seal chamber.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="disc" style="width: 12px; height: 12px; color: #10b981;"></i>
-                  <span>3D Cutaway</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="play-circle" style="width: 12px; height: 12px;"></i>
-                  <span>Real-Time</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Launch 3D Pump">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 10: Microfluidic Chip Lab (Diverging Nozzle) -->
-          <div class="fm-project-card" data-cat="cfd" onclick="navigateToSection('microfluidics')" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/hero-f1-cfd.jpg" alt="Microfluidic diverging nozzle chip lab" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(0, 242, 254, 0.6); color: #00f2fe;">LAB // NAVIER-STOKES</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Microfluidic Chip Lab (Nozzle)" data-fa="آزمایشگاه تراشه میکروسیالاتی">Microfluidic Chip Lab (Nozzle)</div>
-                <div class="fm-project-desc" data-en="Real-time 2D Navier-Stokes numerical solver simulating laminar diverging channel flow, vortices, and tracer dye." data-fa="حل‌کننده بلادرنگ دوبعدی معادلات ناویر-استوکس برای جریان در مجرای واگرا و ردیابی ذرات جوهر.">
-                  Real-time 2D Navier-Stokes numerical solver simulating laminar diverging channel flow, vortices, and tracer dye.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="cpu" style="width: 12px; height: 12px; color: #00f2fe;"></i>
-                  <span>2D Solver</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="sliders" style="width: 12px; height: 12px;"></i>
-                  <span>Interactive</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Open Microfluidics Lab">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 11: Dynamic Thermal Steam Boiler Drum Simulator -->
-          <div class="fm-project-card" data-cat="twin" onclick="window.location.href='simulations/Digital_Twin___Thermal_Power_Simulation.html'" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/wave-vortex-cta.jpg" alt="Boiler drum dynamic steam simulator" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(245, 158, 11, 0.6); color: #f59e0b;">TWIN // BOILER</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Boiler Dynamic Steam Simulator" data-fa="شبیه‌ساز درام بویلر نیروگاهی">Boiler Dynamic Steam Simulator</div>
-                <div class="fm-project-desc" data-en="Dynamic water-steam equilibrium, drum swell & shrink phenomena, and steam superheater heat transfer." data-fa="شبیه‌سازی تعادل ترمودینامیکی دوفازی آب و بخار، پدیده تورم سطح درام و انتقال حرارت سوپرهیتر.">
-                  Dynamic water-steam equilibrium, drum swell &amp; shrink phenomena, and steam superheater heat transfer.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="flame" style="width: 12px; height: 12px; color: #f59e0b;"></i>
-                  <span>Thermal Engine</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="activity" style="width: 12px; height: 12px;"></i>
-                  <span>Phase Equilibrium</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Launch Boiler Sim">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 12: Hydraulic Loop & Industrial Piping Network Twin -->
-          <div class="fm-project-card" data-cat="twin" onclick="window.location.href='simulations/Digital_Twin___Hydraulic_Simulation.html'" role="button" tabindex="0">
-            <div class="fm-project-img-wrap">
-              <img src="assets/images/twin_header_banner_1789396975536.jpg" alt="Industrial hydraulic network twin" class="fm-project-img">
-              <span class="fm-project-badge" style="border-color: rgba(16, 185, 129, 0.6); color: #10b981;">TWIN // HYDRAULICS</span>
-            </div>
-            <div class="fm-project-body">
-              <div>
-                <div class="fm-project-title" data-en="Industrial Hydraulic Piping Twin" data-fa="دوقلوی دیجیتال هیدرولیک و پایپینگ">Industrial Hydraulic Piping Twin</div>
-                <div class="fm-project-desc" data-en="Dynamic piping simulator: Darcy-Weisbach friction, pump operating point Q-H intersection, and valve throttling." data-fa="شبیه‌ساز شبکه خطوط لوله: افت اصطکاکی دارسی-وایسباخ، نقطه کارکرد پمپ Q-H و خفگی شیرها.">
-                  Dynamic piping simulator: Darcy-Weisbach friction, pump operating point Q-H intersection, and valve throttling.
-                </div>
-              </div>
-              <div class="fm-project-footer">
-                <div class="fm-project-meta-item">
-                  <i data-lucide="git-commit" style="width: 12px; height: 12px; color: #10b981;"></i>
-                  <span>Network Solver</span>
-                </div>
-                <div class="fm-project-meta-item">
-                  <i data-lucide="gauge" style="width: 12px; height: 12px;"></i>
-                  <span>Q-H System</span>
-                </div>
-                <div class="fm-project-arrow-btn" title="Launch Hydraulic Twin">
-                  <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ============================================================
-           02 SCIENTIFIC REFERENCE LIBRARY (07 VOLUMES & COMPLETE SOLUTIONS)
-           کتابخانه تخصصی و رفرنس‌های علمی مهندسی مکانیک - ۷ جلد کامل
-           ============================================================ -->
-      <div class="fm-section-panel" style="margin-bottom: 24px;" id="homeScientificLibrary">
-        <div class="fm-panel-header" style="flex-wrap: wrap; gap: 12px;">
-          <div class="fm-panel-num-title">
-            <span class="fm-panel-num">02</span>
-            <div>
-              <h2 class="fm-panel-title" data-en="Scientific Reference Library (08 Volumes & Monograph)" data-fa="کتابخانه تخصصی و رفرنس‌های علمی (۸ جلد و اثر مؤلف)">Scientific Reference Library (08 Volumes & Monograph)</h2>
-              <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;" data-en="Standard academic textbooks, engineering references, and full solution manuals" data-fa="کتب مرجع معتبر دانشگاهی، مراجع مهندسی و حل‌المسائل تشریحی گام‌به‌گام">Standard academic textbooks, engineering references, and full solution manuals</div>
-            </div>
-          </div>
-          <a href="#books" class="fm-panel-action-link" onclick="navigateToSection('books'); return false;">
-            <i data-lucide="library" style="width: 14px; height: 14px;"></i>
-            <span data-en="Open Full Library [08]" data-fa="مشاهده کتابخانه جامع [۰۸]">Open Full Library [08]</span>
-            <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
-          </a>
-        </div>
-
-        <!-- 7 Reference Volumes Grid -->
-        <div class="fm-home-books-grid">
-          <!-- Vol 1: Fluid Mechanics -->
-          <a href="books/fluids.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well"><i data-lucide="droplets" style="width: 18px; height: 18px; color: #00f2fe;"></i></div>
-              <span class="fm-ref-vol-badge">VOL 01</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Fluid Mechanics" data-fa="مکانیک سیالات">Fluid Mechanics</div>
-            <div class="fm-ref-card-authors">Frank M. White &bull; Fox &amp; McDonald &bull; Munson &bull; Yunus Çengel</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> 4 Books + Solutions</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 2: Thermodynamics -->
-          <a href="books/thermodynamics.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(251, 146, 60, 0.12); border-color: rgba(251, 146, 60, 0.3);"><i data-lucide="flame" style="width: 18px; height: 18px; color: #fb923c;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #fb923c; border-color: rgba(251, 146, 60, 0.4);">VOL 02</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Thermodynamics" data-fa="ترمودینامیک">Thermodynamics</div>
-            <div class="fm-ref-card-authors">Çengel &amp; Boles &bull; Van Wylen &bull; Moran &amp; Shapiro</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> 3 Books + Solutions</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 3: Heat Transfer -->
-          <a href="books/heat-transfer.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.3);"><i data-lucide="thermometer" style="width: 18px; height: 18px; color: #ef4444;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4);">VOL 03</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Heat Transfer" data-fa="انتقال حرارت">Heat Transfer</div>
-            <div class="fm-ref-card-authors">Incropera &amp; DeWitt &bull; J.P. Holman &bull; Yunus Çengel</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Standard References</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 4: Statics, Strength & Machine Design -->
-          <a href="books/statics-strength-machine-design.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.3);"><i data-lucide="ruler" style="width: 18px; height: 18px; color: #c084fc;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">VOL 04</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Statics, Strength & Machine Design" data-fa="استاتیک، مقاومت مصالح و طراحی اجزا">Statics, Strength &amp; Machine Design</div>
-            <div class="fm-ref-card-authors">J.L. Meriam &bull; Beer &amp; Johnston &bull; Joseph Shigley</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> 2 Books + Solutions</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 5: Pump Design & Turbomachinery -->
-          <a href="books/pump-design.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(6, 182, 212, 0.12); border-color: rgba(6, 182, 212, 0.3);"><i data-lucide="disc" style="width: 18px; height: 18px; color: #06b6d4;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #06b6d4; border-color: rgba(6, 182, 212, 0.4);">VOL 05</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Pump Design & Turbomachinery" data-fa="طراحی پمپ و توربوماشین">Pump Design &amp; Turbomachinery</div>
-            <div class="fm-ref-card-authors">A.J. Stepanoff &bull; Johann Friedrich Gülich &bull; Igor J. Karassik</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Turbomachinery Handbooks</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 6: Control & Vibrations -->
-          <a href="books/controls-vibrations.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.3);"><i data-lucide="activity" style="width: 18px; height: 18px; color: #22c55e;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #22c55e; border-color: rgba(34, 197, 94, 0.4);">VOL 06</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Control & Vibrations" data-fa="کنترل و ارتعاشات مکانیکی">Control &amp; Vibrations</div>
-            <div class="fm-ref-card-authors">Katsuhiko Ogata &bull; Singiresu S. Rao &bull; William T. Thomson</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Dynamics &amp; Feedback</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 7: Dynamics & Dynamics of Machinery -->
-          <a href="books/dynamics-machine-dynamics.html" class="fm-ref-card">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(234, 179, 8, 0.12); border-color: rgba(234, 179, 8, 0.3);"><i data-lucide="rotate-cw" style="width: 18px; height: 18px; color: #eab308;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #eab308; border-color: rgba(234, 179, 8, 0.4);">VOL 07</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Dynamics & Dynamics of Machinery" data-fa="دینامیک و دینامیک ماشین">Dynamics &amp; Dynamics of Machinery</div>
-            <div class="fm-ref-card-authors">J.L. Meriam &bull; Hamilton H. Mabie &bull; Charles F. Reinholtz</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag"><i data-lucide="check-circle" style="width: 11px; height: 11px;"></i> Kinematics &amp; Linkages</span>
-              <span class="fm-ref-view-btn"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-
-          <!-- Vol 8: Business Management for Engineers (Author's Monograph) -->
-          <a href="books/business-management-for-engineers.html" class="fm-ref-card" style="border-color: rgba(20, 184, 166, 0.5); background: linear-gradient(135deg, rgba(13, 27, 39, 0.9), rgba(12, 74, 76, 0.3));">
-            <div class="fm-ref-card-header">
-              <div class="fm-ref-icon-well" style="background: rgba(13, 148, 136, 0.22); border-color: rgba(20, 184, 166, 0.5);"><i data-lucide="briefcase" style="width: 18px; height: 18px; color: #14b8a6;"></i></div>
-              <span class="fm-ref-vol-badge" style="color: #5eead4; border-color: rgba(20, 184, 166, 0.6); background: rgba(13, 148, 136, 0.2);">VOL 08 &bull; اثر مؤلف</span>
-            </div>
-            <div class="fm-ref-card-title" data-en="Business Management for Engineers" data-fa="اصول مدیریت کسب‌وکار برای ذهن مهندسی">Business Management for Engineers</div>
-            <div class="fm-ref-card-authors" data-en="Mohammadamin Sharif &bull; Special Monograph" data-fa="تألیف: محمدامین شریف &bull; دانشگاه علم و صنعت ایران">تألیف: محمدامین شریف &bull; دانشگاه علم و صنعت ایران</div>
-            <div class="fm-ref-card-footer">
-              <span class="fm-ref-sol-tag" style="background: rgba(13, 148, 136, 0.18); color: #5eead4;"><i data-lucide="sparkles" style="width: 11px; height: 11px;"></i> 10 Strategic Tools</span>
-              <span class="fm-ref-view-btn" style="background: #14b8a6; color: #04101d;"><i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i></span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           4. ENGINEERING THROUGH SIMULATION (Interactive CFD Lab)
-           Authentic scientific visualization with toggleable contours
-           ============================================================ -->
-      <div class="fm-sim-lab-section" id="engineeringSimLab">
-        <div class="fm-panel-header">
-          <div class="fm-panel-num-title">
-            <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #00f2fe;"></i>
-            <h2 class="fm-panel-title" data-en="Engineering Through Simulation" data-fa="مهندسی از دریچه شبیه‌سازی">Engineering Through Simulation</h2>
-          </div>
-          <span style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8;" data-en="INTERACTIVE CFD POST-PROCESSING" data-fa="پردازش گرافیکی تعاملی CFD">INTERACTIVE CFD POST-PROCESSING</span>
-        </div>
-
-        <!-- Simulation Contour Tabs -->
-        <div class="fm-sim-tabs" role="tablist">
-          <button class="fm-sim-tab-btn active" data-contour="velocity" onclick="switchCfdContour('velocity')">
-            <i data-lucide="wind" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Velocity Field (u, v)
-          </button>
-          <button class="fm-sim-tab-btn" data-contour="pressure" onclick="switchCfdContour('pressure')">
-            <i data-lucide="gauge" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Pressure Field (p)
-          </button>
-          <button class="fm-sim-tab-btn" data-contour="vorticity" onclick="switchCfdContour('vorticity')">
-            <i data-lucide="repeat" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Turbulence &amp; Vorticity (&omega;)
-          </button>
-          <button class="fm-sim-tab-btn" data-contour="streamlines" onclick="switchCfdContour('streamlines')">
-            <i data-lucide="git-commit" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Streamlines (&psi;)
-          </button>
-          <button class="fm-sim-tab-btn" data-contour="mesh" onclick="switchCfdContour('mesh')">
-            <i data-lucide="grid" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Computational Mesh
-          </button>
-        </div>
-
-        <!-- Interactive CFD Canvas Display Box -->
-        <div class="fm-sim-display-box" id="cfdSimBox">
-          <canvas id="cfdInteractiveCanvas" class="fm-sim-interactive-canvas"></canvas>
-          <div class="fm-sim-colorbar">
-            <span id="colorbarMin">0.0 m/s</span>
-            <div class="fm-colorbar-gradient" id="colorbarBar"></div>
-            <span id="colorbarMax">45.0 m/s</span>
-            <span style="color: #00f2fe; margin-left: 6px;" id="cfdFieldLabel">| VELOCITY</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           5. RESEARCH INTERESTS SECTION
-           ============================================================ -->
-      <div class="fm-research-section" id="researchInterestsSection">
-        <div class="fm-panel-header" style="margin-bottom: 18px;">
-          <div class="fm-panel-num-title">
-            <i data-lucide="microscope" style="width: 18px; height: 18px; color: #00f2fe;"></i>
-            <h2 class="fm-panel-title" data-en="Research Interests" data-fa="زمینه‌های پژوهشی">Research Interests</h2>
-          </div>
-          <span style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8;" data-en="SCIENTIFIC DISCIPLINES" data-fa="حوزه‌های تخصصی">SCIENTIFIC DISCIPLINES</span>
-        </div>
-
-        <div class="fm-research-grid">
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="waves" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Fluid Dynamics</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="cpu" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">CFD &amp; Numerical Methods</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Turbulence Modeling</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="flame" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Heat Transfer</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="disc" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Turbomachinery</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="navigation" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Aerodynamics</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="sun" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Renewable Energy</span>
-          </div>
-          <div class="fm-research-card">
-            <div class="fm-research-icon"><i data-lucide="droplets" style="width: 16px; height: 16px;"></i></div>
-            <span class="fm-research-label">Multiphase Flow</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           6. CONTACT / CTA SECTION
-           With authentic fluid vortex wave background
-           ============================================================ -->
-      <div class="fm-cta-banner" id="contactCtaBanner">
-        <img src="assets/images/wave-vortex-cta.jpg" alt="Turbulent fluid vortex wave visualization" class="fm-cta-bg-img">
-        <div class="fm-cta-content">
-          <div>
-            <div class="fm-cta-eyebrow" data-en="Next Step..." data-fa="گام بعدی...">Next Step...</div>
-            <h2 class="fm-cta-heading" data-en="Let's Build Something Amazing" data-fa="بیایید اثری ماندگار خلق کنیم">Let's Build Something Amazing</h2>
-            <p class="fm-cta-subtext" data-en="Interested in engineering, simulation, research, or collaboration? Feel free to reach out!" data-fa="علاقه‌مند به همکاری‌های مهندسی، شبیه‌سازی، پروژه‌های صنعتی یا تبادل نظر علمی؟ با کمال میل پاسخگوی شما هستم.">
-              Interested in engineering, simulation, research, or collaboration? Feel free to reach out!
-            </p>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px;">
-              <a href="mailto:mohammadaminsh1384@gmail.com" class="fm-cta-primary" style="padding: 12px 24px; font-size: 13.5px;">
-                <span data-en="Get in Touch" data-fa="ارتباط با من">Get in Touch</span>
-                <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
-              </a>
-              <a href="assets/downloads/Turbomachinery-Lab-Report.pdf" download class="fm-clean-btn fm-clean-btn-primary" style="padding: 11px 20px; font-size: 13px;" title="Download Turbomachinery Laboratory Report">
-                <i data-lucide="file-text" style="width: 15px; height: 15px;"></i>
-                <span data-en="Turbomachinery Report (PDF)" data-fa="گزارش آزمایشگاه توربوماشین (PDF)">گزارش آزمایشگاه توربوماشین (PDF)</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="fm-contact-info-column">
-            <a href="mailto:mohammadaminsh1384@gmail.com" class="fm-contact-item">
-              <div class="fm-contact-icon-box">
-                <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
-              </div>
-              <div>
-                <div class="fm-contact-meta-label">Email</div>
-                <div class="fm-contact-meta-val">mohammadaminsh1384@gmail.com</div>
-              </div>
-            </a>
-            <a href="tel:+989032764840" class="fm-contact-item">
-              <div class="fm-contact-icon-box" style="background: rgba(0, 242, 254, 0.15); border-color: rgba(0, 242, 254, 0.4); color: #00f2fe;">
-                <i data-lucide="phone" style="width: 16px; height: 16px;"></i>
-              </div>
-              <div>
-                <div class="fm-contact-meta-label" data-en="Phone" data-fa="تلفن مستقیم">Phone</div>
-                <div class="fm-contact-meta-val" dir="ltr">0903 276 4840</div>
-              </div>
-            </a>
-            <a href="https://t.me/aminsharif_mech" target="_blank" rel="noopener noreferrer" class="fm-contact-item">
-              <div class="fm-contact-icon-box" style="background: rgba(14, 165, 233, 0.15); border-color: rgba(14, 165, 233, 0.4); color: #38bdf8;">
-                <i data-lucide="send" style="width: 16px; height: 16px;"></i>
-              </div>
-              <div>
-                <div class="fm-contact-meta-label">Telegram</div>
-                <div class="fm-contact-meta-val">@aminsharif_mech</div>
-              </div>
-            </a>
-            <div class="fm-contact-item">
-              <div class="fm-contact-icon-box" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #10b981;">
-                <i data-lucide="map-pin" style="width: 16px; height: 16px;"></i>
-              </div>
-              <div>
-                <div class="fm-contact-meta-label">Location</div>
-                <div class="fm-contact-meta-val">Iran &mdash; IUST University</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================================
-           7. FOOTER
-           ============================================================ -->
-      <footer class="fm-footer">
-        <div class="fm-footer-main">
-          <div class="fm-navbar-brand">
-            <div class="fm-brand-icon">
-              <i data-lucide="waves" style="width: 18px; height: 18px;"></i>
-            </div>
-            <div class="fm-brand-text">
-              <span class="fm-brand-title">FluidMind</span>
-              <span class="fm-brand-sub">Mechanical Engineering | Fluid Mechanics</span>
-            </div>
-          </div>
-
-          <ul class="fm-footer-links">
-            <li><a href="#home" onclick="navigateToSection('home'); return false;">Home</a></li>
-            <li><a href="#about" onclick="document.getElementById('fmAboutMeBlock')?.scrollIntoView({behavior:'smooth'}); return false;">About</a></li>
-            <li><a href="#courses" onclick="navigateToSection('books'); return false;">Courses</a></li>
-            <li><a href="#projects" onclick="navigateToSection('projects'); return false;">Projects</a></li>
-            <li><a href="#research" onclick="document.getElementById('researchInterestsSection')?.scrollIntoView({behavior:'smooth'}); return false;">Research</a></li>
-            <li><a href="#solidworks" onclick="navigateToSection('solidworks'); return false;"><span data-en="SolidWorks Academy" data-fa="آموزش سالیدورکس">SolidWorks Academy</span></a></li>
-            <li><a href="#blog" onclick="navigateToSection('simulations'); return false;">Blog</a></li>
-            <li><a href="#contact" onclick="document.getElementById('contactCtaBanner')?.scrollIntoView({behavior:'smooth'}); return false;">Contact</a></li>
-          </ul>
-
-          <div class="fm-footer-socials">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="GitHub"><i data-lucide="github" style="width: 14px; height: 14px;"></i></a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="LinkedIn"><i data-lucide="linkedin" style="width: 14px; height: 14px;"></i></a>
-            <a href="https://t.me/aminsharif_mech" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="Telegram"><i data-lucide="send" style="width: 14px; height: 14px;"></i></a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="fm-social-btn" title="YouTube"><i data-lucide="video" style="width: 14px; height: 14px;"></i></a>
-          </div>
-        </div>
-
-        <div class="fm-footer-bottom">
-          <span>&copy; 2026 FluidMind. All rights reserved.</span>
-          <span style="color: #00f2fe; font-family: var(--font-mono); font-size: 10px;">Fluid Dynamics &times; Better Tomorrow</span>
-        </div>
-      </footer>
     </section>
+
+    <!-- ============================================================
+         LIQUID GLASS TOOL INSPECTOR MODAL ('وقتی میرم توش توضیحات بیاد')
+         Opens dynamically when any tile, chip, or token is clicked!
+         ============================================================ -->
+    <div id="lgToolInspectorModal" class="lg-inspector-backdrop" onclick="if(event.target === this) closeToolInspector();" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="lg-inspector-box">
+        <div class="lg-inspector-header">
+          <div class="lg-inspector-hero">
+            <div class="lg-inspector-icon-wrap" id="lgInspectorIconWrap">
+              <i data-lucide="box" id="lgInspectorIcon" style="width: 26px; height: 26px; color: #00f2fe;"></i>
+            </div>
+            <div>
+              <h3 class="lg-inspector-title" id="lgInspectorTitle">ابزار مهندسی</h3>
+              <span class="lg-inspector-badge" id="lgInspectorBadge">سطح تخصصی</span>
+            </div>
+          </div>
+          <button class="lg-inspector-close" onclick="closeToolInspector()" title="بستن (Esc)" aria-label="Close modal">
+            <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+
+        <p class="lg-inspector-desc" id="lgInspectorDesc">
+          توضیحات جامع ابزار در اینجا نمایش داده می‌شود.
+        </p>
+
+        <div class="lg-inspector-specs-grid" id="lgInspectorSpecsGrid">
+          <!-- Dynamic capability pills inserted here -->
+        </div>
+
+        <div class="lg-inspector-actions" id="lgInspectorActions">
+          <button class="lg-inspector-btn-primary" id="lgInspectorBtnPrimary">
+            <span id="lgInspectorBtnPrimaryText">ورود به محیط کارگاه</span>
+            <i data-lucide="arrow-left" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="lg-inspector-btn-secondary" id="lgInspectorBtnSecondary" onclick="closeToolInspector()">
+            <span id="lgInspectorBtnSecondaryText">بستن پنجره</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- LIQUID GLASS FILTER DOCK (Modular Quick Switcher) -->
     <div class="filter-glass-dock" id="categoryFilterDock" role="toolbar" aria-label="Portfolio Category Switcher">
@@ -2385,15 +1834,19 @@
       if (mode === 'light') {
         rootEl.classList.add('light-mode');
         rootEl.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        document.body.classList.remove('dark-mode');
         if (themeSwitchCheckbox) themeSwitchCheckbox.checked = false;
       } else {
         rootEl.classList.remove('light-mode');
         rootEl.classList.add('dark-mode');
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
         if (themeSwitchCheckbox) themeSwitchCheckbox.checked = true;
       }
     }
 
-    const savedTheme = localStorage.getItem('site-theme') || 'light';
+    const savedTheme = localStorage.getItem('site-theme') || 'dark';
     applyTheme(savedTheme);
 
     if (themeSwitchCheckbox) {
@@ -2404,19 +1857,43 @@
       });
     }
 
-    // Language Toggle
+    // Language & RTL Direction Toggle
     const i18nEls = document.querySelectorAll('[data-en][data-fa]');
     function applyLanguage(lang) {
+      const isFa = (lang === 'fa');
+      const dir = isFa ? 'rtl' : 'ltr';
+
+      rootEl.setAttribute('lang', lang);
+      rootEl.setAttribute('dir', dir);
+      document.body.setAttribute('dir', dir);
+
       i18nEls.forEach(el => {
-        const val = lang === 'fa' ? el.dataset.fa : el.dataset.en;
+        const val = isFa ? el.dataset.fa : el.dataset.en;
         if (val !== undefined && val !== null) {
-          el.textContent = val;
+          if (val.includes('<') && val.includes('>')) {
+            el.innerHTML = val;
+          } else {
+            el.textContent = val;
+          }
         }
       });
+
       if (langCheckbox) {
-        langCheckbox.checked = (lang === 'fa');
+        langCheckbox.checked = isFa;
       }
-      rootEl.setAttribute('lang', lang);
+
+      // Re-render SolidWorks Academy if active to refresh dynamic strings and direction
+      if (typeof window.renderSolidWorksAcademy === 'function' && document.getElementById('solidworksCourseContainer')) {
+        try {
+          window.renderSolidWorksAcademy('solidworksCourseContainer');
+        } catch (e) {
+          console.warn('SolidWorks Academy re-render error:', e);
+        }
+      }
+
+      if (window.lucide) {
+        try { lucide.createIcons(); } catch (e) {}
+      }
     }
 
     const savedLang = localStorage.getItem('site-lang') || 'fa';
@@ -2429,6 +1906,18 @@
         localStorage.setItem('site-lang', next);
       });
     }
+
+    // Deck Live Clock Updater
+    function updateDeckClock() {
+      const clockEl = document.getElementById('deckLiveClock');
+      if (!clockEl) return;
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      clockEl.textContent = `${hours}:${mins}`;
+    }
+    updateDeckClock();
+    setInterval(updateDeckClock, 10000);
 
 
     // Optional mobile menu handling if present
@@ -3490,8 +2979,10 @@
       left: auto !important;
       z-index: 9999;
       direction: ltr !important;
-      display: inline-flex;
-      align-items: center;
+      display: inline-flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
       gap: 6px;
       padding: 2px 8px;
       height: 28px;
@@ -3665,14 +3156,17 @@
       background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.14);
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      direction: ltr !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
       padding: 0 4px;
       box-sizing: border-box;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6), 0 1px 1px rgba(255, 255, 255, 0.1);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
+      unicode-bidi: isolate !important;
     }
 
     .light-mode .mech-shifter-track {
@@ -4278,6 +3772,590 @@
   </style>
 
   <script>
+    /* ============================================================
+       LIQUID GLASS TOOL INSPECTOR CONTROLLER ("وقتی میرم توش توضیحات بیاد")
+       ============================================================ */
+    const LG_TOOL_DATA = {
+      solidworks: {
+        titleFa: 'سالیدورکس ۲۰۲۴ // طراحی صنعتی و نقشه‌کشی ساخت',
+        titleEn: 'SolidWorks 2024 // 3D CAD & Manufacturing Design',
+        badgeFa: 'CSWP &bull; تدوین ۴۲ درس آکادمی',
+        badgeEn: 'CSWP Level &bull; 42 Course Chapters',
+        icon: 'box',
+        iconColor: '#ff764c',
+        descFa: 'طراحی پارامتریک قطعات پیچیده صنعتی، تسلط کامل بر قیود هندسی و حالت فولی دیفاین در اسکچ دوبعدی، مدل‌سازی سه‌بعدی پیشرفته (اکسترود، ریوالو، لافت، سوییپ)، مونتاژ مکانیزم‌های دقیق مکانیکی با قیود پیشرفته، تحلیل حرکتی (Motion Study)، طراحی سطوح (Surfacing)، و تهیه نقشه‌های ساخت صنعتی منطبق بر استاندارد ISO 7200 با تلرانس‌گذاری هندسی (GD&T) و جدول لیست قطعات (BOM).',
+        descEn: 'Parametric modeling of complex industrial components, mastery of geometric relations and fully-defined sketches, advanced 3D features, mechanical assembly mechanisms, motion simulation, surfacing, and ISO 7200 manufacturing drawings with GD&T and BOM.',
+        specs: [
+          { icon: 'book-open', textFa: '۴۲ سرفصل جامع آکادمی سالیدورکس', textEn: '42 Comprehensive CAD Chapters' },
+          { icon: 'ruler', textFa: '۱۰ نقشه ساخت صنعتی با ابعاد دقیق', textEn: '10 Industrial Blueprints' },
+          { icon: 'layers', textFa: 'مدل‌سازی سطوح پیشرفته و قالب‌سازی', textEn: 'Surfacing & Mold Design' },
+          { icon: 'award', textFa: 'آزمون آنلاین سنجش تسلط', textEn: 'Online Knowledge Quiz' }
+        ],
+        btnPrimaryTextFa: 'ورود به دوره و کارگاه ۴۲ فصل سالیدورکس',
+        btnPrimaryTextEn: 'Enter SolidWorks Academy',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('solidworks'); },
+        btnSecondaryTextFa: 'مشاهده ۱۰ نقشه ساخت با کولیس',
+        btnSecondaryTextEn: 'Open CAD Blueprints',
+        btnSecondaryAction: () => { closeToolInspector(); openBlueprintModal(0); }
+      },
+      cfd: {
+        titleFa: 'انسیس فلوئنت و CFD // دینامیک محاسباتی سیالات',
+        titleEn: 'Ansys Fluent & CFD // Computational Fluid Dynamics',
+        badgeFa: 'توربوماشین &bull; آیرودینامیک &bull; انتقال حرارت',
+        badgeEn: 'Turbomachinery &bull; Aerodynamics &bull; Heat Transfer',
+        icon: 'wind',
+        iconColor: '#00f2fe',
+        descFa: 'شبیه‌سازی و حل عددی میدان‌های جریان تراکم‌پذیر و تراکم‌ناپذیر، جریان‌های متلاطم با مدل‌های k-epsilon و SST k-omega، تحلیل آیرودینامیکی ایرفویل‌ها و خودرو، شبیه‌سازی جریان‌های دوفازی، کاویتاسیون در توربوماشین‌ها، تحلیل انتقال حرارت توأم (CHT)، و مطالعه استقلال حل از ابعاد شبکه محاسباتی (Mesh Convergence).',
+        descEn: 'Numerical simulation of compressible and incompressible flows, turbulence modeling (k-epsilon, SST k-omega), airfoil aerodynamics, multiphase cavitation, conjugate heat transfer (CHT), and mesh convergence validation.',
+        specs: [
+          { icon: 'activity', textFa: 'شبیه‌سازی آیرودینامیک ایرفویل NACA 0012', textEn: 'NACA 0012 Airfoil Aerodynamics' },
+          { icon: 'disc', textFa: 'تحلیل چندمرحله‌ای هیدرولیک پمپ سانتریفیوژ', textEn: 'Centrifugal Pump CFD' },
+          { icon: 'zap', textFa: 'شبیه‌سازی نازل مافوق صوت دی‌لاوال', textEn: 'Supersonic De Laval Nozzle' },
+          { icon: 'git-commit', textFa: 'دوقلوی دیجیتال مولد قطره میکروفلوئیدیک', textEn: 'Microfluidic Droplet Twin' }
+        ],
+        btnPrimaryTextFa: 'ورود به شبیه‌سازها و دوقلوهای دیجیتال',
+        btnPrimaryTextEn: 'Open CFD Simulations & Twins',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('simulations'); },
+        btnSecondaryTextFa: 'چک‌لیست طراحی پمپ در CFturbo',
+        btnSecondaryTextEn: 'CFturbo Pump Checklist',
+        btnSecondaryAction: () => { window.location.href = 'projects/cfturbo-pump/pump-design-checklist.html'; }
+      },
+      blueprints: {
+        titleFa: 'استودیوی نقشه‌های ساخت صنعتی // ISO 7200 & ASME Y14.5',
+        titleEn: 'Industrial Blueprint Studio // ISO 7200 & ASME Y14.5',
+        badgeFa: 'نقشه‌کشی کارگاهی &bull; تلرانس GD&T',
+        badgeEn: 'Shop Drawings &bull; GD&T Tolerancing',
+        icon: 'ruler',
+        iconColor: '#10b981',
+        descFa: 'مجموعه نقشه‌های ساخت صنعتی دقیق شامل جدول مشخصات فنی استاندارد ISO 7200، متریال، روش تولید، تلرانس‌های انطباقی ابعادی (H7/g6)، نمادهای زبری سطح Ra، و تلرانس‌های هندسی (هم‌محوری، تعامد، تختی). مجهز به کولیس مجازی دیجیتال با دقت میلی‌متری و نمایشگر لحظه‌ای مختصات CAD HUD.',
+        descEn: 'Precision manufacturing blueprints adhering to ISO 7200 and ASME Y14.5M, featuring fit tolerances, surface roughness Ra, GD&T frames, virtual millimeter caliper tool, and real-time CAD coordinate HUD.',
+        specs: [
+          { icon: 'ruler', textFa: 'خط‌کش کولیس مجازی با اندازه‌گیری دقیق', textEn: 'Virtual Digital Caliper Tool' },
+          { icon: 'crosshair', textFa: 'نمایشگر زنده مختصات صنعتی CAD HUD', textEn: 'Real-time Coordinate HUD' },
+          { icon: 'layers', textFa: '۳ حالت نمایشی: Dark CAD، Plotter سفید و Cyanotype', textEn: '3 Themes: CAD, Plotter, Cyanotype' },
+          { icon: 'file-text', textFa: 'کشوی مشخصات فنی متریال و استانداردها', textEn: 'Technical Specs Drawer' }
+        ],
+        btnPrimaryTextFa: 'اجرای استودیوی نقشه با کولیس و نمایشگر HUD',
+        btnPrimaryTextEn: 'Launch Blueprint Studio with Caliper',
+        btnPrimaryAction: () => { closeToolInspector(); openBlueprintModal(0); },
+        btnSecondaryTextFa: 'مشاهده ۱۰ تمرین کارگاهی در سالیدورکس',
+        btnSecondaryTextEn: '10 Workshop Blueprints',
+        btnSecondaryAction: () => { closeToolInspector(); navigateToSection('solidworks'); setTimeout(() => filterSwChapter('exercises'), 100); }
+      },
+      matlab: {
+        titleFa: 'متلب و سیمولینک // محاسبات عددی و دینامیک سیستم‌ها',
+        titleEn: 'MATLAB & Simulink // Numerical Computing & Control',
+        badgeFa: 'ارتعاشات &bull; سیمولینک &bull; محاسبات علمی',
+        badgeEn: 'Vibration &bull; Simulink &bull; ODE Solvers',
+        icon: 'activity',
+        iconColor: '#a855f7',
+        descFa: 'کدنویسی الگوریتم‌های محاسبات عددی در مهندسی مکانیک، حل معادلات دیفرانسیل غیرخطی پدیده‌های فیزیکی، شبیه‌سازی سیستم‌های ارتعاشی و دینامیکی چنددرجه آزادی در سیمولینک، تحلیل پاسخ فرکانسی با تبدیل فوریه سریع (FFT)، و طراحی کنترل‌کننده‌های فیدبک PID برای فرآیندهای مکانیکی.',
+        descEn: 'Numerical algorithms for mechanical systems, non-linear ODE solvers, multi-degree-of-freedom dynamic simulations in Simulink, FFT frequency analysis, and closed-loop PID control design.',
+        specs: [
+          { icon: 'sliders', textFa: 'شبیه‌سازی ارتعاشات و سیستم تعلیق خودرو', textEn: 'Vehicle Dynamics & Suspension' },
+          { icon: 'activity', textFa: 'تحلیل پاسخ فرکانسی FFT', textEn: 'FFT Frequency Response' },
+          { icon: 'cpu', textFa: 'طراحی سیستم کنترل فیدبک PID', textEn: 'PID Feedback Control' },
+          { icon: 'code', textFa: 'حل عددی معادلات ناویر-استوکس', textEn: 'Navier-Stokes Numerical Solver' }
+        ],
+        btnPrimaryTextFa: 'مشاهده دوقلوهای دیجیتال و شبیه‌سازها',
+        btnPrimaryTextEn: 'View Digital Twins',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('simulations'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      python: {
+        titleFa: 'پایتون مهندسی // پردازش داده و خودکارسازی محاسبات',
+        titleEn: 'Python for Mechanical Engineering // SciPy & Automation',
+        badgeFa: 'NumPy &bull; SciPy &bull; اتوماسیون داده',
+        badgeEn: 'NumPy &bull; SciPy &bull; Data Pipelines',
+        icon: 'code-2',
+        iconColor: '#f59e0b',
+        descFa: 'توسعه اسکریپت‌های تحلیلی برای مکانیک سیالات و جامدات با زبان پایتون، استخراج و پردازش خودکار داده‌های خروجی نرم‌افزارهای CFD و سالیدورکس، تحلیل آماری و برازش منحنی‌های عملکردی توربوماشین‌ها با کتابخانه‌های NumPy و SciPy، و پیاده‌سازی شبیه‌سازهای سبک محاسباتی تحت وب.',
+        descEn: 'Applied engineering automation and scientific computing using Python, NumPy, and SciPy. Post-processing simulation outputs, turbomachinery performance curve fitting, and interactive simulation web apps.',
+        specs: [
+          { icon: 'terminal', textFa: 'اسکریپت‌های اتوماسیون تحلیل داده‌های CFD', textEn: 'CFD Automation Scripts' },
+          { icon: 'bar-chart', textFa: 'برازش منحنی‌های هد و راندمان پمپ', textEn: 'Pump Curve Fitting' },
+          { icon: 'cpu', textFa: 'محاسبات ترمودینامیکی و خواص سیالات', textEn: 'Fluid Properties & Thermo' },
+          { icon: 'globe', textFa: 'پیاده‌سازی شبیه‌سازهای تعاملی وب', textEn: 'Interactive Web Twins' }
+        ],
+        btnPrimaryTextFa: 'مشاهده شبیه‌سازهای تعاملی وب',
+        btnPrimaryTextEn: 'Explore Web Simulations',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('simulations'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      fea: {
+        titleFa: 'آباکوس و FEA // تحلیل استحکام و المان محدود',
+        titleEn: 'Abaqus & FEA // Finite Element Structural Analysis',
+        badgeFa: 'تنش فون مایسز &bull; تمرکز تنش &bull; خستگی',
+        badgeEn: 'Von Mises &bull; Stress Concentration &bull; Modal',
+        icon: 'cpu',
+        iconColor: '#10b981',
+        descFa: 'تحلیل تنش، کرنش و تغییرشکل اجزای مکانیکی تحت بارهای استاتیکی و دینامیکی، تحلیل تمرکز تنش در ناپیوستگی‌های هندسی، محاسبه ضریب اطمینان (Safety Factor)، ارزیابی معیارهای تسلیم فون مایسز و ترسکا، تحلیل مودال فرکانس‌های طبیعی ارتعاشات، و اصلاح شبکه المان محدود.',
+        descEn: 'Stress, strain, and deformation analysis of mechanical parts under static and dynamic loads, stress concentration evaluation, safety factor calculation, Von Mises yield criteria, and modal vibration analysis.',
+        specs: [
+          { icon: 'shield', textFa: 'تحلیل تنش فون مایسز و کرنش پلاستیک', textEn: 'Von Mises Stress Analysis' },
+          { icon: 'activity', textFa: 'تحلیل فرکانس‌های طبیعی و مودهای ارتعاشی', textEn: 'Modal Vibration Analysis' },
+          { icon: 'check-circle', textFa: 'تخمین عمر خستگی قطعات تحت بار دوره‌ای', textEn: 'Fatigue Life Prediction' },
+          { icon: 'layers', textFa: 'بهینه‌سازی شبکه محاسباتی و همگرایی نتایج', textEn: 'Mesh Quality & Convergence' }
+        ],
+        btnPrimaryTextFa: 'بررسی توانمندی‌های محاسباتی و سازه',
+        btnPrimaryTextEn: 'Explore Capabilities',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('capabilities'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      cfturbo: {
+        titleFa: 'طراحی تخصصی پمپ در CFturbo // توربوماشین',
+        titleEn: 'Centrifugal Pump Design in CFturbo // Turbomachinery',
+        badgeFa: 'طراحی ایمپلر و حلزونی پمپ',
+        badgeEn: 'Impeller & Volute Hydraulic Design',
+        icon: 'disc',
+        iconColor: '#00f2fe',
+        descFa: 'طراحی سیستماتیک و هیدرولیکی پروانه (Impeller) و پوسته حلزونی (Volute) پمپ‌های گریز از مرکز در نرم‌افزار تخصصی CFturbo، محاسبات ابعادی یک‌بعدی سرعت و زوایای جریان، بهینه‌سازی زوایای تیغه در لبه حمله و فرار برای حداکثر راندمان هیدرولیکی، و انتقال مستقیم مدل سه‌بعدی به سالیدورکس و انسیس فلوئنت.',
+        descEn: 'Systematic hydraulic design of centrifugal pump impellers and volutes in CFturbo, 1D velocity triangle sizing, blade angle optimization at leading/trailing edges, and direct STEP export to CAD/CFD workflows.',
+        specs: [
+          { icon: 'clipboard-check', textFa: 'چک‌لیست تعاملی ۱۱ مرحله‌ای طراحی هیدرولیکی', textEn: '11-Stage Design Checklist' },
+          { icon: 'disc', textFa: 'محاسبه مثلث‌های سرعت و زوایای تیغه', textEn: 'Velocity Triangles & Blade Angles' },
+          { icon: 'activity', textFa: 'بررسی پدیده کاویتاسیون و NPSH مورد نیاز', textEn: 'NPSH & Cavitation Assessment' },
+          { icon: 'trending-up', textFa: 'راندمان هیدرولیکی بهینه η = 78.4%', textEn: 'Target Efficiency η = 78.4%' }
+        ],
+        btnPrimaryTextFa: 'ورود به چک‌لیست تعاملی ۱۱ مرحله‌ای طراحی پمپ',
+        btnPrimaryTextEn: 'Open 11-Stage Pump Checklist',
+        btnPrimaryAction: () => { window.location.href = 'projects/cfturbo-pump/pump-design-checklist.html'; },
+        btnSecondaryTextFa: 'مشاهده گزارش کامل مکتوب پروژه',
+        btnSecondaryTextEn: 'Full Design Report',
+        btnSecondaryAction: () => { window.location.href = 'projects/cfturbo-pump/index.html'; }
+      },
+      printing: {
+        titleFa: 'پرینت سه‌بعدی و ساخت افزایشی // نمونه‌سازی سریع',
+        titleEn: '3D Printing & Additive Manufacturing // Prototyping',
+        badgeFa: 'FDM &bull; SLA &bull; اسلایسر Cura',
+        badgeEn: 'FDM &bull; SLA &bull; Cura Slicing',
+        icon: 'layers',
+        iconColor: '#0284c7',
+        descFa: 'فرآیند کامل آماده‌سازی و ساخت قطعات مکانیکی با فناوری‌های ساخت افزایشی FDM و SLA، تسلط بر اسلایسر Ultimaker Cura، تعیین الگوی بهینه تراکم (Infill) جهت استحکام قطعه در راستای بارهای مکانیکی، بهینه‌سازی ساپورت‌گذاری، و جبران‌سازی تلرانس‌های انطباقی برای چرخش روان شفت‌ها و یاتاقان‌ها.',
+        descEn: 'Complete additive manufacturing workflow using FDM and SLA, Ultimaker Cura slicing, infill pattern orientation for load-bearing strength, support generation, and fit tolerance compensation for mechanical assemblies.',
+        specs: [
+          { icon: 'layers', textFa: 'تنظیمات پیشرفته لایه‌گذاری در Cura', textEn: 'Advanced Cura Layering' },
+          { icon: 'shield', textFa: 'تحلیل استحکام مکانیکی پیوند بین لایه‌ها', textEn: 'Anisotropic Layer Strength' },
+          { icon: 'ruler', textFa: 'کنترل انطباق شفت و یاتاقان در قطعات چاپی', textEn: 'Shaft & Bearing Fit Tolerances' },
+          { icon: 'box', textFa: 'ساخت نمونه‌های فیزیکی مکانیزم‌های صنعتی', textEn: 'Physical Prototyping of Mechanisms' }
+        ],
+        btnPrimaryTextFa: 'مشاهده تمامی پروژه‌های مکانیکی',
+        btnPrimaryTextEn: 'Explore Projects Gallery',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('projects'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      business: {
+        titleFa: 'اصول مدیریت کسب‌وکار برای ذهن مهندسی (اثر تألیفی)',
+        titleEn: 'Business Management for the Engineering Mind (Monograph)',
+        badgeFa: 'تألیف اختصاصی: محمدامین شریف',
+        badgeEn: 'Authored by Mohammadamin Sharif',
+        icon: 'book-open',
+        iconColor: '#f59e0b',
+        descFa: 'راهنمای مطالعاتی کاربردی ویژه دانشجویان مهندسی برای تبدیل منطق عددی و تحلیلی به تصمیم‌های هوشمندانه تجاری. شامل ۱۰ ابزار استراتژیک تعاملی: ماتریس تصمیم‌گیری وزنی پوگ (Pugh)، تحلیل SWOT، ماتریس مدیریت زمان آیزنهاور، ماتریس BCG، مدل ۵ نیروی پورتر، و بوم مدل کسب‌وکار (BMC).',
+        descEn: 'A practical monograph written for engineering minds to transform mathematical analysis into strategic business decisions using 10 interactive analytical tools.',
+        specs: [
+          { icon: 'wrench', textFa: '۱۰ ابزار استراتژیک تحلیلی تحت وب', textEn: '10 Interactive Web Tools' },
+          { icon: 'book-open', textFa: 'مطالعه و ورق زدن آنلاین کتاب', textEn: 'Read Monograph Online' },
+          { icon: 'printer', textFa: 'نسخه چاپی و دانلود PDF', textEn: 'Print & PDF Ready' },
+          { icon: 'compass', textFa: 'ماتریس تصمیم‌گیری وزنی پوگ (Pugh)', textEn: 'Pugh Decision Matrix' }
+        ],
+        btnPrimaryTextFa: 'ورق زدن و مطالعه آنلاین کتاب',
+        btnPrimaryTextEn: 'Read Monograph Online',
+        btnPrimaryAction: () => { window.location.href = 'books/business-management-for-engineers.html'; },
+        btnSecondaryTextFa: 'کار با ۱۰ ابزار تعاملی مدیریت',
+        btnSecondaryTextEn: '10 Interactive Management Tools',
+        btnSecondaryAction: () => { window.location.href = 'books/business-management-tools.html'; }
+      },
+      quick_overview: {
+        titleFa: 'میز کار شیشه‌ای مهندسی مکانیک // راهنما',
+        titleEn: 'Liquid Glass Foundations // Workspace Guide',
+        badgeFa: 'دانشگاه علم و صنعت ایران',
+        badgeEn: 'IUST Mechanical Lab',
+        icon: 'compass',
+        iconColor: '#00f2fe',
+        descFa: 'این پورتفولیو به صورت یک میز کار شیشه‌ای تعاملی طراحی شده است تا تمام ابزارها و کارگاه‌های مهندسی بدون شلوغی بیش‌ازحد در دسترس باشند. هر کاشی سه‌بعدی شیشه‌ای، نشان یا توکن فیزیکی نشان‌دهنده یکی از تخصص‌های محمدامین شریف است. با کلیک روی هر المان، توضیحات و دکمه ورود به محیط کارگاه اختصاصی آن باز می‌شود.',
+        descEn: 'This spatial engineering workstation presents Mohammadamin Sharif\'s CAD, CFD, and prototyping capabilities in a tactile, uncluttered interface.',
+        specs: [
+          { icon: 'box', textFa: '۶ مکعب شیشه‌ای سه‌بعدی محیط‌های تخصصی', textEn: '6 3D Liquid Glass Jewels' },
+          { icon: 'layers', textFa: '۷ نشان فیزیکی جعبه‌ابزار مهندسی', textEn: '7 Physical Software Tokens' },
+          { icon: 'ruler', textFa: 'استودیوی نقشه‌های ساخت با کولیس دیجیتال', textEn: 'Blueprint Studio with Caliper' },
+          { icon: 'book-open', textFa: 'کتاب اصول مدیریت کسب‌وکار برای ذهن مهندسی', textEn: 'Business Monograph & Tools' }
+        ],
+        btnPrimaryTextFa: 'متوجه شدم / بازگشت به میز کار',
+        btnPrimaryTextEn: 'Got it / Back to Workspace',
+        btnPrimaryAction: () => closeToolInspector(),
+        btnSecondaryTextFa: 'مشاهده تمام پروژه‌ها',
+        btnSecondaryTextEn: 'All Projects (12)',
+        btnSecondaryAction: () => { closeToolInspector(); navigateToSection('projects'); }
+      },
+      profile: {
+        titleFa: 'محمدامین شریف // مشخصات تحصیلی و بیوگرافی',
+        titleEn: 'Mohammadamin Sharif // Academic Profile',
+        badgeFa: 'دانشجوی مهندسی مکانیک &bull; علم و صنعت',
+        badgeEn: 'Mechanical Engineering &bull; IUST',
+        icon: 'user-check',
+        iconColor: '#38bdf8',
+        descFa: 'محمدامین شریف، دانشجوی مهندسی مکانیک دانشگاه علم و صنعت ایران (ورودی ۱۴۰۲). طراح و مدرس دوره جامع ۴۲ فصل سالیدورکس، متخصص در شبیه‌سازی عددی دینامیک سیالات (CFD) در انسیس فلوئنت، طراحی هیدرولیکی توربوماشین‌ها، نقشه‌کشی ساخت صنعتی با تلرانس هندسی GD&T، و مؤلف کتاب اصول مدیریت کسب‌وکار برای ذهن مهندسی.',
+        descEn: 'Mohammadamin Sharif, Mechanical Engineering student at Iran University of Science and Technology (IUST). CAD specialist, creator of the 42-chapter SolidWorks Academy, CFD analyst, and author of the Business Management Monograph for Engineers.',
+        specs: [
+          { icon: 'award', textFa: 'دانشگاه علم و صنعت ایران (IUST)', textEn: 'Iran Univ. of Science & Technology' },
+          { icon: 'box', textFa: 'طراح و تدوین‌کننده آکادمی سالیدورکس', textEn: 'SolidWorks Academy Curator' },
+          { icon: 'disc', textFa: 'طراحی توربوماشین و پمپ در CFturbo', textEn: 'Turbomachinery & CFD' },
+          { icon: 'book-open', textFa: 'مؤلف کتاب اصول مدیریت کسب‌وکار', textEn: 'Business Monograph Author' }
+        ],
+        btnPrimaryTextFa: 'مشاهده سوابق کامل و اطلاعات تماس',
+        btnPrimaryTextEn: 'Full Biography & Contact',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('info'); },
+        btnSecondaryTextFa: 'مشاهده رزومه و پروژه‌ها',
+        btnSecondaryTextEn: 'Engineering Projects',
+        btnSecondaryAction: () => { closeToolInspector(); navigateToSection('projects'); }
+      },
+      pump: {
+        titleFa: 'طراحی هیدرولیکی پمپ سانتریفیوژ در CFturbo و CFD',
+        titleEn: 'Centrifugal Pump Hydraulic Sizing in CFturbo & Ansys Fluent',
+        badgeFa: 'توربوماشین &bull; چک‌لیست ۱۱ مرحله‌ای &bull; η = 78.4%',
+        badgeEn: 'Turbomachinery &bull; 11-Stage Design &bull; η = 78.4%',
+        icon: 'disc',
+        iconColor: '#00f2fe',
+        descFa: 'طراحی کامل و سیستماتیک پروانه (Impeller) و پوسته حلزونی (Volute) پمپ گریز از مرکز در نرم‌افزار CFturbo، تحلیل یک‌بعدی مثلث‌های سرعت ورودی و خروجی، بهینه‌سازی زاویه بتا تیغه‌ها برای کمینه‌سازی تلفات هیدرولیکی، بررسی پدیده کاویتاسیون و محاسبه NPSH مورد نیاز، خروجی STEP دقیق به سالیدورکس، و تحلیل جریان متلاطم چندمرحله‌ای با مدل SST k-omega در انسیس فلوئنت.',
+        descEn: 'Systematic hydraulic design of centrifugal pump impeller and volute in CFturbo, velocity triangle calculations, blade angle optimization, cavitation NPSH assessment, CAD export to SolidWorks, and multi-stage turbulent CFD in Ansys Fluent.',
+        specs: [
+          { icon: 'gauge', textFa: 'سرعت دورانی: ۱۴۵۰ دور بر دقیقه (RPM)', textEn: 'Rotational Speed: 1450 RPM' },
+          { icon: 'droplet', textFa: 'دبی طراحی: ۲۵ متر مکعب بر ساعت', textEn: 'Design Flow Rate: 25 m³/h' },
+          { icon: 'trending-up', textFa: 'هد هیدرولیکی: ۱۸ متر با راندمان ۷۸.۴٪', textEn: 'Head: 18m & Eff: 78.4%' },
+          { icon: 'clipboard-check', textFa: 'چک‌لیست تعاملی ۱۱ مرحله‌ای طراحی', textEn: '11-Stage Design Checklist' }
+        ],
+        btnPrimaryTextFa: 'ورود به چک‌لیست تعاملی ۱۱ مرحله‌ای طراحی پمپ',
+        btnPrimaryTextEn: 'Open 11-Stage Pump Checklist',
+        btnPrimaryAction: () => { window.location.href = 'projects/cfturbo-pump/pump-design-checklist.html'; },
+        btnSecondaryTextFa: 'مشاهده گزارش کامل و مستندات',
+        btnSecondaryTextEn: 'Full Design Report',
+        btnSecondaryAction: () => { closeToolInspector(); navigateToSection('projects'); }
+      },
+      aerodynamics: {
+        titleFa: 'شبیه‌سازی آیرودینامیک ایرفویل NACA 0012 // تونل باد مجازی',
+        titleEn: 'NACA 0012 Aerodynamics // Virtual Wind Tunnel Twin',
+        badgeFa: 'تونل باد ناسا &bull; زاویه استال &bull; لایه مرزی',
+        badgeEn: 'NASA Validated &bull; Stall Angle &bull; Boundary Layer',
+        icon: 'wind',
+        iconColor: '#38bdf8',
+        descFa: 'حل عددی میدان جریان پیرامون ایرفویل متقارن NACA 0012 در رژیم‌های سرعت زیرصوت تا تراکم‌پذیر (ماخ ۰.۱۵ تا ۰.۸۵)، محاسبه دقیق نیروهای برآ و پسا (Cl و Cd)، تحلیل رفتار لایه مرزی در برابر گرادیان فشار نامساعد، پیش‌بینی زاویه وقوع واماندگی (Stall)، و اعتبارسنجی دقیق با نتایج تونل باد NASA Langley.',
+        descEn: 'Numerical simulation of flow over NACA 0012 airfoil across subsonic and compressible regimes, lift/drag coefficients (Cl/Cd), boundary layer separation under adverse pressure gradients, stall onset prediction, and NASA wind tunnel validation.',
+        specs: [
+          { icon: 'wind', textFa: 'عدد رینولدز: Re = 3.0×10⁶', textEn: 'Reynolds Number: Re = 3.0×10⁶' },
+          { icon: 'zap', textFa: 'محدوده ماخ: Mach 0.15 - 0.85', textEn: 'Mach Range: 0.15 - 0.85' },
+          { icon: 'activity', textFa: 'مدل آشفتگی SST k-omega با شبکه C-Mesh', textEn: 'SST k-omega & C-Mesh' },
+          { icon: 'check-circle', textFa: 'انطباق ۹۸.۲٪ با داده‌های آزمایشگاهی ناسا', textEn: '98.2% NASA Experimental Match' }
+        ],
+        btnPrimaryTextFa: 'ورود به بخش دوقلوهای دیجیتال و شبیه‌سازها',
+        btnPrimaryTextEn: 'Open Digital Twins Lab',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('simulations'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      cylinder: {
+        titleFa: 'ریزش گردابه‌های فون کارمن // جریان گذرای حول استوانه',
+        titleEn: 'Karman Vortex Shedding // Transient Cylinder CFD',
+        badgeFa: 'پاسخ فرکانسی FFT &bull; ناپایداری گردابه‌ای &bull; St ≈ 0.20',
+        badgeEn: 'FFT Frequency &bull; Wake Instability &bull; St ≈ 0.20',
+        icon: 'activity',
+        iconColor: '#00f2fe',
+        descFa: 'شبیه‌سازی گذرای دوبعدی جریان سیال تراکم‌ناپذیر حول استوانه دایروی، بررسی پایداری دنباله جریان و تشکیل خیابان گردابه‌ای فون کارمن (Von Karman Vortex Street)، مانیتورینگ نوسانات نیروی برا و پسا در حوزه زمان، و اجرای تبدیل سریع فوریه (FFT) روی سیگنال لیفت جهت محاسبه فرکانس ریزش و اثبات عدد بدون‌بعد استروهال St ≈ 0.20.',
+        descEn: 'Transient 2D CFD simulation of incompressible flow over a cylinder, wake instability, Von Karman vortex street formation, time-domain lift/drag monitoring, and FFT spectral analysis proving Strouhal number St ≈ 0.20.',
+        specs: [
+          { icon: 'activity', textFa: 'عدد استروهال تجربی: St ≈ 0.20', textEn: 'Strouhal Number: St ≈ 0.20' },
+          { icon: 'sliders', textFa: 'رژیم‌های رینولدز آرام تا متلاطم (Re=100-10⁴)', textEn: 'Laminar to Turbulent (Re=100-10⁴)' },
+          { icon: 'cpu', textFa: 'تحلیل فرکانسی فوریه (FFT Power Spectrum)', textEn: 'FFT Power Spectrum Analysis' },
+          { icon: 'layers', textFa: 'شبکه‌بندی متراکم با لایه‌های مرزی y+ < 1', textEn: 'Prism Boundary Layers y+ < 1' }
+        ],
+        btnPrimaryTextFa: 'ورود به شبیه‌سازهای تعاملی سیالات',
+        btnPrimaryTextEn: 'Open Interactive Fluids Lab',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('simulations'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      microfluidics: {
+        titleFa: 'مولد قطره میکروفلوئیدیک // دوقلوی دیجیتال جریان متمرکز',
+        titleEn: 'Microfluidic Droplet Generator // Flow-Focusing Twin',
+        badgeFa: 'جریان دوفازی &bull; روش VOF &bull; عدد کاپیلاری Ca',
+        badgeEn: '2-Phase Flow &bull; VOF Method &bull; Capillary Number Ca',
+        icon: 'git-commit',
+        iconColor: '#00f2fe',
+        descFa: 'شبیه‌سازی دوقلوی دیجیتال بلادرنگ دینامیک سیالات دوفازی (آب در روغن) در محل اتصال متمرکزکننده جریان (Flow-Focusing Cross Junction)، رهگیری فصل مشترک دوفاز با الگوریتم Volume of Fluid (VOF)، بررسی گذار از رژیم چکه‌کردن (Dripping) به فواره (Jetting)، و تحلیل دینامیکی اثر عدد کاپیلاری Ca و عدد وبر We بر فرکانس و اندازه قطرات.',
+        descEn: 'Real-time digital twin of two-phase flow (water in oil) in a planar flow-focusing cross junction, VOF interface tracking, dripping-to-jetting transition, and capillary number (Ca) control over droplet size and monodispersity.',
+        specs: [
+          { icon: 'git-commit', textFa: 'عدد کاپیلاری بهینه: Ca = 0.042', textEn: 'Capillary Number: Ca = 0.042' },
+          { icon: 'disc', textFa: 'یکنواختی اندازه قطرات (Monodispersity > 98%)', textEn: 'Monodispersity > 98%' },
+          { icon: 'zap', textFa: 'فرکانس تولید قطره: تا 1200 هرتز', textEn: 'Generation Rate: up to 1200 Hz' },
+          { icon: 'layers', textFa: 'قابلیت تنظیم آنی کشش سطحی و نسبت دبی', textEn: 'Live Surface Tension & Flow Ratio' }
+        ],
+        btnPrimaryTextFa: 'ورود به دوقلوی تعاملی میکروفلوئیدیک',
+        btnPrimaryTextEn: 'Launch Microfluidic Twin',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('microfluidics'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      shock: {
+        titleFa: 'مونتاژ مکانیزم کمک‌فنر هیدرولیک و تحلیل دینامیکی',
+        titleEn: 'Hydraulic Shock Absorber Assembly & Dynamic Motion',
+        badgeFa: 'سالیدورکس ۲۰۲۴ &bull; قیود پیشرفته &bull; Motion Study',
+        badgeEn: 'SolidWorks 2024 &bull; Kinematic Mates &bull; Motion Study',
+        icon: 'box',
+        iconColor: '#ff764c',
+        descFa: 'طراحی پارامتریک و مونتاژ کامل اجزای سیستم تعلیق و کمک‌فنر هیدرولیکی در سالیدورکس: سیلندر فشار، پیستون، میله راهنما، فنر مارپیچ با قیدهای انعطاف‌پذیر، سوپاپ‌های کنترل روغن و اتصالات لولایی. تعریف قیود حرکتی پیشرفته (Limit Distance و Concentric)، شبیه‌سازی کورس فشرده‌سازی و بازگشت (Damping Cycle) در SolidWorks Motion، و تهیه نقشه‌های ساخت صنعتی.',
+        descEn: 'Parametric design and mechanical assembly of hydraulic shock absorber components in SolidWorks: pressure tube, damping piston, rod, flexible coil spring, valves, and eyelet mounts. Motion study of compression/rebound stroke and ISO drafting.',
+        specs: [
+          { icon: 'box', textFa: 'مدل‌سازی پارامتریک ۱۲ قطعه مکانیکی دقیق', textEn: '12 Parametric Precision Parts' },
+          { icon: 'activity', textFa: 'تحلیل حرکتی کورس لغزش در SolidWorks Motion', textEn: 'Kinematic Stroke Motion Study' },
+          { icon: 'ruler', textFa: 'انطباق تلرانسی H7/g6 شفت و سیلندر', textEn: 'Fit Tolerance H7/g6 Piston & Bore' },
+          { icon: 'layers', textFa: 'تهیه نقشه ساخت مونتاژی با جدول قطعات BOM', textEn: 'Assembly Drawing & BOM Table' }
+        ],
+        btnPrimaryTextFa: 'مشاهده آکادمی سالیدورکس و مکانیزم‌ها',
+        btnPrimaryTextEn: 'Open SolidWorks Academy',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('solidworks'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      rocket: {
+        titleFa: 'مدل‌سازی بدنه و مونتاژ قطعات راکت چندمرحله‌ای',
+        titleEn: 'Multistage Rocket Body & Aerodynamic Shell CAD',
+        badgeFa: 'سرفیسینگ پیشرفته &bull; مونتاژ Top-Down &bull; هوافضا',
+        badgeEn: 'Advanced Surfacing &bull; Top-Down CAD &bull; Aerospace',
+        icon: 'cpu',
+        iconColor: '#f59e0b',
+        descFa: 'مدل‌سازی پیشرفته سطوح سه‌بعدی و آیرودینامیکی دماغه (Nose Cone) با منحنی‌های درجه ۳ کلاسی، بالک‌های هدایت پایدارکننده (Stabilizer Fins)، کوپلینگ قفل‌شونده بین طبقات سوخت و محفظه احتراق و نازل پیشران با روش Top-Down در سالیدورکس. تحلیل محاسباتی مرکز ثقل (CG) و مرکز فشار آیرودینامیکی (CP) جهت تضمین پایداری پرواز.',
+        descEn: 'Advanced 3D surface modeling of rocket nosecone using Class-A curves, aerodynamic stabilizing fins, inter-stage couplings, combustion chamber, and de Laval expansion nozzle using Top-Down design in SolidWorks. CG and CP aerodynamic stability validation.',
+        specs: [
+          { icon: 'cpu', textFa: 'طراحی سطوح سه‌بعدی Freeform Surfacing', textEn: 'Freeform Aerodynamic Surfacing' },
+          { icon: 'layers', textFa: 'روش مونتاژ از بالا به پایین (Top-Down)', textEn: 'Top-Down In-Context Assembly' },
+          { icon: 'shield', textFa: 'تحلیل فاصله پایداری مرکز جرم و مرکز فشار', textEn: 'Static Margin (CG - CP) Check' },
+          { icon: 'zap', textFa: 'طراحی هندسه نازل واگرا دی‌لاوال', textEn: 'De Laval Supersonic Nozzle CAD' }
+        ],
+        btnPrimaryTextFa: 'ورود به دوره و کارگاه‌های سالیدورکس',
+        btnPrimaryTextEn: 'Enter SolidWorks Academy',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('solidworks'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      calc: {
+        titleFa: 'ماشین‌حساب و ابزارهای محاسبات مهندسی مکانیک',
+        titleEn: 'Mechanical Engineering Interactive Calculators',
+        badgeFa: 'محاسبات عددی &bull; هیدرولیک &bull; مقاومت مصالح',
+        badgeEn: 'Numerical Solvers &bull; Hydraulics &bull; Mechanics',
+        icon: 'calculator',
+        iconColor: '#94a3b8',
+        descFa: 'مجموعه ابزارهای آنلاین محاسبات فنی و مهندسی: محاسبه افت فشار خط لوله دارسی-وایسباخ، تنش‌های بحرانی و گشتاور خمش تیرها، عدد رینولدز و رژیم جریان، و تخمین توان مصرفی پمپ و الکتروموتور با ضریب اطمینان.',
+        descEn: 'Online engineering computation tools: Darcy-Weisbach pipe friction head loss, beam bending stress and deflection, Reynolds number regime, and electric pump motor power sizing.',
+        specs: [
+          { icon: 'calculator', textFa: 'حلگر بلادرنگ روابط تحلیلی مکانیک', textEn: 'Real-Time Analytical Solvers' },
+          { icon: 'droplet', textFa: 'معادلات افت فشار دارسی-وایسباخ', textEn: 'Darcy-Weisbach Head Loss' },
+          { icon: 'activity', textFa: 'تحلیل تنش و خمش مقاطع الاستیک', textEn: 'Elastic Stress & Deflection' },
+          { icon: 'zap', textFa: 'تخمین راندمان و توان محرک هیدرولیکی', textEn: 'Pump Power & Efficiency Sizing' }
+        ],
+        btnPrimaryTextFa: 'مشاهده بخش محاسبات مهندسی',
+        btnPrimaryTextEn: 'Open Engineering Solvers',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('projects'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      quiz: {
+        titleFa: 'آزمون آنلاین سنجش تسلط مهندسی سالیدورکس (CSWP)',
+        titleEn: 'SolidWorks CSWP Mastery & Skills Online Quiz',
+        badgeFa: 'آزمون تعاملی &bull; کارنامه آنی &bull; تحلیل اشتباهات',
+        badgeEn: 'Interactive Quiz &bull; Instant Score &bull; Analytics',
+        icon: 'award',
+        iconColor: '#eab308',
+        descFa: 'آزمون چهارگزینه‌ای تخصصی شامل ۳۰ پرسش کلیدی در حوزه‌های اسکچینگ پیشرفته، تعیین قیود هندسی Fully Defined، فرمول‌نویسی معادلات پارامتریک، تکنیک‌های پیشرفته مونتاژ و قیدهای مکانیکی، نقشه‌کشی ساخت مطابق ISO 7200 و خطایابی سه‌بعدی.',
+        descEn: 'Specialized 30-question interactive quiz covering advanced sketching, fully defined geometrical constraints, global equations, advanced assembly mates, ISO 7200 drafting, and CAD troubleshooting.',
+        specs: [
+          { icon: 'award', textFa: '۳۰ پرسش استاندارد در سطح گواهی CSWP', textEn: '30 Standard CSWP-Level Questions' },
+          { icon: 'check-circle', textFa: 'محاسبه آنی نمره و درصد تسلط', textEn: 'Instant Score & Mastery Rating' },
+          { icon: 'book-open', textFa: 'پاسخ تشریحی همراه با ارجاع به سرفصل‌ها', textEn: 'Detailed Explanations & References' },
+          { icon: 'cpu', textFa: 'تحلیل نقاط قوت و نیازمند تمرین', textEn: 'Skills Gap & Recommendations' }
+        ],
+        btnPrimaryTextFa: 'شروع آزمون آنلاین سالیدورکس',
+        btnPrimaryTextEn: 'Start SolidWorks Quiz',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('solidworks'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      tools10: {
+        titleFa: '۱۰ ابزار استراتژیک تصمیم‌گیری برای ذهن مهندسی',
+        titleEn: '10 Strategic Decision Tools for Engineering Minds',
+        badgeFa: 'مونوگراف کاربردی &bull; ماتریس پوگ &bull; تحلیل SWOT',
+        badgeEn: 'Practical Monograph &bull; Pugh Matrix &bull; SWOT',
+        icon: 'wrench',
+        iconColor: '#fb923c',
+        descFa: 'بسته تعاملی ۱۰ ابزار مدیریتی تدوین‌شده در کتاب: ماتریس تصمیم‌گیری وزنی پوگ (Pugh Concept Selection)، ماتریس اولویت‌بندی آیزنهاور، ماتریس تحلیل SWOT، مدل ۵ نیروی رقابتی پورتر، بوم مدل کسب‌وکار (BMC)، ماتریس RACI و تحلیل هزینه-فایده مهندسی.',
+        descEn: 'Interactive suite of 10 managerial tools from the monograph: Weighted Pugh Decision Matrix, Eisenhower Matrix, SWOT Analysis, Porter 5 Forces, Business Model Canvas, RACI Matrix, and Cost-Benefit Analysis.',
+        specs: [
+          { icon: 'wrench', textFa: '۱۰ ابزار تحت وب با ذخیره‌سازی داده‌ها', textEn: '10 Interactive Web Tools' },
+          { icon: 'compass', textFa: 'ماتریس پوگ با وزن‌دهی به معیارها', textEn: 'Weighted Pugh Concept Matrix' },
+          { icon: 'trending-up', textFa: 'تحلیل SWOT با راهبردهای تهاجمی/تدافعی', textEn: 'SWOT Strategy Synthesis' },
+          { icon: 'file-text', textFa: 'خروجی گزارش PDF و آماده پرینت', textEn: 'PDF Export Ready for Reports' }
+        ],
+        btnPrimaryTextFa: 'ورود به محیط ۱۰ ابزار تعاملی کتاب',
+        btnPrimaryTextEn: 'Open 10 Strategic Tools',
+        btnPrimaryAction: () => { window.location.href = 'books/business-management-tools.html'; },
+        btnSecondaryTextFa: 'ورق زدن آنلاین کتاب',
+        btnSecondaryTextEn: 'Read Book Online',
+        btnSecondaryAction: () => { window.location.href = 'books/business-management-for-engineers.html'; }
+      },
+      twins: {
+        titleFa: 'مرکز دوقلوهای دیجیتال و شبیه‌سازهای تعاملی سیالات',
+        titleEn: 'Digital Twins Lab & Interactive Fluid Simulations',
+        badgeFa: 'محاسبات بلادرنگ &bull; CFD &bull; کنترل پارامتریک',
+        badgeEn: 'Real-Time Computing &bull; CFD &bull; Live Controls',
+        icon: 'cpu',
+        iconColor: '#0ea5e9',
+        descFa: 'فضای آزمایشی دوقلوهای دیجیتال شامل شبیه‌سازی دینامیک سیالات محاسباتی، تونل باد مجازی ایرفویل، گذار گردابه‌ای فون کارمن حول سیلندر، جریان دوفازی میکروفلوئیدیک و چرخه ترمودینامیکی موتور استرلینگ.',
+        descEn: 'Digital twin experimentation lab featuring real-time CFD fluid dynamics, virtual wind tunnel, cylinder vortex wake, microfluidic multiphase droplet generation, and Stirling thermodynamic engine cycle.',
+        specs: [
+          { icon: 'cpu', textFa: 'حل معادلات ناویر-استوکس در مرورگر', textEn: 'In-Browser Navier-Stokes Solvers' },
+          { icon: 'sliders', textFa: 'تغییر آنی رینولدز، زاویه حمله و سرعت', textEn: 'Live Reynolds & Mach Adjustments' },
+          { icon: 'activity', textFa: 'کانتورهای رنگی فشار، سرعت و ورتیسیته', textEn: 'Pressure, Velocity & Vorticity Contours' },
+          { icon: 'check-circle', textFa: 'اعتبارسنجی با داده‌های تجربی آزمایشگاهی', textEn: 'Validated Against Experimental Data' }
+        ],
+        btnPrimaryTextFa: 'ورود به آزمایشگاه شبیه‌سازها',
+        btnPrimaryTextEn: 'Open Digital Twins Lab',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('simulations'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      resume: {
+        titleFa: 'سوابق تحصیلی، مهارت‌ها و رزومه محمدامین شریف',
+        titleEn: 'Academic Background, Skills & Resume // Mohammadamin Sharif',
+        badgeFa: 'دانشگاه علم و صنعت ایران &bull; مکانیک &bull; ورودی ۱۴۰۲',
+        badgeEn: 'IUST &bull; Mechanical Engineering &bull; 1402',
+        icon: 'file-text',
+        iconColor: '#3b82f6',
+        descFa: 'دانشجوی مهندسی مکانیک دانشگاه علم و صنعت ایران، تدوین‌کننده آکادمی تخصصی سالیدورکس با ۴۲ سرفصل، طراح هیدرولیکی پروانه و پوسته پمپ سانتریفیوژ در نرم‌افزار CFturbo، متخصص شبیه‌سازی جریان‌های متلاطم در ANSYS Fluent، و مؤلف کتاب اصول مدیریت کسب‌وکار برای ذهن مهندسی.',
+        descEn: 'Mechanical Engineering student at Iran University of Science and Technology (IUST), curator of 42-chapter SolidWorks Academy, hydraulic designer of centrifugal pump impeller/volute in CFturbo, turbulent CFD specialist in Fluent, and author of Business Management for Engineering Minds.',
+        specs: [
+          { icon: 'award', textFa: 'تسلط کامل به مدل‌سازی و اسمبلی SolidWorks', textEn: 'Advanced SolidWorks Modeling & Assembly' },
+          { icon: 'disc', textFa: 'طراحی پارامتریک توربوماشین در CFturbo', textEn: 'Parametric Turbomachinery in CFturbo' },
+          { icon: 'wind', textFa: 'تحلیل‌های CFD گذرا و پایا در ANSYS Fluent', textEn: 'Steady & Transient CFD in Ansys Fluent' },
+          { icon: 'book-open', textFa: 'تألیف کتاب و پیاده‌سازی ابزارهای وب مهندسی', textEn: 'Monograph Author & Engineering Web Apps' }
+        ],
+        btnPrimaryTextFa: 'مشاهده بخش درباره من و رزومه کامل',
+        btnPrimaryTextEn: 'Open Full Profile & CV',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('profile'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      contact: {
+        titleFa: 'ارتباط مستقیم، مشاوره و همکاری در پروژه‌های مهندسی',
+        titleEn: 'Direct Contact, Consulting & Project Collaboration',
+        badgeFa: 'پاسخگویی سریع &bull; تلگرام &bull; ایمیل آکادمیک',
+        badgeEn: 'Fast Response &bull; Telegram &bull; Academic Mail',
+        icon: 'send',
+        iconColor: '#22c55e',
+        descFa: 'جهت ارتباط در خصوص پروژه‌های مدل‌سازی سالیدورکس، طراحی هیدرولیکی پمپ در CFturbo، شبیه‌سازی‌های سیالاتی CFD فلوئنت، تهیه کتاب یا همکاری‌های آکادمیک و صنعتی، از طریق راه‌های ارتباطی زیر پیام ارسال نمایید.',
+        descEn: 'For inquiries regarding SolidWorks CAD modeling, CFturbo hydraulic pump design, ANSYS Fluent CFD simulations, monograph copies, or academic and industrial collaborations, get in touch below.',
+        specs: [
+          { icon: 'send', textFa: 'آیدی تلگرام: @Mohammadamin_sharif', textEn: 'Telegram: @Mohammadamin_sharif' },
+          { icon: 'mail', textFa: 'ایمیل: mohammadaminsh1384@gmail.com', textEn: 'Email: mohammadaminsh1384@gmail.com' },
+          { icon: 'map-pin', textFa: 'دانشکده مهندسی مکانیک دانشگاه علم و صنعت', textEn: 'IUST Mechanical Engineering Dept.' },
+          { icon: 'clock', textFa: 'پاسخگویی در اسرع وقت', textEn: 'Prompt Response' }
+        ],
+        btnPrimaryTextFa: 'ارسال ایمیل مستقیم',
+        btnPrimaryTextEn: 'Send Direct Email',
+        btnPrimaryAction: () => { window.location.href = 'mailto:mohammadaminsh1384@gmail.com'; },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      }
+    };
+
+    window.filterHomeShowcase = function(category, btn) {
+      document.querySelectorAll('#homeSyncedFilters .proj-filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const cards = document.querySelectorAll('#homeSyncedShowcase [data-category]');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
+          card.style.display = '';
+          card.style.animation = 'fadeInUp 0.3s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.openToolInspector = function(toolId) {
+      const data = LG_TOOL_DATA[toolId] || LG_TOOL_DATA['quick_overview'];
+      const modal = document.getElementById('lgToolInspectorModal');
+      if (!modal) return;
+
+      const isFa = document.documentElement.getAttribute('lang') !== 'en';
+
+      document.getElementById('lgInspectorTitle').textContent = isFa ? data.titleFa : data.titleEn;
+      document.getElementById('lgInspectorBadge').innerHTML = isFa ? data.badgeFa : data.badgeEn;
+      document.getElementById('lgInspectorDesc').textContent = isFa ? data.descFa : data.descEn;
+
+      // Icon
+      const iconWrap = document.getElementById('lgInspectorIconWrap');
+      iconWrap.innerHTML = `<i data-lucide="${data.icon}" style="width: 26px; height: 26px; color: ${data.iconColor || '#00f2fe'};"></i>`;
+
+      // Specs
+      const specsGrid = document.getElementById('lgInspectorSpecsGrid');
+      specsGrid.innerHTML = '';
+      (data.specs || []).forEach(spec => {
+        const item = document.createElement('div');
+        item.className = 'lg-inspector-spec-item';
+        item.innerHTML = `<i data-lucide="${spec.icon}" style="width: 14px; height: 14px;"></i><span>${isFa ? spec.textFa : spec.textEn}</span>`;
+        specsGrid.appendChild(item);
+      });
+
+      // Actions
+      const btnPrimary = document.getElementById('lgInspectorBtnPrimary');
+      const btnPrimaryText = document.getElementById('lgInspectorBtnPrimaryText');
+      btnPrimaryText.textContent = isFa ? data.btnPrimaryTextFa : data.btnPrimaryTextEn;
+      btnPrimary.onclick = data.btnPrimaryAction;
+
+      const btnSecondary = document.getElementById('lgInspectorBtnSecondary');
+      const btnSecondaryText = document.getElementById('lgInspectorBtnSecondaryText');
+      btnSecondaryText.textContent = isFa ? data.btnSecondaryTextFa : data.btnSecondaryTextEn;
+      btnSecondary.onclick = data.btnSecondaryAction;
+
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.closeToolInspector = function() {
+      const modal = document.getElementById('lgToolInspectorModal');
+      if (modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeToolInspector();
+      }
+    });
+
     function filterHomeProjects(category, btn) {
       document.querySelectorAll('#homeAllProjectsPanel .home-filter-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -4678,9 +4756,9 @@
       }
 
       const specsHtml = (item.specs || []).map(s => `
-        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 6px 12px; text-align: center;">
-          <div style="font-family: var(--font-mono); font-size: 9.5px; color: #94a3b8; letter-spacing: 0.05em;">${s.label}</div>
-          <div style="font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; color: #00f2fe; margin-top: 2px;">${s.val}</div>
+        <div class="fm-proj-spec-card" style="border-radius: 8px; padding: 6px 12px; text-align: center;">
+          <div class="fm-proj-spec-label" style="font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.05em;">${s.label}</div>
+          <div class="fm-proj-spec-val" style="font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; margin-top: 2px;">${s.val}</div>
         </div>
       `).join('');
 
@@ -4708,7 +4786,7 @@
               <span style="display: inline-block; width: 8px; height: 8px; background: #00f2fe; border-radius: 50%; box-shadow: 0 0 8px #00f2fe;"></span>
               <span style="font-family: var(--font-mono); font-size: 11px; color: #00f2fe; font-weight: 700; letter-spacing: 0.05em;">// ENGINEERING PROJECT SPECIFICATION</span>
             </div>
-            <button onclick="document.getElementById('projectDetailModal').style.display='none'" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;" title="Close (Esc)">&times;</button>
+            <button onclick="document.getElementById('projectDetailModal').style.display='none'" class="fm-proj-close-btn" style="width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1;" title="Close (Esc)">&times;</button>
           </div>
 
           <div style="border-radius: 14px; overflow: hidden; height: 210px; margin-bottom: 16px; border: 1px solid rgba(0,242,254,0.3); position: relative; background: #080c14;">
@@ -4718,14 +4796,14 @@
             </div>
           </div>
 
-          <h3 style="font-size: 18px; font-weight: 800; color: #ffffff; line-height: 1.3; margin: 0 0 4px 0;">${item.title}</h3>
-          ${item.titleFa ? `<div style="font-size: 14px; font-weight: 700; color: #00f2fe; margin-bottom: 12px;" dir="rtl">${item.titleFa}</div>` : ''}
+          <h3 class="fm-proj-modal-title" style="font-size: 18px; font-weight: 800; line-height: 1.3; margin: 0 0 4px 0;">${item.title}</h3>
+          ${item.titleFa ? `<div class="fm-proj-modal-subtitle" style="font-size: 14px; font-weight: 700; color: #00f2fe; margin-bottom: 12px;" dir="rtl">${item.titleFa}</div>` : ''}
 
           ${specsHtml ? `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-bottom: 14px;">${specsHtml}</div>` : ''}
 
-          <div style="background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
-            <p style="font-size: 13px; color: #cbd5e1; line-height: 1.6; margin: 0 0 8px 0;">${item.desc}</p>
-            ${item.descFa ? `<p style="font-size: 12.5px; color: #94a3b8; line-height: 1.65; margin: 0;" dir="rtl">${item.descFa}</p>` : ''}
+          <div class="fm-proj-desc-box" style="border-radius: 10px; padding: 12px 14px; margin-bottom: 18px;">
+            <p class="fm-proj-modal-desc" style="font-size: 13px; line-height: 1.6; margin: 0 0 8px 0;">${item.desc}</p>
+            ${item.descFa ? `<p class="fm-proj-modal-desc-fa" style="font-size: 12.5px; line-height: 1.65; margin: 0;" dir="rtl">${item.descFa}</p>` : ''}
           </div>
 
           ${item.notice ? `
