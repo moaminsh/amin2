@@ -24,15 +24,160 @@
 </head>
 <body>
 
-  <!-- Comprehensive Mechanical Engineering Blueprint & Schematic Background Canvas -->
-  <canvas id="engineeringBgCanvas" class="engineering-bg-canvas" aria-hidden="true"></canvas>
-
-  <div class="spatial-ambient-glow" aria-hidden="true">
-    <div class="ambient-orb ambient-orb-1"></div>
-    <div class="ambient-orb ambient-orb-2"></div>
-    <div class="ambient-orb ambient-orb-3"></div>
+  <!-- ============================================================
+       MOAMIN.IR FUTURISTIC CYBERNETIC BACKDROP (Exact match to image.png)
+       ============================================================ -->
+  <div class="moamin-cyber-backdrop" id="moaminCyberBackdrop" aria-hidden="true">
+    <div class="cyber-grid-plane"></div>
+    <div class="cyber-ambient-flare flare-cyan"></div>
+    <div class="cyber-ambient-flare flare-blue"></div>
+    <canvas id="cyberStreamCanvas" class="cyber-stream-canvas"></canvas>
   </div>
-  <div class="spatial-texture" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       TOP FUTURISTIC NAVBAR (Exact match to image.png)
+       ============================================================ -->
+  <header class="moamin-top-navbar" id="mainHeaderNav">
+    <div class="navbar-inner-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="navbar-brand-link" onclick="navigateToSection('home'); return false;">
+        <div class="brand-hex-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 8.5 2 15.5 12 22 22 15.5 22 8.5 12 2" stroke="#00E5FF" fill="rgba(0, 229, 255, 0.15)"></polygon>
+            <circle cx="12" cy="12" r="3.5" fill="#00FF9C"></circle>
+          </svg>
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-name">MOAMIN.IR</span>
+          <span class="brand-sub">FLUID &bull; CAD &bull; CFD</span>
+        </div>
+        <span class="brand-pro-tag">PRO 2026</span>
+      </a>
+
+      <!-- Profile / User Chip -->
+      <div class="navbar-user-chip" onclick="openToolInspector('profile')" role="button" title="پروفایل مهندسی محمدامین شریف">
+        <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="navbar-user-avatar">
+        <span class="navbar-user-name">محمدامین شریف</span>
+        <span class="side-nav-dot" title="Active at IUST"></span>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <nav class="navbar-menu-nav">
+        <a href="#home" class="nav-item active" data-nav="home" onclick="navigateToSection('home'); return false;">
+          <i data-lucide="home" style="width: 14px; height: 14px;"></i>
+          <span data-en="Dashboard" data-fa="داشبورد اصلی">داشبورد اصلی</span>
+        </a>
+        <a href="#solidworks" class="nav-item" data-nav="solidworks" onclick="navigateToSection('solidworks'); return false;">
+          <i data-lucide="box" style="width: 14px; height: 14px;"></i>
+          <span data-en="SolidWorks" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span>
+        </a>
+        <a href="#projects" class="nav-item" data-nav="projects" onclick="navigateToSection('projects'); return false;">
+          <i data-lucide="disc" style="width: 14px; height: 14px;"></i>
+          <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span>
+        </a>
+        <a href="#simulations" class="nav-item" data-nav="simulations" onclick="navigateToSection('simulations'); return false;">
+          <i data-lucide="activity" style="width: 14px; height: 14px;"></i>
+          <span data-en="Simulations" data-fa="شبیه‌سازها">شبیه‌سازها</span>
+        </a>
+        <a href="#microfluidics" class="nav-item" data-nav="microfluidics" onclick="navigateToSection('microfluidics'); return false;">
+          <i data-lucide="git-commit" style="width: 14px; height: 14px;"></i>
+          <span data-en="Microfluidics" data-fa="میکروفلوئیدیک">میکروفلوئیدیک</span>
+        </a>
+        <a href="#books" class="nav-item" data-nav="books" onclick="navigateToSection('books'); return false;">
+          <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+          <span data-en="Books" data-fa="کتاب‌ها">کتاب‌ها</span>
+        </a>
+        <a href="#capabilities" class="nav-item" data-nav="capabilities" onclick="navigateToSection('capabilities'); return false;">
+          <i data-lucide="cpu" style="width: 14px; height: 14px;"></i>
+          <span data-en="Capabilities" data-fa="توانمندی‌ها">توانمندی‌ها</span>
+        </a>
+        <a href="#info" class="nav-item" data-nav="info" onclick="navigateToSection('info'); return false;">
+          <i data-lucide="user" style="width: 14px; height: 14px;"></i>
+          <span data-en="About &bull; Contact" data-fa="درباره و تماس">درباره و تماس</span>
+        </a>
+      </nav>
+
+      <!-- Right Action & Controls -->
+      <div class="navbar-actions-dock">
+        <!-- Live Connection & Telemetry Indicator -->
+        <div class="navbar-telemetry-tag" title="وضعیت برخط سیستم و شبیه‌سازی">
+          <span class="side-nav-dot"></span>
+          <span>Re: 1,850</span>
+          <span style="opacity: 0.4;">|</span>
+          <span style="color: var(--futuristic-emerald);">2,950 RPM</span>
+        </div>
+
+        <!-- Search Button -->
+        <button class="navbar-icon-btn" onclick="openSearchModal()" title="جستجو در بخش‌ها، دوره‌ها و ابزارها (Ctrl+K)">
+          <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+        </button>
+
+        <!-- Notification Bell -->
+        <div style="position: relative;">
+          <button class="navbar-icon-btn" onclick="toggleNotifPopover()" id="navNotifBtn" title="اعلان‌ها و رویدادهای زنده مهندسی">
+            <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
+            <span class="nav-notif-badge">۳</span>
+          </button>
+          <!-- Notification Dropdown Popover -->
+          <div class="notif-popover-box" id="notifPopoverBox">
+            <div class="notif-popover-header">
+              <span>اعلان‌های زنده سامانه</span>
+              <span class="side-card-badge">LIVE HUD</span>
+            </div>
+            <div class="notif-item">
+              <span class="notif-item-dot"></span>
+              <div>
+                <strong style="color: #fff; display: block;">اعتبارسنجی ۱۰۰٪ عددی</strong>
+                <span>حلگر ناپایدار ریزش گردابه با دقت ۹۹.۴٪ کالیبره شد.</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <span class="notif-item-dot"></span>
+              <div>
+                <strong style="color: #fff; display: block;">دوره جامع سالیدورکس</strong>
+                <span>۴۲ جلسه به همراه ۱۰ نقشه ساخت صنعتی در دسترس است.</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <span class="notif-item-dot"></span>
+              <div>
+                <strong style="color: #fff; display: block;">چک‌لیست طراحی پروانه پمپ</strong>
+                <span>پروتکل ۶ مرحله‌ای CFturbo بروزرسانی شد.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Button -->
+        <button class="navbar-icon-btn" onclick="openSettingsModal()" title="تنظیمات پوسته و تله‌متری">
+          <i data-lucide="settings" style="width: 16px; height: 16px;"></i>
+        </button>
+
+        <!-- CTA Start Learning Button -->
+        <button class="nav-cta-btn" onclick="navigateToSection('solidworks')">
+          <span data-en="Start Learning" data-fa="شروع یادگیری">شروع یادگیری</span>
+          <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+        </button>
+
+        <!-- Mobile Menu Burger -->
+        <button class="mobile-menu-burger" id="mobileMenuBurgerBtn" aria-label="Toggle navigation menu">
+          <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="navbar-mobile-drawer" id="mobileNavDrawer">
+      <a href="#home" class="mobile-nav-link active" onclick="navigateToSection('home'); return false;"><i data-lucide="home"></i> <span data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</span></a>
+      <a href="#solidworks" class="mobile-nav-link" onclick="navigateToSection('solidworks'); return false;"><i data-lucide="box"></i> <span data-en="SolidWorks" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span></a>
+      <a href="#projects" class="mobile-nav-link" onclick="navigateToSection('projects'); return false;"><i data-lucide="disc"></i> <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span></a>
+      <a href="#simulations" class="mobile-nav-link" onclick="navigateToSection('simulations'); return false;"><i data-lucide="activity"></i> <span data-en="Simulations" data-fa="شبیه‌سازهای زنده">شبیه‌سازهای زنده</span></a>
+      <a href="#microfluidics" class="mobile-nav-link" onclick="navigateToSection('microfluidics'); return false;"><i data-lucide="git-commit"></i> <span data-en="Microfluidics" data-fa="میکروفلوئیدیک">میکروفلوئیدیک</span></a>
+      <a href="#books" class="mobile-nav-link" onclick="navigateToSection('books'); return false;"><i data-lucide="book-open"></i> <span data-en="Books" data-fa="کتاب‌ها و تصمیم‌گیری">کتاب‌ها و تصمیم‌گیری</span></a>
+      <a href="#capabilities" class="mobile-nav-link" onclick="navigateToSection('capabilities'); return false;"><i data-lucide="cpu"></i> <span data-en="Capabilities" data-fa="توانمندی‌های مهندسی">توانمندی‌های مهندسی</span></a>
+      <a href="#info" class="mobile-nav-link" onclick="navigateToSection('info'); return false;"><i data-lucide="user"></i> <span data-en="About" data-fa="درباره و تماس">درباره و تماس</span></a>
+    </div>
+  </header>
   <div class="custom-cursor" id="cursor"></div>
   <div class="custom-cursor-halo" id="cursorHalo"></div>
 
@@ -89,316 +234,866 @@
   <main class="container">
 
     <!-- ============================================================
-         HOME SECTION: MASTER LIQUID GLASS BOARD
-         "فقط اطلاعات اولیه و عکس خودم رو صفحه اصلی باشه"
-         Only basic info, photo, and modular portal cards to enter sections
+         HOME SECTION: 2026 ADVANCED MECHANICAL ENGINEERING PANORAMIC DASHBOARD
+         Preserving 100% of all existing content, categories, and data with an
+         award-winning futuristic, cinematic aerospace engineering aesthetic.
          ============================================================ -->
-    <section id="home" class="site-section active glass-board home-glass-board">
-      <!-- 4 Corner Glass Registration Screws -->
-      <span class="glass-pin pin-tl" aria-hidden="true"></span>
-      <span class="glass-pin pin-tr" aria-hidden="true"></span>
-      <span class="glass-pin pin-bl" aria-hidden="true"></span>
-      <span class="glass-pin pin-br" aria-hidden="true"></span>
+    <section id="home" class="site-section active home-minimal-board">
+      <div class="moamin-dashboard-panoramic">
 
-      <!-- ============================================================
-           PHONE DECK CANVAS (Exact aesthetic inspired by user mockup)
-           ============================================================ -->
-      <div class="deck-canvas">
-        <div class="deck-phone-chassis">
+        <!-- ==========================================
+             LEFT SIDE PANEL: ATMOSPHERIC TELEMETRY & QUOTES
+             ========================================== -->
+        <aside class="dashboard-side-panel dashboard-left-panel" aria-label="Engineering Telemetry & Quotes">
+          <!-- Motivational Quote Card -->
+          <div class="side-panel-card quote-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="quote" style="width: 14px; height: 14px;"></i> کلام مهندسی</span>
+              <span class="side-card-badge">PHILOSOPHY</span>
+            </div>
+            <p class="quote-text">
+              «مرزهای مکانیک و سیالات در نقطه تلاقی فیزیک دقیق، مدل‌سازی ریاضی و شبیه‌سازی محاسباتی گسترش می‌یابد.»
+            </p>
+            <div class="quote-author">— مهندس محمدامین شریف</div>
+          </div>
+
+          <!-- Live Date & Clock Card -->
+          <div class="side-panel-card time-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> زمان‌سنج سامانه</span>
+              <span class="side-card-badge">LIVE UTC+3:30</span>
+            </div>
+            <div class="time-display-digital" id="dashboardLiveTime">10:45:28</div>
+            <div class="date-display-persian" id="dashboardLivePersianDate">جمعه، ۳ مهر ۱۴۰۵</div>
+            <div class="time-telemetry-row">
+              <span>ایستگاه مهندسی IUST</span>
+              <span style="color: var(--futuristic-emerald);"><i data-lucide="wifi" style="width: 11px; height: 11px; display: inline-block;"></i> ONLINE</span>
+            </div>
+          </div>
+
+          <!-- Hydraulic Flow Regime & Gauge Card -->
+          <div class="side-panel-card gauge-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="activity" style="width: 14px; height: 14px;"></i> وضعیت رژیم جریان</span>
+              <span class="side-card-badge">FLUID HUD</span>
+            </div>
+            <div class="gauge-visual-wrap">
+              <div class="gauge-data-labels">
+                <span>عدد رینولدز Re:</span>
+                <span class="gauge-data-val" id="sideGaugeRe">1,850 [Laminar]</span>
+              </div>
+              <div class="gauge-meter-track">
+                <div class="gauge-meter-fill" style="width: 46%;"></div>
+              </div>
+              <div class="gauge-data-labels" style="font-size: 9.5px; opacity: 0.65;">
+                <span>0 (آرام)</span>
+                <span>2,300 (انتقالی)</span>
+                <span>4,000+ (آشفته)</span>
+              </div>
+            </div>
+            <div class="time-telemetry-row">
+              <span>عدد ماخ جریان: <strong style="color: #fff;">Ma 0.28</strong></span>
+              <span>توان هیدرولیکی: <strong style="color: var(--futuristic-emerald);">45.2 kW</strong></span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ==========================================
+             CENTER MAIN DASHBOARD WORKSPACE
+             ========================================== -->
+        <div class="dashboard-center-workspace">
+
           <!-- TOP STATUS BAR -->
-          <div class="deck-status-bar">
-            <span class="deck-status-pill" id="deckLiveClock">14:02</span>
-            <span class="deck-status-greeting" data-en="Welcome, Mohammadamin" data-fa="درود، محمدامین شریف">درود، محمدامین شریف</span>
-            <div class="deck-status-icons">
-              <i data-lucide="wifi" style="width: 12px; height: 12px;"></i>
-              <span style="font-size: 10px; font-weight: 700; color: #38bdf8;">CSWP 100%</span>
+          <div class="deck-status-bar" style="margin-bottom: 20px;">
+            <span class="deck-status-pill" id="deckLiveClock">10:45</span>
+            <span class="deck-status-greeting" data-en="Good Day, Mohammadamin Sharif" data-fa="درود، محمدامین شریف // میز کار تخصصی">درود، محمدامین شریف // میز کار تخصصی</span>
+            <div class="deck-status-icons" style="display: flex; align-items: center; gap: 12px;">
+              <span style="font-size: 11px; font-weight: 700; color: #00E5FF; font-family: var(--font-mono);">
+                <i data-lucide="activity" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+                <span id="hudReynolds">Re: 1,850 [LAMINAR]</span>
+              </span>
+              <span style="font-size: 11px; font-weight: 700; color: #00FF9C; font-family: var(--font-mono);" id="hudRpm">2,950 RPM</span>
+              <span class="brand-pro-tag">CSWP 100%</span>
             </div>
           </div>
 
-          <!-- SCENIC ARTWORK BANNER (Night Sky, Stars, Mountains, Engineering Rover & Turbine) -->
-          <div class="deck-scenic-art" onclick="openToolInspector('quick_overview')" role="button" title="معرفی کارگاه مهندسی">
-            <svg class="deck-scenic-svg" viewBox="0 0 500 170" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="deckSkyGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0e172a"/>
-                  <stop offset="50%" stop-color="#1e293b"/>
-                  <stop offset="100%" stop-color="#334155"/>
-                </linearGradient>
-                <linearGradient id="deckHills1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#1e293b" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#0f172a"/>
-                </linearGradient>
-                <linearGradient id="deckHills2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0f172a"/>
-                  <stop offset="100%" stop-color="#090d16"/>
-                </linearGradient>
-              </defs>
+          <!-- COMMANDING FUTURISTIC HERO BANNER (2-Column with 3D Aerospace Turbine & Floating Analytics) -->
+          <div class="moamin-futuristic-hero">
+            <div class="hero-cinematic-grid">
+              
+              <!-- Column 1: Typography, Credentials & CTA -->
+              <div class="hero-content-col">
+                <div class="hero-badge-tag">
+                  <span class="hero-pulse-dot"></span>
+                  <span data-en="// MECHANICAL ENGINEERING &amp; COMPUTATIONAL FLUID DYNAMICS" data-fa="// مهندسی مکانیک، دینامیک سیالات محاسباتی (CFD) و سالیدورکس">// مهندسی مکانیک، دینامیک سیالات محاسباتی (CFD) و سالیدورکس</span>
+                </div>
+                
+                <h1 class="hero-title-main">
+                  <span class="hero-title-fa" data-en="Engineering is in Your Hands" data-fa="مهندسی در دستان شماست">مهندسی در دستان شماست</span>
+                  <span class="hero-title-en">ENGINEERING IS IN YOUR HANDS</span>
+                </h1>
 
-              <!-- Sky Background -->
-              <rect width="500" height="170" fill="url(#deckSkyGrad)"/>
+                <p class="hero-desc-lead" data-en="Comprehensive engineering academy, CFD simulations, industrial turbomachinery design, and SolidWorks CAD mastercourses by Mohammadamin Sharif — Iran University of Science &amp; Technology (IUST)." data-fa="مرجع تخصصی طراحی مکانیک، شبیه‌سازی دینامیک سیالات محاسباتی (CFD)، طراحی توربوماشین و دوره جامع سالیدورکس توسط مهندس محمدامین شریف — دانشگاه علم و صنعت ایران (IUST).">
+                  مرجع تخصصی طراحی مکانیک، شبیه‌سازی دینامیک سیالات محاسباتی (CFD)، طراحی توربوماشین و دوره جامع سالیدورکس توسط مهندس محمدامین شریف — دانشگاه علم و صنعت ایران (IUST).
+                </p>
 
-              <!-- Stars -->
-              <circle cx="45" cy="25" r="1" fill="#ffffff" opacity="0.8"/>
-              <circle cx="110" cy="18" r="1.2" fill="#ffffff" opacity="0.9"/>
-              <circle cx="175" cy="35" r="0.9" fill="#ffffff" opacity="0.6"/>
-              <circle cx="240" cy="22" r="1.1" fill="#ffffff" opacity="0.85"/>
-              <circle cx="320" cy="15" r="1.3" fill="#ffffff" opacity="0.9"/>
-              <circle cx="410" cy="30" r="1" fill="#ffffff" opacity="0.7"/>
-              <circle cx="465" cy="20" r="1.2" fill="#ffffff" opacity="0.8"/>
-              <circle cx="80" cy="48" r="0.8" fill="#ffffff" opacity="0.5"/>
-              <circle cx="285" cy="42" r="1" fill="#ffffff" opacity="0.7"/>
-              <circle cx="370" cy="48" r="0.9" fill="#ffffff" opacity="0.6"/>
+                <!-- Action Buttons -->
+                <div class="hero-actions-group">
+                  <button class="hero-btn-primary" onclick="navigateToSection('solidworks')">
+                    <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
+                    <span data-en="Start Learning" data-fa="شروع یادگیری">شروع یادگیری</span>
+                  </button>
+                  <button class="hero-btn-secondary" onclick="navigateToSection('projects')">
+                    <i data-lucide="layers" style="width: 18px; height: 18px;"></i>
+                    <span data-en="View Projects" data-fa="مشاهده پروژه‌ها">مشاهده پروژه‌ها</span>
+                  </button>
+                  <button class="hero-btn-glass" onclick="navigateToSection('simulations')">
+                    <i data-lucide="activity" style="width: 18px; height: 18px;"></i>
+                    <span data-en="Simulations Lab" data-fa="آزمایشگاه شبیه‌سازی">آزمایشگاه شبیه‌سازی</span>
+                  </button>
+                </div>
 
-              <!-- Crescent Moon -->
-              <path d="M 425 22 A 12 12 0 0 0 437 34 A 10 10 0 1 1 425 22 Z" fill="#f8fafc" opacity="0.95"/>
+                <!-- Author Profile Strip -->
+                <div class="hero-profile-strip">
+                  <div class="hero-profile-avatar-wrap" onclick="openToolInspector('profile')" role="button" title="مشاهده بیوگرافی و رزومه">
+                    <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="hero-profile-avatar-img">
+                    <span class="deck-avatar-online-dot" title="Active at IUST"></span>
+                  </div>
+                  <div class="hero-profile-details">
+                    <div class="hero-profile-name-row">
+                      <h2 class="hero-profile-name" data-en="Mohammadamin Sharif" data-fa="محمدامین شریف">محمدامین شریف</h2>
+                      <span class="hero-verified-badge"><i data-lucide="check" style="width: 12px; height: 12px;"></i> CSWP Certified</span>
+                    </div>
+                    <p class="hero-profile-uni" data-en="Mechanical Engineering • Iran University of Science &amp; Technology (IUST)" data-fa="مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران (IUST)">
+                      مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران (IUST)
+                    </p>
+                  </div>
+                </div>
 
-              <!-- Distant Mountains Layer 1 -->
-              <path d="M 0 120 Q 80 80, 160 105 T 320 90 T 500 115 L 500 170 L 0 170 Z" fill="url(#deckHills1)"/>
-
-              <!-- Power Transmission Line Poles -->
-              <line x1="280" y1="75" x2="280" y2="125" stroke="#475569" stroke-width="1.5"/>
-              <line x1="270" y1="85" x2="290" y2="85" stroke="#475569" stroke-width="1.5"/>
-              <line x1="272" y1="95" x2="288" y2="95" stroke="#475569" stroke-width="1.5"/>
-              <!-- Power Wires -->
-              <path d="M 0 95 Q 140 108, 270 85" stroke="#334155" stroke-width="0.8" fill="none"/>
-              <path d="M 290 85 Q 395 105, 500 90" stroke="#334155" stroke-width="0.8" fill="none"/>
-
-              <!-- Wind Turbine Silhouette -->
-              <line x1="110" y1="65" x2="110" y2="120" stroke="#64748b" stroke-width="1.2"/>
-              <circle cx="110" cy="65" r="2" fill="#94a3b8"/>
-              <line x1="110" y1="65" x2="110" y2="45" stroke="#94a3b8" stroke-width="1" opacity="0.8"/>
-              <line x1="110" y1="65" x2="127" y2="75" stroke="#94a3b8" stroke-width="1" opacity="0.8"/>
-              <line x1="110" y1="65" x2="93" y2="75" stroke="#94a3b8" stroke-width="1" opacity="0.8"/>
-
-              <!-- Near Hills Layer 2 -->
-              <path d="M 0 135 Q 120 120, 240 132 T 500 128 L 500 170 L 0 170 Z" fill="url(#deckHills2)"/>
-
-              <!-- Engineering Lab Camper Van with glowing lights -->
-              <g transform="translate(55, 115)">
-                <!-- Vehicle Body -->
-                <rect x="0" y="0" width="62" height="28" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="0.8"/>
-                <rect x="44" y="4" width="14" height="12" rx="2" fill="#f59e0b" opacity="0.85"/>
-                <rect x="8" y="4" width="12" height="10" rx="1.5" fill="#0284c7" opacity="0.7"/>
-                <rect x="24" y="4" width="12" height="10" rx="1.5" fill="#0284c7" opacity="0.7"/>
-                <!-- Wheels -->
-                <circle cx="14" cy="28" r="6" fill="#090d16" stroke="#475569" stroke-width="1.5"/>
-                <circle cx="48" cy="28" r="6" fill="#090d16" stroke="#475569" stroke-width="1.5"/>
-                <circle cx="14" cy="28" r="2.5" fill="#94a3b8"/>
-                <circle cx="48" cy="28" r="2.5" fill="#94a3b8"/>
-                <!-- Headlight Beam -->
-                <polygon points="62,18 105,10 105,32 62,26" fill="#fef08a" opacity="0.15"/>
-                <!-- Tail light -->
-                <circle cx="2" cy="20" r="2" fill="#ef4444" opacity="0.9"/>
-              </g>
-            </svg>
-          </div>
-
-          <!-- MINIMAL PROFILE BANNER & BIGGER SPECS (کاربر: عکس مینی‌مال، مشخصات بزرگتر) -->
-          <div class="deck-profile-banner">
-            <div class="deck-profile-avatar-wrap" onclick="openToolInspector('profile')" role="button" title="مشاهده بیوگرافی و رزومه">
-              <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="deck-profile-avatar-img">
-              <span class="deck-avatar-online-dot" title="Active at IUST"></span>
-            </div>
-            <div class="deck-profile-info" onclick="openToolInspector('profile')" style="cursor: pointer;">
-              <h2 class="deck-profile-name" data-en="Mohammadamin Sharif" data-fa="محمدامین شریف">محمدامین شریف</h2>
-              <div class="deck-profile-university" data-en="Mechanical Engineering &bull; IUST" data-fa="مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران">
-                <i data-lucide="graduation-cap" style="width: 14px; height: 14px; color: #38bdf8;"></i>
-                <span data-en="Mechanical Engineering &bull; IUST" data-fa="دانشگاه علم و صنعت ایران (IUST)">دانشگاه علم و صنعت ایران (IUST)</span>
+                <!-- 4-Column Live Telemetry HUD -->
+                <div class="hero-telemetry-hud">
+                  <div class="hud-stat-cell">
+                    <span class="hud-stat-val">۱۵+</span>
+                    <span class="hud-stat-lbl" data-en="Industrial Projects" data-fa="پروژه‌های مهندسی">پروژه‌های مهندسی</span>
+                  </div>
+                  <div class="hud-stat-cell">
+                    <span class="hud-stat-val">۴۲+</span>
+                    <span class="hud-stat-lbl" data-en="SolidWorks Lessons" data-fa="جلسات سالیدورکس">جلسات سالیدورکس</span>
+                  </div>
+                  <div class="hud-stat-cell">
+                    <span class="hud-stat-val">۴+</span>
+                    <span class="hud-stat-lbl" data-en="Books &amp; Monographs" data-fa="کتب و تألیفات">کتب و تألیفات</span>
+                  </div>
+                  <div class="hud-stat-cell">
+                    <span class="hud-stat-val">۱۰۰٪</span>
+                    <span class="hud-stat-lbl" data-en="Validation Accuracy" data-fa="اعتبارسنجی محاسباتی">اعتبارسنجی محاسباتی</span>
+                  </div>
+                </div>
               </div>
-              <div class="deck-specs-chips">
-                <span class="deck-spec-chip highlight"><i data-lucide="award" style="width: 11px; height: 11px;"></i> CSWP Certified</span>
-                <span class="deck-spec-chip"><i data-lucide="disc" style="width: 11px; height: 11px;"></i> CFturbo Pump</span>
-                <span class="deck-spec-chip"><i data-lucide="wind" style="width: 11px; height: 11px;"></i> Fluent CFD</span>
-                <span class="deck-spec-chip"><i data-lucide="book-open" style="width: 11px; height: 11px;"></i> مؤلف کتاب</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- TYPOGRAPHY WIDGET & DYNAMIC TICKER (Matching Friday / February 14th & Music Strip in mockup) -->
-          <div class="deck-typo-widget">
-            <div class="deck-typo-widget-left">
-              <h1 class="deck-typo-main" data-en="Mechanical Engineering" data-fa="طراحی و مهندسی مکانیک">طراحی و مهندسی مکانیک</h1>
-              <div class="deck-typo-sub">
-                <span data-en="Iran University of Science &amp; Technology" data-fa="علم و صنعت ایران &bull; ورودی">علم و صنعت ایران &bull; ورودی</span>
-                <span class="deck-typo-accent">۱۴۰۲</span>
-              </div>
-            </div>
+              <!-- Column 2: 3D Aerospace Turbine Visual & Floating Analytics Card -->
+              <div class="hero-visual-stage">
+                <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="3D Aerospace Turbine and Centrifugal Impeller" class="hero-3d-render-img">
+                <div class="hero-cad-overlay-hud">
+                  <span class="cad-dimension-marker cad-dim-1"><i data-lucide="maximize-2" style="width: 10px; height: 10px; display: inline-block;"></i> ⌀ 320.5mm ISO 7200</span>
+                  <span class="cad-dimension-marker cad-dim-2"><i data-lucide="compass" style="width: 10px; height: 10px; display: inline-block;"></i> R48.2 &bull; β2=28.5°</span>
+                </div>
 
-            <!-- Dynamic Track Strip (SolidWorks & Turbomachinery Suite) -->
-            <div class="deck-track-strip">
-              <div class="deck-track-info">
-                <p class="deck-track-title" data-en="Hydraulic Pump, Digital Twins &amp; SolidWorks" data-fa="طراحی هیدرولیکی، دوقلوهای دیجیتال و سالیدورکس">طراحی هیدرولیکی، دوقلوهای دیجیتال و سالیدورکس</p>
-                <p class="deck-track-artist" data-en="SolidWorks CAD &bull; CFturbo &bull; Ansys Fluent" data-fa="دوره جامع سالیدورکس &bull; طراحی پمپ &bull; تحلیل فلوئنت">دوره جامع سالیدورکس &bull; طراحی پمپ &bull; تحلیل فلوئنت</p>
+                <!-- Floating Live Analytics Card -->
+                <div class="hero-floating-analytics">
+                  <div class="analytics-header-row">
+                    <span class="analytics-title"><i data-lucide="trending-up" style="width: 14px; height: 14px;"></i> نرخ همگرایی CFD و راندمان پمپ</span>
+                    <span class="analytics-live-tag">LIVE HUD</span>
+                  </div>
+                  <!-- Glowing SVG Line Chart -->
+                  <svg class="analytics-svg-chart" viewBox="0 0 300 52" fill="none">
+                    <defs>
+                      <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.35"/>
+                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.0"/>
+                      </linearGradient>
+                      <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#00E5FF"/>
+                        <stop offset="50%" stop-color="#00FF9C"/>
+                        <stop offset="100%" stop-color="#00E5FF"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,45 Q35,42 70,30 T140,24 T210,12 T280,8 L300,6 L300,52 L0,52 Z" fill="url(#chartGradient)"/>
+                    <path d="M0,45 Q35,42 70,30 T140,24 T210,12 T280,8 L300,6" stroke="url(#lineGradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="210" cy="12" r="3.5" fill="#00FF9C" stroke="#06131D" stroke-width="1.5"/>
+                    <circle cx="300" cy="6" r="4" fill="#00E5FF" stroke="#06131D" stroke-width="1.5"/>
+                  </svg>
+                  <div class="analytics-metrics-strip">
+                    <span>راندمان η: <strong class="analytics-metric-val" style="color: var(--futuristic-emerald);">83.4%</strong></span>
+                    <span>همگرایی پس‌ماند: <strong class="analytics-metric-val">10⁻⁶</strong></span>
+                    <span>سرعت چرخش: <strong class="analytics-metric-val">2,950 RPM</strong></span>
+                  </div>
+                </div>
               </div>
-              <div class="deck-track-controls">
-                <button class="deck-track-btn" onclick="openToolInspector('quick_overview')" title="راهنمای میز کار"><i data-lucide="pause" style="width: 15px; height: 15px;"></i></button>
-                <button class="deck-track-btn" onclick="openToolInspector('solidworks')" title="ورود به سالیدورکس"><i data-lucide="play" style="width: 15px; height: 15px;"></i></button>
-              </div>
+
             </div>
           </div>
 
-          <!-- 5-COLUMN SQUIRCLE APP SPRINGBOARD (Exact match to the app grid in image.png) -->
-          <div class="deck-springboard" id="homeSyncedShowcase">
-
-            <!-- ROW 1 -->
-            <!-- 1: SolidWorks -->
-            <button class="deck-app-tile" onclick="openToolInspector('solidworks')" title="دوره جامع سالیدورکس (۴۲ درس)" data-category="cad">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); --glow-color: rgba(2, 132, 199, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="box" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="SolidWorks" data-fa="سالیدورکس">سالیدورکس</span>
-            </button>
-
-            <!-- 2: CFturbo Pump -->
-            <button class="deck-app-tile" onclick="openToolInspector('pump')" title="طراحی پمپ در CFturbo و CFD" data-category="cfd">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); --glow-color: rgba(6, 182, 212, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="disc" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="CFturbo" data-fa="طراحی پمپ">طراحی پمپ</span>
-            </button>
-
-            <!-- 3: ISO Blueprints & Caliper -->
-            <button class="deck-app-tile" onclick="openBlueprintModal(0)" title="استودیوی نقشه‌های ساخت با کولیس دیجیتال" data-category="cad">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); --glow-color: rgba(16, 185, 129, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="ruler" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Blueprints" data-fa="نقشه‌کشی">نقشه‌کشی</span>
-            </button>
-
-            <!-- 4: Business Book -->
-            <button class="deck-app-tile" onclick="openToolInspector('business')" title="کتاب اصول مدیریت کسب‌وکار (اثر تألیفی)" data-category="books">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); --glow-color: rgba(245, 158, 11, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="book-open" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Monograph" data-fa="کتاب مدیریت">کتاب مدیریت</span>
-            </button>
-
-            <!-- 5: NACA 0012 Aerodynamics -->
-            <button class="deck-app-tile" onclick="openToolInspector('aerodynamics')" title="شبیه‌سازی آیرودینامیک ایرفویل ناسا" data-category="cfd">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); --glow-color: rgba(99, 102, 241, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="wind" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Airfoil" data-fa="ایرفویل ناسا">ایرفویل ناسا</span>
-            </button>
-
-            <!-- ROW 2 -->
-            <!-- 6: Karman Vortex -->
-            <button class="deck-app-tile" onclick="openToolInspector('cylinder')" title="ریزش گردابه‌های فون کارمن (FFT)" data-category="cfd">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); --glow-color: rgba(139, 92, 246, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="activity" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Vortex" data-fa="گردابه کارمن">گردابه کارمن</span>
-            </button>
-
-            <!-- 7: Microfluidic Twin -->
-            <button class="deck-app-tile" onclick="openToolInspector('microfluidics')" title="دوقلوی دیجیتال میکروفلوئیدیک دوفازی" data-category="cfd">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); --glow-color: rgba(20, 184, 166, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="git-commit" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Microfluidics" data-fa="میکروفلوئیدیک">میکروفلوئیدیک</span>
-            </button>
-
-            <!-- 8: Shock Absorber Motion -->
-            <button class="deck-app-tile" onclick="openToolInspector('shock')" title="مونتاژ مکانیزم کمک‌فنر در سالیدورکس" data-category="cad">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); --glow-color: rgba(249, 115, 22, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="sliders" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Shock Damper" data-fa="کمک‌فنر">کمک‌فنر</span>
-            </button>
-
-            <!-- 9: Rocket Surfacing -->
-            <button class="deck-app-tile" onclick="openToolInspector('rocket')" title="مدل‌سازی سطوح سه‌بعدی بدنه راکت" data-category="cad">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); --glow-color: rgba(236, 72, 153, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="rocket" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Rocket CAD" data-fa="بدنه راکت">بدنه راکت</span>
-            </button>
-
-            <!-- 10: Engineering Calculator -->
-            <button class="deck-app-tile" onclick="openToolInspector('calc')" title="ماشین‌حساب و حلگرهای مهندسی مکانیک" data-category="cad">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #475569 0%, #334155 100%); --glow-color: rgba(71, 85, 105, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="calculator" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Calculator" data-fa="ماشین‌حساب">ماشین‌حساب</span>
-            </button>
-
-            <!-- ROW 3 -->
-            <!-- 11: SolidWorks Quiz -->
-            <button class="deck-app-tile" onclick="openToolInspector('quiz')" title="آزمون آنلاین سنجش تسلط سالیدورکس CSWP" data-category="cad">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); --glow-color: rgba(234, 179, 8, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="award" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="CAD Quiz" data-fa="آزمون تسلط">آزمون تسلط</span>
-            </button>
-
-            <!-- 12: 10 Strategic Tools -->
-            <button class="deck-app-tile" onclick="openToolInspector('tools10')" title="۱۰ ابزار استراتژیک تصمیم‌گیری (پوگ، SWOT و ...)" data-category="books">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #fb923c 0%, #f97316 100%); --glow-color: rgba(251, 146, 60, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="wrench" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="10 Tools" data-fa="۱۰ ابزار تصمیم">۱۰ ابزار تصمیم</span>
-            </button>
-
-            <!-- 13: Digital Twins & Fluids Lab -->
-            <button class="deck-app-tile" onclick="openToolInspector('twins')" title="مرکز دوقلوهای دیجیتال و شبیه‌سازها" data-category="cfd">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); --glow-color: rgba(14, 165, 233, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="cpu" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Simulations" data-fa="دوقلوی سیالات">دوقلوی سیالات</span>
-            </button>
-
-            <!-- 14: Resume & Background -->
-            <button class="deck-app-tile" onclick="openToolInspector('resume')" title="سوابق تحصیلی و رزومه محمدامین شریف" data-category="profile">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); --glow-color: rgba(59, 130, 246, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="file-text" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Resume" data-fa="رزومه و مهارت">رزومه و مهارت</span>
-            </button>
-
-            <!-- 15: Contact Desk -->
-            <button class="deck-app-tile" onclick="openToolInspector('contact')" title="ارتباط مستقیم و همکاری مهندسی" data-category="contact">
-              <div class="deck-squircle" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); --glow-color: rgba(34, 197, 94, 0.5);">
-                <div class="deck-squircle-icon"><i data-lucide="send" style="width: 24px; height: 24px; color: #ffffff;"></i></div>
-              </div>
-              <span class="deck-app-label" data-en="Contact" data-fa="همکاری و تماس">همکاری و تماس</span>
-            </button>
-
+          <!-- Dynamic Track Strip (SolidWorks & Turbomachinery Suite) -->
+          <div class="deck-track-strip" style="margin-bottom: 28px;">
+            <div class="deck-track-info">
+              <p class="deck-track-title" data-en="Hydraulic Pump, Digital Twins &amp; SolidWorks" data-fa="طراحی هیدرولیکی، دوقلوهای دیجیتال و سالیدورکس">طراحی هیدرولیکی، دوقلوهای دیجیتال و سالیدورکس</p>
+              <p class="deck-track-artist" data-en="SolidWorks CAD &bull; CFturbo &bull; Ansys Fluent" data-fa="دوره جامع سالیدورکس &bull; طراحی پمپ &bull; تحلیل فلوئنت">دوره جامع سالیدورکس &bull; طراحی پمپ &bull; تحلیل فلوئنت</p>
+            </div>
+            <div class="deck-track-controls">
+              <button class="deck-track-btn" onclick="openToolInspector('quick_overview')" title="راهنمای میز کار"><i data-lucide="pause" style="width: 15px; height: 15px;"></i></button>
+              <button class="deck-track-btn" onclick="openToolInspector('solidworks')" title="ورود به سالیدورکس"><i data-lucide="play" style="width: 15px; height: 15px;"></i></button>
+            </div>
           </div>
 
-          <!-- FLOATING DOCK SHELF (Row of 4 primary apps like iOS Dock) -->
-          <div class="deck-dock-shelf">
-            <button class="deck-app-tile" onclick="navigateToSection('solidworks')" title="آکادمی سالیدورکس">
-              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
-                <div class="deck-squircle-icon"><i data-lucide="box" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+          <!-- ==========================================
+               MAIN CATEGORY GRID: 18 DEDICATED CARDS
+               Each card has its OWN unique 3D visual, title, subtitle,
+               description, 1px luminous cyan border, and emerald hover glow!
+               ========================================== -->
+          <div class="moamin-category-section">
+            <div class="section-headline-bar">
+              <div class="section-headline-title">
+                <i data-lucide="grid" style="width: 22px; height: 22px;"></i>
+                <span>ماژول‌ها و کارگاه‌های تخصصی مهندسی</span>
               </div>
-            </button>
-            <button class="deck-app-tile" onclick="navigateToSection('projects')" title="پروژه‌ها و CFD">
-              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">
-                <div class="deck-squircle-icon"><i data-lucide="layers" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+              <span class="section-headline-tag">18 WORKSPACES // 2026 SUITE</span>
+            </div>
+
+            <div class="moamin-cards-grid" id="mainCategoryCardsGrid">
+
+              <!-- CARD 01: کارهای شما (Your Works / Turbomachinery & CFD) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('pump')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="کارهای شما" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">پروژه‌های اجرایی</span>
+                  <span class="card-code-tag">CFTURBO</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">TURBOMACHINERY &amp; APPLIED CFD</span>
+                  <h3 class="card-title-fa">کارهای شما و پروژه‌ها</h3>
+                  <p class="card-desc-fa">طراحی توربوماشین‌ها، شبیه‌سازی عددی پروانه‌ها، ولوت هیدرولیکی و مجموعه‌های صنعتی پیشرفته.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> ۶ پروژه صنعتی</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
               </div>
-            </button>
-            <button class="deck-app-tile" onclick="navigateToSection('books')" title="کتاب و ابزارها">
-              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
-                <div class="deck-squircle-icon"><i data-lucide="book-open" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+
+              <!-- CARD 02: کتاب‌ها (Books & Monographs) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('business')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/books_engineering_3d_1790330849046.jpg" alt="کتاب‌ها" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">تألیفات و کتب</span>
+                  <span class="card-code-tag">MONOGRAPH</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">ENGINEERING MONOGRAPHS &amp; TOOLS</span>
+                  <h3 class="card-title-fa">کتاب‌ها و تصمیم‌گیری</h3>
+                  <p class="card-desc-fa">کتاب اصول مدیریت کسب‌وکار و راهنمای ۱۰ ابزار استراتژیک تصمیم‌گیری مهندسی (ماتریس پوگ، SWOT).</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="book-open" style="width: 12px; height: 12px;"></i> اثر تألیفی</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
               </div>
-            </button>
-            <button class="deck-app-tile" onclick="navigateToSection('profile')" title="درباره محمدامین شریف">
-              <div class="deck-squircle" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
-                <div class="deck-squircle-icon"><i data-lucide="user" style="width: 20px; height: 20px; color: #ffffff;"></i></div>
+
+              <!-- CARD 03: مکانیک و سالیدورکس (Mechanics & CAD) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('solidworks')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/gear_mechanism_3d_1790330828912.jpg" alt="مکانیک" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">طراحی مکانیزم</span>
+                  <span class="card-code-tag">SOLIDWORKS</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">3D CAD &amp; PLANETARY GEARS</span>
+                  <h3 class="card-title-fa">مکانیک و سالیدورکس</h3>
+                  <p class="card-desc-fa">طراحی قطعات مکانیکی، چرخ‌دنده‌های سیاره‌ای، مونتاژ مکانیزم‌های حرکتی و نقشه‌های اجرایی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="box" style="width: 12px; height: 12px;"></i> ۴۲ جلسه کارگاه</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
               </div>
-            </button>
-            <span class="deck-dock-indicator"></span>
+
+              <!-- CARD 04: فرمول‌ها و شبیه‌سازی (Formulas & CFD Simulations) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('cfd')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/cfd_streamlines_3d_1790330839071.jpg" alt="فرمول‌ها و شبیه‌سازی" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">حلگرهای عددی</span>
+                  <span class="card-code-tag">NAVIER-STOKES</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">CFD &amp; GOVERNING EQUATIONS</span>
+                  <h3 class="card-title-fa">فرمول‌ها و شبیه‌سازی</h3>
+                  <p class="card-desc-fa">حل معادلات پیوستگی و ناویر-استوکس، جریان‌های دوفازی، مدل‌های آشفتگی k-omega و اعتبارسنجی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="activity" style="width: 12px; height: 12px;"></i> ۹۹.۴٪ کالیبراسیون</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 05: پمپ‌ها (Centrifugal Pumps) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('pump')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/cad_turbopump_assembly_1790329291591.jpg" alt="پمپ‌ها" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">توربوماشین</span>
+                  <span class="card-code-tag">PUMP CFD</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">CENTRIFUGAL PUMPS &amp; IMPELLERS</span>
+                  <h3 class="card-title-fa">پمپ‌ها و توربوماشین</h3>
+                  <p class="card-desc-fa">سایزبندی یک‌بعدی تا سه‌بعدی پروانه، بررسی زوایای لبه حمله و فرار و طراحی محفظه حلزونی ولوت.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="disc" style="width: 12px; height: 12px;"></i> پروتکل ۶ مرحله‌ای</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 06: مکانیک سیالات (Fluid Dynamics & Aerodynamics) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('aerodynamics')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/cylinder_flow_cfd_1789395340651.jpg" alt="مکانیک سیالات" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">آیرودینامیک</span>
+                  <span class="card-code-tag">VORTEX SHEDDING</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">AERODYNAMICS &amp; FLOW INSTABILITY</span>
+                  <h3 class="card-title-fa">مکانیک سیالات</h3>
+                  <p class="card-desc-fa">تحلیل جریان حول استوانه و ایرفویل ناکا ۰۰۱۲، ریزش گردابه‌های کارمن و محاسبه فرکانس استروهال.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="wind" style="width: 12px; height: 12px;"></i> St = 0.21</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 07: ماشین حساب مهندسی (Engineering Calculator) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('calc')" role="button" tabindex="0">
+                <div class="card-visual-container" style="background: radial-gradient(circle at 50% 50%, #002233 0%, #040910 100%);">
+                  <div style="height: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <svg viewBox="0 0 100 100" width="85" height="85">
+                      <rect x="20" y="15" width="60" height="70" rx="10" fill="#08283A" stroke="#00E5FF" stroke-width="2"/>
+                      <rect x="28" y="24" width="44" height="18" rx="4" fill="#040D14" stroke="#00FF9C" stroke-width="1.5"/>
+                      <text x="68" y="37" fill="#00FF9C" font-family="monospace" font-size="9" text-anchor="end">Re=1,850</text>
+                      <circle cx="34" cy="52" r="4" fill="#00E5FF"/>
+                      <circle cx="46" cy="52" r="4" fill="#00E5FF"/>
+                      <circle cx="58" cy="52" r="4" fill="#00E5FF"/>
+                      <circle cx="70" cy="52" r="4" fill="#00FF9C"/>
+                      <circle cx="34" cy="64" r="4" fill="#168BFF"/>
+                      <circle cx="46" cy="64" r="4" fill="#168BFF"/>
+                      <circle cx="58" cy="64" r="4" fill="#168BFF"/>
+                      <circle cx="70" cy="64" r="4" fill="#00FF9C"/>
+                      <circle cx="34" cy="74" r="4" fill="#168BFF"/>
+                      <circle cx="46" cy="74" r="4" fill="#168BFF"/>
+                      <circle cx="58" cy="74" r="4" fill="#00E5FF"/>
+                      <circle cx="70" cy="74" r="4" fill="#00E5FF"/>
+                    </svg>
+                  </div>
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">محاسبات تخصصی</span>
+                  <span class="card-code-tag">SOLVER</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">HYDRAULIC &amp; MECHANICAL SOLVERS</span>
+                  <h3 class="card-title-fa">ماشین حساب مهندسی</h3>
+                  <p class="card-desc-fa">حلگرهای اختصاصی عدد رینولدز، افت فشار اصطکاکی لوله با دارسی-وایسباخ و معادلات برنولی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="calculator" style="width: 12px; height: 12px;"></i> بلادرنگ و تعاملی</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 08: پروژه‌ها (Industrial Projects) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('projects')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/projects_header_banner_1789396994320.jpg" alt="پروژه‌ها" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">محیط‌های کاری</span>
+                  <span class="card-code-tag">12 PROJECTS</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">TECHNICAL WORKSPACES &amp; MODELS</span>
+                  <h3 class="card-title-fa">پروژه‌های مهندسی</h3>
+                  <p class="card-desc-fa">آرشیو ۱۲ پروژه تحقیقاتی و صنعتی شامل توربوماشین، شبیه‌سازی CFD، سالیدورکس و دوقلوی دیجیتال.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="layers" style="width: 12px; height: 12px;"></i> آرشیو کامل</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 09: تحلیل‌ها و داده‌ها (Data Analytics & FFT) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('cylinder')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/wave_vortex_cta_1789395404051.jpg" alt="تحلیل‌ها" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">داده و ارتعاشات</span>
+                  <span class="card-code-tag">FFT ANALYSIS</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">ENGINEERING DATA &amp; FFT SPECTRA</span>
+                  <h3 class="card-title-fa">تحلیل‌ها و اعتبارسنجی</h3>
+                  <p class="card-desc-fa">تحلیل فوریه سریع (FFT) بر روی نوسانات ضرایب برآ و پسا، کانتورهای میدان فشار و طیف گردابه‌ای.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="bar-chart-2" style="width: 12px; height: 12px;"></i> داده‌های عددی</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 10: سیالات و نیروگاهی (Digital Twins & Fluids) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('twins')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/twin_header_banner_1789396975536.jpg" alt="سیالات و نیروگاهی" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">دوقلوی دیجیتال</span>
+                  <span class="card-code-tag">RANKINE TWIN</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">DIGITAL TWINS &amp; THERMODYNAMICS</span>
+                  <h3 class="card-title-fa">سیالات و نیروگاهی</h3>
+                  <p class="card-desc-fa">شبیه‌ساز بلادرنگ سیکل بخار رانکین، درام بویلر، توربین و پمپ کندانس به همراه نمودارهای تعاملی T-s و P-h.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="cpu" style="width: 12px; height: 12px;"></i> شبیه‌ساز زنده</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 11: گزارش کار و نقشه‌کشی (Blueprints & Reports) -->
+              <div class="moamin-interactive-card" onclick="openBlueprintModal(0)" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/blueprints/cad-drawing.jpg" alt="گزارش کار و نقشه‌کشی" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">استاندارد ساخت</span>
+                  <span class="card-code-tag">ISO 7200</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">BLUEPRINTS &amp; DIGITAL CALIPER</span>
+                  <h3 class="card-title-fa">گزارش کار و نقشه‌کشی</h3>
+                  <p class="card-desc-fa">استودیوی ۱۰ نقشه صنعتی سالیدورکس با کولیس دیجیتال، تلرانس‌های انطباقی و جدول استاندارد قطعات.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="ruler" style="width: 12px; height: 12px;"></i> کولیس دیجیتال</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 12: کنترل مکانیک و مکانیزم‌ها (Mechanical Control) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('shock')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/solidworks/shock-assembly.jpg" alt="کنترل مکانیک" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">مکانیزم‌های دینامیکی</span>
+                  <span class="card-code-tag">KINEMATICS</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">MECHANICAL CONTROLS &amp; DAMPERS</span>
+                  <h3 class="card-title-fa">کنترل مکانیک و مکانیزم‌ها</h3>
+                  <p class="card-desc-fa">مجموعه فنر-کمک‌فنر، دمپرهای هیدرولیکی، مکانیزم ضامنی گیره و بررسی کورس جابجایی دینامیکی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="sliders" style="width: 12px; height: 12px;"></i> مونتاژ سالیدورکس</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 13: همکاری و تماس (Communication & Contact) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('contact')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/cyber_network_contact_3d_1790330860345.jpg" alt="همکاری و تماس" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">ارتباط مهندسی</span>
+                  <span class="card-code-tag">NETWORK</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">INDUSTRIAL COLLABORATION &amp; DESK</span>
+                  <h3 class="card-title-fa">همکاری و تماس</h3>
+                  <p class="card-desc-fa">میز ارتباط مستقیم جهت مشاوره پروژه‌های صنعتی، پژوهش‌های دانشگاهی و برگزاری کارگاه‌های تخصصی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="send" style="width: 12px; height: 12px;"></i> پیام‌رسان مستقیم</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 14: رزومه و مهارت‌ها (Resume & Skills) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('resume')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/profile.jpg" alt="رزومه و مهارت‌ها" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">سوابق علمی</span>
+                  <span class="card-code-tag">CURRICULUM</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">PROFESSIONAL DOSSIER &amp; IUST</span>
+                  <h3 class="card-title-fa">رزومه و مهارت‌ها</h3>
+                  <p class="card-desc-fa">سوابق تحصیلی در مهندسی مکانیک دانشگاه علم و صنعت، گواهینامه بین‌المللی CSWP و تخصص‌های صنعتی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="file-text" style="width: 12px; height: 12px;"></i> سوابق مستند</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 15: پژوهش و مقالات (Research & Publications) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('research')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/engineering_research_lab_1790329310535.jpg" alt="پژوهش و مقالات" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">پژوهش علمی</span>
+                  <span class="card-code-tag">PAPERS</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">SCIENTIFIC RESEARCH &amp; PAPERS</span>
+                  <h3 class="card-title-fa">پژوهش و مقالات</h3>
+                  <p class="card-desc-fa">مقالات و پژوهش‌های کاربردی در بهینه‌سازی توربوماشین‌ها، اعتبارسنجی آزمایشگاهی و تحلیل‌های دینامیکی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="book" style="width: 12px; height: 12px;"></i> ژورنال و کنفرانس</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 16: دوره‌ها و آکادمی (Courses & Academy) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('solidworks')" role="button" tabindex="0">
+                <div class="card-visual-container">
+                  <img src="assets/images/cad_header_banner_1789396958626.jpg" alt="دوره‌ها" class="card-3d-visual">
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">آموزش تخصصی</span>
+                  <span class="card-code-tag">ACADEMY</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">SOLIDWORKS MASTERCOURSE ACADEMY</span>
+                  <h3 class="card-title-fa">دوره‌ها و آکادمی</h3>
+                  <p class="card-desc-fa">دوره جامع ۴۲ درس سالیدورکس با رویکرد صنعتی، تحلیل استاتیکی، مدل‌سازی سطوح و آمادگی آزمون CSWP.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="award" style="width: 12px; height: 12px;"></i> ۴۲ ویدیو و تمرین</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 17: گواهی‌نامه‌ها (Certifications) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('cswp')" role="button" tabindex="0">
+                <div class="card-visual-container" style="background: radial-gradient(circle at 50% 50%, #08283A 0%, #06131D 100%);">
+                  <div style="height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                      <polygon points="50,10 88,32 88,68 50,90 12,68 12,32" fill="rgba(0, 229, 255, 0.1)" stroke="#00E5FF" stroke-width="2"/>
+                      <polygon points="50,20 78,37 78,63 50,80 22,63 22,37" fill="rgba(0, 255, 156, 0.15)" stroke="#00FF9C" stroke-width="1.5"/>
+                      <circle cx="50" cy="50" r="16" fill="#071C29" stroke="#00E5FF" stroke-width="2"/>
+                      <text x="50" y="54" fill="#00FF9C" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">CSWP</text>
+                    </svg>
+                  </div>
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">مدارک بین‌المللی</span>
+                  <span class="card-code-tag">100% VERIFIED</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">CERTIFIED SOLIDWORKS PROFESSIONAL</span>
+                  <h3 class="card-title-fa">گواهی‌نامه‌ها و مدارک</h3>
+                  <p class="card-desc-fa">مدرک رسمی بین‌المللی CSWP سالیدورکس با نمره کامل و تاییدیه‌های معتبر پژوهشی و صنعتی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="check-check" style="width: 12px; height: 12px;"></i> تایید رسمی</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 18: آزمون‌ها (Assessments & Quiz) -->
+              <div class="moamin-interactive-card" onclick="openToolInspector('quiz')" role="button" tabindex="0">
+                <div class="card-visual-container" style="background: radial-gradient(circle at 50% 50%, #071C29 0%, #06131D 100%);">
+                  <div style="height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                      <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                      <circle cx="50" cy="50" r="36" fill="none" stroke="#00FF9C" stroke-width="4" stroke-dasharray="160 226" stroke-linecap="round"/>
+                      <text x="50" y="46" fill="#00E5FF" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">QUIZ</text>
+                      <text x="50" y="60" fill="#94a3b8" font-family="sans-serif" font-size="8" text-anchor="middle">سنجش تسلط</text>
+                    </svg>
+                  </div>
+                  <div class="card-visual-gradient"></div>
+                  <span class="card-category-chip">سنجش مهارت</span>
+                  <span class="card-code-tag">TEST SUITE</span>
+                </div>
+                <div class="card-content-body">
+                  <span class="card-kicker-en">KNOWLEDGE ASSESSMENT QUIZ</span>
+                  <h3 class="card-title-fa">آزمون‌های سنجش تسلط</h3>
+                  <p class="card-desc-fa">سامانه ارزیابی آنلاین مهارت سالیدورکس و اصول طراحی مهندسی با کارنامه تحلیلی آنی.</p>
+                  <div class="card-footer-action">
+                    <span class="card-status-info"><i data-lucide="check-square" style="width: 12px; height: 12px;"></i> آزمون آنلاین</span>
+                    <div class="card-action-btn-circle"><i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ==========================================
+               LOWER SECTION: FEATURED COURSES & ENGINEERING HIGHLIGHTS
+               Large visual cards with realistic 3D engineering & CFD imagery
+               ========================================== -->
+          <div class="moamin-lower-section">
+            <div class="section-headline-bar">
+              <div class="section-headline-title">
+                <i data-lucide="sparkles" style="width: 22px; height: 22px;"></i>
+                <span>دوره‌های محبوب و محتوای شاخص مهندسی</span>
+              </div>
+              <span class="section-headline-tag">FEATURED COURSES &amp; CFD LABS</span>
+            </div>
+
+            <div class="lower-showcase-grid">
+
+              <!-- ITEM 1: SolidWorks CAD Mastercourse -->
+              <div class="lower-showcase-card" onclick="navigateToSection('solidworks')">
+                <div class="lower-card-banner">
+                  <img src="assets/images/cad-banner.jpg" alt="دوره جامع سالیدورکس">
+                </div>
+                <div class="lower-card-body">
+                  <div class="lower-card-tag">// آکادمی تخصصی CAD</div>
+                  <h4 class="lower-card-title">دوره جامع سالیدورکس (SolidWorks 2026)</h4>
+                  <p class="lower-card-desc">۴۲ جلسه آموزش گام‌به‌گام از اسکچینگ و فیچرهای پیشرفته تا مونتاژ، تلرانس‌گذاری هندسی (GD&T) و آمادگی کامل برای آزمون بین‌المللی CSWP.</p>
+                  <div class="lower-card-meta">
+                    <span>۴۲ جلسه ویدیویی + فایل قطعات</span>
+                    <span style="color: var(--futuristic-emerald);">ورود به دوره ←</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 2: Ansys Fluent Karman Vortex -->
+              <div class="lower-showcase-card" onclick="openProjectModal('cylinder')">
+                <div class="lower-card-banner">
+                  <img src="assets/images/cylinder_flow_cfd_1789395340651.jpg" alt="جریان حول استوانه و گردابه کارمن">
+                </div>
+                <div class="lower-card-body">
+                  <div class="lower-card-tag">// دینامیک محاسباتی سیالات</div>
+                  <h4 class="lower-card-title">شبیه‌سازی جریان حول استوانه (ANSYS Fluent)</h4>
+                  <p class="lower-card-desc">تحلیل گذرای دوبعدی ریزش گردابه‌های کارمن، ثبت نوسانات پریودیک ضرایب برآ و پسا و اعتبارسنجی فرکانس ریزش با عدد استروهال St=0.21.</p>
+                  <div class="lower-card-meta">
+                    <span>Re = 1,850 &bull; O-Grid</span>
+                    <span style="color: var(--futuristic-emerald);">مشاهده شبیه‌سازی ←</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 3: CFturbo Pump Impeller Design -->
+              <div class="lower-showcase-card" onclick="navigateToSection('projects')">
+                <div class="lower-card-banner">
+                  <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="طراحی پمپ در CFturbo">
+                </div>
+                <div class="lower-card-body">
+                  <div class="lower-card-tag">// طراحی توربوماشین</div>
+                  <h4 class="lower-card-title">پروتکل طراحی پروانه پمپ در CFturbo</h4>
+                  <p class="lower-card-desc">پروتکل جامع ۶ مرحله‌ای پروانه و ۵ مرحله‌ای ولوت از سایزبندی هیدرولیکی یک‌بعدی تا تیغه‌های سه‌بعدی و جلوگیری از پدیده کاویتاسیون.</p>
+                  <div class="lower-card-meta">
+                    <span>راندمان η = 83.4%</span>
+                    <span style="color: var(--futuristic-emerald);">مشاهده چک‌لیست ←</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 4: Rankine Power Plant Twin -->
+              <div class="lower-showcase-card" onclick="navigateToSection('simulations')">
+                <div class="lower-card-banner">
+                  <img src="assets/images/twin_header_banner_1789396975536.jpg" alt="دوقلوی دیجیتال نیروگاه">
+                </div>
+                <div class="lower-card-body">
+                  <div class="lower-card-tag">// شبیه‌ساز زنده دوقلوی دیجیتال</div>
+                  <h4 class="lower-card-title">دوقلوی دیجیتال سیکل بخار رانکین</h4>
+                  <p class="lower-card-desc">موتور شبیه‌سازی بلادرنگ ترمودینامیکی با نمودارهای T-s و P-h تعاملی، موازنه جرم و انرژی بویلر، توربین بخار، کندانسور و پمپ تغذیه.</p>
+                  <div class="lower-card-meta">
+                    <span>WebGL &bull; Live State</span>
+                    <span style="color: var(--futuristic-emerald);">اجرای دوقلو ←</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 5: Microfluidic Chip Lab -->
+              <div class="lower-showcase-card" onclick="navigateToSection('microfluidics')">
+                <div class="lower-card-banner">
+                  <img src="assets/images/microfluidics_chip_visual_1790329301182.jpg" alt="آزمایشگاه تراشه میکروسیالاتی">
+                </div>
+                <div class="lower-card-body">
+                  <div class="lower-card-tag">// آزمایشگاه تعاملی سیالات</div>
+                  <h4 class="lower-card-title">تراشه میکروسیالاتی و نازل واگرا</h4>
+                  <p class="lower-card-desc">حل‌کننده تعاملی معادله پیوستگی ناویر-استوکس و ردیابی ذره‌ای بلادرنگ در هندسه میکروکانال با جریان آرام لامینار و ویسکوزیته متغیر.</p>
+                  <div class="lower-card-meta">
+                    <span>رژیم آرام Re &lt; 10</span>
+                    <span style="color: var(--futuristic-emerald);">ورود به آزمایشگاه ←</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 6: Business Management Monograph -->
+              <div class="lower-showcase-card" onclick="navigateToSection('books')">
+                <div class="lower-card-banner">
+                  <img src="assets/images/business-management-guide.jpg" alt="کتاب اصول مدیریت کسب‌وکار">
+                </div>
+                <div class="lower-card-body">
+                  <div class="lower-card-tag">// اثر تألیفی و تصمیم‌گیری</div>
+                  <h4 class="lower-card-title">کتاب اصول مدیریت کسب‌وکار</h4>
+                  <p class="lower-card-desc">راهنمای عملی تصمیم‌گیری مهندسی با ماتریس پوگ، تحلیل SWOT، درخت تصمیم و رویکردهای استراتژیک در صنایع تولیدی و پروژه‌های فنی.</p>
+                  <div class="lower-card-meta">
+                    <span>۱۰ ابزار استراتژیک</span>
+                    <span style="color: var(--futuristic-emerald);">مطالعه خلاصه ←</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SIGNATURE HANDLE -->
+          <div class="deck-signature-handle" onclick="openToolInspector('profile')" role="button">
+            Mohammadamin Sharif
+          </div>
+          <div class="deck-signature-sub">
+            Iran University of Science &amp; Technology &bull; Dept. of Mechanical Engineering
           </div>
 
         </div>
 
-        <!-- SIGNATURE HANDLE (Matching u/kennyroo in mockup) -->
-        <div class="deck-signature-handle" onclick="openToolInspector('profile')" role="button">
-          Mohammadamin Sharif
-        </div>
-        <div class="deck-signature-sub">
-          Iran University of Science &amp; Technology &bull; Dept. of Mechanical Engineering
-        </div>
+        <!-- ==========================================
+             RIGHT SIDE PANEL: NAVIGATION, PROGRESS & ACTIVITY
+             ========================================== -->
+        <aside class="dashboard-side-panel dashboard-right-panel" aria-label="Dashboard Navigation & Progress">
+          <!-- Profile Badge Card -->
+          <div class="side-panel-card profile-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="user" style="width: 14px; height: 14px;"></i> مشخصات مهندس</span>
+              <span class="side-card-badge">IUST</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <img src="assets/images/profile.jpg" alt="محمدامین شریف" style="width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid var(--futuristic-cyan); object-fit: cover;">
+              <div>
+                <strong style="color: #fff; font-size: 14px; display: block;">محمدامین شریف</strong>
+                <span style="font-size: 11px; color: #94a3b8;">مهندسی مکانیک &bull; دانشگاه علم و صنعت</span>
+              </div>
+            </div>
+            <div style="font-size: 11px; color: var(--futuristic-cyan); font-family: var(--font-mono); margin-top: 6px;">
+              <i data-lucide="award" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> CSWP 100% &bull; CFturbo &bull; CFD
+            </div>
+          </div>
+
+          <!-- Dashboard Quick Navigation -->
+          <div class="side-panel-card nav-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="compass" style="width: 14px; height: 14px;"></i> دسترسی سریع</span>
+              <span class="side-card-badge">NAV</span>
+            </div>
+            <div class="side-quick-nav-list">
+              <a href="#home" class="side-quick-nav-item active" onclick="navigateToSection('home'); return false;">
+                <span>داشبورد اصلی</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#solidworks" class="side-quick-nav-item" onclick="navigateToSection('solidworks'); return false;">
+                <span>آکادمی سالیدورکس (۴۲ درس)</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#projects" class="side-quick-nav-item" onclick="navigateToSection('projects'); return false;">
+                <span>پروژه‌ها و کارگاه‌های CFD</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#simulations" class="side-quick-nav-item" onclick="navigateToSection('simulations'); return false;">
+                <span>دوقلوهای دیجیتال زنده</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#microfluidics" class="side-quick-nav-item" onclick="navigateToSection('microfluidics'); return false;">
+                <span>تراشه میکروسیالاتی</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#books" class="side-quick-nav-item" onclick="navigateToSection('books'); return false;">
+                <span>کتاب‌ها و ابزارهای تصمیم</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#capabilities" class="side-quick-nav-item" onclick="navigateToSection('capabilities'); return false;">
+                <span>توانمندی‌های تخصصی</span>
+                <span class="side-nav-dot"></span>
+              </a>
+              <a href="#info" class="side-quick-nav-item" onclick="navigateToSection('info'); return false;">
+                <span>درباره و تماس مستقیم</span>
+                <span class="side-nav-dot"></span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Real-Time Activity Feed -->
+          <div class="side-panel-card activity-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="activity" style="width: 14px; height: 14px;"></i> فعالیت‌های اخیر</span>
+              <span class="side-card-badge">RECENT</span>
+            </div>
+            <div class="activity-feed-list">
+              <div class="activity-feed-item">
+                <div class="activity-feed-icon"><i data-lucide="box" style="width: 13px; height: 13px;"></i></div>
+                <div>
+                  <div>جلسه ۴۲ سالیدورکس (مکانیزم‌های پیشرفته) بارگذاری شد.</div>
+                  <div class="activity-feed-meta">امروز &bull; آکادمی CAD</div>
+                </div>
+              </div>
+              <div class="activity-feed-item">
+                <div class="activity-feed-icon" style="color: var(--futuristic-emerald);"><i data-lucide="disc" style="width: 13px; height: 13px;"></i></div>
+                <div>
+                  <div>چک‌لیست ۶ مرحله‌ای پروانه پمپ CFturbo بروزرسانی گردید.</div>
+                  <div class="activity-feed-meta">دیروز &bull; توربوماشین</div>
+                </div>
+              </div>
+              <div class="activity-feed-item">
+                <div class="activity-feed-icon" style="color: #38bdf8;"><i data-lucide="cpu" style="width: 13px; height: 13px;"></i></div>
+                <div>
+                  <div>راندمان سیکل رانکین با دمای ۴۸۰ درجه کالیبره شد.</div>
+                  <div class="activity-feed-meta">۳ روز قبل &bull; دوقلوی دیجیتال</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Tracking Card -->
+          <div class="side-panel-card progress-card">
+            <div class="side-card-header">
+              <span class="side-card-title"><i data-lucide="pie-chart" style="width: 14px; height: 14px;"></i> پیشرفت پروژه‌ها</span>
+              <span class="side-card-badge">METRICS</span>
+            </div>
+            <div class="side-progress-row">
+              <div class="side-progress-header">
+                <span>دوره سالیدورکس (۴۲ درس)</span>
+                <span class="side-progress-percent">۱۰۰٪</span>
+              </div>
+              <div class="side-progress-bar-track">
+                <div class="side-progress-bar-fill fill-emerald" style="width: 100%;"></div>
+              </div>
+            </div>
+            <div class="side-progress-row">
+              <div class="side-progress-header">
+                <span>اعتبارسنجی عددی CFD</span>
+                <span class="side-progress-percent">۹۹.۴٪</span>
+              </div>
+              <div class="side-progress-bar-track">
+                <div class="side-progress-bar-fill fill-cyan" style="width: 99.4%;"></div>
+              </div>
+            </div>
+            <div class="side-progress-row">
+              <div class="side-progress-header">
+                <span>مش‌بندی و حل توربوماشین</span>
+                <span class="side-progress-percent">۹۵٪</span>
+              </div>
+              <div class="side-progress-bar-track">
+                <div class="side-progress-bar-fill fill-blue" style="width: 95%;"></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
       </div>
     </section>
 
@@ -506,7 +1201,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/projects-banner.jpg" alt="Engineering Projects Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/projects_header_banner_1789396994320.jpg" alt="Engineering Projects Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -539,7 +1234,7 @@
         <!-- PROJECT 01: CFTURBO PUMP -->
         <a href="projects/cfturbo-pump/pump-design-checklist.html" class="project-glass-card card-jewel-cyan" data-cat="turbo">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/turbine-blade-cfd.jpg" alt="Centrifugal pump impeller blade" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="Centrifugal pump impeller blade" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">CFturbo 2026</span>
           </div>
           <div class="project-glass-body">
@@ -575,7 +1270,7 @@
         <!-- PROJECT 02: CYLINDER VORTEX SHEDDING (ANSYS FLUENT) -->
         <div class="project-glass-card card-jewel-blue" data-cat="cfd" style="cursor: pointer;" onclick="openProjectModal('cylinder')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/cylinder-flow-cfd.jpg" alt="Vortex shedding around a cylinder" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/cylinder_flow_cfd_1789395340651.jpg" alt="Vortex shedding around a cylinder" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">ANSYS Fluent</span>
           </div>
           <div class="project-glass-body">
@@ -645,7 +1340,7 @@
         <!-- PROJECT 04: MULTIPHASE PIPE FLOW -->
         <div class="project-glass-card card-jewel-violet" data-cat="cfd" style="cursor: pointer;" onclick="openProjectModal('multiphase')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/two-phase-flow-cfd.jpg" alt="Two-phase gas liquid multiphase flow" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/two_phase_flow_1789395385404.jpg" alt="Two-phase gas liquid multiphase flow" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">VOF Multiphase</span>
           </div>
           <div class="project-glass-body">
@@ -750,7 +1445,7 @@
         <!-- PROJECT 07: RANKINE POWER PLANT DIGITAL TWIN ENGINE -->
         <a href="simulations/Power_Plant_Digital_Twin_Engine.html" target="_blank" class="project-glass-card card-jewel-cyan" data-cat="twin">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/twin-banner.jpg" alt="Rankine Power Plant Digital Twin Engine" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/twin_header_banner_1789396975536.jpg" alt="Rankine Power Plant Digital Twin Engine" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">Live Simulator</span>
           </div>
           <div class="project-glass-body">
@@ -785,7 +1480,7 @@
         <!-- PROJECT 08: MICROFLUIDIC CHIP LAB -->
         <div class="project-glass-card card-jewel-emerald" data-cat="cfd" style="cursor: pointer;" onclick="navigateToSection('microfluidics')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/hero-f1-cfd.jpg" alt="Microfluidic chip diverging nozzle lab" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/microfluidics_chip_visual_1790329301182.jpg" alt="Microfluidic chip diverging nozzle lab" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">Interactive Lab</span>
           </div>
           <div class="project-glass-body">
@@ -820,7 +1515,7 @@
         <!-- PROJECT 09: SOLIDWORKS BENCH CLAMP TOGGLE MECHANISM -->
         <div class="project-glass-card card-jewel-amber" data-cat="cad" style="cursor: pointer;" onclick="openProjectModal('clamp')">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/cad-banner.jpg" alt="SolidWorks Bench Clamp Toggle Mechanism" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/cad_header_banner_1789396958626.jpg" alt="SolidWorks Bench Clamp Toggle Mechanism" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">SolidWorks CAD</span>
           </div>
           <div class="project-glass-body">
@@ -855,7 +1550,7 @@
         <!-- PROJECT 10: INTERACTIVE 3D PUMP ANATOMY -->
         <a href="simulations/Interactive_Pump_Anatomy.html" target="_blank" class="project-glass-card card-jewel-cyan" data-cat="twin">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/turbine_blade_cfd_1789395360148.jpg" alt="Interactive 3D Centrifugal Pump Anatomy" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/cad_turbopump_assembly_1790329291591.jpg" alt="Interactive 3D Centrifugal Pump Anatomy" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">3D WebGL</span>
           </div>
           <div class="project-glass-body">
@@ -890,7 +1585,7 @@
         <!-- PROJECT 11: POWER PLANT BOILER DRUM DYNAMIC STEAM SIMULATOR -->
         <a href="simulations/Digital_Twin___Thermal_Power_Simulation.html" target="_blank" class="project-glass-card card-jewel-amber" data-cat="twin">
           <div class="project-glass-preview" style="height: 170px; overflow: hidden; position: relative;">
-            <img src="assets/images/wave-vortex-cta.jpg" alt="Dynamic Steam Boiler Simulator" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
+            <img src="assets/images/wave_vortex_cta_1789395404051.jpg" alt="Dynamic Steam Boiler Simulator" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" referrerPolicy="no-referrer">
             <span class="project-year-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2;">Dynamic Twin</span>
           </div>
           <div class="project-glass-body">
@@ -990,7 +1685,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/cad-banner.jpg" alt="SolidWorks CAD Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/cad_turbopump_assembly_1790329291591.jpg" alt="SolidWorks CAD Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -1176,7 +1871,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/twin-banner.jpg" alt="Digital Twins Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/twin_header_banner_1789396975536.jpg" alt="Digital Twins Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -1343,7 +2038,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/two-phase-flow-cfd.jpg" alt="Microfluidic Lab Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/microfluidics_chip_visual_1790329301182.jpg" alt="Microfluidic Lab Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -1419,7 +2114,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/library-banner.jpg" alt="Scientific Reference Library Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/library_header_banner_1789396938662.jpg" alt="Scientific Reference Library Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -1639,7 +2334,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/turbine-blade-cfd.jpg" alt="Technical Stack Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/engineering_research_lab_1790329310535.jpg" alt="Technical Stack Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -1749,7 +2444,7 @@
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero" style="height: 180px;">
-        <img src="assets/images/wave-vortex-cta.jpg" alt="Research Profile Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/hero_cfd_aerodynamics_1790329281852.jpg" alt="Research Profile Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
@@ -1769,7 +2464,7 @@
       </div>
 
       <div class="profile-glass-card">
-        <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-glass-avatar" onerror="this.src='https://via.placeholder.com/90/0d1117/00f2fe?text=Sharif'">
+        <img src="assets/images/profile.jpg" alt="Mohammadamin Sharif" class="profile-glass-avatar" onerror="this.src='assets/images/profile.jpg'">
         <div>
           <h3 style="font-size: 20px; font-weight: 700; color: var(--lg-text-primary);">Mohammadamin Sharif</h3>
           <p style="font-size: 13px; color: var(--lg-text-secondary); margin-top: 4px;" data-en="B.Sc. Student in Mechanical Engineering" data-fa="دانشجوی کارشناسی مهندسی مکانیک">
@@ -1813,10 +2508,51 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="glass-footer">
-      <span>© 2026 MOHAMMADAMIN SHARIF</span>
-      <span data-en="MECHANICAL & FLUID DYNAMICS PORTFOLIO" data-fa="نمونه‌کار مهندسی مکانیک و دینامیک سیالات">MECHANICAL & FLUID DYNAMICS PORTFOLIO</span>
+    <!-- MOAMIN.IR FUTURISTIC FOOTER (Exact match to image.png) -->
+    <footer class="moamin-futuristic-footer" id="mainSiteFooter">
+      <div class="footer-inner-container">
+        <div class="footer-top-row">
+          <div class="footer-brand-col">
+            <div class="footer-brand-title">
+              <span class="footer-brand-cyan">MOAMIN.IR</span> // FLUIDMIND
+            </div>
+            <p class="footer-brand-desc" data-en="Award-winning portfolio &amp; engineering academy of Mohammadamin Sharif. Mechanical Engineering at Iran University of Science &amp; Technology (IUST)." data-fa="سامانه تخصصی مهندسی مکانیک، شبیه‌سازی دینامیک سیالات محاسباتی و آکادمی تخصصی سالیدورکس محمدامین شریف — دانشگاه علم و صنعت ایران (IUST).">
+              سامانه تخصصی مهندسی مکانیک، شبیه‌سازی دینامیک سیالات محاسباتی و آکادمی تخصصی سالیدورکس محمدامین شریف — دانشگاه علم و صنعت ایران (IUST).
+            </p>
+          </div>
+          <div class="footer-nav-col">
+            <h4 class="footer-col-title" data-en="Quick Links" data-fa="دسترسی سریع">دسترسی سریع</h4>
+            <div class="footer-links-grid">
+              <a href="#home" onclick="navigateToSection('home'); return false;" data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</a>
+              <a href="#solidworks" onclick="navigateToSection('solidworks'); return false;" data-en="SolidWorks" data-fa="دوره سالیدورکس">دوره سالیدورکس</a>
+              <a href="#projects" onclick="navigateToSection('projects'); return false;" data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</a>
+              <a href="#simulations" onclick="navigateToSection('simulations'); return false;" data-en="Simulations" data-fa="شبیه‌سازها">شبیه‌سازها</a>
+              <a href="#books" onclick="navigateToSection('books'); return false;" data-en="Books" data-fa="کتاب‌ها">کتاب‌ها</a>
+              <a href="#capabilities" onclick="navigateToSection('capabilities'); return false;" data-en="Capabilities" data-fa="توانمندی‌ها">توانمندی‌ها</a>
+              <a href="#info" onclick="navigateToSection('info'); return false;" data-en="Contact" data-fa="ارتباط با من">ارتباط با من</a>
+            </div>
+          </div>
+          <div class="footer-social-col">
+            <h4 class="footer-col-title" data-en="Connect &amp; Social" data-fa="شبکه‌های ارتباطی">شبکه‌های ارتباطی</h4>
+            <div class="footer-social-links">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn"><i data-lucide="linkedin" style="width: 18px; height: 18px;"></i></a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="GitHub"><i data-lucide="github" style="width: 18px; height: 18px;"></i></a>
+              <a href="https://t.me/mohammadamin_sh" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Telegram"><i data-lucide="send" style="width: 18px; height: 18px;"></i></a>
+              <a href="mailto:mohammadaminsh1384@gmail.com" class="footer-social-btn" title="Email"><i data-lucide="mail" style="width: 18px; height: 18px;"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-row">
+          <div class="footer-copyright" data-en="© 2026 Moamin.ir — All rights reserved. Mohammadamin Sharif." data-fa="© ۲۰۲۶ تمامی حقوق محفوظ است &bull; محمدامین شریف (Moamin.ir / FluidMind)">
+            © ۲۰۲۶ تمامی حقوق محفوظ است &bull; محمدامین شریف (Moamin.ir / FluidMind)
+          </div>
+          <button class="footer-scroll-top" id="scrollToTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="بازگشت به ابتدای صفحه">
+            <span data-en="Back to Top" data-fa="بازگشت به بالا">بازگشت به بالا</span>
+            <i data-lucide="arrow-up" style="width: 14px; height: 14px;"></i>
+          </button>
+        </div>
+      </div>
     </footer>
 
   </main>
@@ -1846,6 +2582,14 @@
         if (themeSwitchCheckbox) themeSwitchCheckbox.checked = true;
       }
     }
+
+    // Interactive Celestial Theme Toggle (Clicking on Sun or Moon in scenic artwork)
+    window.toggleSiteTheme = function() {
+      const isLight = document.body.classList.contains('light-mode');
+      const next = isLight ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem('site-theme', next);
+    };
 
     const savedTheme = localStorage.getItem('site-theme') || 'dark';
     applyTheme(savedTheme);
@@ -1946,8 +2690,22 @@
     // --- MODULAR SECTION NAVIGATION ENGINE ---
     // User request: "میخوام کل سایتم بشه به بخش این مدلی که هرکی خواست وارد هر بخش سایتم بشه یعنی سایتم به هم پیوسته نباشه و فقط اطلاعات اولیه و عکس خودم رو صفحه اصلی باشه"
     const allSiteSections = document.querySelectorAll('.site-section');
-    const allNavLinks = document.querySelectorAll('.nav-link, .nav-brand');
+    const allNavLinks = document.querySelectorAll('.nav-link, .nav-brand, .nav-item, .mobile-nav-link');
     const allFilterPills = document.querySelectorAll('.filter-pill');
+    const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+    const mobileMenuBurgerBtn = document.getElementById('mobileMenuBurgerBtn');
+
+    if (mobileMenuBurgerBtn && mobileNavDrawer) {
+      mobileMenuBurgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileNavDrawer.classList.toggle('open');
+      });
+      document.addEventListener('click', (e) => {
+        if (!mobileNavDrawer.contains(e.target) && !mobileMenuBurgerBtn.contains(e.target)) {
+          mobileNavDrawer.classList.remove('open');
+        }
+      });
+    }
 
     function navigateToSection(targetId, updateHash = true) {
       if (!targetId) targetId = 'home';
@@ -1963,6 +2721,10 @@
       const activeSec = document.getElementById(targetId);
       if (activeSec) {
         activeSec.classList.add('active');
+      }
+
+      if (mobileNavDrawer) {
+        mobileNavDrawer.classList.remove('open');
       }
 
       // Update Nav Bar Links
@@ -2249,6 +3011,104 @@
         card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale3d(1, 1, 1)';
       });
     });
+  </script>
+
+  <script>
+    // --- CYBER STREAM CANVAS: AERODYNAMIC VECTORS & GLOWING CYBER NODES ---
+    (function() {
+      const cCanvas = document.getElementById('cyberStreamCanvas');
+      if (!cCanvas || !cCanvas.getContext) return;
+      const ctx = cCanvas.getContext('2d');
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        cCanvas.width = width;
+        cCanvas.height = height;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      // Particle streamline vectors
+      const streamlines = Array.from({ length: 42 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        len: Math.random() * 90 + 40,
+        speed: Math.random() * 1.6 + 0.9,
+        opacity: Math.random() * 0.45 + 0.12,
+        width: Math.random() * 1.5 + 0.6,
+        freq: Math.random() * 0.005 + 0.002
+      }));
+
+      // Cyber glowing pulse nodes
+      const nodes = Array.from({ length: 18 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 2.5 + 1.5,
+        baseAlpha: Math.random() * 0.35 + 0.15,
+        pulseSpeed: Math.random() * 0.03 + 0.015,
+        phase: Math.random() * Math.PI * 2
+      }));
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        const isLight = document.body.classList.contains('light-mode');
+        const colorCyan = isLight ? 'rgba(2, 132, 199, ' : 'rgba(0, 229, 255, ';
+        const colorEmerald = isLight ? 'rgba(5, 150, 105, ' : 'rgba(0, 255, 156, ';
+        const colorBlue = isLight ? 'rgba(3, 105, 161, ' : 'rgba(22, 139, 255, ';
+
+        // Draw streamline vectors
+        streamlines.forEach((s, idx) => {
+          s.x += s.speed;
+          s.y += Math.sin(Date.now() * s.freq + s.x * 0.01) * 0.4;
+          if (s.x - s.len > width) {
+            s.x = -s.len;
+            s.y = Math.random() * height;
+          }
+
+          const grad = ctx.createLinearGradient(s.x - s.len, s.y, s.x, s.y);
+          grad.addColorStop(0, 'rgba(0, 229, 255, 0)');
+          grad.addColorStop(1, (idx % 3 === 0 ? colorEmerald : colorCyan) + s.opacity + ')');
+
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = s.width;
+          ctx.beginPath();
+          ctx.moveTo(s.x - s.len, s.y);
+          ctx.lineTo(s.x, s.y);
+          ctx.stroke();
+        });
+
+        // Draw glowing nodes and connective cyber lines
+        nodes.forEach((n, idx) => {
+          n.phase += n.pulseSpeed;
+          const currentAlpha = n.baseAlpha + Math.sin(n.phase) * 0.15;
+          ctx.fillStyle = (idx % 2 === 0 ? colorEmerald : colorCyan) + Math.max(0, currentAlpha) + ')';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          for (let j = idx + 1; j < nodes.length; j++) {
+            const n2 = nodes[j];
+            const dist = Math.hypot(n.x - n2.x, n.y - n2.y);
+            if (dist < 190) {
+              const lineAlpha = (1 - dist / 190) * 0.14;
+              ctx.strokeStyle = (j % 2 === 0 ? colorCyan : colorEmerald) + lineAlpha + ')';
+              ctx.lineWidth = 0.8;
+              ctx.beginPath();
+              ctx.moveTo(n.x, n.y);
+              ctx.lineTo(n2.x, n2.y);
+              ctx.stroke();
+            }
+          }
+        });
+
+        requestAnimationFrame(render);
+      }
+      render();
+    })();
   </script>
 
   <script>
@@ -4282,6 +5142,72 @@
         btnSecondaryTextFa: 'بستن',
         btnSecondaryTextEn: 'Close',
         btnSecondaryAction: () => closeToolInspector()
+      },
+      research: {
+        titleFa: 'پژوهش و مقالات علمی // بهینه‌سازی توربوماشین‌ها',
+        titleEn: 'Scientific Research & Papers // Turbomachinery Optimization',
+        badgeFa: 'پژوهش دانشگاهی &bull; علم و صنعت ایران',
+        badgeEn: 'Academic Research &bull; IUST',
+        icon: 'book',
+        iconColor: '#00FF9C',
+        descFa: 'مجموعه مقالات و مطالعات پژوهشی در زمینه بهینه‌سازی چندهدفه پروانه پمپ‌های گریز از مرکز، تحلیل کاویتاسیون با کانتورهای کسر حجمی بخار در فلوئنت، و ارزیابی زوایای پره بر عملکرد هیدرولیکی.',
+        descEn: 'Research studies and publications focused on multi-objective optimization of centrifugal pumps, cavitation inception modeling, and hydraulic efficiency enhancements.',
+        specs: [
+          { icon: 'file-text', textFa: 'مقالات کنفرانسی و ژورنالی در دست انتشار', textEn: 'Research Papers & Conference Proceedings' },
+          { icon: 'check-circle', textFa: 'اعتبارسنجی با داده‌های آزمایشگاهی تجربی', textEn: 'Validation with Experimental Test Data' },
+          { icon: 'cpu', textFa: 'مدل‌سازی پارامتریک در CFturbo و فلوئنت', textEn: 'Parametric CAD-CFD Coupling' },
+          { icon: 'award', textFa: 'دانشگاه علم و صنعت ایران', textEn: 'IUST Mechanical Research Group' }
+        ],
+        btnPrimaryTextFa: 'مشاهده مقالات و پروژه‌ها',
+        btnPrimaryTextEn: 'View Projects & Papers',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('projects'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
+      },
+      cswp: {
+        titleFa: 'گواهینامه بین‌المللی CSWP // Certified SolidWorks Professional',
+        titleEn: 'Certified SolidWorks Professional (CSWP Certification)',
+        badgeFa: 'نمره کامل ۱۰۰٪ &bull; مدرک رسمی بین‌المللی',
+        badgeEn: 'Score: 100% &bull; Official Credential',
+        icon: 'award',
+        iconColor: '#00E5FF',
+        descFa: 'گواهینامه تخصصی حرفه‌ای سالیدورکس (CSWP) از داسو سیستمز. اثبات تسلط کامل بر مدل‌سازی پیشرفته قطعات پیچیده، تغییرات ابعادی پارامتریک سریع، اسمبلی قطعات با قیدهای مکانیکی و استاندارد، و حل مسائل هندسی تحت محدودیت‌های زمانی استاندارد بین‌المللی.',
+        descEn: 'Official Certified SolidWorks Professional credential from Dassault Systèmes, verifying advanced parametric part design, configurations, mechanical assembly mates, and engineering troubleshooting.',
+        specs: [
+          { icon: 'award', textFa: 'مدرک رسمی بین‌المللی CSWP', textEn: 'Official International CSWP Credential' },
+          { icon: 'check-check', textFa: 'نمره کامل ۱۰۰٪ در آزمون‌های تخصصی', textEn: '100% Perfect Assessment Score' },
+          { icon: 'box', textFa: 'تدوین دوره ۴۲ درس آکادمی بر مبنای سرفصل CSWP', textEn: 'Curriculum Matched with CSWP Standards' },
+          { icon: 'shield', textFa: 'تایید صلاحیت تدریس صنعتی سالیدورکس', textEn: 'Verified CAD Instructor Competence' }
+        ],
+        btnPrimaryTextFa: 'ورود به آکادمی سالیدورکس',
+        btnPrimaryTextEn: 'Open SolidWorks Academy',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('solidworks'); },
+        btnSecondaryTextFa: 'شرکت در آزمون آنلاین سنجش',
+        btnSecondaryTextEn: 'Take Online Quiz',
+        btnSecondaryAction: () => { closeToolInspector(); openToolInspector('quiz'); }
+      },
+      projects: {
+        titleFa: 'کارگاه‌ها و پروژه‌های جامع مهندسی مکانیک',
+        titleEn: 'Comprehensive Mechanical Engineering Workspaces',
+        badgeFa: '۱۲ پروژه تخصصی &bull; CFD &bull; CAD &bull; Twins',
+        badgeEn: '12 Precision Projects &bull; CFD &bull; CAD &bull; Twins',
+        icon: 'layers',
+        iconColor: '#168BFF',
+        descFa: 'مجموعه کامل پروژه‌های صنعتی و شبیه‌سازی: طراحی توربوماشین در CFturbo، ریزش گردابه‌های کارمن در فلوئنت، دوقلوی دیجیتال نیروگاه رانکین، آزمایشگاه میکروسیالات و مجموعه‌های مونتاژی دقیق سالیدورکس.',
+        descEn: 'Comprehensive industrial and research projects: CFturbo pump impeller, Karman vortex CFD in Fluent, Rankine power plant digital twin, microfluidic chip lab, and precision SolidWorks assemblies.',
+        specs: [
+          { icon: 'disc', textFa: '۲ پروژه توربوماشین و پمپ‌های هیدرولیکی', textEn: '2 Turbomachinery & Pump Projects' },
+          { icon: 'wind', textFa: '۳ پروژه دینامیک سیالات محاسباتی CFD', textEn: '3 Computational Fluid Dynamics Projects' },
+          { icon: 'box', textFa: '۳ مجموعه مونتاژ دقیق سالیدورکس', textEn: '3 Precision SolidWorks CAD Assemblies' },
+          { icon: 'cpu', textFa: '۴ دوقلوی دیجیتال و شبیه‌ساز تعاملی', textEn: '4 Live Interactive Digital Twins' }
+        ],
+        btnPrimaryTextFa: 'ورود به گالری پروژه‌ها',
+        btnPrimaryTextEn: 'Open Projects Gallery',
+        btnPrimaryAction: () => { closeToolInspector(); navigateToSection('projects'); },
+        btnSecondaryTextFa: 'بستن',
+        btnSecondaryTextEn: 'Close',
+        btnSecondaryAction: () => closeToolInspector()
       }
     };
 
@@ -5291,6 +6217,194 @@
   <!-- SolidWorks Course Interactive Engine & Content Data -->
   <script src="assets/js/solidworks-content.js"></script>
   <script src="assets/js/solidworks-course.js"></script>
+
+  <!-- ============================================================
+       MOAMIN.IR INTERACTIVE 2026 SEARCH & SETTINGS MODALS
+       ============================================================ -->
+  <!-- Search Modal -->
+  <div id="moaminSearchModal" class="moamin-modal-backdrop" onclick="if(event.target===this) closeSearchModal();" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="moamin-search-dialog">
+      <div class="search-input-header">
+        <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+        <input type="text" id="moaminSearchInput" class="search-input-field" placeholder="جستجو در ۱۸ ماژول، پروژه‌ها، درس‌های سالیدورکس، کتاب‌ها و شبیه‌سازها..." oninput="handleMoaminSearch(this.value)">
+        <button class="lg-inspector-close" onclick="closeSearchModal()" title="بستن (Esc)" style="position: static;"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+      </div>
+      <div class="search-quick-results" id="moaminSearchResults">
+        <!-- Live search results generated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="moaminSettingsModal" class="moamin-modal-backdrop" onclick="if(event.target===this) closeSettingsModal();" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="moamin-search-dialog" style="max-width: 480px; padding: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i data-lucide="settings" style="width: 20px; height: 20px; color: var(--futuristic-cyan);"></i>
+          <h3 style="margin: 0; color: #fff; font-size: 16px;">تنظیمات پوسته و تله‌متری سامانه</h3>
+        </div>
+        <button class="lg-inspector-close" onclick="closeSettingsModal()" title="بستن" style="position: static;"><i data-lucide="x" style="width: 16px; height: 16px;"></i></button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13px; color: #cbd5e1;">
+        <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+          <span>نمایش خطوط جریان ذرات در پس‌زمینه (Streamlines)</span>
+          <input type="checkbox" id="toggleStreamlinesCheck" checked onchange="toggleStreamlinesCanvas(this.checked)">
+        </label>
+        <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+          <span>نمایش نوار وضعیت زنده هیدرولیک (Live HUD)</span>
+          <input type="checkbox" checked onchange="const bar = document.querySelector('.deck-status-bar'); if(bar) bar.style.display = this.checked ? 'flex' : 'none';">
+        </label>
+        <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
+          <span>انیمیشن و تعاملی بودن کارت‌های سه‌بعدی</span>
+          <input type="checkbox" checked onchange="document.querySelectorAll('.moamin-interactive-card').forEach(c => c.style.transition = this.checked ? 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)' : 'none');">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Real-time clock and Persian date updater
+    function updateDashboardTelemetryClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const clockEl = document.getElementById('dashboardLiveTime');
+      if (clockEl) clockEl.textContent = timeStr;
+      
+      const deckClock = document.getElementById('deckLiveClock');
+      if (deckClock) deckClock.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+
+      const persianDateEl = document.getElementById('dashboardLivePersianDate');
+      if (persianDateEl) {
+        persianDateEl.textContent = now.toLocaleDateString('fa-IR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      // Slight natural variance in live Reynolds number Re
+      const reBase = 1850;
+      const reVal = Math.round(reBase + Math.sin(now.getTime() / 2500) * 18);
+      const reEl = document.getElementById('hudReynolds');
+      if (reEl) reEl.textContent = `Re: ${reVal.toLocaleString()} [LAMINAR]`;
+      const sideRe = document.getElementById('sideGaugeRe');
+      if (sideRe) sideRe.textContent = `${reVal.toLocaleString()} [Laminar]`;
+    }
+    setInterval(updateDashboardTelemetryClock, 1000);
+    updateDashboardTelemetryClock();
+
+    // Search Modal Functions
+    const SEARCHABLE_ITEMS = [
+      { nameFa: 'دوره جامع سالیدورکس (SolidWorks 2026)', nameEn: 'SolidWorks Academy', tag: 'آکادمی', action: () => { closeSearchModal(); navigateToSection('solidworks'); } },
+      { nameFa: 'طراحی پروانه پمپ سانتریفیوژ در CFturbo', nameEn: 'CFturbo Pump Design', tag: 'پروژه‌ها', action: () => { closeSearchModal(); window.location.href='projects/cfturbo-pump/pump-design-checklist.html'; } },
+      { nameFa: 'شبیه‌سازی جریان حول استوانه (کارمن فلوئنت)', nameEn: 'Karman Vortex Shedding', tag: 'CFD', action: () => { closeSearchModal(); openProjectModal('cylinder'); } },
+      { nameFa: 'دوقلوی دیجیتال نیروگاه رانکین', nameEn: 'Rankine Power Plant Twin', tag: 'دوقلوها', action: () => { closeSearchModal(); navigateToSection('simulations'); } },
+      { nameFa: 'تراشه میکروسیالاتی و نازل واگرا', nameEn: 'Microfluidic Chip Lab', tag: 'میکروفلوئیدیک', action: () => { closeSearchModal(); navigateToSection('microfluidics'); } },
+      { nameFa: 'کتاب اصول مدیریت کسب‌وکار برای ذهن مهندسی', nameEn: 'Business Monograph', tag: 'کتاب‌ها', action: () => { closeSearchModal(); openToolInspector('business'); } },
+      { nameFa: 'استودیوی ۱۰ نقشه صنعتی با کولیس دیجیتال', nameEn: 'Industrial Blueprints', tag: 'نقشه‌کشی', action: () => { closeSearchModal(); openBlueprintModal(0); } },
+      { nameFa: 'ماشین‌حساب مهندسی و حلگر هیدرولیکی', nameEn: 'Engineering Calculator', tag: 'محاسبات', action: () => { closeSearchModal(); openToolInspector('calc'); } },
+      { nameFa: 'آزمون آنلاین سنجش مهارت سالیدورکس', nameEn: 'SolidWorks Quiz', tag: 'آزمون', action: () => { closeSearchModal(); openToolInspector('quiz'); } },
+      { nameFa: 'گواهینامه بین‌المللی CSWP Professional', nameEn: 'CSWP Certified', tag: 'مدارک', action: () => { closeSearchModal(); openToolInspector('cswp'); } },
+      { nameFa: 'رزومه و مشخصات دانشگاه علم و صنعت ایران', nameEn: 'Resume & Biography', tag: 'درباره', action: () => { closeSearchModal(); openToolInspector('profile'); } },
+      { nameFa: 'همکاری صنعتی و تماس مستقیم', nameEn: 'Direct Contact', tag: 'تماس', action: () => { closeSearchModal(); openToolInspector('contact'); } }
+    ];
+
+    window.openSearchModal = function() {
+      const modal = document.getElementById('moaminSearchModal');
+      if (!modal) return;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      const input = document.getElementById('moaminSearchInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      handleMoaminSearch('');
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.closeSearchModal = function() {
+      const modal = document.getElementById('moaminSearchModal');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    window.handleMoaminSearch = function(query) {
+      const container = document.getElementById('moaminSearchResults');
+      if (!container) return;
+      const q = (query || '').trim().toLowerCase();
+      const results = q ? SEARCHABLE_ITEMS.filter(item => 
+        item.nameFa.toLowerCase().includes(q) || 
+        item.nameEn.toLowerCase().includes(q) ||
+        item.tag.toLowerCase().includes(q)
+      ) : SEARCHABLE_ITEMS;
+
+      if (results.length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 24px; color: #64748b; font-size: 13px;">موردی منطبق با عبارت «${query}» یافت نشد.</div>`;
+        return;
+      }
+
+      container.innerHTML = results.map((item, idx) => `
+        <div class="search-result-item" onclick="SEARCHABLE_ITEMS[${SEARCHABLE_ITEMS.indexOf(item)}].action()">
+          <div>
+            <strong style="color: #fff; display: block;">${item.nameFa}</strong>
+            <span style="font-size: 11px; font-family: monospace; color: #94a3b8;">${item.nameEn}</span>
+          </div>
+          <span class="side-card-badge">${item.tag}</span>
+        </div>
+      `).join('');
+    };
+
+    // Notification Popover Functions
+    window.toggleNotifPopover = function() {
+      const popover = document.getElementById('notifPopoverBox');
+      if (popover) {
+        popover.classList.toggle('open');
+      }
+    };
+
+    document.addEventListener('click', function(e) {
+      const popover = document.getElementById('notifPopoverBox');
+      const btn = document.getElementById('navNotifBtn');
+      if (popover && popover.classList.contains('open') && !popover.contains(e.target) && btn && !btn.contains(e.target)) {
+        popover.classList.remove('open');
+      }
+    });
+
+    // Settings Modal
+    window.openSettingsModal = function() {
+      const modal = document.getElementById('moaminSettingsModal');
+      if (modal) {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.closeSettingsModal = function() {
+      const modal = document.getElementById('moaminSettingsModal');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    window.toggleStreamlinesCanvas = function(enabled) {
+      const canvas = document.getElementById('cyberStreamCanvas');
+      if (canvas) {
+        canvas.style.display = enabled ? 'block' : 'none';
+      }
+    };
+
+    // Keyboard Shortcuts (Ctrl+K or '/' to open search, Esc to close)
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
+        e.preventDefault();
+        openSearchModal();
+      } else if (e.key === 'Escape') {
+        closeSearchModal();
+        closeSettingsModal();
+      }
+    });
+  </script>
 
   <!-- Mechanical Engineering Blueprint Background Engine -->
   <script src="assets/js/engineering-bg.js"></script>
