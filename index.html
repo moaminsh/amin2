@@ -35,7 +35,7 @@
   </div>
 
   <!-- ============================================================
-       TOP FUTURISTIC NAVBAR (Exact match to image.png)
+       TOP FUTURISTIC NAVBAR (Clean & Focused Header: Topics, Clock, Theme, Lang)
        ============================================================ -->
   <header class="moamin-top-navbar" id="mainHeaderNav">
     <div class="navbar-inner-container">
@@ -49,114 +49,55 @@
         </div>
         <div class="brand-text-block">
           <span class="brand-name">MOAMIN.IR</span>
-          <span class="brand-sub">FLUID &bull; CAD &bull; CFD</span>
+          <span class="brand-sub" data-en="Mechanical Engineering" data-fa="مهندسی مکانیک">مهندسی مکانیک</span>
         </div>
-        <span class="brand-pro-tag">PRO 2026</span>
       </a>
 
-      <!-- Profile / User Chip -->
-      <div class="navbar-user-chip" onclick="openToolInspector('profile')" role="button" title="پروفایل مهندسی محمدامین شریف">
-        <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="navbar-user-avatar">
-        <span class="navbar-user-name">محمدامین شریف</span>
-        <span class="side-nav-dot" title="Active at IUST"></span>
-      </div>
-
-      <!-- Desktop Nav Links -->
+      <!-- Desktop Nav Links (سرفصل‌های اصلی با فونت متناسب) -->
       <nav class="navbar-menu-nav">
         <a href="#home" class="nav-item active" data-nav="home" onclick="navigateToSection('home'); return false;">
-          <i data-lucide="home" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="home" style="width: 15px; height: 15px;"></i>
           <span data-en="Dashboard" data-fa="داشبورد اصلی">داشبورد اصلی</span>
         </a>
         <a href="#solidworks" class="nav-item" data-nav="solidworks" onclick="navigateToSection('solidworks'); return false;">
-          <i data-lucide="box" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="box" style="width: 15px; height: 15px;"></i>
           <span data-en="SolidWorks" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span>
         </a>
         <a href="#projects" class="nav-item" data-nav="projects" onclick="navigateToSection('projects'); return false;">
-          <i data-lucide="disc" style="width: 14px; height: 14px;"></i>
-          <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span>
+          <i data-lucide="layers" style="width: 15px; height: 15px;"></i>
+          <span data-en="Projects &amp; CFD" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span>
         </a>
         <a href="#simulations" class="nav-item" data-nav="simulations" onclick="navigateToSection('simulations'); return false;">
-          <i data-lucide="activity" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="activity" style="width: 15px; height: 15px;"></i>
           <span data-en="Simulations" data-fa="شبیه‌سازها">شبیه‌سازها</span>
         </a>
-        <a href="#microfluidics" class="nav-item" data-nav="microfluidics" onclick="navigateToSection('microfluidics'); return false;">
-          <i data-lucide="git-commit" style="width: 14px; height: 14px;"></i>
-          <span data-en="Microfluidics" data-fa="میکروفلوئیدیک">میکروفلوئیدیک</span>
-        </a>
         <a href="#books" class="nav-item" data-nav="books" onclick="navigateToSection('books'); return false;">
-          <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
           <span data-en="Books" data-fa="کتاب‌ها">کتاب‌ها</span>
         </a>
-        <a href="#capabilities" class="nav-item" data-nav="capabilities" onclick="navigateToSection('capabilities'); return false;">
-          <i data-lucide="cpu" style="width: 14px; height: 14px;"></i>
-          <span data-en="Capabilities" data-fa="توانمندی‌ها">توانمندی‌ها</span>
-        </a>
         <a href="#info" class="nav-item" data-nav="info" onclick="navigateToSection('info'); return false;">
-          <i data-lucide="user" style="width: 14px; height: 14px;"></i>
+          <i data-lucide="user" style="width: 15px; height: 15px;"></i>
           <span data-en="About &bull; Contact" data-fa="درباره و تماس">درباره و تماس</span>
         </a>
       </nav>
 
-      <!-- Right Action & Controls -->
+      <!-- Right Action & Controls (ساعت، تغییر زبان، تغییر تم) -->
       <div class="navbar-actions-dock">
-        <!-- Live Connection & Telemetry Indicator -->
-        <div class="navbar-telemetry-tag" title="وضعیت برخط سیستم و شبیه‌سازی">
-          <span class="side-nav-dot"></span>
-          <span>Re: 1,850</span>
-          <span style="opacity: 0.4;">|</span>
-          <span style="color: var(--futuristic-emerald);">2,950 RPM</span>
+        <!-- Live Clock Pill -->
+        <div class="nav-clock-pill" title="زمان زنده سامانه">
+          <i data-lucide="clock" style="width: 14px; height: 14px; color: var(--futuristic-cyan);"></i>
+          <span id="navLiveClock">11:45</span>
         </div>
 
-        <!-- Search Button -->
-        <button class="navbar-icon-btn" onclick="openSearchModal()" title="جستجو در بخش‌ها، دوره‌ها و ابزارها (Ctrl+K)">
-          <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+        <!-- Language Switcher (EN / FA) -->
+        <button class="nav-control-pill" onclick="toggleSiteLanguage()" id="navbarLangBtn" title="تغییر زبان انگلیسی / فارسی">
+          <i data-lucide="languages" style="width: 14px; height: 14px;"></i>
+          <span id="navLangText">EN</span>
         </button>
 
-        <!-- Notification Bell -->
-        <div style="position: relative;">
-          <button class="navbar-icon-btn" onclick="toggleNotifPopover()" id="navNotifBtn" title="اعلان‌ها و رویدادهای زنده مهندسی">
-            <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
-            <span class="nav-notif-badge">۳</span>
-          </button>
-          <!-- Notification Dropdown Popover -->
-          <div class="notif-popover-box" id="notifPopoverBox">
-            <div class="notif-popover-header">
-              <span>اعلان‌های زنده سامانه</span>
-              <span class="side-card-badge">LIVE HUD</span>
-            </div>
-            <div class="notif-item">
-              <span class="notif-item-dot"></span>
-              <div>
-                <strong style="color: #fff; display: block;">اعتبارسنجی ۱۰۰٪ عددی</strong>
-                <span>حلگر ناپایدار ریزش گردابه با دقت ۹۹.۴٪ کالیبره شد.</span>
-              </div>
-            </div>
-            <div class="notif-item">
-              <span class="notif-item-dot"></span>
-              <div>
-                <strong style="color: #fff; display: block;">دوره جامع سالیدورکس</strong>
-                <span>۴۲ جلسه به همراه ۱۰ نقشه ساخت صنعتی در دسترس است.</span>
-              </div>
-            </div>
-            <div class="notif-item">
-              <span class="notif-item-dot"></span>
-              <div>
-                <strong style="color: #fff; display: block;">چک‌لیست طراحی پروانه پمپ</strong>
-                <span>پروتکل ۶ مرحله‌ای CFturbo بروزرسانی شد.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Settings Button -->
-        <button class="navbar-icon-btn" onclick="openSettingsModal()" title="تنظیمات پوسته و تله‌متری">
-          <i data-lucide="settings" style="width: 16px; height: 16px;"></i>
-        </button>
-
-        <!-- CTA Start Learning Button -->
-        <button class="nav-cta-btn" onclick="navigateToSection('solidworks')">
-          <span data-en="Start Learning" data-fa="شروع یادگیری">شروع یادگیری</span>
-          <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+        <!-- Theme Toggle (روشن‌تر کردن / تاریک‌تر کردن صفحه) -->
+        <button class="nav-control-pill nav-theme-pill" onclick="toggleSiteTheme()" id="navbarThemeBtn" title="روشن‌تر / تاریک‌تر کردن صفحه">
+          <i data-lucide="sun" id="navThemeIcon" style="width: 16px; height: 16px;"></i>
         </button>
 
         <!-- Mobile Menu Burger -->
@@ -170,263 +111,96 @@
     <div class="navbar-mobile-drawer" id="mobileNavDrawer">
       <a href="#home" class="mobile-nav-link active" onclick="navigateToSection('home'); return false;"><i data-lucide="home"></i> <span data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</span></a>
       <a href="#solidworks" class="mobile-nav-link" onclick="navigateToSection('solidworks'); return false;"><i data-lucide="box"></i> <span data-en="SolidWorks" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span></a>
-      <a href="#projects" class="mobile-nav-link" onclick="navigateToSection('projects'); return false;"><i data-lucide="disc"></i> <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span></a>
+      <a href="#projects" class="mobile-nav-link" onclick="navigateToSection('projects'); return false;"><i data-lucide="layers"></i> <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span></a>
       <a href="#simulations" class="mobile-nav-link" onclick="navigateToSection('simulations'); return false;"><i data-lucide="activity"></i> <span data-en="Simulations" data-fa="شبیه‌سازهای زنده">شبیه‌سازهای زنده</span></a>
-      <a href="#microfluidics" class="mobile-nav-link" onclick="navigateToSection('microfluidics'); return false;"><i data-lucide="git-commit"></i> <span data-en="Microfluidics" data-fa="میکروفلوئیدیک">میکروفلوئیدیک</span></a>
       <a href="#books" class="mobile-nav-link" onclick="navigateToSection('books'); return false;"><i data-lucide="book-open"></i> <span data-en="Books" data-fa="کتاب‌ها و تصمیم‌گیری">کتاب‌ها و تصمیم‌گیری</span></a>
-      <a href="#capabilities" class="mobile-nav-link" onclick="navigateToSection('capabilities'); return false;"><i data-lucide="cpu"></i> <span data-en="Capabilities" data-fa="توانمندی‌های مهندسی">توانمندی‌های مهندسی</span></a>
       <a href="#info" class="mobile-nav-link" onclick="navigateToSection('info'); return false;"><i data-lucide="user"></i> <span data-en="About" data-fa="درباره و تماس">درباره و تماس</span></a>
     </div>
   </header>
   <div class="custom-cursor" id="cursor"></div>
   <div class="custom-cursor-halo" id="cursorHalo"></div>
 
-  <!-- FLOATING THEME & LANGUAGE CONTROLS -->
-
-  <aside class="floating-lang-dock mech-station" id="floatingControlsDock" aria-label="Theme & Language Controls" title="تغییر زبان و تم روز/شب">
-    <!-- Micro Hex Bolt Left -->
-    <span class="mech-bolt mech-bolt-l" aria-hidden="true"></span>
-
-    <!-- Micro Separator Pin -->
-    <div class="floating-control-divider"></div>
-
-    <!-- Day / Night Mechanical Planetary Gear Switch -->
-    <label class="mech-unit mech-theme-unit" title="حالت روز و شب (Day / Night Gear Dial)">
-      <input id="themeSwitchCheckbox" class="mech-hidden-input" type="checkbox" role="switch" name="theme" value="dark" />
-      <div class="mech-gear-dial">
-        <!-- Sun Gear (Light Mode) -->
-        <svg class="mech-svg mech-sun-svg" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="4.2" class="mech-sun-core" />
-          <path class="mech-sun-rays" d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.8 1.8M17.27 17.27l1.8 1.8M4.93 19.07l1.8-1.8M17.27 6.73l1.8-1.8" />
-        </svg>
-        <!-- Moon Gear (Dark Mode) -->
-        <svg class="mech-svg mech-moon-svg" viewBox="0 0 24 24">
-          <path class="mech-moon-body" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          <circle cx="8" cy="13" r="0.9" class="mech-moon-spot" />
-          <circle cx="13" cy="17" r="0.7" class="mech-moon-spot" />
-        </svg>
-      </div>
-    </label>
-
-    <!-- Mechanical Transmission Language Shifter (FA / EN) -->
-    <label class="mech-unit mech-lang-unit" title="تغییر زبان: فارسی / انگلیسی (Language Transmission Shifter)">
-      <input id="langCheckboxToggle" class="mech-hidden-input" type="checkbox" />
-      <div class="mech-shifter-track">
-        <!-- Rotating Internal Involute Gear -->
-        <svg class="mech-shifter-gear-svg" viewBox="-12 -12 24 24" aria-hidden="true">
-          <path class="mech-shifter-teeth" d="M 9.00 0.00 L 11.77 2.34 L 11.09 4.59 L 7.48 5.00 L 6.36 6.36 L 6.67 9.98 L 4.59 11.09 L 1.76 8.83 L 0.00 9.00 L -2.34 11.77 L -4.59 11.09 L -5.00 7.48 L -6.36 6.36 L -9.98 6.67 L -11.09 4.59 L -8.83 1.76 L -9.00 0.00 L -11.77 -2.34 L -11.09 -4.59 L -7.48 -5.00 L -6.36 -6.36 L -6.67 -9.98 L -4.59 -11.09 L -1.76 -8.83 L -0.00 -9.00 L 2.34 -11.77 L 4.59 -11.09 L 5.00 -7.48 L 6.36 -6.36 L 9.98 -6.67 L 11.09 -4.59 L 8.83 -1.76 Z M 3 0 A 3 3 0 1 0 -3 0 A 3 3 0 1 0 3 0 Z" />
-        </svg>
-        <!-- Mechanical Sliding Piston Slider -->
-        <div class="mech-piston">
-          <div class="mech-piston-groove"></div>
-          <div class="mech-piston-led"></div>
-        </div>
-        <!-- Stamped Gearbox Position Labels -->
-        <span class="mech-label mech-label-fa">FA</span>
-        <span class="mech-label mech-label-en">EN</span>
-      </div>
-    </label>
-
-    <!-- Micro Hex Bolt Right -->
-    <span class="mech-bolt mech-bolt-r" aria-hidden="true"></span>
-  </aside>
-
   <main class="container">
 
     <!-- ============================================================
          HOME SECTION: 2026 ADVANCED MECHANICAL ENGINEERING PANORAMIC DASHBOARD
-         Preserving 100% of all existing content, categories, and data with an
-         award-winning futuristic, cinematic aerospace engineering aesthetic.
          ============================================================ -->
     <section id="home" class="site-section active home-minimal-board">
       <div class="moamin-dashboard-panoramic">
 
-        <!-- ==========================================
-             LEFT SIDE PANEL: ATMOSPHERIC TELEMETRY & QUOTES
-             ========================================== -->
-        <aside class="dashboard-side-panel dashboard-left-panel" aria-label="Engineering Telemetry & Quotes">
-          <!-- Motivational Quote Card -->
-          <div class="side-panel-card quote-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="quote" style="width: 14px; height: 14px;"></i> کلام مهندسی</span>
-              <span class="side-card-badge">PHILOSOPHY</span>
-            </div>
-            <p class="quote-text">
-              «مرزهای مکانیک و سیالات در نقطه تلاقی فیزیک دقیق، مدل‌سازی ریاضی و شبیه‌سازی محاسباتی گسترش می‌یابد.»
-            </p>
-            <div class="quote-author">— مهندس محمدامین شریف</div>
-          </div>
-
-          <!-- Live Date & Clock Card -->
-          <div class="side-panel-card time-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> زمان‌سنج سامانه</span>
-              <span class="side-card-badge">LIVE UTC+3:30</span>
-            </div>
-            <div class="time-display-digital" id="dashboardLiveTime">10:45:28</div>
-            <div class="date-display-persian" id="dashboardLivePersianDate">جمعه، ۳ مهر ۱۴۰۵</div>
-            <div class="time-telemetry-row">
-              <span>ایستگاه مهندسی IUST</span>
-              <span style="color: var(--futuristic-emerald);"><i data-lucide="wifi" style="width: 11px; height: 11px; display: inline-block;"></i> ONLINE</span>
-            </div>
-          </div>
-
-          <!-- Hydraulic Flow Regime & Gauge Card -->
-          <div class="side-panel-card gauge-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="activity" style="width: 14px; height: 14px;"></i> وضعیت رژیم جریان</span>
-              <span class="side-card-badge">FLUID HUD</span>
-            </div>
-            <div class="gauge-visual-wrap">
-              <div class="gauge-data-labels">
-                <span>عدد رینولدز Re:</span>
-                <span class="gauge-data-val" id="sideGaugeRe">1,850 [Laminar]</span>
-              </div>
-              <div class="gauge-meter-track">
-                <div class="gauge-meter-fill" style="width: 46%;"></div>
-              </div>
-              <div class="gauge-data-labels" style="font-size: 9.5px; opacity: 0.65;">
-                <span>0 (آرام)</span>
-                <span>2,300 (انتقالی)</span>
-                <span>4,000+ (آشفته)</span>
-              </div>
-            </div>
-            <div class="time-telemetry-row">
-              <span>عدد ماخ جریان: <strong style="color: #fff;">Ma 0.28</strong></span>
-              <span>توان هیدرولیکی: <strong style="color: var(--futuristic-emerald);">45.2 kW</strong></span>
-            </div>
-          </div>
-        </aside>
-
-        <!-- ==========================================
-             CENTER MAIN DASHBOARD WORKSPACE
-             ========================================== -->
-        <div class="dashboard-center-workspace">
-
-          <!-- TOP STATUS BAR -->
-          <div class="deck-status-bar" style="margin-bottom: 20px;">
-            <span class="deck-status-pill" id="deckLiveClock">10:45</span>
-            <span class="deck-status-greeting" data-en="Good Day, Mohammadamin Sharif" data-fa="درود، محمدامین شریف // میز کار تخصصی">درود، محمدامین شریف // میز کار تخصصی</span>
-            <div class="deck-status-icons" style="display: flex; align-items: center; gap: 12px;">
-              <span style="font-size: 11px; font-weight: 700; color: #00E5FF; font-family: var(--font-mono);">
-                <i data-lucide="activity" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
-                <span id="hudReynolds">Re: 1,850 [LAMINAR]</span>
-              </span>
-              <span style="font-size: 11px; font-weight: 700; color: #00FF9C; font-family: var(--font-mono);" id="hudRpm">2,950 RPM</span>
-              <span class="brand-pro-tag">CSWP 100%</span>
-            </div>
-          </div>
-
-          <!-- COMMANDING FUTURISTIC HERO BANNER (2-Column with 3D Aerospace Turbine & Floating Analytics) -->
-          <div class="moamin-futuristic-hero">
-            <div class="hero-cinematic-grid">
+          <!-- ============================================================
+               COMMANDING FUTURISTIC HERO BANNER:
+               Compressor 3D Visual + Profile Showcase
+               (Mohammadamin Sharif • IUST & Noshirvani • CSWP)
+               ============================================================ -->
+          <div class="moamin-futuristic-hero hero-two-column-showcase" id="heroIdentityBanner">
+            <div class="hero-cinematic-grid hero-balanced-grid">
               
-              <!-- Column 1: Typography, Credentials & CTA -->
-              <div class="hero-content-col">
-                <div class="hero-badge-tag">
-                  <span class="hero-pulse-dot"></span>
-                  <span data-en="// MECHANICAL ENGINEERING &amp; COMPUTATIONAL FLUID DYNAMICS" data-fa="// مهندسی مکانیک، دینامیک سیالات محاسباتی (CFD) و سالیدورکس">// مهندسی مکانیک، دینامیک سیالات محاسباتی (CFD) و سالیدورکس</span>
-                </div>
+              <!-- Column 1 (RTL Right): Personal Identity & Universities -->
+              <div class="hero-identity-main-card">
                 
-                <h1 class="hero-title-main">
-                  <span class="hero-title-fa" data-en="Engineering is in Your Hands" data-fa="مهندسی در دستان شماست">مهندسی در دستان شماست</span>
-                  <span class="hero-title-en">ENGINEERING IS IN YOUR HANDS</span>
-                </h1>
-
-                <p class="hero-desc-lead" data-en="Comprehensive engineering academy, CFD simulations, industrial turbomachinery design, and SolidWorks CAD mastercourses by Mohammadamin Sharif — Iran University of Science &amp; Technology (IUST)." data-fa="مرجع تخصصی طراحی مکانیک، شبیه‌سازی دینامیک سیالات محاسباتی (CFD)، طراحی توربوماشین و دوره جامع سالیدورکس توسط مهندس محمدامین شریف — دانشگاه علم و صنعت ایران (IUST).">
-                  مرجع تخصصی طراحی مکانیک، شبیه‌سازی دینامیک سیالات محاسباتی (CFD)، طراحی توربوماشین و دوره جامع سالیدورکس توسط مهندس محمدامین شریف — دانشگاه علم و صنعت ایران (IUST).
-                </p>
-
-                <!-- Action Buttons -->
-                <div class="hero-actions-group">
-                  <button class="hero-btn-primary" onclick="navigateToSection('solidworks')">
-                    <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
-                    <span data-en="Start Learning" data-fa="شروع یادگیری">شروع یادگیری</span>
-                  </button>
-                  <button class="hero-btn-secondary" onclick="navigateToSection('projects')">
-                    <i data-lucide="layers" style="width: 18px; height: 18px;"></i>
-                    <span data-en="View Projects" data-fa="مشاهده پروژه‌ها">مشاهده پروژه‌ها</span>
-                  </button>
-                  <button class="hero-btn-glass" onclick="navigateToSection('simulations')">
-                    <i data-lucide="activity" style="width: 18px; height: 18px;"></i>
-                    <span data-en="Simulations Lab" data-fa="آزمایشگاه شبیه‌سازی">آزمایشگاه شبیه‌سازی</span>
-                  </button>
+                <!-- Avatar Container (Enlarged to 135px with glowing cyber halo) -->
+                <div class="hero-identity-avatar-container">
+                  <div class="hero-avatar-halo-ring"></div>
+                  <div class="hero-avatar-frame" onclick="openToolInspector('profile')" role="button" title="مشاهده پروفایل مهندس محمدامین شریف">
+                    <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="hero-avatar-image">
+                    <span class="hero-avatar-online-beacon" title="Active • Mechanical Engineering"></span>
+                  </div>
                 </div>
 
-                <!-- Author Profile Strip -->
-                <div class="hero-profile-strip">
-                  <div class="hero-profile-avatar-wrap" onclick="openToolInspector('profile')" role="button" title="مشاهده بیوگرافی و رزومه">
-                    <img src="assets/images/profile.jpg" alt="محمدامین شریف" class="hero-profile-avatar-img">
-                    <span class="deck-avatar-online-dot" title="Active at IUST"></span>
+                <!-- Info Group -->
+                <div class="hero-identity-info-block">
+                  <div class="hero-identity-badge-row">
+                    <span class="hero-identity-tag">
+                      <span class="hero-pulse-dot"></span>
+                      <span>مهندس مکانیک // MECHANICAL ENGINEER</span>
+                    </span>
+                    <span class="hero-verified-chip">
+                      <i data-lucide="check-circle-2" style="width: 13px; height: 13px;"></i>
+                      <span>CSWP Certified</span>
+                    </span>
                   </div>
-                  <div class="hero-profile-details">
-                    <div class="hero-profile-name-row">
-                      <h2 class="hero-profile-name" data-en="Mohammadamin Sharif" data-fa="محمدامین شریف">محمدامین شریف</h2>
-                      <span class="hero-verified-badge"><i data-lucide="check" style="width: 12px; height: 12px;"></i> CSWP Certified</span>
+
+                  <h1 class="hero-identity-name-fa">محمدامین شریف</h1>
+                  <span class="hero-identity-name-en">MOHAMMADAMIN SHARIF</span>
+
+                  <!-- Two Universities Container -->
+                  <div class="hero-universities-container">
+                    <!-- University 1: IUST -->
+                    <div class="hero-identity-uni-badge">
+                      <div class="uni-icon-wrap">
+                        <i data-lucide="graduation-cap" style="width: 18px; height: 18px;"></i>
+                      </div>
+                      <div class="uni-text-content">
+                        <span class="uni-title-fa">دانشگاه علم و صنعت ایران</span>
+                        <span class="uni-subtitle-en">Iran University of Science &amp; Technology (IUST)</span>
+                      </div>
                     </div>
-                    <p class="hero-profile-uni" data-en="Mechanical Engineering • Iran University of Science &amp; Technology (IUST)" data-fa="مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران (IUST)">
-                      مهندسی مکانیک &bull; دانشگاه علم و صنعت ایران (IUST)
-                    </p>
-                  </div>
-                </div>
 
-                <!-- 4-Column Live Telemetry HUD -->
-                <div class="hero-telemetry-hud">
-                  <div class="hud-stat-cell">
-                    <span class="hud-stat-val">۱۵+</span>
-                    <span class="hud-stat-lbl" data-en="Industrial Projects" data-fa="پروژه‌های مهندسی">پروژه‌های مهندسی</span>
+                    <!-- University 2: Babol Noshirvani -->
+                    <div class="hero-identity-uni-badge">
+                      <div class="uni-icon-wrap uni-icon-noshirvani">
+                        <i data-lucide="award" style="width: 18px; height: 18px;"></i>
+                      </div>
+                      <div class="uni-text-content">
+                        <span class="uni-title-fa">دانشگاه صنعتی نوشیروانی بابل (ایران)</span>
+                        <span class="uni-subtitle-en">Babol Noshirvani University of Technology (NIT)</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="hud-stat-cell">
-                    <span class="hud-stat-val">۴۲+</span>
-                    <span class="hud-stat-lbl" data-en="SolidWorks Lessons" data-fa="جلسات سالیدورکس">جلسات سالیدورکس</span>
-                  </div>
-                  <div class="hud-stat-cell">
-                    <span class="hud-stat-val">۴+</span>
-                    <span class="hud-stat-lbl" data-en="Books &amp; Monographs" data-fa="کتب و تألیفات">کتب و تألیفات</span>
-                  </div>
-                  <div class="hud-stat-cell">
-                    <span class="hud-stat-val">۱۰۰٪</span>
-                    <span class="hud-stat-lbl" data-en="Validation Accuracy" data-fa="اعتبارسنجی محاسباتی">اعتبارسنجی محاسباتی</span>
-                  </div>
+
                 </div>
               </div>
 
-              <!-- Column 2: 3D Aerospace Turbine Visual & Floating Analytics Card -->
-              <div class="hero-visual-stage">
-                <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="3D Aerospace Turbine and Centrifugal Impeller" class="hero-3d-render-img">
-                <div class="hero-cad-overlay-hud">
-                  <span class="cad-dimension-marker cad-dim-1"><i data-lucide="maximize-2" style="width: 10px; height: 10px; display: inline-block;"></i> ⌀ 320.5mm ISO 7200</span>
-                  <span class="cad-dimension-marker cad-dim-2"><i data-lucide="compass" style="width: 10px; height: 10px; display: inline-block;"></i> R48.2 &bull; β2=28.5°</span>
-                </div>
-
-                <!-- Floating Live Analytics Card -->
-                <div class="hero-floating-analytics">
-                  <div class="analytics-header-row">
-                    <span class="analytics-title"><i data-lucide="trending-up" style="width: 14px; height: 14px;"></i> نرخ همگرایی CFD و راندمان پمپ</span>
-                    <span class="analytics-live-tag">LIVE HUD</span>
-                  </div>
-                  <!-- Glowing SVG Line Chart -->
-                  <svg class="analytics-svg-chart" viewBox="0 0 300 52" fill="none">
-                    <defs>
-                      <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.35"/>
-                        <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.0"/>
-                      </linearGradient>
-                      <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stop-color="#00E5FF"/>
-                        <stop offset="50%" stop-color="#00FF9C"/>
-                        <stop offset="100%" stop-color="#00E5FF"/>
-                      </linearGradient>
-                    </defs>
-                    <path d="M0,45 Q35,42 70,30 T140,24 T210,12 T280,8 L300,6 L300,52 L0,52 Z" fill="url(#chartGradient)"/>
-                    <path d="M0,45 Q35,42 70,30 T140,24 T210,12 T280,8 L300,6" stroke="url(#lineGradient)" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="210" cy="12" r="3.5" fill="#00FF9C" stroke="#06131D" stroke-width="1.5"/>
-                    <circle cx="300" cy="6" r="4" fill="#00E5FF" stroke="#06131D" stroke-width="1.5"/>
-                  </svg>
-                  <div class="analytics-metrics-strip">
-                    <span>راندمان η: <strong class="analytics-metric-val" style="color: var(--futuristic-emerald);">83.4%</strong></span>
-                    <span>همگرایی پس‌ماند: <strong class="analytics-metric-val">10⁻⁶</strong></span>
-                    <span>سرعت چرخش: <strong class="analytics-metric-val">2,950 RPM</strong></span>
+              <!-- Column 2 (RTL Left): 3D Compressor & Turbine Assembly Stage -->
+              <div class="hero-compressor-stage">
+                <div class="compressor-img-wrapper">
+                  <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="کمپرسور و توربین مهندسی سه‌بعدی" class="hero-compressor-img">
+                  <div class="compressor-gradient-overlay"></div>
+                  <!-- CAD Technical Overlays -->
+                  <div class="compressor-cad-overlay">
+                    <span class="cad-chip cad-chip-top"><i data-lucide="cpu" style="width: 11px; height: 11px;"></i> کمپرسور و توربین جریان محوری</span>
+                    <span class="cad-chip cad-chip-bottom">ISO 7200 &bull; CFD STREAMLINES</span>
                   </div>
                 </div>
               </div>
@@ -578,26 +352,8 @@
 
               <!-- CARD 07: ماشین حساب مهندسی (Engineering Calculator) -->
               <div class="moamin-interactive-card" onclick="openToolInspector('calc')" role="button" tabindex="0">
-                <div class="card-visual-container" style="background: radial-gradient(circle at 50% 50%, #002233 0%, #040910 100%);">
-                  <div style="height: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <svg viewBox="0 0 100 100" width="85" height="85">
-                      <rect x="20" y="15" width="60" height="70" rx="10" fill="#08283A" stroke="#00E5FF" stroke-width="2"/>
-                      <rect x="28" y="24" width="44" height="18" rx="4" fill="#040D14" stroke="#00FF9C" stroke-width="1.5"/>
-                      <text x="68" y="37" fill="#00FF9C" font-family="monospace" font-size="9" text-anchor="end">Re=1,850</text>
-                      <circle cx="34" cy="52" r="4" fill="#00E5FF"/>
-                      <circle cx="46" cy="52" r="4" fill="#00E5FF"/>
-                      <circle cx="58" cy="52" r="4" fill="#00E5FF"/>
-                      <circle cx="70" cy="52" r="4" fill="#00FF9C"/>
-                      <circle cx="34" cy="64" r="4" fill="#168BFF"/>
-                      <circle cx="46" cy="64" r="4" fill="#168BFF"/>
-                      <circle cx="58" cy="64" r="4" fill="#168BFF"/>
-                      <circle cx="70" cy="64" r="4" fill="#00FF9C"/>
-                      <circle cx="34" cy="74" r="4" fill="#168BFF"/>
-                      <circle cx="46" cy="74" r="4" fill="#168BFF"/>
-                      <circle cx="58" cy="74" r="4" fill="#00E5FF"/>
-                      <circle cx="70" cy="74" r="4" fill="#00E5FF"/>
-                    </svg>
-                  </div>
+                <div class="card-visual-container">
+                  <img src="assets/images/engineering_calculator_3d_1790331426250.jpg" alt="ماشین حساب مهندسی" class="card-3d-visual">
                   <div class="card-visual-gradient"></div>
                   <span class="card-category-chip">محاسبات تخصصی</span>
                   <span class="card-code-tag">SOLVER</span>
@@ -786,15 +542,8 @@
 
               <!-- CARD 17: گواهی‌نامه‌ها (Certifications) -->
               <div class="moamin-interactive-card" onclick="openToolInspector('cswp')" role="button" tabindex="0">
-                <div class="card-visual-container" style="background: radial-gradient(circle at 50% 50%, #08283A 0%, #06131D 100%);">
-                  <div style="height: 100%; display: flex; align-items: center; justify-content: center;">
-                    <svg viewBox="0 0 100 100" width="80" height="80">
-                      <polygon points="50,10 88,32 88,68 50,90 12,68 12,32" fill="rgba(0, 229, 255, 0.1)" stroke="#00E5FF" stroke-width="2"/>
-                      <polygon points="50,20 78,37 78,63 50,80 22,63 22,37" fill="rgba(0, 255, 156, 0.15)" stroke="#00FF9C" stroke-width="1.5"/>
-                      <circle cx="50" cy="50" r="16" fill="#071C29" stroke="#00E5FF" stroke-width="2"/>
-                      <text x="50" y="54" fill="#00FF9C" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle">CSWP</text>
-                    </svg>
-                  </div>
+                <div class="card-visual-container">
+                  <img src="assets/images/cswp_certification_seal_3d_1790331436526.jpg" alt="گواهی‌نامه‌ها و مدارک" class="card-3d-visual">
                   <div class="card-visual-gradient"></div>
                   <span class="card-category-chip">مدارک بین‌المللی</span>
                   <span class="card-code-tag">100% VERIFIED</span>
@@ -812,15 +561,8 @@
 
               <!-- CARD 18: آزمون‌ها (Assessments & Quiz) -->
               <div class="moamin-interactive-card" onclick="openToolInspector('quiz')" role="button" tabindex="0">
-                <div class="card-visual-container" style="background: radial-gradient(circle at 50% 50%, #071C29 0%, #06131D 100%);">
-                  <div style="height: 100%; display: flex; align-items: center; justify-content: center;">
-                    <svg viewBox="0 0 100 100" width="80" height="80">
-                      <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
-                      <circle cx="50" cy="50" r="36" fill="none" stroke="#00FF9C" stroke-width="4" stroke-dasharray="160 226" stroke-linecap="round"/>
-                      <text x="50" y="46" fill="#00E5FF" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">QUIZ</text>
-                      <text x="50" y="60" fill="#94a3b8" font-family="sans-serif" font-size="8" text-anchor="middle">سنجش تسلط</text>
-                    </svg>
-                  </div>
+                <div class="card-visual-container">
+                  <img src="assets/images/engineering_quiz_hud_3d_1790331511882.jpg" alt="آزمون‌های سنجش تسلط" class="card-3d-visual">
                   <div class="card-visual-gradient"></div>
                   <span class="card-category-chip">سنجش مهارت</span>
                   <span class="card-code-tag">TEST SUITE</span>
@@ -962,138 +704,6 @@
           </div>
 
         </div>
-
-        <!-- ==========================================
-             RIGHT SIDE PANEL: NAVIGATION, PROGRESS & ACTIVITY
-             ========================================== -->
-        <aside class="dashboard-side-panel dashboard-right-panel" aria-label="Dashboard Navigation & Progress">
-          <!-- Profile Badge Card -->
-          <div class="side-panel-card profile-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="user" style="width: 14px; height: 14px;"></i> مشخصات مهندس</span>
-              <span class="side-card-badge">IUST</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-              <img src="assets/images/profile.jpg" alt="محمدامین شریف" style="width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid var(--futuristic-cyan); object-fit: cover;">
-              <div>
-                <strong style="color: #fff; font-size: 14px; display: block;">محمدامین شریف</strong>
-                <span style="font-size: 11px; color: #94a3b8;">مهندسی مکانیک &bull; دانشگاه علم و صنعت</span>
-              </div>
-            </div>
-            <div style="font-size: 11px; color: var(--futuristic-cyan); font-family: var(--font-mono); margin-top: 6px;">
-              <i data-lucide="award" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i> CSWP 100% &bull; CFturbo &bull; CFD
-            </div>
-          </div>
-
-          <!-- Dashboard Quick Navigation -->
-          <div class="side-panel-card nav-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="compass" style="width: 14px; height: 14px;"></i> دسترسی سریع</span>
-              <span class="side-card-badge">NAV</span>
-            </div>
-            <div class="side-quick-nav-list">
-              <a href="#home" class="side-quick-nav-item active" onclick="navigateToSection('home'); return false;">
-                <span>داشبورد اصلی</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#solidworks" class="side-quick-nav-item" onclick="navigateToSection('solidworks'); return false;">
-                <span>آکادمی سالیدورکس (۴۲ درس)</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#projects" class="side-quick-nav-item" onclick="navigateToSection('projects'); return false;">
-                <span>پروژه‌ها و کارگاه‌های CFD</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#simulations" class="side-quick-nav-item" onclick="navigateToSection('simulations'); return false;">
-                <span>دوقلوهای دیجیتال زنده</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#microfluidics" class="side-quick-nav-item" onclick="navigateToSection('microfluidics'); return false;">
-                <span>تراشه میکروسیالاتی</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#books" class="side-quick-nav-item" onclick="navigateToSection('books'); return false;">
-                <span>کتاب‌ها و ابزارهای تصمیم</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#capabilities" class="side-quick-nav-item" onclick="navigateToSection('capabilities'); return false;">
-                <span>توانمندی‌های تخصصی</span>
-                <span class="side-nav-dot"></span>
-              </a>
-              <a href="#info" class="side-quick-nav-item" onclick="navigateToSection('info'); return false;">
-                <span>درباره و تماس مستقیم</span>
-                <span class="side-nav-dot"></span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Real-Time Activity Feed -->
-          <div class="side-panel-card activity-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="activity" style="width: 14px; height: 14px;"></i> فعالیت‌های اخیر</span>
-              <span class="side-card-badge">RECENT</span>
-            </div>
-            <div class="activity-feed-list">
-              <div class="activity-feed-item">
-                <div class="activity-feed-icon"><i data-lucide="box" style="width: 13px; height: 13px;"></i></div>
-                <div>
-                  <div>جلسه ۴۲ سالیدورکس (مکانیزم‌های پیشرفته) بارگذاری شد.</div>
-                  <div class="activity-feed-meta">امروز &bull; آکادمی CAD</div>
-                </div>
-              </div>
-              <div class="activity-feed-item">
-                <div class="activity-feed-icon" style="color: var(--futuristic-emerald);"><i data-lucide="disc" style="width: 13px; height: 13px;"></i></div>
-                <div>
-                  <div>چک‌لیست ۶ مرحله‌ای پروانه پمپ CFturbo بروزرسانی گردید.</div>
-                  <div class="activity-feed-meta">دیروز &bull; توربوماشین</div>
-                </div>
-              </div>
-              <div class="activity-feed-item">
-                <div class="activity-feed-icon" style="color: #38bdf8;"><i data-lucide="cpu" style="width: 13px; height: 13px;"></i></div>
-                <div>
-                  <div>راندمان سیکل رانکین با دمای ۴۸۰ درجه کالیبره شد.</div>
-                  <div class="activity-feed-meta">۳ روز قبل &bull; دوقلوی دیجیتال</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Progress Tracking Card -->
-          <div class="side-panel-card progress-card">
-            <div class="side-card-header">
-              <span class="side-card-title"><i data-lucide="pie-chart" style="width: 14px; height: 14px;"></i> پیشرفت پروژه‌ها</span>
-              <span class="side-card-badge">METRICS</span>
-            </div>
-            <div class="side-progress-row">
-              <div class="side-progress-header">
-                <span>دوره سالیدورکس (۴۲ درس)</span>
-                <span class="side-progress-percent">۱۰۰٪</span>
-              </div>
-              <div class="side-progress-bar-track">
-                <div class="side-progress-bar-fill fill-emerald" style="width: 100%;"></div>
-              </div>
-            </div>
-            <div class="side-progress-row">
-              <div class="side-progress-header">
-                <span>اعتبارسنجی عددی CFD</span>
-                <span class="side-progress-percent">۹۹.۴٪</span>
-              </div>
-              <div class="side-progress-bar-track">
-                <div class="side-progress-bar-fill fill-cyan" style="width: 99.4%;"></div>
-              </div>
-            </div>
-            <div class="side-progress-row">
-              <div class="side-progress-header">
-                <span>مش‌بندی و حل توربوماشین</span>
-                <span class="side-progress-percent">۹۵٪</span>
-              </div>
-              <div class="side-progress-bar-track">
-                <div class="side-progress-bar-fill fill-blue" style="width: 95%;"></div>
-              </div>
-            </div>
-          </div>
-        </aside>
-
       </div>
     </section>
 
@@ -2573,17 +2183,20 @@
         rootEl.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
         document.body.classList.remove('dark-mode');
-        if (themeSwitchCheckbox) themeSwitchCheckbox.checked = false;
       } else {
         rootEl.classList.remove('light-mode');
         rootEl.classList.add('dark-mode');
         document.body.classList.remove('light-mode');
         document.body.classList.add('dark-mode');
-        if (themeSwitchCheckbox) themeSwitchCheckbox.checked = true;
+      }
+      const themeIcon = document.getElementById('navThemeIcon');
+      if (themeIcon) {
+        themeIcon.setAttribute('data-lucide', mode === 'light' ? 'moon' : 'sun');
+        if (window.lucide) lucide.createIcons();
       }
     }
 
-    // Interactive Celestial Theme Toggle (Clicking on Sun or Moon in scenic artwork)
+    // Toggle Site Theme (روشن‌تر یا تاریک‌تر کردن صفحه)
     window.toggleSiteTheme = function() {
       const isLight = document.body.classList.contains('light-mode');
       const next = isLight ? 'dark' : 'light';
@@ -2593,14 +2206,6 @@
 
     const savedTheme = localStorage.getItem('site-theme') || 'dark';
     applyTheme(savedTheme);
-
-    if (themeSwitchCheckbox) {
-      themeSwitchCheckbox.addEventListener('change', () => {
-        const next = themeSwitchCheckbox.checked ? 'dark' : 'light';
-        applyTheme(next);
-        localStorage.setItem('site-theme', next);
-      });
-    }
 
     // Language & RTL Direction Toggle
     const i18nEls = document.querySelectorAll('[data-en][data-fa]');
@@ -2623,8 +2228,9 @@
         }
       });
 
-      if (langCheckbox) {
-        langCheckbox.checked = isFa;
+      const langText = document.getElementById('navLangText');
+      if (langText) {
+        langText.textContent = isFa ? 'EN' : 'FA';
       }
 
       // Re-render SolidWorks Academy if active to refresh dynamic strings and direction
@@ -2641,28 +2247,28 @@
       }
     }
 
+    // Toggle Language (تغییر زبان انگلیسی یا فارسی)
+    window.toggleSiteLanguage = function() {
+      const currentLang = rootEl.getAttribute('lang') || 'fa';
+      const nextLang = (currentLang === 'fa') ? 'en' : 'fa';
+      applyLanguage(nextLang);
+      localStorage.setItem('site-lang', nextLang);
+    };
+
     const savedLang = localStorage.getItem('site-lang') || 'fa';
     applyLanguage(savedLang);
 
-    if (langCheckbox) {
-      langCheckbox.addEventListener('change', () => {
-        const next = langCheckbox.checked ? 'fa' : 'en';
-        applyLanguage(next);
-        localStorage.setItem('site-lang', next);
-      });
-    }
-
-    // Deck Live Clock Updater
-    function updateDeckClock() {
-      const clockEl = document.getElementById('deckLiveClock');
+    // Top Navbar Live Clock Updater (ساعت زنده)
+    function updateNavbarLiveClock() {
+      const clockEl = document.getElementById('navLiveClock');
       if (!clockEl) return;
       const now = new Date();
       const hours = String(now.getHours()).padStart(2, '0');
       const mins = String(now.getMinutes()).padStart(2, '0');
       clockEl.textContent = `${hours}:${mins}`;
     }
-    updateDeckClock();
-    setInterval(updateDeckClock, 10000);
+    updateNavbarLiveClock();
+    setInterval(updateNavbarLiveClock, 1000);
 
 
     // Optional mobile menu handling if present
@@ -6270,6 +5876,13 @@
       const clockEl = document.getElementById('dashboardLiveTime');
       if (clockEl) clockEl.textContent = timeStr;
       
+      const navClock = document.getElementById('navLiveClock');
+      if (navClock) {
+        const hours = String(now.getHours()).padStart(2, '0');
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        navClock.textContent = `${hours}:${mins}`;
+      }
+
       const deckClock = document.getElementById('deckLiveClock');
       if (deckClock) deckClock.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
 
