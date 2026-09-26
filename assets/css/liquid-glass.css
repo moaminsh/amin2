@@ -9092,22 +9092,31 @@ html.dark-mode .project-card::after {
   color: #64748b;
 }
 
-/* --- Compressor Stage (Column 2) --- */
+/* --- Compressor Stage (Column 2) - Dynamic Turbomachine Simulation --- */
 .hero-compressor-stage {
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  border: 1.5px solid rgba(0, 229, 255, 0.35);
-  background: radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.08) 0%, rgba(6, 19, 29, 0.95) 85%);
-  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 229, 255, 0.12), inset 0 0 15px rgba(0, 229, 255, 0.1);
-  transition: all 0.35s ease;
+  border: 1.5px solid rgba(0, 229, 255, 0.4);
+  background: radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.1) 0%, rgba(6, 19, 29, 0.96) 85%);
+  box-shadow: 0 14px 40px -8px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 229, 255, 0.16), inset 0 0 20px rgba(0, 229, 255, 0.1);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
   min-width: 0;
-  height: 185px;
+  height: 220px;
+}
+
+.hero-compressor-stage.running {
+  animation: compressorMicroVibe 0.1s infinite linear;
+}
+
+.hero-compressor-stage[data-state="boosted"] {
+  border-color: #00FF9C;
+  box-shadow: 0 16px 50px -6px rgba(0, 255, 156, 0.3), 0 0 35px rgba(0, 229, 255, 0.3), inset 0 0 25px rgba(0, 255, 156, 0.2);
 }
 
 .hero-compressor-stage:hover {
   border-color: var(--futuristic-emerald);
-  box-shadow: 0 16px 45px -8px rgba(0, 255, 156, 0.25), 0 0 28px rgba(0, 229, 255, 0.25);
+  box-shadow: 0 18px 48px -8px rgba(0, 255, 156, 0.28), 0 0 32px rgba(0, 229, 255, 0.28);
 }
 
 .compressor-img-wrapper {
@@ -9121,56 +9130,369 @@ html.dark-mode .project-card::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
-  filter: brightness(0.95) contrast(1.1);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.92) contrast(1.15) saturate(1.1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
 }
 
-.hero-compressor-stage:hover .hero-compressor-img {
-  transform: scale(1.05);
+.hero-compressor-stage[data-state="boosted"] .hero-compressor-img {
+  filter: brightness(1.05) contrast(1.25) saturate(1.25);
+  transform: scale(1.04);
+}
+
+/* Dynamic Simulation Canvas (Hardware-accelerated 60FPS turbomachine overlay) */
+.hero-compressor-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .compressor-gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(6, 19, 29, 0.05) 0%, rgba(6, 19, 29, 0.35) 60%, rgba(6, 19, 29, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(6, 19, 29, 0.45) 0%, rgba(6, 19, 29, 0.15) 45%, rgba(6, 19, 29, 0.75) 100%);
   pointer-events: none;
+  z-index: 3;
 }
 
-.compressor-cad-overlay {
+/* Top HUD: Status Beacon & Live Telemetry */
+.compressor-hud-top {
   position: absolute;
-  inset: 0;
+  top: 9px;
+  left: 10px;
+  right: 10px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  padding: 10px 12px;
+  gap: 8px;
+  z-index: 4;
   pointer-events: none;
 }
 
-.cad-chip {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  padding: 2.5px 7px;
-  border-radius: 6px;
-  width: fit-content;
-  backdrop-filter: blur(8px);
-}
-
-.cad-chip-top {
+.compressor-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 8px;
   background: rgba(6, 19, 29, 0.85);
   border: 1px solid rgba(0, 229, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
   color: var(--futuristic-cyan);
+}
+
+.hero-compressor-stage[data-state="boosted"] .compressor-status-tag {
+  border-color: rgba(0, 255, 156, 0.6);
+  color: #00FF9C;
+}
+
+.hero-compressor-stage[data-state="stopped"] .compressor-status-tag {
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #94a3b8;
+}
+
+.compressor-beacon-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00FF9C;
+  box-shadow: 0 0 8px #00FF9C;
+  animation: beaconPulse 1.2s infinite ease-in-out;
+}
+
+.hero-compressor-stage[data-state="stopped"] .compressor-beacon-dot {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  animation: none;
+}
+
+.hero-compressor-stage[data-state="boosted"] .compressor-beacon-dot {
+  background: #00FF9C;
+  box-shadow: 0 0 12px #00FF9C, 0 0 20px #00E5FF;
+  animation: beaconPulse 0.6s infinite ease-in-out;
+}
+
+.status-rpm-val {
+  padding-right: 6px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.compressor-telemetry-chips {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.cad-chip-bottom {
-  align-self: flex-start;
-  background: rgba(6, 19, 29, 0.85);
-  border: 1px solid rgba(0, 255, 156, 0.35);
-  color: var(--futuristic-emerald);
+.telemetry-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2.5px 7px;
+  border-radius: 6px;
+  background: rgba(6, 19, 29, 0.82);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.telemetry-chip .chip-k {
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.telemetry-chip .chip-v {
+  color: #00E5FF;
+}
+
+.telemetry-chip-temp .chip-v {
+  color: #f59e0b;
+}
+
+/* Bottom HUD: Operation Controls & RPM Throttle */
+.compressor-hud-bottom {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 4;
+  pointer-events: auto;
+}
+
+.compressor-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.compressor-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: rgba(6, 19, 29, 0.88);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: #e2e8f0;
+  font-family: var(--font-sans, inherit);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.compressor-ctrl-btn:hover {
+  background: rgba(0, 229, 255, 0.18);
+  border-color: #00E5FF;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.compressor-ctrl-btn.active {
+  background: rgba(0, 255, 156, 0.16);
+  border-color: #00FF9C;
+  color: #00FF9C;
+  box-shadow: 0 0 12px rgba(0, 255, 156, 0.25);
+}
+
+.compressor-ctrl-btn.btn-boost:hover,
+.compressor-ctrl-btn.btn-boost.active {
+  background: rgba(0, 255, 156, 0.2);
+  border-color: #00FF9C;
+  color: #00FF9C;
+  box-shadow: 0 0 16px rgba(0, 255, 156, 0.4);
+}
+
+.compressor-ctrl-btn.btn-power.active {
+  color: #00FF9C;
+  border-color: rgba(0, 255, 156, 0.5);
+}
+
+.compressor-ctrl-btn.btn-sound.active {
+  color: #00E5FF;
+  border-color: rgba(0, 229, 255, 0.5);
+}
+
+/* RPM Throttle Slider */
+.compressor-throttle-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(6, 19, 29, 0.88);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.throttle-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.compressor-throttle-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.compressor-throttle-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #00FF9C;
+  box-shadow: 0 0 8px #00FF9C;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.compressor-throttle-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+.throttle-percent {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  color: #00FF9C;
+  min-width: 28px;
+  text-align: left;
+}
+
+/* Micro vibration animation for high-RPM turbomachinery */
+@keyframes compressorMicroVibe {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(0.25px, -0.2px); }
+  50% { transform: translate(-0.2px, 0.2px); }
+  75% { transform: translate(0.2px, 0.15px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes beaconPulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 4px currentColor); }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+/* Light Mode Overrides */
+.light-mode .hero-compressor-stage {
+  border-color: rgba(2, 132, 199, 0.35);
+  background: radial-gradient(circle at 50% 50%, rgba(2, 132, 199, 0.08) 0%, rgba(248, 250, 252, 0.96) 85%);
+  box-shadow: 0 12px 30px -8px rgba(2, 132, 199, 0.2), inset 0 0 15px rgba(2, 132, 199, 0.08);
+}
+
+.light-mode .compressor-gradient-overlay {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(241, 245, 249, 0.75) 100%);
+}
+
+.light-mode .compressor-status-tag,
+.light-mode .telemetry-chip,
+.light-mode .compressor-ctrl-btn,
+.light-mode .compressor-throttle-bar {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(2, 132, 199, 0.28);
+  color: #0f172a;
+}
+
+.light-mode .compressor-status-tag {
+  color: #0284c7;
+}
+
+.light-mode .status-rpm-val {
+  color: #0f172a;
+  border-right-color: rgba(0, 0, 0, 0.15);
+}
+
+.light-mode .telemetry-chip .chip-v {
+  color: #0284c7;
+}
+
+.light-mode .compressor-ctrl-btn:hover {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+.light-mode .compressor-ctrl-btn.active {
+  background: rgba(5, 150, 105, 0.12);
+  border-color: #059669;
+  color: #059669;
+  box-shadow: 0 0 12px rgba(5, 150, 105, 0.2);
+}
+
+.light-mode .throttle-percent {
+  color: #059669;
+}
+
+@media (max-width: 768px) {
+  .hero-compressor-stage {
+    height: 230px;
+  }
+
+  .compressor-telemetry-chips .telemetry-chip:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .compressor-hud-top {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .compressor-telemetry-chips {
+    display: none;
+  }
+
+  .compressor-hud-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .compressor-controls-group {
+    justify-content: space-between;
+  }
+
+  .compressor-throttle-bar {
+    justify-content: space-between;
+  }
+
+  .compressor-throttle-slider {
+    flex: 1;
+  }
 }
 
 .light-mode .hero-telemetry-hud {

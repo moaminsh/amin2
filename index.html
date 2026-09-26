@@ -198,15 +198,76 @@
                 </div>
               </div>
 
-              <!-- Column 2 (RTL Left): 3D Compressor & Turbine Assembly Stage -->
-              <div class="hero-compressor-stage">
-                <div class="compressor-img-wrapper">
-                  <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="کمپرسور و توربین مهندسی سه‌بعدی" class="hero-compressor-img">
+              <!-- Column 2 (RTL Left): 3D Dynamic Compressor & Turbomachine Twin -->
+              <div class="hero-compressor-stage running" id="heroCompressorStage" data-state="running" role="region" aria-label="شبیه‌ساز توربوکمپرسور جریان محوری مهندس محمدامین شریف">
+                <div class="compressor-img-wrapper" id="compressorWrapper">
+                  <!-- Base 3D Aerospace Turbomachine Image -->
+                  <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="کمپرسور و توربین مهندسی سه‌بعدی" class="hero-compressor-img" id="heroCompressorImg">
+                  
+                  <!-- Dynamic Canvas (Real-time rotating blades, CFD streamlines, compression shocks) -->
+                  <canvas id="heroCompressorCanvas" class="hero-compressor-canvas"></canvas>
+
+                  <!-- Vignette & Ambient Radial Overlay -->
                   <div class="compressor-gradient-overlay"></div>
-                  <!-- CAD Technical Overlays -->
-                  <div class="compressor-cad-overlay">
-                    <span class="cad-chip cad-chip-top"><i data-lucide="cpu" style="width: 11px; height: 11px;"></i> کمپرسور و توربین جریان محوری</span>
-                    <span class="cad-chip cad-chip-bottom">ISO 7200 &bull; CFD STREAMLINES</span>
+
+                  <!-- Top HUD: Operational Beacon & Real-time Sensor Telemetry -->
+                  <div class="compressor-hud-top">
+                    <div class="compressor-status-tag" id="compressorStatusTag">
+                      <span class="compressor-beacon-dot"></span>
+                      <span class="status-text-fa" id="compressorStatusLabel">کمپرسور فعال</span>
+                      <span class="status-rpm-val" id="compressorRpmDisplay">18,450 RPM</span>
+                    </div>
+
+                    <div class="compressor-telemetry-chips">
+                      <div class="telemetry-chip" title="نسبت تراکم (Pressure Ratio)">
+                        <span class="chip-k">Πc:</span>
+                        <span class="chip-v" id="compressorPrDisplay">18.4:1</span>
+                      </div>
+                      <div class="telemetry-chip" title="دبی جرمی سیال (Mass Flow)">
+                        <span class="chip-k">Ṁ:</span>
+                        <span class="chip-v" id="compressorFlowDisplay">48.2 kg/s</span>
+                      </div>
+                      <div class="telemetry-chip telemetry-chip-temp" title="دمای خروجی مرحله (Exit Temp)">
+                        <span class="chip-k">T₂:</span>
+                        <span class="chip-v" id="compressorTempDisplay">418°C</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Bottom HUD: Interactive Operation Controls, Audio FX & Throttle -->
+                  <div class="compressor-hud-bottom">
+                    <div class="compressor-controls-group">
+                      <!-- Power Toggle -->
+                      <button class="compressor-ctrl-btn btn-power active" id="compressorPowerBtn" onclick="toggleCompressorEngine(event)" title="روشن / خاموش کردن توربین کمپرسور" aria-label="روشن یا خاموش کردن موتور">
+                        <i data-lucide="power" style="width: 12px; height: 12px;"></i>
+                        <span id="compressorPowerText">روشن</span>
+                      </button>
+
+                      <!-- Turbo Boost (24,000 RPM) -->
+                      <button class="compressor-ctrl-btn btn-boost" id="compressorBoostBtn" onclick="boostCompressorEngine(event)" title="حالت بوست حداکثر (MAX TURBO BOOST - 24,000 RPM)" aria-label="شتاب توربو بوست">
+                        <i data-lucide="zap" style="width: 12px; height: 12px;"></i>
+                        <span>بوست توربو</span>
+                      </button>
+
+                      <!-- Mode Switcher -->
+                      <button class="compressor-ctrl-btn btn-mode" id="compressorModeBtn" onclick="cycleCompressorMode(event)" title="تغییر نمای شبیه‌سازی: CFD، مکانیکی، حرارتی، یا CAD" aria-label="تغییر نمای مهندسی">
+                        <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
+                        <span id="compressorModeText">جریان CFD</span>
+                      </button>
+
+                      <!-- Synthesized Turbine Sound FX -->
+                      <button class="compressor-ctrl-btn btn-sound" id="compressorSoundBtn" onclick="toggleCompressorAudio(event)" title="صدای واقعی توربین و کمپرسور (Web Audio API)" aria-label="پخش صدای توربین">
+                        <i data-lucide="volume-x" id="compressorSoundIcon" style="width: 12px; height: 12px;"></i>
+                        <span id="compressorSoundText">صدا</span>
+                      </button>
+                    </div>
+
+                    <!-- Throttle Slider (RPM Control) -->
+                    <div class="compressor-throttle-bar" title="اهرم گاز و تنظیم دور موتور کمپرسور">
+                      <span class="throttle-label">گاز:</span>
+                      <input type="range" min="0" max="100" value="75" id="compressorThrottleInput" class="compressor-throttle-slider" oninput="setCompressorThrottle(this.value)" aria-label="تنظیم گاز کمپرسور">
+                      <span class="throttle-percent" id="compressorThrottlePercent">75%</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -6027,5 +6088,7 @@
 
   <!-- Mechanical Engineering Blueprint Background Engine -->
   <script src="assets/js/engineering-bg.js"></script>
+  <!-- Dynamic Turbomachinery Compressor Simulation Engine -->
+  <script src="assets/js/compressor-engine.js"></script>
 </body>
 </html>
