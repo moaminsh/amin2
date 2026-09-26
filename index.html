@@ -16,6 +16,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Three.js 3D WebGL Engine for High-Fidelity Turbomachinery Simulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <!-- Liquid Glass Design System -->
   <link rel="stylesheet" href="assets/css/liquid-glass.css">
   <link rel="stylesheet" href="assets/css/solidworks-course.css">
@@ -198,14 +201,30 @@
                 </div>
               </div>
 
-              <!-- Column 2 (RTL Left): 3D Dynamic Compressor & Turbomachine Twin -->
+              <!-- Column 2 (RTL Left): 3D Dynamic Turbomachine & Axial Compressor -->
               <div class="hero-compressor-stage running" id="heroCompressorStage" data-state="running" role="region" aria-label="شبیه‌ساز توربوکمپرسور جریان محوری مهندس محمدامین شریف">
                 <div class="compressor-img-wrapper" id="compressorWrapper">
-                  <!-- Base 3D Aerospace Turbomachine Image -->
-                  <img src="assets/images/futuristic_turbine_hero_1790330818526.jpg" alt="کمپرسور و توربین مهندسی سه‌بعدی" class="hero-compressor-img" id="heroCompressorImg">
-                  
-                  <!-- Dynamic Canvas (Real-time rotating blades, CFD streamlines, compression shocks) -->
-                  <canvas id="heroCompressorCanvas" class="hero-compressor-canvas"></canvas>
+                  <!-- Real-time 3D WebGL Turbomachinery Engine Canvas -->
+                  <canvas id="heroCompressorCanvas" class="hero-compressor-canvas" aria-label="شبیه‌ساز سه‌بعدی کمپرسور"></canvas>
+
+                  <!-- 3D Orbit Interaction Hint Badge -->
+                  <div class="compressor-3d-hint" id="compressor3dHint">
+                    <i data-lucide="orbit" style="width: 12px; height: 12px;"></i>
+                    <span>چرخش ۳۶۰° با درگ ماوس / لمس</span>
+                  </div>
+
+                  <!-- Camera View Angle Presets -->
+                  <div class="compressor-camera-presets">
+                    <button class="cam-preset-btn active" id="btnCamIso" onclick="setCompressorCameraPreset('iso', event)" title="نمای ایزومتریک ۳ بعدی">
+                      <span>ایزومتریک ۳D</span>
+                    </button>
+                    <button class="cam-preset-btn" id="btnCamCutaway" onclick="setCompressorCameraPreset('cutaway', event)" title="نمای برش داخلی قطعات">
+                      <span>برش مقطع</span>
+                    </button>
+                    <button class="cam-preset-btn" id="btnCamFront" onclick="setCompressorCameraPreset('front', event)" title="نمای روبرو ورودی پروانه">
+                      <span>اینلت (روبرو)</span>
+                    </button>
+                  </div>
 
                   <!-- Vignette & Ambient Radial Overlay -->
                   <div class="compressor-gradient-overlay"></div>
@@ -219,7 +238,7 @@
                     </div>
 
                     <div class="compressor-telemetry-chips">
-                      <div class="telemetry-chip" title="نسبت تراکم (Pressure Ratio)">
+                      <div class="telemetry-chip" title="نسبت تراکم کلی (Pressure Ratio)">
                         <span class="chip-k">Πc:</span>
                         <span class="chip-v" id="compressorPrDisplay">18.4:1</span>
                       </div>
@@ -227,7 +246,7 @@
                         <span class="chip-k">Ṁ:</span>
                         <span class="chip-v" id="compressorFlowDisplay">48.2 kg/s</span>
                       </div>
-                      <div class="telemetry-chip telemetry-chip-temp" title="دمای خروجی مرحله (Exit Temp)">
+                      <div class="telemetry-chip telemetry-chip-temp" title="دمای گاز خروجی مرحله (Exit Temp)">
                         <span class="chip-k">T₂:</span>
                         <span class="chip-v" id="compressorTempDisplay">418°C</span>
                       </div>
@@ -246,7 +265,7 @@
                       <!-- Turbo Boost (24,000 RPM) -->
                       <button class="compressor-ctrl-btn btn-boost" id="compressorBoostBtn" onclick="boostCompressorEngine(event)" title="حالت بوست حداکثر (MAX TURBO BOOST - 24,000 RPM)" aria-label="شتاب توربو بوست">
                         <i data-lucide="zap" style="width: 12px; height: 12px;"></i>
-                        <span>بوست توربو</span>
+                        <span>بوست ۲۴k</span>
                       </button>
 
                       <!-- Mode Switcher -->
@@ -259,6 +278,12 @@
                       <button class="compressor-ctrl-btn btn-sound" id="compressorSoundBtn" onclick="toggleCompressorAudio(event)" title="صدای واقعی توربین و کمپرسور (Web Audio API)" aria-label="پخش صدای توربین">
                         <i data-lucide="volume-x" id="compressorSoundIcon" style="width: 12px; height: 12px;"></i>
                         <span id="compressorSoundText">صدا</span>
+                      </button>
+
+                      <!-- CAD Specs & Engineering Breakdown -->
+                      <button class="compressor-ctrl-btn btn-cad-info" onclick="openToolInspector('compressor')" title="مشاهده مشخصات طراحی سالیدورکس، مثلث‌های سرعت و معادله اویلر">
+                        <i data-lucide="file-text" style="width: 12px; height: 12px;"></i>
+                        <span>آنالیز CAD</span>
                       </button>
                     </div>
 
@@ -4310,6 +4335,28 @@
        LIQUID GLASS TOOL INSPECTOR CONTROLLER ("وقتی میرم توش توضیحات بیاد")
        ============================================================ */
     const LG_TOOL_DATA = {
+      compressor: {
+        titleFa: 'شبیه‌ساز و دوقلوی دیجیتال توربوکمپرسور جریان محوری',
+        titleEn: 'Axial Turbocompressor 3D Digital Twin & Fluid Dynamics',
+        badgeFa: '۴ ردیف روتور &bull; نسبت تراکم ۱۸.۴ &bull; Euler Head',
+        badgeEn: '4 Rotor Stages &bull; PR 18.4:1 &bull; Euler Turbomachinery',
+        icon: 'disc',
+        iconColor: '#00e5ff',
+        descFa: 'طراحی پیشرفته توربوکمپرسور جریان محوری چندمرحله‌ای: تحلیل آیرودینامیکی ایرفویل‌های ناکا (NACA 65-Series) با زاویه پیچش شعاعی متغیر برای ارضای قانون گردابه آزاد (Free Vortex Law). انتقال انرژی روتور به سیال با معادله اویلر (Δh₀ = U·ΔCθ)، بازده آیزنتروپیک ۹۲.۴٪، پخش فشار در استاتورها، آنالیز تنش‌های گریز از مرکز فینیت المنت (von Mises) در ریشه دم چلچله‌ای پره‌ها و شبیه‌سازی ذرات CFD در جریان تراکم‌پذیر سه بعدی.',
+        descEn: 'Advanced multistage axial turbocompressor engineering: aerodynamic profiling of NACA 65-series cambered airfoils with continuous radial twist for free-vortex equilibrium. Euler turbomachinery work transfer, 92.4% isentropic efficiency, stator kinetic diffusion, finite element centrifugal stress at dovetail blade roots, and real-time 3D compressible CFD streamlines.',
+        specs: [
+          { icon: 'activity', textFa: 'سرعت دورانی اسمی: ۱۸,۴۵۰ دور بر دقیقه (RPM)', textEn: 'Nominal Speed: 18,450 RPM' },
+          { icon: 'gauge', textFa: 'نسبت تراکم کلی: ۱۸.۴ به ۱ با دبی ۴۸.۲ کیلوگرم بر ثانیه', textEn: 'Pressure Ratio: 18.4:1, Mass Flow: 48.2 kg/s' },
+          { icon: 'layers', textFa: '۴ مرحله روتور تیتانیومی با استاتورهای هدایت‌کننده', textEn: '4 Titanium Rotor Stages + Stationary Stators' },
+          { icon: 'thermometer', textFa: 'افزایش دمای ترمودینامیکی سیال: از ۲۴°C به ۴۱۸°C', textEn: 'Thermodynamic Temperature Rise: 24°C to 418°C' }
+        ],
+        btnPrimaryTextFa: 'بستن و ادامه شبیه‌ساز سه‌بعدی',
+        btnPrimaryTextEn: 'Close & Resume 3D Simulator',
+        btnPrimaryAction: () => { closeToolInspector(); },
+        btnSecondaryTextFa: 'مشاهده چک‌لیست توربوماشین‌ها در CFturbo',
+        btnSecondaryTextEn: 'Open CFturbo Turbomachine Suite',
+        btnSecondaryAction: () => { closeToolInspector(); window.location.href = 'projects/cfturbo-pump/pump-design-checklist.html'; }
+      },
       solidworks: {
         titleFa: 'سالیدورکس ۲۰۲۴ // طراحی صنعتی و نقشه‌کشی ساخت',
         titleEn: 'SolidWorks 2024 // 3D CAD & Manufacturing Design',
