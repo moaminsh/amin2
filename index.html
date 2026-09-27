@@ -17,11 +17,17 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Three.js 3D WebGL Engine for High-Fidelity Turbomachinery Simulation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="assets/js/vendor/three.min.js"></script>
+  <script>
+    if (typeof window.THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
 
   <!-- Liquid Glass Design System -->
   <link rel="stylesheet" href="assets/css/liquid-glass.css">
   <link rel="stylesheet" href="assets/css/solidworks-course.css">
+  <link rel="stylesheet" href="assets/css/business-decision-matrix.css">
 
   <!-- Core styles are loaded from assets/css/liquid-glass.css -->
 </head>
@@ -62,9 +68,9 @@
           <i data-lucide="home" style="width: 15px; height: 15px;"></i>
           <span data-en="Dashboard" data-fa="داشبورد اصلی">داشبورد اصلی</span>
         </a>
-        <a href="#solidworks" class="nav-item" data-nav="solidworks" onclick="navigateToSection('solidworks'); return false;">
-          <i data-lucide="box" style="width: 15px; height: 15px;"></i>
-          <span data-en="SolidWorks" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span>
+        <a href="#education" class="nav-item" data-nav="education" onclick="navigateToSection('education'); return false;">
+          <i data-lucide="graduation-cap" style="width: 15px; height: 15px;"></i>
+          <span data-en="Academy" data-fa="آموزش (سالیدورکس و مدیریت)">آموزش (سالیدورکس و مدیریت)</span>
         </a>
         <a href="#projects" class="nav-item" data-nav="projects" onclick="navigateToSection('projects'); return false;">
           <i data-lucide="layers" style="width: 15px; height: 15px;"></i>
@@ -113,7 +119,7 @@
     <!-- Mobile Drawer Menu -->
     <div class="navbar-mobile-drawer" id="mobileNavDrawer">
       <a href="#home" class="mobile-nav-link active" onclick="navigateToSection('home'); return false;"><i data-lucide="home"></i> <span data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</span></a>
-      <a href="#solidworks" class="mobile-nav-link" onclick="navigateToSection('solidworks'); return false;"><i data-lucide="box"></i> <span data-en="SolidWorks" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span></a>
+      <a href="#education" class="mobile-nav-link" onclick="navigateToSection('education'); return false;"><i data-lucide="graduation-cap"></i> <span data-en="Academy" data-fa="آموزش (سالیدورکس و مدیریت)">آموزش (سالیدورکس و مدیریت)</span></a>
       <a href="#projects" class="mobile-nav-link" onclick="navigateToSection('projects'); return false;"><i data-lucide="layers"></i> <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span></a>
       <a href="#simulations" class="mobile-nav-link" onclick="navigateToSection('simulations'); return false;"><i data-lucide="activity"></i> <span data-en="Simulations" data-fa="شبیه‌سازهای زنده">شبیه‌سازهای زنده</span></a>
       <a href="#books" class="mobile-nav-link" onclick="navigateToSection('books'); return false;"><i data-lucide="book-open"></i> <span data-en="Books" data-fa="کتاب‌ها و تصمیم‌گیری">کتاب‌ها و تصمیم‌گیری</span></a>
@@ -210,7 +216,7 @@
                   <!-- 3D Orbit Interaction Hint Badge -->
                   <div class="compressor-3d-hint" id="compressor3dHint">
                     <i data-lucide="orbit" style="width: 12px; height: 12px;"></i>
-                    <span>چرخش ۳۶۰° با درگ ماوس / لمس</span>
+                    <span>چرخش ۳۶۰° با ماوس / لمس &bull; اسکرول زوم</span>
                   </div>
 
                   <!-- Camera View Angle Presets -->
@@ -218,15 +224,18 @@
                     <button class="cam-preset-btn active" id="btnCamIso" onclick="setCompressorCameraPreset('iso', event)" title="نمای ایزومتریک ۳ بعدی">
                       <span>ایزومتریک ۳D</span>
                     </button>
-                    <button class="cam-preset-btn" id="btnCamCutaway" onclick="setCompressorCameraPreset('cutaway', event)" title="نمای برش داخلی قطعات">
-                      <span>برش مقطع</span>
+                    <button class="cam-preset-btn" id="btnCamCutaway" onclick="setCompressorCameraPreset('side', event)" title="نمای جانبی روتور و مراحل پره‌ها">
+                      <span>نمای جانبی</span>
                     </button>
                     <button class="cam-preset-btn" id="btnCamFront" onclick="setCompressorCameraPreset('front', event)" title="نمای روبرو ورودی پروانه">
-                      <span>اینلت (روبرو)</span>
+                      <span>اینلت (ورودی)</span>
+                    </button>
+                    <button class="cam-preset-btn" id="btnCamAft" onclick="setCompressorCameraPreset('aft', event)" title="نمای خروجی دیفیوزر">
+                      <span>دیفیوزر (خروجی)</span>
                     </button>
                   </div>
 
-                  <!-- Vignette & Ambient Radial Overlay -->
+                  <!-- Vignette Overlay -->
                   <div class="compressor-gradient-overlay"></div>
 
                   <!-- Top HUD: Operational Beacon & Real-time Sensor Telemetry -->
@@ -238,17 +247,21 @@
                     </div>
 
                     <div class="compressor-telemetry-chips">
-                      <div class="telemetry-chip" title="نسبت تراکم کلی (Pressure Ratio)">
+                      <div class="telemetry-chip" title="نسبت تراکم کلی (Pressure Ratio Πc)">
                         <span class="chip-k">Πc:</span>
                         <span class="chip-v" id="compressorPrDisplay">18.4:1</span>
                       </div>
-                      <div class="telemetry-chip" title="دبی جرمی سیال (Mass Flow)">
+                      <div class="telemetry-chip" title="دبی جرمی سیال (Mass Flow Ṁ)">
                         <span class="chip-k">Ṁ:</span>
                         <span class="chip-v" id="compressorFlowDisplay">48.2 kg/s</span>
                       </div>
-                      <div class="telemetry-chip telemetry-chip-temp" title="دمای گاز خروجی مرحله (Exit Temp)">
+                      <div class="telemetry-chip telemetry-chip-temp" title="دمای گاز خروجی مرحله (Exit Temp T₂)">
                         <span class="chip-k">T₂:</span>
                         <span class="chip-v" id="compressorTempDisplay">418°C</span>
+                      </div>
+                      <div class="telemetry-chip" title="بازده آیزنتروپیک کمپرسور (Isentropic Efficiency ηc)">
+                        <span class="chip-k">ηc:</span>
+                        <span class="chip-v" id="compressorEffDisplay" style="color: #00ff9c;">92.4%</span>
                       </div>
                     </div>
                   </div>
@@ -278,6 +291,12 @@
                       <button class="compressor-ctrl-btn btn-sound" id="compressorSoundBtn" onclick="toggleCompressorAudio(event)" title="صدای واقعی توربین و کمپرسور (Web Audio API)" aria-label="پخش صدای توربین">
                         <i data-lucide="volume-x" id="compressorSoundIcon" style="width: 12px; height: 12px;"></i>
                         <span id="compressorSoundText">صدا</span>
+                      </button>
+
+                      <!-- Full Turbomachinery Lab Workbench Button -->
+                      <button class="compressor-ctrl-btn btn-lab-launch" onclick="openTurbomachineLab(event)" title="ورود به میزکار و آزمایشگاه جامع تست توربوکمپرسور (نقشه عملکرد، سرج، اویلر و تنش)">
+                        <i data-lucide="flask-conical" style="width: 12px; height: 12px; color: #00ff9c;"></i>
+                        <span style="color: #00ff9c; font-weight: 700;">آزمایشگاه جامع</span>
                       </button>
 
                       <!-- CAD Specs & Engineering Breakdown -->
@@ -694,12 +713,12 @@
                   <img src="assets/images/cad-banner.jpg" alt="دوره جامع سالیدورکس">
                 </div>
                 <div class="lower-card-body">
-                  <div class="lower-card-tag">// آکادمی تخصصی CAD</div>
-                  <h4 class="lower-card-title">دوره جامع سالیدورکس (SolidWorks 2026)</h4>
-                  <p class="lower-card-desc">۴۲ جلسه آموزش گام‌به‌گام از اسکچینگ و فیچرهای پیشرفته تا مونتاژ، تلرانس‌گذاری هندسی (GD&T) و آمادگی کامل برای آزمون بین‌المللی CSWP.</p>
+                  <div class="lower-card-tag">// آکادمی تخصصی سالیدورکس</div>
+                  <h4 class="lower-card-title">آموزش تخصصی سالیدورکس (SolidWorks 2026)</h4>
+                  <p class="lower-card-desc">۴۲ مبحث جامع مهندسی از اسکچینگ و فیچرهای پیشرفته تا مونتاژ، تلرانس‌گذاری هندسی (GD&amp;T)، ۱۰ نقشه صنعتی و آزمون CSWP.</p>
                   <div class="lower-card-meta">
-                    <span>۴۲ جلسه ویدیویی + فایل قطعات</span>
-                    <span style="color: var(--futuristic-emerald);">ورود به دوره ←</span>
+                    <span>۴۲ سرفصل + ۱۰ نقشه ساخت</span>
+                    <span style="color: var(--futuristic-emerald);">ورود به دوره سالیدورکس ←</span>
                   </div>
                 </div>
               </div>
@@ -768,18 +787,18 @@
                 </div>
               </div>
 
-              <!-- ITEM 6: Business Management Monograph -->
-              <div class="lower-showcase-card" onclick="navigateToSection('books')">
+              <!-- ITEM 6: Business Management Academy & Course -->
+              <div class="lower-showcase-card" onclick="navigateToSection('business')">
                 <div class="lower-card-banner">
-                  <img src="assets/images/business-management-guide.jpg" alt="کتاب اصول مدیریت کسب‌وکار">
+                  <img src="assets/images/business-management-guide.jpg" alt="آموزش اصول مدیریت کسب‌وکار برای مهندسان">
                 </div>
                 <div class="lower-card-body">
-                  <div class="lower-card-tag">// اثر تألیفی و تصمیم‌گیری</div>
-                  <h4 class="lower-card-title">کتاب اصول مدیریت کسب‌وکار</h4>
-                  <p class="lower-card-desc">راهنمای عملی تصمیم‌گیری مهندسی با ماتریس پوگ، تحلیل SWOT، درخت تصمیم و رویکردهای استراتژیک در صنایع تولیدی و پروژه‌های فنی.</p>
+                  <div class="lower-card-tag">// آکادمی مدیریت و استراتژی</div>
+                  <h4 class="lower-card-title">آموزش اصول مدیریت کسب‌وکار برای مهندسان</h4>
+                  <p class="lower-card-desc">دوره جامع استراتژی صنعتی، ماتریس تصمیم‌گیری پوگ، بوم مدل کسب‌وکار (BMC)، ۵ نیروی پورتر، مدیریت پروژه گانت و کوئیز تعاملی سنجش هوش تجاری.</p>
                   <div class="lower-card-meta">
-                    <span>۱۰ ابزار استراتژیک</span>
-                    <span style="color: var(--futuristic-emerald);">مطالعه خلاصه ←</span>
+                    <span>۷ ابزار زنده + آزمون آنلاین</span>
+                    <span style="color: var(--futuristic-emerald);">ورود به دوره مدیریت ←</span>
                   </div>
                 </div>
               </div>
@@ -851,9 +870,9 @@
         <span data-en="PUMP DESIGN" data-fa="طراحی پمپ">PUMP DESIGN</span>
         <span class="filter-pill-count">01</span>
       </button>
-      <button class="filter-pill" data-filter="solidworks">
-        <i data-lucide="box" style="width: 14px;"></i>
-        <span data-en="SOLIDWORKS ACADEMY" data-fa="آموزش و کارگاه سالیدورکس">SOLIDWORKS ACADEMY</span>
+      <button class="filter-pill" data-filter="education" onclick="navigateToSection('education')">
+        <i data-lucide="graduation-cap" style="width: 14px;"></i>
+        <span data-en="ACADEMY &amp; COURSES" data-fa="آموزش (سالیدورکس و مدیریت)">آموزش (سالیدورکس و مدیریت)</span>
         <span class="filter-pill-count">PRO</span>
       </button>
       <button class="filter-pill" data-filter="simulations">
@@ -1365,12 +1384,20 @@
       </div>
     </section>
 
-    <!-- SOLIDWORKS GALLERY -->
-    <section id="solidworks" class="site-section glass-board">
+    <!-- ============================================================
+         EDUCATION & ACADEMY SECTION (مرکز جامع آموزش: سالیدورکس و مدیریت کسب‌وکار)
+         ============================================================ -->
+    <section id="education" data-alias="solidworks" class="site-section glass-board">
       <span class="glass-pin pin-tl" aria-hidden="true"></span>
       <span class="glass-pin pin-tr" aria-hidden="true"></span>
       <span class="glass-pin pin-bl" aria-hidden="true"></span>
       <span class="glass-pin pin-br" aria-hidden="true"></span>
+
+      <!-- Backward-compatible invisible anchors for direct linking -->
+      <div id="solidworks" style="position: absolute; top: 0; left: 0; pointer-events: none; opacity: 0;"></div>
+      <div id="business" style="position: absolute; top: 0; left: 0; pointer-events: none; opacity: 0;"></div>
+      <div id="learning" style="position: absolute; top: 0; left: 0; pointer-events: none; opacity: 0;"></div>
+      <div id="academy" style="position: absolute; top: 0; left: 0; pointer-events: none; opacity: 0;"></div>
 
       <!-- Section Navigation Top Bar -->
       <div class="section-view-bar">
@@ -1381,30 +1408,77 @@
         <div class="section-breadcrumbs">
           <span class="section-breadcrumb-home" onclick="navigateToSection('home')" data-en="HOME" data-fa="صفحه اصلی">HOME</span>
           <span>/</span>
-          <span class="section-breadcrumb-active" data-en="SOLIDWORKS CAD" data-fa="سالیدورکس">SOLIDWORKS CAD</span>
+          <span class="section-breadcrumb-active" data-en="ACADEMY &amp; MASTERCLASS" data-fa="مرکز آموزش مهندسی و مدیریت">مرکز آموزش مهندسی و مدیریت</span>
         </div>
       </div>
 
       <!-- Section Futuristic Visual Header Banner -->
       <div class="section-banner-hero">
-        <img src="assets/images/cad_turbopump_assembly_1790329291591.jpg" alt="SolidWorks CAD Banner" class="section-banner-img" referrerPolicy="no-referrer">
+        <img src="assets/images/cad_turbopump_assembly_1790329291591.jpg" alt="Engineering Academy Banner" class="section-banner-img" referrerPolicy="no-referrer">
         <div class="section-banner-gradient-overlay"></div>
         <div class="section-banner-content">
           <div class="section-banner-top-tags">
             <span class="section-banner-badge">
               <span class="pulse-dot"></span>
-              <span data-en="// SOLIDWORKS MASTERCLASS & BLUEPRINTS" data-fa="// دوره جامع آموزش و کارگاه سالیدورکس">// SOLIDWORKS MASTERCLASS & BLUEPRINTS</span>
+              <span data-en="// ENGINEERING ACADEMY &amp; BUSINESS SUITE" data-fa="// مرکز جامع آموزش مهندسی: سالیدورکس و مدیریت کسب‌وکار">// مرکز جامع آموزش مهندسی: سالیدورکس و مدیریت کسب‌وکار</span>
             </span>
-            <span class="section-banner-pill">[42 TOPICS &bull; 10 BLUEPRINTS &bull; 35+ TOOLS &bull; QUIZ]</span>
+            <span class="section-banner-pill">[DUAL TRACK: 42 CAD TOPICS &bull; 10 BLUEPRINTS &bull; 7 STRATEGIC TOOLS &bull; 2 QUIZZES]</span>
           </div>
-          <h2 class="section-banner-title" data-en="SOLIDWORKS ENGINEERING ACADEMY &amp; CAD LAB" data-fa="دوره جامع و کارگاه تخصصی سالیدورکس مقدماتی تا پیشرفته">
-            SOLIDWORKS ENGINEERING ACADEMY &amp; CAD LAB
+          <h2 class="section-banner-title" data-en="ENGINEERING DESIGN &amp; BUSINESS MANAGEMENT ACADEMY" data-fa="مرکز آموزش تخصصی مهندسی مکانیک، سالیدورکس و مدیریت کسب‌وکار">
+            مرکز آموزش تخصصی مهندسی مکانیک، سالیدورکس و مدیریت کسب‌وکار
           </h2>
-          <p class="section-banner-subtitle" data-en="Comprehensive SolidWorks engineering masterclass curated, structured, and presented by Mohammadamin Sharif — featuring 2D sketching, geometric relations, fully defined states, 3D features, assemblies, drawings, GD&T, 10 exact blueprints, and interactive quiz." data-fa="دوره جامع و تخصصی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) همراه با تمامی ابزارها، قیود، میانبرها، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.">
-            دوره جامع و تخصصی آموزش مهندسی سالیدورکس (گردآوری و تدوین: محمدامین شریف) همراه با تمامی ابزارها، قیود، میانبرها، ۱۰ نقشه ساخت صنعتی با ابعاد دقیق، و آزمون تعاملی سنجش تسلط.
+          <p class="section-banner-subtitle" data-en="Integrated engineering academy curated and structured by Mohammadamin Sharif (IUST &amp; Noshirvani) — featuring comprehensive SolidWorks 3D CAD masterclass, GD&amp;T, exact industrial blueprints, along with strategic business management, Pugh decision matrix, Business Model Canvas (BMC), Porter's 5 forces, Gantt project management, and interactive mastery quizzes." data-fa="مرکز آموزش و آکادمی جامع تخصصی گردآوری و تدوین‌شده توسط مهندس محمدامین شریف (دانشگاه علم و صنعت و نوشیروانی) شامل دو مسیر راهبردی: دوره جامع طراحی سه‌بعدی و نقشه‌کشی سالیدورکس (SolidWorks) به همراه اصول استراتژیک مدیریت کسب‌وکار، مدل‌های تصمیم‌گیری، ماتریس پوگ، بوم کسب‌وکار، مدیریت پروژه گانت و کوئیزهای تعاملی.">
+            مرکز آموزش و آکادمی جامع تخصصی گردآوری و تدوین‌شده توسط مهندس محمدامین شریف (دانشگاه علم و صنعت و نوشیروانی) شامل دو مسیر راهبردی: دوره جامع طراحی سه‌بعدی و نقشه‌کشی سالیدورکس (SolidWorks) به همراه اصول استراتژیک مدیریت کسب‌وکار، مدل‌های تصمیم‌گیری، ماتریس پوگ، بوم کسب‌وکار، مدیریت پروژه گانت و کوئیزهای تعاملی.
           </p>
         </div>
       </div>
+
+      <!-- Master Dual-Track Switcher -->
+      <div class="academy-track-switcher" id="academyTrackSwitcher">
+        <button class="academy-track-btn active" id="btnTrackBoth" onclick="switchAcademyTrack('both')">
+          <i data-lucide="layers"></i>
+          <div class="academy-track-btn-info">
+            <span class="track-btn-title" data-en="All Masterclasses (Both Tracks)" data-fa="نمایش کامل هر دو مسیر">نمایش کامل هر دو مسیر</span>
+            <span class="track-btn-sub" data-en="Panoramic View: SolidWorks &amp; Business" data-fa="مشاهده همزمان سالیدورکس و مدیریت کسب‌وکار">مشاهده همزمان سالیدورکس و مدیریت کسب‌وکار</span>
+          </div>
+          <span class="track-btn-badge">PANORAMIC</span>
+        </button>
+
+        <button class="academy-track-btn" id="btnTrackSolidworks" onclick="switchAcademyTrack('solidworks')">
+          <i data-lucide="box"></i>
+          <div class="academy-track-btn-info">
+            <span class="track-btn-title" data-en="SolidWorks CAD Academy" data-fa="آموزش سالیدورکس">آموزش سالیدورکس</span>
+            <span class="track-btn-sub" data-en="42 Topics &bull; 10 Blueprints &bull; CAD Lab" data-fa="۴۲ سرفصل، ۱۰ نقشه ساخت، کارگاه سه‌بعدی">۴۲ سرفصل، ۱۰ نقشه ساخت، کارگاه سه‌بعدی</span>
+          </div>
+          <span class="track-btn-badge">CAD LAB</span>
+        </button>
+
+        <button class="academy-track-btn" id="btnTrackBusiness" onclick="switchAcademyTrack('business')">
+          <i data-lucide="briefcase"></i>
+          <div class="academy-track-btn-info">
+            <span class="track-btn-title" data-en="Business Management for Engineers" data-fa="آموزش مدیریت کسب‌وکار">آموزش مدیریت کسب‌وکار</span>
+            <span class="track-btn-sub" data-en="Decision Matrix &bull; BMC &bull; Porter &bull; Quiz" data-fa="ماتریس تصمیم‌گیری، بوم کسب‌وکار، مدیریت پروژه، کوئیز">ماتریس تصمیم‌گیری، بوم کسب‌وکار، مدیریت پروژه، کوئیز</span>
+          </div>
+          <span class="track-btn-badge">STRATEGY</span>
+        </button>
+      </div>
+
+      <!-- ============================================================
+           TRACK 1: SOLIDWORKS CAD MASTERCLASS PANE
+           ============================================================ -->
+      <div id="academyTrackSolidworksPane" class="academy-pane">
+        <div class="section-glass-header" style="margin-top: 10px; margin-bottom: 16px;">
+          <div>
+            <div class="section-eyebrow" data-en="// TRACK 01: 3D CAD &amp; ENGINEERING DESIGN" data-fa="// مسیر اول: طراحی صنعتی و مهندسی سالیدورکس">
+              <i data-lucide="box" style="width: 14px;"></i>
+              <span>// TRACK 01: 3D CAD &amp; ENGINEERING DESIGN</span>
+            </div>
+            <div class="section-main-heading" data-en="SOLIDWORKS CAD MASTERCLASS" data-fa="دوره جامع آموزش سالیدورکس">دوره جامع آموزش سالیدورکس</div>
+          </div>
+          <div class="section-pill-indicator">
+            [42 TOPICS &bull; 10 BLUEPRINTS]
+          </div>
+        </div>
 
       <!-- Quick Metrics Statistics Row -->
       <div class="sw-stats-row" style="margin: 16px 0 20px 0;">
@@ -1541,6 +1615,490 @@
         </div>
 
       </div>
+      <!-- END TRACK 1: SOLIDWORKS CAD MASTERCLASS PANE -->
+
+      <!-- ============================================================
+           TRACK 2: BUSINESS MANAGEMENT FOR ENGINEERS PANE
+           ============================================================ -->
+      <div id="academyTrackBusinessPane" class="academy-pane">
+        
+        <div class="section-glass-header" style="margin-top: 36px; margin-bottom: 16px;">
+          <div>
+            <div class="section-eyebrow" data-en="// TRACK 02: BUSINESS MANAGEMENT &amp; STRATEGY" data-fa="// مسیر دوم: اصول مدیریت کسب‌وکار و استراتژی مهندسی">
+              <i data-lucide="briefcase" style="width: 14px;"></i>
+              <span>// TRACK 02: BUSINESS MANAGEMENT &amp; STRATEGY</span>
+            </div>
+            <div class="section-main-heading" data-en="BUSINESS MANAGEMENT FOR ENGINEERING MINDS" data-fa="آموزش اصول مدیریت کسب‌وکار برای ذهن مهندسی">آموزش اصول مدیریت کسب‌وکار برای ذهن مهندسی</div>
+          </div>
+          <div class="section-pill-indicator">
+            [7 STRATEGIC TOOLS &bull; BMC &bull; PUGH &bull; QUIZ]
+          </div>
+        </div>
+
+        <!-- Business Management Hero Banner -->
+        <div class="bm-hero-banner">
+          <div class="bm-cover-frame">
+            <img src="assets/images/business-management-guide.jpg" alt="کتاب اصول مدیریت کسب‌وکار برای ذهن مهندسی" class="bm-cover-img" referrerPolicy="no-referrer">
+          </div>
+          <div class="bm-hero-content">
+            <div class="bm-hero-top-tag">
+              <i data-lucide="check-circle" style="width: 13px; height: 13px;"></i>
+              <span>دوره تخصصی مدیریت راهبردی و اقتصاد مهندسی</span>
+            </div>
+            <h3 class="bm-hero-title">
+              اصول مدیریت کسب‌وکار برای ذهن مهندسی
+            </h3>
+            <p class="bm-hero-desc">
+              چرا پیچیده‌ترین شبیه‌سازی‌های CFD و زیباترین قطعات سالیدورکس بدون درک اقتصاد، کشف نیاز واقعی مشتری، ماتریس تصمیم‌گیری و مدیریت پروژه محکوم به شکست هستند؟ این دوره مهندسان را به رهبران استراتژیست با توانایی تبدیل دانش فنی به بیزنس‌های صنعتی پایدار و سودآور تبدیل می‌کند.
+            </p>
+            <div class="bm-hero-actions">
+              <button class="bm-btn-primary" onclick="switchBusinessToolTab('pugh'); document.getElementById('businessToolsWorkbenchSection').scrollIntoView({ behavior: 'smooth' });">
+                <i data-lucide="calculator" style="width: 15px; height: 15px;"></i>
+                ورود به میزابزار تعاملی مدیریت
+              </button>
+              <a href="books/business-management-for-engineers.html" class="bm-btn-secondary" title="مطالعه آنلاین جزوه کامل">
+                <i data-lucide="book-open" style="width: 15px; height: 15px;"></i>
+                مطالعه مرجع و کتابچه کامل
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Metrics Statistics Row for Business Track -->
+        <div class="sw-stats-row" style="margin: 10px 0 24px 0;">
+          <div class="sw-stat-pill"><i data-lucide="sliders"></i> <span>۷ ابزار تصمیم‌گیری و ماتریس زنده</span></div>
+          <div class="sw-stat-pill"><i data-lucide="layout-grid"></i> <span>۹ بلوک سازنده بوم مدل کسب‌وکار (BMC)</span></div>
+          <div class="sw-stat-pill"><i data-lucide="bar-chart-2"></i> <span>ماتریس تصمیم‌گیری وزنی پوگ (Pugh Matrix)</span></div>
+          <div class="sw-stat-pill"><i data-lucide="calendar"></i> <span>مدیریت پروژه و گانت چارت زمان‌بندی</span></div>
+          <div class="sw-stat-pill"><i data-lucide="shield-alert"></i> <span>تحلیل جذابیت ۵ نیروی پورتر و ریسک FMEA</span></div>
+          <div class="sw-stat-pill"><i data-lucide="award"></i> <span>آزمون تعاملی سنجش درک کسب‌وکار مهندسی</span></div>
+        </div>
+
+        <!-- 4 PHASES CURRICULUM GRID -->
+        <div class="bm-curriculum-container">
+          <div class="bm-curriculum-header">
+            <div>
+              <div class="section-eyebrow" data-en="// 4 COMPREHENSIVE PHASES" data-fa="// سرفصل‌های جامع ۴ فاز آموزشی">
+                <i data-lucide="book-open" style="width: 14px;"></i>
+                <span>// 4 COMPREHENSIVE PHASES</span>
+              </div>
+              <h3 style="font-size: 18px; font-weight: 800; color: #f8fafc; margin-top: 4px;">نقشه راه جامع تسلط بر مدیریت کسب‌وکار مهندسی</h3>
+            </div>
+            <span class="track-btn-badge">CURRICULUM 2026</span>
+          </div>
+
+          <div class="bm-curriculum-grid">
+
+            <!-- PHASE 1 -->
+            <div class="bm-phase-card">
+              <div class="bm-phase-top">
+                <span class="bm-phase-tag">PHASE 01</span>
+                <span class="bm-phase-badge">DECISION MAKING</span>
+              </div>
+              <h4 class="bm-phase-title">فاز اول: تفکر استراتژیک و تکنیک‌های تصمیم‌گیری وزنی</h4>
+              <p class="bm-phase-summary">
+                گذار از ذهنیت صرفاً تکنیکال به تفکر بیزنس، حذف تعصبات ذهنی در انتخاب کانسپت محصول، و تفکیک اولویت‌های روزمره از اهداف کلان رشد.
+              </p>
+              <ul class="bm-phase-topics">
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>تفاوت ذهنیت مهندسی و کسب‌وکار:</strong> چرا حل مسئله فنی شرط لازم است اما هرگز برای سودآوری کافی نیست.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>ماتریس تصمیم‌گیری وزنی پوگ (Pugh Matrix):</strong> تعیین ضرایب اهمیت، نمره‌دهی ۱ تا ۵، و انتخاب مستند گزینه بهینه.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>ماتریس اولویت‌بندی آیزنهاور:</strong> تمرکز بر کارهای ربع ۲ (مهم اما غیرفوری) و نجات از آتش‌نشانی‌های کاری.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>تحلیل محیط کلان PESTEL:</strong> بررسی عوامل شش‌گانه سیاسی، اقتصادی، اجتماعی، تکنولوژی، زیست‌محیطی و حقوقی.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- PHASE 2 -->
+            <div class="bm-phase-card">
+              <div class="bm-phase-top">
+                <span class="bm-phase-tag">PHASE 02</span>
+                <span class="bm-phase-badge">BUSINESS MODELS</span>
+              </div>
+              <h4 class="bm-phase-title">فاز دوم: طراحی مدل کسب‌وکار، ارزش پیشنهادی و پویایی بازار</h4>
+              <p class="bm-phase-summary">
+                معماری ۹ جزء بوم مدل کسب‌وکار (BMC)، تحلیل شدت رقابت صنعتی و موقعیت‌یابی محصولات با حاشیه سود بالا در زنجیره تأمین.
+              </p>
+              <ul class="bm-phase-topics">
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>بوم مدل کسب‌وکار (Business Model Canvas):</strong> تدوین گام‌به‌گام ۹ بلوک برای کارگاه‌های ساخت و دفاتر مهندسی.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>ارزش پیشنهادی در برابر درد مشتری:</strong> تناسب محصول با بازار (Product-Market Fit) و مزیت رقابتی پایدار.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>۵ نیروی رقابتی مایکل پورتر:</strong> ارزیابی قدرت خریداران، تأمین‌کنندگان، رقبای تازه‌وارد، کالاهای جایگزین و رقابت درون‌صنعت.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>ماتریس رشد-سهم بوستون (BCG Matrix):</strong> طبقه‌بندی محصولات مهندسی به گاوهای شیرده، ستاره‌ها، سگ‌ها و علامت‌های سؤال.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- PHASE 3 -->
+            <div class="bm-phase-card">
+              <div class="bm-phase-top">
+                <span class="bm-phase-tag">PHASE 03</span>
+                <span class="bm-phase-badge">PROJECT MGMT</span>
+              </div>
+              <h4 class="bm-phase-title">فاز سوم: مدیریت پروژه‌های صنعتی، زمان‌بندی و کنترل ریسک</h4>
+              <p class="bm-phase-summary">
+                متدولوژی‌های اجرای پروژه، تعیین مسیر بحرانی با گانت چارت، مدیریت شکست با FMEA و هزینه‌یابی دقیق ساخت و تولید صنعتی.
+              </p>
+              <ul class="bm-phase-topics">
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>مقایسه Waterfall با Agile/Scrum:</strong> کاربرد آبشاری در ساخت قالب‌های سنگین در برابر چابک در نمونه‌سازی سریع.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>گانت چارت و مسیر بحرانی (CPM):</strong> مدیریت وابستگی فعالیت‌ها، مایلستون‌ها و جلوگیری از تأخیرهای زنجیره‌ای.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>مدیریت ریسک و FMEA مهندسی:</strong> محاسبه عدد اولویت ریسک (RPN = S × O × D) و تدوین برنامه‌های کاهش آسیب.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>هزینه‌یابی صنعتی و نقطه سر به سر:</strong> تفاوت CapEx و OpEx، محاسبه استهلاک تجهیزات و نقطه تعادل سود/زیان.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- PHASE 4 -->
+            <div class="bm-phase-card">
+              <div class="bm-phase-top">
+                <span class="bm-phase-tag">PHASE 04</span>
+                <span class="bm-phase-badge">COMMERCIALIZATION</span>
+              </div>
+              <h4 class="bm-phase-title">فاز چهارم: تجاری‌سازی صنعتی، بازاریابی B2B و مالکیت فکری</h4>
+              <p class="bm-phase-summary">
+                قیف فروش محصولات و خدمات فنی، مدل‌های قیمت‌گذاری، حفاظت حقوقی از فایل‌ها و نقشه‌های CAD و جذب سرمایه‌گذار در طرح‌های صنعتی.
+              </p>
+              <ul class="bm-phase-topics">
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>قیف بازاریابی و فروش B2B مهندسی:</strong> مذاکره با مدیران فنی کارخانجات، برگزاری مناقصات و قراردادهای نگهداری.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>استراتژی‌های قیمت‌گذاری فنی:</strong> مقایسه قیمت‌گذاری هزینه به‌علاوه سود (Cost-Plus) با ارزش‌محور (Value-Based).</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>حقوق مالکیت فکری (IP):</strong> تفاوت پتنت (Patent) با اسرار تجاری (Trade Secret)، قراردادهای محرمانگی (NDA) و کپی‌رایت طرح.</span>
+                </li>
+                <li class="bm-phase-topic-item">
+                  <i data-lucide="check"></i>
+                  <span><strong>ارائه به سرمایه‌گذار (Pitch Deck):</strong> اسلایدهای استاندارد اعتبارسنجی بازار برای استارتاپ‌های سخت‌افزاری و دیپ‌تک.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================================================
+             INTERACTIVE BUSINESS TOOLS WORKBENCH SUITE
+             ============================================================ -->
+        <div class="bm-tools-workbench" id="businessToolsWorkbenchSection">
+          <div class="bm-tools-header">
+            <div>
+              <div class="section-eyebrow" data-en="// INTERACTIVE WORKBENCH SUITE" data-fa="// میزابزار و آزمایشگاه تعاملی مدیریت">
+                <i data-lucide="cpu" style="width: 14px;"></i>
+                <span>// INTERACTIVE WORKBENCH SUITE</span>
+              </div>
+              <h3 style="font-size: 19px; font-weight: 800; color: #f8fafc; margin-top: 4px;">جعبه‌ابزار زنده تصمیم‌گیری، بوم کسب‌وکار و آزمون تسلط</h3>
+            </div>
+            <span class="track-btn-badge" style="background: rgba(20, 184, 166, 0.2); color: #2dd4bf; border-color: rgba(20, 184, 166, 0.4);">LIVE WORKBENCH</span>
+          </div>
+
+          <!-- Tool Switcher Tabs -->
+          <div class="bm-tools-nav">
+            <button class="bm-tool-tab-btn active" onclick="switchBusinessToolTab('pugh', this)">
+              <i data-lucide="sliders" style="width: 15px; height: 15px;"></i>
+              <span>ماتریس تصمیم‌گیری وزنی پوگ</span>
+            </button>
+            <button class="bm-tool-tab-btn" onclick="switchBusinessToolTab('bmc', this)">
+              <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i>
+              <span>بوم مدل کسب‌وکار (BMC)</span>
+            </button>
+            <button class="bm-tool-tab-btn" onclick="switchBusinessToolTab('porter', this)">
+              <i data-lucide="pie-chart" style="width: 15px; height: 15px;"></i>
+              <span>تحلیل ۵ نیروی پورتر</span>
+            </button>
+            <button class="bm-tool-tab-btn" onclick="switchBusinessToolTab('quiz', this)">
+              <i data-lucide="help-circle" style="width: 15px; height: 15px;"></i>
+              <span>آزمون سنجش درک کسب‌وکار</span>
+            </button>
+          </div>
+
+          <!-- TAB 1: PUGH DECISION MATRIX -->
+          <div id="bmToolPane_pugh" class="bm-tool-tab-pane active" style="margin-top: 20px;">
+            <div id="businessDecisionToolWorkbench"></div>
+          </div>
+
+          <!-- TAB 2: BUSINESS MODEL CANVAS (BMC) -->
+          <div id="bmToolPane_bmc" class="bm-tool-tab-pane" style="margin-top: 20px;">
+            <div class="bmc-container">
+              <div class="bmc-presets-bar">
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                  <span style="font-size: 12px; font-weight: 800; color: #f8fafc;">کسب‌وکارهای مهندسی نمونه:</span>
+                  <div class="bmc-preset-btns">
+                    <button class="bmc-preset-btn active" onclick="switchBmcPreset('cnc', this)">
+                      کارگاه CNC و قطعه‌سازی
+                    </button>
+                    <button class="bmc-preset-btn" onclick="switchBmcPreset('cfd', this)">
+                      دفتر مشاوره و تحلیل CFD
+                    </button>
+                    <button class="bmc-preset-btn" onclick="switchBmcPreset('iot', this)">
+                      استارتاپ سنسورهای هوشمند پایش
+                    </button>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span id="bmcActiveTitle" style="font-size: 11px; font-family: 'Fira Code', monospace; color: #38bdf8;"></span>
+                  <button class="pdm-btn-act" onclick="copyBmcSummary()" style="padding: 6px 12px; font-size: 11px;">
+                    <i data-lucide="copy" style="width: 13px; height: 13px;"></i>
+                    کپی خلاصه بوم
+                  </button>
+                </div>
+              </div>
+
+              <!-- 9-box BMC Grid -->
+              <div class="bmc-board-grid">
+                
+                <!-- 1. Key Partners -->
+                <div class="bmc-box bmc-partners">
+                  <div class="bmc-box-header">
+                    <i data-lucide="users" style="width: 15px; height: 15px; color: #8b5cf6;"></i>
+                    <span>شرکای کلیدی (Key Partners)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcPartners"></ul>
+                </div>
+
+                <!-- 2. Key Activities -->
+                <div class="bmc-box bmc-activities">
+                  <div class="bmc-box-header">
+                    <i data-lucide="activity" style="width: 15px; height: 15px; color: #0ea5e9;"></i>
+                    <span>فعالیت‌های کلیدی (Key Activities)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcActivities"></ul>
+                </div>
+
+                <!-- 3. Key Resources -->
+                <div class="bmc-box bmc-resources">
+                  <div class="bmc-box-header">
+                    <i data-lucide="cpu" style="width: 15px; height: 15px; color: #06b6d4;"></i>
+                    <span>منابع کلیدی (Key Resources)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcResources"></ul>
+                </div>
+
+                <!-- 4. Value Propositions -->
+                <div class="bmc-box bmc-value">
+                  <div class="bmc-box-header">
+                    <i data-lucide="award" style="width: 15px; height: 15px; color: #f59e0b;"></i>
+                    <span>ارزش‌های پیشنهادی (Value Proposition)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcValue"></ul>
+                </div>
+
+                <!-- 5. Customer Relationships -->
+                <div class="bmc-box bmc-relations">
+                  <div class="bmc-box-header">
+                    <i data-lucide="heart" style="width: 15px; height: 15px; color: #10b981;"></i>
+                    <span>ارتباط با مشتریان (Relationships)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcRelations"></ul>
+                </div>
+
+                <!-- 6. Channels -->
+                <div class="bmc-box bmc-channels">
+                  <div class="bmc-box-header">
+                    <i data-lucide="truck" style="width: 15px; height: 15px; color: #14b8a6;"></i>
+                    <span>کانال‌های توزیع (Channels)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcChannels"></ul>
+                </div>
+
+                <!-- 7. Customer Segments -->
+                <div class="bmc-box bmc-segments">
+                  <div class="bmc-box-header">
+                    <i data-lucide="target" style="width: 15px; height: 15px; color: #ec4899;"></i>
+                    <span>بخش‌های مشتریان (Segments)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcSegments"></ul>
+                </div>
+
+                <!-- 8. Cost Structure -->
+                <div class="bmc-box bmc-costs">
+                  <div class="bmc-box-header">
+                    <i data-lucide="dollar-sign" style="width: 15px; height: 15px; color: #ef4444;"></i>
+                    <span>ساختار هزینه‌ها (Cost Structure)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcCosts"></ul>
+                </div>
+
+                <!-- 9. Revenue Streams -->
+                <div class="bmc-box bmc-revenue">
+                  <div class="bmc-box-header">
+                    <i data-lucide="trending-up" style="width: 15px; height: 15px; color: #10b981;"></i>
+                    <span>جریان‌های درآمدی (Revenue Streams)</span>
+                  </div>
+                  <ul class="bmc-box-list" id="bmcRevenue"></ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: PORTER 5 FORCES CALCULATOR -->
+          <div id="bmToolPane_porter" class="bm-tool-tab-pane" style="margin-top: 20px;">
+            <div class="pdm-wrapper" style="margin: 0;">
+              <div class="pdm-header-row">
+                <div>
+                  <h4 style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">
+                    محاسبه‌گر تعاملی ۵ نیروی رقابتی مایکل پورتر (Porter's 5 Forces)
+                  </h4>
+                  <p style="font-size: 12px; color: #94a3b8;">
+                    شدت فشار هر یک از ۵ نیروی ساختاری را تعیین کنید تا شاخص جذابیت و حاشیه سود صنعت به صورت بلادرنگ ارزیابی شود.
+                  </p>
+                </div>
+                <div style="text-align: center; background: rgba(15, 23, 42, 0.7); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.3);">
+                  <div style="font-size: 11px; color: #94a3b8; margin-bottom: 2px;">شاخص جذابیت سودآوری صنعت:</div>
+                  <div id="porterScorePct" style="font-size: 24px; font-weight: 900; font-family: 'Fira Code', monospace; color: #00f2fe;">50%</div>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="height: 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; margin-bottom: 20px;">
+                <div id="porterScoreBar" style="height: 100%; width: 50%; background: linear-gradient(90deg, #0ea5e9, #00f2fe); transition: width 0.3s ease, background 0.3s ease;"></div>
+              </div>
+
+              <!-- Sliders Grid -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                
+                <!-- Force 1 -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); padding: 14px; border-radius: 12px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">
+                    <span>۱. شدت رقابت میان رقبای فعلی</span>
+                    <span id="porterVal1" style="font-family: 'Fira Code', monospace; color: #38bdf8;">3</span>
+                  </div>
+                  <input type="range" id="porterRange1" min="1" max="5" value="3" style="width: 100%; accent-color: #0ea5e9;" oninput="updatePorterAttractiveness()">
+                  <div style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 4px;">
+                    <span>۱: انحصاری / ملایم</span>
+                    <span>۵: جنگ فرسایشی قیمت‌ها</span>
+                  </div>
+                </div>
+
+                <!-- Force 2 -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); padding: 14px; border-radius: 12px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">
+                    <span>۲. تهدید ورود رقبای تازه‌وارد</span>
+                    <span id="porterVal2" style="font-family: 'Fira Code', monospace; color: #38bdf8;">3</span>
+                  </div>
+                  <input type="range" id="porterRange2" min="1" max="5" value="3" style="width: 100%; accent-color: #0ea5e9;" oninput="updatePorterAttractiveness()">
+                  <div style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 4px;">
+                    <span>۱: موانع ورود بسیار سخت (پتنت)</span>
+                    <span>۵: ورود بسیار آسان با سرمایه کم</span>
+                  </div>
+                </div>
+
+                <!-- Force 3 -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); padding: 14px; border-radius: 12px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">
+                    <span>۳. قدرت چانه‌زنی خریداران صنعتی</span>
+                    <span id="porterVal3" style="font-family: 'Fira Code', monospace; color: #38bdf8;">3</span>
+                  </div>
+                  <input type="range" id="porterRange3" min="1" max="5" value="3" style="width: 100%; accent-color: #0ea5e9;" oninput="updatePorterAttractiveness()">
+                  <div style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 4px;">
+                    <span>۱: مشتریان خرد و پراکنده</span>
+                    <span>۵: چند خریدار بزرگ متمرکز</span>
+                  </div>
+                </div>
+
+                <!-- Force 4 -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); padding: 14px; border-radius: 12px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">
+                    <span>۴. قدرت چانه‌زنی تأمین‌کنندگان مواد</span>
+                    <span id="porterVal4" style="font-family: 'Fira Code', monospace; color: #38bdf8;">3</span>
+                  </div>
+                  <input type="range" id="porterRange4" min="1" max="5" value="3" style="width: 100%; accent-color: #0ea5e9;" oninput="updatePorterAttractiveness()">
+                  <div style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 4px;">
+                    <span>۱: منابع فراوان و قابل تعویض</span>
+                    <span>۵: انحصار متریال و قطعات اولیه</span>
+                  </div>
+                </div>
+
+                <!-- Force 5 -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); padding: 14px; border-radius: 12px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">
+                    <span>۵. تهدید محصولات و خدمات جایگزین</span>
+                    <span id="porterVal5" style="font-family: 'Fira Code', monospace; color: #38bdf8;">3</span>
+                  </div>
+                  <input type="range" id="porterRange5" min="1" max="5" value="3" style="width: 100%; accent-color: #0ea5e9;" oninput="updatePorterAttractiveness()">
+                  <div style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 4px;">
+                    <span>۱: هیچ جایگزین تکنولوژیکی نیست</span>
+                    <span>۵: فناوری‌های ارزان‌تر در حال ظهور</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Recommendation Card -->
+              <div id="porterVerdict" style="padding: 14px 18px; border-radius: 10px; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.3); font-size: 12.5px; line-height: 1.6; color: #cbd5e1;">
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: INTERACTIVE BUSINESS QUIZ -->
+          <div id="bmToolPane_quiz" class="bm-tool-tab-pane" style="margin-top: 20px;">
+            <div id="bmQuizContainer" class="bm-quiz-box"></div>
+          </div>
+
+        </div>
+
+        <!-- QUICK ACCESS HUB LINKS -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 32px 0 10px 0;">
+          <a href="books/business-management-for-engineers.html" class="project-glass-card card-jewel-teal" style="text-decoration: none; padding: 20px; display: flex; align-items: center; gap: 16px;">
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(20, 184, 166, 0.18); border: 1px solid rgba(20, 184, 166, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="book-open" style="width: 24px; height: 24px; color: #2dd4bf;"></i>
+            </div>
+            <div>
+              <h4 style="font-size: 15px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">مطالعه جزوه کامل اصول مدیریت کسب‌وکار</h4>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin: 0;">راهنمای جامع دیجیتال تألیف محمدامین شریف با فرمت کتابچه آنلاین تعاملی و سرفصل‌های بازشونده</p>
+            </div>
+          </a>
+
+          <a href="books/business-management-tools.html" class="project-glass-card card-jewel-blue" style="text-decoration: none; padding: 20px; display: flex; align-items: center; gap: 16px;">
+            <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(14, 165, 233, 0.18); border: 1px solid rgba(14, 165, 233, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <i data-lucide="wrench" style="width: 24px; height: 24px; color: #38bdf8;"></i>
+            </div>
+            <div>
+              <h4 style="font-size: 15px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">جعبه‌ابزار پیشرفته وب‌اپلیکیشن استراتژی</h4>
+              <p style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin: 0;">محیط مستقل کار با ماتریس‌های SWOT، آیزنهاور، BCG، پورتر و گانت چارت زمان‌بندی پروژه</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+      <!-- END TRACK 2: BUSINESS MANAGEMENT PANE -->
 
       <!-- Section Navigation Bottom Bar -->
       <div class="section-view-bar-bottom">
@@ -2409,6 +2967,12 @@
       if (!targetId) targetId = 'home';
       targetId = targetId.replace('#', '');
       
+      let subTrack = null;
+      if (targetId === 'solidworks' || targetId === 'business' || targetId === 'learning' || targetId === 'academy') {
+        subTrack = targetId === 'business' ? 'business' : (targetId === 'solidworks' ? 'solidworks' : null);
+        targetId = 'education';
+      }
+
       const targetSec = document.getElementById(targetId);
       if (!targetSec) targetId = 'home';
 
@@ -2428,7 +2992,7 @@
       // Update Nav Bar Links
       allNavLinks.forEach(link => {
         const linkNav = link.dataset.nav || (link.getAttribute('href') ? link.getAttribute('href').replace('#', '') : '');
-        if (linkNav === targetId) {
+        if (linkNav === targetId || (targetId === 'education' && (linkNav === 'solidworks' || linkNav === 'education'))) {
           link.classList.add('active');
         } else {
           link.classList.remove('active');
@@ -2437,12 +3001,17 @@
 
       // Update Filter Dock Pills
       allFilterPills.forEach(pill => {
-        if (pill.dataset.filter === targetId) {
+        const filterVal = pill.dataset.filter;
+        if (filterVal === targetId || (targetId === 'education' && (filterVal === 'solidworks' || filterVal === 'education'))) {
           pill.classList.add('active');
         } else {
           pill.classList.remove('active');
         }
       });
+
+      if (subTrack && typeof window.switchAcademyTrack === 'function') {
+        window.switchAcademyTrack(subTrack);
+      }
 
       if (updateHash) {
         try {
@@ -2462,7 +3031,7 @@
       setTimeout(() => {
         if (typeof resizeHeroCanvas === 'function') resizeHeroCanvas();
         if (typeof resizeChipCanvas === 'function') resizeChipCanvas();
-        if (targetId === 'solidworks' && typeof renderSolidWorksAcademy === 'function') {
+        if ((targetId === 'solidworks' || targetId === 'education') && typeof renderSolidWorksAcademy === 'function') {
           const swCont = document.getElementById('solidworksCourseContainer');
           if (swCont && (!swCont.innerHTML || swCont.innerHTML.trim() === '')) {
             renderSolidWorksAcademy('solidworksCourseContainer');
@@ -2482,7 +3051,7 @@
     // Handle initial routing and back/forward browser navigation
     function handleRouteFromHash() {
       const hash = window.location.hash.replace('#', '');
-      if (hash && document.getElementById(hash) && document.getElementById(hash).classList.contains('site-section')) {
+      if (hash && (document.getElementById(hash) || hash === 'solidworks' || hash === 'business' || hash === 'education')) {
         navigateToSection(hash, false);
       } else {
         navigateToSection('home', false);
@@ -4350,9 +4919,9 @@
           { icon: 'layers', textFa: '۴ مرحله روتور تیتانیومی با استاتورهای هدایت‌کننده', textEn: '4 Titanium Rotor Stages + Stationary Stators' },
           { icon: 'thermometer', textFa: 'افزایش دمای ترمودینامیکی سیال: از ۲۴°C به ۴۱۸°C', textEn: 'Thermodynamic Temperature Rise: 24°C to 418°C' }
         ],
-        btnPrimaryTextFa: 'بستن و ادامه شبیه‌ساز سه‌بعدی',
-        btnPrimaryTextEn: 'Close & Resume 3D Simulator',
-        btnPrimaryAction: () => { closeToolInspector(); },
+        btnPrimaryTextFa: 'ورود به میزکار و آزمایشگاه جامع توربوماشین',
+        btnPrimaryTextEn: 'Launch Full Turbomachinery Test Cell',
+        btnPrimaryAction: () => { closeToolInspector(); if (window.openTurbomachineLab) window.openTurbomachineLab(); },
         btnSecondaryTextFa: 'مشاهده چک‌لیست توربوماشین‌ها در CFturbo',
         btnSecondaryTextEn: 'Open CFturbo Turbomachine Suite',
         btnSecondaryAction: () => { closeToolInspector(); window.location.href = 'projects/cfturbo-pump/pump-design-checklist.html'; }
@@ -5938,6 +6507,11 @@
   <script src="assets/js/solidworks-content.js"></script>
   <script src="assets/js/solidworks-course.js"></script>
 
+  <!-- Business Management Academy & Strategic Tools Interactive Engine -->
+  <script src="assets/js/business-decision-matrix.js"></script>
+  <script src="assets/js/business-interactive-suite.js"></script>
+  <script src="assets/js/business-academy.js"></script>
+
   <!-- ============================================================
        MOAMIN.IR INTERACTIVE 2026 SEARCH & SETTINGS MODALS
        ============================================================ -->
@@ -5982,6 +6556,341 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       TURBOMACHINERY VIRTUAL TEST CELL & SIMULATION LAB MODAL
+       FluidMind // Mohammadamin Sharif - Comprehensive Engineering Studio
+       ============================================================ -->
+  <div id="turbomachineryLabModal" class="turbomachine-lab-backdrop" onclick="if(event.target===this) closeTurbomachineLab();" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="turbomachine-lab-box">
+      <!-- Modal Header -->
+      <div class="lab-modal-header">
+        <div class="lab-header-info">
+          <div class="lab-header-icon">
+            <i data-lucide="disc" style="width: 22px; height: 22px;"></i>
+          </div>
+          <div class="lab-title-text">
+            <h2>
+              <span>میزکار و آزمایشگاه جامع تست توربوکمپرسور چندمرحله‌ای</span>
+              <span style="font-size: 11px; padding: 2px 7px; border-radius: 6px; background: rgba(0, 229, 255, 0.15); color: #00e5ff; font-family: var(--font-mono);">FluidMind 3D Digital Twin</span>
+            </h2>
+            <p>تحلیل آیرودینامیک چندمرحله‌ای، نقشه مشخصه عملکرد (Surge/Choke)، مثلث‌های سرعت اویلر و گرادیان تنش پره‌ها</p>
+          </div>
+        </div>
+
+        <div class="lab-header-actions">
+          <button class="lab-btn-action" onclick="runTurbomachineSweepTest()" title="اجرای آزمون خودکار دورانی از Idle تا Turbo Boost">
+            <i data-lucide="play" style="width: 13px; height: 13px; color: #00ff9c;"></i>
+            <span>تست سویپ خودکار</span>
+          </button>
+          <button class="lab-btn-action" onclick="exportTurbomachineDataCsv()" title="دریافت فایل خروجی CSV تله‌متری و معادلات">
+            <i data-lucide="download" style="width: 13px; height: 13px; color: #00e5ff;"></i>
+            <span>خروجی CSV</span>
+          </button>
+          <button class="lab-btn-close" onclick="closeTurbomachineLab()" title="بستن (Esc)" aria-label="بستن پنجره">
+            <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Dual Panes) -->
+      <div class="lab-modal-body">
+        <!-- Left Pane: 3D Interactive Testing Bay -->
+        <div class="lab-viewport-bay">
+          <div class="lab-3d-canvas-wrap">
+            <canvas id="labCompressorCanvas" class="lab-compressor-canvas" aria-label="شبیه‌ساز سه‌بعدی آزمایشگاه توربوکمپرسور"></canvas>
+
+            <!-- Top Viewport Toolbar -->
+            <div class="lab-viewport-toolbar">
+              <div class="lab-view-modes-group">
+                <button class="lab-mode-tab active" id="labModeCfd" onclick="setLabViewMode('cfd')">جریان CFD</button>
+                <button class="lab-mode-tab" id="labModeMech" onclick="setLabViewMode('mechanical')">تنش پره (Stress)</button>
+                <button class="lab-mode-tab" id="labModeTherm" onclick="setLabViewMode('thermal')">حرارتی (Thermal)</button>
+                <button class="lab-mode-tab" id="labModeCad" onclick="setLabViewMode('cad')">اسکن CAD</button>
+              </div>
+
+              <div class="lab-view-modes-group">
+                <button class="lab-mode-tab" onclick="setLabCameraPreset('iso')">ایزومتریک</button>
+                <button class="lab-mode-tab" onclick="setLabCameraPreset('cutaway')">برش مقطع</button>
+                <button class="lab-mode-tab" onclick="setLabCameraPreset('front')">اینلت</button>
+                <button class="lab-mode-tab" onclick="setLabCameraPreset('aft')">دیفیوزر</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Viewport Controls: Exploded Assembly & Geometry -->
+          <div class="lab-viewport-controls-bottom">
+            <div class="lab-slider-item" title="جداسازی و مونتاژ قطعات روتور، استاتورها، شفت و پوسته">
+              <span>مونتاژ / دمونتاژ:</span>
+              <input type="range" min="0" max="100" value="0" id="labExplodeSlider" class="lab-range-input" oninput="setLabExplodedView(this.value)">
+              <span class="val" id="labExplodeVal">0%</span>
+            </div>
+
+            <div class="lab-slider-item" title="تنظیم زاویه پنجره برش پوسته توربوکمپرسور">
+              <span>زاویه برش پوسته:</span>
+              <input type="range" min="0" max="180" value="140" id="labCutawaySlider" class="lab-range-input" oninput="setLabCutawayAngle(this.value)">
+              <span class="val" id="labCutawayVal">140°</span>
+            </div>
+
+            <div class="lab-slider-item" title="سرعت شبیه‌سازی حرکت و جریان">
+              <span>سرعت حرکت:</span>
+              <input type="range" min="10" max="200" value="100" id="labSpeedSlider" class="lab-range-input" oninput="setLabSimSpeed(this.value)">
+              <span class="val" id="labSpeedVal">1.0x</span>
+            </div>
+
+            <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #94a3b8; cursor: pointer; margin-right: auto;">
+              <input type="checkbox" id="labWireframeCheck" onchange="toggleLabWireframe(this.checked)">
+              <span>نمایش مش فینیت المنت پره‌ها</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Right Pane: Diagnostics Deck & Engineering Test Benches -->
+        <div class="lab-diagnostics-deck">
+          <!-- Navigation Tabs -->
+          <div class="lab-tabs-nav">
+            <button class="lab-tab-nav-btn active" id="tabBtnPerf" onclick="switchLabTab('perf')">
+              <i data-lucide="line-chart" style="width: 14px; height: 14px;"></i>
+              <span>نقشه عملکرد (Surge Map)</span>
+            </button>
+            <button class="lab-tab-nav-btn" id="tabBtnEuler" onclick="switchLabTab('euler')">
+              <i data-lucide="triangle" style="width: 14px; height: 14px;"></i>
+              <span>مثلث‌های سرعت اویلر</span>
+            </button>
+            <button class="lab-tab-nav-btn" id="tabBtnStages" onclick="switchLabTab('stages')">
+              <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
+              <span>مشخصات ۴ مرحله روتور</span>
+            </button>
+            <button class="lab-tab-nav-btn" id="tabBtnFluid" onclick="switchLabTab('fluid')">
+              <i data-lucide="sliders" style="width: 14px; height: 14px;"></i>
+              <span>شرایط کاری و سیال</span>
+            </button>
+          </div>
+
+          <!-- Tab Panels Content Area -->
+          <div class="lab-tab-content-area">
+            <!-- Tab 1: Performance Map (Surge & Choke Envelope) -->
+            <div class="lab-tab-panel active" id="tabPanelPerf">
+              <!-- Surge Alarm Notification Banner -->
+              <div class="lab-surge-alert" id="labSurgeAlertBanner">
+                <i data-lucide="alert-triangle" style="width: 16px; height: 16px;"></i>
+                <span>هشدار سرج آیرودینامیکی (Compressor Surge & Stall)! فشار برگشتی بیش از حد مجاز است و جریان پروانه‌ها ناپایدار گردید.</span>
+              </div>
+
+              <div class="lab-canvas-card">
+                <canvas id="labPerfMapCanvas"></canvas>
+              </div>
+
+              <!-- Real-time Operating Point Summary Chips -->
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;">
+                <div class="telemetry-chip" style="justify-content: center; padding: 6px;">
+                  <span class="chip-k">نسبت تراکم:</span>
+                  <span class="chip-v" id="labPrVal">18.4:1</span>
+                </div>
+                <div class="telemetry-chip" style="justify-content: center; padding: 6px;">
+                  <span class="chip-k">دبی جرمی:</span>
+                  <span class="chip-v" id="labFlowVal">48.2 kg/s</span>
+                </div>
+                <div class="telemetry-chip" style="justify-content: center; padding: 6px;">
+                  <span class="chip-k">حاشیه سرج:</span>
+                  <span class="chip-v" id="labSmVal" style="color: #00ff9c;">18.5%</span>
+                </div>
+                <div class="telemetry-chip" style="justify-content: center; padding: 6px;">
+                  <span class="chip-k">توان شفت:</span>
+                  <span class="chip-v" id="labPowerVal">14.8 MW</span>
+                </div>
+              </div>
+
+              <!-- Valve & Throttle Interactive Sliders -->
+              <div style="display: flex; gap: 16px; background: rgba(6, 20, 31, 0.7); padding: 10px; border-radius: 8px; border: 1px solid rgba(0, 229, 255, 0.2);">
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                    <span style="color: #94a3b8;">شیر گلوگاهی خروجی (Throttle / Back-Pressure Valve):</span>
+                    <span id="labValveVal" style="color: #00e5ff; font-family: var(--font-mono); font-weight: 700;">45%</span>
+                  </div>
+                  <input type="range" min="10" max="95" value="45" id="labValveSlider" style="width: 100%;" oninput="setLabBackPressure(this.value)">
+                  <span style="font-size: 10px; color: #64748b;">با افزایش این شیر می‌توانید رفتار سرج و ناپایداری پروانه‌ها را آزمایش کنید.</span>
+                </div>
+
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                    <span style="color: #94a3b8;">اهرم دور موتور (RPM Spool Throttle):</span>
+                    <span id="labRpmSliderVal" style="color: #00ff9c; font-family: var(--font-mono); font-weight: 700;">75%</span>
+                  </div>
+                  <input type="range" min="0" max="100" value="75" id="labRpmSlider" style="width: 100%;" oninput="setCompressorThrottle(this.value)">
+                  <span style="font-size: 10px; color: #64748b;">تنظیم زاویه دورانی از سرعت درجا (Idle) تا توربو بوست ۲۴k.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2: Velocity Triangles & Euler Work -->
+            <div class="lab-tab-panel" id="tabPanelEuler">
+              <div class="lab-canvas-card">
+                <canvas id="labVelocityTrianglesCanvas"></canvas>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;">
+                <div class="lab-ctrl-card">
+                  <div style="font-size: 10px; color: #94a3b8;">کار ویژه اویلر (Euler Specific Work):</div>
+                  <div id="labEulerWork" style="font-size: 14px; font-weight: 800; color: #00ff9c; font-family: var(--font-mono); margin-top: 4px;">394.2 kJ/kg</div>
+                  <div style="font-size: 9.5px; color: #64748b; margin-top: 2px;">Δh₀ = U·ΔCθ</div>
+                </div>
+                <div class="lab-ctrl-card">
+                  <div style="font-size: 10px; color: #94a3b8;">انحراف زاویه‌ای جریان (Flow Deflection):</div>
+                  <div id="labFlowDeflect" style="font-size: 14px; font-weight: 800; color: #00e5ff; font-family: var(--font-mono); margin-top: 4px;">Δβ = 22.4°</div>
+                  <div style="font-size: 9.5px; color: #64748b; margin-top: 2px;">تغییر زاویه سیال در گذر از پره</div>
+                </div>
+                <div class="lab-ctrl-card">
+                  <div style="font-size: 10px; color: #94a3b8;">درجه عکس‌العمل (Degree of Reaction):</div>
+                  <div id="labReactionDeg" style="font-size: 14px; font-weight: 800; color: #f59e0b; font-family: var(--font-mono); margin-top: 4px;">Rx = 0.52</div>
+                  <div style="font-size: 9.5px; color: #64748b; margin-top: 2px;">تقسیم مساوی افزایش فشار در روتور و استاتور</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3: Multi-Stage Aerodynamic & Structural Breakdown -->
+            <div class="lab-tab-panel" id="tabPanelStages">
+              <p style="font-size: 11.5px; color: #94a3b8; margin: 0 0 8px 0;">
+                تحلیل پارامتریک هر یک از ۴ مرحله تراکم شامل ابعاد هندسی، سرعت‌های محوری و مماسی، عدد ماخ نوک پره و تنش ریشه پره (Root Stress):
+              </p>
+              <div style="overflow-x: auto;">
+                <table class="lab-stage-table">
+                  <thead>
+                    <tr>
+                      <th>مرحله (Stage)</th>
+                      <th>تعداد پره</th>
+                      <th>قطر نوک (Tip)</th>
+                      <th>سرعت خطی (Utip)</th>
+                      <th>ماخ نوک (Mtip)</th>
+                      <th>نسبت تراکم (Πs)</th>
+                      <th>افزایش دما (ΔT)</th>
+                      <th>تنش فون مایزس (σroot)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="color: #00e5ff; font-weight: 700;">مرحله ۱ (فن ورودی / LP)</td>
+                      <td>۲۰</td>
+                      <td>860 mm</td>
+                      <td id="stg1Utip">385 m/s</td>
+                      <td id="stg1Mach" style="color: #f59e0b;">1.12 (ترنزونیک)</td>
+                      <td>2.15 : 1</td>
+                      <td>+62 °C</td>
+                      <td id="stg1Stress" style="color: #ef4444;">284 MPa</td>
+                    </tr>
+                    <tr>
+                      <td style="color: #00e5ff; font-weight: 700;">مرحله ۲ (فشار متوسط IP)</td>
+                      <td>۲۴</td>
+                      <td>760 mm</td>
+                      <td id="stg2Utip">340 m/s</td>
+                      <td id="stg2Mach">0.94 (ساب‌سونیک)</td>
+                      <td>2.28 : 1</td>
+                      <td>+84 °C</td>
+                      <td id="stg2Stress">235 MPa</td>
+                    </tr>
+                    <tr>
+                      <td style="color: #00e5ff; font-weight: 700;">مرحله ۳ (فشار بالا HP)</td>
+                      <td>۲۸</td>
+                      <td>660 mm</td>
+                      <td id="stg3Utip">295 m/s</td>
+                      <td id="stg3Mach">0.78 (ساب‌سونیک)</td>
+                      <td>2.35 : 1</td>
+                      <td>+112 °C</td>
+                      <td id="stg3Stress">192 MPa</td>
+                    </tr>
+                    <tr>
+                      <td style="color: #00e5ff; font-weight: 700;">مرحله ۴ (دیفیوزر خروجی)</td>
+                      <td>۳۲</td>
+                      <td>570 mm</td>
+                      <td id="stg4Utip">255 m/s</td>
+                      <td id="stg4Mach">0.62 (ساب‌سونیک)</td>
+                      <td>1.60 : 1</td>
+                      <td>+136 °C</td>
+                      <td id="stg4Stress">155 MPa</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr style="background: rgba(0, 229, 255, 0.12); font-weight: 800;">
+                      <td style="color: #00ff9c;">مجموع کل کمپرسور</td>
+                      <td>۱۰۴ پره</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td id="stgTotalPr" style="color: #00ff9c;">18.4 : 1</td>
+                      <td id="stgTotalTemp" style="color: #f59e0b;">+394 °C</td>
+                      <td style="color: #94a3b8;">Max: 284 MPa</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab 4: Working Fluid Selection & Environmental Settings -->
+            <div class="lab-tab-panel" id="tabPanelFluid">
+              <p style="font-size: 11.5px; color: #94a3b8; margin: 0 0 10px 0;">
+                تنظیم خواص گاز کاری، ارتفاع پروازی، دمای اتمسفر ورودی و زاویه پره‌های راهنمای ورودی متغیر (VIGV):
+              </p>
+
+              <div class="lab-controls-grid">
+                <div class="lab-ctrl-card">
+                  <label for="labFluidSelect">سیال کاری (Working Gas):</label>
+                  <select id="labFluidSelect" class="lab-select" onchange="setLabWorkingFluid(this.value)">
+                    <option value="air" selected>هوا (Air - γ = 1.40, R = 287 J/kg·K)</option>
+                    <option value="sco2">دی‌اکسید کربن فوق‌بحرانی (sCO2 - γ = 1.28)</option>
+                    <option value="ch4">گاز متان / طبیعی (CH4 - γ = 1.32)</option>
+                    <option value="n2">گاز نیتروژن صنعتی (N2 - γ = 1.40)</option>
+                  </select>
+                </div>
+
+                <div class="lab-ctrl-card">
+                  <label>دمای محیط ورودی (T₁ Ambient):</label>
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                    <span style="color: #94a3b8;">دما:</span>
+                    <span id="labAmbTempVal" style="color: #00e5ff; font-family: var(--font-mono); font-weight: 700;">+15 °C</span>
+                  </div>
+                  <input type="range" min="-40" max="50" value="15" id="labAmbTempSlider" style="width: 100%;" oninput="setLabAmbTemp(this.value)">
+                </div>
+
+                <div class="lab-ctrl-card">
+                  <label>ارتفاع پروازی / فشار ورودی:</label>
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                    <span style="color: #94a3b8;">ارتفاع:</span>
+                    <span id="labAltitudeVal" style="color: #00e5ff; font-family: var(--font-mono); font-weight: 700;">0 m (101.3 kPa)</span>
+                  </div>
+                  <input type="range" min="0" max="12000" step="500" value="0" id="labAltitudeSlider" style="width: 100%;" oninput="setLabAltitude(this.value)">
+                </div>
+
+                <div class="lab-ctrl-card">
+                  <label>زاویه پره‌های ورودی متغیر (VIGV):</label>
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                    <span style="color: #94a3b8;">زاویه انحراف:</span>
+                    <span id="labVigvVal" style="color: #00ff9c; font-family: var(--font-mono); font-weight: 700;">0°</span>
+                  </div>
+                  <input type="range" min="-25" max="25" value="0" id="labVigvSlider" style="width: 100%;" oninput="setLabVigvAngle(this.value)">
+                </div>
+              </div>
+
+              <!-- Quick Presets -->
+              <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="lab-btn-action" onclick="applyLabFlightPreset('sealevel')">
+                  <i data-lucide="anchor" style="width: 12px; height: 12px;"></i>
+                  <span>سطح دریا (ISA Standard)</span>
+                </button>
+                <button class="lab-btn-action" onclick="applyLabFlightPreset('cruise')">
+                  <i data-lucide="plane" style="width: 12px; height: 12px;"></i>
+                  <span>کروز ۱۰,۰۰۰ متری (-50°C)</span>
+                </button>
+                <button class="lab-btn-action" onclick="applyLabFlightPreset('hotandhigh')">
+                  <i data-lucide="sun" style="width: 12px; height: 12px;"></i>
+                  <span>شرایط دشوار Hot & High (+45°C)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Real-time clock and Persian date updater
     function updateDashboardTelemetryClock() {
@@ -6018,7 +6927,11 @@
 
     // Search Modal Functions
     const SEARCHABLE_ITEMS = [
-      { nameFa: 'دوره جامع سالیدورکس (SolidWorks 2026)', nameEn: 'SolidWorks Academy', tag: 'آکادمی', action: () => { closeSearchModal(); navigateToSection('solidworks'); } },
+      { nameFa: 'مرکز جامع آموزش: سالیدورکس و مدیریت کسب‌وکار', nameEn: 'Engineering & Business Academy', tag: 'آموزش', action: () => { closeSearchModal(); navigateToSection('education'); } },
+      { nameFa: 'دوره جامع سالیدورکس (SolidWorks 2026)', nameEn: 'SolidWorks Academy', tag: 'آموزش', action: () => { closeSearchModal(); navigateToSection('solidworks'); } },
+      { nameFa: 'دوره آموزش اصول مدیریت کسب‌وکار برای مهندسان', nameEn: 'Business Management for Engineers', tag: 'آموزش', action: () => { closeSearchModal(); navigateToSection('business'); } },
+      { nameFa: 'میزابزار تعاملی مدیریت: ماتریس پوگ، بوم کسب‌وکار و پورتر', nameEn: 'Business Strategy Tools', tag: 'ابزارها', action: () => { closeSearchModal(); navigateToSection('business'); setTimeout(() => switchBusinessToolTab('pugh'), 100); } },
+      { nameFa: 'آزمون تعاملی مدیریت کسب‌وکار و استراتژی', nameEn: 'Business Strategy Quiz', tag: 'آزمون', action: () => { closeSearchModal(); navigateToSection('business'); setTimeout(() => switchBusinessToolTab('quiz'), 100); } },
       { nameFa: 'طراحی پروانه پمپ سانتریفیوژ در CFturbo', nameEn: 'CFturbo Pump Design', tag: 'پروژه‌ها', action: () => { closeSearchModal(); window.location.href='projects/cfturbo-pump/pump-design-checklist.html'; } },
       { nameFa: 'شبیه‌سازی جریان حول استوانه (کارمن فلوئنت)', nameEn: 'Karman Vortex Shedding', tag: 'CFD', action: () => { closeSearchModal(); openProjectModal('cylinder'); } },
       { nameFa: 'دوقلوی دیجیتال نیروگاه رانکین', nameEn: 'Rankine Power Plant Twin', tag: 'دوقلوها', action: () => { closeSearchModal(); navigateToSection('simulations'); } },
