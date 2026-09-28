@@ -14,6 +14,8 @@ export function configureSecurityHeaders(app) {
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
+          workerSrc: ["'self'", "blob:"],
+          manifestSrc: ["'self'"],
           scriptSrc: [
             "'self'",
             "'unsafe-inline'", // Required for existing inline widgets & charts in simulations

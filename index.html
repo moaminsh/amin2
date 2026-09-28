@@ -24,10 +24,22 @@
     }
   </script>
 
+  <!-- Progressive Web App (PWA) Standards & Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#070e14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FluidMind">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+
   <!-- Liquid Glass Design System -->
   <link rel="stylesheet" href="assets/css/liquid-glass.css">
   <link rel="stylesheet" href="assets/css/solidworks-course.css">
   <link rel="stylesheet" href="assets/css/business-decision-matrix.css">
+  <link rel="stylesheet" href="assets/css/pwa-install.css">
 
   <!-- Core styles are loaded from assets/css/liquid-glass.css -->
 </head>
@@ -109,6 +121,12 @@
           <i data-lucide="sun" id="navThemeIcon" style="width: 16px; height: 16px;"></i>
         </button>
 
+        <!-- PWA Install Button (نصب اپلیکیشن روی دستگاه) -->
+        <button class="nav-control-pill nav-install-pill" id="pwaNavInstallBtn" onclick="triggerPWAInstall()" style="display: none;" title="نصب اپلیکیشن روی دستگاه">
+          <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+          <span data-en="Install App" data-fa="نصب برنامه">نصب برنامه</span>
+        </button>
+
         <!-- Mobile Menu Burger -->
         <button class="mobile-menu-burger" id="mobileMenuBurgerBtn" aria-label="Toggle navigation menu">
           <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
@@ -124,6 +142,7 @@
       <a href="#simulations" class="mobile-nav-link" onclick="navigateToSection('simulations'); return false;"><i data-lucide="activity"></i> <span data-en="Simulations" data-fa="شبیه‌سازهای زنده">شبیه‌سازهای زنده</span></a>
       <a href="#books" class="mobile-nav-link" onclick="navigateToSection('books'); return false;"><i data-lucide="book-open"></i> <span data-en="Books" data-fa="کتاب‌ها و تصمیم‌گیری">کتاب‌ها و تصمیم‌گیری</span></a>
       <a href="#info" class="mobile-nav-link" onclick="navigateToSection('info'); return false;"><i data-lucide="user"></i> <span data-en="About" data-fa="درباره و تماس">درباره و تماس</span></a>
+      <a href="#" class="mobile-nav-link" id="pwaMobileDrawerInstallBtn" onclick="triggerPWAInstall(); return false;" style="display: none; color: #38bdf8; border-top: 1px solid rgba(56,189,248,0.2);"><i data-lucide="download"></i> <span data-en="Install App on Phone" data-fa="دانلود و نصب اپلیکیشن رو گوشی">دانلود و نصب اپلیکیشن رو گوشی</span></a>
     </div>
   </header>
   <div class="custom-cursor" id="cursor"></div>
@@ -7046,9 +7065,53 @@
     });
   </script>
 
+  <!-- ============================================================
+       FLUIDMIND PWA INSTALLATION BOTTOM DOCK (دانلود و نصب وب‌اپلیکیشن رو گوشی)
+       ============================================================ -->
+  <aside id="pwaBottomDock" class="pwa-bottom-dock" role="dialog" aria-label="پیشنهاد نصب اپلیکیشن رو گوشی">
+    <div class="pwa-dock-logo-box">
+      <img src="pwa-192x192.png" alt="FluidMind App Icon" class="pwa-dock-logo-img">
+    </div>
+    <div class="pwa-dock-text-col">
+      <div class="pwa-dock-title-row">
+        <span class="pwa-dock-title" data-en="Install FluidMind App" data-fa="نصب وب‌اپلیکیشن FluidMind">نصب وب‌اپلیکیشن FluidMind</span>
+        <span class="pwa-dock-badge">PWA</span>
+      </div>
+      <div class="pwa-dock-sub" data-en="Fast offline access & native mobile experience" data-fa="دسترسی سریع و آفلاین روی گوشی • آیکون اختصاصی">دسترسی سریع و آفلاین روی گوشی • آیکون اختصاصی</div>
+    </div>
+    <div class="pwa-dock-actions">
+      <button class="pwa-btn-install-primary" onclick="triggerPWAInstall()" aria-label="دانلود و نصب اپلیکیشن">
+        <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+        <span data-en="Install App" data-fa="دانلود و نصب">دانلود و نصب</span>
+      </button>
+      <button class="pwa-btn-dismiss" onclick="dismissPWADock()" aria-label="بستن پیشنهاد" title="بستن">
+        <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- PWA Guided Install Modal for iOS and Android/Desktop -->
+  <div id="pwaInstallModal" class="pwa-ios-modal-backdrop" onclick="if(event.target===this) closePWAInstallModal();" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="pwa-ios-dialog">
+      <img src="pwa-192x192.png" alt="FluidMind App" class="pwa-ios-app-icon">
+      <h3 id="pwaModalTitle" style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">نصب وب‌اپلیکیشن FluidMind</h3>
+      <p id="pwaModalDesc" style="font-size: 12px; color: #94a3b8; margin-bottom: 16px; line-height: 1.5;">این وب‌سایت به عنوان وب‌اپلیکیشن پیشرو (PWA) مستقیماً روی صفحه گوشی شما قرار می‌گیرد.</p>
+
+      <ul class="pwa-ios-steps-list" id="pwaModalStepsList">
+        <!-- Steps populated dynamically based on iOS or Android device -->
+      </ul>
+
+      <button class="pwa-btn-install-primary" onclick="closePWAInstallModal()" style="width: 100%; justify-content: center; padding: 11px; font-size: 13px; margin-top: 8px;">
+        <span data-en="Got it" data-fa="متوجه شدم">متوجه شدم</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Mechanical Engineering Blueprint Background Engine -->
   <script src="assets/js/engineering-bg.js"></script>
   <!-- Dynamic Turbomachinery Compressor Simulation Engine -->
   <script src="assets/js/compressor-engine.js"></script>
+  <!-- Progressive Web App Controller & Offline Engine -->
+  <script src="assets/js/pwa-install.js"></script>
 </body>
 </html>

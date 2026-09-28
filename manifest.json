@@ -1,0 +1,58 @@
+{
+  "id": "/",
+  "name": "FluidMind // Mechanical Engineering & Fluid Mechanics",
+  "short_name": "FluidMind",
+  "description": "Award-winning futuristic engineering portfolio of Mohammadamin Sharif specializing in Fluid Mechanics, Computational Fluid Dynamics (CFD), and Turbomachinery.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070e14",
+  "theme_color": "#070e14",
+  "lang": "fa",
+  "dir": "rtl",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "آموزش و آکادمی",
+      "short_name": "آموزش",
+      "description": "دوره جامع سالیدورکس و اصول مدیریت کسب‌وکار",
+      "url": "/#education",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "شبیه‌سازها و دوقلوها",
+      "short_name": "شبیه‌ساز",
+      "description": "دوقلوهای دیجیتال و شبیه‌سازهای بلادرنگ",
+      "url": "/#simulations",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "پروژه‌ها و طراحی پمپ",
+      "short_name": "پروژه‌ها",
+      "description": "پروژه‌ها و تحلیل‌های دینامیک سیالات",
+      "url": "/#projects",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
