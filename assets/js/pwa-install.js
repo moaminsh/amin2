@@ -62,7 +62,7 @@
     closePWAInstallModal();
 
     if (typeof window.showGlobalToast === 'function') {
-      window.showGlobalToast('اپلیکیشن FluidMind با موفقیت روی دستگاه شما نصب گردید!');
+      window.showGlobalToast('اپلیکیشن FluidMind با موفقیت روی صفحه اصلی دستگاه شما نصب گردید!');
     }
   });
 
@@ -76,25 +76,23 @@
       return;
     }
 
-    if (available || !isStandaloneApp()) {
-      if (navBtn) navBtn.style.display = 'inline-flex';
-      if (drawerBtn) drawerBtn.style.display = 'flex';
-    }
+    if (navBtn) navBtn.style.display = 'inline-flex';
+    if (drawerBtn) drawerBtn.style.display = 'flex';
   }
 
   function scheduleBottomDockDisplay() {
     if (isStandaloneApp()) return;
 
-    // Check if user dismissed it in this 24-hour period
+    // Check if user explicitly dismissed it recently
     const dismissedAt = localStorage.getItem(STORAGE_DISMISS_KEY);
     if (dismissedAt) {
       const elapsed = Date.now() - parseInt(dismissedAt, 10);
       if (elapsed < DISMISS_DURATION_MS) {
-        return; // Respect user dismissal
+        return; // Respect user dismissal for auto-display
       }
     }
 
-    // Friendly 2.2s delay after page load for subtle entrance
+    // Friendly 700ms delay after page load for subtle entrance
     setTimeout(() => {
       const dock = document.getElementById('pwaBottomDock');
       if (dock && !isStandaloneApp()) {
@@ -103,7 +101,7 @@
           window.lucide.createIcons();
         }
       }
-    }, 2200);
+    }, 700);
   }
 
   window.dismissPWADock = function () {
@@ -120,35 +118,85 @@
     }
   }
 
-  // 6. Trigger installation flow
+  // 6. Trigger installation flow directly onto screen
   window.triggerPWAInstall = async function () {
     if (isStandaloneApp()) {
+      const isFa = document.documentElement.lang !== 'en';
+      const msg = isFa 
+        ? 'اپلیکیشن FluidMind در حال حاضر روی دستگاه شما نصب است' 
+        : 'FluidMind app is already installed on your device';
       if (typeof window.showGlobalToast === 'function') {
-        window.showGlobalToast('اپلیکیشن در حال حاضر روی دستگاه شما نصب است');
+        window.showGlobalToast(msg);
       }
       return;
     }
 
-    // If native prompt is available (Android Chrome / Chromium Desktop)
+    // Clear any previous dismissal so the dock is brought onto the screen immediately
+    try {
+      localStorage.removeItem(STORAGE_DISMISS_KEY);
+    } catch (e) {}
+
+    // 1. Immediately bring the bottom dock onto screen
+    const dock = document.getElementById('pwaBottomDock');
+    if (dock) {
+      dock.classList.add('visible');
+      dock.classList.add('pwa-dock-pulse-highlight');
+      setTimeout(() => dock.classList.remove('pwa-dock-pulse-highlight'), 1500);
+    }
+
+    // 2. Close mobile drawer if open so modal is unblocked
+    const mobileDrawer = document.getElementById('mobileNavDrawer');
+    if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+      mobileDrawer.classList.remove('open');
+    }
+
+    // 3. If native prompt is available (Android Chrome / Chromium Desktop)
     if (deferredInstallPrompt) {
-      hideBottomDock();
       try {
         await deferredInstallPrompt.prompt();
         const choiceResult = await deferredInstallPrompt.userChoice;
         console.log('[FluidMind PWA] Install choice outcome:', choiceResult.outcome);
         if (choiceResult.outcome === 'accepted') {
           deferredInstallPrompt = null;
+          hideBottomDock();
           updateInstallButtonVisibility(false);
+          closePWAInstallModal();
+          return;
         }
       } catch (err) {
         console.warn('[FluidMind PWA] Install prompt error:', err);
-        openPWAInstallModal();
       }
-      return;
     }
 
-    // Otherwise show step-by-step guided installation modal
+    // 4. In all cases or when native prompt is pending/unsupported, bring up the on-screen install card
     openPWAInstallModal();
+  };
+
+  // Direct install retry from within the modal
+  window.retryDirectPWAInstall = async function () {
+    if (deferredInstallPrompt) {
+      try {
+        await deferredInstallPrompt.prompt();
+        const choice = await deferredInstallPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          deferredInstallPrompt = null;
+          closePWAInstallModal();
+          hideBottomDock();
+          return;
+        }
+      } catch (err) {
+        console.warn('[FluidMind PWA] Direct retry prompt error:', err);
+      }
+    }
+
+    // If native prompt is not available, scroll or highlight the steps
+    const isFa = document.documentElement.lang !== 'en';
+    const msg = isFa
+      ? 'برای نصب آیکون، مراحل راهنمای بالا را در مرورگر خود انجام دهید'
+      : 'Follow the steps shown above in your browser to add the app icon';
+    if (typeof window.showGlobalToast === 'function') {
+      window.showGlobalToast(msg);
+    }
   };
 
   // 7. Guided Modal for iOS Safari, Android without prompt, or Desktop

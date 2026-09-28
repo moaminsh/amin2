@@ -8719,6 +8719,15 @@ html.dark-mode .project-card::after {
     gap: 8px;
   }
   .nav-clock-pill {
+    display: inline-flex !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    gap: 4px !important;
+  }
+  .nav-clock-pill .nav-live-date {
+    display: none !important;
+  }
+  .nav-clock-pill .nav-time-divider {
     display: none !important;
   }
   .brand-hex-icon {
@@ -11762,6 +11771,15 @@ html.dark-mode .project-card::after {
   }
 
   .nav-clock-pill {
+    display: inline-flex !important;
+    padding: 3px 6px !important;
+    font-size: 10.5px !important;
+    gap: 3px !important;
+  }
+  .nav-clock-pill .nav-live-date {
+    display: none !important;
+  }
+  .nav-clock-pill .nav-time-divider {
     display: none !important;
   }
 

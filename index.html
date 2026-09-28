@@ -104,9 +104,12 @@
 
       <!-- Right Action & Controls (ساعت، تغییر زبان، تغییر تم) -->
       <div class="navbar-actions-dock">
-        <!-- Live Clock Pill -->
-        <div class="nav-clock-pill" title="زمان زنده سامانه">
-          <i data-lucide="clock" style="width: 14px; height: 14px; color: var(--futuristic-cyan);"></i>
+        <!-- Live Date & Clock Pill (ساعت و تاریخ زنده شمسی / میلادی) -->
+        <div class="nav-clock-pill" id="navLiveDateTimePill" onclick="showLiveDateToast()" title="مشاهده تقویم و ساعت زنده هوشمند" role="button" tabindex="0">
+          <i data-lucide="calendar" class="nav-date-icon" style="width: 13px; height: 13px; color: var(--futuristic-cyan);"></i>
+          <span id="navLiveDate" class="nav-live-date">دوشنبه، ۶ مهر ۱۴۰۵</span>
+          <span class="nav-time-divider">|</span>
+          <i data-lucide="clock" class="nav-clock-icon" style="width: 13px; height: 13px; color: var(--futuristic-cyan);"></i>
           <span id="navLiveClock">11:45</span>
         </div>
 
@@ -121,10 +124,10 @@
           <i data-lucide="sun" id="navThemeIcon" style="width: 16px; height: 16px;"></i>
         </button>
 
-        <!-- PWA Install Button (نصب اپلیکیشن روی دستگاه) -->
-        <button class="nav-control-pill nav-install-pill" id="pwaNavInstallBtn" onclick="triggerPWAInstall()" style="display: none;" title="نصب اپلیکیشن روی دستگاه">
+        <!-- PWA Install Button (نصب مستقیم اپلیکیشن روی دستگاه و آوردن رو صفحه) -->
+        <button class="nav-control-pill nav-install-pill" id="pwaNavInstallBtn" onclick="triggerPWAInstall()" title="نصب مستقیم اپلیکیشن روی صفحه">
           <i data-lucide="download" style="width: 14px; height: 14px;"></i>
-          <span data-en="Install App" data-fa="نصب برنامه">نصب برنامه</span>
+          <span data-en="Install App" data-fa="نصب اپ">نصب اپ</span>
         </button>
 
         <!-- Mobile Menu Burger -->
@@ -136,13 +139,25 @@
 
     <!-- Mobile Drawer Menu -->
     <div class="navbar-mobile-drawer" id="mobileNavDrawer">
+      <!-- Mobile Drawer Live Date & Time HUD Card -->
+      <div class="mobile-drawer-date-card" onclick="showLiveDateToast()" title="مشاهده تقویم و ساعت زنده">
+        <div class="drawer-date-header">
+          <span class="drawer-cal-badge" id="mobileDrawerCalBadge">گاه‌شماری خورشیدی (شمسی)</span>
+          <span class="drawer-clock-badge" id="mobileDrawerClock">11:45:00</span>
+        </div>
+        <div class="drawer-date-main">
+          <i data-lucide="calendar" style="width: 15px; height: 15px; color: var(--futuristic-cyan);"></i>
+          <span id="mobileDrawerDate">دوشنبه، ۶ مهر ۱۴۰۵</span>
+        </div>
+      </div>
+
       <a href="#home" class="mobile-nav-link active" onclick="navigateToSection('home'); return false;"><i data-lucide="home"></i> <span data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</span></a>
       <a href="#education" class="mobile-nav-link" onclick="navigateToSection('education'); return false;"><i data-lucide="graduation-cap"></i> <span data-en="Academy" data-fa="آموزش (سالیدورکس و مدیریت)">آموزش (سالیدورکس و مدیریت)</span></a>
       <a href="#projects" class="mobile-nav-link" onclick="navigateToSection('projects'); return false;"><i data-lucide="layers"></i> <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span></a>
       <a href="#simulations" class="mobile-nav-link" onclick="navigateToSection('simulations'); return false;"><i data-lucide="activity"></i> <span data-en="Simulations" data-fa="شبیه‌سازهای زنده">شبیه‌سازهای زنده</span></a>
       <a href="#books" class="mobile-nav-link" onclick="navigateToSection('books'); return false;"><i data-lucide="book-open"></i> <span data-en="Books" data-fa="کتاب‌ها و تصمیم‌گیری">کتاب‌ها و تصمیم‌گیری</span></a>
       <a href="#info" class="mobile-nav-link" onclick="navigateToSection('info'); return false;"><i data-lucide="user"></i> <span data-en="About" data-fa="درباره و تماس">درباره و تماس</span></a>
-      <a href="#" class="mobile-nav-link" id="pwaMobileDrawerInstallBtn" onclick="triggerPWAInstall(); return false;" style="display: none; color: #38bdf8; border-top: 1px solid rgba(56,189,248,0.2);"><i data-lucide="download"></i> <span data-en="Install App on Phone" data-fa="دانلود و نصب اپلیکیشن رو گوشی">دانلود و نصب اپلیکیشن رو گوشی</span></a>
+      <a href="#" class="mobile-nav-link" id="pwaMobileDrawerInstallBtn" onclick="triggerPWAInstall(); return false;" style="color: #38bdf8; border-top: 1px solid rgba(56,189,248,0.25);"><i data-lucide="download"></i> <span data-en="Direct Install App on Phone" data-fa="نصب مستقیم اپلیکیشن رو صفحه">نصب مستقیم اپلیکیشن رو صفحه</span></a>
     </div>
   </header>
   <div class="custom-cursor" id="cursor"></div>
@@ -2911,6 +2926,9 @@
         }
       }
 
+      // Dynamic Live Clock & Date update on language change
+      updateLiveClockAndDate();
+
       if (window.lucide) {
         try { lucide.createIcons(); } catch (e) {}
       }
@@ -2924,20 +2942,143 @@
       localStorage.setItem('site-lang', nextLang);
     };
 
+    // Live Clock & Date Engine (تاریخ شمسی در فارسی / تاریخ میلادی در انگلیسی)
+    function updateLiveClockAndDate() {
+      const now = new Date();
+      const currentLang = rootEl.getAttribute('lang') || 'fa';
+      const isFa = (currentLang === 'fa');
+
+      // Time strings
+      const hours = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+      const timeShort = `${hours}:${mins}`;
+      const timeFull = `${hours}:${mins}:${secs}`;
+
+      let dateText = '';
+      let calBadgeText = '';
+
+      if (isFa) {
+        calBadgeText = 'گاه‌شماری خورشیدی (شمسی)';
+        try {
+          const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }).formatToParts(now);
+
+          const weekday = parts.find(p => p.type === 'weekday')?.value || '';
+          const day = parts.find(p => p.type === 'day')?.value || '';
+          const month = parts.find(p => p.type === 'month')?.value || '';
+          const year = parts.find(p => p.type === 'year')?.value || '';
+
+          dateText = `${weekday}، ${day} ${month} ${year}`;
+        } catch (e) {
+          try {
+            dateText = now.toLocaleDateString('fa-IR', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+          } catch (err2) {
+            dateText = now.toLocaleDateString('fa-IR');
+          }
+        }
+      } else {
+        calBadgeText = 'Gregorian Calendar';
+        try {
+          dateText = new Intl.DateTimeFormat('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          }).format(now);
+        } catch (e) {
+          dateText = now.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+        }
+      }
+
+      // Top Navbar elements
+      const navClockEl = document.getElementById('navLiveClock');
+      if (navClockEl) navClockEl.textContent = timeShort;
+
+      const navDateEl = document.getElementById('navLiveDate');
+      if (navDateEl) navDateEl.textContent = dateText;
+
+      // Mobile Drawer elements
+      const mobileDrawerDate = document.getElementById('mobileDrawerDate');
+      if (mobileDrawerDate) mobileDrawerDate.textContent = dateText;
+
+      const mobileDrawerClock = document.getElementById('mobileDrawerClock');
+      if (mobileDrawerClock) mobileDrawerClock.textContent = timeFull;
+
+      const mobileDrawerCalBadge = document.getElementById('mobileDrawerCalBadge');
+      if (mobileDrawerCalBadge) mobileDrawerCalBadge.textContent = calBadgeText;
+
+      // Telemetry / Dashboard elements
+      const dashDateEl = document.getElementById('dashboardLivePersianDate');
+      if (dashDateEl) dashDateEl.textContent = dateText;
+
+      const dashClockEl = document.getElementById('dashboardLiveTime');
+      if (dashClockEl) dashClockEl.textContent = timeFull;
+    }
+
+    // Interactive Toast for Date & Time
+    window.showLiveDateToast = function() {
+      const now = new Date();
+      const currentLang = rootEl.getAttribute('lang') || 'fa';
+      const isFa = (currentLang === 'fa');
+
+      let shamsiStr = '';
+      try {
+        const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }).formatToParts(now);
+        const weekday = parts.find(p => p.type === 'weekday')?.value || '';
+        const day = parts.find(p => p.type === 'day')?.value || '';
+        const month = parts.find(p => p.type === 'month')?.value || '';
+        const year = parts.find(p => p.type === 'year')?.value || '';
+        shamsiStr = `${weekday}، ${day} ${month} ${year}`;
+      } catch (e) {
+        shamsiStr = now.toLocaleDateString('fa-IR');
+      }
+
+      const gregStr = new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(now);
+
+      const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+
+      const msg = isFa
+        ? `📅 تقویم هجری شمسی: ${shamsiStr}\n🌐 تاریخ میلادی: ${gregStr}\n⏰ ساعت زنده سامانه: ${timeStr}`
+        : `📅 Gregorian Date: ${gregStr}\n🌐 Solar Hijri (Shamsi): ${shamsiStr}\n⏰ Live System Time: ${timeStr}`;
+
+      if (typeof window.showGlobalToast === 'function') {
+        window.showGlobalToast(msg);
+      } else {
+        alert(msg);
+      }
+    };
+
     const savedLang = localStorage.getItem('site-lang') || 'fa';
     applyLanguage(savedLang);
 
-    // Top Navbar Live Clock Updater (ساعت زنده)
-    function updateNavbarLiveClock() {
-      const clockEl = document.getElementById('navLiveClock');
-      if (!clockEl) return;
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const mins = String(now.getMinutes()).padStart(2, '0');
-      clockEl.textContent = `${hours}:${mins}`;
-    }
-    updateNavbarLiveClock();
-    setInterval(updateNavbarLiveClock, 1000);
+    // Run clock & date updater immediately and on interval
+    updateLiveClockAndDate();
+    setInterval(updateLiveClockAndDate, 1000);
 
 
     // Optional mobile menu handling if present
@@ -6911,27 +7052,17 @@
   </div>
 
   <script>
-    // Real-time clock and Persian date updater
+    // Real-time telemetry and aerodynamic monitor
     function updateDashboardTelemetryClock() {
       const now = new Date();
-      const timeStr = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-      const clockEl = document.getElementById('dashboardLiveTime');
-      if (clockEl) clockEl.textContent = timeStr;
-      
-      const navClock = document.getElementById('navLiveClock');
-      if (navClock) {
-        const hours = String(now.getHours()).padStart(2, '0');
-        const mins = String(now.getMinutes()).padStart(2, '0');
-        navClock.textContent = `${hours}:${mins}`;
+
+      // Keep live date & time updated across language changes
+      if (typeof updateLiveClockAndDate === 'function') {
+        updateLiveClockAndDate();
       }
 
       const deckClock = document.getElementById('deckLiveClock');
       if (deckClock) deckClock.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-
-      const persianDateEl = document.getElementById('dashboardLivePersianDate');
-      if (persianDateEl) {
-        persianDateEl.textContent = now.toLocaleDateString('fa-IR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      }
 
       // Slight natural variance in live Reynolds number Re
       const reBase = 1850;
@@ -6942,6 +7073,7 @@
       if (sideRe) sideRe.textContent = `${reVal.toLocaleString()} [Laminar]`;
     }
     setInterval(updateDashboardTelemetryClock, 1000);
+    updateDashboardTelemetryClock();
     updateDashboardTelemetryClock();
 
     // Search Modal Functions
@@ -7101,9 +7233,15 @@
         <!-- Steps populated dynamically based on iOS or Android device -->
       </ul>
 
-      <button class="pwa-btn-install-primary" onclick="closePWAInstallModal()" style="width: 100%; justify-content: center; padding: 11px; font-size: 13px; margin-top: 8px;">
-        <span data-en="Got it" data-fa="متوجه شدم">متوجه شدم</span>
-      </button>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px;">
+        <button class="pwa-btn-install-primary" id="pwaModalDirectActionBtn" onclick="retryDirectPWAInstall()" style="width: 100%; justify-content: center; padding: 12px; font-size: 13px;">
+          <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+          <span data-en="Direct Install on Screen" data-fa="نصب مستقیم روی صفحه">نصب مستقیم روی صفحه</span>
+        </button>
+        <button onclick="closePWAInstallModal()" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: #94a3b8; font-size: 12px; cursor: pointer; transition: all 0.2s ease;">
+          <span data-en="Close" data-fa="بستن">بستن</span>
+        </button>
+      </div>
     </div>
   </div>
 
