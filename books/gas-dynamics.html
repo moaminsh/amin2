@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gas Dynamics // دینامیک گازها — کتب و جزوات // MOHAMMADAMIN SHARIF</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Liquid Glass Design System -->
+  <link rel="stylesheet" href="../assets/css/liquid-glass.css">
+
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: #0d1117;
+      --bg-card-hover: #131922;
+      --bg-void: #05070a;
+      --border: #1a2230;
+      --border-bright: #2d3b52;
+      --text-main: #f0f4f8;
+      --text-muted: #62748e;
+      --text-dim: #3d4b5e;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #0072ff;
+      --accent-orange: #fb923c;
+      --accent-glow: rgba(0, 242, 254, 0.14);
+      
+      --font-mono: 'Fira Code', monospace;
+      --font-sans: 'Vazirmatn', 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      selection-background-color: var(--accent-cyan);
+      selection-color: var(--bg-dark);
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Custom Cursor Indicator */
+    .custom-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+      mix-blend-mode: difference;
+    }
+    .custom-cursor.hover {
+      width: 36px; height: 36px;
+      background: rgba(0, 242, 254, 0.3);
+      border: 1px solid var(--accent-cyan);
+    }
+
+    /* Grid Overlay Background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header / Nav Bar */
+    header.nav-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 66px;
+    }
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-brand-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+    .nav-menu {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-link:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* NAV TOOLS */
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 20px;
+    }
+    [dir="ltr"] .nav-tools {
+      margin-right: 0;
+      margin-left: 20px;
+    }
+    .tool-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 7px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .tool-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+    }
+
+    /* LIGHT MODE THEME */
+    html.light-mode {
+      --bg-dark: #eef1f6;
+      --bg-card: #ffffff;
+      --bg-card-hover: #e6eaf1;
+      --bg-void: #dde3ec;
+      --border: #d6dce6;
+      --border-bright: #b7c1d1;
+      --text-main: #10151d;
+      --text-muted: #4b5a70;
+      --text-dim: #7c8aa0;
+      --accent-cyan: #0089ad;
+      --accent-blue: #0072ff;
+      --accent-glow: rgba(0, 137, 173, 0.08);
+    }
+    html.light-mode header.nav-bar {
+      background: rgba(245, 247, 250, 0.88);
+    }
+    html.light-mode .custom-cursor {
+      mix-blend-mode: normal;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      padding-top: 110px;
+      padding-bottom: 40px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: stretch;
+    }
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .hero-title {
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+    .hero-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .spec-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    .spec-node:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+    }
+    .spec-key {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .spec-value {
+      font-size: 14px;
+      color: var(--text-main);
+      font-weight: 700;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* HERO VISUAL CANVAS */
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      min-height: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .canvas-overlay {
+      padding: 14px 18px;
+      background: rgba(7, 9, 14, 0.7);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      z-index: 2;
+    }
+    #heroCanvas {
+      width: 100%;
+      flex: 1;
+      min-height: 320px;
+      display: block;
+      cursor: crosshair;
+    }
+    .canvas-controls {
+      padding: 12px 18px;
+      background: rgba(7, 9, 14, 0.85);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 2;
+    }
+    .canvas-slider-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .canvas-slider {
+      flex: 1;
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+    .canvas-val-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      min-width: 52px;
+      text-align: right;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 60px 0 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-title-text {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    /* FEATURED BOOKLET HIGHLIGHT CARD */
+    .booklet-feature-card {
+      background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(10, 25, 47, 0.75));
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      border-radius: 14px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      margin-bottom: 40px;
+    }
+    .booklet-feature-card::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .booklet-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .booklet-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .booklet-cover {
+        margin: 0 auto;
+      }
+      .booklet-actions {
+        justify-content: center;
+      }
+    }
+    .booklet-cover {
+      width: 190px;
+      height: 250px;
+      background: linear-gradient(145deg, #091522, #040910);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 242, 254, 0.05);
+      transition: var(--transition);
+    }
+    .booklet-cover:hover {
+      transform: translateY(-4px) rotate(1deg);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 18px 36px rgba(0, 242, 254, 0.2);
+    }
+    .cover-top-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+    .cover-main-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .cover-sub-title {
+      font-size: 9px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+    .cover-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cover-badge {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--accent-cyan);
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+    .booklet-info h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .booklet-info p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .booklet-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .b-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .b-tag-highlight {
+      background: rgba(0, 242, 254, 0.1);
+      border-color: rgba(0, 242, 254, 0.4);
+      color: var(--accent-cyan);
+    }
+    .booklet-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 220px;
+    }
+    .btn-download-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #07090e;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(0, 242, 254, 0.25);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-download-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(0, 242, 254, 0.45);
+      color: #000;
+    }
+    .btn-reader-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .btn-reader-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* CHAPTER SYLLABUS CARDS */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .chapter-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .chapter-card:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+    .chapter-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .chapter-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(0, 242, 254, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      font-weight: 700;
+    }
+    .chapter-icon-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+    }
+    .chapter-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .chapter-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .chapter-formula-preview {
+      background: var(--bg-dark);
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* COMPRESSIBLE FLOW CALCULATOR TOOL */
+    .calculator-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 50px;
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+    @media (max-width: 860px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .calc-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .calc-input {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      outline: none;
+      transition: var(--transition);
+      direction: ltr;
+    }
+    .calc-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+    }
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .res-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 8px;
+      direction: ltr;
+      text-align: left;
+    }
+    .res-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .res-val {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-top: 4px;
+    }
+    .res-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* PDF EMBED MODAL */
+    .pdf-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .pdf-modal-backdrop.active {
+      display: flex;
+    }
+    .pdf-modal-box {
+      width: 100%;
+      max-width: 1100px;
+      height: 90vh;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+    }
+    .pdf-modal-header {
+      padding: 16px 24px;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pdf-modal-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pdf-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pdf-modal-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .pdf-modal-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+    .pdf-iframe-container {
+      flex: 1;
+      width: 100%;
+      background: #1e293b;
+    }
+    .pdf-iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 80px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    @media (max-width: 640px) {
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- Background Grid -->
+  <div class="bg-grid"></div>
+
+  <!-- Header / Navigation -->
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <a href="../index.html#books" class="nav-brand">
+        <span class="nav-brand-dot"></span>
+        <span>MOHAMMADAMIN SHARIF // BOOKS</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="../index.html#home" class="nav-link" data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</a></li>
+        <li><a href="../index.html#books" class="nav-link" data-en="Scientific Library" data-fa="کتابخانه علمی">کتابخانه علمی</a></li>
+        <li><a href="#booklet" class="nav-link" data-en="Gas Dynamics Booklet" data-fa="جزوه دینامیک گاز">جزوه دینامیک گاز</a></li>
+        <li><a href="#calculator" class="nav-link" data-en="Mach Calculator" data-fa="محاسبه‌گر ماخ">محاسبه‌گر ماخ</a></li>
+      </ul>
+
+      <div class="nav-tools">
+        <!-- Language Switcher -->
+        <button class="tool-btn" id="langToggleBtn" onclick="toggleLanguage()">
+          <i data-lucide="globe" style="width: 14px; height: 14px;"></i>
+          <span id="langLabel">EN</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button class="tool-btn" id="themeToggleBtn" onclick="toggleTheme()">
+          <i data-lucide="sun" id="themeIcon" style="width: 14px; height: 14px;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container">
+    
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-grid">
+        
+        <div class="hero-content">
+          <div class="hero-tag">
+            <i data-lucide="wind" style="width: 14px; height: 14px;"></i>
+            <span data-en="// VOL. 09 • GAS DYNAMICS &amp; COMPRESSIBLE FLOW" data-fa="// جلد ۰۹ • دینامیک گازها و جریان‌های تراکم‌پذیر">// جلد ۰۹ • دینامیک گازها و جریان‌های تراکم‌پذیر</span>
+          </div>
+
+          <h1 class="hero-title" data-en="Gas Dynamics // Compressible Flow" data-fa="دینامیک گازها // جریان‌های تراکم‌پذیر">
+            دینامیک گازها // جریان‌های تراکم‌پذیر
+          </h1>
+
+          <p class="hero-subtitle" data-en="Complete lecture compendium, theoretical foundations, normal &amp; oblique shock dynamics, isentropic nozzles, Fanno/Rayleigh flows, and aerospace propulsion analysis." data-fa="مجموعه کامل و مدون جزوه دینامیک گازها شامل مبانی نظری جریان‌های تراکم‌پذیر صوتی و مافوق‌صوت، امواج ضربه‌ای قائم و مایل، نازل‌های همگرا-واگرا، جریان‌های فانو و ریلی، و کاربرد در پیشرانش هوافضایی.">
+            مجموعه کامل و مدون جزوه دینامیک گازها شامل مبانی نظری جریان‌های تراکم‌پذیر صوتی و مافوق‌صوت، امواج ضربه‌ای قائم و مایل، نازل‌های همگرا-واگرا، جریان‌های فانو و ریلی، و کاربرد در پیشرانش هوافضایی.
+          </p>
+
+          <div class="hero-specs">
+            <div class="spec-node">
+              <div class="spec-key" data-en="REGIME DOMAIN" data-fa="حوزه جریان">حوزه جریان</div>
+              <div class="spec-value">
+                <i data-lucide="zap" style="width: 14px; height: 14px; color: var(--accent-cyan);"></i>
+                <span data-en="Subsonic to Hypersonic (M &gt; 1)" data-fa="مادون‌صوت تا هایپرسونیک">مادون‌صوت تا هایپرسونیک</span>
+              </div>
+            </div>
+
+            <div class="spec-node">
+              <div class="spec-key" data-en="CHOKING CONDITION" data-fa="شرایط خفگی جریان">شرایط خفگی جریان</div>
+              <div class="spec-value">
+                <i data-lucide="target" style="width: 14px; height: 14px; color: var(--accent-cyan);"></i>
+                <span>A / A* = 1.00 @ M = 1</span>
+              </div>
+            </div>
+
+            <div class="spec-node">
+              <div class="spec-key" data-en="GOVERNING PHYSICS" data-fa="معادلات حاکم">معادلات حاکم</div>
+              <div class="spec-value">
+                <i data-lucide="book" style="width: 14px; height: 14px; color: var(--accent-cyan);"></i>
+                <span data-en="Rankine-Hugoniot &amp; Euler" data-fa="رانکین-هوگونیو و اویلر">رانکین-هوگونیو و اویلر</span>
+              </div>
+            </div>
+
+            <div class="spec-node">
+              <div class="spec-key" data-en="ATTACHED BOOKLET" data-fa="جزوه ضمیمه شده">جزوه ضمیمه شده</div>
+              <div class="spec-value">
+                <i data-lucide="file-text" style="width: 14px; height: 14px; color: var(--accent-cyan);"></i>
+                <span data-en="BGD.pdf (Direct Download)" data-fa="جزوه BGD.pdf (دانلود)">جزوه BGD.pdf (دانلود)</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="#booklet" class="btn-download-primary">
+              <i data-lucide="file-down" style="width: 18px; height: 18px;"></i>
+              <span data-en="View Gas Dynamics Booklet" data-fa="مشاهده و دانلود جزوه دینامیک گاز">مشاهده و دانلود جزوه دینامیک گاز</span>
+            </a>
+            <a href="#calculator" class="btn-reader-secondary">
+              <i data-lucide="calculator" style="width: 16px; height: 16px;"></i>
+              <span data-en="Launch Mach Solver" data-fa="ماشین‌حساب جریان مافوق‌صوت">ماشین‌حساب جریان مافوق‌صوت</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO VISUAL: INTERACTIVE DE LAVAL SUPERSONIC NOZZLE SIMULATOR -->
+        <div class="hero-visual">
+          <div class="canvas-overlay">
+            <span data-en="// LIVE NOZZLE CFD CONTOUR &amp; SHOCK WAVE" data-fa="// شبیه‌ساز زنده نازل دلاوال و موج ضربه‌ای">// شبیه‌ساز زنده نازل دلاوال و موج ضربه‌ای</span>
+            <span id="canvasMachDisplay" style="color: var(--accent-cyan); font-weight: 700;">Throat M=1.00 • Exit M=2.20</span>
+          </div>
+
+          <canvas id="heroCanvas"></canvas>
+
+          <div class="canvas-controls">
+            <span class="canvas-slider-label" data-en="Backpressure (Pb/P0):" data-fa="نسبت فشار پسین (Pb/P0):">نسبت فشار پسین (Pb/P0):</span>
+            <input type="range" id="nozzleBackpressure" class="canvas-slider" min="0.10" max="0.95" step="0.01" value="0.28" oninput="updateNozzleSim(this.value)">
+            <span class="canvas-val-badge" id="pbVal">0.28</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURED BOOKLET DOWNLOAD & READER -->
+    <section id="booklet" style="scroll-margin-top: 80px;">
+      <div class="section-header">
+        <div>
+          <div class="section-label">
+            <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+            <span data-en="// OFFICIAL COURSE COMPENDIUM" data-fa="// مرجع و جزوه رسمی دوره">// مرجع و جزوه رسمی دوره</span>
+          </div>
+          <h2 class="section-title-text" data-en="Gas Dynamics Lecture Booklet (BGD.pdf)" data-fa="جزوه تخصصی دینامیک گازها (BGD.pdf)">
+            جزوه تخصصی دینامیک گازها (BGD.pdf)
+          </h2>
+        </div>
+        <span class="chapter-badge" data-en="PDF FORMAT • HIGH QUALITY" data-fa="فرمت PDF • با کیفیت برداری">فرمت PDF • با کیفیت برداری</span>
+      </div>
+
+      <div class="booklet-feature-card">
+        <div class="booklet-grid">
+          
+          <!-- Realistic Book Cover -->
+          <div class="booklet-cover">
+            <div>
+              <div class="cover-top-tag">GAS DYNAMICS</div>
+              <div style="height: 1px; background: rgba(0, 242, 254, 0.4); margin: 6px 0 12px;"></div>
+              <div class="cover-main-title">دینامیک گازها</div>
+              <div class="cover-sub-title" style="margin-top: 4px;">COMPRESSIBLE FLOW NOTES</div>
+            </div>
+            
+            <div style="text-align: center; margin: 10px 0;">
+              <i data-lucide="wind" style="width: 48px; height: 48px; color: var(--accent-cyan); opacity: 0.85;"></i>
+            </div>
+
+            <div class="cover-footer">
+              <span class="cover-badge">BGD.pdf</span>
+              <span style="font-size: 8px; color: var(--text-dim); font-family: var(--font-mono);">VOL. 09</span>
+            </div>
+          </div>
+
+          <!-- Booklet Description & Meta -->
+          <div class="booklet-info">
+            <h3 data-en="Comprehensive Gas Dynamics Lecture Notes (BGD)" data-fa="جزوه جامع و مدون دینامیک گازها (BGD)">
+              جزوه جامع و مدون دینامیک گازها (BGD)
+            </h3>
+            <p data-en="This lecture compendium gathers the complete core curriculum of compressible fluid mechanics and gas dynamics. Features explicit derivations for sound velocity, isentropic duct flow, normal and oblique shock wave relations, Prandtl-Meyer expansion waves, Fanno and Rayleigh line flows, and aerospace propulsion nozzle matching." data-fa="این جزوه آموزشی مدون، شامل تمامی سرفصل‌های کلیدی مکانیک سیالات تراکم‌پذیر و دینامیک گازها می‌باشد. در این جزوه روابط ایزنتروپیک، نازل‌های همگرا-واگرا، امواج ضربه‌ای قائم و مایل رانکین-هوگونیو، بادبزن انبساطی پرانتل-مایر، جریان‌های فانو و ریلی، و عملکرد آیرودینامیکی نازل‌های موشک و توربین گاز به صورت تشریحی با فرمول‌ها و جداول مرجع گردآوری شده است.">
+              این جزوه آموزشی مدون، شامل تمامی سرفصل‌های کلیدی مکانیک سیالات تراکم‌پذیر و دینامیک گازها می‌باشد. در این جزوه روابط ایزنتروپیک، نازل‌های همگرا-واگرا، امواج ضربه‌ای قائم و مایل رانکین-هوگونیو، بادبزن انبساطی پرانتل-مایر، جریان‌های فانو و ریلی، و عملکرد آیرودینامیکی نازل‌های موشک و توربین گاز به صورت تشریحی با فرمول‌ها و جداول مرجع گردآوری شده است.
+            </p>
+
+            <div class="booklet-meta-tags">
+              <span class="b-tag b-tag-highlight">
+                <i data-lucide="file-check" style="width: 12px; height: 12px;"></i>
+                <span data-en="Filename: BGD.pdf" data-fa="نام فایل: BGD.pdf">نام فایل: BGD.pdf</span>
+              </span>
+              <span class="b-tag">
+                <i data-lucide="layers" style="width: 12px; height: 12px;"></i>
+                <span data-en="7 Core Modules" data-fa="۷ فصل آموزشی جامع">۷ فصل آموزشی جامع</span>
+              </span>
+              <span class="b-tag">
+                <i data-lucide="table" style="width: 12px; height: 12px;"></i>
+                <span data-en="Standard Mach &amp; Shock Tables" data-fa="جداول استاندارد ماخ و شوک">جداول استاندارد ماخ و شوک</span>
+              </span>
+              <span class="b-tag">
+                <i data-lucide="shield-check" style="width: 12px; height: 12px;"></i>
+                <span data-en="Academic Reference Quality" data-fa="مرجع دانشگاهی مهندسی مکانیک">مرجع دانشگاهی مهندسی مکانیک</span>
+              </span>
+            </div>
+
+            <div style="font-size: 12px; color: var(--text-dim); font-family: var(--font-mono);">
+              <span data-en="• Direct Server Link:" data-fa="• مسیر فایل در سرور:">• مسیر فایل در سرور:</span>
+              <code style="color: var(--accent-cyan); background: var(--bg-dark); padding: 2px 6px; border-radius: 4px;">/assets/downloads/books/gas-dynamics/BGD.pdf</code>
+            </div>
+          </div>
+
+          <!-- Download & Interactive Actions -->
+          <div class="booklet-actions">
+            <!-- Direct Download Button -->
+            <a href="../assets/downloads/books/gas-dynamics/BGD.pdf" download="BGD-Gas-Dynamics-Notes.pdf" class="btn-download-primary">
+              <i data-lucide="download" style="width: 18px; height: 18px;"></i>
+              <span data-en="Download PDF (BGD)" data-fa="دانلود فایل PDF جزوه">دانلود فایل PDF جزوه</span>
+            </a>
+
+            <!-- Online Embedded Reader Modal Opener -->
+            <button class="btn-reader-secondary" onclick="openPdfModal('../assets/downloads/books/gas-dynamics/BGD.pdf')">
+              <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+              <span data-en="Read Online in Browser" data-fa="مطالعه آنلاین در مرورگر">مطالعه آنلاین در مرورگر</span>
+            </button>
+
+            <!-- Direct root URL open in new tab -->
+            <a href="../BGD.pdf" target="_blank" class="btn-reader-secondary" style="font-size: 11px;">
+              <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+              <span data-en="Open in Dedicated Tab" data-fa="باز کردن مستقیم در تب جدید">باز کردن مستقیم در تب جدید</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CHAPTER-BY-CHAPTER SYLLABUS -->
+    <section style="margin-top: 60px;">
+      <div class="section-header">
+        <div>
+          <div class="section-label">
+            <i data-lucide="list" style="width: 14px; height: 14px;"></i>
+            <span data-en="// COURSE SYLLABUS &amp; CHAPTER BREAKDOWN" data-fa="// سرفصل‌ها و مباحث تشریحی جزوه">// سرفصل‌ها و مباحث تشریحی جزوه</span>
+          </div>
+          <h2 class="section-title-text" data-en="Curriculum Structure of the Booklet" data-fa="ساختار فصول آموزشی جزوه دینامیک گاز">
+            ساختار فصول آموزشی جزوه دینامیک گاز
+          </h2>
+        </div>
+      </div>
+
+      <div class="chapters-grid">
+        
+        <!-- CHAPTER 1 -->
+        <div class="chapter-card">
+          <div>
+            <div class="chapter-top">
+              <span class="chapter-badge">MOD 01</span>
+              <div class="chapter-icon-wrap">
+                <i data-lucide="sound-wave" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <h3 class="chapter-title" data-en="1. Acoustic Speed &amp; Fundamentals" data-fa="۱. مفاهیم پایه و سرعت صوت">
+              ۱. مفاهیم پایه و سرعت صوت
+            </h3>
+            <p class="chapter-desc" data-en="Thermodynamics of ideal gases, derivation of acoustic speed, Mach angle, and stagnation properties (T0, P0, rho0)." data-fa="ترمودینامیک گاز کامل، اثبات سرعت امواج صوتی در محیط تراکم‌پذیر، تعریف زاویه ماخ، و محاسبه خواص سکون (دما، فشار و چگالی کل).">
+              ترمودینامیک گاز کامل، اثبات سرعت امواج صوتی در محیط تراکم‌پذیر، تعریف زاویه ماخ، و محاسبه خواص سکون (دما، فشار و چگالی کل).
+            </p>
+          </div>
+          <div class="chapter-formula-preview">
+            a = &radic;(&gamma; &bull; R &bull; T) &nbsp;|&nbsp; T<sub>0</sub>/T = 1 + [(&gamma;-1)/2]M<sup>2</sup>
+          </div>
+        </div>
+
+        <!-- CHAPTER 2 -->
+        <div class="chapter-card">
+          <div>
+            <div class="chapter-top">
+              <span class="chapter-badge">MOD 02</span>
+              <div class="chapter-icon-wrap">
+                <i data-lucide="maximize-2" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <h3 class="chapter-title" data-en="2. 1D Isentropic Flow &amp; Nozzles" data-fa="۲. جریان ایزنتروپیک و نازل‌های دلاوال">
+              ۲. جریان ایزنتروپیک و نازل‌های دلاوال
+            </h3>
+            <p class="chapter-desc" data-en="Differential area-velocity relation, throat choking criteria (M=1), converging-diverging nozzles, and critical ratios." data-fa="رابطه دیفرانسیلی تغییر مساحت و سرعت، شرایط خفگی گلوگاه نازل (ماخ برابر یک)، نازل‌های همگرا-واگرا دلاوال و نسبت‌های بحرانی مساحت.">
+              رابطه دیفرانسیلی تغییر مساحت و سرعت، شرایط خفگی گلوگاه نازل (ماخ برابر یک)، نازل‌های همگرا-واگرا دلاوال و نسبت‌های بحرانی مساحت.
+            </p>
+          </div>
+          <div class="chapter-formula-preview">
+            dA/A = (M<sup>2</sup> - 1)(dV/V) &nbsp;|&nbsp; P*/P<sub>0</sub> = 0.528 (Air)
+          </div>
+        </div>
+
+        <!-- CHAPTER 3 -->
+        <div class="chapter-card">
+          <div>
+            <div class="chapter-top">
+              <span class="chapter-badge">MOD 03</span>
+              <div class="chapter-icon-wrap">
+                <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <h3 class="chapter-title" data-en="3. Normal Shock Waves" data-fa="۳. امواج ضربه‌ای عمودی (قائم)">
+              ۳. امواج ضربه‌ای عمودی (قائم)
+            </h3>
+            <p class="chapter-desc" data-en="Rankine-Hugoniot jump equations, supersonic-to-subsonic transition, entropy increase, and stagnation pressure decay." data-fa="معادلات پرش رانکین-هوگونیو، گذار ناگهانی مافوق‌صوت به مادون‌صوت، تولید انتروپی و افت شدید فشار کل در امواج شوک عمودی.">
+              معادلات پرش رانکین-هوگونیو، گذار ناگهانی مافوق‌صوت به مادون‌صوت، تولید انتروپی و افت شدید فشار کل در امواج شوک عمودی.
+            </p>
+          </div>
+          <div class="chapter-formula-preview">
+            M<sub>2</sub><sup>2</sup> = [2+(&gamma;-1)M<sub>1</sub><sup>2</sup>] / [2&gamma;M<sub>1</sub><sup>2</sup>-(&gamma;-1)]
+          </div>
+        </div>
+
+        <!-- CHAPTER 4 -->
+        <div class="chapter-card">
+          <div>
+            <div class="chapter-top">
+              <span class="chapter-badge">MOD 04</span>
+              <div class="chapter-icon-wrap">
+                <i data-lucide="compass" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <h3 class="chapter-title" data-en="4. Oblique Shocks &amp; Prandtl-Meyer" data-fa="۴. امواج مایل و انبساط پرانتل-مایر">
+              ۴. امواج مایل و انبساط پرانتل-مایر
+            </h3>
+            <p class="chapter-desc" data-en="Theta-Beta-Mach relation, weak vs. strong shocks, shock detachment, continuous expansion fans, and supersonic airfoils." data-fa="روابط تتا-بتا-ماخ در امواج مایل، تمایز شوک ضعیف و قوی، زاویه جدایش شوک، بادبزن انبساطی پیوسته و آیرودینامیک ایرفویل‌های مافوق‌صوت.">
+              روابط تتا-بتا-ماخ در امواج مایل، تمایز شوک ضعیف و قوی، زاویه جدایش شوک، بادبزن انبساطی پیوسته و آیرودینامیک ایرفویل‌های مافوق‌صوت.
+            </p>
+          </div>
+          <div class="chapter-formula-preview">
+            tan(&theta;) = 2 cot(&beta;) &bull; [M<sub>1</sub><sup>2</sup>sin<sup>2</sup>(&beta;)-1] / [M<sub>1</sub><sup>2</sup>(&gamma;+cos 2&beta;)+2]
+          </div>
+        </div>
+
+        <!-- CHAPTER 5 -->
+        <div class="chapter-card">
+          <div>
+            <div class="chapter-top">
+              <span class="chapter-badge">MOD 05</span>
+              <div class="chapter-icon-wrap">
+                <i data-lucide="git-commit" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <h3 class="chapter-title" data-en="5. Fanno Flow (Wall Friction)" data-fa="۵. جریان فانو (جریان با اصطکاک)">
+              ۵. جریان فانو (جریان با اصطکاک)
+            </h3>
+            <p class="chapter-desc" data-en="Adiabatic compressible flow in constant-area ducts with wall friction, Fanno line on T-s diagram, and friction choking." data-fa="جریان آدیاباتیک در لوله‌های با مقطع ثابت همراه با اصطکاک دیواره، رسم منحنی فانو در دیاگرام T-s و طول بحرانی برای خفگی اصطکاکی.">
+              جریان آدیاباتیک در لوله‌های با مقطع ثابت همراه با اصطکاک دیواره، رسم منحنی فانو در دیاگرام T-s و طول بحرانی برای خفگی اصطکاکی.
+            </p>
+          </div>
+          <div class="chapter-formula-preview">
+            T<sub>0</sub> = Const &nbsp;|&nbsp; 4fL*/D = f(M, &gamma;) &nbsp;|&nbsp; Choking @ M=1
+          </div>
+        </div>
+
+        <!-- CHAPTER 6 -->
+        <div class="chapter-card">
+          <div>
+            <div class="chapter-top">
+              <span class="chapter-badge">MOD 06</span>
+              <div class="chapter-icon-wrap">
+                <i data-lucide="flame" style="width: 20px; height: 20px;"></i>
+              </div>
+            </div>
+            <h3 class="chapter-title" data-en="6. Rayleigh Flow (Heat Transfer)" data-fa="۶. جریان ریلی (جریان با انتقال حرارت)">
+              ۶. جریان ریلی (جریان با انتقال حرارت)
+            </h3>
+            <p class="chapter-desc" data-en="Frictionless compressible flow with heat addition, stagnation temperature change, and thermal choking limits." data-fa="جریان بدون اصطکاک گاز در مجرای یکنواخت با تبادل حرارت، تغییرات دمای سکون، و پدیده خفگی حرارتی در محفظه‌های احتراق و رم‌جت‌ها.">
+              جریان بدون اصطکاک گاز در مجرای یکنواخت با تبادل حرارت، تغییرات دمای سکون، و پدیده خفگی حرارتی در محفظه‌های احتراق و رم‌جت‌ها.
+            </p>
+          </div>
+          <div class="chapter-formula-preview">
+            q = c<sub>p</sub>(T<sub>02</sub> - T<sub>01</sub>) &nbsp;|&nbsp; T<sub>0</sub>/T<sub>0</sub>* Maximum @ M=1
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE GAS DYNAMICS & MACH SOLVER -->
+    <section id="calculator" class="calculator-card" style="scroll-margin-top: 80px;">
+      <div class="section-label">
+        <i data-lucide="cpu" style="width: 14px; height: 14px;"></i>
+        <span data-en="// INTERACTIVE ENGINE" data-fa="// موتور محاسباتی تعاملی">// موتور محاسباتی تعاملی</span>
+      </div>
+      <h2 class="section-title-text" data-en="Compressible Flow &amp; Shock Wave Solver" data-fa="محاسبه‌گر آنلاین جریان تراکم‌پذیر و امواج شوک">
+        محاسبه‌گر آنلاین جریان تراکم‌پذیر و امواج شوک
+      </h2>
+      <p style="font-size: 14px; color: var(--text-muted); margin-top: 6px;" data-en="Instant computation of isentropic flow ratios and normal shock properties for any Mach number and specific heat ratio." data-fa="محاسبه بلادرنگ نسبت‌های ایزنتروپیک و پرش امواج ضربه‌ای قائم برای هر عدد ماخ و ضریب گرمای ویژه دلخواه.">
+        محاسبه بلادرنگ نسبت‌های ایزنتروپیک و پرش امواج ضربه‌ای قائم برای هر عدد ماخ و ضریب گرمای ویژه دلخواه.
+      </p>
+
+      <div class="calc-grid">
+        
+        <!-- Inputs -->
+        <div class="calc-inputs">
+          <div class="input-group">
+            <label class="input-label">
+              <span data-en="Mach Number (M1)" data-fa="عدد ماخ جریان (M1)">عدد ماخ جریان (M1)</span>
+              <span style="color: var(--accent-cyan);" id="machDisplayVal">M = 2.00</span>
+            </label>
+            <input type="range" id="inputMach" min="0.1" max="5.0" step="0.05" value="2.0" class="canvas-slider" oninput="solveCompressible()">
+            <input type="number" id="inputMachNum" class="calc-input" min="0.1" max="10.0" step="0.01" value="2.00" oninput="syncMachFromNum(this.value)">
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span data-en="Specific Heat Ratio (&gamma;)" data-fa="نسبت گرماهای ویژه (&gamma;)">نسبت گرماهای ویژه (&gamma;)</span>
+              <span style="color: var(--text-muted);">Air = 1.40</span>
+            </label>
+            <select id="inputGamma" class="calc-input" onchange="solveCompressible()">
+              <option value="1.40" selected>Air / Diatomic Gas (&gamma; = 1.40)</option>
+              <option value="1.67">Monatomic Gas / Argon / Helium (&gamma; = 1.67)</option>
+              <option value="1.33">Triatomic / Combustion Products (&gamma; = 1.33)</option>
+              <option value="1.20">Hot Rocket Exhaust (&gamma; = 1.20)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span data-en="Stagnation Temperature T0 (K)" data-fa="دمای سکون T0 (کلوین)">دمای سکون T0 (کلوین)</span>
+              <span style="color: var(--text-muted);">Standard = 300 K</span>
+            </label>
+            <input type="number" id="inputT0" class="calc-input" value="300" step="10" oninput="solveCompressible()">
+          </div>
+        </div>
+
+        <!-- Real-time Results Grid -->
+        <div class="calc-results-grid">
+          
+          <div class="res-card">
+            <div class="res-label">Temperature Ratio (T / T0)</div>
+            <div class="res-val" id="resT">0.5556</div>
+            <div class="res-sub" id="resStaticT">Static T = 166.7 K</div>
+          </div>
+
+          <div class="res-card">
+            <div class="res-label">Pressure Ratio (P / P0)</div>
+            <div class="res-val" id="resP">0.1278</div>
+            <div class="res-sub">Isentropic Static/Total</div>
+          </div>
+
+          <div class="res-card">
+            <div class="res-label">Area Ratio (A / A*)</div>
+            <div class="res-val" id="resA">1.6875</div>
+            <div class="res-sub">Throat Choking Ratio</div>
+          </div>
+
+          <div class="res-card">
+            <div class="res-label">Shock Downstream Mach (M2)</div>
+            <div class="res-val" id="resM2" style="color: var(--accent-orange);">0.5774</div>
+            <div class="res-sub">Subsonic behind shock</div>
+          </div>
+
+          <div class="res-card">
+            <div class="res-label">Shock Pressure Jump (P2 / P1)</div>
+            <div class="res-val" id="resP2P1" style="color: var(--accent-orange);">4.5000</div>
+            <div class="res-sub">Static Pressure Step</div>
+          </div>
+
+          <div class="res-card">
+            <div class="res-label">Total Pressure Loss (P02 / P01)</div>
+            <div class="res-val" id="resP02P01" style="color: var(--accent-orange);">0.7209</div>
+            <div class="res-sub">Entropy decay factor</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: SUMMARY OF GAS DYNAMICS TABLES -->
+    <section style="margin-bottom: 60px;">
+      <div class="section-header">
+        <div>
+          <div class="section-label">
+            <i data-lucide="table" style="width: 14px; height: 14px;"></i>
+            <span data-en="// STANDARD BENCHMARK TABLE" data-fa="// جدول مرجع داده‌های استاندارد">// جدول مرجع داده‌های استاندارد</span>
+          </div>
+          <h2 class="section-title-text" data-en="Gas Dynamics Quick Lookup Table (Air &gamma;=1.4)" data-fa="جدول خلاصه خواص ایزنتروپیک و امواج شوک (هوا)">
+            جدول خلاصه خواص ایزنتروپیک و امواج شوک (هوا)
+          </h2>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;">
+        <table style="width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 12px; text-align: center; direction: ltr;">
+          <thead>
+            <tr style="background: rgba(0, 242, 254, 0.08); border-bottom: 1px solid var(--border); color: var(--accent-cyan);">
+              <th style="padding: 12px 16px;">Mach (M1)</th>
+              <th style="padding: 12px 16px;">T / T0</th>
+              <th style="padding: 12px 16px;">P / P0</th>
+              <th style="padding: 12px 16px;">&rho; / &rho;0</th>
+              <th style="padding: 12px 16px;">A / A*</th>
+              <th style="padding: 12px 16px;">M2 (Shock)</th>
+              <th style="padding: 12px 16px;">P2 / P1</th>
+              <th style="padding: 12px 16px;">P02 / P01</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 16px; font-weight: 700; color: #fff;">0.50</td>
+              <td style="padding: 10px 16px;">0.9524</td>
+              <td style="padding: 10px 16px;">0.8430</td>
+              <td style="padding: 10px 16px;">0.8852</td>
+              <td style="padding: 10px 16px;">1.3398</td>
+              <td style="padding: 10px 16px; color: var(--text-dim);">&mdash;</td>
+              <td style="padding: 10px 16px; color: var(--text-dim);">&mdash;</td>
+              <td style="padding: 10px 16px;">1.0000</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border); background: rgba(0, 242, 254, 0.03);">
+              <td style="padding: 10px 16px; font-weight: 700; color: var(--accent-cyan);">1.00 (Sonic)</td>
+              <td style="padding: 10px 16px;">0.8333</td>
+              <td style="padding: 10px 16px;">0.5283</td>
+              <td style="padding: 10px 16px;">0.6339</td>
+              <td style="padding: 10px 16px; font-weight: 700; color: var(--accent-cyan);">1.0000</td>
+              <td style="padding: 10px 16px;">1.0000</td>
+              <td style="padding: 10px 16px;">1.0000</td>
+              <td style="padding: 10px 16px;">1.0000</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 16px; font-weight: 700; color: #fff;">1.50</td>
+              <td style="padding: 10px 16px;">0.6897</td>
+              <td style="padding: 10px 16px;">0.2724</td>
+              <td style="padding: 10px 16px;">0.3950</td>
+              <td style="padding: 10px 16px;">1.1762</td>
+              <td style="padding: 10px 16px;">0.7011</td>
+              <td style="padding: 10px 16px;">2.4583</td>
+              <td style="padding: 10px 16px;">0.9298</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border); background: rgba(0, 242, 254, 0.03);">
+              <td style="padding: 10px 16px; font-weight: 700; color: #fff;">2.00</td>
+              <td style="padding: 10px 16px;">0.5556</td>
+              <td style="padding: 10px 16px;">0.1278</td>
+              <td style="padding: 10px 16px;">0.2300</td>
+              <td style="padding: 10px 16px;">1.6875</td>
+              <td style="padding: 10px 16px;">0.5774</td>
+              <td style="padding: 10px 16px;">4.5000</td>
+              <td style="padding: 10px 16px;">0.7209</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 16px; font-weight: 700; color: #fff;">2.50</td>
+              <td style="padding: 10px 16px;">0.4444</td>
+              <td style="padding: 10px 16px;">0.0585</td>
+              <td style="padding: 10px 16px;">0.1317</td>
+              <td style="padding: 10px 16px;">2.6367</td>
+              <td style="padding: 10px 16px;">0.5130</td>
+              <td style="padding: 10px 16px;">7.1250</td>
+              <td style="padding: 10px 16px;">0.4990</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; font-weight: 700; color: #fff;">3.00</td>
+              <td style="padding: 10px 16px;">0.3571</td>
+              <td style="padding: 10px 16px;">0.0272</td>
+              <td style="padding: 10px 16px;">0.0762</td>
+              <td style="padding: 10px 16px;">4.2346</td>
+              <td style="padding: 10px 16px;">0.4752</td>
+              <td style="padding: 10px 16px;">10.3333</td>
+              <td style="padding: 10px 16px;">0.3283</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        <span>MOHAMMADAMIN SHARIF // GAS DYNAMICS VOL. 09</span>
+      </div>
+      <div>
+        <a href="../index.html#books" style="color: var(--accent-cyan); text-decoration: none;" data-en="&larr; Return to Library" data-fa="&rarr; بازگشت به کتابخانه کتب">&rarr; بازگشت به کتابخانه کتب</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- PDF ONLINE VIEWER MODAL -->
+  <div class="pdf-modal-backdrop" id="pdfModal" onclick="closePdfModal(event)">
+    <div class="pdf-modal-box" onclick="event.stopPropagation()">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title">
+          <i data-lucide="file-text" style="width: 16px; height: 16px; color: var(--accent-cyan);"></i>
+          <span>BGD.pdf &mdash; جزوه تخصصی دینامیک گازها</span>
+        </div>
+        <div class="pdf-modal-actions">
+          <a href="../assets/downloads/books/gas-dynamics/BGD.pdf" download="BGD-Gas-Dynamics.pdf" class="pdf-modal-btn">
+            <i data-lucide="download" style="width: 12px; height: 12px;"></i>
+            <span data-en="Download" data-fa="دانلود">دانلود</span>
+          </a>
+          <button class="pdf-modal-btn" onclick="closePdfModal()">
+            <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+            <span data-en="Close" data-fa="بستن">بستن</span>
+          </button>
+        </div>
+      </div>
+      <div class="pdf-iframe-container">
+        <iframe id="pdfFrame" src="" title="Gas Dynamics PDF Viewer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Custom Cursor tracking
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, input, select').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Language Toggle logic
+    let currentLang = 'fa';
+    function toggleLanguage() {
+      currentLang = currentLang === 'fa' ? 'en' : 'fa';
+      applyLang(currentLang);
+    }
+    function applyLang(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      document.getElementById('langLabel').textContent = lang === 'fa' ? 'EN' : 'فا';
+
+      document.querySelectorAll('[data-en][data-fa]').forEach(el => {
+        el.textContent = lang === 'fa' ? el.getAttribute('data-fa') : el.getAttribute('data-en');
+      });
+      lucide.createIcons();
+    }
+
+    // Theme Toggle logic
+    function toggleTheme() {
+      document.documentElement.classList.toggle('light-mode');
+      const isLight = document.documentElement.classList.contains('light-mode');
+      const icon = document.getElementById('themeIcon');
+      if (isLight) {
+        icon.setAttribute('data-lucide', 'moon');
+      } else {
+        icon.setAttribute('data-lucide', 'sun');
+      }
+      lucide.createIcons();
+    }
+
+    // PDF Modal Controls
+    function openPdfModal(pdfUrl) {
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = pdfUrl;
+      modal.classList.add('active');
+    }
+    function closePdfModal(e) {
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = '';
+      modal.classList.remove('active');
+    }
+
+    // Compressible Flow Calculator Engine
+    function syncMachFromNum(val) {
+      const num = parseFloat(val);
+      if (!isNaN(num) && num > 0) {
+        document.getElementById('inputMach').value = Math.min(Math.max(num, 0.1), 5.0);
+        solveCompressible();
+      }
+    }
+
+    function solveCompressible() {
+      const M = parseFloat(document.getElementById('inputMach').value) || 2.0;
+      const gamma = parseFloat(document.getElementById('inputGamma').value) || 1.40;
+      const T0 = parseFloat(document.getElementById('inputT0').value) || 300;
+
+      document.getElementById('inputMachNum').value = M.toFixed(2);
+      document.getElementById('machDisplayVal').textContent = 'M = ' + M.toFixed(2);
+
+      // Isentropic relations
+      const gm1 = gamma - 1;
+      const gp1 = gamma + 1;
+      const tempFactor = 1 + (gm1 / 2) * M * M;
+      const T_ratio = 1 / tempFactor;
+      const P_ratio = Math.pow(T_ratio, gamma / gm1);
+      const staticT = T0 * T_ratio;
+
+      // Area-Mach relation A / A*
+      let A_ratio = 1.0;
+      if (M > 0.001) {
+        const term = (2 / gp1) * (1 + (gm1 / 2) * M * M);
+        const pwr = gp1 / (2 * gm1);
+        A_ratio = (1 / M) * Math.pow(term, pwr);
+      }
+
+      // Normal Shock Relations
+      let M2 = 0;
+      let P2P1 = 1.0;
+      let P02P01 = 1.0;
+
+      if (M >= 1.0) {
+        const numM2 = 2 + gm1 * M * M;
+        const denM2 = 2 * gamma * M * M - gm1;
+        M2 = Math.sqrt(numM2 / denM2);
+        P2P1 = 1 + (2 * gamma / gp1) * (M * M - 1);
+
+        const t1 = (gp1 * M * M) / (2 + gm1 * M * M);
+        const t2 = gp1 / (2 * gamma * M * M - gm1);
+        P02P01 = Math.pow(t1, gamma / gm1) * Math.pow(t2, 1 / gm1);
+      } else {
+        M2 = M; // No shock
+        P2P1 = 1.0;
+        P02P01 = 1.0;
+      }
+
+      document.getElementById('resT').textContent = T_ratio.toFixed(4);
+      document.getElementById('resStaticT').textContent = 'Static T = ' + staticT.toFixed(1) + ' K';
+      document.getElementById('resP').textContent = P_ratio.toFixed(4);
+      document.getElementById('resA').textContent = A_ratio.toFixed(4);
+
+      if (M >= 1.0) {
+        document.getElementById('resM2').textContent = M2.toFixed(4);
+        document.getElementById('resP2P1').textContent = P2P1.toFixed(4);
+        document.getElementById('resP02P01').textContent = P02P01.toFixed(4);
+      } else {
+        document.getElementById('resM2').textContent = 'Subsonic';
+        document.getElementById('resP2P1').textContent = '1.0000 (No Shock)';
+        document.getElementById('resP02P01').textContent = '1.0000 (Isentropic)';
+      }
+    }
+
+    // Hero Canvas Nozzle CFD Simulation
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let backpressureRatio = 0.28;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function updateNozzleSim(val) {
+      backpressureRatio = parseFloat(val);
+      document.getElementById('pbVal').textContent = backpressureRatio.toFixed(2);
+      
+      const shockPos = Math.min(Math.max((backpressureRatio - 0.2) / 0.6, 0.1), 0.95);
+      const isOverExpanded = backpressureRatio > 0.45;
+      const text = isOverExpanded 
+        ? `Over-Expanded (Shock in Nozzle) • Pb/P0=${backpressureRatio.toFixed(2)}`
+        : `Supersonic Jet Diamonds • Pb/P0=${backpressureRatio.toFixed(2)}`;
+      document.getElementById('canvasMachDisplay').textContent = text;
+    }
+
+    let animTime = 0;
+    function renderNozzle() {
+      animTime += 0.02;
+      const w = canvas.getBoundingClientRect().width;
+      const h = canvas.getBoundingClientRect().height;
+      if (!w || !h) return;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Nozzle Geometry parameters
+      const throatX = w * 0.35;
+      const exitX = w * 0.72;
+      const centerY = h * 0.5;
+      const inR = h * 0.38;
+      const throatR = h * 0.16;
+      const exitR = h * 0.28;
+
+      // Function for nozzle wall half-height at x
+      function wallR(x) {
+        if (x <= throatX) {
+          const t = x / throatX;
+          return inR - (inR - throatR) * (3 * t * t - 2 * t * t * t);
+        } else if (x <= exitX) {
+          const t = (x - throatX) / (exitX - throatX);
+          return throatR + (exitR - throatR) * (3 * t * t - 2 * t * t * t);
+        } else {
+          return exitR; // Plume
+        }
+      }
+
+      // Draw Mach Contours inside Nozzle
+      const steps = 60;
+      for (let i = 0; i < steps; i++) {
+        const x1 = (i / steps) * exitX;
+        const x2 = ((i + 1) / steps) * exitX;
+        const r1 = wallR(x1);
+        const r2 = wallR(x2);
+
+        // Approximate local Mach
+        let localM = x1 <= throatX ? (0.2 + 0.8 * (x1 / throatX)) : (1.0 + 1.2 * ((x1 - throatX) / (exitX - throatX)));
+        
+        // Shock wave position based on backpressure
+        const shockX = throatX + (exitX - throatX) * (1 - (backpressureRatio - 0.15) / 0.75);
+        if (x1 > shockX && backpressureRatio > 0.35) {
+          localM = 0.65; // Subsonic drop after shock
+        }
+
+        // Color based on Mach (Blue = subsonic, Cyan = sonic, Orange/Gold = Supersonic)
+        let hue, sat, light;
+        if (localM < 1.0) {
+          hue = 215; sat = 80; light = 20 + localM * 20;
+        } else {
+          hue = 185 - (localM - 1.0) * 120;
+          sat = 90;
+          light = 40 + Math.min(localM * 10, 30);
+        }
+
+        ctx.fillStyle = `hsl(${hue}, ${sat}%, ${light}%)`;
+        ctx.beginPath();
+        ctx.moveTo(x1, centerY - r1);
+        ctx.lineTo(x2, centerY - r2);
+        ctx.lineTo(x2, centerY + r2);
+        ctx.lineTo(x1, centerY + r1);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // Draw Normal Shock Wave line if inside nozzle
+      const shockX = throatX + (exitX - throatX) * (1 - (backpressureRatio - 0.15) / 0.75);
+      if (backpressureRatio > 0.35 && shockX > throatX && shockX < exitX) {
+        const sR = wallR(shockX);
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 3.5;
+        ctx.shadowColor = '#ef4444';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.moveTo(shockX, centerY - sR + 2);
+        ctx.lineTo(shockX, centerY + sR - 2);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = '#ef4444';
+        ctx.font = '10px monospace';
+        ctx.fillText('NORMAL SHOCK', shockX - 42, centerY - sR - 8);
+      }
+
+      // Supersonic Exhaust Plume & Shock Diamonds
+      if (exitX < w) {
+        const plumeW = w - exitX;
+        const numDiamonds = 4;
+        const diamondSpacing = plumeW / numDiamonds;
+
+        for (let d = 0; d < numDiamonds; d++) {
+          const dx = exitX + d * diamondSpacing + (animTime * 15) % diamondSpacing;
+          if (dx < w - 10) {
+            ctx.strokeStyle = 'rgba(0, 242, 254, 0.75)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(dx, centerY - exitR * 0.7);
+            ctx.lineTo(dx + diamondSpacing * 0.5, centerY);
+            ctx.lineTo(dx, centerY + exitR * 0.7);
+            ctx.lineTo(dx - diamondSpacing * 0.5, centerY);
+            ctx.closePath();
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw Top and Bottom Solid Nozzle Walls
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      for (let x = 0; x <= exitX; x += 3) {
+        const yTop = centerY - wallR(x);
+        if (x === 0) ctx.moveTo(x, yTop);
+        else ctx.lineTo(x, yTop);
+      }
+      ctx.stroke();
+
+      ctx.beginPath();
+      for (let x = 0; x <= exitX; x += 3) {
+        const yBot = centerY + wallR(x);
+        if (x === 0) ctx.moveTo(x, yBot);
+        else ctx.lineTo(x, yBot);
+      }
+      ctx.stroke();
+
+      // Throat dashed indicator
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.5)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(throatX, centerY - throatR);
+      ctx.lineTo(throatX, centerY + throatR);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = 'rgba(0, 242, 254, 0.9)';
+      ctx.font = '10px monospace';
+      ctx.fillText('THROAT M=1.0', throatX - 35, centerY + throatR + 18);
+
+      requestAnimationFrame(renderNozzle);
+    }
+
+    renderNozzle();
+    solveCompressible();
+  </script>
+</body>
+</html>
