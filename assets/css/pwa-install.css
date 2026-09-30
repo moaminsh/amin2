@@ -392,18 +392,9 @@
   transform: translateY(-1px);
 }
 
-/* Mobile Drawer Live Date & Clock Card */
+/* Mobile Drawer Live Date & Clock Card - Hidden: date/time is exclusively on top bar line */
 .mobile-drawer-date-card {
-  margin-bottom: 12px;
-  padding: 10px 14px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  display: none !important;
 }
 
 .light-mode .mobile-drawer-date-card {

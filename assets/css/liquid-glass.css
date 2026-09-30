@@ -8627,28 +8627,51 @@ html.dark-mode .project-card::after {
   gap: 10px;
 }
 
-/* Live Clock Pill */
+/* Live Clock Pill (Only on the top bar line) */
 .nav-clock-pill {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 12px;
-  background: rgba(7, 28, 41, 0.85);
-  border: 1px solid rgba(0, 229, 255, 0.25);
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 11px;
+  background: rgba(7, 28, 41, 0.88);
+  border: 1px solid rgba(0, 229, 255, 0.3);
   font-family: var(--font-mono);
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 12.5px;
+  font-weight: 600;
   color: #00E5FF;
   box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
   white-space: nowrap;
+  direction: ltr !important;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.nav-clock-pill:hover {
+  border-color: rgba(0, 242, 254, 0.65);
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.35);
+  transform: translateY(-1px);
+}
+
+.nav-clock-pill .nav-live-date,
+.nav-clock-pill .nav-live-clock {
+  font-family: var(--font-mono);
+  direction: ltr !important;
+  display: inline-block;
+  letter-spacing: 0.2px;
+}
+
+.nav-clock-pill .nav-time-divider {
+  opacity: 0.45;
+  margin: 0 1px;
 }
 
 .light-mode .nav-clock-pill {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(2, 132, 199, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(2, 132, 199, 0.28);
   color: #0284c7;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
 }
 
 /* Page Control Pills (Language & Theme) */
@@ -8715,52 +8738,136 @@ html.dark-mode .project-card::after {
 
 @media (max-width: 640px) {
   .navbar-inner-container {
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 7px 10px !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
   }
   .nav-clock-pill {
     display: inline-flex !important;
+    align-items: center !important;
     padding: 4px 8px !important;
     font-size: 11px !important;
     gap: 4px !important;
+    border-radius: 8px !important;
+    background: rgba(7, 28, 41, 0.92) !important;
+    border-color: rgba(0, 242, 254, 0.4) !important;
+    white-space: nowrap !important;
+    direction: ltr !important;
   }
   .nav-clock-pill .nav-live-date {
-    display: none !important;
+    display: inline !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    direction: ltr !important;
+  }
+  .nav-clock-pill .nav-live-clock {
+    display: inline !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    direction: ltr !important;
   }
   .nav-clock-pill .nav-time-divider {
+    display: inline !important;
+    opacity: 0.5 !important;
+    margin: 0 1px !important;
+  }
+  .nav-install-pill span {
     display: none !important;
   }
+  .nav-install-pill {
+    padding: 5px !important;
+    width: 32px !important;
+    height: 32px !important;
+    justify-content: center !important;
+  }
   .brand-hex-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
   }
   .brand-name {
-    font-size: 14.5px;
+    font-size: 13.5px;
   }
   .brand-sub {
     font-size: 8px;
   }
   .navbar-actions-dock {
-    gap: 6px;
+    gap: 5px;
+    flex-wrap: nowrap !important;
   }
   .nav-control-pill {
-    padding: 5px 8px;
-    font-size: 11px;
-    height: 34px;
-    border-radius: 9px;
+    padding: 4px 7px;
+    font-size: 10.5px;
+    height: 32px;
+    border-radius: 8px;
   }
   .nav-theme-pill {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
   .mobile-menu-burger {
-    width: 34px;
-    height: 34px;
-    padding: 6px;
-    border-radius: 9px;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-inner-container {
+    padding: 6px 8px !important;
+    gap: 4px !important;
+  }
+  .brand-hex-icon {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .brand-name {
+    font-size: 12.5px !important;
+    letter-spacing: 0.2px !important;
+  }
+  .brand-sub {
+    display: none !important;
+  }
+  .nav-install-pill {
+    display: none !important; /* Keep mobile navbar uncluttered; install accessible in drawer */
+  }
+  .navbar-actions-dock {
+    gap: 4px !important;
+  }
+  .nav-clock-pill {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+    gap: 3px !important;
+    border-radius: 7px !important;
+  }
+  .nav-clock-pill .nav-live-date {
+    font-size: 10px !important;
+  }
+  .nav-clock-pill .nav-live-clock {
+    font-size: 10px !important;
+  }
+  .nav-control-pill {
+    padding: 3px 5px !important;
+    font-size: 10px !important;
+    height: 29px !important;
+    min-width: 29px !important;
+    border-radius: 7px !important;
+  }
+  .nav-theme-pill {
+    width: 29px !important;
+    height: 29px !important;
+    border-radius: 7px !important;
+  }
+  .mobile-menu-burger {
+    width: 29px !important;
+    height: 29px !important;
+    padding: 4px !important;
+    border-radius: 7px !important;
   }
 }
 
@@ -11772,15 +11879,24 @@ html.dark-mode .project-card::after {
 
   .nav-clock-pill {
     display: inline-flex !important;
+    align-items: center !important;
     padding: 3px 6px !important;
-    font-size: 10.5px !important;
+    font-size: 10px !important;
     gap: 3px !important;
+    border-radius: 8px !important;
+    background: rgba(7, 28, 41, 0.9) !important;
+    border-color: rgba(0, 242, 254, 0.35) !important;
   }
   .nav-clock-pill .nav-live-date {
-    display: none !important;
+    display: inline !important;
+    font-size: 9.5px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
   }
   .nav-clock-pill .nav-time-divider {
-    display: none !important;
+    display: inline !important;
+    opacity: 0.5 !important;
+    margin: 0 1px !important;
   }
 
   .nav-control-pill {
@@ -12251,6 +12367,177 @@ html.dark-mode .project-card::after {
   .footer-brand-desc {
     font-size: 12.5px !important;
   }
+}
+
+/* ==========================================================================
+   EXCLUSIVE TOP BAR DATE & CLOCK — Secondary bars removed as requested
+   ========================================================================== */
+.mobile-live-telemetry-bar,
+.mobile-drawer-date-card {
+  display: none !important;
+}
+
+.light-mode .mobile-drawer-date-card {
+  background: linear-gradient(135deg, #ffffff, #f0f9ff);
+  border-color: rgba(2, 132, 199, 0.3);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+}
+
+.mobile-drawer-date-card:hover {
+  border-color: var(--futuristic-cyan);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+}
+
+.drawer-date-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.light-mode .drawer-date-header {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.drawer-cal-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--futuristic-cyan);
+  background: rgba(0, 242, 254, 0.12);
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 242, 254, 0.25);
+}
+
+.light-mode .drawer-cal-badge {
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.25);
+}
+
+.drawer-clock-badge {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  color: #00FF9C;
+  letter-spacing: 0.5px;
+}
+
+.light-mode .drawer-clock-badge {
+  color: #059669;
+}
+
+.drawer-date-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.light-mode .drawer-date-main {
+  color: #0f172a;
+}
+
+/* --- Live Date Floating Toast (Modern Glass In-App Dialog) --- */
+.live-date-floating-toast {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  z-index: 10001;
+  width: 90%;
+  max-width: 440px;
+  background: linear-gradient(135deg, rgba(13, 27, 42, 0.96), rgba(7, 15, 25, 0.98));
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 242, 254, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  direction: rtl;
+}
+
+.light-mode .live-date-floating-toast {
+  background: linear-gradient(135deg, #ffffff, #f0f9ff);
+  border-color: rgba(2, 132, 199, 0.35);
+  box-shadow: 0 16px 36px rgba(2, 132, 199, 0.2);
+}
+
+.live-date-floating-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.toast-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light-mode .toast-header-row {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.toast-pill-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--futuristic-cyan);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toast-close-btn {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.toast-close-btn:hover {
+  color: #fff;
+}
+
+.toast-body-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.toast-item-label {
+  color: #94a3b8;
+  font-size: 11.5px;
+}
+
+.light-mode .toast-item-label {
+  color: #64748b;
+}
+
+.toast-item-val {
+  font-weight: 700;
+  text-align: left;
 }
 
 

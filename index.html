@@ -104,13 +104,13 @@
 
       <!-- Right Action & Controls (ساعت، تغییر زبان، تغییر تم) -->
       <div class="navbar-actions-dock">
-        <!-- Live Date & Clock Pill (ساعت و تاریخ زنده شمسی / میلادی) -->
-        <div class="nav-clock-pill" id="navLiveDateTimePill" onclick="showLiveDateToast()" title="مشاهده تقویم و ساعت زنده هوشمند" role="button" tabindex="0">
+        <!-- Live Date & Clock Pill (ساعت و تاریخ زنده کاملاً عددی بدون هیچ حرف و کلمه روی خط نوار بالا) -->
+        <div class="nav-clock-pill" id="navLiveDateTimePill" onclick="toggleCalendarFormat()" title="ساعت و تاریخ زنده عددی — کلیک برای تغییر قالب" role="button" tabindex="0" dir="ltr">
           <i data-lucide="calendar" class="nav-date-icon" style="width: 13px; height: 13px; color: var(--futuristic-cyan);"></i>
-          <span id="navLiveDate" class="nav-live-date">دوشنبه، ۶ مهر ۱۴۰۵</span>
+          <span id="navLiveDate" class="nav-live-date" dir="ltr">8/7/1405</span>
           <span class="nav-time-divider">|</span>
           <i data-lucide="clock" class="nav-clock-icon" style="width: 13px; height: 13px; color: var(--futuristic-cyan);"></i>
-          <span id="navLiveClock">11:45</span>
+          <span id="navLiveClock" class="nav-live-clock" dir="ltr">11:45</span>
         </div>
 
         <!-- Language Switcher (EN / FA) -->
@@ -139,18 +139,6 @@
 
     <!-- Mobile Drawer Menu -->
     <div class="navbar-mobile-drawer" id="mobileNavDrawer">
-      <!-- Mobile Drawer Live Date & Time HUD Card -->
-      <div class="mobile-drawer-date-card" onclick="showLiveDateToast()" title="مشاهده تقویم و ساعت زنده">
-        <div class="drawer-date-header">
-          <span class="drawer-cal-badge" id="mobileDrawerCalBadge">گاه‌شماری خورشیدی (شمسی)</span>
-          <span class="drawer-clock-badge" id="mobileDrawerClock">11:45:00</span>
-        </div>
-        <div class="drawer-date-main">
-          <i data-lucide="calendar" style="width: 15px; height: 15px; color: var(--futuristic-cyan);"></i>
-          <span id="mobileDrawerDate">دوشنبه، ۶ مهر ۱۴۰۵</span>
-        </div>
-      </div>
-
       <a href="#home" class="mobile-nav-link active" onclick="navigateToSection('home'); return false;"><i data-lucide="home"></i> <span data-en="Home" data-fa="صفحه اصلی">صفحه اصلی</span></a>
       <a href="#education" class="mobile-nav-link" onclick="navigateToSection('education'); return false;"><i data-lucide="graduation-cap"></i> <span data-en="Academy" data-fa="آموزش (سالیدورکس و مدیریت)">آموزش (سالیدورکس و مدیریت)</span></a>
       <a href="#projects" class="mobile-nav-link" onclick="navigateToSection('projects'); return false;"><i data-lucide="layers"></i> <span data-en="Projects" data-fa="پروژه‌ها و مقالات">پروژه‌ها و مقالات</span></a>
@@ -2962,135 +2950,149 @@
       localStorage.setItem('site-lang', nextLang);
     };
 
-    // Live Clock & Date Engine (تاریخ شمسی در فارسی / تاریخ میلادی در انگلیسی)
+    // Live Clock & Pure Numeric Date Engine (فقط روی نوار بالا — کاملاً عددی بدون هیچ حرف یا کلمه مثل 5/4/2000)
+    let currentDateFormatMode = localStorage.getItem('moamin_numeric_date_mode') || 'shamsi_dmy';
+
+    function getPureNumericDate(now, isFa) {
+      if (currentDateFormatMode === 'gregorian_dmy' || (!isFa && currentDateFormatMode !== 'shamsi_dmy' && currentDateFormatMode !== 'shamsi_ymd')) {
+        const d = now.getDate();
+        const m = now.getMonth() + 1;
+        const y = now.getFullYear();
+        return `${d}/${m}/${y}`; // e.g. 30/9/2026 (exact numeric slash pattern like 5/4/2000)
+      }
+
+      // Default Shamsi / Jalali in pure numeric format (بدون هیچ حرف یا کلمه)
+      try {
+        const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric'
+        }).formatToParts(now);
+        const y = parts.find(p => p.type === 'year')?.value || '';
+        const m = parts.find(p => p.type === 'month')?.value || '';
+        const d = parts.find(p => p.type === 'day')?.value || '';
+
+        if (currentDateFormatMode === 'shamsi_ymd') {
+          return `${y}/${m}/${d}`; // 1405/7/8
+        }
+        return `${d}/${m}/${y}`; // 8/7/1405 (exact numeric slash pattern like 5/4/2000)
+      } catch (e) {
+        const d = now.getDate();
+        const m = now.getMonth() + 1;
+        const y = now.getFullYear();
+        return `${d}/${m}/${y}`;
+      }
+    }
+
     function updateLiveClockAndDate() {
       const now = new Date();
       const currentLang = rootEl.getAttribute('lang') || 'fa';
       const isFa = (currentLang === 'fa');
 
-      // Time strings
+      // 24h Time string (ساعت و دقیقه)
       const hours = String(now.getHours()).padStart(2, '0');
       const mins = String(now.getMinutes()).padStart(2, '0');
-      const secs = String(now.getSeconds()).padStart(2, '0');
       const timeShort = `${hours}:${mins}`;
-      const timeFull = `${hours}:${mins}:${secs}`;
 
-      let dateText = '';
-      let calBadgeText = '';
+      // Numeric date with slashes only, zero words / letters
+      const numericDate = getPureNumericDate(now, isFa);
 
-      if (isFa) {
-        calBadgeText = 'گاه‌شماری خورشیدی (شمسی)';
-        try {
-          const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }).formatToParts(now);
-
-          const weekday = parts.find(p => p.type === 'weekday')?.value || '';
-          const day = parts.find(p => p.type === 'day')?.value || '';
-          const month = parts.find(p => p.type === 'month')?.value || '';
-          const year = parts.find(p => p.type === 'year')?.value || '';
-
-          dateText = `${weekday}، ${day} ${month} ${year}`;
-        } catch (e) {
-          try {
-            dateText = now.toLocaleDateString('fa-IR', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            });
-          } catch (err2) {
-            dateText = now.toLocaleDateString('fa-IR');
-          }
-        }
-      } else {
-        calBadgeText = 'Gregorian Calendar';
-        try {
-          dateText = new Intl.DateTimeFormat('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          }).format(now);
-        } catch (e) {
-          dateText = now.toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          });
-        }
-      }
-
-      // Top Navbar elements
+      // Top Navbar elements (تاریخ و ساعت منحصراً روی نوار بالا)
       const navClockEl = document.getElementById('navLiveClock');
       if (navClockEl) navClockEl.textContent = timeShort;
 
       const navDateEl = document.getElementById('navLiveDate');
-      if (navDateEl) navDateEl.textContent = dateText;
-
-      // Mobile Drawer elements
-      const mobileDrawerDate = document.getElementById('mobileDrawerDate');
-      if (mobileDrawerDate) mobileDrawerDate.textContent = dateText;
-
-      const mobileDrawerClock = document.getElementById('mobileDrawerClock');
-      if (mobileDrawerClock) mobileDrawerClock.textContent = timeFull;
-
-      const mobileDrawerCalBadge = document.getElementById('mobileDrawerCalBadge');
-      if (mobileDrawerCalBadge) mobileDrawerCalBadge.textContent = calBadgeText;
-
-      // Telemetry / Dashboard elements
-      const dashDateEl = document.getElementById('dashboardLivePersianDate');
-      if (dashDateEl) dashDateEl.textContent = dateText;
-
-      const dashClockEl = document.getElementById('dashboardLiveTime');
-      if (dashClockEl) dashClockEl.textContent = timeFull;
+      if (navDateEl) navDateEl.textContent = numericDate;
     }
 
-    // Interactive Toast for Date & Time
+    // Toggle between numeric date systems (Shamsi D/M/Y, Gregorian D/M/Y, Shamsi Y/M/D) on click
+    window.toggleCalendarFormat = function() {
+      const modes = ['shamsi_dmy', 'gregorian_dmy', 'shamsi_ymd'];
+      const nextIdx = (modes.indexOf(currentDateFormatMode) + 1) % modes.length;
+      currentDateFormatMode = modes[nextIdx];
+      localStorage.setItem('moamin_numeric_date_mode', currentDateFormatMode);
+
+      updateLiveClockAndDate();
+      showLiveDateToast();
+    };
+
+    // In-App Custom Glass Toast Notification for Date & Time (کلیک روی پیل بالای صفحه)
     window.showLiveDateToast = function() {
       const now = new Date();
       const currentLang = rootEl.getAttribute('lang') || 'fa';
       const isFa = (currentLang === 'fa');
 
-      let shamsiStr = '';
+      // Shamsi numeric
+      let shamsiNumeric = '';
       try {
-        const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
-          weekday: 'long',
+        const parts = new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn', {
           year: 'numeric',
-          month: 'long',
+          month: 'numeric',
           day: 'numeric'
         }).formatToParts(now);
-        const weekday = parts.find(p => p.type === 'weekday')?.value || '';
-        const day = parts.find(p => p.type === 'day')?.value || '';
-        const month = parts.find(p => p.type === 'month')?.value || '';
-        const year = parts.find(p => p.type === 'year')?.value || '';
-        shamsiStr = `${weekday}، ${day} ${month} ${year}`;
+        const y = parts.find(p => p.type === 'year')?.value || '';
+        const m = parts.find(p => p.type === 'month')?.value || '';
+        const d = parts.find(p => p.type === 'day')?.value || '';
+        shamsiNumeric = `${d}/${m}/${y}`;
       } catch (e) {
-        shamsiStr = now.toLocaleDateString('fa-IR');
+        shamsiNumeric = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
       }
 
-      const gregStr = new Intl.DateTimeFormat('en-US', {
-        weekday: 'long',
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric'
-      }).format(now);
+      // Gregorian numeric
+      const gregNumeric = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
 
-      const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+      const timeStr = `${hours}:${mins}:${secs}`;
 
-      const msg = isFa
-        ? `📅 تقویم هجری شمسی: ${shamsiStr}\n🌐 تاریخ میلادی: ${gregStr}\n⏰ ساعت زنده سامانه: ${timeStr}`
-        : `📅 Gregorian Date: ${gregStr}\n🌐 Solar Hijri (Shamsi): ${shamsiStr}\n⏰ Live System Time: ${timeStr}`;
+      // Remove existing toast if present
+      const existingToast = document.getElementById('fluidmindDateToast');
+      if (existingToast) existingToast.remove();
 
-      if (typeof window.showGlobalToast === 'function') {
-        window.showGlobalToast(msg);
-      } else {
-        alert(msg);
-      }
+      const toast = document.createElement('div');
+      toast.id = 'fluidmindDateToast';
+      toast.className = 'live-date-floating-toast';
+      toast.setAttribute('role', 'alert');
+      toast.onclick = () => toast.remove();
+
+      toast.innerHTML = `
+        <div class="toast-card-inner">
+          <div class="toast-header-row">
+            <span class="toast-pill-tag">
+              <span class="pulse-live-indicator" style="display:inline-block; margin-inline-end: 4px;"></span>
+              ${isFa ? 'ساعت و تاریخ زنده (قالب کاملاً عددی)' : 'Live Numerical Clock & Date'}
+            </span>
+            <span class="toast-close-btn">&times;</span>
+          </div>
+          <div class="toast-body-item">
+            <span class="toast-item-label">${isFa ? 'تاریخ خورشیدی (شمسی):' : 'Solar (Shamsi) Date:'}</span>
+            <span class="toast-item-val" style="color: #00E5FF; font-family: var(--font-mono); font-weight: 700; direction: ltr;" dir="ltr">${shamsiNumeric}</span>
+          </div>
+          <div class="toast-body-item">
+            <span class="toast-item-label">${isFa ? 'تاریخ میلادی (Gregorian):' : 'Gregorian Date:'}</span>
+            <span class="toast-item-val" style="color: #f1f5f9; font-family: var(--font-mono); font-weight: 700; direction: ltr;" dir="ltr">${gregNumeric}</span>
+          </div>
+          <div class="toast-body-item" style="border-bottom: none; padding-bottom: 0;">
+            <span class="toast-item-label">${isFa ? 'ساعت دقیق هماهنگ:' : 'Live System Time:'}</span>
+            <span class="toast-item-val" style="color: #00FF9C; font-family: var(--font-mono); font-weight: 800; direction: ltr;" dir="ltr">${timeStr}</span>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('visible');
+      }, 10);
+
+      // Auto dismiss after 3.8 seconds
+      setTimeout(() => {
+        if (toast && toast.parentNode) {
+          toast.classList.remove('visible');
+          setTimeout(() => toast.remove(), 300);
+        }
+      }, 3800);
     };
 
     const savedLang = localStorage.getItem('site-lang') || 'fa';
