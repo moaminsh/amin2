@@ -1027,8 +1027,40 @@
               <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
               <span data-en="Open in Dedicated Tab" data-fa="باز کردن مستقیم در تب جدید">باز کردن مستقیم در تب جدید</span>
             </a>
+
+            <!-- Quick Replace File Button -->
+            <button class="btn-reader-secondary" style="font-size: 11px; border-color: rgba(0, 242, 254, 0.35); color: var(--accent-cyan);" onclick="document.getElementById('directBookletFileInput').click()">
+              <i data-lucide="upload" style="width: 13px; height: 13px;"></i>
+              <span data-en="Upload/Replace BGD.pdf" data-fa="آپلود و جایگزینی فایل اصلی جزوه">آپلود و جایگزینی فایل اصلی جزوه</span>
+            </button>
           </div>
 
+        </div>
+      </div>
+
+      <!-- Direct Upload & Replace original booklet widget -->
+      <div id="uploadBookletBox" class="booklet-upload-card" style="background: rgba(13, 17, 23, 0.85); border: 2px dashed rgba(0, 242, 254, 0.45); border-radius: 12px; padding: 22px 28px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(0, 242, 254, 0.12); border: 1px solid rgba(0, 242, 254, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan); flex-shrink: 0;">
+            <i data-lucide="upload-cloud" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div>
+            <h4 style="font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px;" data-en="Upload &amp; Replace Your Authentic BGD.pdf Booklet" data-fa="بارگذاری و جایگزینی فایل اصلی جزوه خودتان (BGD.pdf)">
+              بارگذاری و جایگزینی فایل اصلی جزوه خودتان (BGD.pdf)
+            </h4>
+            <p style="font-size: 12px; color: var(--text-muted); margin: 0; max-width: 680px;" data-en="Because browser sandboxes cannot read local device files without user selection, click here to choose your original BGD.pdf from your phone or PC. It will instantly overwrite the server file and become the live booklet!" data-fa="برای اینکه دقیقاً همان فایل اصلی جزوه BGD.pdf که در دستگاهتان دارید روی سرور قرار گیرد، کافیست روی دکمه زیر بزنید و فایل PDF را انتخاب نمایید تا بلافاصله جایگزین و روی سایت فعال شود.">
+              برای اینکه دقیقاً همان فایل اصلی جزوه BGD.pdf که در دستگاهتان دارید روی سرور قرار گیرد، کافیست روی دکمه زیر بزنید و فایل PDF را انتخاب نمایید تا بلافاصله جایگزین و روی سایت فعال شود.
+            </p>
+            <div id="uploadStatusMessage" style="font-size: 12px; margin-top: 8px; font-family: var(--font-mono); font-weight: 600; display: none;"></div>
+          </div>
+        </div>
+
+        <div>
+          <input type="file" id="directBookletFileInput" accept=".pdf,application/pdf" style="display: none;" onchange="handleDirectBookletUpload(this)">
+          <button type="button" class="btn-download-primary" style="padding: 10px 20px; font-size: 13px; cursor: pointer;" onclick="document.getElementById('directBookletFileInput').click()">
+            <i data-lucide="file-up" style="width: 15px; height: 15px;"></i>
+            <span data-en="Select BGD.pdf from Device" data-fa="انتخاب فایل BGD.pdf از دستگاه">انتخاب فایل BGD.pdf از دستگاه</span>
+          </button>
         </div>
       </div>
     </section>
@@ -1702,6 +1734,46 @@
 
     renderNozzle();
     solveCompressible();
+
+    // Direct Upload Handler for BGD.pdf
+    async function handleDirectBookletUpload(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+
+      const statusEl = document.getElementById('uploadStatusMessage');
+      statusEl.style.display = 'block';
+      statusEl.style.color = 'var(--accent-cyan)';
+      statusEl.textContent = 'در حال ارسال و ذخیره فایل اصلی ' + file.name + ' روی سرور...';
+
+      const formData = new FormData();
+      formData.append('booklet', file);
+
+      try {
+        const response = await fetch('/api/upload-booklet', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          const kb = (data.size / 1024).toFixed(1);
+          statusEl.style.color = '#22c55e';
+          statusEl.innerHTML = `&#10004; فایل اصلی <strong>${file.name}</strong> با موفقیت روی سرور جایگزین شد (${kb} KB). کلیه لینک‌های دانلود و مطالعه آنلاین بلافاصله به‌روزرسانی شدند.`;
+          
+          // Refresh iframe preview if opened
+          const frame = document.getElementById('pdfFrame');
+          if (frame && frame.src) {
+            frame.src = frame.src.split('?')[0] + '?t=' + Date.now();
+          }
+        } else {
+          statusEl.style.color = '#ef4444';
+          statusEl.textContent = 'خطا در بارگذاری فایل: ' + (data.message || data.error);
+        }
+      } catch (err) {
+        statusEl.style.color = '#ef4444';
+        statusEl.textContent = 'خطا در ارسال فایل به سرور: ' + err.message;
+      }
+    }
   </script>
 </body>
 </html>

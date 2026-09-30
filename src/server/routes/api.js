@@ -104,6 +104,56 @@ apiRouter.get('/files/:storedName', (req, res) => {
   }
 });
 
+/**
+ * Direct Upload & Replace for Gas Dynamics Booklet (BGD.pdf)
+ * Allows user to directly upload and replace the authentic booklet file onto the server
+ */
+apiRouter.post('/upload-booklet', upload.single('booklet'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({
+      success: false,
+      error: 'NO_FILE_PROVIDED',
+      message: 'لطفاً فایل PDF جزوه را انتخاب کنید.'
+    });
+  }
+
+  try {
+    const buffer = req.file.buffer;
+    // Verify PDF header %PDF-
+    if (buffer.length < 5 || buffer.toString('utf-8', 0, 5).indexOf('%PDF') !== 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'INVALID_PDF',
+        message: 'فایل انتخابی یک فایل معتبر PDF نیست.'
+      });
+    }
+
+    const targetPaths = [
+      path.join(process.cwd(), 'assets/downloads/books/gas-dynamics/BGD.pdf'),
+      path.join(process.cwd(), 'assets/downloads/books/gas-dynamics/gas-dynamics-lecture-notes.pdf'),
+      path.join(process.cwd(), 'BGD.pdf'),
+      path.join(process.cwd(), 'books/BGD.pdf')
+    ];
+
+    for (const p of targetPaths) {
+      fs.mkdirSync(path.dirname(p), { recursive: true });
+      fs.writeFileSync(p, buffer);
+    }
+
+    console.log(`[Booklet Upload] Successfully replaced BGD.pdf with uploaded file (${buffer.length} bytes)`);
+
+    res.json({
+      success: true,
+      message: 'جزوه اصلی با موفقیت روی سرور بارگذاری و جایگزین شد.',
+      size: buffer.length,
+      filename: 'BGD.pdf'
+    });
+  } catch (err) {
+    console.error('[Booklet Upload Error]', err);
+    res.status(500).json({ success: false, error: 'WRITE_ERROR', message: err.message });
+  }
+});
+
 // ============================================================================
 // 2. ADMIN AUTHENTICATION ENDPOINTS
 // ============================================================================
