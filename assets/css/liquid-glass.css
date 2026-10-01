@@ -12540,6 +12540,491 @@ html.dark-mode .project-card::after {
   text-align: left;
 }
 
+/* ==========================================================================
+   RESILIENT BOOK DOWNLOAD FEEDBACK TOAST
+   ========================================================================== */
+.book-download-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(10, 25, 47, 0.95);
+  border: 1px solid rgba(0, 229, 255, 0.5);
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.2);
+  z-index: 100000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  max-width: 360px;
+}
+
+.book-download-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.toast-inner-flex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toast-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(0, 229, 255, 0.2);
+  border-top-color: #00e5ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.toast-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toast-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.toast-file {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  color: #38bdf8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+/* ==========================================================================
+   MAPNA CLASS F TURBINE ENGINEERING DOSSIER & INFORMATION SUITE
+   ========================================================================== */
+.mapna-dossier-card {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(8, 20, 36, 0.94), rgba(4, 12, 24, 0.98));
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.light-mode .mapna-dossier-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(241, 245, 249, 0.95));
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.mapna-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.mapna-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mapna-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  background: rgba(0, 229, 255, 0.15);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+
+.mapna-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 992px) {
+  .mapna-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.mapna-visual-viewport {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  background: #020617;
+}
+
+.mapna-visual-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.mapna-visual-viewport:hover .mapna-visual-img {
+  transform: scale(1.025);
+}
+
+.mapna-visual-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  background: linear-gradient(to top, rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.6) 70%, transparent);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mapna-visual-hud-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: #38bdf8;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.mapna-hero-specs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mapna-headline-title {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #f8fafc;
+}
+
+.light-mode .mapna-headline-title {
+  color: #0f172a;
+}
+
+.mapna-headline-desc {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #94a3b8;
+}
+
+.light-mode .mapna-headline-desc {
+  color: #334155;
+}
+
+.mapna-action-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.mapna-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0284c7, #00f2fe);
+  color: #020617;
+  font-weight: 800;
+  font-size: 13px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.4);
+  transition: all 0.25s ease;
+}
+
+.mapna-btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(0, 242, 254, 0.6);
+  color: #000;
+}
+
+.mapna-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: #38bdf8;
+  font-weight: 700;
+  font-size: 12.5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mapna-btn-secondary:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: #00e5ff;
+  color: #f8fafc;
+}
+
+/* Key Metrics 8-Grid */
+.mapna-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 900px) {
+  .mapna-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mapna-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mapna-metric-box {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.mapna-metric-box:hover {
+  border-color: rgba(0, 229, 255, 0.4);
+  transform: translateY(-2px);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.light-mode .mapna-metric-box {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.mapna-metric-label {
+  font-size: 11.5px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mapna-metric-val {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  color: #00f2fe;
+}
+
+.light-mode .mapna-metric-val {
+  color: #0284c7;
+}
+
+.mapna-metric-sub {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* 6 Technical Chapter Cards */
+.mapna-chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .mapna-chapters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mapna-chapter-card {
+  background: rgba(13, 27, 42, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.18);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s ease;
+}
+
+.mapna-chapter-card:hover {
+  border-color: rgba(0, 229, 255, 0.45);
+  background: rgba(13, 27, 42, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.light-mode .mapna-chapter-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(203, 213, 225, 0.8);
+}
+
+.mapna-chapter-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mapna-chapter-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(0, 229, 255, 0.15);
+  color: #00e5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+  flex-shrink: 0;
+}
+
+.mapna-chapter-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.light-mode .mapna-chapter-heading {
+  color: #0f172a;
+}
+
+.mapna-chapter-body {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #94a3b8;
+}
+
+.light-mode .mapna-chapter-body {
+  color: #475569;
+}
+
+.mapna-chapter-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mapna-chapter-bullets li {
+  font-size: 12px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.light-mode .mapna-chapter-bullets li {
+  color: #334155;
+}
+
+.mapna-bullet-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00e5ff;
+  flex-shrink: 0;
+}
+
+/* Comparison Table */
+.mapna-table-container {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  background: rgba(10, 20, 32, 0.7);
+  margin-top: 16px;
+}
+
+.mapna-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  text-align: right;
+}
+
+.mapna-table th {
+  background: rgba(0, 229, 255, 0.12);
+  color: #00e5ff;
+  padding: 12px 16px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+  white-space: nowrap;
+}
+
+.mapna-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+}
+
+.light-mode .mapna-table td {
+  color: #334155;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mapna-table tr:hover td {
+  background: rgba(0, 229, 255, 0.04);
+}
+
+.mapna-table .highlight-col {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+
 
 
 

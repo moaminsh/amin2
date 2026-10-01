@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import { initDatabase } from './src/server/db.js';
@@ -39,6 +40,55 @@ app.use('/api', apiRouter);
 // 6. Admin Panel Entrypoint (Dedicated admin SPA route)
 app.get(['/admin', '/admin/*'], (req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'index.html'));
+});
+
+// 6.1 Direct and Guaranteed Book & Technical PDF Download Endpoints
+app.get(['/download/books/:category/:file', '/assets/downloads/books/:category/:file'], (req, res, next) => {
+  try {
+    const { category, file } = req.params;
+    const safeFile = path.basename(file);
+    const safeCategory = path.basename(category);
+    const filePath = path.join(__dirname, 'assets', 'downloads', 'books', safeCategory, safeFile);
+
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(safeFile)}"`);
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+      return res.sendFile(filePath);
+    }
+  } catch (err) {
+    console.error('[Download Error]', err);
+  }
+  next();
+});
+
+app.get(['/download/turbomachinery/:file', '/assets/downloads/turbomachinery/:file'], (req, res, next) => {
+  try {
+    const { file } = req.params;
+    const safeFile = path.basename(file);
+    const filePath = path.join(__dirname, 'assets', 'downloads', 'turbomachinery', safeFile);
+
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(safeFile)}"`);
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+      return res.sendFile(filePath);
+    }
+  } catch (err) {
+    console.error('[Download Error]', err);
+  }
+  next();
+});
+
+app.get(['/BGD.pdf', '/books/BGD.pdf'], (req, res) => {
+  const filePath = path.join(__dirname, 'assets', 'downloads', 'books', 'gas-dynamics', 'BGD.pdf');
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Disposition', 'attachment; filename="BGD-Gas-Dynamics.pdf"');
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.sendFile(filePath);
+  }
+  res.status(404).send('BGD.pdf not found');
 });
 
 // 7. Serve Static Assets with automatic .html extension resolution

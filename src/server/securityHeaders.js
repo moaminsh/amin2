@@ -47,7 +47,7 @@ export function configureSecurityHeaders(app) {
             "https://api.dicebear.com"
           ],
           connectSrc: ["'self'", "https:", "wss:", "blob:"],
-          objectSrc: ["'none'"],
+          objectSrc: ["'self'", "blob:", "data:"],
           baseUri: ["'self'"],
           formAction: ["'self'"],
           frameAncestors: ["'self'", "https://ai.studio", "https://*.google.com", "https://*.run.app", "*"],
